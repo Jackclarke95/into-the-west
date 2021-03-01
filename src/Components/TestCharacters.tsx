@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { firebaseDb } from "../firebase.utils";
 
 const TestCharacters = () => {
-  var [currentId, setCurrentId] = useState("");
   var [objects, setObjects] = useState({});
 
   useEffect(() => {
@@ -15,23 +14,21 @@ const TestCharacters = () => {
     });
   }, []);
 
-  const add = (obj) => {
+  const addRecord = (obj) => {
     firebaseDb.child("characters").push(obj);
-    setCurrentId("");
   };
 
-  const update = (key, value) => {
+  const updateRecord = (key, value) => {
     firebaseDb.child(`characters/${key}`).update(value);
-    setCurrentId("");
   };
 
-  const onDelete = (id) => {
+  const deleteRecord = (id) => {
     if (window.confirm("Are you sure to delete this record?")) {
       firebaseDb.child(`characters/${id}`).remove();
     }
   };
 
-  const addTestObject = () => {
+  const addTestCharacter = () => {
     const characters = [
       {
         id: 38950925,
@@ -376,14 +373,13 @@ const TestCharacters = () => {
 
     var randomCharacter =
       characters[Math.floor(Math.random() * characters.length)];
-
-    add(randomCharacter);
+    addRecord(randomCharacter);
   };
 
   return (
     <>
       <div>Characters</div>
-      <button onClick={() => addTestObject()}>Add Random Character</button>
+      <button onClick={() => addTestCharacter()}>Add Random Character</button>
       <table>
         <thead>
           <th>Character</th>
@@ -428,14 +424,14 @@ const TestCharacters = () => {
                   <button
                     onClick={() => {
                       currentRecord["starting-level"] = 69;
-                      update(key, currentRecord);
+                      updateRecord(key, currentRecord);
                     }}
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => {
-                      onDelete(key);
+                      deleteRecord(key);
                     }}
                   >
                     Delete

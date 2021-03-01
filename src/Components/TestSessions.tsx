@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { firebaseDb } from "../firebase.utils";
 
 const TestSessions = () => {
-  var [currentId, setCurrentId] = useState("");
   var [objects, setObjects] = useState({});
 
   useEffect(() => {
@@ -15,23 +14,21 @@ const TestSessions = () => {
     });
   }, []);
 
-  const add = (obj) => {
+  const addRecord = (obj) => {
     firebaseDb.child("sessions").push(obj);
-    setCurrentId("");
   };
 
-  const update = (key, value) => {
+  const updateRecord = (key, value) => {
     firebaseDb.child(`sessions/${key}`).update(value);
-    setCurrentId("");
   };
 
-  const onDelete = (id) => {
+  const deleteRecord = (id) => {
     if (window.confirm("Are you sure to delete this record?")) {
       firebaseDb.child(`sessions/${id}`).remove();
     }
   };
 
-  const addTestObject = () => {
+  const addTestSession = () => {
     const sessions = [
       {
         id: 43,
@@ -426,14 +423,13 @@ const TestSessions = () => {
     ];
 
     var randomCharacter = sessions[Math.floor(Math.random() * sessions.length)];
-
-    add(randomCharacter);
+    addRecord(randomCharacter);
   };
 
   return (
     <>
       <div>Sessions</div>
-      <button onClick={() => addTestObject()}>Add Random Session</button>
+      <button onClick={() => addTestSession()}>Add Random Session</button>
       <table>
         <thead>
           <th>Title</th>
@@ -466,14 +462,14 @@ const TestSessions = () => {
                   <button
                     onClick={() => {
                       currentRecord.name = "Test";
-                      update(key, currentRecord);
+                      updateRecord(key, currentRecord);
                     }}
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => {
-                      onDelete(key);
+                      deleteRecord(key);
                     }}
                   >
                     Delete
