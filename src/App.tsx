@@ -1,12 +1,13 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import Test from "./Components/Test";
+import TestCharacters from "./Components/TestCharacters";
+import TestSessions from "./Components/TestSessions";
 
 function App() {
   return (
     <div>
-      <Test></Test>
+      <TestCharacters />
+      <TestSessions />
     </div>
   );
 }
