@@ -15,35 +15,19 @@ const TestCharacters = () => {
     });
   }, []);
 
-  const addOrEdit = (obj) => {
-    if (currentId === "") {
-      firebaseDb.child("characters").push(obj, (err) => {
-        if (err) {
-          console.log(err);
-        } else {
-          setCurrentId("");
-        }
-      });
-    } else {
-      firebaseDb.child(`characters/${currentId}`).set(obj, (err) => {
-        if (err) {
-          console.log(err);
-        } else {
-          setCurrentId("");
-        }
-      });
-    }
+  const add = (obj) => {
+    firebaseDb.child("characters").push(obj);
+    setCurrentId("");
+  };
+
+  const update = (key, value) => {
+    firebaseDb.child(`characters/${key}`).update(value);
+    setCurrentId("");
   };
 
   const onDelete = (id) => {
     if (window.confirm("Are you sure to delete this record?")) {
-      firebaseDb.child(`characters/${id}`).remove((err) => {
-        if (err) {
-          console.log(err);
-        } else {
-          setCurrentId("");
-        }
-      });
+      firebaseDb.child(`characters/${id}`).remove();
     }
   };
 
@@ -393,12 +377,12 @@ const TestCharacters = () => {
     var randomCharacter =
       characters[Math.floor(Math.random() * characters.length)];
 
-    addOrEdit(randomCharacter);
+    add(randomCharacter);
   };
 
   return (
     <>
-      <div>Hello</div>
+      <div>Characters</div>
       <button onClick={() => addTestObject()}>Add Random Character</button>
       <table>
         <thead>
@@ -408,17 +392,18 @@ const TestCharacters = () => {
         </thead>
         <tbody>
           {Object.keys(objects).map((key) => {
+            let currentRecord = objects[key];
             return (
-              <tr key={key} data-id={objects[key].id}>
+              <tr key={key} data-id={currentRecord.id}>
                 <td className="column name">
                   <a
                     className="avatar-link"
                     rel="noopener noreferrer"
                     target="_blank"
-                    href={`https://www.dndbeyond.com/avatars/${objects[key]["avatar-link"]}`}
+                    href={`https://www.dndbeyond.com/avatars/${currentRecord["avatar-link"]}`}
                   >
                     <img
-                      src={`https://www.dndbeyond.com/avatars/${objects[key]["avatar-link"]}`}
+                      src={`https://www.dndbeyond.com/avatars/${currentRecord["avatar-link"]}`}
                       style={{
                         objectFit: "cover",
                         width: "30px",
@@ -430,16 +415,24 @@ const TestCharacters = () => {
                     className="character-name"
                     rel="noopener noreferrer"
                     target="_blank"
-                    href={`https://www.dndbeyond.com/profile/${objects[key]["player-dndbeyond-name"]}/characters/${objects[key].id}`}
+                    href={`https://www.dndbeyond.com/profile/${currentRecord["player-dndbeyond-name"]}/characters/${currentRecord.id}`}
                   >
-                    {objects[key].nickname
-                      ? objects[key].nickname
-                      : objects[key].name}
+                    {currentRecord.nickname
+                      ? currentRecord.nickname
+                      : currentRecord.name}
                   </a>
                 </td>
-                <td>{objects[key].race}</td>
-                <td>{objects[key]["starting-level"]}</td>
+                <td>{currentRecord.race}</td>
+                <td>{currentRecord["starting-level"]}</td>
                 <td>
+                  <button
+                    onClick={() => {
+                      currentRecord["starting-level"] = 69;
+                      update(key, currentRecord);
+                    }}
+                  >
+                    Edit
+                  </button>
                   <button
                     onClick={() => {
                       onDelete(key);

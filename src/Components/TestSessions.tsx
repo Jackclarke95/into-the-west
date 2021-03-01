@@ -15,35 +15,19 @@ const TestSessions = () => {
     });
   }, []);
 
-  const addOrEdit = (obj) => {
-    if (currentId === "") {
-      firebaseDb.child("sessions").push(obj, (err) => {
-        if (err) {
-          console.log(err);
-        } else {
-          setCurrentId("");
-        }
-      });
-    } else {
-      firebaseDb.child(`sessions/${currentId}`).set(obj, (err) => {
-        if (err) {
-          console.log(err);
-        } else {
-          setCurrentId("");
-        }
-      });
-    }
+  const add = (obj) => {
+    firebaseDb.child("sessions").push(obj);
+    setCurrentId("");
+  };
+
+  const update = (key, value) => {
+    firebaseDb.child(`sessions/${key}`).update(value);
+    setCurrentId("");
   };
 
   const onDelete = (id) => {
     if (window.confirm("Are you sure to delete this record?")) {
-      firebaseDb.child(`sessions/${id}`).remove((err) => {
-        if (err) {
-          console.log(err);
-        } else {
-          setCurrentId("");
-        }
-      });
+      firebaseDb.child(`sessions/${id}`).remove();
     }
   };
 
@@ -443,12 +427,12 @@ const TestSessions = () => {
 
     var randomCharacter = sessions[Math.floor(Math.random() * sessions.length)];
 
-    addOrEdit(randomCharacter);
+    add(randomCharacter);
   };
 
   return (
     <>
-      <div>Hello</div>
+      <div>Sessions</div>
       <button onClick={() => addTestObject()}>Add Random Session</button>
       <table>
         <thead>
@@ -459,25 +443,34 @@ const TestSessions = () => {
         </thead>
         <tbody>
           {Object.keys(objects).map((key) => {
+            let currentRecord = objects[key];
             return (
-              <tr key={key} data-id={objects[key].id}>
-                <td>{objects[key].name}</td>
+              <tr key={key} data-id={currentRecord.id}>
+                <td>{currentRecord.name}</td>
                 <td>
-                  {objects[key]["dungeon-master"]
-                    ? objects[key]["dungeon-master"]
+                  {currentRecord["dungeon-master"]
+                    ? currentRecord["dungeon-master"]
                     : "None yet"}
                 </td>
                 <td>
-                  {objects[key]["suggested-date"]
-                    ? objects[key]["suggested-date"]
+                  {currentRecord["suggested-date"]
+                    ? currentRecord["suggested-date"]
                     : "N/A"}
                 </td>
                 <td>
-                  {objects[key]["scheduled-date"]
-                    ? objects[key]["scheduled-date"]
+                  {currentRecord["scheduled-date"]
+                    ? currentRecord["scheduled-date"]
                     : "N/A"}
                 </td>
                 <td>
+                  <button
+                    onClick={() => {
+                      currentRecord.name = "Test";
+                      update(key, currentRecord);
+                    }}
+                  >
+                    Edit
+                  </button>
                   <button
                     onClick={() => {
                       onDelete(key);
