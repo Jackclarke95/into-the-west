@@ -440,7 +440,7 @@ const TestSessions = () => {
 
   return (
     <>
-      <div>Sessions</div>
+      <h2>Sessions</h2>
       <button onClick={() => addTestSession()}>Add Random Session</button>
       <button onClick={() => toggleForm()}>
         {`${showForm ? "Hide" : "Show"} New Session Form`}
@@ -491,36 +491,36 @@ const TestSessions = () => {
         </thead>
         <tbody>
           {Object.keys(sessions).map((key, i) => {
-            let currentRecord = sessions[key];
+            let session = sessions[key];
             return (
               <tr
                 style={{
                   backgroundColor: i % 2 !== 0 ? "lightgrey" : "white",
                 }}
                 key={key}
-                data-id={currentRecord.id}
+                data-id={session.id}
               >
-                <td>{currentRecord.name}</td>
+                <td>{session.name}</td>
                 <td>
-                  {currentRecord["dungeon-master"]
-                    ? currentRecord["dungeon-master"]
+                  {session["dungeon-master"]
+                    ? session["dungeon-master"]
                     : "None yet"}
                 </td>
                 <td>
-                  {currentRecord["suggested-date"]
-                    ? currentRecord["suggested-date"]
+                  {session["suggested-date"]
+                    ? session["suggested-date"]
                     : "N/A"}
                 </td>
                 <td>
-                  {currentRecord["scheduled-date"]
-                    ? currentRecord["scheduled-date"]
+                  {session["scheduled-date"]
+                    ? session["scheduled-date"]
                     : "N/A"}
                 </td>
                 <td>
                   <button
                     onClick={() => {
-                      currentRecord.name = "Test";
-                      updateRecord(key, currentRecord);
+                      session.name = "Test";
+                      updateRecord(key, session);
                     }}
                   >
                     Edit

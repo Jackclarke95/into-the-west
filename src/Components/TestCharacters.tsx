@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import { firebaseDb } from "../firebase.utils";
 
 const TestCharacters = () => {
-  var [objects, setObjects] = useState({});
-  var [currentId, setCurrentId] = useState("");
-  var [currentObject, setCurrentObject] = useState({});
+  var [characters, setObjects] = useState({});
 
   useEffect(() => {
     firebaseDb.child("characters").on("value", (snapshot) => {
@@ -380,7 +378,7 @@ const TestCharacters = () => {
 
   return (
     <>
-      <div>Characters</div>
+      <h2>Characters</h2>
       <button onClick={() => addTestCharacter()}>Add Random Character</button>
       <table
         style={{
@@ -393,8 +391,8 @@ const TestCharacters = () => {
           <th>Starting Level</th>
         </thead>
         <tbody>
-          {Object.keys(objects).map((key, i) => {
-            let currentRecord = objects[key];
+          {Object.keys(characters).map((key, i) => {
+            let currentRecord = characters[key];
 
             return (
               <tr
