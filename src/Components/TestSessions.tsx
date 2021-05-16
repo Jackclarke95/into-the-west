@@ -2,16 +2,30 @@ import React, { useState, useEffect } from "react";
 import { firebaseDb } from "../firebase.utils";
 
 const TestSessions = () => {
-  var [objects, setObjects] = useState({});
+  var [sessions, setSessions] = useState({});
+  var [characters, setCharacters] = useState({});
+  var [showForm, setShowForm] = useState(false);
+  var [currentSession, setCurrentSession] = useState({});
 
   useEffect(() => {
     firebaseDb.child("sessions").on("value", (snapshot) => {
       if (snapshot.val() != null) {
-        setObjects({ ...snapshot.val() });
+        setSessions({ ...snapshot.val() });
       } else {
-        setObjects({});
+        setSessions({});
       }
     });
+
+    firebaseDb
+      .child("characters")
+      .orderByChild("starting-level")
+      .on("value", (snapshot) => {
+        if (snapshot.val() != null) {
+          setCharacters({ ...snapshot.val() });
+        } else {
+          setCharacters({});
+        }
+      });
   }, []);
 
   const addRecord = (obj) => {
@@ -76,12 +90,7 @@ const TestSessions = () => {
         "suggested-date": "2020 12 20",
         "scheduled-date": "2021 01 27",
         characters: [
-          35316039,
-          27850604,
-          26128406,
-          26125998,
-          33132303,
-          39965081,
+          35316039, 27850604, 26128406, 26125998, 33132303, 39965081,
         ],
         "discord-channel": "#session-1",
       },
@@ -188,12 +197,7 @@ const TestSessions = () => {
         "suggested-date": "2020 10 13",
         "scheduled-date": "2020 11 12",
         characters: [
-          34189033,
-          26133759,
-          30038677,
-          26128406,
-          33132303,
-          27850604,
+          34189033, 26133759, 30038677, 26128406, 33132303, 27850604,
         ],
         "max-players": 5,
         "discord-channel": "#session-4",
@@ -426,11 +430,59 @@ const TestSessions = () => {
     addRecord(randomCharacter);
   };
 
+  const toggleForm = () => {
+    setShowForm(!showForm);
+  };
+
+  const addNewSession = () => {
+    console.log(currentSession);
+  };
+
   return (
     <>
       <div>Sessions</div>
       <button onClick={() => addTestSession()}>Add Random Session</button>
-      <table>
+      <button onClick={() => toggleForm()}>
+        {`${showForm ? "Hide" : "Show"} New Session Form`}
+      </button>
+      <form style={{ display: showForm ? "block" : "none" }}>
+        <label>
+          Name:
+          <input type="text" name="name" />
+        </label>
+        <label>
+          DM:
+          <input type="text" name="dm" />
+        </label>
+        <label>
+          Date:
+          <input type="date" name="date" />
+        </label>
+
+        <label>
+          Players:
+          <select>
+            <option></option>
+            {Object.keys(characters).map((key) => {
+              let currentRecord = characters[key];
+              let name = currentRecord.nickname
+                ? currentRecord.nickname
+                : currentRecord.name;
+              return (
+                <option key={key} value={name}>
+                  {name}
+                </option>
+              );
+            })}
+          </select>
+        </label>
+        <button onClick={() => addNewSession()}>Submit</button>
+      </form>
+      <table
+        style={{
+          borderCollapse: "collapse",
+        }}
+      >
         <thead>
           <th>Title</th>
           <th>Dungeon Master</th>
@@ -438,10 +490,16 @@ const TestSessions = () => {
           <th>Scheduled Date</th>
         </thead>
         <tbody>
-          {Object.keys(objects).map((key) => {
-            let currentRecord = objects[key];
+          {Object.keys(sessions).map((key, i) => {
+            let currentRecord = sessions[key];
             return (
-              <tr key={key} data-id={currentRecord.id}>
+              <tr
+                style={{
+                  backgroundColor: i % 2 !== 0 ? "lightgrey" : "white",
+                }}
+                key={key}
+                data-id={currentRecord.id}
+              >
                 <td>{currentRecord.name}</td>
                 <td>
                   {currentRecord["dungeon-master"]

@@ -3,6 +3,8 @@ import { firebaseDb } from "../firebase.utils";
 
 const TestCharacters = () => {
   var [objects, setObjects] = useState({});
+  var [currentId, setCurrentId] = useState("");
+  var [currentObject, setCurrentObject] = useState({});
 
   useEffect(() => {
     firebaseDb.child("characters").on("value", (snapshot) => {
@@ -380,17 +382,28 @@ const TestCharacters = () => {
     <>
       <div>Characters</div>
       <button onClick={() => addTestCharacter()}>Add Random Character</button>
-      <table>
+      <table
+        style={{
+          borderCollapse: "collapse",
+        }}
+      >
         <thead>
           <th>Character</th>
           <th>Race</th>
           <th>Starting Level</th>
         </thead>
         <tbody>
-          {Object.keys(objects).map((key) => {
+          {Object.keys(objects).map((key, i) => {
             let currentRecord = objects[key];
+
             return (
-              <tr key={key} data-id={currentRecord.id}>
+              <tr
+                key={key}
+                data-id={key}
+                style={{
+                  backgroundColor: i % 2 !== 0 ? "lightgrey" : "white",
+                }}
+              >
                 <td className="column name">
                   <a
                     className="avatar-link"
