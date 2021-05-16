@@ -28,15 +28,15 @@ const TestSessions = () => {
       });
   }, []);
 
-  const addRecord = (obj) => {
-    firebaseDb.child("sessions").push(obj);
+  const addSession = (session) => {
+    firebaseDb.child("sessions").push(session);
   };
 
-  const updateRecord = (key, value) => {
-    firebaseDb.child(`sessions/${key}`).update(value);
+  const updateSession = (key, session) => {
+    firebaseDb.child(`sessions/${key}`).update(session);
   };
 
-  const deleteRecord = (id) => {
+  const deleteSession = (id) => {
     if (window.confirm("Are you sure to delete this record?")) {
       firebaseDb.child(`sessions/${id}`).remove();
     }
@@ -427,7 +427,7 @@ const TestSessions = () => {
     ];
 
     var randomCharacter = sessions[Math.floor(Math.random() * sessions.length)];
-    addRecord(randomCharacter);
+    addSession(randomCharacter);
   };
 
   const toggleForm = () => {
@@ -520,14 +520,14 @@ const TestSessions = () => {
                   <button
                     onClick={() => {
                       session.name = "Test";
-                      updateRecord(key, session);
+                      updateSession(key, session);
                     }}
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => {
-                      deleteRecord(key);
+                      deleteSession(key);
                     }}
                   >
                     Delete

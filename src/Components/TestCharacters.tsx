@@ -14,15 +14,15 @@ const TestCharacters = () => {
     });
   }, []);
 
-  const addRecord = (obj) => {
-    firebaseDb.child("characters").push(obj);
+  const addCharacter = (character) => {
+    firebaseDb.child("characters").push(character);
   };
 
-  const updateRecord = (key, value) => {
-    firebaseDb.child(`characters/${key}`).update(value);
+  const updateCharacter = (key, character) => {
+    firebaseDb.child(`characters/${key}`).update(character);
   };
 
-  const deleteRecord = (id) => {
+  const deleteCharacter = (id) => {
     if (window.confirm("Are you sure to delete this record?")) {
       firebaseDb.child(`characters/${id}`).remove();
     }
@@ -373,7 +373,7 @@ const TestCharacters = () => {
 
     var randomCharacter =
       characters[Math.floor(Math.random() * characters.length)];
-    addRecord(randomCharacter);
+    addCharacter(randomCharacter);
   };
 
   return (
@@ -435,14 +435,14 @@ const TestCharacters = () => {
                   <button
                     onClick={() => {
                       currentRecord["starting-level"] = 69;
-                      updateRecord(key, currentRecord);
+                      updateCharacter(key, currentRecord);
                     }}
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => {
-                      deleteRecord(key);
+                      deleteCharacter(key);
                     }}
                   >
                     Delete

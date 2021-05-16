@@ -16,8 +16,8 @@ const TestEncounters = () => {
     });
   }, []);
 
-  const addRecord = (obj) => {
-    firebaseDb.child("encounters").push(obj);
+  const addEncounter = (encounter) => {
+    firebaseDb.child("encounters").push(encounter);
   };
 
   const addTestEncounter = () => {
@@ -36,7 +36,7 @@ const TestEncounters = () => {
 
     var randomEncounter =
       encounters[Math.floor(Math.random() * encounters.length)];
-    addRecord(randomEncounter);
+    addEncounter(randomEncounter);
   };
 
   return (
@@ -49,10 +49,8 @@ const TestEncounters = () => {
         }}
       >
         <thead>
-          <th>Title</th>
-          <th>Dungeon Master</th>
-          <th>Suggested Date</th>
-          <th>Scheduled Date</th>
+          <th>Terrain</th>
+          <th>Encounter</th>
         </thead>
         <tbody>
           {Object.keys(encounters).map((key, i) => {
@@ -70,16 +68,6 @@ const TestEncounters = () => {
                   {encounter["dungeon-master"]
                     ? encounter["dungeon-master"]
                     : "None yet"}
-                </td>
-                <td>
-                  {encounter["suggested-date"]
-                    ? encounter["suggested-date"]
-                    : "N/A"}
-                </td>
-                <td>
-                  {encounter["scheduled-date"]
-                    ? encounter["scheduled-date"]
-                    : "N/A"}
                 </td>
               </tr>
             );
