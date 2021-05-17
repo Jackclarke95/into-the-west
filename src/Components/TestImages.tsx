@@ -1,14 +1,13 @@
 import { url } from "node:inspector";
 import React, { useState, useEffect } from "react";
-import { isTemplateSpan } from "typescript";
-import { fireStore } from "../firebase.utils";
+import { firestore } from "../firebase.utils";
 
 const TestImages = ({ name }) => {
   const [imageUrl, setImageUrl] = useState();
 
   useEffect(() => {
-    fireStore
-      .ref(`Avatars/${name}.jpeg`)
+    firestore
+      .ref(`Avatars/${name}`)
       .getDownloadURL()
       .then((url) => {
         setImageUrl(url);
@@ -17,7 +16,13 @@ const TestImages = ({ name }) => {
   }, []);
 
   return (
-    <img style={{ height: 50, width: 50, objectFit: "cover" }} src={imageUrl} />
+    <>
+      <h3>{name}</h3>
+      <img
+        style={{ height: 50, width: 50, objectFit: "cover" }}
+        src={imageUrl}
+      />
+    </>
   );
 };
 
