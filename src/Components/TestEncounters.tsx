@@ -84,27 +84,28 @@ const TestEncounters = () => {
           <h3>Random Encounter:</h3>
           <div>{`Terrain: ${currentEncounter.terrain}`}</div>
           <div>
-            {`${
-              currentEncounter.discovery ?? ""
-            } ${currentEncounter.enemies?.map((enemy) => {
-              var enemyList = "";
-              if (isNaN(enemy.quantity)) {
-                var count = 0;
+            {`${currentEncounter.discovery ?? ""} ${currentEncounter.enemies
+              ?.map((enemy) => {
+                var enemyList = [] as string[];
 
-                // Roll the dice
-                for (var i = 0; i < enemy.quantity["die-count"]; i++) {
-                  count += Math.ceil(Math.random() * enemy.quantity.die);
-                  console.log("current die roll total", count);
+                if (isNaN(enemy.quantity)) {
+                  var count = 0;
+
+                  // Roll the dice
+                  for (var i = 0; i < enemy.quantity["die-count"]; i++) {
+                    count += Math.ceil(Math.random() * enemy.quantity.die);
+                    console.log("current die roll total", count);
+                  }
+
+                  count += enemy.quantity.modifier ?? 0;
+                  enemyList.push(`${count} ${enemy.type}s`);
+                } else {
+                  enemyList.push(`a ${enemy.type}`);
                 }
 
-                count += enemy.quantity.modifier ?? 0;
-                enemyList += `${count} ${enemy.type}s`;
-              } else {
-                enemyList += ` a ${enemy.type}`;
-              }
-
-              return enemyList;
-            })}`}
+                return enemyList;
+              })
+              .join(", ")}`}
           </div>
         </>
       ) : null}
