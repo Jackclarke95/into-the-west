@@ -3,6 +3,7 @@ import "./App.css";
 import TestCharacters from "./Components/TestCharacters";
 import TestSessions from "./Components/TestSessions";
 import TestEncounters from "./Components/TestEncounters";
+import TestImages from "./Components/TestImages";
 
 function App() {
   return (
@@ -11,6 +12,8 @@ function App() {
       <TestCharacters />
       <TestSessions />
       <TestEncounters />
+      <TestImages name="Eslyn" />
+      <TestImages name="Alavara" />
     </div>
   );
 }

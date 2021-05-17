@@ -13,10 +13,13 @@ let firebaseConfig = {
 
 var fireDb = firebase.initializeApp(firebaseConfig);
 
+var fireStore = firebase.storage();
+
 const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });
 
 export const firebaseDb = fireDb.database().ref();
 export const auth = firebase.auth();
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
+export { fireStore };
 export default firebase;
