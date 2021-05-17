@@ -57,11 +57,6 @@ const TestEncounters = () => {
 
   const getRandomEncounter = () => {
     let recordCount;
-
-    // firebaseDb.child("encounters").once("value", (snapshot) => {
-    //   recordCount = snapshot.numChildren();
-    // });
-
     let array = [] as any;
 
     firebaseDb.child("encounters").once("value", (snapshot) => {
@@ -72,12 +67,7 @@ const TestEncounters = () => {
     });
 
     const randomIndex = Math.floor(Math.random() * recordCount);
-
     const encounter = array[randomIndex];
-
-    console.log(encounter);
-
-    setCurrentEncounter(encounter);
 
     return encounter;
   };
@@ -85,43 +75,39 @@ const TestEncounters = () => {
   return (
     <>
       <h2>Encounters</h2>
-      <button onClick={() => addTestEncounter()}>Add Random Encounter</button>
-      <button onClick={() => getRandomEncounter()}>Log Random Encounter</button>
-      <table
-        style={{
-          borderCollapse: "collapse",
-        }}
-      >
-        <thead>
-          <th>Terrain</th>
-          <th>Encounter</th>
-        </thead>
-        <tbody>
-          {Object.keys(encounters).map((key, i) => {
-            let encounter = encounters[key];
-            return (
-              <tr
-                style={{
-                  backgroundColor: i % 2 !== 0 ? "lightgrey" : "white",
-                }}
-                key={key}
-                data-id={encounter.id}
-              >
-                <td>{encounter.terrain}</td>
-                <td>
-                  {encounter.discovery
-                    ? encounter.discovery
-                    : encounter.enemies.map((enemy) => {
-                        return enemy.type;
-                      })}
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      <div>{`Terrain: ${currentEncounter}`}</div>
-      {/* <div>{`Terrain: ${currentEncounter}`}</div> */}
+      <button onClick={() => setCurrentEncounter(getRandomEncounter())}>
+        Generate Random Encounter
+      </button>
+
+      {currentEncounter.discovery || currentEncounter.enemies ? (
+        <>
+          <h3>Random Encounter:</h3>
+          <div>{`Terrain: ${currentEncounter.terrain}`}</div>
+          <div>
+            {`${
+              currentEncounter.discovery ?? ""
+            } ${currentEncounter.enemies?.map((enemy) => {
+              var enemyList = "";
+              if (isNaN(enemy.quantity)) {
+                var count = 0;
+
+                // Roll the dice
+                for (var i = 0; i < enemy.quantity["die-count"]; i++) {
+                  count += Math.ceil(Math.random() * enemy.quantity.die);
+                  console.log("current die roll total", count);
+                }
+
+                count += enemy.quantity.modifier ?? 0;
+                enemyList += `${count} ${enemy.type}s`;
+              } else {
+                enemyList += ` a ${enemy.type}`;
+              }
+
+              return enemyList;
+            })}`}
+          </div>
+        </>
+      ) : null}
     </>
   );
 };
