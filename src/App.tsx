@@ -1,12 +1,37 @@
-import React from "react";
-import "./App.css";
+import React, { useState, useEffect } from "react";
 import TestCharacters from "./Components/TestCharacters";
 import Character from "./Components/Character";
 import TestSessions from "./Components/TestSessions";
 import TestEncounters from "./Components/TestEncounters";
 import TestImages from "./Components/TestImages";
+import firebase, { firebaseDb, firestore } from "./firebase.utils";
+import "./App.css";
 
 function App() {
+  const [characters, setCharacters] = useState({});
+  const [sessions, setSessions] = useState({});
+
+  useEffect(() => {
+    firebaseDb.child("sessions").on("value", (snapshot) => {
+      if (snapshot.val() != null) {
+        setSessions({ ...snapshot.val() });
+      } else {
+        setSessions({});
+      }
+    });
+
+    firebaseDb
+      .child("characters")
+      .orderByChild("starting-level")
+      .on("value", (snapshot) => {
+        if (snapshot.val() != null) {
+          setCharacters({ ...snapshot.val() });
+        } else {
+          setCharacters({});
+        }
+      });
+  }, []);
+
   return (
     <div>
       <h1>Into The West</h1>
@@ -31,8 +56,8 @@ function App() {
           "starting-level": 9,
         }}
       />
-      <TestCharacters />
-      <TestSessions />
+      <TestCharacters characters={characters} />
+      <TestSessions characters={characters} sessions={sessions} />
       <TestEncounters />
       <TestImages name="Eslyn.jpeg" />
     </div>

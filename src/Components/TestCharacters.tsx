@@ -1,19 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { firebaseDb } from "../firebase.utils";
 
-const TestCharacters = () => {
-  var [characters, setObjects] = useState({});
-
-  useEffect(() => {
-    firebaseDb.child("characters").on("value", (snapshot) => {
-      if (snapshot.val() != null) {
-        setObjects({ ...snapshot.val() });
-      } else {
-        setObjects({});
-      }
-    });
-  }, []);
-
+const TestCharacters = ({ characters }) => {
   const addCharacter = (character) => {
     firebaseDb.child("characters").push(character);
   };

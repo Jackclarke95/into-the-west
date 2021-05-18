@@ -1,32 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { firebaseDb } from "../firebase.utils";
 
-const TestSessions = () => {
-  var [sessions, setSessions] = useState({});
-  var [characters, setCharacters] = useState({});
+const TestSessions = ({ characters, sessions }) => {
   var [showForm, setShowForm] = useState(false);
   var [currentSession, setCurrentSession] = useState({});
-
-  useEffect(() => {
-    firebaseDb.child("sessions").on("value", (snapshot) => {
-      if (snapshot.val() != null) {
-        setSessions({ ...snapshot.val() });
-      } else {
-        setSessions({});
-      }
-    });
-
-    firebaseDb
-      .child("characters")
-      .orderByChild("starting-level")
-      .on("value", (snapshot) => {
-        if (snapshot.val() != null) {
-          setCharacters({ ...snapshot.val() });
-        } else {
-          setCharacters({});
-        }
-      });
-  }, []);
 
   const addSession = (session) => {
     firebaseDb.child("sessions").push(session);
@@ -488,6 +465,7 @@ const TestSessions = () => {
           <th>Dungeon Master</th>
           <th>Suggested Date</th>
           <th>Scheduled Date</th>
+          <th>Players</th>
         </thead>
         <tbody>
           {Object.keys(sessions).map((key, i) => {
@@ -516,6 +494,7 @@ const TestSessions = () => {
                     ? session["scheduled-date"]
                     : "N/A"}
                 </td>
+                <td>{session.characters ?? "N/A"}</td>
                 <td>
                   <button
                     onClick={() => {
