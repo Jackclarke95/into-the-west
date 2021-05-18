@@ -54,9 +54,8 @@ const deteremineSessionsAttended = (character, sessions) => {
  *
  * @returns {number} The number of sessions required for this level
  */
-const calculateMaxSessionsToNextLevel = (level: number) => {
-  return Math.trunc(level / 6 + 2);
-};
+const calculateMaxSessionsToNextLevel = (level: number) =>
+  Math.trunc(level / 6 + 2);
 
 /**
  * Calculates the character's current level from its starting level and session count
