@@ -2,7 +2,7 @@ import { url } from "node:inspector";
 import React, { useState, useEffect } from "react";
 import { firestore } from "../firebase.utils";
 
-const TestImages = ({ character }) => {
+const Character = ({ character }) => {
   const [imageUrl, setImageUrl] = useState();
 
   useEffect(() => {
@@ -92,4 +92,4 @@ const TestImages = ({ character }) => {
   ) : null;
 };
 
-export default TestImages;
+export default Character;
