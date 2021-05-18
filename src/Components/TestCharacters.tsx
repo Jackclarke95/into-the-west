@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { firebaseDb } from "../firebase.utils";
+import {
+  deteremineSessionsAttended,
+  calculateSessionsForLevelUp,
+} from "../Helpers/DataHelper";
 
-const TestCharacters = ({ characters }) => {
+const TestCharacters = ({ characters, sessions }) => {
   const addCharacter = (character) => {
     firebaseDb.child("characters").push(character);
   };
@@ -377,10 +381,12 @@ const TestCharacters = ({ characters }) => {
           <th>Character</th>
           <th>Race</th>
           <th>Starting Level</th>
+          <th>Session Count</th>
+          <th>Sessions to Level Up</th>
         </thead>
         <tbody>
           {Object.keys(characters).map((key, i) => {
-            let currentRecord = characters[key];
+            let character = characters[key];
 
             return (
               <tr
@@ -395,10 +401,10 @@ const TestCharacters = ({ characters }) => {
                     className="avatar-link"
                     rel="noopener noreferrer"
                     target="_blank"
-                    href={`https://www.dndbeyond.com/avatars/${currentRecord["avatar-link"]}`}
+                    href={`https://www.dndbeyond.com/avatars/${character["avatar-link"]}`}
                   >
                     <img
-                      src={`https://www.dndbeyond.com/avatars/${currentRecord["avatar-link"]}`}
+                      src={`https://www.dndbeyond.com/avatars/${character["avatar-link"]}`}
                       style={{
                         objectFit: "cover",
                         width: "30px",
@@ -410,20 +416,29 @@ const TestCharacters = ({ characters }) => {
                     className="character-name"
                     rel="noopener noreferrer"
                     target="_blank"
-                    href={`https://www.dndbeyond.com/profile/${currentRecord["player-dndbeyond-name"]}/characters/${currentRecord.id}`}
+                    href={`https://www.dndbeyond.com/profile/${character["player-dndbeyond-name"]}/characters/${character.id}`}
                   >
-                    {currentRecord.nickname
-                      ? currentRecord.nickname
-                      : currentRecord.name}
+                    {character.nickname ? character.nickname : character.name}
                   </a>
                 </td>
-                <td>{currentRecord.race}</td>
-                <td>{currentRecord["starting-level"]}</td>
+                <td>{character.race}</td>
+                <td style={{ textAlign: "center" }}>
+                  {character["starting-level"]}
+                </td>
+                <td style={{ textAlign: "center" }}>
+                  {deteremineSessionsAttended(character, sessions)}
+                </td>
+                <td style={{ textAlign: "center" }}>
+                  {calculateSessionsForLevelUp(
+                    character["starting-level"],
+                    deteremineSessionsAttended(character, sessions)
+                  )}
+                </td>
                 <td>
                   <button
                     onClick={() => {
-                      currentRecord["starting-level"] = 69;
-                      updateCharacter(key, currentRecord);
+                      character["starting-level"] = 69;
+                      updateCharacter(key, character);
                     }}
                   >
                     Edit

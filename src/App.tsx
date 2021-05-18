@@ -56,7 +56,7 @@ function App() {
           "starting-level": 9,
         }}
       />
-      <TestCharacters characters={characters} />
+      <TestCharacters characters={characters} sessions={sessions} />
       <TestSessions characters={characters} sessions={sessions} />
       <TestEncounters />
       <TestImages name="Eslyn.jpeg" />

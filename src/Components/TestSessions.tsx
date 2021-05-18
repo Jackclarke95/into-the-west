@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { firebaseDb } from "../firebase.utils";
+import { determineSessionCharacters } from "../Helpers/DataHelper";
 
 const TestSessions = ({ characters, sessions }) => {
   var [showForm, setShowForm] = useState(false);
@@ -403,8 +404,8 @@ const TestSessions = ({ characters, sessions }) => {
       },
     ];
 
-    var randomCharacter = sessions[Math.floor(Math.random() * sessions.length)];
-    addSession(randomCharacter);
+    const randomSession = sessions[Math.floor(Math.random() * sessions.length)];
+    addSession(randomSession);
   };
 
   const toggleForm = () => {
@@ -435,16 +436,13 @@ const TestSessions = ({ characters, sessions }) => {
           Date:
           <input type="date" name="date" />
         </label>
-
         <label>
           Players:
           <select>
             <option></option>
             {Object.keys(characters).map((key) => {
-              let currentRecord = characters[key];
-              let name = currentRecord.nickname
-                ? currentRecord.nickname
-                : currentRecord.name;
+              let character = characters[key];
+              let name = character.nickname ?? character.name;
               return (
                 <option key={key} value={name}>
                   {name}
@@ -494,7 +492,7 @@ const TestSessions = ({ characters, sessions }) => {
                     ? session["scheduled-date"]
                     : "N/A"}
                 </td>
-                <td>{session.characters ?? "N/A"}</td>
+                <td>{determineSessionCharacters(characters, session)}</td>
                 <td>
                   <button
                     onClick={() => {
