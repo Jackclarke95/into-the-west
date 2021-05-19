@@ -4,12 +4,23 @@ import Character from "./Components/Character";
 import TestSessions from "./Components/TestSessions";
 import TestEncounters from "./Components/TestEncounters";
 import TestImages from "./Components/TestImages";
-import firebase, { firebaseDb, firestore } from "./firebase.utils";
+import firebase, {
+  auth,
+  firebaseDb,
+  firestore,
+  signInWithGoogle,
+} from "./firebase.utils";
 import "./App.scss";
 
 function App() {
   const [characters, setCharacters] = useState({});
   const [sessions, setSessions] = useState({});
+  const [user, setUser] = useState({} as any);
+
+  auth.onAuthStateChanged((user) => {
+    console.log("setting user to:", user?.displayName, user?.uid);
+    setUser(user);
+  });
 
   useEffect(() => {
     firebaseDb.child("sessions").on("value", (snapshot) => {
@@ -30,6 +41,21 @@ function App() {
           setCharacters({});
         }
       });
+
+    if (user) {
+      console.log(user.uid);
+      firebaseDb
+        .child("players")
+        .orderByChild("uid")
+        .equalTo(user.uid)
+        .on("value", (snapshot) => {
+          if (snapshot.val() != null) {
+            console.log("players:", snapshot.val());
+          } else {
+            setCharacters({});
+          }
+        });
+    }
   }, []);
 
   let characterArray = [] as any[];
@@ -42,10 +68,10 @@ function App() {
     return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
   });
 
-  console.log(characterArray.length);
-
   return (
     <div>
+      <button onClick={signInWithGoogle}>Sign In with Google</button>
+      <button onClick={() => auth.signOut()}>Sign Out</button>
       <h1>Into The West</h1>
       <div
         className="characters"
