@@ -47,10 +47,21 @@ function App() {
   return (
     <div>
       <h1>Into The West</h1>
-      <div className="character-cards">
-        {characterArray.map((character) => (
-          <Character character={character} sessions={sessions} />
-        ))}
+      <div
+        className="characters"
+        style={{
+          // display: "flex",
+          // flexDirection: "column",
+          // justifyContent: "center",
+          // alignItems: "center",
+          textAlign: "center",
+        }}
+      >
+        <div className="character-cards">
+          {characterArray.map((character) => (
+            <Character character={character} sessions={sessions} />
+          ))}
+        </div>
       </div>
       <TestCharacters characters={characterArray} sessions={sessions} />
       <TestSessions characters={characters} sessions={sessions} />

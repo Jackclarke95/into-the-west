@@ -70,36 +70,48 @@ const Character = ({ character, sessions }) => {
       className="character-card"
       data-character-name={character.name}
       style={{
-        display: "flex",
-        margin: "1em",
-        padding: "1em",
+        display: "inline-block",
+        margin: "0.5em",
+        padding: "0.5em",
         backgroundColor: "#eeeeee",
-        //flex: 1,
+        width: "30em",
+        textAlign: "start",
       }}
     >
-      <img
-        style={{ height: 100, width: 100, objectFit: "cover" }}
-        src={imageUrl}
-      />
-      <div style={{ marginLeft: "1em" }}>
-        <div style={{ fontSize: "20px", fontWeight: "bold" }}>
-          {getDisplayName()}
-        </div>
-        <div style={{ display: "flex" }}>
-          <div>{getFormattedTotalLevel()}</div> <TextDivider />
-          <div>{getRace()}</div>
-          <TextDivider />
-          <div>{getClasses()}</div>
-        </div>
-        <div>
-          Session Count: {deteremineSessionsAttended(character, sessions)}
-        </div>
-        <div>
-          Sessions to Level Up:{" "}
-          {calculateSessionsForLevelUp(
-            character["starting-level"],
-            deteremineSessionsAttended(character, sessions)
-          )}
+      <div style={{ display: "flex" }}>
+        <img
+          style={{ height: 100, width: 100, objectFit: "cover" }}
+          src={imageUrl}
+        />
+        <div style={{ marginLeft: "1em" }}>
+          <div
+            className="character-card-title"
+            style={{
+              fontSize: "20px",
+              fontWeight: "bold",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+          >
+            {getDisplayName()}
+          </div>
+          <div style={{ display: "flex" }}>
+            <div>{getFormattedTotalLevel()}</div> <TextDivider />
+            <div>{getRace()}</div>
+            <TextDivider />
+            <div>{getClasses()}</div>
+          </div>
+          <div>
+            Session Count: {deteremineSessionsAttended(character, sessions)}
+          </div>
+          <div>
+            Sessions to Level Up:{" "}
+            {calculateSessionsForLevelUp(
+              character["starting-level"],
+              deteremineSessionsAttended(character, sessions)
+            )}
+          </div>
         </div>
       </div>
     </div>
