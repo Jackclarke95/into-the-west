@@ -8,8 +8,26 @@ import {
 } from "../Helpers/DataHelper";
 import TextDivider from "./Stylistic/TextDivider";
 
-const Character = ({ character, sessions }) => {
+const Character = ({ character, sessions, player = null as null | any }) => {
   const [imageUrl, setImageUrl] = useState("");
+  console.log("character player:", player);
+
+  let playerMatch = false;
+
+  if (player) {
+    let playerData;
+    Object.keys(player).map((key) => {
+      console.log("player:", player[key]);
+      playerData = player[key];
+    });
+
+    if (playerData["dndbeyond-name"] === character["player-dndbeyond-name"]) {
+      playerMatch = true;
+    } else {
+    }
+  }
+
+  console.log("match:", playerMatch);
 
   useEffect(() => {
     firestore
@@ -78,16 +96,16 @@ const Character = ({ character, sessions }) => {
         textAlign: "start",
       }}
     >
-      <div
-        className="character-card-image-container"
-        style={{ display: "flex" }}
-      >
+      <div style={{ display: "flex" }}>
         <img
           className="character-image"
           style={{ height: 100, width: 100, objectFit: "cover" }}
           src={imageUrl}
         />
-        <div className="character-card-data" style={{ marginLeft: "1em" }}>
+        <div
+          className="character-card-data"
+          style={{ marginLeft: "1em", flexGrow: 1 }}
+        >
           <div
             className="character-name"
             style={{
@@ -100,26 +118,41 @@ const Character = ({ character, sessions }) => {
           >
             {getDisplayName()}
           </div>
-          <div
-            className="character-details"
-            style={{ display: "flex", fontWeight: 500 }}
-          >
-            <div>{getFormattedTotalLevel()}</div> <TextDivider />
-            <div>{getRace()}</div>
-            <TextDivider />
-            <div>{getClasses()}</div>
-          </div>
-          <div>
-            Session Count: {deteremineSessionsAttended(character, sessions)}
-          </div>
-          <div>
-            Sessions to Level Up:{" "}
-            {calculateSessionsForLevelUp(
-              character["starting-level"],
-              deteremineSessionsAttended(character, sessions)
-            )}
+          <div className="character-details">
+            <div
+              className="character-summary"
+              style={{ display: "flex", fontWeight: 500 }}
+            >
+              <div className="character-level">{getFormattedTotalLevel()}</div>
+              <TextDivider />
+              <div className="character-race">{getRace()}</div>
+              <TextDivider />
+              <div className="character-classes">{getClasses()}</div>
+            </div>
+            <div className="character-session-count">
+              Session Count: {deteremineSessionsAttended(character, sessions)}
+            </div>
+            <div className="character-sessions-to-level">
+              Sessions to Level Up:{" "}
+              {calculateSessionsForLevelUp(
+                character["starting-level"],
+                deteremineSessionsAttended(character, sessions)
+              )}
+            </div>
           </div>
         </div>
+        {playerMatch ? (
+          <div
+            className="edit-character-button"
+            style={{
+              position: "relative",
+              right: 0,
+              backgroundColor: "pink",
+            }}
+          >
+            Edit
+          </div>
+        ) : null}
       </div>
     </div>
   ) : null;
