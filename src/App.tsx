@@ -13,8 +13,8 @@ import firebase, {
 import "./App.scss";
 
 function App() {
-  const [characters, setCharacters] = useState({});
-  const [sessions, setSessions] = useState({});
+  const [characters, setCharacters] = useState([] as {}[]);
+  const [sessions, setSessions] = useState([] as {}[]);
   const [user, setUser] = useState({} as any);
   const [currentPlayer, setCurrentPlayer] = useState();
 
@@ -23,25 +23,31 @@ function App() {
   });
 
   useEffect(() => {
-    firebaseDb.child("sessions").on("value", (snapshot) => {
-      if (snapshot.val() != null) {
-        setSessions({ ...snapshot.val() });
-      } else {
-        setSessions({});
-      }
-    });
+    let sessionArray = [] as {}[];
+    firebaseDb
+      .child("sessions")
+      .orderByChild("scheduled-date")
+      .on("value", (snapshot) => {
+        snapshot.forEach((child) => {
+          sessionArray.push(child.val());
+        });
+        setSessions(sessionArray);
+      });
+
+    let characterArray = [] as {}[];
 
     firebaseDb
       .child("characters")
-      .orderByChild("starting-level")
-      .on("value", (snapshot) => {
-        if (snapshot.val() != null) {
-          setCharacters({ ...snapshot.val() });
-        } else {
-          setCharacters({});
-        }
+      .orderByChild("name")
+      .once("value", (snapshot) => {
+        snapshot.forEach((child) => {
+          characterArray.push(child.val());
+        });
+        setCharacters(characterArray);
       });
   }, []);
+
+  console.log(characters);
 
   if (user && user.uid && !currentPlayer) {
     firebaseDb
