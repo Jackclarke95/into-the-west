@@ -55,33 +55,36 @@ function App() {
       });
   }
 
-  let characterArray = [] as any[];
-
-  Object.keys(characters).map((key) => {
-    characterArray.push(characters[key]);
-  });
-
-  characterArray.sort((a, b) => {
-    return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
-  });
-
   return (
     <div>
-      <BrowserView>
-        <button onClick={signInWithGooglePopup}>Sign In with Google</button>
-        <div>Desktop</div>
-      </BrowserView>
-      <MobileView>
-        <button onClick={signInWithGoogleRedirect}>Sign In with Google</button>
-        <div>Mobile</div>
-      </MobileView>
-      <button onClick={() => auth.signOut()}>Sign Out</button>
+      {user ? (
+        <button
+          onClick={() => {
+            auth.signOut();
+            // setCurrentPlayer(null);
+          }}
+        >
+          Sign Out
+        </button>
+      ) : (
+        <>
+          <BrowserView>
+            <button onClick={signInWithGooglePopup}>Sign In with Google</button>
+          </BrowserView>
+          <MobileView>
+            <button onClick={signInWithGoogleRedirect}>
+              Sign In with Google
+            </button>
+          </MobileView>
+        </>
+      )}
       <h1>Into The West</h1>
       <div className="characters" style={{ textAlign: "center" }}>
         <div className="character-cards">
-          {characterArray.map((character) => (
+          {Object.keys(characters).map((key) => (
             <Character
-              character={character}
+              character={characters[key]}
+              characterKey={key}
               sessions={sessions}
               player={currentPlayer}
             />

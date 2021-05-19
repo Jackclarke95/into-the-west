@@ -1,6 +1,6 @@
 import { url } from "node:inspector";
 import React, { useState, useEffect } from "react";
-import { firestore } from "../firebase.utils";
+import { firestore, firebaseDb } from "../firebase.utils";
 import {
   deteremineSessionsAttended,
   calculateSessionsForLevelUp,
@@ -8,8 +8,58 @@ import {
 } from "../Helpers/DataHelper";
 import TextDivider from "./Stylistic/TextDivider";
 
-const Character = ({ character, sessions, player = null as null | any }) => {
+const Character = ({
+  character,
+  characterKey,
+  sessions,
+  player = null as null | any,
+}) => {
   const [imageUrl, setImageUrl] = useState("");
+
+  const updateCharacter = (key, character) => {
+    character.name = character.name;
+    firebaseDb.child(`characters/${key}`).update(character);
+  };
+
+  const getDisplayName = () => {
+    return character.nickname
+      ? `${character.name} (${character.nickname})`
+      : character.name;
+  };
+
+  const getRace = () => {
+    return `${character.subrace ? `${character.subrace} ` : ""}${
+      character.race
+    }`;
+  };
+
+  const getClasses = () => {
+    let classList = [] as string[];
+
+    character.classes
+      .sort((a, b) => {
+        return b.level - a.level; // Sort by class with most levels
+      })
+      .map((characterClass) => {
+        classList.push(characterClass.class);
+      });
+
+    return classList.join("/");
+  };
+
+  const getTotalLevel = () => {
+    let totalLevel = 0;
+
+    character.classes.map((characterClass) => {
+      totalLevel += characterClass.level;
+    });
+
+    return totalLevel;
+  };
+
+  const getFormattedTotalLevel = () => {
+    return `${getOrdinal(getTotalLevel())} Level`;
+  };
 
   let playerMatch = false;
 
@@ -38,46 +88,6 @@ const Character = ({ character, sessions, player = null as null | any }) => {
         )
       );
   }, []);
-
-  const getDisplayName = () => {
-    return character.nickname
-      ? `${character.name} (${character.nickname})`
-      : character.name;
-  };
-
-  const getRace = () => {
-    return `${character.subrace ? `${character.subrace} ` : ""}${
-      character.race
-    }`;
-  };
-
-  const getClasses = () => {
-    let classList = [] as string[];
-
-    character.classes
-      .sort((a, b) => {
-        return b.level - a.level; // Sort by highest class level
-      })
-      .map((characterClass) => {
-        classList.push(characterClass.class);
-      });
-
-    return classList.join("/");
-  };
-
-  const getTotalLevel = () => {
-    let totalLevel = 0;
-
-    character.classes.map((characterClass) => {
-      totalLevel += characterClass.level;
-    });
-
-    return totalLevel;
-  };
-
-  const getFormattedTotalLevel = () => {
-    return `${getOrdinal(getTotalLevel())} Level`;
-  };
 
   return character ? (
     <div
@@ -152,6 +162,7 @@ const Character = ({ character, sessions, player = null as null | any }) => {
                 }}
               >
                 <img
+                  onClick={() => updateCharacter(characterKey, character)}
                   title="Edit"
                   style={{ cursor: "pointer" }}
                   src={process.env.PUBLIC_URL + "/Images/settings-cog.svg"}
