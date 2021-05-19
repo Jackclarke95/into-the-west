@@ -78,14 +78,18 @@ const Character = ({ character, sessions }) => {
         textAlign: "start",
       }}
     >
-      <div style={{ display: "flex" }}>
+      <div
+        className="character-card-image-container"
+        style={{ display: "flex" }}
+      >
         <img
+          className="character-image"
           style={{ height: 100, width: 100, objectFit: "cover" }}
           src={imageUrl}
         />
-        <div style={{ marginLeft: "1em" }}>
+        <div className="character-card-data" style={{ marginLeft: "1em" }}>
           <div
-            className="character-card-title"
+            className="character-name"
             style={{
               fontSize: "20px",
               fontWeight: "bold",
@@ -96,7 +100,10 @@ const Character = ({ character, sessions }) => {
           >
             {getDisplayName()}
           </div>
-          <div style={{ display: "flex" }}>
+          <div
+            className="character-details"
+            style={{ display: "flex", fontWeight: 500 }}
+          >
             <div>{getFormattedTotalLevel()}</div> <TextDivider />
             <div>{getRace()}</div>
             <TextDivider />

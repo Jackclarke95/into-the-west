@@ -5,7 +5,7 @@ import TestSessions from "./Components/TestSessions";
 import TestEncounters from "./Components/TestEncounters";
 import TestImages from "./Components/TestImages";
 import firebase, { firebaseDb, firestore } from "./firebase.utils";
-import "./App.css";
+import "./App.scss";
 
 function App() {
   const [characters, setCharacters] = useState({});
