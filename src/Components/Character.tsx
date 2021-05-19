@@ -62,7 +62,7 @@ const Character = ({ character, sessions }) => {
   };
 
   const getFormattedTotalLevel = () => {
-    return `${getTotalLevel()}${getOrdinal(getTotalLevel())} Level`;
+    return `${getOrdinal(getTotalLevel())} Level`;
   };
 
   return character ? (
