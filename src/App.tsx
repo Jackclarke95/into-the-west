@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import TestCharacters from "./Components/TestCharacters";
 import Character from "./Components/Character";
 import TestSessions from "./Components/TestSessions";
 import TestEncounters from "./Components/TestEncounters";
-import TestImages from "./Components/TestImages";
 import firebase, {
   auth,
   firebaseDb,
@@ -19,7 +17,6 @@ function App() {
   const [currentPlayer, setCurrentPlayer] = useState();
 
   auth.onAuthStateChanged((user) => {
-    console.log("setting user to:", user?.displayName, user?.uid);
     setUser(user);
   });
 
@@ -45,14 +42,12 @@ function App() {
   }, []);
 
   if (user && user.uid && !currentPlayer) {
-    console.log("Finding player");
     firebaseDb
       .child("players")
       .orderByChild("uid")
       .equalTo(user.uid)
       .on("value", (snapshot) => {
         if (snapshot.val() != null) {
-          console.log("Snapshot value:", snapshot.val());
           setCurrentPlayer({ ...snapshot.val() });
         }
       });
@@ -84,10 +79,8 @@ function App() {
           ))}
         </div>
       </div>
-      <TestCharacters characters={characterArray} sessions={sessions} />
-      <TestSessions characters={characters} sessions={sessions} />
       <TestEncounters />
-      <TestImages name="Eslyn Juhlenath.jpeg" />
+      <TestSessions characters={characters} sessions={sessions} />
     </div>
   );
 }

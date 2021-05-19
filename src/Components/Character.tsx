@@ -10,14 +10,12 @@ import TextDivider from "./Stylistic/TextDivider";
 
 const Character = ({ character, sessions, player = null as null | any }) => {
   const [imageUrl, setImageUrl] = useState("");
-  console.log("character player:", player);
 
   let playerMatch = false;
 
   if (player) {
     let playerData;
     Object.keys(player).map((key) => {
-      console.log("player:", player[key]);
       playerData = player[key];
     });
 
@@ -26,8 +24,6 @@ const Character = ({ character, sessions, player = null as null | any }) => {
     } else {
     }
   }
-
-  console.log("match:", playerMatch);
 
   useEffect(() => {
     firestore
