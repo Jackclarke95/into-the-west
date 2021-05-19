@@ -69,7 +69,13 @@ const Character = ({ character, sessions }) => {
     <div
       className="character-card"
       data-character-name={character.name}
-      style={{ display: "flex", margin: "1em", flexShrink: 3 }}
+      style={{
+        display: "flex",
+        margin: "1em",
+        padding: "1em",
+        backgroundColor: "#eeeeee",
+        //flex: 1,
+      }}
     >
       <img
         style={{ height: 100, width: 100, objectFit: "cover" }}
