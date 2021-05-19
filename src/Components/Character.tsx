@@ -118,41 +118,53 @@ const Character = ({ character, sessions, player = null as null | any }) => {
           >
             {getDisplayName()}
           </div>
-          <div className="character-details">
-            <div
-              className="character-summary"
-              style={{ display: "flex", fontWeight: 500 }}
-            >
-              <div className="character-level">{getFormattedTotalLevel()}</div>
-              <TextDivider />
-              <div className="character-race">{getRace()}</div>
-              <TextDivider />
-              <div className="character-classes">{getClasses()}</div>
+          <div style={{ display: "flex" }} className="character-card-data-body">
+            <div style={{ flexGrow: 1 }} className="character-details">
+              <div
+                className="character-summary"
+                style={{ display: "flex", fontWeight: 500 }}
+              >
+                <div className="character-level">
+                  {getFormattedTotalLevel()}
+                </div>
+                <TextDivider />
+                <div className="character-race">{getRace()}</div>
+                <TextDivider />
+                <div className="character-classes">{getClasses()}</div>
+              </div>
+              <div className="character-session-count">
+                Session Count: {deteremineSessionsAttended(character, sessions)}
+              </div>
+              <div className="character-sessions-to-level">
+                Sessions to Level Up:{" "}
+                {calculateSessionsForLevelUp(
+                  character["starting-level"],
+                  deteremineSessionsAttended(character, sessions)
+                )}
+              </div>
             </div>
-            <div className="character-session-count">
-              Session Count: {deteremineSessionsAttended(character, sessions)}
-            </div>
-            <div className="character-sessions-to-level">
-              Sessions to Level Up:{" "}
-              {calculateSessionsForLevelUp(
-                character["starting-level"],
-                deteremineSessionsAttended(character, sessions)
-              )}
-            </div>
+            {playerMatch ? (
+              <div
+                className="edit-character-button"
+                style={{
+                  position: "relative",
+                  right: 0,
+                  display: "flex",
+                  alignItems: "flex-end",
+                  marginRight: "1em",
+                  // cursor: "pointer",
+                }}
+              >
+                <img
+                  title="Edit"
+                  style={{ cursor: "pointer" }}
+                  src={process.env.PUBLIC_URL + "/Images/settings-cog.svg"}
+                  height={24}
+                />
+              </div>
+            ) : null}
           </div>
         </div>
-        {playerMatch ? (
-          <div
-            className="edit-character-button"
-            style={{
-              position: "relative",
-              right: 0,
-              backgroundColor: "pink",
-            }}
-          >
-            Edit
-          </div>
-        ) : null}
       </div>
     </div>
   ) : null;
