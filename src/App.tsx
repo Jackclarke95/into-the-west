@@ -7,8 +7,8 @@ import firebase, {
   auth,
   firebaseDb,
   firestore,
-  signInWithGoogle,
-  provider,
+  signInWithGoogleRedirect,
+  signInWithGooglePopup,
 } from "./firebase.utils";
 import "./App.scss";
 
@@ -17,14 +17,6 @@ function App() {
   const [sessions, setSessions] = useState({});
   const [user, setUser] = useState({} as any);
   const [currentPlayer, setCurrentPlayer] = useState();
-
-  const signInPopup = () => {
-    auth.signInWithPopup(provider);
-  };
-
-  const signInRedirect = () => {
-    auth.signInWithRedirect(provider);
-  };
 
   auth.onAuthStateChanged((user) => {
     setUser(user);
@@ -76,10 +68,12 @@ function App() {
   return (
     <div>
       <BrowserView>
-        <button onClick={signInPopup}>Sign In with Google</button>
+        <button onClick={signInWithGooglePopup}>Sign In with Google</button>
+        <div>Desktop</div>
       </BrowserView>
       <MobileView>
-        <button onClick={signInRedirect}>Sign In with Google</button>
+        <button onClick={signInWithGoogleRedirect}>Sign In with Google</button>
+        <div>Mobile</div>
       </MobileView>
       <button onClick={() => auth.signOut()}>Sign Out</button>
       <h1>Into The West</h1>
