@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { BrowserView, MobileView } from "react-device-detect";
 import Character from "./Components/Character";
 import TestSessions from "./Components/TestSessions";
 import TestEncounters from "./Components/TestEncounters";
@@ -7,6 +8,7 @@ import firebase, {
   firebaseDb,
   firestore,
   signInWithGoogle,
+  provider,
 } from "./firebase.utils";
 import "./App.scss";
 
@@ -15,6 +17,14 @@ function App() {
   const [sessions, setSessions] = useState({});
   const [user, setUser] = useState({} as any);
   const [currentPlayer, setCurrentPlayer] = useState();
+
+  const signInPopup = () => {
+    auth.signInWithPopup(provider);
+  };
+
+  const signInRedirect = () => {
+    auth.signInWithRedirect(provider);
+  };
 
   auth.onAuthStateChanged((user) => {
     setUser(user);
@@ -65,7 +75,12 @@ function App() {
 
   return (
     <div>
-      <button onClick={signInWithGoogle}>Sign In with Google</button>
+      <BrowserView>
+        <button onClick={signInPopup}>Sign In with Google</button>
+      </BrowserView>
+      <MobileView>
+        <button onClick={signInRedirect}>Sign In with Google</button>
+      </MobileView>
       <button onClick={() => auth.signOut()}>Sign Out</button>
       <h1>Into The West</h1>
       <div className="characters" style={{ textAlign: "center" }}>
