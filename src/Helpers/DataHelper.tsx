@@ -1,5 +1,26 @@
 import React, { useState } from "react";
 
+const getOrdinal = (level: number) => {
+  const lastDigit = level % 10;
+
+  if (level === 11 || level === 12) {
+    return "th";
+  }
+  switch (lastDigit) {
+    case 1:
+      return "st";
+
+    case 2:
+      return "nd";
+
+    case 3:
+      return "rd";
+
+    default:
+      return "th";
+  }
+};
+
 /**
  * Determines the characters that attended specified session
  *
@@ -126,4 +147,5 @@ export {
   determineSessionCharacters,
   deteremineSessionsAttended,
   calculateSessionsForLevelUp,
+  getOrdinal,
 };

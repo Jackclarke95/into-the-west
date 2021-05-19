@@ -402,16 +402,7 @@ const TestCharacters = ({ characters, sessions }) => {
                     rel="noopener noreferrer"
                     target="_blank"
                     href={`https://www.dndbeyond.com/avatars/${character["avatar-link"]}`}
-                  >
-                    <img
-                      src={`https://www.dndbeyond.com/avatars/${character["avatar-link"]}`}
-                      style={{
-                        objectFit: "cover",
-                        width: "30px",
-                        height: "30px",
-                      }}
-                    />
-                  </a>
+                  ></a>
                   <a
                     className="character-name"
                     rel="noopener noreferrer"

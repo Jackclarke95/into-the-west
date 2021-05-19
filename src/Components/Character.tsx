@@ -1,9 +1,15 @@
 import { url } from "node:inspector";
 import React, { useState, useEffect } from "react";
 import { firestore } from "../firebase.utils";
+import {
+  deteremineSessionsAttended,
+  calculateSessionsForLevelUp,
+  getOrdinal,
+} from "../Helpers/DataHelper";
+import TextDivider from "./Stylistic/TextDivider";
 
-const Character = ({ character }) => {
-  const [imageUrl, setImageUrl] = useState();
+const Character = ({ character, sessions }) => {
+  const [imageUrl, setImageUrl] = useState("");
 
   useEffect(() => {
     firestore
@@ -12,11 +18,17 @@ const Character = ({ character }) => {
       .then((url) => {
         setImageUrl(url);
       })
-      .catch((e) => console.log("Errors while downloading => ", e));
+      .catch((e) =>
+        setImageUrl(
+          "https://www.dndbeyond.com/Content/Skins/Waterdeep/images/characters/default-avatar-builder.png"
+        )
+      );
   }, []);
 
   const getDisplayName = () => {
-    return character.nickname ? character.nickname : character.name;
+    return character.nickname
+      ? `${character.name} (${character.nickname})`
+      : character.name;
   };
 
   const getRace = () => {
@@ -33,10 +45,10 @@ const Character = ({ character }) => {
         return b.level - a.level; // Sort by highest class level
       })
       .map((characterClass) => {
-        classList.push(`${characterClass.class} (${characterClass.level})`);
+        classList.push(characterClass.class);
       });
 
-    return classList.join(", ");
+    return classList.join("/");
   };
 
   const getTotalLevel = () => {
@@ -50,45 +62,41 @@ const Character = ({ character }) => {
   };
 
   const getFormattedTotalLevel = () => {
-    const level = getTotalLevel();
-    let prefix;
-
-    switch (level) {
-      case 1:
-        prefix = "st";
-        break;
-
-      case 2:
-        prefix = "nd";
-        break;
-
-      case 3:
-        prefix = "rd";
-        break;
-
-      default:
-        prefix = "th";
-        break;
-    }
-
-    return `${level}${prefix} Level`;
-  };
-
-  const getStartingLevel = () => {
-    return character["starting-level"];
+    return `${getTotalLevel()}${getOrdinal(getTotalLevel())} Level`;
   };
 
   return character ? (
-    <>
-      <h3>{getDisplayName()}</h3>
-      <h4>{getRace()}</h4>
-      <div>{`${getFormattedTotalLevel()}`}</div>
-      <div>{`${getClasses()}}`}</div>
+    <div
+      className="character-card"
+      data-character-name={character.name}
+      style={{ display: "flex", margin: "1em", flexShrink: 3 }}
+    >
       <img
-        style={{ height: 50, width: 50, objectFit: "cover" }}
+        style={{ height: 100, width: 100, objectFit: "cover" }}
         src={imageUrl}
       />
-    </>
+      <div style={{ marginLeft: "1em" }}>
+        <div style={{ fontSize: "20px", fontWeight: "bold" }}>
+          {getDisplayName()}
+        </div>
+        <div style={{ display: "flex" }}>
+          <div>{getFormattedTotalLevel()}</div> <TextDivider />
+          <div>{getRace()}</div>
+          <TextDivider />
+          <div>{getClasses()}</div>
+        </div>
+        <div>
+          Session Count: {deteremineSessionsAttended(character, sessions)}
+        </div>
+        <div>
+          Sessions to Level Up:{" "}
+          {calculateSessionsForLevelUp(
+            character["starting-level"],
+            deteremineSessionsAttended(character, sessions)
+          )}
+        </div>
+      </div>
+    </div>
   ) : null;
 };
 

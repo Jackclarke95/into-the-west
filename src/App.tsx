@@ -32,34 +32,30 @@ function App() {
       });
   }, []);
 
+  let characterArray = [] as any[];
+
+  Object.keys(characters).map((key) => {
+    characterArray.push(characters[key]);
+  });
+
+  characterArray.sort((a, b) => {
+    return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
+  });
+
+  console.log(characterArray.length);
+
   return (
     <div>
       <h1>Into The West</h1>
-      <Character
-        character={{
-          "avatar-link": "11867/502/1581111423-32902489.jpeg",
-          classes: [
-            {
-              class: "Cleric",
-              level: 2,
-            },
-            {
-              class: "Artificer",
-              level: 7,
-            },
-          ],
-          id: 32902489,
-          name: "Caduceus",
-          nickname: "C.A.D.",
-          "player-dndbeyond-name": "ThePerkyRiolu",
-          race: "???",
-          "starting-level": 9,
-        }}
-      />
-      <TestCharacters characters={characters} sessions={sessions} />
+      <div className="character-cards">
+        {characterArray.map((character) => (
+          <Character character={character} sessions={sessions} />
+        ))}
+      </div>
+      <TestCharacters characters={characterArray} sessions={sessions} />
       <TestSessions characters={characters} sessions={sessions} />
       <TestEncounters />
-      <TestImages name="Eslyn.jpeg" />
+      <TestImages name="Eslyn Juhlenath.jpeg" />
     </div>
   );
 }

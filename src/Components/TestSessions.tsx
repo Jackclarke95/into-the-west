@@ -496,14 +496,6 @@ const TestSessions = ({ characters, sessions }) => {
                 <td>
                   <button
                     onClick={() => {
-                      session.name = "Test";
-                      updateSession(key, session);
-                    }}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => {
                       deleteSession(key);
                     }}
                   >
