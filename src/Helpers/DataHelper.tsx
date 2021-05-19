@@ -1,23 +1,29 @@
 import React, { useState } from "react";
 
-const getOrdinal = (level: number) => {
-  const lastDigit = level % 10;
+/**
+ * Gets a number in its ordinal format. For example, passing in "27", will return "27th"
+ *
+ * @param {number} number The number to format
+ * @return {string} The number in ordinal format
+ */
+const getOrdinal = (number: number) => {
+  const lastDigit = number % 10;
 
-  if (level === 11 || level === 12) {
-    return "th";
+  if (number === 11 || number === 12) {
+    return number + "th";
   }
   switch (lastDigit) {
     case 1:
-      return "st";
+      return number + "st";
 
     case 2:
-      return "nd";
+      return number + "nd";
 
     case 3:
-      return "rd";
+      return number + "rd";
 
     default:
-      return "th";
+      return number + "th";
   }
 };
 
