@@ -16,10 +16,16 @@ const firestore = firebase.storage();
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 googleProvider.setCustomParameters({ prompt: "select_account" });
 
+const firebaseDb = fireDb.database().ref();
+const auth = firebase.auth();
 const signInWithGoogleRedirect = () => auth.signInWithRedirect(googleProvider);
 const signInWithGooglePopup = () => auth.signInWithPopup(googleProvider);
 
-export const firebaseDb = fireDb.database().ref();
-export const auth = firebase.auth();
-export { firestore, signInWithGooglePopup, signInWithGoogleRedirect };
+export {
+  auth,
+  firebaseDb,
+  firestore,
+  signInWithGooglePopup,
+  signInWithGoogleRedirect,
+};
 export default firebase;
