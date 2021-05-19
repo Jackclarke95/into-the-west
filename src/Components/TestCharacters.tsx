@@ -29,11 +29,13 @@ const TestCharacters = ({ characters, sessions }) => {
         }}
       >
         <thead>
-          <th>Character</th>
-          <th>Race</th>
-          <th>Starting Level</th>
-          <th>Session Count</th>
-          <th>Sessions to Level Up</th>
+          <tr>
+            <th>Character</th>
+            <th>Race</th>
+            <th>Starting Level</th>
+            <th>Session Count</th>
+            <th>Sessions to Level Up</th>
+          </tr>
         </thead>
         <tbody>
           {Object.keys(characters).map((key, i) => {

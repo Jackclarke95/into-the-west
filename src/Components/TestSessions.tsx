@@ -70,11 +70,13 @@ const TestSessions = ({ characters, sessions }) => {
         }}
       >
         <thead>
-          <th>Title</th>
-          <th>Dungeon Master</th>
-          <th>Suggested Date</th>
-          <th>Scheduled Date</th>
-          <th>Players</th>
+          <tr>
+            <th>Title</th>
+            <th>Dungeon Master</th>
+            <th>Suggested Date</th>
+            <th>Scheduled Date</th>
+            <th>Players</th>
+          </tr>
         </thead>
         <tbody>
           {Object.keys(sessions).map((key, i) => {
