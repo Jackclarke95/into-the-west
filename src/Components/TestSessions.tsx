@@ -135,9 +135,9 @@ const TestSessions = ({ characters, sessions }) => {
                   >
                     Delete
                   </button>
-                  <button onClick={() => sendDiscordMessage(session)}>
+                  {/* <button onClick={() => sendDiscordMessage(session)}>
                     Send To Discord
-                  </button>
+                  </button> */}
                 </td>
               </tr>
             );
