@@ -4,6 +4,8 @@ import { firestore, firebaseDb } from "../firebase.utils";
 import {
   deteremineSessionsAttended,
   calculateSessionsForLevelUp,
+  calculateLevelFromSessions,
+  countSessionsAttended,
   getOrdinal,
 } from "../Helpers/DataHelper";
 import TextDivider from "./Stylistic/TextDivider";
@@ -57,8 +59,19 @@ const Character = ({
     return totalLevel;
   };
 
+  const getCorrectLevel = () => {
+    return calculateLevelFromSessions(
+      character["starting-level"],
+      countSessionsAttended(character, sessions)
+    );
+  };
+
   const getFormattedTotalLevel = () => {
     return `${getOrdinal(getTotalLevel())} Level`;
+  };
+
+  const getFormattedCorrectLevel = () => {
+    return `${getOrdinal(getCorrectLevel())} Level`;
   };
 
   let playerMatch = false;
@@ -130,8 +143,20 @@ const Character = ({
                 className="character-summary"
                 style={{ display: "flex", fontWeight: 500 }}
               >
-                <div className="character-level">
-                  {getFormattedTotalLevel()}
+                <div
+                  title={
+                    getCorrectLevel() !== getTotalLevel()
+                      ? "Missing level data (speak to Jack)"
+                      : ""
+                  }
+                  className="character-level"
+                  style={
+                    getCorrectLevel() !== getTotalLevel()
+                      ? { color: "red" }
+                      : {}
+                  }
+                >
+                  {getFormattedCorrectLevel()}
                 </div>
                 <TextDivider />
                 <div className="character-race">{getRace()}</div>

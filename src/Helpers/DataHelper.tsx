@@ -131,6 +131,29 @@ const calculateSessionsForLevelUp = (startingLevel, sessionCount) => {
 };
 
 /**
+ * Counts the number of sessions a character has attended
+ *
+ * @param {*} character The characters whose session attendance to count
+ * @param {*} sessions All sessions
+ * @return {number} The number of sessions a character has attended
+ */
+const countSessionsAttended = (character, sessions) => {
+  let matchingSessions = [] as any[];
+
+  sessions.map((session) => {
+    if (
+      session.characters &&
+      session.characters.includes(character.id) &&
+      new Date(session["scheduled-date"]) < new Date()
+    ) {
+      matchingSessions.push(session);
+    }
+  });
+
+  return matchingSessions.length;
+};
+
+/**
  * Calculates the number of sessions required to go from 1st level to the specified level
  *
  * @param {number} level The level
@@ -153,5 +176,7 @@ export {
   determineSessionCharacters,
   deteremineSessionsAttended,
   calculateSessionsForLevelUp,
+  calculateLevelFromSessions,
+  countSessionsAttended,
   getOrdinal,
 };
