@@ -102,6 +102,8 @@ const CharacterCard = ({
       );
   }, []);
 
+  const levelMatch = getCorrectLevel() !== getTotalLevel();
+
   return character ? (
     <div
       className="character-card"
@@ -144,17 +146,9 @@ const CharacterCard = ({
                 style={{ display: "flex", fontWeight: 500 }}
               >
                 <div
-                  title={
-                    getCorrectLevel() !== getTotalLevel()
-                      ? "Missing level data (speak to Jack)"
-                      : ""
-                  }
+                  title={levelMatch ? "Missing level data (speak to Jack)" : ""}
                   className="character-level"
-                  style={
-                    getCorrectLevel() !== getTotalLevel()
-                      ? { color: "red" }
-                      : {}
-                  }
+                  style={levelMatch ? { color: "red" } : {}}
                 >
                   {getFormattedCorrectLevel()}
                 </div>
