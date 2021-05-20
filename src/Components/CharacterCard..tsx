@@ -1,5 +1,6 @@
 import { url } from "node:inspector";
 import React, { useState, useEffect } from "react";
+import { MdModeEdit } from "react-icons/md";
 import { firestore, firebaseDb } from "../firebase.utils";
 import {
   deteremineSessionsAttended,
@@ -182,12 +183,10 @@ const CharacterCard = ({
               marginTop: "0.5em",
             }}
           >
-            <img
+            <MdModeEdit
               onClick={() => updateCharacter(characterKey, character)}
               title="Edit"
               style={{ cursor: "pointer" }}
-              src={process.env.PUBLIC_URL + "/Images/settings-cog.svg"}
-              height={24}
             />
           </div>
         ) : null}
