@@ -47,8 +47,6 @@ function App() {
       });
   }, []);
 
-  console.log(characters);
-
   if (user && user.uid && !currentPlayer) {
     firebaseDb
       .child("players")
@@ -89,6 +87,7 @@ function App() {
         <div className="character-cards">
           {Object.keys(characters).map((key) => (
             <Character
+              key={key}
               character={characters[key]}
               characterKey={key}
               sessions={sessions}
