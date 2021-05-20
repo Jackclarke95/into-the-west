@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserView, MobileView } from "react-device-detect";
-import Character from "./Components/Character";
+import Character from "./Components/CharacterCard.";
 import TestSessions from "./Components/TestSessions";
 import TestEncounters from "./Components/TestEncounters";
 import firebase, {

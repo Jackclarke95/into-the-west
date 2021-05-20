@@ -10,7 +10,7 @@ import {
 } from "../Helpers/DataHelper";
 import TextDivider from "./Stylistic/TextDivider";
 
-const Character = ({
+const CharacterCard = ({
   character,
   characterKey,
   sessions,
@@ -111,7 +111,7 @@ const Character = ({
         margin: "0.5em",
         padding: "0.5em",
         backgroundColor: "#eeeeee",
-        width: "30em",
+        width: "35em",
         textAlign: "start",
       }}
     >
@@ -174,32 +174,32 @@ const Character = ({
                 )}
               </div>
             </div>
-            {playerMatch ? (
-              <div
-                className="edit-character-button"
-                style={{
-                  position: "relative",
-                  right: 0,
-                  display: "flex",
-                  alignItems: "flex-end",
-                  marginRight: "1em",
-                  // cursor: "pointer",
-                }}
-              >
-                <img
-                  onClick={() => updateCharacter(characterKey, character)}
-                  title="Edit"
-                  style={{ cursor: "pointer" }}
-                  src={process.env.PUBLIC_URL + "/Images/settings-cog.svg"}
-                  height={24}
-                />
-              </div>
-            ) : null}
           </div>
         </div>
+        {playerMatch ? (
+          <div
+            className="edit-character-button"
+            style={{
+              position: "relative",
+              right: 0,
+              display: "flex",
+              alignItems: "flex-start",
+              marginRight: "0.5em",
+              marginTop: "0.5em",
+            }}
+          >
+            <img
+              onClick={() => updateCharacter(characterKey, character)}
+              title="Edit"
+              style={{ cursor: "pointer" }}
+              src={process.env.PUBLIC_URL + "/Images/settings-cog.svg"}
+              height={24}
+            />
+          </div>
+        ) : null}
       </div>
     </div>
   ) : null;
 };
 
-export default Character;
+export default CharacterCard;
