@@ -1,6 +1,7 @@
 import { truncate } from "node:fs";
 import React, { useState, useEffect } from "react";
 import { MdModeEdit, MdFileUpload } from "react-icons/md";
+import { isConditionalExpression, setConstantValue } from "typescript";
 import { firestore, firebaseDb } from "../firebase.utils";
 import {
   deteremineSessionsAttended,
@@ -19,10 +20,18 @@ const CharacterCard = ({
 }) => {
   const [imageUrl, setImageUrl] = useState("");
   const [edit, setEdit] = useState(false);
+  const [newImage, setNewImage] = useState([] as any[]);
+  const [characterName, setCharacterName] = useState(character.name as string);
+  const [characterNickName, setCharacterNickName] = useState(
+    character.nickname ?? (null as string | null)
+  );
 
-  const updateCharacter = (key, character) => {
-    character.name = character.name;
-    firebaseDb.child(`characters/${key}`).update(character);
+  const oldName = character.name;
+
+  const updateCharacter = () => {
+    character.name = characterName;
+    character.nickname = characterName.includes(" ") ? characterNickName : null;
+    firebaseDb.child(`characters/${characterKey}`).update(character);
   };
 
   const getDisplayName = () => {
@@ -76,6 +85,45 @@ const CharacterCard = ({
     return `${getOrdinal(getCorrectLevel())} Level`;
   };
 
+  const uploadPicture = () => {
+    console.log("uploading picture");
+  };
+
+  const handleChangeImage = (e) => {
+    const file = e.target.files[0];
+
+    setNewImage(file);
+
+    console.log("file:", file);
+
+    firestore
+      .ref(`Avatars/.jpeg`)
+      .put(file)
+      .then((snapshot) => {
+        console.log("uploaded a file");
+      });
+
+    if (characterName !== oldName) {
+      console.log("no match");
+    } else {
+      console.log("match");
+    }
+  };
+
+  useEffect(() => {
+    firestore
+      .ref(`Avatars/${characterName}.jpeg`)
+      .getDownloadURL()
+      .then((url) => {
+        setImageUrl(url);
+      })
+      .catch((e) =>
+        setImageUrl(
+          "https://www.dndbeyond.com/Content/Skins/Waterdeep/images/characters/default-avatar-builder.png"
+        )
+      );
+  }, []);
+
   let playerMatch = false;
 
   if (player) {
@@ -89,20 +137,6 @@ const CharacterCard = ({
     } else {
     }
   }
-
-  useEffect(() => {
-    firestore
-      .ref(`Avatars/${character.name}.jpeg`)
-      .getDownloadURL()
-      .then((url) => {
-        setImageUrl(url);
-      })
-      .catch((e) =>
-        setImageUrl(
-          "https://www.dndbeyond.com/Content/Skins/Waterdeep/images/characters/default-avatar-builder.png"
-        )
-      );
-  }, []);
 
   const levelMatch = getCorrectLevel() !== getTotalLevel();
 
@@ -139,6 +173,9 @@ const CharacterCard = ({
           />
           {playerMatch && edit ? (
             <div
+              onClick={() => {
+                document.getElementById("image-upload")?.click();
+              }}
               className="edit-character-button"
               title="Replace Image"
               style={{
@@ -152,8 +189,13 @@ const CharacterCard = ({
                 cursor: "pointer",
               }}
             >
+              <input
+                id="image-upload"
+                type="file"
+                hidden
+                onChange={handleChangeImage}
+              />
               <MdFileUpload
-                onClick={() => updateCharacter(characterKey, character)}
                 title="Replace Image"
                 color="white"
                 size="1.5em"
@@ -168,18 +210,51 @@ const CharacterCard = ({
           className="character-card-data"
           style={{ marginLeft: "1em", flexGrow: 1 }}
         >
-          <div
-            className="character-name"
-            style={{
-              fontSize: "20px",
-              fontWeight: "bold",
-              whiteSpace: "nowrap",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-            }}
-          >
-            {getDisplayName()}
-          </div>
+          {!edit ? (
+            <div
+              className="character-name"
+              style={{
+                fontSize: "20px",
+                fontWeight: "bold",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
+            >
+              {getDisplayName()}
+            </div>
+          ) : (
+            <div style={{ display: "flex" }}>
+              <input
+                type="text"
+                placeholder="Character Name"
+                value={characterName}
+                onChange={(e) => setCharacterName(e.target.value)}
+                className="character-name"
+                style={{
+                  fontSize: "18px",
+                  fontWeight: "bold",
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              />
+              <input
+                type="text"
+                placeholder="Nickname"
+                value={characterNickName ?? null}
+                onChange={(e) => setCharacterNickName(e.target.value)}
+                className="character-name"
+                style={{
+                  fontSize: "18px",
+                  fontWeight: "bold",
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              />
+            </div>
+          )}
           <div style={{ display: "flex" }} className="character-card-data-body">
             <div style={{ flexGrow: 1 }} className="character-details">
               <div
@@ -211,20 +286,35 @@ const CharacterCard = ({
             </div>
           </div>
         </div>
-        {!edit ? (
-          <div className="edit-character-button">
-            <MdModeEdit
-              onClick={() => setEdit(!edit)}
-              title="Edit"
-              style={{ cursor: "pointer" }}
-            />
-          </div>
-        ) : (
-          <button onClick={() => setEdit(!edit)}>Save</button>
-        )}
+        {playerMatch ? (
+          !edit ? (
+            <div className="edit-character-button">
+              <MdModeEdit
+                onClick={() => setEdit(!edit)}
+                title="Edit"
+                style={{ cursor: "pointer" }}
+              />
+            </div>
+          ) : (
+            <button
+              disabled={
+                characterName.includes(" ") &&
+                (characterNickName === "" || !characterNickName)
+              }
+              onClick={() => {
+                updateCharacter();
+                setEdit(!edit);
+              }}
+            >
+              Save
+            </button>
+          )
+        ) : null}
       </div>
     </div>
-  ) : null;
+  ) : (
+    <div>Loading</div>
+  );
 };
 
 export default CharacterCard;
