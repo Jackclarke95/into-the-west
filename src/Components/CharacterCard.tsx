@@ -1,6 +1,6 @@
 import { truncate } from "node:fs";
 import React, { useState, useEffect } from "react";
-import { MdModeEdit, MdFileUpload } from "react-icons/md";
+import { MdModeEdit, MdSave, MdFileUpload } from "react-icons/md";
 import { isConditionalExpression, setConstantValue } from "typescript";
 import { firestore, firebaseDb } from "../firebase.utils";
 import {
@@ -25,8 +25,6 @@ const CharacterCard = ({
   const [characterNickName, setCharacterNickName] = useState(
     character.nickname ?? (null as string | null)
   );
-
-  const oldName = character.name;
 
   const updateCharacter = () => {
     character.name = characterName;
@@ -85,11 +83,7 @@ const CharacterCard = ({
     return `${getOrdinal(getCorrectLevel())} Level`;
   };
 
-  const uploadPicture = () => {
-    console.log("uploading picture");
-  };
-
-  const handleChangeImage = (e) => {
+  const uploadImage = (e) => {
     const file = e.target.files[0];
 
     setNewImage(file);
@@ -97,22 +91,22 @@ const CharacterCard = ({
     console.log("file:", file);
 
     firestore
-      .ref(`Avatars/.jpeg`)
+      .ref(`Avatars/${character.id}.jpeg`)
       .put(file)
       .then((snapshot) => {
         console.log("uploaded a file");
-      });
-
-    if (characterName !== oldName) {
-      console.log("no match");
-    } else {
-      console.log("match");
-    }
+        window.location.reload();
+      })
+      .catch((e) =>
+        alert(
+          `Unable to upload image. This could be because you are not conected to the internet. Please try again.\n\nDetails:\n${e}`
+        )
+      );
   };
 
   useEffect(() => {
     firestore
-      .ref(`Avatars/${characterName}.jpeg`)
+      .ref(`Avatars/${character.id}.jpeg`)
       .getDownloadURL()
       .then((url) => {
         setImageUrl(url);
@@ -193,7 +187,7 @@ const CharacterCard = ({
                 id="image-upload"
                 type="file"
                 hidden
-                onChange={handleChangeImage}
+                onChange={uploadImage}
               />
               <MdFileUpload
                 title="Replace Image"
@@ -244,7 +238,7 @@ const CharacterCard = ({
                       (characterNickName === "" || !characterNickName)) ||
                     (characterNickName && characterNickName.includes(" "))
                       ? "red"
-                      : "black",
+                      : "",
                 }}
               />
             </div>
@@ -321,8 +315,9 @@ const CharacterCard = ({
                 updateCharacter();
                 setEdit(!edit);
               }}
+              style={{ backgroundColor: "green" }}
             >
-              Save
+              <MdSave />
             </button>
           )
         ) : null}
