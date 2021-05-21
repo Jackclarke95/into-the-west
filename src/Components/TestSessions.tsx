@@ -93,18 +93,6 @@ const TestSessions = ({
                     : "N/A"}
                 </td>
                 <td>{determineSessionCharacters(characters, session)}</td>
-                <td>
-                  <button
-                    onClick={() => {
-                      deleteSession(key);
-                    }}
-                  >
-                    Delete
-                  </button>
-                  {/* <button onClick={() => sendDiscordMessage(session)}>
-                    Send To Discord
-                  </button> */}
-                </td>
               </tr>
             );
           })}
