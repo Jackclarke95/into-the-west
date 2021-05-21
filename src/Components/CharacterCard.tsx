@@ -206,25 +206,12 @@ const CharacterCard = ({
             </div>
           ) : null}
         </div>
-        <div
+        <span
           className="character-card-data"
           style={{ marginLeft: "1em", flexGrow: 1 }}
         >
-          {!edit ? (
-            <div
-              className="character-name"
-              style={{
-                fontSize: "20px",
-                fontWeight: "bold",
-                whiteSpace: "nowrap",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-              }}
-            >
-              {getDisplayName()}
-            </div>
-          ) : (
-            <div style={{ display: "flex" }}>
+          {edit ? (
+            <div>
               <input
                 type="text"
                 placeholder="Character Name"
@@ -242,6 +229,7 @@ const CharacterCard = ({
               <input
                 type="text"
                 placeholder="Nickname"
+                disabled={!characterName.includes(" ")}
                 value={characterNickName ?? null}
                 onChange={(e) => setCharacterNickName(e.target.value)}
                 className="character-name"
@@ -251,41 +239,68 @@ const CharacterCard = ({
                   whiteSpace: "nowrap",
                   overflow: "hidden",
                   textOverflow: "ellipsis",
+                  borderColor:
+                    (characterName.includes(" ") &&
+                      (characterNickName === "" || !characterNickName)) ||
+                    (characterNickName && characterNickName.includes(" "))
+                      ? "red"
+                      : "black",
                 }}
               />
             </div>
-          )}
-          <div style={{ display: "flex" }} className="character-card-data-body">
-            <div style={{ flexGrow: 1 }} className="character-details">
+          ) : (
+            <>
               <div
-                className="character-summary"
-                style={{ display: "flex", fontWeight: 500 }}
+                className="character-name"
+                style={{
+                  fontSize: "20px",
+                  fontWeight: "bold",
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
               >
-                <div
-                  title={levelMatch ? "Missing level data (speak to Jack)" : ""}
-                  className="character-level"
-                  style={levelMatch ? { color: "red" } : {}}
-                >
-                  {getFormattedCorrectLevel()}
+                {getDisplayName()}
+              </div>
+              <div
+                style={{ display: "flex" }}
+                className="character-card-data-body"
+              >
+                <div style={{ flexGrow: 1 }} className="character-details">
+                  <div
+                    className="character-summary"
+                    style={{ display: "flex", fontWeight: 500 }}
+                  >
+                    <div
+                      title={
+                        levelMatch ? "Missing level data (speak to Jack)" : ""
+                      }
+                      className="character-level"
+                      style={levelMatch ? { color: "red" } : {}}
+                    >
+                      {getFormattedCorrectLevel()}
+                    </div>
+                    <TextDivider />
+                    <div className="character-race">{getRace()}</div>
+                    <TextDivider />
+                    <div className="character-classes">{getClasses()}</div>
+                  </div>
+                  <div className="character-session-count">
+                    Session Count:{" "}
+                    {deteremineSessionsAttended(character, sessions)}
+                  </div>
+                  <div className="character-sessions-to-level">
+                    Sessions to Level Up:{" "}
+                    {calculateSessionsForLevelUp(
+                      character["starting-level"],
+                      deteremineSessionsAttended(character, sessions)
+                    )}
+                  </div>
                 </div>
-                <TextDivider />
-                <div className="character-race">{getRace()}</div>
-                <TextDivider />
-                <div className="character-classes">{getClasses()}</div>
               </div>
-              <div className="character-session-count">
-                Session Count: {deteremineSessionsAttended(character, sessions)}
-              </div>
-              <div className="character-sessions-to-level">
-                Sessions to Level Up:{" "}
-                {calculateSessionsForLevelUp(
-                  character["starting-level"],
-                  deteremineSessionsAttended(character, sessions)
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
+            </>
+          )}
+        </span>
         {playerMatch ? (
           !edit ? (
             <div className="edit-character-button">
@@ -298,8 +313,9 @@ const CharacterCard = ({
           ) : (
             <button
               disabled={
-                characterName.includes(" ") &&
-                (characterNickName === "" || !characterNickName)
+                (characterName.includes(" ") &&
+                  (characterNickName === "" || !characterNickName)) ||
+                (characterNickName && characterNickName.includes(" "))
               }
               onClick={() => {
                 updateCharacter();
