@@ -65,7 +65,10 @@ const deteremineSessionsAttended = (character, sessions) => {
 
     if (session.players) return;
 
-    if (session.characters.includes(character.id)) {
+    if (
+      session.characters.length > 0 &&
+      session.characters.includes(character.id)
+    ) {
       sessionCount++;
     }
   });

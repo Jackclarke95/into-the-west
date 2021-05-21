@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Webhook, MessageBuilder } from "discord-webhook-node";
 import { firebaseDb } from "../firebase.utils";
 import { determineSessionCharacters } from "../Helpers/DataHelper";
+import SessionForm from "./SessionForm";
 
-const TestSessions = ({ characters, sessions }) => {
-  var [showForm, setShowForm] = useState(false);
+const TestSessions = ({
+  characters,
+  sessions,
+  player = null as null | any,
+}) => {
+  var [showForm, setShowForm] = useState(true);
   var [currentSession, setCurrentSession] = useState({});
 
   const addSession = (session) => {
@@ -12,7 +16,7 @@ const TestSessions = ({ characters, sessions }) => {
   };
 
   const updateSession = (key, session) => {
-    firebaseDb.child(`sessions/${key}`).update(session);
+    firebaseDb.child(`sessions/${key}`).update(true);
   };
 
   const deleteSession = (id) => {
@@ -29,62 +33,24 @@ const TestSessions = ({ characters, sessions }) => {
     console.log(currentSession);
   };
 
-  const sendDiscordMessage = (session) => {
-    const hook = new Webhook(
-      "https://discord.com/api/webhooks/845060074015555605/T7uXBkLL8PYI4jgKc-yZU99tIem99BYN8OYo21qY4sLqeZEvChzG3wHMYlAOIB3Do7WE"
-    );
+  let playerName = "";
 
-    const embed = new MessageBuilder()
-      .setAuthor("Adventure Announcer")
-      .setTitle(
-        session["suggested-by"]
-          ? `${session["suggested-by"]} has suggested a new adventure!`
-          : "A new adventure has been suggested!"
-      )
-      .setDescription(session.name)
-      .addField("Dungeon Master", session["dungeon-master"] ?? "N/A")
-      .setFooter("Please see the website for more details")
-      .setTimestamp();
+  if (player) {
+    let playerData;
+    Object.keys(player).map((key) => {
+      playerData = player[key];
+    });
 
-    hook.send(embed);
-  };
+    playerName = playerData["dndbeyond-name"];
+  }
 
   return (
     <>
       <h2>Sessions</h2>
       <button onClick={() => toggleForm()}>
-        {`${showForm ? "Hide" : "Show"} New Session Form`}
+        {showForm ? "Hide Form" : "Suggest Adventure"}
       </button>
-      <form style={{ display: showForm ? "block" : "none" }}>
-        <label>
-          Name:
-          <input type="text" name="name" />
-        </label>
-        <label>
-          DM:
-          <input type="text" name="dm" />
-        </label>
-        <label>
-          Date:
-          <input type="date" name="date" />
-        </label>
-        <label>
-          Players:
-          <select>
-            <option></option>
-            {Object.keys(characters).map((key) => {
-              let character = characters[key];
-              let name = character.nickname ?? character.name;
-              return (
-                <option key={key} value={name}>
-                  {name}
-                </option>
-              );
-            })}
-          </select>
-        </label>
-        <button onClick={() => addNewSession()}>Submit</button>
-      </form>
+      {player && showForm ? <SessionForm playerName={playerName} /> : null}
       <table
         style={{
           borderCollapse: "collapse",

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserView, MobileView } from "react-device-detect";
-import Character from "./Components/CharacterCard.";
+import Character from "./Components/CharacterCard";
 import TestSessions from "./Components/TestSessions";
 import TestEncounters from "./Components/TestEncounters";
 import {
@@ -41,7 +41,6 @@ function App() {
       .orderByChild("name")
       .once("value", (snapshot) => {
         snapshot.forEach((child) => {
-          console.log(child.val().name);
           characterArray.push(child.val());
         });
         setCharacters(characterArray);
@@ -91,7 +90,11 @@ function App() {
         </div>
       </div>
       <TestEncounters />
-      <TestSessions characters={characters} sessions={sessions} />
+      <TestSessions
+        characters={characters}
+        sessions={sessions}
+        player={currentPlayer}
+      />
     </div>
   );
 }
