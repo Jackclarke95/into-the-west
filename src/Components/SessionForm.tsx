@@ -9,11 +9,18 @@ const SessionForm = (playerName = null as null | any) => {
   playerName = playerName["playerName"] ?? null;
 
   const createSession = () => {
+    const dateNow = new Date();
+    const currentDate = `${dateNow.getFullYear()} ${
+      dateNow.getMonth() + 1
+    } ${dateNow.getDate()}`;
+
     const session = {
       "dungeon-master": dungeonMaster ?? "N/A",
       name: name,
       "suggested-by": playerName,
       characters: [0, 0, 0, 0, 0],
+      "scheduled-date": "",
+      "suggested-date": currentDate,
     };
 
     addSession(session);

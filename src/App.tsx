@@ -15,6 +15,7 @@ import "./App.scss";
 function App() {
   const [characters, setCharacters] = useState([] as {}[]);
   const [sessions, setSessions] = useState([] as {}[]);
+  const [players, setPlayers] = useState([] as {}[]);
   const [user, setUser] = useState({} as any);
   const [currentPlayer, setCurrentPlayer] = useState();
 
@@ -24,6 +25,7 @@ function App() {
 
   useEffect(() => {
     let sessionArray = [] as {}[];
+
     firebaseDb
       .child("sessions")
       .orderByChild("scheduled-date")
@@ -45,11 +47,25 @@ function App() {
         });
         setCharacters(characterArray);
       });
+
+    let playerArray = [] as {}[];
+
+    firebaseDb
+      .child("players")
+      .orderByChild("name")
+      .once("value", (snapshot) => {
+        snapshot.forEach((child) => {
+          playerArray.push(child.val());
+        });
+        setPlayers(playerArray);
+      });
   }, []);
+
+  console.log(players);
 
   if (user && user.uid && !currentPlayer) {
     firebaseDb
-      .child("players")
+      .child("users")
       .orderByChild("uid")
       .equalTo(user.uid)
       .on("value", (snapshot) => {
