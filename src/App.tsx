@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { BrowserView, MobileView } from "react-device-detect";
-import Character from "./Components/CharacterCard";
 import TestSessions from "./Components/TestSessions";
 import TestEncounters from "./Components/TestEncounters";
+import Characters from "./Components/Characters";
 import {
   auth,
   firebaseDb,
-  firestore,
   signInWithGoogleRedirect,
   signInWithGooglePopup,
 } from "./firebase.utils";
@@ -92,19 +91,11 @@ function App() {
         </>
       )}
       <h1>Into The West</h1>
-      <div className="characters" style={{ textAlign: "center" }}>
-        <div className="character-cards">
-          {Object.keys(characters).map((key) => (
-            <Character
-              key={key}
-              character={characters[key]}
-              characterKey={key}
-              sessions={sessions}
-              player={currentPlayer}
-            />
-          ))}
-        </div>
-      </div>
+      <Characters
+        characters={characters}
+        sessions={sessions}
+        player={currentPlayer}
+      />
       <TestEncounters />
       <TestSessions
         characters={characters}
