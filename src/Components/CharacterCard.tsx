@@ -1,5 +1,6 @@
+import { truncate } from "node:fs";
 import React, { useState, useEffect } from "react";
-import { MdModeEdit } from "react-icons/md";
+import { MdModeEdit, MdFileUpload } from "react-icons/md";
 import { firestore, firebaseDb } from "../firebase.utils";
 import {
   deteremineSessionsAttended,
@@ -17,6 +18,7 @@ const CharacterCard = ({
   player = null as null | any,
 }) => {
   const [imageUrl, setImageUrl] = useState("");
+  const [edit, setEdit] = useState(false);
 
   const updateCharacter = (key, character) => {
     character.name = character.name;
@@ -118,11 +120,50 @@ const CharacterCard = ({
       }}
     >
       <div style={{ display: "flex" }}>
-        <img
-          className="character-image"
-          style={{ height: 100, width: 100, objectFit: "cover" }}
-          src={imageUrl}
-        />
+        <div
+          className="character-image-container"
+          style={{
+            position: "relative",
+            display: "flex",
+          }}
+        >
+          <img
+            className="character-image"
+            style={{
+              position: "relative",
+              height: 100,
+              width: 100,
+              objectFit: "cover",
+            }}
+            src={imageUrl}
+          />
+          {playerMatch && edit ? (
+            <div
+              className="edit-character-button"
+              title="Replace Image"
+              style={{
+                position: "absolute",
+                bottom: "0",
+                width: "100%",
+                backgroundColor: "rgba(255, 255, 255, 0.5)",
+                display: "flex",
+                justifyContent: "center",
+                padding: "0.2em 0",
+                cursor: "pointer",
+              }}
+            >
+              <MdFileUpload
+                onClick={() => updateCharacter(characterKey, character)}
+                title="Replace Image"
+                color="white"
+                size="1.5em"
+                style={{
+                  textAlign: "end",
+                }}
+              />
+            </div>
+          ) : null}
+        </div>
         <div
           className="character-card-data"
           style={{ marginLeft: "1em", flexGrow: 1 }}
@@ -170,25 +211,17 @@ const CharacterCard = ({
             </div>
           </div>
         </div>
-        {playerMatch ? (
-          <div
-            className="edit-character-button"
-            style={{
-              position: "relative",
-              right: 0,
-              display: "flex",
-              alignItems: "flex-start",
-              marginRight: "0.5em",
-              marginTop: "0.5em",
-            }}
-          >
+        {!edit ? (
+          <div className="edit-character-button">
             <MdModeEdit
-              onClick={() => updateCharacter(characterKey, character)}
+              onClick={() => setEdit(!edit)}
               title="Edit"
               style={{ cursor: "pointer" }}
             />
           </div>
-        ) : null}
+        ) : (
+          <button onClick={() => setEdit(!edit)}>Save</button>
+        )}
       </div>
     </div>
   ) : null;
