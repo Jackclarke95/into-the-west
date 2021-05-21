@@ -18,8 +18,8 @@ const SessionForm = (playerName = null as null | any) => {
       "dungeon-master": dungeonMaster ?? "N/A",
       name: name,
       "suggested-by": playerName,
-      characters: [0, 0, 0, 0, 0],
-      "scheduled-date": "",
+      characters: "",
+      "scheduled-date": null,
       "suggested-date": currentDate,
     };
 
@@ -44,10 +44,14 @@ const SessionForm = (playerName = null as null | any) => {
       .setFooter("Please see the website for more details")
       .setTimestamp();
 
-    console.log("session", session);
-    console.log("suggested by", session["suggested-by"]);
-
-    hook.send(message);
+    hook
+      .send(message)
+      .then(() => window.location.reload())
+      .catch((e) =>
+        alert(
+          `Unable to create session. This could be because you are not conected to the internet. Please try again.\n\nDetails:\n${e}`
+        )
+      );
   };
 
   const addSession = (session) => {

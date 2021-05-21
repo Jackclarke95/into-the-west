@@ -60,8 +60,6 @@ function App() {
       });
   }, []);
 
-  console.log(players);
-
   if (user && user.uid && !currentPlayer) {
     firebaseDb
       .child("users")

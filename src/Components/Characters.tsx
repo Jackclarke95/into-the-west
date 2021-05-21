@@ -1,8 +1,6 @@
-import React, { useState } from "react";
 import CharacterCard from "./CharacterCard";
 
 const Characters = ({ characters, sessions, player = null as null | any }) => {
-  console.log(characters);
   return (
     <div style={{ textAlign: "center" }}>
       <h2>Characters</h2>
