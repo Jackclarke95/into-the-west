@@ -66,9 +66,9 @@ function App() {
       .orderByChild("uid")
       .equalTo(userAccount.uid)
       .on("value", (snapshot) => {
-        if (snapshot.val() != null) {
-          setCurrentPlayer({ ...snapshot.val() });
-        }
+        snapshot.forEach((child) => {
+          setCurrentPlayer(child.val());
+        });
       });
   }
 

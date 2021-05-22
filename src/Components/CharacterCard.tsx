@@ -126,19 +126,8 @@ const CharacterCard = ({
       );
   }, [character.id]);
 
-  let playerMatch = false;
-
-  if (player) {
-    let playerData;
-    Object.keys(player).forEach((key) => {
-      playerData = player[key];
-    });
-
-    if (playerData["dndbeyond-name"] === character["player-dndbeyond-name"]) {
-      playerMatch = true;
-    } else {
-    }
-  }
+  let playerMatch =
+    player && player["dndbeyond-name"] === character["player-dndbeyond-name"];
 
   const levelMatch = getFormattedTotalLevel() !== getFormattedCorrectLevel();
 
