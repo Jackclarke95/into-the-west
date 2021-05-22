@@ -25,8 +25,15 @@ const CharacterCard = ({
   );
 
   const submitForm = () => {
-    updateCharacter();
-    setEdit(!edit);
+    if (
+      characterName.includes(" ") &&
+      (characterNickName === "" || !characterNickName)
+    ) {
+      return;
+    } else {
+      updateCharacter();
+      setEdit(!edit);
+    }
   };
 
   const updateCharacter = () => {

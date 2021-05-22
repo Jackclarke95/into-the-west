@@ -15,11 +15,11 @@ function App() {
   const [characters, setCharacters] = useState([] as {}[]);
   const [sessions, setSessions] = useState([] as {}[]);
   const [players, setPlayers] = useState([] as {}[]);
-  const [user, setUser] = useState({} as any);
+  const [userAccount, setUserAccount] = useState({} as any);
   const [currentPlayer, setCurrentPlayer] = useState();
 
   auth.onAuthStateChanged((user) => {
-    setUser(user);
+    setUserAccount(user);
   });
 
   useEffect(() => {
@@ -60,11 +60,11 @@ function App() {
       });
   }, []);
 
-  if (user && user.uid && !currentPlayer) {
+  if (userAccount && userAccount.uid && !currentPlayer) {
     firebaseDb
-      .child("users")
+      .child("user-accounts")
       .orderByChild("uid")
-      .equalTo(user.uid)
+      .equalTo(userAccount.uid)
       .on("value", (snapshot) => {
         if (snapshot.val() != null) {
           setCurrentPlayer({ ...snapshot.val() });
@@ -74,7 +74,7 @@ function App() {
 
   return (
     <div>
-      {user ? (
+      {userAccount ? (
         <button
           onClick={() => {
             auth.signOut();
