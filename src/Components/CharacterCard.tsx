@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react";
-import { MdModeEdit, MdSave, MdFileUpload } from "react-icons/md";
+import {
+  MdArrowUpward,
+  MdModeEdit,
+  MdSave,
+  MdFileUpload,
+} from "react-icons/md";
 import { firestore, firebaseDb } from "../firebase.utils";
 import {
   deteremineSessionsAttended,
@@ -27,14 +32,20 @@ const CharacterCard = ({
 
   const submitForm = () => {
     if (
-      characterName.includes(" ") &&
-      (characterNickName === "" || !characterNickName)
+      !characterName ||
+      characterName === "" ||
+      (characterName.includes(" ") &&
+        (characterNickName === "" || !characterNickName))
     ) {
       return;
     } else {
       updateCharacter();
       setEdit(!edit);
     }
+  };
+
+  const openLevelUp = () => {
+    console.log("level up");
   };
 
   const updateCharacter = () => {
@@ -178,7 +189,7 @@ const CharacterCard = ({
   let playerMatch =
     player && player["dndbeyond-name"] === character["player-dndbeyond-name"];
 
-  const levelMatch = getFormattedTotalLevel() !== getFormattedCorrectLevel();
+  const levelMatch = getFormattedTotalLevel() === getFormattedCorrectLevel();
 
   return character ? (
     <div
@@ -250,11 +261,12 @@ const CharacterCard = ({
         </div>
         <span
           className="character-card-data"
-          style={{ marginLeft: "0.5em", width: "420px" }}
+          style={{ marginLeft: "0.5em", width: "420px", flexGrow: 1 }}
         >
           <div
             className="character-card-data-title"
             style={{
+              display: "flex",
               borderBottomStyle: "solid",
               borderBottomWidth: 3,
               borderBottomColor: getClassColour(),
@@ -265,7 +277,7 @@ const CharacterCard = ({
             {edit ? (
               <div
                 className="input-character-names"
-                style={{ display: "flex" }}
+                style={{ display: "flex", width: "421px" }}
               >
                 <input
                   type="text"
@@ -281,14 +293,14 @@ const CharacterCard = ({
                   className="input-character-name"
                   style={{
                     fontSize: "18px",
-                    fontWeight: "bold",
-                    whiteSpace: "nowrap",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
+                    width: "200px",
+                    borderColor:
+                      characterName === "" || !characterName ? "red" : "",
                   }}
                 />
                 <input
                   type="text"
+                  title="Type a nickname/display name if your character has more than 1 name"
                   placeholder="Nickname"
                   disabled={!characterName.includes(" ")}
                   value={characterNickName ?? null}
@@ -302,11 +314,8 @@ const CharacterCard = ({
                   className="input-character-name-nickname"
                   style={{
                     fontSize: "18px",
-                    fontWeight: "bold",
-                    whiteSpace: "nowrap",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    // display: !characterName.includes(" ") ? "none" : "block",
+                    width: "200px",
+                    marginLeft: "0.25em",
                     borderColor:
                       (characterName.includes(" ") &&
                         (characterNickName === "" || !characterNickName)) ||
@@ -333,11 +342,71 @@ const CharacterCard = ({
                   whiteSpace: "nowrap",
                   overflow: "hidden",
                   textOverflow: "ellipsis",
+                  width: "421px",
                 }}
               >
                 {getDisplayName()}
               </div>
             )}
+            {playerMatch ? (
+              !edit ? (
+                <button
+                  className="edit-button"
+                  title="Edit Name"
+                  disabled={
+                    (characterName.includes(" ") &&
+                      (characterNickName === "" || !characterNickName)) ||
+                    (characterNickName && characterNickName.includes(" "))
+                  }
+                  onClick={() => setEdit(!edit)}
+                  style={{
+                    color: "white",
+                    display: "flex",
+                    cursor: "pointer",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    height: "2em",
+                    width: "2em",
+                    border: "none",
+                    borderRadius: 0,
+                    marginLeft: "5px",
+                    backgroundColor: "grey",
+                  }}
+                >
+                  <MdModeEdit size="1.5em" style={{ cursor: "pointer" }} />
+                </button>
+              ) : (
+                <button
+                  className="save-button"
+                  title="Save Name"
+                  disabled={
+                    (characterName.includes(" ") &&
+                      (characterNickName === "" || !characterNickName)) ||
+                    (characterNickName && characterNickName.includes(" "))
+                  }
+                  onClick={submitForm}
+                  style={{
+                    color: "white",
+                    display: "flex",
+                    cursor: "pointer",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    height: "2em",
+                    width: "2em",
+                    border: "none",
+                    borderRadius: 0,
+                    marginLeft: "5px",
+                    backgroundColor: "green",
+                  }}
+                >
+                  <MdSave
+                    size="1.5em"
+                    style={{ alignSelf: "center" }}
+                    color="white"
+                  />
+                </button>
+              )
+            ) : null}
           </div>
           <div style={{ display: "flex" }} className="character-card-data-body">
             <div style={{ flexGrow: 1 }} className="character-details">
@@ -348,9 +417,8 @@ const CharacterCard = ({
                 <div
                   title={levelMatch ? "Missing level data (speak to Jack)" : ""}
                   className="character-level"
-                  style={levelMatch ? { color: "red" } : {}}
                 >
-                  {getFormattedCorrectLevel()}
+                  {getFormattedTotalLevel()}
                 </div>
                 <TextDivider />
                 <div className="character-race">{getRace()}</div>
@@ -361,75 +429,33 @@ const CharacterCard = ({
                 Session Count: {deteremineSessionsAttended(character, sessions)}
               </div>
               <div className="character-sessions-to-level">
-                Sessions to Level Up:{" "}
-                {calculateSessionsForLevelUp(
-                  character["starting-level"],
-                  deteremineSessionsAttended(character, sessions)
+                {levelMatch ? (
+                  `Sessions to Level Up: ${calculateSessionsForLevelUp(
+                    character["starting-level"],
+                    deteremineSessionsAttended(character, sessions)
+                  )}`
+                ) : (
+                  <b>Level Up Available!</b>
                 )}
               </div>
             </div>
+            {playerMatch && !levelMatch ? (
+              <MdArrowUpward
+                title="Level Up!"
+                className="level-up-button"
+                onClick={openLevelUp}
+                size="3em"
+                strokeWidth={2}
+                style={{
+                  alignSelf: "center",
+                  cursor: "pointer",
+                  marginRight: "1em",
+                }}
+                color="green"
+              />
+            ) : null}
           </div>
         </span>
-        {playerMatch ? (
-          !edit ? (
-            <button
-              disabled={
-                (characterName.includes(" ") &&
-                  (characterNickName === "" || !characterNickName)) ||
-                (characterNickName && characterNickName.includes(" "))
-              }
-              onClick={() => setEdit(!edit)}
-              style={{
-                color: "white",
-                display: "flex",
-                cursor: "pointer",
-                alignItems: "center",
-                justifyContent: "center",
-                height: "2.3em",
-                width: "2em",
-                border: "none",
-                borderRadius: 0,
-                marginLeft: "5px",
-                backgroundColor: "grey",
-              }}
-            >
-              <MdModeEdit
-                size="1.5em"
-                onClick={() => setEdit(!edit)}
-                title="Edit"
-                style={{ cursor: "pointer" }}
-              />
-            </button>
-          ) : (
-            <button
-              disabled={
-                (characterName.includes(" ") &&
-                  (characterNickName === "" || !characterNickName)) ||
-                (characterNickName && characterNickName.includes(" "))
-              }
-              onClick={submitForm}
-              style={{
-                color: "white",
-                display: "flex",
-                cursor: "pointer",
-                alignItems: "center",
-                justifyContent: "center",
-                height: "2.3em",
-                width: "2em",
-                border: "none",
-                borderRadius: 0,
-                marginLeft: "5px",
-                backgroundColor: "green",
-              }}
-            >
-              <MdSave
-                size="1.5em"
-                style={{ alignSelf: "center" }}
-                color="white"
-              />
-            </button>
-          )
-        ) : null}
       </div>
     </div>
   ) : (

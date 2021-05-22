@@ -5,3 +5,13 @@ table {
     }
   }
 }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+
+.level-up-button {
+  animation: fadeIn 1.5s infinite alternate;
+}
