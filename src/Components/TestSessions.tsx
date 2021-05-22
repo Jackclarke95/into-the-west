@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { firebaseDb } from "../firebase.utils";
+import { useState } from "react";
 import { determineSessionCharacters } from "../Helpers/DataHelper";
 import SessionForm from "./SessionForm";
 
@@ -9,21 +8,20 @@ const TestSessions = ({
   player = null as null | any,
 }) => {
   var [showForm, setShowForm] = useState(true);
-  var [currentSession, setCurrentSession] = useState({});
 
-  const addSession = (session) => {
-    firebaseDb.child("sessions").push(session);
-  };
+  // const addSession = (session) => {
+  //   firebaseDb.child("sessions").push(session);
+  // };
 
-  const updateSession = (key, session) => {
-    firebaseDb.child(`sessions/${key}`).update(true);
-  };
+  // const updateSession = (key, session) => {
+  //   firebaseDb.child(`sessions/${key}`).update(true);
+  // };
 
-  const deleteSession = (id) => {
-    if (window.confirm("Are you sure to delete this record?")) {
-      firebaseDb.child(`sessions/${id}`).remove();
-    }
-  };
+  // const deleteSession = (id) => {
+  //   if (window.confirm("Are you sure to delete this record?")) {
+  //     firebaseDb.child(`sessions/${id}`).remove();
+  //   }
+  // };
 
   const toggleForm = () => {
     setShowForm(!showForm);
@@ -33,7 +31,7 @@ const TestSessions = ({
 
   if (player) {
     let playerData;
-    Object.keys(player).map((key) => {
+    Object.keys(player).forEach((key) => {
       playerData = player[key];
     });
 

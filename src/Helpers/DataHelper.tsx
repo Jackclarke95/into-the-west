@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 /**
  * Gets a number in its ordinal format. For example, passing in "27", will return "27th"
  *
@@ -39,7 +37,7 @@ const determineSessionCharacters = (characters, session) => {
 
   let sessionCharacters = [] as string[];
 
-  Object.keys(characters).map((key) => {
+  Object.keys(characters).forEach((key) => {
     const character = characters[key];
 
     if (session.characters.includes(character.id)) {
@@ -60,7 +58,7 @@ const determineSessionCharacters = (characters, session) => {
 const deteremineSessionsAttended = (character, sessions) => {
   let sessionCount = 0;
 
-  Object.keys(sessions).map((key) => {
+  Object.keys(sessions).forEach((key) => {
     const session = sessions[key];
 
     if (session.players) return;
@@ -143,7 +141,7 @@ const calculateSessionsForLevelUp = (startingLevel, sessionCount) => {
 const countSessionsAttended = (character, sessions) => {
   let matchingSessions = [] as any[];
 
-  sessions.map((session) => {
+  sessions.forEach((session) => {
     if (
       session.characters &&
       session.characters.includes(character.id) &&

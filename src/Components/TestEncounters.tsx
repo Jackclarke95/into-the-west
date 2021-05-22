@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { firebaseDb } from "../firebase.utils";
 
 const TestEncounters = () => {
@@ -45,7 +45,7 @@ const TestEncounters = () => {
           <div>{`Terrain: ${currentEncounter.terrain}`}</div>
           <div>
             {`${currentEncounter.discovery ?? ""} ${currentEncounter.enemies
-              ?.map((enemy) => {
+              ?.forEach((enemy) => {
                 var enemyList = [] as string[];
 
                 if (isNaN(enemy.quantity)) {

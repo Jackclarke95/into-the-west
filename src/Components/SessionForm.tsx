@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Webhook, MessageBuilder } from "discord-webhook-node";
 import { firebaseDb } from "../firebase.utils";
 

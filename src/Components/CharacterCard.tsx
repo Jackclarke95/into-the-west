@@ -1,7 +1,5 @@
-import { truncate } from "node:fs";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { MdModeEdit, MdSave, MdFileUpload } from "react-icons/md";
-import { isConditionalExpression, setConstantValue } from "typescript";
 import { firestore, firebaseDb } from "../firebase.utils";
 import {
   deteremineSessionsAttended,
@@ -51,7 +49,7 @@ const CharacterCard = ({
       .sort((a, b) => {
         return b.level - a.level; // Sort by class with most levels
       })
-      .map((characterClass) => {
+      .forEach((characterClass) => {
         classList.push(characterClass.class);
       });
 
@@ -61,7 +59,7 @@ const CharacterCard = ({
   const getTotalLevel = () => {
     let totalLevel = 0;
 
-    character.classes.map((characterClass) => {
+    character.classes.forEach((characterClass) => {
       totalLevel += characterClass.level;
     });
 
@@ -90,7 +88,7 @@ const CharacterCard = ({
     firestore
       .ref(`Avatars/${character.id}.jpeg`)
       .put(file)
-      .then((snapshot) => {
+      .then(() => {
         window.location.reload();
       })
       .catch((e) =>
@@ -112,13 +110,13 @@ const CharacterCard = ({
           "https://www.dndbeyond.com/Content/Skins/Waterdeep/images/characters/default-avatar-builder.png"
         )
       );
-  }, []);
+  }, [character.id]);
 
   let playerMatch = false;
 
   if (player) {
     let playerData;
-    Object.keys(player).map((key) => {
+    Object.keys(player).forEach((key) => {
       playerData = player[key];
     });
 
@@ -128,7 +126,7 @@ const CharacterCard = ({
     }
   }
 
-  const levelMatch = getCorrectLevel() !== getTotalLevel();
+  const levelMatch = getFormattedTotalLevel() !== getFormattedCorrectLevel();
 
   return character ? (
     <div
@@ -152,6 +150,7 @@ const CharacterCard = ({
           }}
         >
           <img
+            alt={`${character.name} Avatar`}
             className="character-image"
             style={{
               position: "relative",
@@ -170,11 +169,12 @@ const CharacterCard = ({
               title="Replace Image"
               style={{
                 position: "absolute",
-                bottom: "0",
+                height: "100%",
                 width: "100%",
                 backgroundColor: "rgba(255, 255, 255, 0.5)",
                 display: "flex",
                 justifyContent: "center",
+                alignItems: "center",
                 padding: "0.2em 0",
                 cursor: "pointer",
               }}
@@ -188,7 +188,7 @@ const CharacterCard = ({
               <MdFileUpload
                 title="Replace Image"
                 color="white"
-                size="1.5em"
+                size="3em"
                 style={{
                   textAlign: "end",
                 }}
