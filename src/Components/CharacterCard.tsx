@@ -25,8 +25,10 @@ const CharacterCard = ({
   );
 
   const updateCharacter = () => {
-    character.name = characterName;
-    character.nickname = characterName.includes(" ") ? characterNickName : null;
+    character.name = characterName.trim();
+    character.nickname = characterName.includes(" ")
+      ? characterNickName.trim()
+      : null;
     firebaseDb.child(`characters/${characterKey}`).update(character);
   };
 
@@ -207,7 +209,8 @@ const CharacterCard = ({
                 placeholder="Full Name"
                 value={characterName}
                 onChange={(e) => setCharacterName(e.target.value)}
-                className="character-name"
+                onBlur={(e) => setCharacterName(e.target.value.trim())}
+                className="input-character-name"
                 style={{
                   fontSize: "20px",
                   fontWeight: "bold",
@@ -222,9 +225,10 @@ const CharacterCard = ({
                 disabled={!characterName.includes(" ")}
                 value={characterNickName ?? null}
                 onChange={(e) => setCharacterNickName(e.target.value)}
-                className="character-name"
+                onBlur={(e) => setCharacterNickName(e.target.value.trim())}
+                className="input-character-name-nickname"
                 style={{
-                  fontSize: "20px",
+                  fontSize: "16px",
                   fontWeight: "bold",
                   whiteSpace: "nowrap",
                   overflow: "hidden",
