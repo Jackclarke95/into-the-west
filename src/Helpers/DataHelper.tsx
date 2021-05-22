@@ -10,6 +10,7 @@ const getOrdinal = (number: number) => {
   if (number === 11 || number === 12) {
     return number + "th";
   }
+
   switch (lastDigit) {
     case 1:
       return number + "st";
@@ -72,6 +73,25 @@ const deteremineSessionsAttended = (character, sessions) => {
   });
 
   return sessionCount;
+};
+
+/**
+ * Gets a the main class of a character with the most levels
+ *
+ * @param {*} character The character whose class to get
+ * @return {string}
+ */
+const getMainClass = (character) => {
+  const characterClasses = character.classes;
+
+  let currentClass = character.classes[0];
+
+  characterClasses.forEach((characterClass) => {
+    if (characterClass.level > currentClass.level) {
+    }
+  });
+
+  return currentClass.class;
 };
 
 /**
@@ -180,4 +200,5 @@ export {
   calculateLevelFromSessions,
   countSessionsAttended,
   getOrdinal,
+  getMainClass,
 };
