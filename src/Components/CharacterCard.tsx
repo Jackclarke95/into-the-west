@@ -252,69 +252,79 @@ const CharacterCard = ({
           className="character-card-data"
           style={{ marginLeft: "0.5em", width: "420px" }}
         >
-          {edit ? (
-            <div>
-              <input
-                type="text"
-                placeholder="Full Name"
-                value={characterName}
-                onChange={(e) => setCharacterName(e.target.value)}
-                onBlur={(e) => setCharacterName(e.target.value.trim())}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    submitForm();
-                  }
-                }}
-                className="input-character-name"
-                style={{
-                  fontSize: "20px",
-                  fontWeight: "bold",
-                  whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                }}
-              />
-              <input
-                type="text"
-                placeholder="Nickname"
-                disabled={!characterName.includes(" ")}
-                value={characterNickName ?? null}
-                onChange={(e) => setCharacterNickName(e.target.value)}
-                onBlur={(e) => setCharacterNickName(e.target.value.trim())}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    submitForm();
-                  }
-                }}
-                className="input-character-name-nickname"
-                style={{
-                  fontSize: "16px",
-                  fontWeight: "bold",
-                  whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  display: !characterName.includes(" ") ? "none" : "block",
-                  borderColor:
-                    (characterName.includes(" ") &&
-                      (characterNickName === "" || !characterNickName)) ||
-                    (characterNickName && characterNickName.includes(" "))
-                      ? "red"
-                      : "",
-                }}
-              />
-              {characterName.includes(" ") ? (
-                <div
-                  style={{
-                    fontStyle: "italic",
-                    color: characterNickName ? "black" : "red",
+          <div
+            className="character-card-data-title"
+            style={{
+              borderBottomStyle: "solid",
+              borderBottomWidth: 3,
+              borderBottomColor: getClassColour(),
+              paddingBottom: "1px",
+              marginBottom: "1px",
+            }}
+          >
+            {edit ? (
+              <div
+                className="input-character-names"
+                style={{ display: "flex" }}
+              >
+                <input
+                  type="text"
+                  placeholder="Full Name"
+                  value={characterName}
+                  onChange={(e) => setCharacterName(e.target.value)}
+                  onBlur={(e) => setCharacterName(e.target.value.trim())}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      submitForm();
+                    }
                   }}
-                >
-                  Please provide a nickname/display name
-                </div>
-              ) : null}
-            </div>
-          ) : (
-            <>
+                  className="input-character-name"
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                  }}
+                />
+                <input
+                  type="text"
+                  placeholder="Nickname"
+                  disabled={!characterName.includes(" ")}
+                  value={characterNickName ?? null}
+                  onChange={(e) => setCharacterNickName(e.target.value)}
+                  onBlur={(e) => setCharacterNickName(e.target.value.trim())}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      submitForm();
+                    }
+                  }}
+                  className="input-character-name-nickname"
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    // display: !characterName.includes(" ") ? "none" : "block",
+                    borderColor:
+                      (characterName.includes(" ") &&
+                        (characterNickName === "" || !characterNickName)) ||
+                      (characterNickName && characterNickName.includes(" "))
+                        ? "red"
+                        : "",
+                  }}
+                />
+                {characterName.includes(" ") ? (
+                  <div
+                    style={{
+                      fontStyle: "italic",
+                      color: characterNickName ? "black" : "red",
+                    }}
+                  />
+                ) : null}
+              </div>
+            ) : (
               <div
                 className="character-name"
                 style={{
@@ -323,53 +333,42 @@ const CharacterCard = ({
                   whiteSpace: "nowrap",
                   overflow: "hidden",
                   textOverflow: "ellipsis",
-                  borderBottomStyle: "solid",
-                  borderBottomWidth: 3,
-                  borderBottomColor: getClassColour(),
-                  paddingBottom: "1px",
-                  marginBottom: "1px",
                 }}
               >
                 {getDisplayName()}
               </div>
+            )}
+          </div>
+          <div style={{ display: "flex" }} className="character-card-data-body">
+            <div style={{ flexGrow: 1 }} className="character-details">
               <div
-                style={{ display: "flex" }}
-                className="character-card-data-body"
+                className="character-summary"
+                style={{ display: "flex", fontWeight: 500 }}
               >
-                <div style={{ flexGrow: 1 }} className="character-details">
-                  <div
-                    className="character-summary"
-                    style={{ display: "flex", fontWeight: 500 }}
-                  >
-                    <div
-                      title={
-                        levelMatch ? "Missing level data (speak to Jack)" : ""
-                      }
-                      className="character-level"
-                      style={levelMatch ? { color: "red" } : {}}
-                    >
-                      {getFormattedCorrectLevel()}
-                    </div>
-                    <TextDivider />
-                    <div className="character-race">{getRace()}</div>
-                    <TextDivider />
-                    <div className="character-classes">{getClasses()}</div>
-                  </div>
-                  <div className="character-session-count">
-                    Session Count:{" "}
-                    {deteremineSessionsAttended(character, sessions)}
-                  </div>
-                  <div className="character-sessions-to-level">
-                    Sessions to Level Up:{" "}
-                    {calculateSessionsForLevelUp(
-                      character["starting-level"],
-                      deteremineSessionsAttended(character, sessions)
-                    )}
-                  </div>
+                <div
+                  title={levelMatch ? "Missing level data (speak to Jack)" : ""}
+                  className="character-level"
+                  style={levelMatch ? { color: "red" } : {}}
+                >
+                  {getFormattedCorrectLevel()}
                 </div>
+                <TextDivider />
+                <div className="character-race">{getRace()}</div>
+                <TextDivider />
+                <div className="character-classes">{getClasses()}</div>
               </div>
-            </>
-          )}
+              <div className="character-session-count">
+                Session Count: {deteremineSessionsAttended(character, sessions)}
+              </div>
+              <div className="character-sessions-to-level">
+                Sessions to Level Up:{" "}
+                {calculateSessionsForLevelUp(
+                  character["starting-level"],
+                  deteremineSessionsAttended(character, sessions)
+                )}
+              </div>
+            </div>
+          </div>
         </span>
         {playerMatch ? (
           !edit ? (
@@ -415,7 +414,7 @@ const CharacterCard = ({
                 cursor: "pointer",
                 alignItems: "center",
                 justifyContent: "center",
-                height: "2.5em",
+                height: "2.3em",
                 width: "2em",
                 border: "none",
                 borderRadius: 0,
