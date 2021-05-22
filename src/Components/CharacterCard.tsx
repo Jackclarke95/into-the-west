@@ -7,6 +7,7 @@ import {
   calculateLevelFromSessions,
   countSessionsAttended,
   getOrdinal,
+  getMainClass,
 } from "../Helpers/DataHelper";
 import TextDivider from "./Stylistic/TextDivider";
 
@@ -126,6 +127,54 @@ const CharacterCard = ({
       );
   }, [character.id]);
 
+  const getClassColour = () => {
+    let characterClass = getMainClass(character);
+
+    switch (characterClass) {
+      case "Artificer":
+        return "#d5913a";
+
+      case "Barbarian":
+        return "#e7623e";
+
+      case "Bard":
+        return "#ab6dac";
+
+      case "Cleric":
+        return "#91a1b2";
+
+      case "Druid":
+        return "#7a853b";
+
+      case "Fighter":
+        return "#7f513e";
+
+      case "Monk":
+        return "#51a5c5";
+
+      case "Paladin":
+        return "#b59e54";
+
+      case "Ranger":
+        return "#507f62";
+
+      case "Rogue":
+        return "#555752";
+
+      case "Sorcerer":
+        return "#992e2e";
+
+      case "Warlock":
+        return "#7b469b";
+
+      case "Wizard":
+        return "#2a50a1";
+
+      default:
+        return "black";
+    }
+  };
+
   let playerMatch =
     player && player["dndbeyond-name"] === character["player-dndbeyond-name"];
 
@@ -201,7 +250,7 @@ const CharacterCard = ({
         </div>
         <span
           className="character-card-data"
-          style={{ marginLeft: "1em", flexGrow: 1 }}
+          style={{ marginLeft: "0.5em", width: "420px" }}
         >
           {edit ? (
             <div>
@@ -274,6 +323,11 @@ const CharacterCard = ({
                   whiteSpace: "nowrap",
                   overflow: "hidden",
                   textOverflow: "ellipsis",
+                  borderBottomStyle: "solid",
+                  borderBottomWidth: 3,
+                  borderBottomColor: getClassColour(),
+                  paddingBottom: "1px",
+                  marginBottom: "1px",
                 }}
               >
                 {getDisplayName()}
@@ -332,10 +386,12 @@ const CharacterCard = ({
                 cursor: "pointer",
                 alignItems: "center",
                 justifyContent: "center",
-                height: "3em",
-                backgroundColor: "grey",
+                height: "2.3em",
+                width: "2em",
                 border: "none",
-                width: "3em",
+                borderRadius: 0,
+                marginLeft: "5px",
+                backgroundColor: "grey",
               }}
             >
               <MdModeEdit
@@ -359,10 +415,12 @@ const CharacterCard = ({
                 cursor: "pointer",
                 alignItems: "center",
                 justifyContent: "center",
-                height: "3em",
-                backgroundColor: "green",
+                height: "2.5em",
+                width: "2em",
                 border: "none",
-                width: "3em",
+                borderRadius: 0,
+                marginLeft: "5px",
+                backgroundColor: "green",
               }}
             >
               <MdSave
