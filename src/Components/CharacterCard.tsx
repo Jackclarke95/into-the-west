@@ -209,7 +209,7 @@ const CharacterCard = ({
                 onChange={(e) => setCharacterName(e.target.value)}
                 className="character-name"
                 style={{
-                  fontSize: "18px",
+                  fontSize: "20px",
                   fontWeight: "bold",
                   whiteSpace: "nowrap",
                   overflow: "hidden",
@@ -224,7 +224,7 @@ const CharacterCard = ({
                 onChange={(e) => setCharacterNickName(e.target.value)}
                 className="character-name"
                 style={{
-                  fontSize: "18px",
+                  fontSize: "20px",
                   fontWeight: "bold",
                   whiteSpace: "nowrap",
                   overflow: "hidden",
@@ -294,13 +294,35 @@ const CharacterCard = ({
         </span>
         {playerMatch ? (
           !edit ? (
-            <div className="edit-character-button">
+            <button
+              disabled={
+                (characterName.includes(" ") &&
+                  (characterNickName === "" || !characterNickName)) ||
+                (characterNickName && characterNickName.includes(" "))
+              }
+              onClick={() => {
+                updateCharacter();
+                setEdit(!edit);
+              }}
+              style={{
+                color: "white",
+                display: "flex",
+                cursor: "pointer",
+                alignItems: "center",
+                justifyContent: "center",
+                height: "3em",
+                backgroundColor: "grey",
+                border: "none",
+                width: "3em",
+              }}
+            >
               <MdModeEdit
+                size="1.5em"
                 onClick={() => setEdit(!edit)}
                 title="Edit"
                 style={{ cursor: "pointer" }}
               />
-            </div>
+            </button>
           ) : (
             <button
               disabled={
@@ -312,9 +334,23 @@ const CharacterCard = ({
                 updateCharacter();
                 setEdit(!edit);
               }}
-              style={{ backgroundColor: "green" }}
+              style={{
+                color: "white",
+                display: "flex",
+                cursor: "pointer",
+                alignItems: "center",
+                justifyContent: "center",
+                height: "3em",
+                backgroundColor: "green",
+                border: "none",
+                width: "3em",
+              }}
             >
-              <MdSave />
+              <MdSave
+                size="1.5em"
+                style={{ alignSelf: "center" }}
+                color="white"
+              />
             </button>
           )
         ) : null}
