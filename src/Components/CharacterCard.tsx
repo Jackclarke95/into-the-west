@@ -24,6 +24,11 @@ const CharacterCard = ({
     character.nickname ?? (null as string | null)
   );
 
+  const submitForm = () => {
+    updateCharacter();
+    setEdit(!edit);
+  };
+
   const updateCharacter = () => {
     character.name = characterName.trim();
     character.nickname = characterName.includes(" ")
@@ -210,6 +215,11 @@ const CharacterCard = ({
                 value={characterName}
                 onChange={(e) => setCharacterName(e.target.value)}
                 onBlur={(e) => setCharacterName(e.target.value.trim())}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    submitForm();
+                  }
+                }}
                 className="input-character-name"
                 style={{
                   fontSize: "20px",
@@ -226,6 +236,11 @@ const CharacterCard = ({
                 value={characterNickName ?? null}
                 onChange={(e) => setCharacterNickName(e.target.value)}
                 onBlur={(e) => setCharacterNickName(e.target.value.trim())}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    submitForm();
+                  }
+                }}
                 className="input-character-name-nickname"
                 style={{
                   fontSize: "16px",
@@ -242,6 +257,16 @@ const CharacterCard = ({
                       : "",
                 }}
               />
+              {characterName.includes(" ") ? (
+                <div
+                  style={{
+                    fontStyle: "italic",
+                    color: characterNickName ? "black" : "red",
+                  }}
+                >
+                  Please provide a nickname/display name
+                </div>
+              ) : null}
             </div>
           ) : (
             <>
@@ -304,10 +329,7 @@ const CharacterCard = ({
                   (characterNickName === "" || !characterNickName)) ||
                 (characterNickName && characterNickName.includes(" "))
               }
-              onClick={() => {
-                updateCharacter();
-                setEdit(!edit);
-              }}
+              onClick={() => setEdit(!edit)}
               style={{
                 color: "white",
                 display: "flex",
@@ -334,10 +356,7 @@ const CharacterCard = ({
                   (characterNickName === "" || !characterNickName)) ||
                 (characterNickName && characterNickName.includes(" "))
               }
-              onClick={() => {
-                updateCharacter();
-                setEdit(!edit);
-              }}
+              onClick={submitForm}
               style={{
                 color: "white",
                 display: "flex",

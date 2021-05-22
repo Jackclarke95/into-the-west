@@ -75,7 +75,14 @@ function App() {
   return (
     <div>
       {user ? (
-        <button onClick={() => auth.signOut()}>Sign Out</button>
+        <button
+          onClick={() => {
+            auth.signOut();
+            window.location.reload();
+          }}
+        >
+          Sign Out
+        </button>
       ) : (
         <>
           <BrowserView>
