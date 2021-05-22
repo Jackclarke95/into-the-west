@@ -9,8 +9,8 @@ const Characters = ({ characters, sessions, player = null as null | any }) => {
           {Object.keys(characters).map((key) => (
             <CharacterCard
               key={key}
-              character={characters[key]}
-              characterKey={key}
+              characterKey={characters[key].key}
+              character={characters[key].value}
               sessions={sessions}
               player={player}
             />

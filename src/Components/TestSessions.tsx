@@ -29,10 +29,6 @@ const TestSessions = ({
     setShowForm(!showForm);
   };
 
-  const addNewSession = () => {
-    console.log(currentSession);
-  };
-
   let playerName = "";
 
   if (player) {

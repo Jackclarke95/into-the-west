@@ -42,7 +42,7 @@ function App() {
       .orderByChild("name")
       .once("value", (snapshot) => {
         snapshot.forEach((child) => {
-          characterArray.push(child.val());
+          characterArray.push({ key: child.key, value: child.val() });
         });
         setCharacters(characterArray);
       });

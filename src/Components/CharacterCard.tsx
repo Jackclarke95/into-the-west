@@ -85,16 +85,12 @@ const CharacterCard = ({
 
   const uploadImage = (e) => {
     const file = e.target.files[0];
-
     setNewImage(file);
-
-    console.log("file:", file);
 
     firestore
       .ref(`Avatars/${character.id}.jpeg`)
       .put(file)
       .then((snapshot) => {
-        console.log("uploaded a file");
         window.location.reload();
       })
       .catch((e) =>
@@ -208,7 +204,7 @@ const CharacterCard = ({
             <div>
               <input
                 type="text"
-                placeholder="Character Name"
+                placeholder="Full Name"
                 value={characterName}
                 onChange={(e) => setCharacterName(e.target.value)}
                 className="character-name"
@@ -233,6 +229,7 @@ const CharacterCard = ({
                   whiteSpace: "nowrap",
                   overflow: "hidden",
                   textOverflow: "ellipsis",
+                  display: !characterName.includes(" ") ? "none" : "block",
                   borderColor:
                     (characterName.includes(" ") &&
                       (characterNickName === "" || !characterNickName)) ||
