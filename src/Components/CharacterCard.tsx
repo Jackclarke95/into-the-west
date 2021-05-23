@@ -286,9 +286,6 @@ const CharacterCard = ({
             position: "relative",
             display: "flex",
             boxSizing: "border-box",
-             borderWidth: "4px",
-            borderStyle: "solid",
-            borderColor: getClassColour(),
             borderRadius: "50%",
           }}
         >
