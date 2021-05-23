@@ -88,10 +88,23 @@ const getMainClass = (character) => {
 
   characterClasses.forEach((characterClass) => {
     if (characterClass.level > currentClass.level) {
+      currentClass = characterClass;
     }
   });
 
   return currentClass.class;
+};
+
+const getClasses = (character) => {
+  const characterClasses = character.classes;
+
+  let classList = [] as string[];
+
+  characterClasses.forEach((characterClass) => {
+    classList.push(characterClass.class);
+  });
+
+  return classList;
 };
 
 /**
@@ -201,4 +214,5 @@ export {
   countSessionsAttended,
   getOrdinal,
   getMainClass,
+  getClasses,
 };

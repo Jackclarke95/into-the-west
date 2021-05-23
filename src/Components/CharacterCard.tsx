@@ -14,6 +14,7 @@ import {
   countSessionsAttended,
   getOrdinal,
   getMainClass,
+  getClasses,
 } from "../Helpers/DataHelper";
 
 const CharacterCard = ({
@@ -26,7 +27,6 @@ const CharacterCard = ({
   const [edit, setEdit] = useState(false);
   const [levelUp, setLevelUp] = useState(false);
   const [newLevel, setNewLevel] = useState("");
-  const [newImage, setNewImage] = useState([] as any[]);
   const [characterName, setCharacterName] = useState(character.name as string);
   const [characterNickName, setCharacterNickName] = useState(
     character.nickname ?? (null as string | null)
@@ -94,7 +94,7 @@ const CharacterCard = ({
       .update(character)
       .catch((e) =>
         alert(
-          `Unable to update Character. This could be because you are not conected to the internet. Please try again.\n\nDetails:\n${e}`
+          `Failed to update Character. This could be because you are not conected to the internet. Please try again.\n\nDetails:\n${e}`
         )
       );
   };
@@ -111,7 +111,7 @@ const CharacterCard = ({
     }`;
   };
 
-  const getClasses = () => {
+  const getFormattedClasses = () => {
     let classList = [] as string[];
 
     character.classes
@@ -152,19 +152,46 @@ const CharacterCard = ({
 
   const uploadImage = (e) => {
     const file = e.target.files[0];
-    setNewImage(file);
 
-    firestore
-      .ref(`Avatars/${character.id}.jpeg`)
-      .put(file)
-      .then(() => {
-        window.location.reload();
-      })
-      .catch((e) =>
-        alert(
-          `Unable to upload image. This could be because you are not conected to the internet. Please try again.\n\nDetails:\n${e}`
-        )
+    if (!file || file === undefined) {
+      return;
+    }
+
+    let errorMessage = [] as string[];
+
+    if (
+      file.type !== "image/jpeg" &&
+      file.type !== "image/jpg" &&
+      file.type !== "image/png"
+    ) {
+      errorMessage.push(
+        'Wrong file type. Please ensure the file type is "jpg", "jpeg", or "png".'
       );
+    }
+
+    if (file.size > 2_000_000) {
+      errorMessage.push(
+        "File size too big. Please ensure the file is less than 2MB."
+      );
+    }
+
+    if (errorMessage.length > 0) {
+      alert(
+        `Could not upload image.\n\nDetails:\n-${errorMessage.join("\n-")}`
+      );
+    } else {
+      firestore
+        .ref(`Avatars/${character.id}.jpeg`)
+        .put(file)
+        .then(() => {
+          window.location.reload();
+        })
+        .catch((e) =>
+          alert(
+            `Failed to upload image. This could be because you are not conected to the internet. Please try again.\n\nDetails:\n${e}`
+          )
+        );
+    }
   };
 
   useEffect(() => {
@@ -186,7 +213,7 @@ const CharacterCard = ({
 
     switch (characterClass) {
       case "Artificer":
-        return "#d5913a";
+        return "#d59139";
 
       case "Barbarian":
         return "#e7623e";
@@ -233,6 +260,8 @@ const CharacterCard = ({
     player && player["dndbeyond-name"] === character["player-dndbeyond-name"];
 
   const levelMatch = getFormattedTotalLevel() === getFormattedCorrectLevel();
+  const characterClasses = getClasses(character);
+  console.log(characterClasses);
 
   return character ? (
     <div
@@ -245,6 +274,8 @@ const CharacterCard = ({
         backgroundColor: "#eeeeee",
         width: "35em",
         textAlign: "start",
+        borderTopLeftRadius: "10em",
+        borderBottomLeftRadius: "10em",
       }}
     >
       <div style={{ display: "flex" }}>
@@ -263,6 +294,7 @@ const CharacterCard = ({
               height: 100,
               width: 100,
               objectFit: "cover",
+              borderRadius: "50%",
             }}
             src={imageUrl}
           />
@@ -281,13 +313,14 @@ const CharacterCard = ({
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                padding: "0.2em 0",
                 cursor: "pointer",
+                borderRadius: "50%",
               }}
             >
               <input
                 id="image-upload"
                 type="file"
+                accept=".jpeg,.jpg,png"
                 hidden
                 onChange={uploadImage}
               />
@@ -377,19 +410,44 @@ const CharacterCard = ({
                 ) : null}
               </div>
             ) : (
-              <div
-                className="character-name"
-                style={{
-                  fontSize: "20px",
-                  fontWeight: "bold",
-                  whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  width: "421px",
-                }}
-              >
-                {getDisplayName()}
-              </div>
+              <>
+                <div
+                  className="character-class-icons"
+                  style={{ display: "flex" }}
+                >
+                  {characterClasses.map((characterClass) => {
+                    return (
+                      <img
+                        alt={`${character.name} Class Icon`}
+                        title={`${characterClass} Icon`}
+                        className="character-class"
+                        style={{
+                          position: "relative",
+                          height: 25,
+                          width: 25,
+                          objectFit: "cover",
+                          marginRight: "0.5em",
+                          borderRadius: "50%",
+                        }}
+                        src={`${process.env.PUBLIC_URL}/ClassIcons/${characterClass}.jpeg`}
+                      />
+                    );
+                  })}
+                </div>
+                <div
+                  className="character-name"
+                  style={{
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    width: "421px",
+                  }}
+                >
+                  {getDisplayName()}
+                </div>
+              </>
             )}
             {playerMatch ? (
               !edit ? (
@@ -442,7 +500,8 @@ const CharacterCard = ({
             <div style={{ flexGrow: 1 }} className="character-details">
               {!levelUp ? (
                 <div className="character-summary" style={{ fontWeight: 500 }}>
-                  {getFormattedTotalLevel()} | {getRace()} | {getClasses()}
+                  {getFormattedTotalLevel()} | {getRace()} |{" "}
+                  {getFormattedClasses()}
                 </div>
               ) : (
                 <div
