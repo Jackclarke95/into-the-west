@@ -73,7 +73,13 @@ function App() {
   }
 
   return (
-    <div>
+    <div
+      style={{
+        backgroundImage: `url("${process.env.PUBLIC_URL}/Maps/Hewett's Map.jpg")`,
+        backgroundRepeat: "no-repeat",
+        width: "100%",
+      }}
+    >
       {userAccount ? (
         <button
           onClick={() => {
