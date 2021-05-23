@@ -8,7 +8,14 @@ const Characters = ({
 }) => {
   return (
     <div style={{ textAlign: "center" }}>
-      <h2>{`Characters (${characters.length})`}</h2>
+      <h2
+        style={{
+          textAlign: "center",
+          fontFamily: "Papyrus",
+          fontSize: "2em",
+          fontWeight: "bold",
+        }}
+      >{`Characters (${characters.length})`}</h2>
       <div className="characters" style={{ textAlign: "center" }}>
         <div className="character-cards">
           {Object.keys(characters).map((key) => {
@@ -23,6 +30,8 @@ const Characters = ({
                 ) {
                   characterPlayer = player;
                 }
+
+                return null;
               });
             }
 

@@ -73,48 +73,71 @@ function App() {
   }
 
   return (
-    <div
-      style={{
-        backgroundImage: `url("${process.env.PUBLIC_URL}/Maps/Hewett's Map.jpg")`,
-        backgroundRepeat: "no-repeat",
-        width: "100%",
-      }}
-    >
-      {userAccount ? (
-        <button
-          onClick={() => {
-            auth.signOut();
-            window.location.reload();
+    <>
+      <div className="site-container">
+        {userAccount ? (
+          <button
+            onClick={() => {
+              auth.signOut();
+              window.location.reload();
+            }}
+          >
+            Sign Out
+          </button>
+        ) : (
+          <>
+            <BrowserView>
+              <button onClick={signInWithGooglePopup}>
+                Sign In with Google
+              </button>
+            </BrowserView>
+            <MobileView>
+              <button onClick={signInWithGoogleRedirect}>
+                Sign In with Google
+              </button>
+            </MobileView>
+          </>
+        )}
+        <h1
+          style={{
+            textAlign: "center",
+            fontFamily: "Papyrus",
+            fontSize: "3em",
+            fontWeight: "bold",
           }}
         >
-          Sign Out
-        </button>
-      ) : (
-        <>
-          <BrowserView>
-            <button onClick={signInWithGooglePopup}>Sign In with Google</button>
-          </BrowserView>
-          <MobileView>
-            <button onClick={signInWithGoogleRedirect}>
-              Sign In with Google
-            </button>
-          </MobileView>
-        </>
-      )}
-      <h1>Into The West</h1>
-      <Characters
-        characters={characters}
-        sessions={sessions}
-        players={players}
-        currentUser={currentPlayer}
-      />
-      <TestEncounters />
-      <TestSessions
-        characters={characters}
-        sessions={sessions}
-        player={currentPlayer}
-      />
-    </div>
+          Into The West
+        </h1>
+        <Characters
+          characters={characters}
+          sessions={sessions}
+          players={players}
+          currentUser={currentPlayer}
+        />
+        <TestEncounters />
+        <TestSessions
+          characters={characters}
+          sessions={sessions}
+          player={currentPlayer}
+        />
+      </div>
+      <BrowserView>
+        <img
+          className="background-image"
+          src={`${process.env.PUBLIC_URL}/Images/Maps/Hewett's Map.jpg`}
+          alt="Background Map"
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            zIndex: -1,
+            opacity: 0.3,
+            filter: "grayscale(100%)",
+            width: "100%",
+          }}
+        />
+      </BrowserView>
+    </>
   );
 }
 

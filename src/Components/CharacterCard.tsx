@@ -33,8 +33,6 @@ const CharacterCard = ({
     character.nickname ?? (null as string | null)
   );
 
-  console.log("character's player name", player["dndbeyond-name"]);
-
   const saveNewName = () => {
     if (
       !characterName ||
@@ -274,7 +272,7 @@ const CharacterCard = ({
         display: "inline-block",
         margin: "0.5em",
         padding: "0.5em",
-        backgroundColor: "#eeeeee",
+        backgroundColor: "#ffffff",
         width: "35em",
         textAlign: "start",
         borderTopLeftRadius: "10em",
@@ -306,7 +304,7 @@ const CharacterCard = ({
               onClick={() => {
                 document.getElementById("image-upload")?.click();
               }}
-              className="edit-character-button"
+              className="replace-avatar-button"
               title="Replace Image"
               style={{
                 position: "absolute",
@@ -418,9 +416,10 @@ const CharacterCard = ({
                   className="character-class-icons"
                   style={{ display: "flex" }}
                 >
-                  {characterClasses.map((characterClass) => {
+                  {characterClasses.map((characterClass, key) => {
                     return (
                       <img
+                        key={key}
                         alt={`${character.name} Class Icon`}
                         title={`${characterClass} Icon`}
                         className="character-class"
@@ -432,7 +431,7 @@ const CharacterCard = ({
                           marginRight: "0.5em",
                           borderRadius: "50%",
                         }}
-                        src={`${process.env.PUBLIC_URL}/ClassIcons/${characterClass}.jpeg`}
+                        src={`${process.env.PUBLIC_URL}/Images/ClassIcons/${characterClass}.jpeg`}
                       />
                     );
                   })}
@@ -466,12 +465,13 @@ const CharacterCard = ({
                   style={{
                     border: "none",
                     cursor: "pointer",
+                    background: "none",
                   }}
                 >
                   <MdModeEdit
                     size="1.5em"
                     style={{ cursor: "pointer" }}
-                    color="grey"
+                    color={getClassColour()}
                   />
                 </button>
               ) : (
@@ -485,15 +485,15 @@ const CharacterCard = ({
                   }
                   onClick={saveNewName}
                   style={{
-                    color: "white",
                     cursor: "pointer",
                     border: "none",
+                    background: "none",
                   }}
                 >
                   <MdSave
                     size="1.5em"
                     style={{ alignSelf: "center" }}
-                    color="grey"
+                    color={getClassColour()}
                   />
                 </button>
               )
