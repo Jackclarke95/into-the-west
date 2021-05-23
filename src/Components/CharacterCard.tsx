@@ -48,18 +48,22 @@ const CharacterCard = ({
 
   const saveNewLevel = () => {
     const characterClasses = character.classes;
-    let addNew = false;
+    let addNew = true;
 
     characterClasses.forEach((characterClass) => {
       if (characterClass.class === newLevel) {
-        characterClass.level++;
-      } else {
-        addNew = true;
+        addNew = false;
       }
     });
 
     if (addNew) {
       characterClasses.push({ class: newLevel, level: 1 });
+    } else {
+      characterClasses.forEach((characterClass) => {
+        if (characterClass.class === newLevel) {
+          characterClass.level++;
+        }
+      });
     }
 
     setLevelUp(!levelUp);
@@ -399,20 +403,15 @@ const CharacterCard = ({
                   }
                   onClick={() => setEdit(!edit)}
                   style={{
-                    color: "white",
-                    display: "flex",
-                    cursor: "pointer",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    height: "2em",
-                    width: "2em",
                     border: "none",
-                    borderRadius: 0,
-                    marginLeft: "5px",
-                    backgroundColor: "grey",
+                    cursor: "pointer",
                   }}
                 >
-                  <MdModeEdit size="1.5em" style={{ cursor: "pointer" }} />
+                  <MdModeEdit
+                    size="1.5em"
+                    style={{ cursor: "pointer" }}
+                    color="grey"
+                  />
                 </button>
               ) : (
                 <button
@@ -426,22 +425,14 @@ const CharacterCard = ({
                   onClick={saveNewName}
                   style={{
                     color: "white",
-                    display: "flex",
                     cursor: "pointer",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    height: "2em",
-                    width: "2em",
                     border: "none",
-                    borderRadius: 0,
-                    marginLeft: "5px",
-                    backgroundColor: "green",
                   }}
                 >
                   <MdSave
                     size="1.5em"
                     style={{ alignSelf: "center" }}
-                    color="white"
+                    color="grey"
                   />
                 </button>
               )
@@ -485,10 +476,17 @@ const CharacterCard = ({
               </div>
               <div className="character-sessions-to-level">
                 {levelMatch ? (
-                  `Sessions to Level Up: ${calculateSessionsForLevelUp(
+                  `Level Up In ${calculateSessionsForLevelUp(
                     character["starting-level"],
                     deteremineSessionsAttended(character, sessions)
-                  )}`
+                  )} Session${
+                    calculateSessionsForLevelUp(
+                      character["starting-level"],
+                      deteremineSessionsAttended(character, sessions)
+                    ) > 1
+                      ? "s"
+                      : ""
+                  }`
                 ) : (
                   <b>Level Up Available!</b>
                 )}
