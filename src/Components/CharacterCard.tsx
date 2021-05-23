@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import {
+  MdAdd,
   MdArrowUpward,
   MdModeEdit,
   MdSave,
@@ -14,7 +15,6 @@ import {
   getOrdinal,
   getMainClass,
 } from "../Helpers/DataHelper";
-import TextDivider from "./Stylistic/TextDivider";
 
 const CharacterCard = ({
   character,
@@ -24,13 +24,15 @@ const CharacterCard = ({
 }) => {
   const [imageUrl, setImageUrl] = useState("");
   const [edit, setEdit] = useState(false);
+  const [levelUp, setLevelUp] = useState(false);
+  const [newLevel, setNewLevel] = useState("");
   const [newImage, setNewImage] = useState([] as any[]);
   const [characterName, setCharacterName] = useState(character.name as string);
   const [characterNickName, setCharacterNickName] = useState(
     character.nickname ?? (null as string | null)
   );
 
-  const submitForm = () => {
+  const saveNewName = () => {
     if (
       !characterName ||
       characterName === "" ||
@@ -39,21 +41,58 @@ const CharacterCard = ({
     ) {
       return;
     } else {
-      updateCharacter();
+      updateCharacterName();
       setEdit(!edit);
     }
   };
 
-  const openLevelUp = () => {
-    console.log("level up");
+  const saveNewLevel = () => {
+    const characterClasses = character.classes;
+    let addNew = false;
+
+    characterClasses.forEach((characterClass) => {
+      if (characterClass.class === newLevel) {
+        characterClass.level++;
+      } else {
+        addNew = true;
+      }
+    });
+
+    if (addNew) {
+      characterClasses.push({ class: newLevel, level: 1 });
+    }
+
+    setLevelUp(!levelUp);
+    character.classes = characterClasses;
+
+    firebaseDb
+      .child(`characters/${characterKey}`)
+      .update(character)
+      .then(() => {
+        window.location.reload();
+      })
+      .catch((e) =>
+        alert(
+          `Unable to update Character. This could be because you are not conected to the internet. Please try again.\n\nDetails:\n${e}`
+        )
+      );
+
+    setNewLevel("");
   };
 
-  const updateCharacter = () => {
+  const updateCharacterName = () => {
     character.name = characterName.trim();
     character.nickname = characterName.includes(" ")
       ? characterNickName.trim()
       : null;
-    firebaseDb.child(`characters/${characterKey}`).update(character);
+    firebaseDb
+      .child(`characters/${characterKey}`)
+      .update(character)
+      .catch((e) =>
+        alert(
+          `Unable to update Character. This could be because you are not conected to the internet. Please try again.\n\nDetails:\n${e}`
+        )
+      );
   };
 
   const getDisplayName = () => {
@@ -287,7 +326,7 @@ const CharacterCard = ({
                   onBlur={(e) => setCharacterName(e.target.value.trim())}
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
-                      submitForm();
+                      saveNewName();
                     }
                   }}
                   className="input-character-name"
@@ -308,7 +347,7 @@ const CharacterCard = ({
                   onBlur={(e) => setCharacterNickName(e.target.value.trim())}
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
-                      submitForm();
+                      saveNewName();
                     }
                   }}
                   className="input-character-name-nickname"
@@ -384,7 +423,7 @@ const CharacterCard = ({
                       (characterNickName === "" || !characterNickName)) ||
                     (characterNickName && characterNickName.includes(" "))
                   }
-                  onClick={submitForm}
+                  onClick={saveNewName}
                   style={{
                     color: "white",
                     display: "flex",
@@ -410,21 +449,37 @@ const CharacterCard = ({
           </div>
           <div style={{ display: "flex" }} className="character-card-data-body">
             <div style={{ flexGrow: 1 }} className="character-details">
-              <div
-                className="character-summary"
-                style={{ display: "flex", fontWeight: 500 }}
-              >
-                <div
-                  title={levelMatch ? "Missing level data (speak to Jack)" : ""}
-                  className="character-level"
-                >
-                  {getFormattedTotalLevel()}
+              {!levelUp ? (
+                <div className="character-summary" style={{ fontWeight: 500 }}>
+                  {getFormattedTotalLevel()} | {getRace()} | {getClasses()}
                 </div>
-                <TextDivider />
-                <div className="character-race">{getRace()}</div>
-                <TextDivider />
-                <div className="character-classes">{getClasses()}</div>
-              </div>
+              ) : (
+                <div
+                  className="character-level-up-form"
+                  style={{ marginBottom: "-1px" }}
+                >
+                  Choose class for new level:
+                  <select
+                    onChange={(e) => setNewLevel(e.target.value)}
+                    style={{ marginLeft: "0.5em" }}
+                    value={newLevel}
+                  >
+                    <option>Artificer</option>
+                    <option>Barbarian</option>
+                    <option>Bard</option>
+                    <option>Cleric</option>
+                    <option>Druid</option>
+                    <option>Fighter</option>
+                    <option>Monk</option>
+                    <option>Paladin</option>
+                    <option>Ranger</option>
+                    <option>Rogue</option>
+                    <option>Sorcerer</option>
+                    <option>Warlock</option>
+                    <option>Wizard</option>
+                  </select>
+                </div>
+              )}
               <div className="character-session-count">
                 Session Count: {deteremineSessionsAttended(character, sessions)}
               </div>
@@ -440,19 +495,36 @@ const CharacterCard = ({
               </div>
             </div>
             {playerMatch && !levelMatch ? (
-              <MdArrowUpward
-                title="Level Up!"
-                className="level-up-button"
-                onClick={openLevelUp}
-                size="3em"
-                strokeWidth={2}
-                style={{
-                  alignSelf: "center",
-                  cursor: "pointer",
-                  marginRight: "1em",
-                }}
-                color="green"
-              />
+              !levelUp ? (
+                <MdArrowUpward
+                  title="Level Up!"
+                  className="level-up-button"
+                  onClick={() => {
+                    setNewLevel(getMainClass(character));
+                    setLevelUp(!levelUp);
+                  }}
+                  size="3em"
+                  strokeWidth={2}
+                  style={{
+                    alignSelf: "center",
+                    cursor: "pointer",
+                  }}
+                  color="green"
+                />
+              ) : (
+                <MdAdd
+                  title="Level Up!"
+                  className="save-level-up-button"
+                  onClick={saveNewLevel}
+                  size="3em"
+                  strokeWidth={2}
+                  style={{
+                    alignSelf: "center",
+                    cursor: "pointer",
+                  }}
+                  color="grey"
+                />
+              )
             ) : null}
           </div>
         </span>
