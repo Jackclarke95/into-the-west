@@ -21,7 +21,8 @@ const CharacterCard = ({
   character,
   characterKey,
   sessions,
-  player = null as null | any,
+  player,
+  currentUser = null as null | any,
 }) => {
   const [imageUrl, setImageUrl] = useState("");
   const [edit, setEdit] = useState(false);
@@ -31,6 +32,8 @@ const CharacterCard = ({
   const [characterNickName, setCharacterNickName] = useState(
     character.nickname ?? (null as string | null)
   );
+
+  console.log("character's player name", player["dndbeyond-name"]);
 
   const saveNewName = () => {
     if (
@@ -257,11 +260,11 @@ const CharacterCard = ({
   };
 
   let playerMatch =
-    player && player["dndbeyond-name"] === character["player-dndbeyond-name"];
+    currentUser &&
+    currentUser["dndbeyond-name"] === character["player-dndbeyond-name"];
 
   const levelMatch = getFormattedTotalLevel() === getFormattedCorrectLevel();
   const characterClasses = getClasses(character);
-  console.log(characterClasses);
 
   return character ? (
     <div
@@ -530,10 +533,14 @@ const CharacterCard = ({
                   </select>
                 </div>
               )}
-              <div className="character-session-count">
-                Session Count: {deteremineSessionsAttended(character, sessions)}
-              </div>
-              <div className="character-sessions-to-level">
+              <div
+                className="character-session-count"
+                style={{ marginRight: "1em" }}
+              >
+                {`Session Count: ${deteremineSessionsAttended(
+                  character,
+                  sessions
+                )} | `}
                 {levelMatch ? (
                   `Level Up In ${calculateSessionsForLevelUp(
                     character["starting-level"],
@@ -549,6 +556,28 @@ const CharacterCard = ({
                 ) : (
                   <b>Level Up Available!</b>
                 )}
+              </div>
+              <div
+                className="character-player-details"
+                style={{ display: "flex" }}
+              >
+                {player["display-name"] ? (
+                  <div>
+                    <b>Player: </b>
+                    {player["display-name"]}
+                  </div>
+                ) : null}
+                {player["display-name"] && player.discord ? (
+                  <div style={{ marginRight: "0.3em", marginLeft: "0.3em" }}>
+                    |
+                  </div>
+                ) : null}
+                {player.discord ? (
+                  <div>
+                    <b>Discord: </b>
+                    {player.discord}
+                  </div>
+                ) : null}{" "}
               </div>
             </div>
             {playerMatch && !levelMatch ? (

@@ -99,7 +99,8 @@ function App() {
       <Characters
         characters={characters}
         sessions={sessions}
-        player={currentPlayer}
+        players={players}
+        currentUser={currentPlayer}
       />
       <TestEncounters />
       <TestSessions
