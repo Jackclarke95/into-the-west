@@ -5,6 +5,7 @@ import {
   MdModeEdit,
   MdSave,
   MdFileUpload,
+  MdFlag,
 } from "react-icons/md";
 import { firestore, firebaseDb } from "../firebase.utils";
 import {
@@ -98,6 +99,25 @@ const CharacterCard = ({
           `Failed to update Character. This could be because you are not conected to the internet. Please try again.\n\nDetails:\n${e}`
         )
       );
+  };
+
+  const claimCharacter = () => {
+    if (
+      window.confirm(
+        `Please ensure that ${character.name} belongs to you before proceeding.`
+      )
+    ) {
+      character["player-dndbeyond-name"] = currentUser["dndbeyond-name"];
+
+      firebaseDb
+        .child(`characters/${characterKey}`)
+        .update(character)
+        .catch((e) =>
+          alert(
+            `Failed to claim Character. This could be because you are not conected to the internet. Please try again.\n\nDetails:\n${e}`
+          )
+        );
+    }
   };
 
   const getDisplayName = () => {
@@ -263,6 +283,10 @@ const CharacterCard = ({
 
   const levelMatch = getFormattedTotalLevel() === getFormattedCorrectLevel();
   const characterClasses = getClasses(character);
+  const characterClaimed = character["player-dndbeyond-name"] ? true : false;
+
+  // console.log(character);
+  // console.log(character.name, characterClaimed);
 
   return character ? (
     <div
@@ -499,7 +523,17 @@ const CharacterCard = ({
                   />
                 </button>
               )
-            ) : null}
+            ) : characterClaimed ? (
+              <div>Claimed</div>
+            ) : (
+              <MdFlag
+                size="1.5em"
+                style={{ alignSelf: "center", cursor: "pointer" }}
+                color={getClassColour()}
+                onClick={claimCharacter}
+                title="Claim this Character"
+              />
+            )}
           </div>
           <div style={{ display: "flex" }} className="character-card-data-body">
             <div style={{ flexGrow: 1 }} className="character-details">
