@@ -20,6 +20,7 @@ const firebaseDb = fireDb.database().ref();
 const auth = firebase.auth();
 const signInWithGoogleRedirect = () => auth.signInWithRedirect(googleProvider);
 const signInWithGooglePopup = () => auth.signInWithPopup(googleProvider);
+const signOut = () => auth.signOut();
 
 export {
   auth,
@@ -27,5 +28,6 @@ export {
   firestore,
   signInWithGooglePopup,
   signInWithGoogleRedirect,
+  signOut,
 };
 export default firebase;
