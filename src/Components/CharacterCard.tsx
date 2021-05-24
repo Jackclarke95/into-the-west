@@ -23,7 +23,7 @@ const CharacterCard = ({
   characterKey,
   sessions,
   player,
-  currentUser = null as null | any,
+  currentPlayer = null as null | any,
 }) => {
   const [imageUrl, setImageUrl] = useState("");
   const [edit, setEdit] = useState(false);
@@ -107,7 +107,7 @@ const CharacterCard = ({
         `Please ensure that ${character.name} belongs to you before proceeding.`
       )
     ) {
-      character["player-dndbeyond-name"] = currentUser["dndbeyond-name"];
+      character["player-dndbeyond-name"] = currentPlayer["dndbeyond-name"];
 
       firebaseDb
         .child(`characters/${characterKey}`)
@@ -117,6 +117,8 @@ const CharacterCard = ({
             `Failed to claim Character. This could be because you are not conected to the internet. Please try again.\n\nDetails:\n${e}`
           )
         );
+
+      window.location.reload();
     }
   };
 
@@ -190,7 +192,7 @@ const CharacterCard = ({
       );
     }
 
-    if (file.size > 2_000_000) {
+    if (file.size > 2 * 1024 * 1024) {
       errorMessage.push(
         "File size too big. Please ensure the file is less than 2MB."
       );
@@ -232,7 +234,9 @@ const CharacterCard = ({
   const getClassColour = () => {
     let characterClass = getMainClass(character);
 
-    switch (characterClass) {
+    let colour = character.retirement ?? characterClass;
+
+    switch (colour) {
       case "Artificer":
         return "#d59139";
 
@@ -272,26 +276,27 @@ const CharacterCard = ({
       case "Wizard":
         return "#2a50a1";
 
+      case "retired":
+        return "grey";
+
       default:
         return "black";
     }
   };
 
   let playerMatch =
-    currentUser &&
-    currentUser["dndbeyond-name"] === character["player-dndbeyond-name"];
+    currentPlayer &&
+    currentPlayer["dndbeyond-name"] === character["player-dndbeyond-name"];
 
   const levelMatch = getFormattedTotalLevel() === getFormattedCorrectLevel();
   const characterClasses = getClasses(character);
   const characterClaimed = character["player-dndbeyond-name"] ? true : false;
 
-  // console.log(character);
-  // console.log(character.name, characterClaimed);
-
   return character ? (
     <div
       className="character-card"
       data-character-name={character.name}
+      title={getDisplayName()}
       style={{
         display: "inline-block",
         margin: "0.5em",
@@ -317,11 +322,11 @@ const CharacterCard = ({
             alt={`${character.name} Avatar`}
             className="character-image"
             style={{
-              position: "relative",
               height: 100,
               width: 100,
               objectFit: "cover",
               borderRadius: "50%",
+              filter: character.retirement ? "grayscale(100%)" : "none",
             }}
             src={imageUrl}
           />
@@ -447,15 +452,17 @@ const CharacterCard = ({
                       <img
                         key={key}
                         alt={`${character.name} Class Icon`}
-                        title={`${characterClass} Icon`}
+                        title={`${characterClass}`}
                         className="character-class"
                         style={{
-                          position: "relative",
                           height: 25,
                           width: 25,
                           objectFit: "cover",
                           marginRight: "0.5em",
                           borderRadius: "50%",
+                          filter: character.retirement
+                            ? "grayscale(100%)"
+                            : "none",
                         }}
                         src={`${process.env.PUBLIC_URL}/Images/ClassIcons/${characterClass}.jpeg`}
                       />
@@ -477,7 +484,7 @@ const CharacterCard = ({
                 </div>
               </>
             )}
-            {playerMatch ? (
+            {!character.retirement && playerMatch ? (
               !edit ? (
                 <button
                   className="edit-button"
@@ -523,9 +530,7 @@ const CharacterCard = ({
                   />
                 </button>
               )
-            ) : characterClaimed ? (
-              <div>Claimed</div>
-            ) : (
+            ) : currentPlayer && !characterClaimed ? (
               <MdFlag
                 size="1.5em"
                 style={{ alignSelf: "center", cursor: "pointer" }}
@@ -533,7 +538,7 @@ const CharacterCard = ({
                 onClick={claimCharacter}
                 title="Claim this Character"
               />
-            )}
+            ) : null}
           </div>
           <div style={{ display: "flex" }} className="character-card-data-body">
             <div style={{ flexGrow: 1 }} className="character-details">
