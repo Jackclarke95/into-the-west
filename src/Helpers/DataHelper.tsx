@@ -95,8 +95,17 @@ const getMainClass = (character) => {
   return currentClass.class;
 };
 
+/**
+ * Gets a list of the character's classes, ordered by highest level first
+ *
+ * @param {*} character
+ * @return {string[]} A list of the character's classes
+ */
 const getClasses = (character) => {
   const characterClasses = character.classes;
+  characterClasses.sort((a, b) => {
+    return b.level - a.level;
+  });
 
   let classList = [] as string[];
 

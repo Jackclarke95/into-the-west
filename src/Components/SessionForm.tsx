@@ -49,7 +49,7 @@ const SessionForm = (playerName = null as null | any) => {
       .then(() => window.location.reload())
       .catch((e) =>
         alert(
-          `Unable to create session. This could be because you are not conected to the internet. Please try again.\n\nDetails:\n${e}`
+          `Unable to create session. Verify that you are connected to the internet. Please try again.\n\nDetails:\n${e}`
         )
       );
   };

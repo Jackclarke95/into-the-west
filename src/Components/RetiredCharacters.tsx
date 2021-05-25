@@ -17,9 +17,6 @@ const Characters = ({
     }
   });
 
-  console.log("active", activeCharacters.length, activeCharacters);
-  console.log("retired", retiredCharacters.length, retiredCharacters);
-
   return (
     <div style={{ textAlign: "center" }}>
       <h2
@@ -30,60 +27,10 @@ const Characters = ({
           fontWeight: "bold",
         }}
       >
-        Characters
+        Retired Characters
       </h2>
       <div className="characters" style={{ textAlign: "center" }}>
-        <div className="active-character-cards">
-          <h3
-            style={{
-              textAlign: "center",
-              fontFamily: "Papyrus",
-              fontSize: "1.5em",
-              fontWeight: "bold",
-            }}
-          >
-            Active Characters
-          </h3>
-          {Object.keys(activeCharacters).map((key) => {
-            let character = activeCharacters[key];
-            let characterPlayer = {};
-
-            if (currentPlayer) {
-              players.map((player) => {
-                if (
-                  player["dndbeyond-name"] ===
-                  character.value["player-dndbeyond-name"]
-                ) {
-                  characterPlayer = player;
-                }
-
-                return null;
-              });
-            }
-
-            return (
-              <CharacterCard
-                key={key}
-                characterKey={character.key}
-                character={character.value}
-                sessions={sessions}
-                player={characterPlayer}
-                currentPlayer={currentPlayer}
-              />
-            );
-          })}
-        </div>
         <div className="retired-character-cards">
-          <h3
-            style={{
-              textAlign: "center",
-              fontFamily: "Papyrus",
-              fontSize: "1.5em",
-              fontWeight: "bold",
-            }}
-          >
-            Retired Characters
-          </h3>
           {Object.keys(retiredCharacters).map((key) => {
             let character = retiredCharacters[key];
             let characterPlayer = {};

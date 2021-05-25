@@ -27,12 +27,14 @@ const CharacterCard = ({
 }) => {
   const [imageUrl, setImageUrl] = useState("");
   const [edit, setEdit] = useState(false);
+  const [retire, setRetire] = useState(false);
   const [levelUp, setLevelUp] = useState(false);
   const [newLevel, setNewLevel] = useState("");
   const [characterName, setCharacterName] = useState(character.name as string);
   const [characterNickName, setCharacterNickName] = useState(
     character.nickname ?? (null as string | null)
   );
+  const [retirementReason, setRetirementReason] = useState("");
 
   const saveNewName = () => {
     if (
@@ -79,11 +81,9 @@ const CharacterCard = ({
       })
       .catch((e) =>
         alert(
-          `Unable to update Character. This could be because you are not conected to the internet. Please try again.\n\nDetails:\n${e}`
+          `Unable to update Character. Verify that you are connected to the internet. Please try again.\n\nDetails:\n${e}`
         )
       );
-
-    setNewLevel("");
   };
 
   const updateCharacterName = () => {
@@ -94,9 +94,35 @@ const CharacterCard = ({
     firebaseDb
       .child(`characters/${characterKey}`)
       .update(character)
+      .then(() => window.location.reload())
       .catch((e) =>
         alert(
-          `Failed to update Character. This could be because you are not conected to the internet. Please try again.\n\nDetails:\n${e}`
+          `Failed to update Character. Verify that you are connected to the internet. Please try again.\n\nDetails:\n${e}`
+        )
+      );
+  };
+
+  const retireCharacter = () => {
+    if (retirementReason.length === 0) {
+      console.log("empty");
+      return;
+    }
+
+    const now = new Date();
+
+    const dateString = `${now.getFullYear()} ${
+      now.getMonth() + 1
+    } ${now.getDate()}`;
+
+    character.retirement = { cause: retirementReason, date: dateString };
+
+    firebaseDb
+      .child(`characters/${characterKey}`)
+      .update(character)
+      .then(() => window.location.reload())
+      .catch((e) =>
+        alert(
+          `Failed to update Character. Verify that you are connected to the internet. Please try again.\n\nDetails:\n${e}`
         )
       );
   };
@@ -114,7 +140,7 @@ const CharacterCard = ({
         .update(character)
         .catch((e) =>
           alert(
-            `Failed to claim Character. This could be because you are not conected to the internet. Please try again.\n\nDetails:\n${e}`
+            `Failed to claim Character. Verify that you are connected to the internet. Please try again.\n\nDetails:\n${e}`
           )
         );
 
@@ -211,7 +237,7 @@ const CharacterCard = ({
         })
         .catch((e) =>
           alert(
-            `Failed to upload image. This could be because you are not conected to the internet. Please try again.\n\nDetails:\n${e}`
+            `Failed to upload image. Verify that you are connected to the internet. Please try again.\n\nDetails:\n${e}`
           )
         );
     }
@@ -291,6 +317,7 @@ const CharacterCard = ({
   const levelMatch = getFormattedTotalLevel() === getFormattedCorrectLevel();
   const characterClasses = getClasses(character);
   const characterClaimed = character["player-dndbeyond-name"] ? true : false;
+  const retired = character.retirement ? true : false;
 
   return character ? (
     <div
@@ -367,9 +394,9 @@ const CharacterCard = ({
             </div>
           ) : null}
         </div>
-        <span
+        <div
           className="character-card-data"
-          style={{ marginLeft: "0.5em", width: "420px", flexGrow: 1 }}
+          style={{ marginLeft: "0.5em", flexGrow: 1 }}
         >
           <div
             className="character-card-data-title"
@@ -385,7 +412,7 @@ const CharacterCard = ({
             {edit ? (
               <div
                 className="input-character-names"
-                style={{ display: "flex", width: "421px" }}
+                style={{ display: "flex", flexGrow: 1 }}
               >
                 <input
                   type="text"
@@ -401,7 +428,7 @@ const CharacterCard = ({
                   className="input-character-name"
                   style={{
                     fontSize: "18px",
-                    width: "200px",
+                    width: "50%",
                     borderColor:
                       characterName === "" || !characterName ? "red" : "",
                   }}
@@ -422,7 +449,7 @@ const CharacterCard = ({
                   className="input-character-name-nickname"
                   style={{
                     fontSize: "18px",
-                    width: "200px",
+                    width: "50%",
                     marginLeft: "0.25em",
                     borderColor:
                       (characterName.includes(" ") &&
@@ -477,7 +504,7 @@ const CharacterCard = ({
                     whiteSpace: "nowrap",
                     overflow: "hidden",
                     textOverflow: "ellipsis",
-                    width: "421px",
+                    width: "100%",
                   }}
                 >
                   {getDisplayName()}
@@ -516,7 +543,10 @@ const CharacterCard = ({
                       (characterNickName === "" || !characterNickName)) ||
                     (characterNickName && characterNickName.includes(" "))
                   }
-                  onClick={saveNewName}
+                  onClick={() => {
+                    setRetire(false);
+                    saveNewName();
+                  }}
                   style={{
                     cursor: "pointer",
                     border: "none",
@@ -543,9 +573,82 @@ const CharacterCard = ({
           <div style={{ display: "flex" }} className="character-card-data-body">
             <div style={{ flexGrow: 1 }} className="character-details">
               {!levelUp ? (
-                <div className="character-summary" style={{ fontWeight: 500 }}>
-                  {getFormattedTotalLevel()} | {getRace()} |{" "}
-                  {getFormattedClasses()}
+                <div
+                  className="character-summary-container"
+                  style={{
+                    display: "flex",
+                    height: "1.3em",
+                    flexGrow: 1,
+                  }}
+                >
+                  {!retire ? (
+                    <div
+                      className="character-summary"
+                      style={{ fontWeight: 500, flexGrow: 1 }}
+                    >
+                      {getFormattedTotalLevel()} | {getRace()} |{" "}
+                      {getFormattedClasses()}
+                    </div>
+                  ) : (
+                    <input
+                      type="text"
+                      placeholder="Retirement Reason"
+                      value={retirementReason ?? null}
+                      onChange={(e) => setRetirementReason(e.target.value)}
+                      onBlur={(e) => setRetirementReason(e.target.value.trim())}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          retireCharacter();
+                        }
+                      }}
+                      className="input-retirement-reason"
+                      style={{
+                        width: "100%",
+                        borderColor:
+                          retirementReason.length === 0 ? "red" : undefined,
+                      }}
+                    />
+                  )}
+                  {edit ? (
+                    <button
+                      className="save-button"
+                      title="Save Name"
+                      disabled={retirementReason.length === 0}
+                      onClick={() => {
+                        setRetire(!retire);
+                        retireCharacter();
+                      }}
+                      style={{
+                        cursor: "pointer",
+                        border: "none",
+                        background: "none",
+                      }}
+                    >
+                      {!retire ? (
+                        <MdAdd
+                          color={getClassColour()}
+                          size="2em"
+                          title="Retire Character"
+                          onClick={() => {
+                            setRetire(!retire);
+                          }}
+                          style={{
+                            cursor: "pointer",
+                            transform: "rotate(45deg)",
+                            marginRight: "-5px",
+                            marginTop: "-2px",
+                          }}
+                        />
+                      ) : (
+                        <MdSave
+                          color={getClassColour()}
+                          size="1.5em"
+                          title="Retire Character"
+                          style={{ cursor: "pointer" }}
+                        />
+                      )}
+                    </button>
+                  ) : null}
                 </div>
               ) : (
                 <div
@@ -574,87 +677,106 @@ const CharacterCard = ({
                   </select>
                 </div>
               )}
-              <div
-                className="character-session-count"
-                style={{ marginRight: "1em" }}
-              >
-                {`Session Count: ${deteremineSessionsAttended(
-                  character,
-                  sessions
-                )} | `}
-                {levelMatch ? (
-                  `Level Up In ${calculateSessionsForLevelUp(
-                    character["starting-level"],
-                    deteremineSessionsAttended(character, sessions)
-                  )} Session${
-                    calculateSessionsForLevelUp(
-                      character["starting-level"],
-                      deteremineSessionsAttended(character, sessions)
-                    ) > 1
-                      ? "s"
-                      : ""
-                  }`
-                ) : (
-                  <b>Level Up Available!</b>
-                )}
-              </div>
-              <div
-                className="character-player-details"
-                style={{ display: "flex" }}
-              >
-                {player["display-name"] ? (
-                  <div>
-                    <b>Player: </b>
-                    {player["display-name"]}
-                  </div>
-                ) : null}
-                {player["display-name"] && player.discord ? (
-                  <div style={{ marginRight: "0.3em", marginLeft: "0.3em" }}>
-                    |
-                  </div>
-                ) : null}
-                {player.discord ? (
-                  <div>
-                    <b>Discord: </b>
-                    {player.discord}
-                  </div>
-                ) : null}{" "}
-              </div>
-            </div>
-            {playerMatch && !levelMatch ? (
-              !levelUp ? (
-                <MdArrowUpward
-                  title="Level Up!"
-                  className="level-up-button"
-                  onClick={() => {
-                    setNewLevel(getMainClass(character));
-                    setLevelUp(!levelUp);
-                  }}
-                  size="3em"
-                  strokeWidth={2}
+              {retired ? (
+                <div
+                  className="character-retirement"
                   style={{
-                    alignSelf: "center",
-                    cursor: "pointer",
+                    maxHeight: "2.9em",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
                   }}
-                  color="green"
-                />
+                >
+                  {character.retirement.cause}
+                </div>
               ) : (
-                <MdAdd
-                  title="Level Up!"
-                  className="save-level-up-button"
-                  onClick={saveNewLevel}
-                  size="3em"
-                  strokeWidth={2}
-                  style={{
-                    alignSelf: "center",
-                    cursor: "pointer",
-                  }}
-                  color="grey"
-                />
-              )
+                <>
+                  <div
+                    className="character-session-count"
+                    style={{ marginRight: "1em" }}
+                  >
+                    {`Session Count: ${deteremineSessionsAttended(
+                      character,
+                      sessions
+                    )} | `}
+                    {levelMatch ? (
+                      `Level Up In ${calculateSessionsForLevelUp(
+                        character["starting-level"],
+                        deteremineSessionsAttended(character, sessions)
+                      )} Session${
+                        calculateSessionsForLevelUp(
+                          character["starting-level"],
+                          deteremineSessionsAttended(character, sessions)
+                        ) > 1
+                          ? "s"
+                          : ""
+                      }`
+                    ) : (
+                      <b>Level Up Available!</b>
+                    )}
+                  </div>
+                  <div
+                    className="character-player-details"
+                    style={{ display: "flex" }}
+                  >
+                    {player["display-name"] ? (
+                      <div>
+                        <b>Player: </b>
+                        {player["display-name"]}
+                      </div>
+                    ) : null}
+                    {player["display-name"] && player.discord ? (
+                      <div
+                        style={{ marginRight: "0.3em", marginLeft: "0.3em" }}
+                      >
+                        |
+                      </div>
+                    ) : null}
+                    {player.discord ? (
+                      <div>
+                        <b>Discord: </b>
+                        {player.discord}
+                      </div>
+                    ) : null}
+                  </div>
+                </>
+              )}
+            </div>
+            {playerMatch && !levelMatch && !retired ? (
+              !edit ? (
+                !levelUp ? (
+                  <MdArrowUpward
+                    title="Level Up!"
+                    className="level-up-button"
+                    onClick={() => {
+                      setNewLevel(getMainClass(character));
+                      setLevelUp(!levelUp);
+                    }}
+                    size="3em"
+                    strokeWidth={2}
+                    style={{
+                      alignSelf: "center",
+                      cursor: "pointer",
+                    }}
+                    color="green"
+                  />
+                ) : (
+                  <MdAdd
+                    title="Level Up!"
+                    className="save-level-up-button"
+                    onClick={saveNewLevel}
+                    size="3em"
+                    strokeWidth={2}
+                    style={{
+                      alignSelf: "center",
+                      cursor: "pointer",
+                    }}
+                    color="grey"
+                  />
+                )
+              ) : null
             ) : null}
           </div>
-        </span>
+        </div>
       </div>
     </div>
   ) : (

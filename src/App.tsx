@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { BrowserView, MobileView } from "react-device-detect";
+import UserBanner from "./Components/UserBanner";
 import TestSessions from "./Components/TestSessions";
 import TestEncounters from "./Components/TestEncounters";
-import Characters from "./Components/Characters";
+import ActiveCharacters from "./Components/ActiveCharacters";
+import RetiredCharacters from "./Components/RetiredCharacters";
 import {
   auth,
+  signOut,
   firebaseDb,
   signInWithGoogleRedirect,
   signInWithGooglePopup,
@@ -70,34 +73,20 @@ function App() {
           setCurrentPlayer(child.val());
         });
       });
+    console.log("currentPlayer", currentPlayer);
   }
 
   return (
     <>
-      <div className="site-container">
-        {userAccount ? (
-          <button
-            onClick={() => {
-              auth.signOut();
-              window.location.reload();
-            }}
-          >
-            Sign Out
-          </button>
-        ) : (
-          <>
-            <BrowserView>
-              <button onClick={signInWithGooglePopup}>
-                Sign In with Google
-              </button>
-            </BrowserView>
-            <MobileView>
-              <button onClick={signInWithGoogleRedirect}>
-                Sign In with Google
-              </button>
-            </MobileView>
-          </>
-        )}
+      <UserBanner user={userAccount} currentPlayer={currentPlayer} />
+      <div
+        className="site-container"
+        style={{
+          maxWidth: "1920px",
+          margin: "auto",
+          padding: "1.5em",
+        }}
+      >
         <h1
           style={{
             textAlign: "center",
@@ -108,11 +97,17 @@ function App() {
         >
           Into The West
         </h1>
-        <Characters
+        <ActiveCharacters
           characters={characters}
           sessions={sessions}
           players={players}
-          currentUser={currentPlayer}
+          currentPlayer={currentPlayer}
+        />
+        <RetiredCharacters
+          characters={characters}
+          sessions={sessions}
+          players={players}
+          currentPlayer={currentPlayer}
         />
         <TestEncounters />
         <TestSessions
