@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Session = ({ session }) => {
+const FutureSession = ({ session }) => {
   return (
     <div className="session" style={{ display: "flex" }}>
       <div style={{ marginRight: "1em", marginLeft: "1em" }}>
@@ -27,4 +27,4 @@ const Session = ({ session }) => {
   );
 };
 
-export default Session;
+export default FutureSession;

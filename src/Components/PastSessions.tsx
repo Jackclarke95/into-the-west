@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
-import Session from "./Session";
+import PastSession from "./PastSession";
 
 const PastSessions = ({
   sessions,
@@ -25,7 +24,7 @@ const PastSessions = ({
     <div className="sessions-container">
       <h2>{`Past Sessions (${pastSessions.length})`}</h2>
       {pastSessions.map((session, key) => {
-        return <Session key={key} session={session} />;
+        return <PastSession key={key} session={session} />;
       })}
     </div>
   );
