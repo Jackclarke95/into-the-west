@@ -8,26 +8,15 @@ const Characters = ({
 }) => {
   let activeCharacters = [] as any[];
 
-  characters.map((character) => {
+  characters.forEach((character) => {
     if (character.value.retirement === undefined) {
       activeCharacters.push(character);
     }
   });
 
-  console.log("foo", currentPlayer);
-
   return (
     <div style={{ textAlign: "center" }}>
-      <h2
-        style={{
-          textAlign: "center",
-          fontFamily: "Papyrus",
-          fontSize: "2em",
-          fontWeight: "bold",
-        }}
-      >
-        Active Characters
-      </h2>
+      <h2>Active Characters</h2>
       <div className="characters" style={{ textAlign: "center" }}>
         <div className="active-character-cards">
           {Object.keys(activeCharacters).map((key) => {

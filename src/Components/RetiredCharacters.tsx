@@ -9,7 +9,7 @@ const Characters = ({
   let activeCharacters = [] as any[];
   let retiredCharacters = [] as any[];
 
-  characters.map((character) => {
+  characters.forEach((character) => {
     if (character.value.retirement === undefined) {
       activeCharacters.push(character);
     } else {
@@ -19,16 +19,7 @@ const Characters = ({
 
   return (
     <div style={{ textAlign: "center" }}>
-      <h2
-        style={{
-          textAlign: "center",
-          fontFamily: "Papyrus",
-          fontSize: "2em",
-          fontWeight: "bold",
-        }}
-      >
-        Retired Characters
-      </h2>
+      <h2>Retired Characters</h2>
       <div className="characters" style={{ textAlign: "center" }}>
         <div className="retired-character-cards">
           {Object.keys(retiredCharacters).map((key) => {

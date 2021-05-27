@@ -104,7 +104,6 @@ const CharacterCard = ({
 
   const retireCharacter = () => {
     if (retirementReason.length === 0) {
-      console.log("empty");
       return;
     }
 

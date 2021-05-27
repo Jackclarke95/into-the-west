@@ -1,17 +1,13 @@
 import { useState, useEffect } from "react";
-import { BrowserView, MobileView } from "react-device-detect";
+import { BrowserView } from "react-device-detect";
 import UserBanner from "./Components/UserBanner";
 import TestSessions from "./Components/TestSessions";
+import PastSessions from "./Components/PastSessions";
+import FutureSessions from "./Components/FutureSessions";
 import TestEncounters from "./Components/TestEncounters";
 import ActiveCharacters from "./Components/ActiveCharacters";
 import RetiredCharacters from "./Components/RetiredCharacters";
-import {
-  auth,
-  signOut,
-  firebaseDb,
-  signInWithGoogleRedirect,
-  signInWithGooglePopup,
-} from "./firebase.utils";
+import { auth, firebaseDb } from "./firebase.utils";
 import "./App.scss";
 
 function App() {
@@ -73,7 +69,6 @@ function App() {
           setCurrentPlayer(child.val());
         });
       });
-    console.log("currentPlayer", currentPlayer);
   }
 
   return (
@@ -103,6 +98,18 @@ function App() {
           players={players}
           currentPlayer={currentPlayer}
         />
+        <FutureSessions
+          characters={characters}
+          sessions={sessions}
+          players={players}
+          currentPlayer={currentPlayer}
+        />
+        <PastSessions
+          characters={characters}
+          sessions={sessions}
+          players={players}
+          currentPlayer={currentPlayer}
+        />
         <RetiredCharacters
           characters={characters}
           sessions={sessions}
@@ -123,12 +130,15 @@ function App() {
           alt="Background Map"
           style={{
             position: "fixed",
-            top: 0,
-            left: 0,
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
             zIndex: -1,
             opacity: 0.3,
             filter: "grayscale(100%)",
             width: "100%",
+            height: "100%",
+            objectFit: "cover",
           }}
         />
       </BrowserView>

@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { BrowserView, MobileView } from "react-device-detect";
 import { MdArrowDropDown, MdFileUpload } from "react-icons/md";
-import { FaSignOutAlt } from "react-icons/fa";
 import {
   signInWithGooglePopup,
   signInWithGoogleRedirect,
@@ -22,7 +21,7 @@ const UserBanner = ({
 
   if (
     currentPlayer &&
-    (displayName == "" || discordName == "") &&
+    (displayName === "" || discordName === "") &&
     !dataChanged
   ) {
     firebaseDb
@@ -31,7 +30,6 @@ const UserBanner = ({
       .equalTo(currentPlayer["dndbeyond-name"])
       .on("value", (snapshot) => {
         snapshot.forEach((child) => {
-          console.log("child:", child.val());
           setPlayer(child.val());
           setPlayerKey(child.key);
           setDisplayName(child.val()["display-name"]);
@@ -100,12 +98,7 @@ const UserBanner = ({
               cursor: "pointer",
             }}
           />
-          <img
-            alt="Profile Picture"
-            src={user.photoURL}
-            height="24px"
-            width="24px"
-          />
+          <img alt="Profile" src={user.photoURL} height="24px" width="24px" />
           {settingsExpanded ? (
             <div
               className="user-settings-menu"
@@ -155,7 +148,7 @@ const UserBanner = ({
                     setDataChanged(true);
                     setDisplayName(e.target.value);
                   }}
-                  //   onBlur={(e) => setDisplayName(e.target.value.trim())}
+                     onBlur={(e) => setDisplayName(e.target.value.trim())}
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
                       updateNames();
@@ -173,7 +166,7 @@ const UserBanner = ({
                     setDataChanged(true);
                     setDiscordName(e.target.value);
                   }}
-                  //   onBlur={(e) => setDiscordName(e.target.value.trim())}
+                     onBlur={(e) => setDiscordName(e.target.value.trim())}
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
                       updateNames();
