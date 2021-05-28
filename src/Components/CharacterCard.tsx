@@ -15,6 +15,7 @@ import {
   countSessionsAttended,
   getOrdinal,
   getMainClass,
+  getMainClassColour,
   getClasses,
 } from "../Helpers/DataHelper";
 
@@ -256,59 +257,6 @@ const CharacterCard = ({
       );
   }, [character.id]);
 
-  const getClassColour = () => {
-    let characterClass = getMainClass(character);
-
-    let colour = character.retirement ?? characterClass;
-
-    switch (colour) {
-      case "Artificer":
-        return "#d59139";
-
-      case "Barbarian":
-        return "#e7623e";
-
-      case "Bard":
-        return "#ab6dac";
-
-      case "Cleric":
-        return "#91a1b2";
-
-      case "Druid":
-        return "#7a853b";
-
-      case "Fighter":
-        return "#7f513e";
-
-      case "Monk":
-        return "#51a5c5";
-
-      case "Paladin":
-        return "#b59e54";
-
-      case "Ranger":
-        return "#507f62";
-
-      case "Rogue":
-        return "#555752";
-
-      case "Sorcerer":
-        return "#992e2e";
-
-      case "Warlock":
-        return "#7b469b";
-
-      case "Wizard":
-        return "#2a50a1";
-
-      case "retired":
-        return "grey";
-
-      default:
-        return "black";
-    }
-  };
-
   let playerMatch =
     currentPlayer &&
     currentPlayer["dndbeyond-name"] === character["player-dndbeyond-name"];
@@ -317,6 +265,9 @@ const CharacterCard = ({
   const characterClasses = getClasses(character);
   const characterClaimed = character["player-dndbeyond-name"] ? true : false;
   const retired = character.retirement ? true : false;
+  const characterColour = character.retirement
+    ? "grey"
+    : getMainClassColour(character);
 
   return character ? (
     <div
@@ -403,7 +354,7 @@ const CharacterCard = ({
               display: "flex",
               borderBottomStyle: "solid",
               borderBottomWidth: 3,
-              borderBottomColor: getClassColour(),
+              borderBottomColor: characterColour,
               paddingBottom: "1px",
               marginBottom: "1px",
             }}
@@ -530,7 +481,7 @@ const CharacterCard = ({
                   <MdModeEdit
                     size="1.5em"
                     style={{ cursor: "pointer" }}
-                    color={getClassColour()}
+                    color={characterColour}
                   />
                 </button>
               ) : (
@@ -555,7 +506,7 @@ const CharacterCard = ({
                   <MdSave
                     size="1.5em"
                     style={{ alignSelf: "center" }}
-                    color={getClassColour()}
+                    color={characterColour}
                   />
                 </button>
               )
@@ -563,7 +514,7 @@ const CharacterCard = ({
               <MdFlag
                 size="1.5em"
                 style={{ alignSelf: "center", cursor: "pointer" }}
-                color={getClassColour()}
+                color={characterColour}
                 onClick={claimCharacter}
                 title="Claim this Character"
               />
@@ -625,7 +576,7 @@ const CharacterCard = ({
                     >
                       {!retire ? (
                         <MdAdd
-                          color={getClassColour()}
+                          color={characterColour}
                           size="2em"
                           title="Retire Character"
                           onClick={() => {
@@ -640,7 +591,7 @@ const CharacterCard = ({
                         />
                       ) : (
                         <MdSave
-                          color={getClassColour()}
+                          color={characterColour}
                           size="1.5em"
                           title="Retire Character"
                           style={{ cursor: "pointer" }}

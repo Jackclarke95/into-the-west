@@ -215,6 +215,103 @@ const calculateOffsetSessionsRequiredForLevel = (level) => {
   return minimumSessions;
 };
 
+/**
+ * Gets the colour of the character's main class
+ *
+ * @param {*} character
+ * @return {string} The hexadecimal format of the colour of the character's main class
+ */
+const getMainClassColour = (character) => {
+  const characterClass = getMainClass(character);
+  let colour = characterClass;
+
+  switch (colour) {
+    case "Artificer":
+      return "#d59139";
+
+    case "Barbarian":
+      return "#e7623e";
+
+    case "Bard":
+      return "#ab6dac";
+
+    case "Cleric":
+      return "#91a1b2";
+
+    case "Druid":
+      return "#7a853b";
+
+    case "Fighter":
+      return "#7f513e";
+
+    case "Monk":
+      return "#51a5c5";
+
+    case "Paladin":
+      return "#b59e54";
+
+    case "Ranger":
+      return "#507f62";
+
+    case "Rogue":
+      return "#555752";
+
+    case "Sorcerer":
+      return "#992e2e";
+
+    case "Warlock":
+      return "#7b469b";
+
+    case "Wizard":
+      return "#2a50a1";
+
+    default:
+      return "black";
+  }
+};
+
+/**
+ * Gets a character from a provided ID
+ *
+ * @param {number} id The ID of the character to get
+ * @param {*} characters All the characters
+ * @return {*} The entire character with the provided ID
+ */
+const getCharacterFromId = (id, characters) => {
+  let matchedCharacter;
+
+  characters.map((character) => {
+    if (character.id === id) {
+      matchedCharacter = character;
+    }
+  });
+
+
+  return matchedCharacter;
+};
+
+/**
+ * Gets all of the characters of a player, where the dndbeyond name of each match
+ *
+ * @param {*} player The players whose characters to get
+ * @param {*} characters All the characters
+ * @return {*[]} An array containing all the player's characters
+ */
+const getActiveCharactersFromPlayer = (player, characters) => {
+  let matchedCharacters = [] as any[];
+
+  characters.map((character) => {
+    if (
+      character["player-dndbeyond-name"] === player["dndbeyond-name"] &&
+      !character.retirement
+    ) {
+      matchedCharacters.push(character);
+    }
+  });
+
+  return matchedCharacters;
+};
+
 export {
   determineSessionCharacters,
   deteremineSessionsAttended,
@@ -224,4 +321,7 @@ export {
   getOrdinal,
   getMainClass,
   getClasses,
+  getMainClassColour,
+  getCharacterFromId,
+  getActiveCharactersFromPlayer,
 };

@@ -29,7 +29,7 @@ function App() {
       .orderByChild("scheduled-date")
       .on("value", (snapshot) => {
         snapshot.forEach((child) => {
-          sessionArray.push(child.val());
+          sessionArray.push({ key: child.key, value: child.val() });
         });
         setSessions(sessionArray);
       });
@@ -71,6 +71,18 @@ function App() {
       });
   }
 
+  let characterData = [] as any[];
+
+  Object.keys(characters).map((key) => {
+    characterData.push(characters[key].value);
+  });
+
+  let sessionData = [] as any[];
+
+  Object.keys(sessions).map((key) => {
+    sessionData.push(sessions[key].value);
+  });
+
   return (
     <>
       <UserBanner user={userAccount} currentPlayer={currentPlayer} />
@@ -92,34 +104,33 @@ function App() {
         >
           Into The West
         </h1>
-        <ActiveCharacters
-          characters={characters}
-          sessions={sessions}
-          players={players}
-          currentPlayer={currentPlayer}
-        />
         <FutureSessions
-          characters={characters}
+          characters={characterData}
           sessions={sessions}
-          players={players}
           currentPlayer={currentPlayer}
         />
         <PastSessions
-          characters={characters}
+          characters={characterData}
           sessions={sessions}
+          players={players}
+          currentPlayer={currentPlayer}
+        />
+        <ActiveCharacters
+          characters={characters}
+          sessions={sessionData}
           players={players}
           currentPlayer={currentPlayer}
         />
         <RetiredCharacters
           characters={characters}
-          sessions={sessions}
+          sessions={sessionData}
           players={players}
           currentPlayer={currentPlayer}
         />
         <TestEncounters />
         <TestSessions
           characters={characters}
-          sessions={sessions}
+          sessions={sessionData}
           player={currentPlayer}
         />
       </div>

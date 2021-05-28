@@ -8,7 +8,7 @@ const PastSessions = ({
   currentPlayer = null as any | null,
 }) => {
   let pastSessions = sessions.filter((session) => {
-    const sessionDate = new Date(session["scheduled-date"]).setHours(
+    const sessionDate = new Date(session.value["scheduled-date"]).setHours(
       0,
       0,
       0,
@@ -19,12 +19,23 @@ const PastSessions = ({
 
     return inFuture;
   });
+  
+
+  pastSessions.sort((sessionA, sessionB) => {
+    return sessionA.value["scheduledDate"] < sessionB.value["scheduledDate"];
+  });
 
   return (
-    <div className="sessions-container">
+    <div className="past-sessions-container">
       <h2>{`Past Sessions (${pastSessions.length})`}</h2>
       {pastSessions.map((session, key) => {
-        return <PastSession key={key} session={session} />;
+        return (
+          <PastSession
+            key={key}
+            session={session.value}
+            characters={characters}
+          />
+        );
       })}
     </div>
   );

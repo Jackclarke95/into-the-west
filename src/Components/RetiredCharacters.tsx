@@ -18,7 +18,10 @@ const Characters = ({
   });
 
   return (
-    <div style={{ textAlign: "center" }}>
+    <div
+      className="active-characters-container"
+      style={{ textAlign: "center" }}
+    >
       <h2>Retired Characters</h2>
       <div className="characters" style={{ textAlign: "center" }}>
         <div className="retired-character-cards">
