@@ -28,6 +28,7 @@ const PastSessions = ({
   return (
     <div className="past-sessions-container">
       <h2>{`Past Sessions (${pastSessions.length})`}</h2>
+      <table></table>
       {pastSessions.map((session, key) => {
         return (
           <PastSession

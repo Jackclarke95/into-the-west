@@ -174,7 +174,7 @@ const CharacterCard = ({
     return classList.join("/");
   };
 
-  const getTotalLevel = () => {
+  const getLevelFromClasses = () => {
     let totalLevel = 0;
 
     character.classes.forEach((characterClass) => {
@@ -184,19 +184,19 @@ const CharacterCard = ({
     return totalLevel;
   };
 
-  const getCorrectLevel = () => {
+  const getLevelFromSessions = () => {
     return calculateLevelFromSessions(
       character["starting-level"],
       countSessionsAttended(character, sessions)
     );
   };
 
-  const getFormattedTotalLevel = () => {
-    return `${getOrdinal(getTotalLevel())} Level`;
+  const getFormattedLevelFromClasses = () => {
+    return `${getOrdinal(getLevelFromClasses())} Level`;
   };
 
-  const getFormattedCorrectLevel = () => {
-    return `${getOrdinal(getCorrectLevel())} Level`;
+  const getFormmatedLevelFromSessions = () => {
+    return `${getOrdinal(getLevelFromSessions())} Level`;
   };
 
   const uploadImage = (e) => {
@@ -261,7 +261,8 @@ const CharacterCard = ({
     currentPlayer &&
     currentPlayer["dndbeyond-name"] === character["player-dndbeyond-name"];
 
-  const levelMatch = getFormattedTotalLevel() === getFormattedCorrectLevel();
+  const levelMatch =
+    getFormattedLevelFromClasses() === getFormmatedLevelFromSessions();
   const characterClasses = getClasses(character);
   const characterClaimed = character["player-dndbeyond-name"] ? true : false;
   const retired = character.retirement ? true : false;
@@ -536,7 +537,7 @@ const CharacterCard = ({
                       className="character-summary"
                       style={{ fontWeight: 500, flexGrow: 1 }}
                     >
-                      {getFormattedTotalLevel()} | {getRace()} |{" "}
+                      {getFormattedLevelFromClasses()} | {getRace()} |{" "}
                       {getFormattedClasses()}
                     </div>
                   ) : (

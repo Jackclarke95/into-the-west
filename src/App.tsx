@@ -107,6 +107,7 @@ function App() {
         <FutureSessions
           characters={characterData}
           sessions={sessions}
+          players={players}
           currentPlayer={currentPlayer}
         />
         <PastSessions

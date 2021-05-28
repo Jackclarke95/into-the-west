@@ -133,7 +133,7 @@ const UserBanner = ({
               <div
                 className="user-names-form"
                 style={{
-                  textAlign: "end",
+                  textAlign: "center",
                   display: "flex",
                   flexDirection: "column",
                 }}
@@ -148,7 +148,7 @@ const UserBanner = ({
                     setDataChanged(true);
                     setDisplayName(e.target.value);
                   }}
-                     onBlur={(e) => setDisplayName(e.target.value.trim())}
+                  onBlur={(e) => setDisplayName(e.target.value.trim())}
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
                       updateNames();
@@ -166,7 +166,7 @@ const UserBanner = ({
                     setDataChanged(true);
                     setDiscordName(e.target.value);
                   }}
-                     onBlur={(e) => setDiscordName(e.target.value.trim())}
+                  onBlur={(e) => setDiscordName(e.target.value.trim())}
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
                       updateNames();

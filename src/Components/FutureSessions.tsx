@@ -4,6 +4,7 @@ import FutureSessionCard from "./FutureSessionCard.";
 const FutureSessions = ({
   sessions,
   characters,
+  players,
   currentPlayer = null as any | null,
 }) => {
   let scheduledSessions = sessions.filter((session) => {
@@ -53,6 +54,7 @@ const FutureSessions = ({
                 key={key}
                 characters={characters}
                 currentPlayer={currentPlayer}
+                players={players}
                 session={session.value}
                 sessionKey={session.key}
               />
@@ -68,13 +70,14 @@ const FutureSessions = ({
             margin: "0.5em",
           }}
         >
-          <h3>{`Scheduled (${unscheduledSessions.length})`}</h3>
+          <h3>{`Unscheduled (${unscheduledSessions.length})`}</h3>
           {unscheduledSessions.map((session, key) => {
             return (
               <FutureSessionCard
                 key={key}
                 characters={characters}
                 currentPlayer={currentPlayer}
+                players={players}
                 session={session.value}
                 sessionKey={session.key}
               />

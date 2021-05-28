@@ -280,12 +280,11 @@ const getMainClassColour = (character) => {
 const getCharacterFromId = (id, characters) => {
   let matchedCharacter;
 
-  characters.map((character) => {
+  characters.forEach((character) => {
     if (character.id === id) {
       matchedCharacter = character;
     }
   });
-
 
   return matchedCharacter;
 };
@@ -300,7 +299,7 @@ const getCharacterFromId = (id, characters) => {
 const getActiveCharactersFromPlayer = (player, characters) => {
   let matchedCharacters = [] as any[];
 
-  characters.map((character) => {
+  characters.forEach((character) => {
     if (
       character["player-dndbeyond-name"] === player["dndbeyond-name"] &&
       !character.retirement
@@ -310,6 +309,47 @@ const getActiveCharactersFromPlayer = (player, characters) => {
   });
 
   return matchedCharacters;
+};
+
+/**
+ * Gets a player's display name from their dndbeyond name. If not present, returns their dndbeyond name
+ *
+ * @param {string} dndbeyondName The player's dndbeyond name
+ * @param {any[]} players All the players
+ * @return {string} The player's display name
+ */
+const getPlayerDisplayNameFromName = (
+  dndbeyondName: string,
+  players: any[]
+) => {
+  let displayName;
+
+  players.forEach((player) => {
+    if (player["dndbeyond-name"] === dndbeyondName) {
+      displayName = player["display-name"] ?? player["dndbeyond-name"];
+    }
+  });
+
+  return displayName;
+};
+
+/**
+ * Gets a player from their dndbeyond name
+ *
+ * @param {string} dndbeyondName The player's dndbeyond name
+ * @param {any[]} players All the players
+ * @return {*} The player
+ */
+const getPlayerFromName = (dndbeyondName: string, players: any[]) => {
+  let matchingPlayer;
+
+  players.forEach((player) => {
+    if (player["dndbeyond-name"] === dndbeyondName) {
+      matchingPlayer = player;
+    }
+  });
+
+  return matchingPlayer;
 };
 
 export {
@@ -324,4 +364,6 @@ export {
   getMainClassColour,
   getCharacterFromId,
   getActiveCharactersFromPlayer,
+  getPlayerDisplayNameFromName,
+  getPlayerFromName,
 };

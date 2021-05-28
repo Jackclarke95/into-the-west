@@ -2,36 +2,44 @@ import React, { useState, useEffect } from "react";
 import {
   getCharacterFromId,
   getActiveCharactersFromPlayer,
+  getPlayerDisplayNameFromName,
+  getPlayerFromName,
 } from "../Helpers/DataHelper";
 import { firebaseDb } from "../firebase.utils";
 
 const FutureSession = ({
   currentPlayer = null as null | any,
   characters,
+  players,
   session,
   sessionKey,
 }) => {
   const getCharacterNames = () => {
-    let characterNames = [] as string[];
-    let playerNames = [] as string[];
+    let names = [] as string[];
 
-    if (characters.length > 0) {
-      if (session.characters) {
+    if (characters !== undefined && characters.length > 0) {
+      if (session.characters && session.characters.length > 0) {
         session.characters.map((characterId) => {
           const characterName =
             getCharacterFromId(characterId, characters).nickname ??
             getCharacterFromId(characterId, characters).name;
 
-          characterNames.push(characterName);
+          names.push(characterName);
         });
-      } else {
+      } else if (session.players) {
         session.players.map((player) => {
-          characterNames.push(player.name);
+          let playerName;
+          if (currentPlayer) {
+            playerName = getPlayerDisplayNameFromName(player, players);
+          } else {
+            playerName = player;
+          }
+          names.push(playerName);
         });
       }
     }
 
-    return characterNames;
+    return names;
   };
 
   let matchingCharacters = [] as any[];
@@ -89,32 +97,44 @@ const FutureSession = ({
       style={{ display: "flex", flexDirection: "column" }}
     >
       <div
-        className="session-name"
+        className="session-card-title"
         style={{
-          textAlign: "center",
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
           padding: "0.2em",
           marginBottom: "0.3em",
           borderBottom: "solid 1px grey",
-          fontSize: "20px",
-          fontWeight: "bold",
-          whiteSpace: "nowrap",
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-          flexGrow: 1,
         }}
       >
-        {session.name}
+        <div
+          className="session-name"
+          style={{
+            fontWeight: "bold",
+            fontSize: "20px",
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            flexGrow: 1,
+          }}
+        >
+          {session.name}
+        </div>
+        <div className="session-dungeon-master" style={{}}>
+          <b>DM: </b>
+          {session["dungeon-master"]
+            ? currentPlayer
+              ? getPlayerDisplayNameFromName(session["dungeon-master"], players)
+              : session["dungeon-master"]
+            : "No DM Assigned"}
+        </div>
       </div>
-
       <div
         className="session-card-content"
         style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}
       >
         <div className="session-details" style={{ display: "flex" }}>
-          <div className="session-dungeon-master" style={{ width: "20%" }}>
-            <b>DM: </b>
-            {session["dungeon-master"]}
-          </div>
           <div className="session-date" style={{ width: "30%" }}>
             <b>Date: </b>
             {session["scheduled-date"]
@@ -123,7 +143,7 @@ const FutureSession = ({
                   {
                     weekday: "long",
                     day: "numeric",
-                    month: "long",
+                    month: "short",
                     year: "numeric",
                   }
                 )
@@ -137,16 +157,16 @@ const FutureSession = ({
           ) : (
             <div className="session-players" style={{ width: "50%" }}>
               <b>Players: </b>
-              {getCharacterNames()}
+              {getCharacterNames().join(", ")}
             </div>
           )}
         </div>
         <div className="session-card-body" style={{ display: "flex" }}>
           <div
             className="session-description"
-            style={{ padding: "0.2em", flexGrow: 1 }}
+            style={{ padding: "0.2em", flexGrow: 1, fontStyle: "italic" }}
           >
-            {session.description}
+            {session.description ?? "No description provided"}
           </div>
           {currentPlayer && session.characters ? (
             <div
