@@ -62,9 +62,8 @@ const FutureSession = ({
   };
 
   const unsignFromSession = () => {
-    console.log("unsigning");
     const index = session.characters.indexOf(matchingCharacters[0].id);
-    console.log(index);
+
     if (index !== -1) {
       session.characters.splice(index);
     }
@@ -154,10 +153,9 @@ const FutureSession = ({
               style={{ alignSelf: "flex-end" }}
               className="session-sign-up-button"
             >
-              {!matchingCharacters.some((character) => {
-                console.log(character);
-                return session.characters.includes(character.id);
-              }) ? (
+              {!matchingCharacters.some((character) =>
+                session.characters.includes(character.id)
+              ) ? (
                 <button onClick={signUpToSession}>Sign Up</button>
               ) : (
                 <button onClick={unsignFromSession}>Unsign</button>
