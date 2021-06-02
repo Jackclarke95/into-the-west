@@ -101,7 +101,7 @@ const getMainClass = (character) => {
  * @param {*} character
  * @return {string[]} A list of the character's classes
  */
-const getClasses = (character) => {
+const getCharacterClasses = (character) => {
   const characterClasses = character.classes;
   characterClasses.sort((a, b) => {
     return b.level - a.level;
@@ -360,7 +360,7 @@ export {
   countSessionsAttended,
   getOrdinal,
   getMainClass,
-  getClasses,
+  getCharacterClasses,
   getMainClassColour,
   getCharacterFromId,
   getActiveCharactersFromPlayer,

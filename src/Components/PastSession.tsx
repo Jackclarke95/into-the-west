@@ -4,26 +4,25 @@ import { getCharacterFromId } from "../Helpers/DataHelper";
 
 const PastSession = ({ characters, session }) => {
   const getCharacterNames = () => {
-    let characterNames = [] as string[];
-    let playerNames = [] as string[];
+    let names = [] as string[];
 
     if (characters.length > 0) {
       if (session.characters) {
-        session.characters.map((characterId) => {
+        session.characters.forEach((characterId) => {
           const characterName =
             getCharacterFromId(characterId, characters).nickname ??
             getCharacterFromId(characterId, characters).name;
 
-          characterNames.push(characterName);
+          names.push(characterName);
         });
       } else {
         session.players.map((player) => {
-          characterNames.push(player.name);
+          names.push(player.name);
         });
       }
     }
 
-    return characterNames;
+    return names;
   };
 
   return (

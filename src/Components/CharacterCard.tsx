@@ -16,7 +16,7 @@ import {
   getOrdinal,
   getMainClass,
   getMainClassColour,
-  getClasses,
+  getCharacterClasses,
 } from "../Helpers/DataHelper";
 
 const CharacterCard = ({
@@ -116,15 +116,23 @@ const CharacterCard = ({
 
     character.retirement = { cause: retirementReason, date: dateString };
 
-    firebaseDb
-      .child(`characters/${characterKey}`)
-      .update(character)
-      .then(() => window.location.reload())
-      .catch((e) =>
-        alert(
-          `Failed to update Character. Verify that you are connected to the internet. Please try again.\n\nDetails:\n${e}`
-        )
-      );
+    if (
+      window.confirm(
+        `Are you sure you want to retire ${character.name}? This action cannot be undone.`
+      )
+    ) {
+      firebaseDb
+        .child(`characters/${characterKey}`)
+        .update(character)
+        .then(() => window.location.reload())
+        .catch((e) =>
+          alert(
+            `Failed to update Character. Verify that you are connected to the internet. Please try again.\n\nDetails:\n${e}`
+          )
+        );
+    } else {
+      window.location.reload();
+    }
   };
 
   const claimCharacter = () => {
@@ -195,7 +203,7 @@ const CharacterCard = ({
     return `${getOrdinal(getLevelFromClasses())} Level`;
   };
 
-  const getFormmatedLevelFromSessions = () => {
+  const getFormatedLevelFromSessions = () => {
     return `${getOrdinal(getLevelFromSessions())} Level`;
   };
 
@@ -262,8 +270,8 @@ const CharacterCard = ({
     currentPlayer["dndbeyond-name"] === character["player-dndbeyond-name"];
 
   const levelMatch =
-    getFormattedLevelFromClasses() === getFormmatedLevelFromSessions();
-  const characterClasses = getClasses(character);
+    getFormattedLevelFromClasses() >= getFormatedLevelFromSessions();
+  const characterClasses = getCharacterClasses(character);
   const characterClaimed = character["player-dndbeyond-name"] ? true : false;
   const retired = character.retirement ? true : false;
   const characterColour = character.retirement
