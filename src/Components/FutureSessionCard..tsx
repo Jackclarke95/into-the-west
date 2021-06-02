@@ -98,6 +98,30 @@ const FutureSession = ({
     window.location.reload();
   };
 
+  let currentPlayerRecord;
+
+  if (currentPlayer) {
+    currentPlayerRecord = players.filter((player) => {
+      return currentPlayer["dndbeyond-name"] === player["dndbeyond-name"];
+    })[0];
+  }
+
+  const volunteerAsDm = () => {
+    session["dungeon-master"] = currentPlayerRecord["dndbeyond-name"];
+
+    firebaseDb
+      .child(`sessions/${sessionKey}`)
+      .update(session)
+      .then(() => {
+        window.location.reload();
+      })
+      .catch((e) =>
+        alert(
+          `Unable to unsign from session. Verify that you are connected to the internet. Please try again.\n\nDetails:\n${e}`
+        )
+      );
+  };
+
   return (
     <div
       className="session"
@@ -128,13 +152,27 @@ const FutureSession = ({
         >
           {session.name}
         </div>
-        <div className="session-dungeon-master" style={{}}>
+        <div
+          className="session-dungeon-master"
+          style={{ whiteSpace: "nowrap" }}
+        >
           <b>DM: </b>
-          {session["dungeon-master"]
-            ? currentPlayer
-              ? getPlayerDisplayNameFromName(session["dungeon-master"], players)
-              : session["dungeon-master"]
-            : "No DM Assigned"}
+          {currentPlayer ? (
+            session["dungeon-master"] ? (
+              <div>
+                {getPlayerDisplayNameFromName(
+                  session["dungeon-master"],
+                  players
+                )}
+              </div>
+            ) : currentPlayerRecord["dungeon-master"] === true ? (
+              <button onClick={volunteerAsDm}>Volunteer as DM!</button>
+            ) : (
+              "No DM Assigned"
+            )
+          ) : (
+            <div>{session["dungeon-master"]}</div>
+          )}
         </div>
       </div>
       <div
