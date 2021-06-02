@@ -181,27 +181,36 @@ const FutureSession = ({
         </div>
         {currentPlayer && session.characters ? (
           <div
+            className="session-sign-up-button"
             style={{
-              alignSelf: "flex-end",
               display: "flex",
               flexDirection: "column",
-              alignItems: "flex-end",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "0.2em",
             }}
-            className="session-sign-up-button"
           >
             {!matchingCharacters.some((character) =>
               session.characters.includes(character.id)
             ) ? (
               singleCharacter ? (
-                <button onClick={signUpToSession}>Sign Up</button>
+                <button
+                  onClick={signUpToSession}
+                  style={{ width: "100%", whiteSpace: "nowrap" }}
+                >
+                  Sign Up
+                </button>
               ) : (
                 <>
-                  <div>Sign Up</div>
+                  <div style={{ marginBottom: "0.3em" }}>Sign Up</div>
                   <select
                     onChange={(e) => {
                       setSelectedCharacterId(parseInt(e.target.value));
                     }}
-                    style={{ width: "100%", marginLeft: "0.5em" }}
+                    style={{
+                      marginTop: "0.2em",
+                      marginBottom: "0.3em",
+                    }}
                     value={selectedCharacterId}
                   >
                     {matchingCharacters.map((character) => {
@@ -212,13 +221,21 @@ const FutureSession = ({
                       );
                     })}
                   </select>
-                  <button style={{ width: "100%" }} onClick={signUpToSession}>
+                  <button
+                    onClick={signUpToSession}
+                    style={{ width: "100%", whiteSpace: "nowrap" }}
+                  >
                     Sign Up
                   </button>
                 </>
               )
             ) : (
-              <button onClick={unsignFromSession}>Unsign</button>
+              <button
+                onClick={unsignFromSession}
+                style={{ width: "100%", whiteSpace: "nowrap" }}
+              >
+                Unsign
+              </button>
             )}
           </div>
         ) : null}
