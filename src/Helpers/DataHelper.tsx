@@ -50,34 +50,6 @@ const determineSessionCharacters = (characters, session) => {
 };
 
 /**
- * Calculates the number of sessions a character has attended
- *
- * @param {*} character The character whose session attendance to coount
- * @param {*} sessions All sessions
- * @return {number} The number of sessions a character has attended
- */
-const deteremineSessionsAttended = (character, sessions) => {
-  let sessionCount = 0;
-
-  Object.keys(sessions).forEach((key) => {
-    const session = sessions[key];
-
-    if (session.players) return;
-
-    if (!session.characters) return;
-
-    if (
-      session.characters.length > 0 &&
-      session.characters.includes(character.id)
-    ) {
-      sessionCount++;
-    }
-  });
-
-  return sessionCount;
-};
-
-/**
  * Gets a the main class of a character with the most levels
  *
  * @param {*} character The character whose class to get
@@ -356,7 +328,6 @@ const getPlayerFromName = (dndbeyondName: string, players: any[]) => {
 
 export {
   determineSessionCharacters,
-  deteremineSessionsAttended,
   calculateSessionsForLevelUp,
   calculateLevelFromSessions,
   countSessionsAttended,

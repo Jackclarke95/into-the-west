@@ -9,7 +9,6 @@ import {
 } from "react-icons/md";
 import { firestore, firebaseDb } from "../firebase.utils";
 import {
-  deteremineSessionsAttended,
   calculateSessionsForLevelUp,
   calculateLevelFromSessions,
   countSessionsAttended,
@@ -653,18 +652,18 @@ const CharacterCard = ({
                     className="character-session-count"
                     style={{ marginRight: "1em" }}
                   >
-                    {`Session Count: ${deteremineSessionsAttended(
+                    {`Session Count: ${countSessionsAttended(
                       character,
                       sessions
                     )} | `}
                     {levelMatch ? (
                       `Level Up In ${calculateSessionsForLevelUp(
                         character["starting-level"],
-                        deteremineSessionsAttended(character, sessions)
+                        countSessionsAttended(character, sessions)
                       )} Session${
                         calculateSessionsForLevelUp(
                           character["starting-level"],
-                          deteremineSessionsAttended(character, sessions)
+                          countSessionsAttended(character, sessions)
                         ) > 1
                           ? "s"
                           : ""
