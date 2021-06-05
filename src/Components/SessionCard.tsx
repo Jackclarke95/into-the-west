@@ -65,7 +65,11 @@ const FutureSession = ({
       session.characters = [] as number[];
     }
 
-    session.characters.push(selectedCharacterId);
+    if (selectedCharacterId === 0) {
+      alert("You have not selected a character");
+    } else {
+      session.characters.push(selectedCharacterId);
+    }
 
     firebaseDb
       .child(`sessions/${sessionKey}`)
