@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import FutureSessionCard from "./FutureSessionCard.";
+import SessionForm from "./SessionForm";
+import SessionCard from "./SessionCard.";
 
 const FutureSessions = ({
   sessions,
@@ -27,65 +28,68 @@ const FutureSessions = ({
   });
 
   return (
-    <div className="future-sessions-container">
-      <h2>{`Future Sessions (${
-        scheduledSessions.length + unscheduledSessions.length
-      })`}</h2>
-      <div
-        className="session-columns-container"
-        style={{
-          display: "flex",
-          padding: "0.5em",
-        }}
-      >
+    <>
+      <SessionForm />
+      <div className="future-sessions-container">
+        <h2>{`Future Sessions (${
+          scheduledSessions.length + unscheduledSessions.length
+        })`}</h2>
         <div
-          className="scheduled-sessions-container"
+          className="session-columns-container"
           style={{
-            width: "100%",
-            backgroundColor: "white",
-            padding: "1em",
-            margin: "0.5em",
+            display: "flex",
+            padding: "0.5em",
           }}
         >
-          <h3>{`Scheduled (${scheduledSessions.length})`}</h3>
-          {scheduledSessions.map((session, key) => {
-            return (
-              <FutureSessionCard
-                key={key}
-                characters={characters}
-                currentPlayer={currentPlayer}
-                players={players}
-                session={session.value}
-                sessionKey={session.key}
-              />
-            );
-          })}
-        </div>
-        <div
-          className="scheduled-sessions-container"
-          style={{
-            width: "100%",
-            backgroundColor: "white",
-            padding: "1em",
-            margin: "0.5em",
-          }}
-        >
-          <h3>{`Unscheduled (${unscheduledSessions.length})`}</h3>
-          {unscheduledSessions.map((session, key) => {
-            return (
-              <FutureSessionCard
-                key={key}
-                characters={characters}
-                currentPlayer={currentPlayer}
-                players={players}
-                session={session.value}
-                sessionKey={session.key}
-              />
-            );
-          })}
+          <div
+            className="scheduled-sessions-container"
+            style={{
+              width: "100%",
+              backgroundColor: "white",
+              padding: "1em",
+              margin: "0.5em",
+            }}
+          >
+            <h3>{`Scheduled (${scheduledSessions.length})`}</h3>
+            {scheduledSessions.map((session, key) => {
+              return (
+                <SessionCard
+                  key={key}
+                  characters={characters}
+                  currentPlayer={currentPlayer}
+                  players={players}
+                  session={session.value}
+                  sessionKey={session.key}
+                />
+              );
+            })}
+          </div>
+          <div
+            className="scheduled-sessions-container"
+            style={{
+              width: "100%",
+              backgroundColor: "white",
+              padding: "1em",
+              margin: "0.5em",
+            }}
+          >
+            <h3>{`Unscheduled (${unscheduledSessions.length})`}</h3>
+            {unscheduledSessions.map((session, key) => {
+              return (
+                <SessionCard
+                  key={key}
+                  characters={characters}
+                  currentPlayer={currentPlayer}
+                  players={players}
+                  session={session.value}
+                  sessionKey={session.key}
+                />
+              );
+            })}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

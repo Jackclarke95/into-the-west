@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import { BrowserView } from "react-device-detect";
 import UserBanner from "./Components/UserBanner";
-import TestSessions from "./Components/TestSessions";
 import PastSessions from "./Components/PastSessions";
 import FutureSessions from "./Components/FutureSessions";
-import TestEncounters from "./Components/TestEncounters";
 import ActiveCharacters from "./Components/ActiveCharacters";
 import RetiredCharacters from "./Components/RetiredCharacters";
 import { auth, firebaseDb } from "./firebase.utils";
@@ -104,6 +102,12 @@ function App() {
         >
           Into The West
         </h1>
+        <ActiveCharacters
+          characters={characters}
+          sessions={sessionData}
+          players={players}
+          currentPlayer={currentPlayer}
+        />
         <FutureSessions
           characters={characterData}
           sessions={sessions}
@@ -116,23 +120,11 @@ function App() {
           players={players}
           currentPlayer={currentPlayer}
         />
-        <ActiveCharacters
-          characters={characters}
-          sessions={sessionData}
-          players={players}
-          currentPlayer={currentPlayer}
-        />
         <RetiredCharacters
           characters={characters}
           sessions={sessionData}
           players={players}
           currentPlayer={currentPlayer}
-        />
-        <TestEncounters />
-        <TestSessions
-          characters={characters}
-          sessions={sessionData}
-          player={currentPlayer}
         />
       </div>
       <BrowserView>
