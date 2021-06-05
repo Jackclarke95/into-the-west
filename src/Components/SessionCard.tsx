@@ -133,9 +133,6 @@ const FutureSession = ({
   const saveSessionDate = () => {
     session["scheduled-date"] = scheduledDate;
 
-    console.log("scheduled:", scheduledDate);
-    console.log("session:", session);
-
     firebaseDb
       .child(`sessions/${sessionKey}`)
       .update(session)

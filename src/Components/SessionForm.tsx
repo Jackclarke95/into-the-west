@@ -33,7 +33,6 @@ const SessionForm = ({
       session["scheduled-date"] = scheduledDate;
     }
 
-    console.log(session);
     addSession(session);
     sendDiscordMessage(session);
   };
