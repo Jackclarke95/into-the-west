@@ -29,7 +29,7 @@ const FutureSessions = ({
 
   return (
     <div className="future-sessions-container">
-      <h3>Future Sessions</h3>
+      <h3>Future Sessions (Work in Progress)</h3>
       <div
         className="session-columns-container"
         style={{
