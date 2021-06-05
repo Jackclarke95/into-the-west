@@ -32,7 +32,7 @@ const PastSessions = ({
 
   return sessions.length > 0 ? (
     <div className="past-sessions-container">
-      <h2>{`Past Sessions (${sessionArray.length})`}</h2>
+      <h2>Past Sessions</h2>
       <table
         style={{
           borderCollapse: "collapse",

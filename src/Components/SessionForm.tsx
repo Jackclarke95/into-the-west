@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { Webhook, MessageBuilder } from "discord-webhook-node";
 import { firebaseDb } from "../firebase.utils";
+import { getPlayerDisplayNameFromName } from "../Helpers/DataHelper";
 
-const SessionForm = (playerName = null as null | any) => {
+const SessionForm = ({
+  currentPlayer = null as null | any,
+  players = null as null | any,
+}) => {
   const [name, setName] = useState("");
-  const [dungeonMaster, setDungeonMaster] = useState(null as null | string);
-
-  playerName = playerName["playerName"] ?? null;
+  const [description, setDescription] = useState("");
+  const [sessionDungeonMaster, setSessionDungeonMaster] = useState("");
+  const [scheduledDate, setScheduledDate] = useState("");
 
   const createSession = () => {
     const dateNow = new Date();
@@ -15,16 +19,27 @@ const SessionForm = (playerName = null as null | any) => {
     } ${dateNow.getDate()}`;
 
     const session = {
-      "dungeon-master": dungeonMaster ?? "N/A",
       name: name,
-      "suggested-by": playerName,
-      characters: "",
-      "scheduled-date": null,
+      description: description,
+      "suggested-by": currentPlayer["dndbeyond-name"],
       "suggested-date": currentDate,
     };
 
+    if (sessionDungeonMaster.length > 0) {
+      session["dungeon-master"] = sessionDungeonMaster;
+    }
+
+    if (scheduledDate.length > 0) {
+      session["scheduled-date"] = scheduledDate;
+    }
+
+    console.log(session);
     addSession(session);
     sendDiscordMessage(session);
+  };
+
+  const addSession = (session) => {
+    firebaseDb.child("sessions").push(session);
   };
 
   const sendDiscordMessage = (session) => {
@@ -34,13 +49,12 @@ const SessionForm = (playerName = null as null | any) => {
 
     const message = new MessageBuilder()
       .setAuthor("Westeridge Town Crier")
-      .setTitle(
-        session["suggested-by"]
-          ? `${session["suggested-by"]} has suggested a new adventure!`
-          : "A new adventure has been suggested!"
+      .setTitle(session.name)
+      .setDescription(session.description)
+      .addField(
+        "Suggested by",
+        getPlayerDisplayNameFromName(session["suggested-by"], players)
       )
-      .setDescription(session.name)
-      .addField("Dungeon Master", session["dungeon-master"] ?? "N/A")
       .setFooter("Please see the website for more details")
       .setTimestamp();
 
@@ -54,31 +68,72 @@ const SessionForm = (playerName = null as null | any) => {
       );
   };
 
-  const addSession = (session) => {
-    firebaseDb.child("sessions").push(session);
-  };
+  let dungeonMasters = players
+    .filter((player) => {
+      return player["dungeon-master"];
+    })
+    .sort();
 
   return (
-    <div>
-      <h3>New Session</h3>
-      <input
-        type="text"
-        value={name}
-        placeholder="Enter a message"
-        onChange={(e) => setName(e.target.value)}
-      />
-
-      <div>Dungeon Master</div>
-      <div>
-        <select onChange={(e) => setDungeonMaster(e.target.value)}>
-          <option value=""></option>
-          <option value="Jack">Jack</option>
-          <option value="Louis">Louis</option>
-          <option value="Dave">Dave</option>
-          <option value="Ben">Ben</option>
-        </select>
+    <div className="new-session-form-container">
+      <h3>New Session (Work in Progress)</h3>
+      <div
+        className="new-session-form"
+        style={{
+          display: "flex",
+          backgroundColor: "white",
+          padding: "1em",
+          flexDirection: "row",
+        }}
+      >
+        <div
+          className="new-session-form-top"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <input
+            type="text"
+            value={name}
+            placeholder="Adventure Name"
+            onChange={(e) => setName(e.target.value)}
+          />
+          <div>Date (Optional)</div>
+          <input
+            type="date"
+            onChange={(e) =>
+              setScheduledDate(e.target.value.replaceAll("-", " "))
+            }
+          />
+          <div>Dungeon Master</div>
+          <div>
+            <select onChange={(e) => setSessionDungeonMaster(e.target.value)}>
+              <option value=""></option>
+              {dungeonMasters.map((dungeonMaster) => {
+                return (
+                  <option value={dungeonMaster["dndbeyond-name"]}>
+                    {dungeonMaster["display-name"] ??
+                      dungeonMaster["dndbeyond-name"]}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+        </div>
+        <textarea
+          value={description}
+          placeholder="Adventure Description"
+          onChange={(e) => setDescription(e.target.value)}
+          style={{ fontFamily: "sans-serif" }}
+        />
+        <button
+          onClick={createSession}
+          disabled={name.length === 0 || description.length === 0}
+        >
+          Suggest Adventure!
+        </button>
       </div>
-      <button onClick={createSession}>Suggest Adventure!</button>
     </div>
   );
 };

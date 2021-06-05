@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { BrowserView } from "react-device-detect";
 import UserBanner from "./Components/UserBanner";
+import Sessions from "./Components/Sessions";
 import PastSessions from "./Components/PastSessions";
 import FutureSessions from "./Components/FutureSessions";
 import ActiveCharacters from "./Components/ActiveCharacters";
@@ -108,14 +109,8 @@ function App() {
           players={players}
           currentPlayer={currentPlayer}
         />
-        <FutureSessions
-          characters={characterData}
-          sessions={sessions}
-          players={players}
-          currentPlayer={currentPlayer}
-        />
-        <PastSessions
-          characters={characterData}
+        <Sessions
+          characterData={characterData}
           sessions={sessions}
           players={players}
           currentPlayer={currentPlayer}

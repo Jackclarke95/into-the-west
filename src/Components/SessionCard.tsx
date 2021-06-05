@@ -6,7 +6,6 @@ import {
   getPlayerFromName,
 } from "../Helpers/DataHelper";
 import { firebaseDb } from "../firebase.utils";
-import { stringify } from "node:querystring";
 
 const FutureSession = ({
   currentPlayer = null as null | any,
@@ -16,6 +15,7 @@ const FutureSession = ({
   sessionKey,
 }) => {
   const [selectedCharacterId, setSelectedCharacterId] = useState(0);
+  const [scheduledDate, setScheduledDate] = useState("");
 
   const getCharacterNames = () => {
     let names = [] as string[];
@@ -45,22 +45,26 @@ const FutureSession = ({
     return names;
   };
 
-  let matchingCharacters = [] as any[];
+  let playersCharacters = [] as any[];
 
   if (currentPlayer) {
-    matchingCharacters = getActiveCharactersFromPlayer(
+    playersCharacters = getActiveCharactersFromPlayer(
       currentPlayer,
       characters
     );
   }
 
-  const singleCharacter = matchingCharacters.length === 1;
+  const singleCharacter = playersCharacters.length === 1;
 
-  if (matchingCharacters.length > 0 && selectedCharacterId === 0) {
-    setSelectedCharacterId(matchingCharacters[0].id);
+  if (playersCharacters.length > 0 && selectedCharacterId === 0) {
+    setSelectedCharacterId(playersCharacters[0].id);
   }
 
   const signUpToSession = () => {
+    if (!session.characters) {
+      session.characters = [] as number[];
+    }
+
     session.characters.push(selectedCharacterId);
 
     firebaseDb
@@ -77,7 +81,7 @@ const FutureSession = ({
   };
 
   const unsignFromSession = () => {
-    matchingCharacters.forEach((character) => {
+    playersCharacters.forEach((character) => {
       const index = session.characters.indexOf(character.id);
 
       if (index !== -1) {
@@ -118,6 +122,25 @@ const FutureSession = ({
       .catch((e) =>
         alert(
           `Unable to unsign from session. Verify that you are connected to the internet. Please try again.\n\nDetails:\n${e}`
+        )
+      );
+  };
+
+  const saveSessionDate = () => {
+    session["scheduled-date"] = scheduledDate;
+
+    console.log("scheduled:", scheduledDate);
+    console.log("session:", session);
+
+    firebaseDb
+      .child(`sessions/${sessionKey}`)
+      .update(session)
+      .then(() => {
+        window.location.reload();
+      })
+      .catch((e) =>
+        alert(
+          `Unable to schedule session. Verify that you are connected to the internet. Please try again.\n\nDetails:\n${e}`
         )
       );
   };
@@ -177,35 +200,62 @@ const FutureSession = ({
       </div>
       <div
         className="session-card-body"
-        style={{ display: "flex", flexDirection: "row", flexGrow: 1 }}
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          flexGrow: 1,
+          padding: "0.2em",
+        }}
       >
         <div
           className="session-card-content"
           style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}
         >
           <div className="session-details" style={{ display: "flex" }}>
-            <div className="session-date" style={{ width: "30%" }}>
-              <b>Date: </b>
-              {session["scheduled-date"]
-                ? new Date(session["scheduled-date"]).toLocaleDateString(
-                    "en-UK",
-                    {
-                      weekday: "long",
-                      day: "numeric",
-                      month: "short",
-                      year: "numeric",
+            <div
+              className="session-date"
+              style={{
+                width: "30%",
+                display: "flex",
+                alignItems: "flex-start",
+              }}
+            >
+              <b style={{ paddingRight: "0.5em" }}>Date:</b>
+              {session["scheduled-date"] ? (
+                new Date(session["scheduled-date"]).toLocaleDateString(
+                  "en-UK",
+                  {
+                    weekday: "long",
+                    day: "numeric",
+                    month: "short",
+                    year: "numeric",
+                  }
+                )
+              ) : (
+                <>
+                  <input
+                    type="date"
+                    onChange={(e) =>
+                      setScheduledDate(e.target.value.replaceAll("-", " "))
                     }
-                  )
-                : "To be scheduled"}
+                  />
+                  <button
+                    onClick={saveSessionDate}
+                    disabled={scheduledDate.length === 0}
+                  >
+                    Schedule
+                  </button>
+                </>
+              )}
             </div>
             {session.characters ? (
               <div className="session-characters" style={{ width: "50%" }}>
-                <b>Characters: </b>
+                <b style={{ paddingRight: "0.5em" }}>Characters:</b>
                 {getCharacterNames().join(", ")}
               </div>
             ) : (
               <div className="session-players" style={{ width: "50%" }}>
-                <b>Players: </b>
+                <b style={{ paddingRight: "0.5em" }}>Players:</b>
                 {getCharacterNames().join(", ")}
               </div>
             )}
@@ -217,7 +267,7 @@ const FutureSession = ({
             {session.description ?? "No description provided"}
           </div>
         </div>
-        {currentPlayer && session.characters ? (
+        {currentPlayer ? (
           <div
             className="session-sign-up-button"
             style={{
@@ -228,9 +278,16 @@ const FutureSession = ({
               padding: "0.2em",
             }}
           >
-            {!matchingCharacters.some((character) =>
-              session.characters.includes(character.id)
-            ) ? (
+            {!session.characters ? (
+              <button
+                onClick={signUpToSession}
+                style={{ width: "100%", whiteSpace: "nowrap" }}
+              >
+                Sign Up
+              </button>
+            ) : !playersCharacters.some((character) =>
+                session.characters.includes(character.id)
+              ) ? (
               singleCharacter ? (
                 <button
                   onClick={signUpToSession}
@@ -251,7 +308,7 @@ const FutureSession = ({
                     }}
                     value={selectedCharacterId}
                   >
-                    {matchingCharacters.map((character) => {
+                    {playersCharacters.map((character) => {
                       return (
                         <option value={character.id}>
                           {character.nickname ?? character.name}
@@ -276,7 +333,9 @@ const FutureSession = ({
               </button>
             )}
           </div>
-        ) : null}
+        ) : (
+          <div>hello</div>
+        )}
       </div>
     </div>
   );
