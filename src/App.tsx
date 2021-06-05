@@ -93,16 +93,7 @@ function App() {
           padding: "1.5em",
         }}
       >
-        <h1
-          style={{
-            textAlign: "center",
-            fontFamily: "Papyrus",
-            fontSize: "3em",
-            fontWeight: "bold",
-          }}
-        >
-          Into The West
-        </h1>
+        <h1>Into The West</h1>
         <ActiveCharacters
           characters={characters}
           sessions={sessionData}
