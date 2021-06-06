@@ -101,7 +101,17 @@ const PastSessions = ({
               </td>
               <td
                 title={
-                  session["scheduled-date"] ? session["scheduled-date"] : "N/A"
+                  session["scheduled-date"]
+                    ? new Date(session["scheduled-date"]).toLocaleDateString(
+                        "en-UK",
+                        {
+                          weekday: "short",
+                          day: "numeric",
+                          month: "short",
+                          year: "numeric",
+                        }
+                      )
+                    : "N/A"
                 }
                 style={{
                   whiteSpace: "nowrap",
@@ -112,7 +122,17 @@ const PastSessions = ({
                   paddingRight: "0.5em",
                 }}
               >
-                {session["scheduled-date"] ? session["scheduled-date"] : "N/A"}
+                {session["scheduled-date"]
+                  ? new Date(session["scheduled-date"]).toLocaleDateString(
+                      "en-UK",
+                      {
+                        weekday: "short",
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric",
+                      }
+                    )
+                  : "N/A"}
               </td>
               <td
                 title={determineSessionCharacters(characters, session)}

@@ -146,6 +146,16 @@ const FutureSession = ({
       );
   };
 
+  const showSignUpButton =
+    !session.characters ||
+    !playersCharacters.some((character) =>
+      session.characters.includes(character.id)
+    );
+
+  const dmMatch = currentPlayer
+    ? session["dungeon-master"] !== currentPlayer["dndbeyond-name"]
+    : false;
+
   return (
     <div
       className="session"
@@ -178,9 +188,9 @@ const FutureSession = ({
         </div>
         <div
           className="session-dungeon-master"
-          style={{ whiteSpace: "nowrap" }}
+          style={{ whiteSpace: "nowrap", display: "flex" }}
         >
-          <b>DM: </b>
+          <b style={{ marginRight: "0.5em" }}>DM:</b>
           {currentPlayer ? (
             session["dungeon-master"] ? (
               <div>
@@ -189,8 +199,11 @@ const FutureSession = ({
                   players
                 )}
               </div>
-            ) : currentPlayerRecord["dungeon-master"] === true ? (
-              <button onClick={volunteerAsDm}>Volunteer as DM!</button>
+            ) : currentPlayerRecord["dungeon-master"] === true &&
+              showSignUpButton ? (
+              <button className="dm-volunteer-button" onClick={volunteerAsDm}>
+                Volunteer as DM!
+              </button>
             ) : (
               "No DM Assigned"
             )
@@ -226,7 +239,7 @@ const FutureSession = ({
                 new Date(session["scheduled-date"]).toLocaleDateString(
                   "en-UK",
                   {
-                    weekday: "long",
+                    weekday: "short",
                     day: "numeric",
                     month: "short",
                     year: "numeric",
@@ -279,16 +292,7 @@ const FutureSession = ({
               padding: "0.2em",
             }}
           >
-            {!session.characters ? (
-              <button
-                onClick={signUpToSession}
-                style={{ width: "100%", whiteSpace: "nowrap" }}
-              >
-                Sign Up
-              </button>
-            ) : !playersCharacters.some((character) =>
-                session.characters.includes(character.id)
-              ) ? (
+            {showSignUpButton && dmMatch ? (
               singleCharacter ? (
                 <button
                   onClick={signUpToSession}
@@ -325,18 +329,16 @@ const FutureSession = ({
                   </button>
                 </>
               )
-            ) : (
+            ) : dmMatch ? (
               <button
                 onClick={unsignFromSession}
                 style={{ width: "100%", whiteSpace: "nowrap" }}
               >
                 Unsign
               </button>
-            )}
+            ) : null}
           </div>
-        ) : (
-          <div>hello</div>
-        )}
+        ) : null}
       </div>
     </div>
   );
