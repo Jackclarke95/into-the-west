@@ -18,7 +18,11 @@ const Sessions = ({
         currentPlayer={currentPlayer}
       />
       {currentPlayer ? (
-        <SessionForm currentPlayer={currentPlayer} players={players} />
+        <SessionForm
+          characters={characterData}
+          currentPlayer={currentPlayer}
+          players={players}
+        />
       ) : (
         <div>Sign in to suggest an adventure!</div>
       )}
