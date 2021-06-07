@@ -274,6 +274,11 @@ const CharacterCard = ({
       className="character-card"
       data-character-name={character.name}
       title={getDisplayName()}
+      onKeyDown={(e) => {
+        if (e.key === "Escape") {
+          setEdit(false);
+        }
+      }}
       style={{
         display: "inline-block",
         margin: "0.5em",
@@ -336,8 +341,6 @@ const CharacterCard = ({
               <span
                 className="material-icons outlined"
                 title="Replace Image"
-                // color="white"
-                // size="3em"
                 style={{
                   textAlign: "end",
                   fontSize: "3em",
@@ -380,6 +383,10 @@ const CharacterCard = ({
                     if (e.key === "Enter") {
                       saveNewName();
                     }
+                    if (e.key === "Escape") {
+                      setEdit(false);
+                      setRetire(false);
+                    }
                   }}
                   className="input-character-name"
                   style={{
@@ -400,6 +407,10 @@ const CharacterCard = ({
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
                       saveNewName();
+                    }
+                    if (e.key === "Escape") {
+                      setEdit(false);
+                      setRetire(false);
                     }
                   }}
                   className="input-character-name-nickname"
@@ -486,9 +497,7 @@ const CharacterCard = ({
                 >
                   <span
                     className="material-icons outlined"
-                    // size="1.5em"
                     style={{ cursor: "pointer", color: characterColour }}
-                    // color={characterColour}
                   >
                     edit
                   </span>
@@ -514,9 +523,7 @@ const CharacterCard = ({
                 >
                   <span
                     className="material-icons outlined"
-                    // size="1.5em"
                     style={{ alignSelf: "center", color: characterColour }}
-                    // color={characterColour}
                   >
                     save
                   </span>
@@ -526,8 +533,6 @@ const CharacterCard = ({
               <span
                 className="material-icons outlined"
                 title="Claim this Character"
-                // size="1.5em"
-                // color={characterColour}
                 onClick={claimCharacter}
                 style={{
                   alignSelf: "center",
@@ -569,6 +574,10 @@ const CharacterCard = ({
                         if (e.key === "Enter") {
                           retireCharacter();
                         }
+                        if (e.key === "Escape") {
+                          setRetire(false);
+                          setEdit(false);
+                        }
                       }}
                       className="input-retirement-reason"
                       style={{
@@ -596,8 +605,6 @@ const CharacterCard = ({
                       {!retire ? (
                         <span
                           className="material-icons outlined"
-                          // color={characterColour}
-                          // size="2em"
                           title="Retire Character"
                           onClick={() => {
                             setRetire(!retire);
@@ -607,6 +614,8 @@ const CharacterCard = ({
                             transform: "rotate(45deg)",
                             marginRight: "-5px",
                             marginTop: "-2px",
+                            color: "black",
+                            fontSize: "2.5em",
                           }}
                         >
                           add
@@ -614,8 +623,6 @@ const CharacterCard = ({
                       ) : (
                         <span
                           className="material-icons outlined"
-                          // color={characterColour}
-                          // size="1.5em"
                           title="Retire Character"
                           style={{ cursor: "pointer", color: characterColour }}
                         >
