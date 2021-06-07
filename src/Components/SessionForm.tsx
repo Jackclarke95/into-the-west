@@ -92,8 +92,6 @@ const SessionForm = ({
     setSelectedCharacterId(playersCharacters[0].id);
   }
 
-  console.log("id", selectedCharacterId);
-
   return (
     <div className="new-session-form-container">
       <h3>New Session (Work in Progress)</h3>
