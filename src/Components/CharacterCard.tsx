@@ -1,12 +1,4 @@
 import { useState, useEffect } from "react";
-import {
-  MdAdd,
-  MdArrowUpward,
-  MdModeEdit,
-  MdSave,
-  MdFileUpload,
-  MdFlag,
-} from "react-icons/md";
 import { firestore, firebaseDb } from "../firebase.utils";
 import {
   calculateSessionsForLevelUp,
@@ -328,7 +320,7 @@ const CharacterCard = ({
                 width: "100%",
                 backgroundColor: "rgba(255, 255, 255, 0.5)",
                 display: "flex",
-                justifyContent: "center",
+                justifyContent: "flex-end",
                 alignItems: "center",
                 cursor: "pointer",
                 borderRadius: "50%",
@@ -341,14 +333,20 @@ const CharacterCard = ({
                 hidden
                 onChange={uploadImage}
               />
-              <MdFileUpload
+              <span
+                className="material-icons outlined"
                 title="Replace Image"
-                color="white"
-                size="3em"
+                // color="white"
+                // size="3em"
                 style={{
                   textAlign: "end",
+                  fontSize: "3em",
+                  color: "white",
+                  marginRight: "0.5em",
                 }}
-              />
+              >
+                file upload
+              </span>
             </div>
           ) : null}
         </div>
@@ -486,11 +484,14 @@ const CharacterCard = ({
                     background: "none",
                   }}
                 >
-                  <MdModeEdit
-                    size="1.5em"
-                    style={{ cursor: "pointer" }}
-                    color={characterColour}
-                  />
+                  <span
+                    className="material-icons outlined"
+                    // size="1.5em"
+                    style={{ cursor: "pointer", color: characterColour }}
+                    // color={characterColour}
+                  >
+                    edit
+                  </span>
                 </button>
               ) : (
                 <button
@@ -511,21 +512,31 @@ const CharacterCard = ({
                     background: "none",
                   }}
                 >
-                  <MdSave
-                    size="1.5em"
-                    style={{ alignSelf: "center" }}
-                    color={characterColour}
-                  />
+                  <span
+                    className="material-icons outlined"
+                    // size="1.5em"
+                    style={{ alignSelf: "center", color: characterColour }}
+                    // color={characterColour}
+                  >
+                    save
+                  </span>
                 </button>
               )
             ) : currentPlayer && !characterClaimed ? (
-              <MdFlag
-                size="1.5em"
-                style={{ alignSelf: "center", cursor: "pointer" }}
-                color={characterColour}
-                onClick={claimCharacter}
+              <span
+                className="material-icons outlined"
                 title="Claim this Character"
-              />
+                // size="1.5em"
+                // color={characterColour}
+                onClick={claimCharacter}
+                style={{
+                  alignSelf: "center",
+                  cursor: "pointer",
+                  color: characterColour,
+                }}
+              >
+                flag
+              </span>
             ) : null}
           </div>
           <div style={{ display: "flex" }} className="character-card-data-body">
@@ -583,9 +594,10 @@ const CharacterCard = ({
                       }}
                     >
                       {!retire ? (
-                        <MdAdd
-                          color={characterColour}
-                          size="2em"
+                        <span
+                          className="material-icons outlined"
+                          // color={characterColour}
+                          // size="2em"
                           title="Retire Character"
                           onClick={() => {
                             setRetire(!retire);
@@ -596,14 +608,19 @@ const CharacterCard = ({
                             marginRight: "-5px",
                             marginTop: "-2px",
                           }}
-                        />
+                        >
+                          add
+                        </span>
                       ) : (
-                        <MdSave
-                          color={characterColour}
-                          size="1.5em"
+                        <span
+                          className="material-icons outlined"
+                          // color={characterColour}
+                          // size="1.5em"
                           title="Retire Character"
-                          style={{ cursor: "pointer" }}
-                        />
+                          style={{ cursor: "pointer", color: characterColour }}
+                        >
+                          save
+                        </span>
                       )}
                     </button>
                   ) : null}
@@ -702,34 +719,39 @@ const CharacterCard = ({
             {playerMatch && !levelMatch && !retired ? (
               !edit ? (
                 !levelUp ? (
-                  <MdArrowUpward
+                  <span
                     title="Level Up!"
-                    className="level-up-button"
+                    className="material-icons outlined level-up-button"
                     onClick={() => {
                       setNewLevel(getMainClass(character));
                       setLevelUp(!levelUp);
                     }}
-                    size="3em"
-                    strokeWidth={2}
                     style={{
                       alignSelf: "center",
                       cursor: "pointer",
+                      fontSize: "3em",
+                      color: "green",
+                      fontWeight: "bold",
                     }}
                     color="green"
-                  />
+                  >
+                    arrow_upward
+                  </span>
                 ) : (
-                  <MdAdd
+                  <span
                     title="Level Up!"
-                    className="save-level-up-button"
+                    className="material-icons outlined"
                     onClick={saveNewLevel}
-                    size="3em"
-                    strokeWidth={2}
                     style={{
                       alignSelf: "center",
                       cursor: "pointer",
+                      fontSize: "3em",
+                      fontWeight: "bold",
                     }}
                     color="grey"
-                  />
+                  >
+                    add
+                  </span>
                 )
               ) : null
             ) : null}

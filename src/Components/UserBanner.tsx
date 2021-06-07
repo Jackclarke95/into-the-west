@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { BrowserView, MobileView } from "react-device-detect";
-import { MdArrowDropDown, MdFileUpload } from "react-icons/md";
 import {
   signInWithGooglePopup,
   signInWithGoogleRedirect,
@@ -86,18 +85,20 @@ const UserBanner = ({
       {user ? (
         <>
           <div>{`Welcome, ${user.displayName}`}</div>
-          <MdArrowDropDown
+          <span
             title="Account Settings"
-            className="account-settings-button"
-            size="1.5em"
+            className="material-icons outlined"
             onClick={() => setSettingsExpanded(!settingsExpanded)}
             style={{
               alignSelf: "center",
               marginLeft: "0.3em",
               marginRight: "0.3em",
               cursor: "pointer",
+              fontSize: "1.5em",
             }}
-          />
+          >
+            arrow_drop_down
+          </span>
           <img alt="Profile" src={user.photoURL} height="24px" width="24px" />
           {settingsExpanded ? (
             <div
@@ -124,10 +125,12 @@ const UserBanner = ({
               >
                 <div className="sign-out-button" style={{ display: "flex" }}>
                   Sign Out
-                  <MdFileUpload
-                    size="1.5em"
-                    style={{ transform: "rotate(90deg)", marginLeft: "0.5em" }}
-                  />
+                  <span
+                    className="material-icons outlined"
+                    style={{ marginLeft: "0.5em", fontSize: "1.5em" }}
+                  >
+                    logout
+                  </span>
                 </div>
               </div>
               <div
