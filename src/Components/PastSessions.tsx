@@ -46,8 +46,6 @@ const PastSessions = ({
       );
   };
 
-  console.log(sessions);
-
   return sessions.length > 0 ? (
     <div className="past-sessions-container">
       <h2>Past Sessions</h2>
@@ -69,7 +67,6 @@ const PastSessions = ({
         </thead>
         {pastSessions.map((session, key) => {
           let sessionData = session.value;
-          console.log();
 
           return (
             <tr
@@ -169,7 +166,6 @@ const PastSessions = ({
               </td>
               <td
                 style={{
-                  // width: "10em",
                   display: "flex",
                   justifyContent: "flex-end",
                 }}
@@ -202,7 +198,6 @@ const PastSessions = ({
                       className="material-icons"
                       style={{ color: "grey", cursor: "pointer" }}
                       onClick={() => {
-                        console.log("clicked set");
                         setEditLegendKeeper(true);
                       }}
                     >
