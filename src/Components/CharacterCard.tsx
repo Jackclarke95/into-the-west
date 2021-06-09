@@ -86,7 +86,7 @@ const CharacterCard = ({
     firebaseDb
       .child(`characters/${characterKey}`)
       .update(character)
-      .then(() => window.location.reload())
+      // .then(() => window.location.reload())
       .catch((e) =>
         alert(
           `Failed to update Character. Verify that you are connected to the internet. Please try again.\n\nDetails:\n${e}`
@@ -366,6 +366,7 @@ const CharacterCard = ({
               borderBottomColor: characterColour,
               paddingBottom: "1px",
               marginBottom: "1px",
+              height: "2em",
             }}
           >
             {edit ? (
@@ -503,31 +504,51 @@ const CharacterCard = ({
                   </span>
                 </button>
               ) : (
-                <button
-                  className="save-button"
-                  title="Save Name"
-                  disabled={
-                    (characterName.includes(" ") &&
-                      (characterNickName === "" || !characterNickName)) ||
-                    (characterNickName && characterNickName.includes(" "))
-                  }
-                  onClick={() => {
-                    setRetire(false);
-                    saveNewName();
-                  }}
-                  style={{
-                    cursor: "pointer",
-                    border: "none",
-                    background: "none",
-                  }}
-                >
+                <div style={{ display: "flex" }}>
+                  <button
+                    className="save-button"
+                    title="Save Name"
+                    disabled={
+                      (characterName.includes(" ") &&
+                        (characterNickName === "" || !characterNickName)) ||
+                      (characterNickName && characterNickName.includes(" "))
+                    }
+                    onClick={() => {
+                      setEdit(false);
+                      saveNewName();
+                    }}
+                    style={{
+                      cursor: "pointer",
+                      border: "none",
+                      background: "none",
+                      padding: "0 3px",
+                      marginLeft: "0.2em",
+                    }}
+                  >
+                    <span
+                      className="material-icons outlined"
+                      style={{ alignSelf: "center", color: characterColour }}
+                    >
+                      check
+                    </span>
+                  </button>
                   <span
                     className="material-icons outlined"
-                    style={{ alignSelf: "center", color: characterColour }}
+                    onClick={() => {
+                      setEdit(false);
+                      setRetire(false);
+                    }}
+                    style={{
+                      alignSelf: "center",
+                      color: characterColour,
+                      cursor: "pointer",
+                      paddingRight: "6px",
+                      paddingBottom: "0.1em",
+                    }}
                   >
-                    save
+                    edit_off
                   </span>
-                </button>
+                </div>
               )
             ) : currentPlayer && !characterClaimed ? (
               <span
@@ -540,7 +561,7 @@ const CharacterCard = ({
                   color: characterColour,
                 }}
               >
-                flag
+                front_hand
               </span>
             ) : null}
           </div>
@@ -576,7 +597,7 @@ const CharacterCard = ({
                         }
                         if (e.key === "Escape") {
                           setRetire(false);
-                          setEdit(false);
+                          // setEdit(false);
                         }
                       }}
                       className="input-retirement-reason"
@@ -611,23 +632,38 @@ const CharacterCard = ({
                           }}
                           style={{
                             cursor: "pointer",
-                            transform: "rotate(45deg)",
-                            marginRight: "-5px",
-                            marginTop: "-2px",
-                            color: "black",
-                            fontSize: "2.5em",
+                            color: characterColour,
                           }}
                         >
-                          add
+                          delete
                         </span>
                       ) : (
-                        <span
-                          className="material-icons outlined"
-                          title="Retire Character"
-                          style={{ cursor: "pointer", color: characterColour }}
-                        >
-                          save
-                        </span>
+                        <div style={{ display: "flex" }}>
+                          <span
+                            className="material-icons outlined"
+                            title="Retire Character"
+                            style={{
+                              cursor: "pointer",
+                              color: characterColour,
+                            }}
+                          >
+                            check
+                          </span>
+                          <span
+                            className="material-icons outlined"
+                            title="Cancel Retirement"
+                            onClick={() => {
+                              setRetire(false);
+                            }}
+                            style={{
+                              cursor: "pointer",
+                              color: characterColour,
+                              fontSize: "2em",
+                            }}
+                          >
+                            close
+                          </span>
+                        </div>
                       )}
                     </button>
                   ) : null}
