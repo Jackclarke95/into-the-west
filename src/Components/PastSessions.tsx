@@ -24,8 +24,12 @@ const PastSessions = ({
     return inFuture;
   });
 
+  // Sort by date
   pastSessions.sort((sessionA, sessionB) => {
-    return sessionA.value["scheduledDate"] < sessionB.value["scheduledDate"];
+    const dateA = new Date(sessionA.value["scheduled-date"]);
+    const dateB = new Date(sessionB.value["scheduled-date"]);
+
+    return dateA.getTime() - dateB.getTime();
   });
 
   const updateLegendKeeperLink = (sessionKey, session) => {

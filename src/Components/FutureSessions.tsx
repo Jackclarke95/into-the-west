@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import SessionForm from "./SessionForm";
 import SessionCard from "./SessionCard";
 
 const FutureSessions = ({
@@ -15,6 +14,7 @@ const FutureSessions = ({
       0,
       0
     );
+
     const today = new Date().setHours(0, 0, 0, 0);
     const inFuture = sessionDate >= today;
 
