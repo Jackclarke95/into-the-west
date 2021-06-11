@@ -85,20 +85,37 @@ const UserBanner = ({
       {user ? (
         <>
           <div>{`Welcome, ${user.displayName}`}</div>
-          <span
-            title="Account Settings"
-            className="material-icons outlined"
-            onClick={() => setSettingsExpanded(!settingsExpanded)}
-            style={{
-              alignSelf: "center",
-              marginLeft: "0.3em",
-              marginRight: "0.3em",
-              cursor: "pointer",
-              fontSize: "1.5em",
-            }}
-          >
-            arrow_drop_down
-          </span>
+          {settingsExpanded ? (
+            <span
+              title="Account Settings"
+              className="material-icons outlined"
+              onClick={() => setSettingsExpanded(!settingsExpanded)}
+              style={{
+                alignSelf: "center",
+                marginLeft: "0.3em",
+                marginRight: "0.3em",
+                cursor: "pointer",
+                fontSize: "1.5em",
+              }}
+            >
+              arrow_drop_up
+            </span>
+          ) : (
+            <span
+              title="Account Settings"
+              className="material-icons outlined"
+              onClick={() => setSettingsExpanded(!settingsExpanded)}
+              style={{
+                alignSelf: "center",
+                marginLeft: "0.3em",
+                marginRight: "0.3em",
+                cursor: "pointer",
+                fontSize: "1.5em",
+              }}
+            >
+              arrow_drop_down
+            </span>
+          )}
           <img alt="Profile" src={user.photoURL} height="24px" width="24px" />
           {settingsExpanded ? (
             <div
@@ -111,28 +128,6 @@ const UserBanner = ({
                 padding: "0.5em",
               }}
             >
-              <div
-                onClick={() => {
-                  signOut();
-                  window.location.reload();
-                }}
-                style={{
-                  cursor: "pointer",
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  marginBottom: "1em",
-                }}
-              >
-                <div className="sign-out-button" style={{ display: "flex" }}>
-                  Sign Out
-                  <span
-                    className="material-icons outlined"
-                    style={{ marginLeft: "0.5em", fontSize: "1.5em" }}
-                  >
-                    logout
-                  </span>
-                </div>
-              </div>
               <div
                 className="user-names-form"
                 style={{
@@ -184,6 +179,29 @@ const UserBanner = ({
                 >
                   Save
                 </button>
+              </div>
+              <div
+                className="sign-out-button-container"
+                onClick={() => {
+                  signOut();
+                  window.location.reload();
+                }}
+                style={{
+                  cursor: "pointer",
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  marginTop: "1em",
+                }}
+              >
+                <div className="sign-out" style={{ display: "flex" }}>
+                  <div className="sign-out-button-prompt link">Sign Out</div>
+                  <span
+                    className="sign-out-button link2 material-icons outlined"
+                    style={{ marginLeft: "0.5em", fontSize: "1.5em" }}
+                  >
+                    logout
+                  </span>
+                </div>
               </div>
             </div>
           ) : null}

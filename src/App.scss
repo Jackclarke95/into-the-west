@@ -40,6 +40,10 @@ h3 {
   margin-bottom: 0.25em;
 }
 
+.sign-out-button-container:hover .link {
+  text-decoration: underline;
+}
+
 .material-icons {
   font-family: "Material Icons";
   font-weight: normal;
