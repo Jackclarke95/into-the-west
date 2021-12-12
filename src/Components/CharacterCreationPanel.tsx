@@ -10,12 +10,20 @@ import {
 } from "@fluentui/react/";
 
 export const CharacterCreationPanel: React.FC<{
-  showCharacterCreationPanel: boolean;
+  shouldShowCharacterCreationPanel: boolean;
   toggleCharacterCreationPanel: (shouldShow) => void;
-}> = ({ showCharacterCreationPanel, toggleCharacterCreationPanel }) => {
+}> = ({ shouldShowCharacterCreationPanel, toggleCharacterCreationPanel }) => {
   const onRenderFooterContent = React.useCallback(
     () => (
-      <div>
+      <Stack
+        horizontal
+        style={{
+          paddingLeft: "24px",
+          paddingRight: "24px",
+          paddingBottom: "20px",
+        }}
+        tokens={{ childrenGap: 10 }}
+      >
         <PrimaryButton
           onClick={() => toggleCharacterCreationPanel(false)}
           text="Save"
@@ -24,15 +32,15 @@ export const CharacterCreationPanel: React.FC<{
           onClick={() => toggleCharacterCreationPanel(false)}
           text="Cancel"
         />
-      </div>
+      </Stack>
     ),
-    [showCharacterCreationPanel]
+    [shouldShowCharacterCreationPanel]
   );
 
   return (
     <Panel
       isLightDismiss
-      isOpen={showCharacterCreationPanel}
+      isOpen={shouldShowCharacterCreationPanel}
       onDismiss={() => toggleCharacterCreationPanel(false)}
       closeButtonAriaLabel="Close"
       headerText="Character Creation"
@@ -65,16 +73,6 @@ export const CharacterCreationPanel: React.FC<{
           { key: "wizard", text: "Wizard" },
         ]}
       />
-      <Stack horizontal horizontalAlign="end">
-        <PrimaryButton
-          onClick={() => toggleCharacterCreationPanel(false)}
-          text="Save"
-        />
-        <DefaultButton
-          onClick={() => toggleCharacterCreationPanel(false)}
-          text="Cancel"
-        />
-      </Stack>
     </Panel>
   );
 };

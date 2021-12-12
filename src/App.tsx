@@ -235,7 +235,7 @@ const App = () => {
         </Stack>
       </Stack>
       <CharacterCreationPanel
-        showCharacterCreationPanel={showCharacterCreationPanel}
+        shouldShowCharacterCreationPanel={showCharacterCreationPanel}
         toggleCharacterCreationPanel={(shouldShow) =>
           enableCharacterCreationPanel(shouldShow)
         }
