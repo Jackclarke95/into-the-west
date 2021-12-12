@@ -5,7 +5,12 @@ import { firestore } from "../firebase.utils";
 
 export const CharacterPersona: React.FC<{
   character: ICharacter;
-}> = ({ character }) => {
+  characterImages: { characterId: number; imageUrl: string }[];
+  setCharacterImages: (
+    charImages: { characterId: number; imageUrl: string }[]
+  ) => void;
+  // imageUrl: string;
+}> = ({ character, characterImages, setCharacterImages }) => {
   const [imageUrl, setImageUrl] = React.useState<string>("");
 
   useEffect(() => {
@@ -15,6 +20,16 @@ export const CharacterPersona: React.FC<{
         .getDownloadURL()
         .then((url) => {
           setImageUrl(url);
+          setCharacterImages([
+            ...characterImages.filter(
+              (charImg: { characterId: number; imageUrl: string }) =>
+                charImg.characterId !== character.id
+            ),
+            {
+              characterId: character.id,
+              imageUrl: url,
+            },
+          ]);
         })
         .catch(() =>
           setImageUrl(
@@ -41,7 +56,10 @@ export const CharacterPersona: React.FC<{
 
   return (
     <Persona
-      imageUrl={imageUrl}
+      imageUrl={
+        characterImages.find((charImg) => charImg.characterId === character.id)
+          ?.imageUrl ?? imageUrl
+      }
       text={character.name}
       secondaryText={`${character.ordinalLevel} level ${character.classes
         .map((characterClass) => characterClass.class)

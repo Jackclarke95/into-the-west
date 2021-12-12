@@ -14,6 +14,8 @@ import {
   calculateMaxSessionsToNextLevel,
 } from "./DataHelper";
 
+import { firestore } from "../firebase.utils";
+
 const parseCharacterData = (
   characterData: {
     key: string | null;
@@ -53,6 +55,20 @@ const parseCharacterData = (
       character.value["starting-level"],
       sessionCount
     );
+
+    var imageUrl = "";
+
+    firestore
+      .ref(`Avatars/${character.value.id}.jpeg`)
+      .getDownloadURL()
+      .then((url) => {
+        imageUrl = url;
+      })
+      .catch(
+        (e) =>
+          (imageUrl =
+            "https://www.dndbeyond.com/Content/Skins/Waterdeep/images/characters/default-avatar-builder.png")
+      );
 
     newCharacterDataArray.push({
       databaseKey: character.key,

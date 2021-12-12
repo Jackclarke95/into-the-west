@@ -3,13 +3,22 @@ import {
   CommandBar,
   ICommandBarItemProps,
 } from "@fluentui/react/lib/CommandBar";
-import { IButtonProps } from "@fluentui/react/lib/Button";
 
 export const Commands: React.FC<{
   createCharacter: () => void;
   createSession: () => void;
   toggleCharacterCreationPanel: (shouldShow) => void;
-}> = ({ createCharacter, createSession, toggleCharacterCreationPanel }) => {
+  useDarkTheme: boolean;
+  toggleTheme: (useDarkTheme: boolean) => void;
+  setThemeOverride: (useDarkTheme: boolean) => void;
+}> = ({
+  createCharacter,
+  createSession,
+  toggleCharacterCreationPanel,
+  useDarkTheme,
+  toggleTheme,
+  setThemeOverride,
+}) => {
   const commandBarItems: ICommandBarItemProps[] = [
     {
       key: "newItem",
@@ -50,8 +59,22 @@ export const Commands: React.FC<{
           | React.KeyboardEvent<HTMLElement>
           | undefined
       ) => {
-        console.log("click");
         toggleCharacterCreationPanel(true);
+      },
+    },
+    {
+      key: "newItem",
+      text: "Toggle Dark Mode",
+      cacheKey: "myCacheKey", // changing this key will invalidate this item's cache
+      iconProps: { iconName: useDarkTheme ? "Light" : "Light" },
+      onClick: (
+        ev?:
+          | React.MouseEvent<HTMLElement, MouseEvent>
+          | React.KeyboardEvent<HTMLElement>
+          | undefined
+      ) => {
+        toggleTheme(!useDarkTheme);
+        setThemeOverride(true);
       },
     },
   ];

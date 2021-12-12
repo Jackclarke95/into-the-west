@@ -21,6 +21,8 @@ import {
   DatePicker,
   Link,
   Panel,
+  ThemeProvider,
+  FontSizes,
 } from "@fluentui/react";
 import { initializeIcons } from "@fluentui/react/lib/Icons";
 
@@ -40,11 +42,16 @@ import { parseCharacterData, parseSessionData } from "./Helpers/DataParser";
 import ICharacter from "./Interfaces/ICharacter";
 import ISession from "./Interfaces/ISession";
 import { auth, firebaseDb, firestore } from "./firebase.utils";
-import "./App.scss";
+import "./Style/App.scss";
+import {
+  darkRedTheme as darkTheme,
+  lightRedTheme as lightTheme,
+} from "./Style/Themes";
 import ISessionData from "./Interfaces/ISessionData";
 import ICharacterData from "./Interfaces/ICharacterData";
 import { CharacterCreationPanel } from "./Components/CharacterCreationPanel";
 import { CharacterPersona } from "./Components/CharacterPersona";
+import { Sessions } from "./Components/Sessions";
 
 const App = () => {
   const [userAccount, setUserAccount] = useState({} as any);
@@ -59,7 +66,14 @@ const App = () => {
   const [showCharacterCreationPanel, setShowCharacterCreationPanel] =
     useState(false);
   const [name, setName] = useState("");
-  const [startingLevel, setStartingLevel] = useState("");
+  const [useDarkTheme, setUseDarkTheme] = useState(
+    window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+  );
+  const [themeOverride, setThemeOverride] = useState(false);
+  const [characterImages, setCharacterImages] = useState(
+    [] as { characterId: number; imageUrl: string }[]
+  );
 
   auth.onAuthStateChanged((user) => {
     setUserAccount(user);
@@ -67,7 +81,7 @@ const App = () => {
 
   initializeIcons();
 
-  // Get Sessions data from Firebase
+  // Get Sessions data from Firebase Realtime Database
   useEffect(() => {
     firebaseDb
       .child("sessions")
@@ -76,15 +90,14 @@ const App = () => {
         const data = [] as { key: string | null; value: ISessionData }[];
 
         snapshot.forEach((child) => {
-          const sessionData = child.val() as ISessionData;
-
-          data.push({ key: child.key, value: sessionData });
+          data.push({ key: child.key, value: child.val() });
         });
+
         setSessionData(data);
       });
   }, [firebaseDb]);
 
-  // Get Characters data from Firebase
+  // Get Characters data from Firebase Realtime Database
   useEffect(() => {
     firebaseDb
       .child("characters")
@@ -93,45 +106,22 @@ const App = () => {
         const data = [] as { key: string | null; value: ICharacterData }[];
 
         snapshot.forEach((child) => {
-          const characterData = child.val() as ICharacterData;
-
-          data.push({ key: child.key, value: characterData });
+          data.push({ key: child.key, value: child.val() });
         });
+
         setCharacterData(data);
       });
   }, [firebaseDb]);
 
-  // Set Sessions from Session data from Firebase
+  // Set Sessions from Session data from Firebase Realtime Database
   useEffect(() => {
     setSessions(parseSessionData(sessionData));
   }, [sessionData]);
 
-  // Set Characters from Character data from Firebase
+  // Set Characters from Character data from Firebase Realtime Database
   useEffect(() => {
     setCharacters(parseCharacterData(characterData, sessions));
   }, [characterData, sessions]);
-
-  useEffect(() => {
-    characterData.forEach((character) => {
-      firestore
-        .ref(`Avatars/${character.value.id}.jpeg`)
-        .getDownloadURL()
-        .then((url) => {
-          character["avatar-link"] = url;
-          setCharacterData([
-            ...characterData.filter(
-              (data) => data.value.id !== character.value.id
-            ),
-            character,
-          ]);
-        });
-      // .catch((e) =>
-      //   setImageUrl(
-      //     "https://www.dndbeyond.com/Content/Skins/Waterdeep/images/characters/default-avatar-builder.png"
-      //   )
-      // );
-    });
-  }, []);
 
   const createCharacter = () => {
     const character = characters[0];
@@ -173,9 +163,6 @@ const App = () => {
     }
   };
 
-  console.log("characters:", characters);
-  console.log("sessions", sessions);
-
   const stackStyles: Partial<IStackStyles> = {
     root: {
       width: "100%",
@@ -192,55 +179,71 @@ const App = () => {
     setShowCharacterCreationPanel(shouldShow);
   };
 
+  const getTheme = () => {
+    return useDarkTheme ||
+      (window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches &&
+        !themeOverride)
+      ? darkTheme
+      : lightTheme;
+  };
+
   return (
-    <Stack horizontal>
-      <Stack
-        verticalAlign="start"
-        verticalFill
-        styles={stackStyles}
-        tokens={{ childrenGap: 10 }}
-      >
-        <Text style={{ fontSize: "3em" }}>Into the West</Text>
-        <Commands
-          createCharacter={createCharacter}
-          createSession={createSession}
+    <ThemeProvider theme={getTheme()}>
+      <Stack horizontal>
+        <Stack
+          verticalAlign="start"
+          verticalFill
+          styles={stackStyles}
+          tokens={{ childrenGap: 10 }}
+        >
+          <Text style={{ fontSize: FontSizes.mega }}>Into the West</Text>
+          <Commands
+            createCharacter={createCharacter}
+            createSession={createSession}
+            toggleCharacterCreationPanel={(shouldShow) =>
+              enableCharacterCreationPanel(shouldShow)
+            }
+            useDarkTheme={useDarkTheme}
+            toggleTheme={(useDarkTheme) => setUseDarkTheme(useDarkTheme)}
+            setThemeOverride={(useDarkTheme) => setThemeOverride(useDarkTheme)}
+          />
+          <Stack
+            horizontal
+            styles={{
+              root: { overflowY: "auto", justifyContent: "space-evenly" },
+            }}
+          >
+            <Stack
+              styles={{ root: { width: "45%", overflowY: "auto" } }}
+              tokens={{ childrenGap: 10 }}
+            >
+              <Text style={{ fontSize: FontSizes.superLarge }}>Characters</Text>
+              {characters.map((character) => (
+                <CharacterPersona
+                  character={character}
+                  characterImages={characterImages}
+                  setCharacterImages={(charImages) =>
+                    setCharacterImages(charImages)
+                  }
+                />
+              ))}
+            </Stack>
+            <Sessions
+              characters={characters}
+              sessions={sessions}
+              characterImages={characterImages}
+            />
+          </Stack>
+        </Stack>
+        <CharacterCreationPanel
+          shouldShowCharacterCreationPanel={showCharacterCreationPanel}
           toggleCharacterCreationPanel={(shouldShow) =>
             enableCharacterCreationPanel(shouldShow)
           }
         />
-        <Stack
-          horizontal
-          styles={{
-            root: { overflowY: "auto", justifyContent: "space-evenly" },
-          }}
-        >
-          <Stack
-            styles={{ root: { width: "45%", overflowY: "auto" } }}
-            tokens={{ childrenGap: 10 }}
-          >
-            {characters.map((character) => (
-              <CharacterPersona character={character} />
-            ))}
-          </Stack>
-          <Stack
-            styles={{
-              root: { width: "45%", overflowY: "auto" },
-            }}
-            tokens={{ childrenGap: 10 }}
-          >
-            {sessions.map((session) => (
-              <p>{session.name}</p>
-            ))}
-          </Stack>
-        </Stack>
       </Stack>
-      <CharacterCreationPanel
-        shouldShowCharacterCreationPanel={showCharacterCreationPanel}
-        toggleCharacterCreationPanel={(shouldShow) =>
-          enableCharacterCreationPanel(shouldShow)
-        }
-      />
-    </Stack>
+    </ThemeProvider>
   );
 };
 
