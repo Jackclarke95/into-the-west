@@ -24,15 +24,11 @@ export const CharacterPersona: React.FC<{
   const getImageUrl = (): string => {
     var imageUrl = "";
 
-    debugger;
-
     characterImages.forEach((charImg) => {
       if (charImg.characterId === character.id) {
         imageUrl = charImg.imageUrl;
       }
     });
-
-    debugger;
 
     return imageUrl;
   };
