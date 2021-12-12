@@ -7,12 +7,19 @@ import {
   PrimaryButton,
   DefaultButton,
   Dropdown,
+  MessageBar,
+  MessageBarType,
 } from "@fluentui/react/";
 
 export const CharacterCreationPanel: React.FC<{
   shouldShowCharacterCreationPanel: boolean;
   toggleCharacterCreationPanel: (shouldShow) => void;
 }> = ({ shouldShowCharacterCreationPanel, toggleCharacterCreationPanel }) => {
+  const [name, setName] = React.useState("");
+  const [classCount, setClassCount] = React.useState(1);
+  const [startingLevel, setStartingLevel] = React.useState(1);
+  const [errorMessage, setErrorMessage] = React.useState("");
+
   const onRenderFooterContent = React.useCallback(
     () => (
       <Stack
@@ -37,6 +44,28 @@ export const CharacterCreationPanel: React.FC<{
     [shouldShowCharacterCreationPanel]
   );
 
+  const onAddClass = () => {
+    if (classCount === startingLevel) {
+      setErrorMessage("You can't have more classes than starting levels");
+
+      return;
+    }
+
+    setClassCount(classCount + 1);
+  };
+
+  const onChangeName = React.useCallback(
+    (
+      event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
+      newValue?: string
+    ) => {
+      setName(newValue || "");
+    },
+    []
+  );
+
+  console.log(name);
+
   return (
     <Panel
       isLightDismiss
@@ -47,14 +76,19 @@ export const CharacterCreationPanel: React.FC<{
       onRenderFooter={onRenderFooterContent}
       isFooterAtBottom={true}
     >
+      {errorMessage && (
+        <MessageBar messageBarType={MessageBarType.error}>
+          {errorMessage}
+        </MessageBar>
+      )}
       <Label required htmlFor="character-name">
         Character name
       </Label>
-      <TextField id="character-name" />
+      <TextField value={name} onChange={onChangeName} id="character-name" />
       <Label required htmlFor="character-starting-level">
         Starting Level
       </Label>
-      <TextField errorMessage="Required" id="character-starting-level" />
+      <TextField errorMessage="" id="character-starting-level" />
       <Dropdown
         placeholder="Select a Class"
         label="Class"
