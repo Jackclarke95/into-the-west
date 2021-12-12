@@ -1,139 +1,247 @@
 import { useState, useEffect } from "react";
-import { BrowserView } from "react-device-detect";
-import UserBanner from "./Components/UserBanner";
-import Sessions from "./Components/Sessions";
-import PastSessions from "./Components/PastSessions";
-import FutureSessions from "./Components/FutureSessions";
-import ActiveCharacters from "./Components/ActiveCharacters";
-import RetiredCharacters from "./Components/RetiredCharacters";
-import { auth, firebaseDb } from "./firebase.utils";
-import "./App.scss";
+import {
+  Stack,
+  Text,
+  FontWeights,
+  IStackTokens,
+  IStackStyles,
+  ITextStyles,
+  Persona,
+  PersonaSize,
+  List,
+  ProgressIndicator,
+  Label,
+  Dialog,
+  DialogType,
+  TextField,
+  PrimaryButton,
+  DefaultButton,
+  Dropdown,
+  IDropdownStyles,
+  DatePicker,
+  Link,
+  Panel,
+} from "@fluentui/react";
+import { initializeIcons } from "@fluentui/react/lib/Icons";
 
-function App() {
-  const [characters, setCharacters] = useState([] as {}[]);
-  const [sessions, setSessions] = useState([] as {}[]);
-  const [players, setPlayers] = useState([] as {}[]);
+import { Commands } from "./Components/CommandBar";
+
+import {
+  calculateSessionsForLevelUp,
+  calculateLevelFromSessions,
+  countSessionsAttended,
+  getOrdinal,
+  getMainClass,
+  getMainClassColour,
+  getCharacterClasses,
+  calculateMaxSessionsToNextLevel,
+} from "./Helpers/DataHelper";
+import { parseCharacterData, parseSessionData } from "./Helpers/DataParser";
+import ICharacter from "./Interfaces/ICharacter";
+import ISession from "./Interfaces/ISession";
+import { auth, firebaseDb, firestore } from "./firebase.utils";
+import "./App.scss";
+import ISessionData from "./Interfaces/ISessionData";
+import ICharacterData from "./Interfaces/ICharacterData";
+import { CharacterCreationPanel } from "./Components/CharacterCreationPanel";
+import { CharacterPersona } from "./Components/CharacterPersona";
+
+const App = () => {
   const [userAccount, setUserAccount] = useState({} as any);
-  const [currentPlayer, setCurrentPlayer] = useState();
+  const [sessionData, setSessionData] = useState(
+    [] as { key: string | null; value: ISessionData }[]
+  );
+  const [characterData, setCharacterData] = useState(
+    [] as { key: string | null; value: ICharacterData }[]
+  );
+  const [characters, setCharacters] = useState([] as ICharacter[]);
+  const [sessions, setSessions] = useState([] as ISession[]);
+  const [showCharacterCreationPanel, setShowCharacterCreationPanel] =
+    useState(false);
+  const [name, setName] = useState("");
+  const [startingLevel, setStartingLevel] = useState("");
 
   auth.onAuthStateChanged((user) => {
     setUserAccount(user);
   });
 
-  useEffect(() => {
-    let sessionArray = [] as {}[];
+  initializeIcons();
 
+  // Get Sessions data from Firebase
+  useEffect(() => {
     firebaseDb
       .child("sessions")
       .orderByChild("scheduled-date")
       .on("value", (snapshot) => {
+        const data = [] as { key: string | null; value: ISessionData }[];
+
         snapshot.forEach((child) => {
-          sessionArray.push({ key: child.key, value: child.val() });
+          const sessionData = child.val() as ISessionData;
+
+          data.push({ key: child.key, value: sessionData });
         });
-        setSessions(sessionArray);
+        setSessionData(data);
       });
+  }, [firebaseDb]);
 
-    let characterArray = [] as {}[];
-
+  // Get Characters data from Firebase
+  useEffect(() => {
     firebaseDb
       .child("characters")
       .orderByChild("name")
-      .once("value", (snapshot) => {
-        snapshot.forEach((child) => {
-          characterArray.push({ key: child.key, value: child.val() });
-        });
-        setCharacters(characterArray);
-      });
+      .on("value", (snapshot) => {
+        const data = [] as { key: string | null; value: ICharacterData }[];
 
-    let playerArray = [] as {}[];
-
-    firebaseDb
-      .child("players")
-      .orderByChild("name")
-      .once("value", (snapshot) => {
         snapshot.forEach((child) => {
-          playerArray.push(child.val());
+          const characterData = child.val() as ICharacterData;
+
+          data.push({ key: child.key, value: characterData });
         });
-        setPlayers(playerArray);
+        setCharacterData(data);
       });
+  }, [firebaseDb]);
+
+  // Set Sessions from Session data from Firebase
+  useEffect(() => {
+    setSessions(parseSessionData(sessionData));
+  }, [sessionData]);
+
+  // Set Characters from Character data from Firebase
+  useEffect(() => {
+    setCharacters(parseCharacterData(characterData, sessions));
+  }, [characterData, sessions]);
+
+  useEffect(() => {
+    characterData.forEach((character) => {
+      firestore
+        .ref(`Avatars/${character.value.id}.jpeg`)
+        .getDownloadURL()
+        .then((url) => {
+          character["avatar-link"] = url;
+          setCharacterData([
+            ...characterData.filter(
+              (data) => data.value.id !== character.value.id
+            ),
+            character,
+          ]);
+        });
+      // .catch((e) =>
+      //   setImageUrl(
+      //     "https://www.dndbeyond.com/Content/Skins/Waterdeep/images/characters/default-avatar-builder.png"
+      //   )
+      // );
+    });
   }, []);
 
-  if (userAccount && userAccount.uid && !currentPlayer) {
-    firebaseDb
-      .child("user-accounts")
-      .orderByChild("uid")
-      .equalTo(userAccount.uid)
-      .on("value", (snapshot) => {
-        snapshot.forEach((child) => {
-          setCurrentPlayer(child.val());
-        });
-      });
-  }
+  const createCharacter = () => {
+    const character = characters[0];
 
-  let characterData = [] as any[];
+    const characterData = {
+      classes: character.classes,
+      id: new Date().getTime(),
+      name: character.name,
+      race: character.race,
+      ["starting-level"]: character.startingLevel,
+    } as ICharacterData;
 
-  Object.keys(characters).map((key) => {
-    characterData.push(characters[key].value);
-  });
+    if (window.confirm(`Create new Character?`)) {
+      firebaseDb
+        .child(`characters/`)
+        .push(characterData)
+        .catch((e) =>
+          alert(
+            `Failed to claim Character. Verify that you are connected to the internet. Please try again.\n\nDetails:\n${e}`
+          )
+        );
+    }
+  };
 
-  let sessionData = [] as any[];
+  const dropdownStyles: Partial<IDropdownStyles> = {
+    dropdown: { width: 300 },
+  };
 
-  Object.keys(sessions).map((key) => {
-    sessionData.push(sessions[key].value);
-  });
+  const createSession = () => {
+    const data = sessionData[0];
+
+    const session = data.value;
+
+    if (window.confirm(`Create new Session?`)) {
+      firebaseDb
+        .child(`sessions/`)
+        .push(session)
+        .catch((e) => alert(`Failed to create Session.\n\nDetails:\n${e}`));
+    }
+  };
+
+  console.log("characters:", characters);
+  console.log("sessions", sessions);
+
+  const stackStyles: Partial<IStackStyles> = {
+    root: {
+      width: "100%",
+      margin: "0 auto",
+      textAlign: "center",
+      color: "#605e5c",
+      display: "flex",
+      flexDirection: "column",
+      maxHeight: "100vh",
+    },
+  };
+
+  const enableCharacterCreationPanel = (shouldShow) => {
+    setShowCharacterCreationPanel(shouldShow);
+  };
 
   return (
-    <>
-      <UserBanner user={userAccount} currentPlayer={currentPlayer} />
-      <div
-        className="site-container"
-        style={{
-          maxWidth: "1920px",
-          margin: "auto",
-          padding: "1.5em",
-        }}
+    <Stack horizontal>
+      <Stack
+        verticalAlign="start"
+        verticalFill
+        styles={stackStyles}
+        tokens={{ childrenGap: 10 }}
       >
-        <h1>Into The West</h1>
-        <ActiveCharacters
-          characters={characters}
-          sessions={sessionData}
-          players={players}
-          currentPlayer={currentPlayer}
+        <Text style={{ fontSize: "3em" }}>Into the West</Text>
+        <Commands
+          createCharacter={createCharacter}
+          createSession={createSession}
+          toggleCharacterCreationPanel={(shouldShow) =>
+            enableCharacterCreationPanel(shouldShow)
+          }
         />
-        <Sessions
-          characterData={characterData}
-          sessions={sessions}
-          players={players}
-          currentPlayer={currentPlayer}
-        />
-        <RetiredCharacters
-          characters={characters}
-          sessions={sessionData}
-          players={players}
-          currentPlayer={currentPlayer}
-        />
-      </div>
-      <BrowserView>
-        <img
-          className="background-image"
-          src={`${process.env.PUBLIC_URL}/Images/Maps/Hewett's Map.jpg`}
-          alt="Background Map"
-          style={{
-            position: "fixed",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            zIndex: -1,
-            opacity: 0.3,
-            filter: "grayscale(100%)",
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
+        <Stack
+          horizontal
+          styles={{
+            root: { overflowY: "auto", justifyContent: "space-evenly" },
           }}
-        />
-      </BrowserView>
-    </>
+        >
+          <Stack
+            styles={{ root: { width: "45%", overflowY: "auto" } }}
+            tokens={{ childrenGap: 10 }}
+          >
+            {characters.map((character) => (
+              <CharacterPersona character={character} />
+            ))}
+          </Stack>
+          <Stack
+            styles={{
+              root: { width: "45%", overflowY: "auto" },
+            }}
+            tokens={{ childrenGap: 10 }}
+          >
+            {sessions.map((session) => (
+              <p>{session.name}</p>
+            ))}
+          </Stack>
+        </Stack>
+      </Stack>
+      <CharacterCreationPanel
+        showCharacterCreationPanel={showCharacterCreationPanel}
+        toggleCharacterCreationPanel={(shouldShow) =>
+          enableCharacterCreationPanel(shouldShow)
+        }
+      />
+    </Stack>
   );
-}
+};
 
 export default App;

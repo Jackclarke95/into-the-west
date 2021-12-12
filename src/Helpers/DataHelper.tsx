@@ -1,3 +1,7 @@
+import ICharacter from "../Interfaces/ICharacter";
+import ICharacterClass from "../Interfaces/ICharacterClass";
+import ISession from "../Interfaces/ISession";
+
 /**
  * Gets a number in its ordinal format. For example, passing in "27", will return "27th"
  *
@@ -33,15 +37,16 @@ const getOrdinal = (number: number) => {
  * @param {*} session The session whose attendance to calculate
  * @return {string} A list of characters that attended specified session
  */
-const determineSessionCharacters = (characters, session) => {
-  if (session.players) return session.players.join(", ");
-
+const determineSessionCharacters = (
+  characters: ICharacter[],
+  session: ISession
+) => {
   let sessionCharacters = [] as string[];
 
   Object.keys(characters).forEach((key) => {
     const character = characters[key];
 
-    if (session.characters.includes(character.id)) {
+    if (session.characterIds.includes(character.id)) {
       sessionCharacters.push(character.nickname ?? character.name);
     }
   });
@@ -75,16 +80,18 @@ const getMainClass = (character) => {
  * @param {*} character
  * @return {string[]} A list of the character's classes
  */
-const getCharacterClasses = (character) => {
-  const characterClasses = character.classes;
+const getCharacterClasses = (characterClasses: ICharacterClass[]) => {
   characterClasses.sort((a, b) => {
     return b.level - a.level;
   });
 
-  let classList = [] as string[];
+  let classList = [] as ICharacterClass[];
 
   characterClasses.forEach((characterClass) => {
-    classList.push(characterClass.class);
+    classList.push({
+      class: characterClass.class,
+      level: characterClass.level,
+    });
   });
 
   return classList;
@@ -134,7 +141,10 @@ const calculateLevelFromSessions = (
  *
  * @returns {number} The remaining number of sessions a character must attend in order to gain a level
  */
-const calculateSessionsForLevelUp = (startingLevel, sessionCount) => {
+const calculateSessionsForLevelUp = (
+  startingLevel: number,
+  sessionCount: number
+) => {
   let currentLevel = calculateLevelFromSessions(startingLevel, sessionCount);
 
   let sessionsRequiredForNext = calculateOffsetSessionsRequiredForLevel(
@@ -154,20 +164,23 @@ const calculateSessionsForLevelUp = (startingLevel, sessionCount) => {
  * @param {*} sessions All sessions
  * @return {number} The number of sessions a character has attended
  */
-const countSessionsAttended = (character, sessions) => {
-  let matchingSessions = [] as any[];
+const countSessionsAttended = (characterId: number, sessions: ISession[]) => {
+  // let matchingSessions = [] as any[];
+  let sessionCount = 0;
 
   sessions.forEach((session) => {
     if (
-      session.characters &&
-      session.characters.includes(character.id) &&
-      new Date(session["scheduled-date"]) < new Date()
+      session.characterIds &&
+      session.characterIds.includes(characterId) &&
+      session.date < new Date()
     ) {
-      matchingSessions.push(session);
+      // matchingSessions.push(session);
+      sessionCount++;
     }
   });
 
-  return matchingSessions.length;
+  // return matchingSessions.length;
+  return sessionCount;
 };
 
 /**
@@ -177,7 +190,7 @@ const countSessionsAttended = (character, sessions) => {
  *
  * @returns {number} The number of sessions required for this level
  */
-const calculateOffsetSessionsRequiredForLevel = (level) => {
+const calculateOffsetSessionsRequiredForLevel = (level: number) => {
   let minimumSessions = 0;
   let currentLevel = 1;
 
@@ -195,7 +208,7 @@ const calculateOffsetSessionsRequiredForLevel = (level) => {
  * @param {*} character
  * @return {string} The hexadecimal format of the colour of the character's main class
  */
-const getMainClassColour = (character) => {
+const getMainClassColour = (character: ICharacter) => {
   const characterClass = getMainClass(character);
   let colour = characterClass;
 
@@ -251,7 +264,7 @@ const getMainClassColour = (character) => {
  * @param {*} characters All the characters
  * @return {*} The entire character with the provided ID
  */
-const getCharacterFromId = (id, characters) => {
+const getCharacterFromId = (id: number, characters: ICharacter[]) => {
   let matchedCharacter;
 
   characters.forEach((character) => {
@@ -267,11 +280,11 @@ const getCharacterFromId = (id, characters) => {
  * Gets all of the characters of a player, where the dndbeyond name of each match
  *
  * @param {*} player The players whose characters to get
- * @param {*} characters All the characters
- * @return {*[]} An array containing all the player's characters
+ * @param {ICharacter[]} characters All the characters
+ * @return {ICharacter[]} An array containing all the player's characters
  */
-const getActiveCharactersFromPlayer = (player, characters) => {
-  let matchedCharacters = [] as any[];
+const getActiveCharactersFromPlayer = (player, characters: ICharacter[]) => {
+  let matchedCharacters = [] as ICharacter[];
 
   characters.forEach((character) => {
     if (
@@ -339,4 +352,5 @@ export {
   getActiveCharactersFromPlayer,
   getPlayerDisplayNameFromName,
   getPlayerFromName,
+  calculateMaxSessionsToNextLevel,
 };
