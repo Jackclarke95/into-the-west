@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ISession from "../Interfaces/ISession";
 import {
   FontSizes,
@@ -6,41 +6,15 @@ import {
   Stack,
   Facepile,
   PersonaSize,
-  Persona,
   IFacepilePersona,
 } from "@fluentui/react/";
 import ICharacter from "../Interfaces/ICharacter";
-import { firestore } from "../firebase.utils";
 
 export const Sessions: React.FC<{
   characters: ICharacter[];
   sessions: ISession[];
   characterImages: { characterId: number; imageUrl: string }[];
 }> = ({ characters, sessions, characterImages }) => {
-  const GetImageUrl = (character) => {
-    var imageUrl = "";
-
-    useEffect(() => {
-      firestore
-        .ref(`Avatars/${character.id}.jpeg`)
-        .getDownloadURL()
-        .then((url) => {
-          imageUrl = url;
-        })
-        .catch(
-          () =>
-            (imageUrl =
-              "https://www.dndbeyond.com/Content/Skins/Waterdeep/images/characters/default-avatar-builder.png")
-        );
-
-      if (character.name == "Eslyn Juhlenath") {
-        debugger;
-      }
-    }, [character]);
-
-    return imageUrl;
-  };
-
   const getPersonas = (session: ISession): IFacepilePersona[] => {
     const foo = characters
       .filter((character) =>

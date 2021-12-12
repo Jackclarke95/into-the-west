@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Persona, PersonaSize, ProgressIndicator } from "@fluentui/react/";
 import ICharacter from "../Interfaces/ICharacter";
-import { firestore } from "../firebase.utils";
+import { getMainClassColour } from "../Helpers/DataHelper";
 
 export const CharacterPersona: React.FC<{
   character: ICharacter;
@@ -9,6 +9,7 @@ export const CharacterPersona: React.FC<{
 }> = ({ character, characterImages }) => {
   const levelProgress = () => (
     <ProgressIndicator
+    
       label={`Level Progress: ${character.sessionToLevelUp}/${
         character.maxSessionsToNextLevel
       } - ${(
