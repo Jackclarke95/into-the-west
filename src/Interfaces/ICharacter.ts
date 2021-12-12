@@ -49,6 +49,4 @@ export default interface ICharacter {
 
   /** Sessions until the Character will gain a level */
   sessionToLevelUp: number;
-
-  imageUrl?: string;
 }

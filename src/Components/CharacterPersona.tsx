@@ -9,7 +9,6 @@ export const CharacterPersona: React.FC<{
 }> = ({ character, characterImages }) => {
   const levelProgress = () => (
     <ProgressIndicator
-    
       label={`Level Progress: ${character.sessionToLevelUp}/${
         character.maxSessionsToNextLevel
       } - ${(
@@ -40,11 +39,7 @@ export const CharacterPersona: React.FC<{
 
   return (
     <Persona
-      imageUrl={
-        getImageUrl()
-        // characterImages.find((charImg) => charImg.characterId === character.id)
-        //   ?.imageUrl
-      }
+      imageUrl={getImageUrl()}
       text={character.name}
       secondaryText={`${character.ordinalLevel} level ${character.classes
         .map((characterClass) => characterClass.class)
