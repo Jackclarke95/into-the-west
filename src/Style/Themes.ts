@@ -54,17 +54,17 @@ const lightTheme = createTheme({
   },
 });
 
-const darkRedTheme = createTheme({
+const darkPurpleTheme = createTheme({
   palette: {
-    themePrimary: "#eb4949",
-    themeLighterAlt: "#090303",
-    themeLighter: "#260c0c",
-    themeLight: "#461616",
-    themeTertiary: "#8d2c2c",
-    themeSecondary: "#ce4040",
-    themeDarkAlt: "#ed5a5a",
-    themeDark: "#ef7272",
-    themeDarker: "#f49595",
+    themePrimary: "#b15beb",
+    themeLighterAlt: "#070409",
+    themeLighter: "#1c0f26",
+    themeLight: "#351b46",
+    themeTertiary: "#6a378d",
+    themeSecondary: "#9c51ce",
+    themeDarkAlt: "#b96bed",
+    themeDark: "#c380ef",
+    themeDarker: "#d2a0f4",
     neutralLighterAlt: "#181a1b",
     neutralLighter: "#181a1b",
     neutralLight: "#17191a",
@@ -81,17 +81,17 @@ const darkRedTheme = createTheme({
   },
 });
 
-const lightRedTheme = createTheme({
+const lightPurpleTheme = createTheme({
   palette: {
-    themePrimary: "#db2e2e",
-    themeLighterAlt: "#fef6f6",
-    themeLighter: "#f9dada",
-    themeLight: "#f4baba",
-    themeTertiary: "#ea7b7b",
-    themeSecondary: "#e04444",
-    themeDarkAlt: "#c52929",
-    themeDark: "#a72323",
-    themeDarker: "#7b1a1a",
+    themePrimary: "#9f2de0",
+    themeLighterAlt: "#fbf6fe",
+    themeLighter: "#eedafa",
+    themeLight: "#e0bbf6",
+    themeTertiary: "#c37bed",
+    themeSecondary: "#a944e4",
+    themeDarkAlt: "#8f28ca",
+    themeDark: "#7922ab",
+    themeDarker: "#59197e",
     neutralLighterAlt: "#faf9f8",
     neutralLighter: "#f3f2f1",
     neutralLight: "#edebe9",
@@ -108,4 +108,9 @@ const lightRedTheme = createTheme({
   },
 });
 
-export { darkTheme, darkRedTheme, lightTheme, lightRedTheme };
+export {
+  darkTheme,
+  darkPurpleTheme as darkRedTheme,
+  lightTheme,
+  lightPurpleTheme as lightRedTheme,
+};
