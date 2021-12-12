@@ -123,6 +123,28 @@ const App = () => {
     setCharacters(parseCharacterData(characterData, sessions));
   }, [characterData, sessions]);
 
+  useEffect(() => {
+    var charImages = [] as { characterId: number; imageUrl: string }[];
+
+    characters.map((character) => {
+      firestore
+        .ref(`Avatars/${character.id}.jpeg`)
+        .getDownloadURL()
+        .then((url) => {
+          charImages.push({ characterId: character.id, imageUrl: url });
+        })
+        .catch(() => {
+          charImages.push({
+            characterId: character.id,
+            imageUrl:
+              "https://www.dndbeyond.com/Content/Skins/Waterdeep/images/characters/default-avatar-builder.png",
+          });
+        });
+    });
+
+    setCharacterImages(charImages);
+  }, [characters, firestore]);
+
   const createCharacter = () => {
     const character = characters[0];
 
@@ -223,9 +245,6 @@ const App = () => {
                 <CharacterPersona
                   character={character}
                   characterImages={characterImages}
-                  setCharacterImages={(charImages) =>
-                    setCharacterImages(charImages)
-                  }
                 />
               ))}
             </Stack>

@@ -6,40 +6,7 @@ import { firestore } from "../firebase.utils";
 export const CharacterPersona: React.FC<{
   character: ICharacter;
   characterImages: { characterId: number; imageUrl: string }[];
-  setCharacterImages: (
-    charImages: { characterId: number; imageUrl: string }[]
-  ) => void;
-  // imageUrl: string;
-}> = ({ character, characterImages, setCharacterImages }) => {
-  const [imageUrl, setImageUrl] = React.useState<string>("");
-
-  useEffect(() => {
-    const unsubscribe = () =>
-      firestore
-        .ref(`Avatars/${character.id}.jpeg`)
-        .getDownloadURL()
-        .then((url) => {
-          setImageUrl(url);
-          setCharacterImages([
-            ...characterImages.filter(
-              (charImg: { characterId: number; imageUrl: string }) =>
-                charImg.characterId !== character.id
-            ),
-            {
-              characterId: character.id,
-              imageUrl: url,
-            },
-          ]);
-        })
-        .catch(() =>
-          setImageUrl(
-            "https://www.dndbeyond.com/Content/Skins/Waterdeep/images/characters/default-avatar-builder.png"
-          )
-        );
-
-    unsubscribe();
-  }, [character, firestore]);
-
+}> = ({ character, characterImages }) => {
   const levelProgress = () => (
     <ProgressIndicator
       label={`Level Progress: ${character.sessionToLevelUp}/${
@@ -54,11 +21,28 @@ export const CharacterPersona: React.FC<{
     />
   );
 
+  const getImageUrl = (): string => {
+    var imageUrl = "";
+
+    debugger;
+
+    characterImages.forEach((charImg) => {
+      if (charImg.characterId === character.id) {
+        imageUrl = charImg.imageUrl;
+      }
+    });
+
+    debugger;
+
+    return imageUrl;
+  };
+
   return (
     <Persona
       imageUrl={
-        characterImages.find((charImg) => charImg.characterId === character.id)
-          ?.imageUrl ?? imageUrl
+        getImageUrl()
+        // characterImages.find((charImg) => charImg.characterId === character.id)
+        //   ?.imageUrl
       }
       text={character.name}
       secondaryText={`${character.ordinalLevel} level ${character.classes
