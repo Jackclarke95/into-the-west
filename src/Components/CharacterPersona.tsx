@@ -1,7 +1,6 @@
 import React from "react";
 import { Persona, PersonaSize, ProgressIndicator } from "@fluentui/react/";
 import ICharacter from "../Interfaces/ICharacter";
-import { getMainClassColour } from "../Helpers/DataHelper";
 
 export const CharacterPersona: React.FC<{
   character: ICharacter;

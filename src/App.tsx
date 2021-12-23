@@ -118,24 +118,19 @@ const App = () => {
     setSessions(parseSessionData(sessionData));
   }, [sessionData]);
 
-  // Set Characters from Character data from Firebase Realtime Database
-  useEffect(() => {
-    setCharacters(parseCharacterData(characterData, sessions));
-  }, [characterData, sessions]);
-
   useEffect(() => {
     var charImages = [] as { characterId: number; imageUrl: string }[];
 
-    characters.map((character) => {
+    characterData.map((character) => {
       firestore
-        .ref(`Avatars/${character.id}.jpeg`)
+        .ref(`Avatars/${character.value.id}.jpeg`)
         .getDownloadURL()
         .then((url) => {
-          charImages.push({ characterId: character.id, imageUrl: url });
+          charImages.push({ characterId: character.value.id, imageUrl: url });
         })
         .catch(() => {
           charImages.push({
-            characterId: character.id,
+            characterId: character.value.id,
             imageUrl:
               "https://www.dndbeyond.com/Content/Skins/Waterdeep/images/characters/default-avatar-builder.png",
           });
@@ -143,7 +138,12 @@ const App = () => {
     });
 
     setCharacterImages(charImages);
-  }, [characters, firestore]);
+  }, [characterData, firestore]);
+
+  // Set Characters from Character data from Firebase Realtime Database
+  useEffect(() => {
+    setCharacters(parseCharacterData(characterData, sessions));
+  }, [sessions, characterImages]);
 
   const createCharacter = () => {
     const character = characters[0];

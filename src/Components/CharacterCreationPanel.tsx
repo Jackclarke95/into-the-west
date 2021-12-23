@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode, useState } from "react";
 import {
   Panel,
   Label,
@@ -9,7 +9,11 @@ import {
   Dropdown,
   MessageBar,
   MessageBarType,
+  IDropdownOption,
+  setVirtualParent,
+  SpinButton,
 } from "@fluentui/react/";
+import ICharacterClass from "../Interfaces/ICharacterClass";
 
 export const CharacterCreationPanel: React.FC<{
   shouldShowCharacterCreationPanel: boolean;
@@ -18,6 +22,9 @@ export const CharacterCreationPanel: React.FC<{
   const [name, setName] = React.useState("");
   const [classCount, setClassCount] = React.useState(1);
   const [startingLevel, setStartingLevel] = React.useState(1);
+  const [characterClasses, setCharacterClass] = React.useState<
+    ICharacterClass[]
+  >([] as ICharacterClass[]);
   const [errorMessage, setErrorMessage] = React.useState("");
 
   const onRenderFooterContent = React.useCallback(
@@ -41,8 +48,81 @@ export const CharacterCreationPanel: React.FC<{
         />
       </Stack>
     ),
-    [shouldShowCharacterCreationPanel]
+    []
   );
+
+  const onChangeCharacterClass = (
+    item: IDropdownOption<any> | undefined,
+    level: number | undefined
+  ) => {
+    console.log(item, level);
+    // const newClass = item.value
+
+    // const allClasses = characterClasses as ICharacterClass[];
+
+    // setCharacterClass([
+    //   ...allClasses.filter((cls) => cls.class. != item.value),
+    //   item.key, ,
+    // ]);
+  };
+
+  const LevelPicker = () => {
+    const [characterClass, setCharacterClass] = useState("");
+    const [ClassLevel, SetClassLevel] = useState<number | undefined>(1);
+
+    const onChangeLevel = React.useCallback(
+      (_event: any, newValue?: string | undefined) => {
+        if (!newValue) {
+          alert("Please enter a valid level");
+
+          return;
+        }
+
+        let level = 0;
+
+        try {
+          level = parseInt(newValue);
+        } catch (e) {
+          alert(e);
+        }
+
+        SetClassLevel(level);
+      },
+      []
+    );
+
+    const levelPicker = [] as ReactNode[];
+
+    for (let i = 1; i <= startingLevel; i++) {
+      levelPicker.push(
+        <Stack horizontal>
+          <Dropdown
+            placeholder="Select a Class"
+            label="Class"
+            onChange={(_event, item) =>
+              onChangeCharacterClass(item, ClassLevel)
+            }
+            options={[
+              { key: "artificer", text: "Artificer" },
+              { key: "barbarian", text: "Barbarian" },
+              { key: "bard", text: "Bard" },
+              { key: "cleric", text: "Cleric" },
+              { key: "druid", text: "Druid" },
+              { key: "fighter", text: "Fighter" },
+              { key: "monk", text: "Monk" },
+              { key: "paladin", text: "Paladin" },
+              { key: "ranger", text: "Ranger" },
+              { key: "rogue", text: "Rogue" },
+              { key: "sorcerer", text: "Sorcerer" },
+              { key: "warlock", text: "Warlock" },
+              { key: "wizard", text: "Wizard" },
+            ]}
+          />
+          <SpinButton defaultValue="Starting level" onChange={onChangeLevel} />
+        </Stack>
+      );
+    }
+  };
 
   const onAddClass = () => {
     if (classCount === startingLevel) {
@@ -56,7 +136,7 @@ export const CharacterCreationPanel: React.FC<{
 
   const onChangeName = React.useCallback(
     (
-      event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
+      _event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
       newValue?: string
     ) => {
       setName(newValue || "");
@@ -64,7 +144,7 @@ export const CharacterCreationPanel: React.FC<{
     []
   );
 
-  console.log(name);
+  console.log(name, startingLevel, characterClasses);
 
   return (
     <Panel
@@ -88,24 +168,37 @@ export const CharacterCreationPanel: React.FC<{
       <Label required htmlFor="character-starting-level">
         Starting Level
       </Label>
-      <TextField errorMessage="" id="character-starting-level" />
-      <Dropdown
-        placeholder="Select a Class"
-        label="Class"
-        options={[
-          { key: "barbarian", text: "Barbarian" },
-          { key: "bard", text: "Bard" },
-          { key: "cleric", text: "Cleric" },
-          { key: "druid", text: "Druid" },
-          { key: "fighter", text: "Fighter" },
-          { key: "monk", text: "Monk" },
-          { key: "paladin", text: "Paladin" },
-          { key: "ranger", text: "Ranger" },
-          { key: "rogue", text: "Rogue" },
-          { key: "sorcerer", text: "Sorcerer" },
-          { key: "warlock", text: "Warlock" },
-          { key: "wizard", text: "Wizard" },
-        ]}
+      {LevelPicker()}
+      <PrimaryButton
+        text="Upload Avatar"
+        iconProps={{ iconName: "Upload" }}
+        onClick={(ev?) => {
+          ev?.persist();
+
+          Promise.resolve().then(() => {
+            const inputElement = document.createElement("input");
+            inputElement.style.visibility = "hidden";
+            inputElement.setAttribute("type", "file");
+
+            document.body.appendChild(inputElement);
+
+            const target = ev?.target as HTMLElement | undefined;
+
+            if (target) {
+              setVirtualParent(inputElement, target);
+            }
+
+            inputElement.click();
+
+            if (target) {
+              setVirtualParent(inputElement, null);
+            }
+
+            setTimeout(() => {
+              inputElement.remove();
+            }, 10000);
+          });
+        }}
       />
     </Panel>
   );
