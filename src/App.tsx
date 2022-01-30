@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import {
   Stack,
   Text,
@@ -54,15 +56,9 @@ import { CharacterPersona } from "./Components/CharacterPersona";
 import { Sessions } from "./Components/Sessions";
 
 const App = () => {
+  const dispatch = useDispatch();
+
   const [userAccount, setUserAccount] = useState({} as any);
-  const [sessionData, setSessionData] = useState(
-    [] as { key: string | null; value: ISessionData }[]
-  );
-  const [characterData, setCharacterData] = useState(
-    [] as { key: string | null; value: ICharacterData }[]
-  );
-  const [characters, setCharacters] = useState([] as ICharacter[]);
-  const [sessions, setSessions] = useState([] as ISession[]);
   const [showCharacterCreationPanel, setShowCharacterCreationPanel] =
     useState(false);
   const [name, setName] = useState("");
@@ -74,6 +70,9 @@ const App = () => {
   const [characterImages, setCharacterImages] = useState(
     [] as { characterId: number; imageUrl: string }[]
   );
+
+  const reduxCharacters = useSelector((state) => state.characters);
+  const reduxSessions = useSelector((state) => state.sessions);
 
   auth.onAuthStateChanged((user) => {
     setUserAccount(user);
@@ -93,7 +92,10 @@ const App = () => {
           data.push({ key: child.key, value: child.val() });
         });
 
-        setSessionData(data);
+        dispatch({
+          type: "SetSessions",
+          sessions: data.map((session) => parseSessionData(session)),
+        });
       });
   }, [firebaseDb]);
 
@@ -109,28 +111,29 @@ const App = () => {
           data.push({ key: child.key, value: child.val() });
         });
 
-        setCharacterData(data);
+        // Redux version
+        dispatch({
+          type: "SetCharacters",
+          characters: data.map((character) =>
+            parseCharacterData(character, reduxSessions)
+          ),
+        });
       });
   }, [firebaseDb]);
-
-  // Set Sessions from Session data from Firebase Realtime Database
-  useEffect(() => {
-    setSessions(parseSessionData(sessionData));
-  }, [sessionData]);
 
   useEffect(() => {
     var charImages = [] as { characterId: number; imageUrl: string }[];
 
-    characterData.map((character) => {
+    reduxCharacters.map((character) => {
       firestore
-        .ref(`Avatars/${character.value.id}.jpeg`)
+        .ref(`Avatars/${character.id}.jpeg`)
         .getDownloadURL()
         .then((url) => {
-          charImages.push({ characterId: character.value.id, imageUrl: url });
+          charImages.push({ characterId: character.id, imageUrl: url });
         })
         .catch(() => {
           charImages.push({
-            characterId: character.value.id,
+            characterId: character.id,
             imageUrl:
               "https://www.dndbeyond.com/Content/Skins/Waterdeep/images/characters/default-avatar-builder.png",
           });
@@ -138,52 +141,47 @@ const App = () => {
     });
 
     setCharacterImages(charImages);
-  }, [characterData, firestore]);
+  }, [reduxCharacters, firestore]);
 
-  // Set Characters from Character data from Firebase Realtime Database
-  useEffect(() => {
-    setCharacters(parseCharacterData(characterData, sessions));
-  }, [sessions, characterImages]);
+  // const createCharacter = () => {
+  //   const character = reduxCharacters[0];
 
-  const createCharacter = () => {
-    const character = characters[0];
+  //   const characterData = {
+  //     classes: character.classes,
+  //     id: new Date().getTime(),
+  //     name: character.name,
+  //     race: character.race,
+  //     ["starting-level"]: character.startingLevel,
+  //   } as ICharacterData;
 
-    const characterData = {
-      classes: character.classes,
-      id: new Date().getTime(),
-      name: character.name,
-      race: character.race,
-      ["starting-level"]: character.startingLevel,
-    } as ICharacterData;
+  //   if (window.confirm(`Create new Character?`)) {
+  //     firebaseDb
+  //       .child(`characters/`)
+  //       .push(characterData)
+  //       .catch((e) =>
+  //         alert(
+  //           `Failed to claim Character. Verify that you are connected to the internet. Please try again.\n\nDetails:\n${e}`
+  //         )
+  //       );
+  //   }
+  // };
 
-    if (window.confirm(`Create new Character?`)) {
-      firebaseDb
-        .child(`characters/`)
-        .push(characterData)
-        .catch((e) =>
-          alert(
-            `Failed to claim Character. Verify that you are connected to the internet. Please try again.\n\nDetails:\n${e}`
-          )
-        );
-    }
-  };
+  // const dropdownStyles: Partial<IDropdownStyles> = {
+  //   dropdown: { width: 300 },
+  // };
 
-  const dropdownStyles: Partial<IDropdownStyles> = {
-    dropdown: { width: 300 },
-  };
+  // const createSession = () => {
+  //   const data = sessionData[0];
 
-  const createSession = () => {
-    const data = sessionData[0];
+  //   const session = data.value;
 
-    const session = data.value;
-
-    if (window.confirm(`Create new Session?`)) {
-      firebaseDb
-        .child(`sessions/`)
-        .push(session)
-        .catch((e) => alert(`Failed to create Session.\n\nDetails:\n${e}`));
-    }
-  };
+  //   if (window.confirm(`Create new Session?`)) {
+  //     firebaseDb
+  //       .child(`sessions/`)
+  //       .push(session)
+  //       .catch((e) => alert(`Failed to create Session.\n\nDetails:\n${e}`));
+  //   }
+  // };
 
   const stackStyles: Partial<IStackStyles> = {
     root: {
@@ -210,6 +208,9 @@ const App = () => {
       : lightTheme;
   };
 
+  console.log("redux sessions", reduxSessions);
+  console.log("redux characters", reduxCharacters);
+
   return (
     <ThemeProvider theme={getTheme()}>
       <Stack horizontal>
@@ -221,8 +222,8 @@ const App = () => {
         >
           <Text style={{ fontSize: FontSizes.mega }}>Into the West</Text>
           <Commands
-            createCharacter={createCharacter}
-            createSession={createSession}
+            // createCharacter={createCharacter}
+            // createSession={createSession}
             toggleCharacterCreationPanel={(shouldShow) =>
               enableCharacterCreationPanel(shouldShow)
             }
@@ -241,7 +242,7 @@ const App = () => {
               tokens={{ childrenGap: 10 }}
             >
               <Text style={{ fontSize: FontSizes.superLarge }}>Characters</Text>
-              {characters.map((character) => (
+              {reduxCharacters.map((character) => (
                 <CharacterPersona
                   character={character}
                   characterImages={characterImages}
@@ -249,8 +250,8 @@ const App = () => {
               ))}
             </Stack>
             <Sessions
-              characters={characters}
-              sessions={sessions}
+              characters={reduxCharacters}
+              sessions={reduxSessions}
               characterImages={characterImages}
             />
           </Stack>

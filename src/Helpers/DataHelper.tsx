@@ -77,13 +77,15 @@ const getMainClass = (character) => {
 /**
  * Gets a list of the character's classes, ordered by highest level first
  *
- * @param {*} character
+ * @param {ICharacterClass[]} character
  * @return {string[]} A list of the character's classes
  */
 const getCharacterClasses = (characterClasses: ICharacterClass[]) => {
-  characterClasses.sort((a, b) => {
-    return b.level - a.level;
-  });
+  if (characterClasses.length > 1) {
+    characterClasses.sort((a, b) => {
+      return b.level - a.level;
+    });
+  }
 
   let classList = [] as ICharacterClass[];
 

@@ -5,15 +5,15 @@ import {
 } from "@fluentui/react/lib/CommandBar";
 
 export const Commands: React.FC<{
-  createCharacter: () => void;
-  createSession: () => void;
+  // createCharacter: () => void;
+  // createSession: () => void;
   toggleCharacterCreationPanel: (shouldShow) => void;
   useDarkTheme: boolean;
   toggleTheme: (useDarkTheme: boolean) => void;
   setThemeOverride: (useDarkTheme: boolean) => void;
 }> = ({
-  createCharacter,
-  createSession,
+  // createCharacter,
+  // createSession,
   toggleCharacterCreationPanel,
   useDarkTheme,
   toggleTheme,
@@ -31,7 +31,7 @@ export const Commands: React.FC<{
           | React.KeyboardEvent<HTMLElement>
           | undefined
       ) => {
-        createCharacter();
+        // createCharacter();
       },
     },
     {
@@ -45,7 +45,7 @@ export const Commands: React.FC<{
           | React.KeyboardEvent<HTMLElement>
           | undefined
       ) => {
-        createSession();
+        // createSession();
       },
     },
     {

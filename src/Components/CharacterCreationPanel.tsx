@@ -55,11 +55,8 @@ export const CharacterCreationPanel: React.FC<{
     item: IDropdownOption<any> | undefined,
     level: number | undefined
   ) => {
-    console.log(item, level);
     // const newClass = item.value
-
     // const allClasses = characterClasses as ICharacterClass[];
-
     // setCharacterClass([
     //   ...allClasses.filter((cls) => cls.class. != item.value),
     //   item.key, ,
@@ -143,8 +140,6 @@ export const CharacterCreationPanel: React.FC<{
     },
     []
   );
-
-  console.log(name, startingLevel, characterClasses);
 
   return (
     <Panel
