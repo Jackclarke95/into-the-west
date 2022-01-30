@@ -28,21 +28,7 @@ import {
 } from "@fluentui/react";
 import { initializeIcons } from "@fluentui/react/lib/Icons";
 
-import { Commands } from "./Components/CommandBar";
-
-import {
-  calculateSessionsForLevelUp,
-  calculateLevelFromSessions,
-  countSessionsAttended,
-  getOrdinal,
-  getMainClass,
-  getMainClassColour,
-  getCharacterClasses,
-  calculateMaxSessionsToNextLevel,
-} from "./Helpers/DataHelper";
 import { parseCharacterData, parseSessionData } from "./Helpers/DataParser";
-import ICharacter from "./Interfaces/ICharacter";
-import ISession from "./Interfaces/ISession";
 import { auth, firebaseDb, firestore } from "./firebase.utils";
 import "./Style/App.scss";
 import {
@@ -54,6 +40,7 @@ import ICharacterData from "./Interfaces/ICharacterData";
 import { CharacterCreationPanel } from "./Components/CharacterCreationPanel";
 import { CharacterPersona } from "./Components/CharacterPersona";
 import { Sessions } from "./Components/Sessions";
+import { Commands } from "./Components/CommandBar";
 
 const App = () => {
   const dispatch = useDispatch();
