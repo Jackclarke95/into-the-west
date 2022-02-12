@@ -29,7 +29,7 @@ import {
 import { initializeIcons } from "@fluentui/react/lib/Icons";
 
 import { parseCharacterData, parseSessionData } from "./Helpers/DataParser";
-import { auth, firebaseDb, firestore } from "./firebase.utils";
+import { auth, firebaseDb } from "./firebase.utils";
 import "./Style/App.scss";
 import {
   darkRedTheme as darkTheme,
