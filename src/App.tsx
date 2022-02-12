@@ -4,31 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   Stack,
   Text,
-  FontWeights,
-  IStackTokens,
   IStackStyles,
-  ITextStyles,
-  Persona,
-  PersonaSize,
-  List,
-  ProgressIndicator,
-  Label,
-  Dialog,
-  DialogType,
-  TextField,
-  PrimaryButton,
-  DefaultButton,
-  Dropdown,
-  IDropdownStyles,
-  DatePicker,
-  Link,
-  Panel,
   ThemeProvider,
   FontSizes,
 } from "@fluentui/react";
 import { initializeIcons } from "@fluentui/react/lib/Icons";
 
-import { parseCharacterData, parseSessionData } from "./Helpers/DataParser";
+import {
+  parseCharacterData,
+  parseSessionData,
+} from "./Helpers/DataParser";
 import { auth, firebaseDb } from "./firebase.utils";
 import "./Style/App.scss";
 import {
@@ -97,14 +82,12 @@ export default () => {
           }
         });
 
-        const charactersToDispatch = data.map((character) =>
-          parseCharacterData(character, sessions)
-        );
-
         // Redux version
         dispatch({
           type: "SetCharacters",
-          characters: charactersToDispatch,
+          characters: data.map((character) =>
+            parseCharacterData(character, sessions)
+          ),
         });
       });
   }, [firebaseDb]);
@@ -129,8 +112,6 @@ export default () => {
       ? darkTheme
       : lightTheme;
   };
-
-  console.log("dark mode", darkMode);
 
   return (
     <ThemeProvider theme={getTheme()}>

@@ -9,17 +9,15 @@ export const createCharacter = (character: ICharacterData) => {
       .push(character)
       .catch((error) =>
         alert(
-          `Failed to claim Character. Verify that you are connected to the internet. Please try again.\n\nDetails:\n${error}`
+          `Failed to create Character. Verify that you are connected to the internet. Please try again.\n\nDetails:\n${error}`
         )
       );
   }
 };
 
 export const createSession = (session: ISessionData) => {
-  if (window.confirm(`Create new Session?`)) {
-    firebaseDb
-      .child(`sessions/`)
-      .push(session)
-      .catch((e) => alert(`Failed to create Session.\n\nDetails:\n${e}`));
-  }
+  firebaseDb
+    .child(`sessions/`)
+    .push(session)
+    .catch((e) => alert(`Failed to create Session.\n\nDetails:\n${e}`));
 };

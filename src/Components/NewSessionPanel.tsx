@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Panel,
@@ -13,10 +13,11 @@ import {
   DayOfWeek,
   Dropdown,
   IDropdownOption,
-  CompactPeoplePicker,
 } from "@fluentui/react/";
 import { formatDate } from "../Helpers/DataParser";
 import { CharacterPicker } from "./CharacterPicker";
+import ISessionData from "../Interfaces/ISessionData";
+import { createSession } from "../Helpers/DatabaseHandler";
 
 export const NewSessionPanel: React.FC<{}> = () => {
   const dispatch = useDispatch();
@@ -25,12 +26,21 @@ export const NewSessionPanel: React.FC<{}> = () => {
 
   const showNewSessionPanel = useSelector((state) => state.showNewSessionPanel);
   const [sessionName, setSessionName] = useState<string>("");
-  const [sessionDate, setSessionDate] = useState<Date | null | undefined>();
-  const [selectedCharacterIds, setSelectedCharacterIds] = useState<string[]>(
-    []
-  );
-  const [selectedMap, setSelectedMap] = useState<string>("");
+  const [sessionDate, setSessionDate] = useState<string>("");
+  const [sessionCharacterIds, setSelectedCharacterIds] = useState<number[]>([]);
+  const [sessionMap, setSelectedMap] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const [session, setSession] = useState<ISessionData | null>(null);
+
+  useEffect(() => {
+    setSession({
+      characters: [...sessionCharacterIds],
+      id: new Date().getTime() as number,
+      name: sessionName,
+      ["scheduled-date"]: sessionDate,
+      ["dungeon-master"]: "",
+    });
+  }, [sessionName, sessionDate, sessionCharacterIds, sessionMap]);
 
   const onChangeName = React.useCallback(
     (
@@ -49,6 +59,14 @@ export const NewSessionPanel: React.FC<{}> = () => {
     });
   };
 
+  const onSave = () => {
+    console.log("session", session);
+
+    if (session) {
+      createSession(session);
+    }
+  };
+
   const onRenderFooterContent = React.useCallback(
     () => (
       <Stack
@@ -60,23 +78,12 @@ export const NewSessionPanel: React.FC<{}> = () => {
         }}
         tokens={{ childrenGap: 10 }}
       >
-        <PrimaryButton onClick={() => dismissnewSessionPanel()} text="Save" />
+        <PrimaryButton onClick={() => onSave()} text="Save" />
         <DefaultButton onClick={() => dismissnewSessionPanel()} text="Cancel" />
       </Stack>
     ),
     []
   );
-
-  const onChangeCharacters = (
-    _: React.FormEvent<HTMLDivElement>,
-    item?: IDropdownOption
-  ): void => {
-    setSelectedCharacterIds(
-      item!.selected
-        ? [...selectedCharacterIds, item!.key as string]
-        : selectedCharacterIds.filter((key) => key !== item!.key)
-    );
-  };
 
   const onChangeMap = (
     _: React.FormEvent<HTMLDivElement>,
@@ -85,9 +92,7 @@ export const NewSessionPanel: React.FC<{}> = () => {
     setSelectedMap(item!.text);
   };
 
-  console.log("characters", selectedCharacterIds);
-  console.log("date:", sessionDate);
-  console.log("map:", selectedMap);
+  console.log("state session", session);
 
   return (
     <Panel
@@ -124,7 +129,7 @@ export const NewSessionPanel: React.FC<{}> = () => {
       <Label required htmlFor="session-sessions">
         Characters
       </Label>
-      <CharacterPicker />
+      <CharacterPicker setSelectedCharacterIds={setSelectedCharacterIds} />
       <Dropdown
         placeholder="Select Map"
         label="Map"

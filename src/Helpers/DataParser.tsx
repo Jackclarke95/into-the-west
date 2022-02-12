@@ -21,7 +21,7 @@ const parseCharacterData = (
     value: ICharacterData;
   },
   sessions: ISession[]
-) => {
+): ICharacter => {
   const characterClasses = getCharacterClasses(character.value.classes);
   const sessionCount = countSessionsAttended(
     character.value.id,
@@ -81,7 +81,7 @@ const parseCharacterData = (
 const parseSessionData = (session: {
   key: string | null;
   value: ISessionData;
-}) => {
+}): ISession => {
   return {
     databaseKey: session.key,
     characterIds: session.value.characters,

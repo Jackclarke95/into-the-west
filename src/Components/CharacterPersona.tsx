@@ -22,9 +22,6 @@ export const CharacterPersona: React.FC<{
     />
   );
 
-  // console.log("param images", characterImages);
-  // console.log("redux images", reduxImages);
-
   return (
     <Persona
       imageUrl={characterImage?.imageUrl}
