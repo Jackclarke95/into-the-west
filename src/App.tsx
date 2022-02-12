@@ -195,9 +195,6 @@ export default () => {
           <Commands
             // createCharacter={createCharacter}
             // createSession={createSession}
-            toggleCharacterCreationPanel={(shouldShow) =>
-              enableCharacterCreationPanel(shouldShow)
-            }
             useDarkTheme={useDarkTheme}
             toggleTheme={(useDarkTheme) => setUseDarkTheme(useDarkTheme)}
             setThemeOverride={(useDarkTheme) => setThemeOverride(useDarkTheme)}
@@ -212,12 +209,7 @@ export default () => {
             <Sessions />
           </Stack>
         </Stack>
-        <CharacterCreationPanel
-          shouldShowCharacterCreationPanel={showCharacterCreationPanel}
-          toggleCharacterCreationPanel={(shouldShow) =>
-            enableCharacterCreationPanel(shouldShow)
-          }
-        />
+        <CharacterCreationPanel />
       </Stack>
     </ThemeProvider>
   );

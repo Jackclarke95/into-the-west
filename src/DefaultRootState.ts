@@ -10,6 +10,12 @@ declare module "react-redux" {
     characters: ICharacter[];
 
     sessions: ISessionD[];
+
+    // Whether to show the New Session Panel
+    showNewSessionPanel: boolean;
+
+    // Whether to show the New Character Panel
+    showNewCharacterPanel: boolean;
   }
 
   // Declare dispatcher to take our root provider's action type

@@ -14,18 +14,30 @@ import {
   SpinButton,
 } from "@fluentui/react/";
 import ICharacterClass from "../Interfaces/ICharacterClass";
+import { useDispatch, useSelector } from "react-redux";
 
-export const CharacterCreationPanel: React.FC<{
-  shouldShowCharacterCreationPanel: boolean;
-  toggleCharacterCreationPanel: (shouldShow) => void;
-}> = ({ shouldShowCharacterCreationPanel, toggleCharacterCreationPanel }) => {
+export const CharacterCreationPanel: React.FC<{}> = () => {
+  const dispatch = useDispatch();
+
+  const showNewCharacterPanel = useSelector(
+    (state) => state.showNewCharacterPanel
+  );
+
   const [name, setName] = React.useState("");
   const [classCount, setClassCount] = React.useState(1);
   const [startingLevel, setStartingLevel] = React.useState(1);
   const [characterClasses, setCharacterClass] = React.useState<
     ICharacterClass[]
   >([] as ICharacterClass[]);
+
   const [errorMessage, setErrorMessage] = React.useState("");
+
+  const toggleCharacterCreationPanel = () => {
+    dispatch({
+      type: "SetShowNewCharacterPanel",
+      showNewCharacterPanel: !showNewCharacterPanel,
+    });
+  };
 
   const onRenderFooterContent = React.useCallback(
     () => (
@@ -39,11 +51,11 @@ export const CharacterCreationPanel: React.FC<{
         tokens={{ childrenGap: 10 }}
       >
         <PrimaryButton
-          onClick={() => toggleCharacterCreationPanel(false)}
+          onClick={() => toggleCharacterCreationPanel()}
           text="Save"
         />
         <DefaultButton
-          onClick={() => toggleCharacterCreationPanel(false)}
+          onClick={() => toggleCharacterCreationPanel()}
           text="Cancel"
         />
       </Stack>
@@ -145,8 +157,8 @@ export const CharacterCreationPanel: React.FC<{
   return (
     <Panel
       isLightDismiss
-      isOpen={shouldShowCharacterCreationPanel}
-      onDismiss={() => toggleCharacterCreationPanel(false)}
+      isOpen={showNewCharacterPanel}
+      onDismiss={() => toggleCharacterCreationPanel()}
       closeButtonAriaLabel="Close"
       headerText="Character Creation"
       onRenderFooter={onRenderFooterContent}

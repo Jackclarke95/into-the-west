@@ -5,12 +5,22 @@ import { DefaultRootState } from "react-redux";
 /** Description of all the Actions taken that can affect the state */
 export type Action =
   | { type: "SetCharacters"; characters: DefaultRootState["characters"] }
-  | { type: "SetSessions"; sessions: DefaultRootState["sessions"] };
+  | { type: "SetSessions"; sessions: DefaultRootState["sessions"] }
+  | {
+      type: "SetShowNewSessionPanel";
+      showNewSessionPanel: DefaultRootState["showNewSessionPanel"];
+    }
+  | {
+      type: "SetShowNewCharacterPanel";
+      showNewCharacterPanel: DefaultRootState["showNewCharacterPanel"];
+    };
 
 /** Initial application state */
 export const initialState: DefaultRootState = {
   characters: [],
   sessions: [],
+  showNewSessionPanel: false,
+  showNewCharacterPanel: false,
 };
 
 /**
@@ -35,6 +45,18 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         // Action for setting the Sessions
         case "SetSessions": {
           draftState.sessions = action.sessions!;
+          break;
+        }
+
+        // Action for toggling the New Session Panel
+        case "SetShowNewSessionPanel": {
+          draftState.showNewSessionPanel = action.showNewSessionPanel;
+          break;
+        }
+
+        // Action for toggling the New Character Panel
+        case "SetShowNewCharacterPanel": {
+          draftState.showNewCharacterPanel = action.showNewCharacterPanel;
           break;
         }
       }

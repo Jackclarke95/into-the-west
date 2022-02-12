@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   CommandBar,
   ICommandBarItemProps,
@@ -7,18 +8,18 @@ import {
 export const Commands: React.FC<{
   // createCharacter: () => void;
   // createSession: () => void;
-  toggleCharacterCreationPanel: (shouldShow) => void;
   useDarkTheme: boolean;
   toggleTheme: (useDarkTheme: boolean) => void;
   setThemeOverride: (useDarkTheme: boolean) => void;
 }> = ({
   // createCharacter,
   // createSession,
-  toggleCharacterCreationPanel,
   useDarkTheme,
   toggleTheme,
   setThemeOverride,
 }) => {
+  const dispatch = useDispatch();
+
   const commandBarItems: ICommandBarItemProps[] = [
     {
       key: "newItem",
@@ -59,7 +60,10 @@ export const Commands: React.FC<{
           | React.KeyboardEvent<HTMLElement>
           | undefined
       ) => {
-        toggleCharacterCreationPanel(true);
+        dispatch({
+          type: "SetShowNewCharacterPanel",
+          showNewCharacterPanel: true,
+        });
       },
     },
     {
