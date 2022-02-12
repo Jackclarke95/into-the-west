@@ -13,8 +13,10 @@ import {
   DayOfWeek,
   Dropdown,
   IDropdownOption,
+  CompactPeoplePicker,
 } from "@fluentui/react/";
 import { formatDate } from "../Helpers/DataParser";
+import { CharacterPicker } from "./CharacterPicker";
 
 export const NewSessionPanel: React.FC<{}> = () => {
   const dispatch = useDispatch();
@@ -119,16 +121,10 @@ export const NewSessionPanel: React.FC<{}> = () => {
         ariaLabel="Select a date"
         onSelectDate={(date) => setSessionDate(formatDate(date, "yyyy MM dd"))}
       />
-      <Dropdown
-        placeholder="Select characters"
-        label="Characters"
-        // multiSelect
-        options={characters.map((character) => ({
-          key: character.id,
-          text: character.name,
-        }))}
-        onChange={onChangeCharacters}
-      />
+      <Label required htmlFor="session-sessions">
+        Characters
+      </Label>
+      <CharacterPicker />
       <Dropdown
         placeholder="Select Map"
         label="Map"
