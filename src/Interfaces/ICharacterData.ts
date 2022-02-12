@@ -14,5 +14,4 @@ export default interface ICharacterData {
   } | null;
   ["starting-level"]: number;
   ["player-dndbeyond-name"]: string;
-  ["avatar-link"]: string | null;
 }

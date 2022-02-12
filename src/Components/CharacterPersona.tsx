@@ -1,11 +1,14 @@
 import React from "react";
 import { Persona, PersonaSize, ProgressIndicator } from "@fluentui/react/";
 import ICharacter from "../Interfaces/ICharacter";
+import { useDispatch, useSelector } from "react-redux";
 
 export const CharacterPersona: React.FC<{
   character: ICharacter;
   characterImages: { characterId: number; imageUrl: string }[];
 }> = ({ character, characterImages }) => {
+  const reduxImages = useSelector((state) => state.characterImages);
+
   const levelProgress = () => (
     <ProgressIndicator
       label={`Level Progress: ${character.sessionToLevelUp}/${
@@ -20,21 +23,15 @@ export const CharacterPersona: React.FC<{
     />
   );
 
-  const getImageUrl = (): string => {
-    var imageUrl = "";
-
-    characterImages.forEach((charImg) => {
-      if (charImg.characterId === character.id) {
-        imageUrl = charImg.imageUrl;
-      }
-    });
-
-    return imageUrl;
-  };
+  // console.log("param images", characterImages);
+  // console.log("redux images", reduxImages);
 
   return (
     <Persona
-      imageUrl={getImageUrl()}
+      imageUrl={
+        characterImages.find((charImg) => charImg.characterId === character.id)
+          ?.imageUrl
+      }
       text={character.name}
       secondaryText={`${character.ordinalLevel} level ${character.classes
         .map((characterClass) => characterClass.class)

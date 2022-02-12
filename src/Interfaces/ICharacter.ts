@@ -49,4 +49,7 @@ export default interface ICharacter {
 
   /** Sessions until the Character will gain a level */
   sessionToLevelUp: number;
+
+  /** The URL of the Character's Avatar */
+  avatarImageUrl: string;
 }

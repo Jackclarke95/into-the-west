@@ -103,6 +103,7 @@ export const CharacterCreationPanel: React.FC<{
               { key: "artificer", text: "Artificer" },
               { key: "barbarian", text: "Barbarian" },
               { key: "bard", text: "Bard" },
+              { key: "blood hunter", text: "Blood Hunter" },
               { key: "cleric", text: "Cleric" },
               { key: "druid", text: "Druid" },
               { key: "fighter", text: "Fighter" },

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Children } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -59,6 +59,7 @@ const App = () => {
   );
 
   const reduxCharacters = useSelector((state) => state.characters);
+  const reduxImages = useSelector((state) => state.characterImages);
   const reduxSessions = useSelector((state) => state.sessions);
 
   auth.onAuthStateChanged((user) => {
@@ -91,19 +92,28 @@ const App = () => {
     firebaseDb
       .child("characters")
       .orderByChild("name")
-      .on("value", (snapshot) => {
-        const data = [] as { key: string | null; value: ICharacterData }[];
+      .on("value", async (snapshot) => {
+        const data = [] as {
+          key: string | null;
+          value: ICharacterData;
+        }[];
 
         snapshot.forEach((child) => {
           data.push({ key: child.key, value: child.val() });
+
+          if (!child.key) {
+            return;
+          }
         });
+
+        const charactersToDispatch = data.map((character) =>
+          parseCharacterData(character, reduxSessions)
+        );
 
         // Redux version
         dispatch({
           type: "SetCharacters",
-          characters: data.map((character) =>
-            parseCharacterData(character, reduxSessions)
-          ),
+          characters: charactersToDispatch,
         });
       });
   }, [firebaseDb]);
@@ -117,6 +127,14 @@ const App = () => {
         .getDownloadURL()
         .then((url) => {
           charImages.push({ characterId: character.id, imageUrl: url });
+
+          dispatch({
+            type: "SetCharacterImages",
+            characterImages: [
+              ...reduxImages,
+              { characterId: character.id, imageUrl: url },
+            ],
+          });
         })
         .catch(() => {
           charImages.push({
@@ -124,11 +142,26 @@ const App = () => {
             imageUrl:
               "https://www.dndbeyond.com/Content/Skins/Waterdeep/images/characters/default-avatar-builder.png",
           });
+
+          dispatch({
+            type: "SetCharacterImages",
+            characterImages: [
+              ...reduxImages,
+              {
+                characterId: character.id,
+                imageUrl:
+                  "https://www.dndbeyond.com/Content/Skins/Waterdeep/images/characters/default-avatar-builder.png",
+              },
+            ],
+          });
         });
     });
 
+    console.log("redux images", reduxImages);
+    console.log("local state images", charImages);
+
     setCharacterImages(charImages);
-  }, [reduxCharacters, firestore]);
+  }, [reduxCharacters]);
 
   // const createCharacter = () => {
   //   const character = reduxCharacters[0];
@@ -195,8 +228,8 @@ const App = () => {
       : lightTheme;
   };
 
-  console.log("redux sessions", reduxSessions);
-  console.log("redux characters", reduxCharacters);
+  // console.log("redux sessions", reduxSessions);
+  // console.log("redux characters", reduxCharacters);
 
   return (
     <ThemeProvider theme={getTheme()}>

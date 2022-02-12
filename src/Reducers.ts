@@ -5,11 +5,16 @@ import { DefaultRootState } from "react-redux";
 /** Description of all the Actions taken that can affect the state */
 export type Action =
   | { type: "SetCharacters"; characters: DefaultRootState["characters"] }
+  | {
+      type: "SetCharacterImages";
+      characterImages: DefaultRootState["characterImages"];
+    }
   | { type: "SetSessions"; sessions: DefaultRootState["sessions"] };
 
 /** Initial application state */
 export const initialState: DefaultRootState = {
   characters: [],
+  characterImages: [],
   sessions: [],
 };
 
@@ -29,6 +34,12 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         // Action for setting the Characters
         case "SetCharacters": {
           draftState.characters = action.characters!;
+          break;
+        }
+
+        // Action for setting the Characters with Images
+        case "SetCharacterImages": {
+          draftState.characterImages = action.characterImages!;
           break;
         }
 

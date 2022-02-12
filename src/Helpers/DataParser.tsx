@@ -2,6 +2,7 @@ import ICharacter from "../Interfaces/ICharacter";
 import ICharacterData from "../Interfaces/ICharacterData";
 import ISession from "../Interfaces/ISession";
 import ISessionData from "../Interfaces/ISessionData";
+import { auth, firebaseDb, firestore } from "../firebase.utils";
 
 import {
   calculateSessionsForLevelUp,
@@ -13,8 +14,6 @@ import {
   getCharacterClasses,
   calculateMaxSessionsToNextLevel,
 } from "./DataHelper";
-
-import { firestore } from "../firebase.utils";
 
 const parseCharacterData = (
   character: {
@@ -53,19 +52,31 @@ const parseCharacterData = (
     sessionCount
   );
 
-  var imageUrl = "";
+  // const imageUrl = (await firestore
+  //   .ref(`Avatars/${character.value.id}`)
+  //   .getDownloadURL()) as string;
 
-  firestore
-    .ref(`Avatars/${character.value.id}.jpeg`)
-    .getDownloadURL()
-    .then((url) => {
-      imageUrl = url;
-    })
-    .catch(
-      (e) =>
-        (imageUrl =
-          "https://www.dndbeyond.com/Content/Skins/Waterdeep/images/characters/default-avatar-builder.png")
-    );
+  // console.log("imageurl", imageUrl);
+
+  // let imageUrl: string;
+
+  // var foo = await firestore
+  //   .ref(`Avatars/${character.value.id}`)
+  //   .getDownloadURL()
+  //   .then((url) => {
+  //     debugger;
+
+  //     imageUrl = url;
+
+  //     return url;
+  //   })
+  //   .catch((error) => {
+  //     console.error(error);
+
+  //     throw new Error(error);
+  //   });
+
+  // console.log(`imageUrl for ${character.value.name}`, imageUrl);
 
   return {
     databaseKey: character.key,
@@ -89,6 +100,7 @@ const parseCharacterData = (
         }
       : null,
     sessionToLevelUp: sessionToLevelUp,
+    avatarImageUrl: "",
   };
 };
 
