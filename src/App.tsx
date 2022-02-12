@@ -1,4 +1,4 @@
-import { useState, useEffect, Children } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -38,11 +38,11 @@ import {
 import ISessionData from "./Interfaces/ISessionData";
 import ICharacterData from "./Interfaces/ICharacterData";
 import { CharacterCreationPanel } from "./Components/CharacterCreationPanel";
-import { CharacterPersona } from "./Components/CharacterPersona";
+import { Characters } from "./Components/Characters";
 import { Sessions } from "./Components/Sessions";
 import { Commands } from "./Components/CommandBar";
 
-const App = () => {
+export default () => {
   const dispatch = useDispatch();
 
   const [userAccount, setUserAccount] = useState({} as any);
@@ -127,7 +127,27 @@ const App = () => {
         .getDownloadURL()
         .then((url) => {
           charImages.push({ characterId: character.id, imageUrl: url });
+        })
+        .catch(() => {
+          charImages.push({
+            characterId: character.id,
+            imageUrl:
+              "https://www.dndbeyond.com/Content/Skins/Waterdeep/images/characters/default-avatar-builder.png",
+          });
+        });
+    });
 
+    console.log("1 - images", charImages);
+
+    setCharacterImages(charImages);
+  }, [reduxCharacters]);
+
+  useEffect(() => {
+    reduxCharacters.map((character) => {
+      firestore
+        .ref(`Avatars/${character.id}.jpeg`)
+        .getDownloadURL()
+        .then((url) => {
           dispatch({
             type: "SetCharacterImages",
             characterImages: [
@@ -137,12 +157,6 @@ const App = () => {
           });
         })
         .catch(() => {
-          charImages.push({
-            characterId: character.id,
-            imageUrl:
-              "https://www.dndbeyond.com/Content/Skins/Waterdeep/images/characters/default-avatar-builder.png",
-          });
-
           dispatch({
             type: "SetCharacterImages",
             characterImages: [
@@ -157,10 +171,7 @@ const App = () => {
         });
     });
 
-    console.log("redux images", reduxImages);
-    console.log("local state images", charImages);
-
-    setCharacterImages(charImages);
+    console.log("2 - redux images", reduxImages);
   }, [reduxCharacters]);
 
   // const createCharacter = () => {
@@ -230,6 +241,7 @@ const App = () => {
 
   // console.log("redux sessions", reduxSessions);
   // console.log("redux characters", reduxCharacters);
+  // console.log("redux images", reduxImages);
 
   return (
     <ThemeProvider theme={getTheme()}>
@@ -257,23 +269,8 @@ const App = () => {
               root: { overflowY: "auto", justifyContent: "space-evenly" },
             }}
           >
-            <Stack
-              styles={{ root: { width: "45%", overflowY: "auto" } }}
-              tokens={{ childrenGap: 10 }}
-            >
-              <Text style={{ fontSize: FontSizes.superLarge }}>Characters</Text>
-              {reduxCharacters.map((character) => (
-                <CharacterPersona
-                  character={character}
-                  characterImages={characterImages}
-                />
-              ))}
-            </Stack>
-            <Sessions
-              characters={reduxCharacters}
-              sessions={reduxSessions}
-              characterImages={characterImages}
-            />
+            <Characters characterImages={characterImages} />
+            <Sessions characterImages={characterImages} />
           </Stack>
         </Stack>
         <CharacterCreationPanel
@@ -286,5 +283,3 @@ const App = () => {
     </ThemeProvider>
   );
 };
-
-export default App;

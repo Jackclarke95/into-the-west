@@ -8,13 +8,14 @@ import {
   PersonaSize,
   IFacepilePersona,
 } from "@fluentui/react/";
-import ICharacter from "../Interfaces/ICharacter";
+import { useSelector } from "react-redux";
 
 export const Sessions: React.FC<{
-  characters: ICharacter[];
-  sessions: ISession[];
   characterImages: { characterId: number; imageUrl: string }[];
-}> = ({ characters, sessions, characterImages }) => {
+}> = ({ characterImages }) => {
+  const characters = useSelector((state) => state.characters);
+  const sessions = useSelector((state) => state.sessions);
+
   const getPersonas = (session: ISession): IFacepilePersona[] => {
     const foo = characters
       .filter((character) =>

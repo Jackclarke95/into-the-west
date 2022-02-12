@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 export const CharacterPersona: React.FC<{
   character: ICharacter;
-  characterImages: { characterId: number; imageUrl: string }[];
-}> = ({ character, characterImages }) => {
+  characterImage: { characterId: number; imageUrl: string } | undefined;
+}> = ({ character, characterImage }) => {
   const reduxImages = useSelector((state) => state.characterImages);
 
   const levelProgress = () => (
@@ -28,10 +28,7 @@ export const CharacterPersona: React.FC<{
 
   return (
     <Persona
-      imageUrl={
-        characterImages.find((charImg) => charImg.characterId === character.id)
-          ?.imageUrl
-      }
+      imageUrl={characterImage?.imageUrl}
       text={character.name}
       secondaryText={`${character.ordinalLevel} level ${character.classes
         .map((characterClass) => characterClass.class)
