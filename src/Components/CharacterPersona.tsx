@@ -7,8 +7,6 @@ export const CharacterPersona: React.FC<{
   character: ICharacter;
   characterImage: { characterId: number; imageUrl: string } | undefined;
 }> = ({ character, characterImage }) => {
-  const reduxImages = useSelector((state) => state.characterImages);
-
   const levelProgress = () => (
     <ProgressIndicator
       label={`Level Progress: ${character.sessionToLevelUp}/${

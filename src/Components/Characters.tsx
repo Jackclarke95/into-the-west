@@ -3,9 +3,7 @@ import { FontSizes, Text, Stack } from "@fluentui/react/";
 import { useSelector } from "react-redux";
 import { CharacterPersona } from "./CharacterPersona";
 
-export const Characters: React.FC<{
-  characterImages: { characterId: number; imageUrl: string }[];
-}> = ({ characterImages }) => {
+export const Characters: React.FC<{}> = () => {
   const characters = useSelector((state) => state.characters);
 
   return (
@@ -17,9 +15,7 @@ export const Characters: React.FC<{
       {characters.map((character) => (
         <CharacterPersona
           character={character}
-          characterImage={characterImages.find(
-            (charImg) => charImg.characterId === character.id
-          )}
+          characterImage={undefined} // TODO: get image
         />
       ))}
     </Stack>

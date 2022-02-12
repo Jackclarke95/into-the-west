@@ -10,9 +10,7 @@ import {
 } from "@fluentui/react/";
 import { useSelector } from "react-redux";
 
-export const Sessions: React.FC<{
-  characterImages: { characterId: number; imageUrl: string }[];
-}> = ({ characterImages }) => {
+export const Sessions: React.FC<{}> = () => {
   const characters = useSelector((state) => state.characters);
   const sessions = useSelector((state) => state.sessions);
 
@@ -25,9 +23,7 @@ export const Sessions: React.FC<{
       )
       .map((character) => {
         const persona: IFacepilePersona = {
-          imageUrl: characterImages.find(
-            (charImg) => charImg.characterId === character.id
-          )?.imageUrl,
+          imageUrl: undefined, // TODO: get image
           personaName: character.name,
         };
 

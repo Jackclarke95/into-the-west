@@ -54,13 +54,8 @@ export default () => {
       window.matchMedia("(prefers-color-scheme: dark)").matches
   );
   const [themeOverride, setThemeOverride] = useState(false);
-  const [characterImages, setCharacterImages] = useState(
-    [] as { characterId: number; imageUrl: string }[]
-  );
 
-  const reduxCharacters = useSelector((state) => state.characters);
-  const reduxImages = useSelector((state) => state.characterImages);
-  const reduxSessions = useSelector((state) => state.sessions);
+  const sessions = useSelector((state) => state.sessions);
 
   auth.onAuthStateChanged((user) => {
     setUserAccount(user);
@@ -107,7 +102,7 @@ export default () => {
         });
 
         const charactersToDispatch = data.map((character) =>
-          parseCharacterData(character, reduxSessions)
+          parseCharacterData(character, sessions)
         );
 
         // Redux version
@@ -117,62 +112,6 @@ export default () => {
         });
       });
   }, [firebaseDb]);
-
-  useEffect(() => {
-    var charImages = [] as { characterId: number; imageUrl: string }[];
-
-    reduxCharacters.map((character) => {
-      firestore
-        .ref(`Avatars/${character.id}.jpeg`)
-        .getDownloadURL()
-        .then((url) => {
-          charImages.push({ characterId: character.id, imageUrl: url });
-        })
-        .catch(() => {
-          charImages.push({
-            characterId: character.id,
-            imageUrl:
-              "https://www.dndbeyond.com/Content/Skins/Waterdeep/images/characters/default-avatar-builder.png",
-          });
-        });
-    });
-
-    console.log("1 - images", charImages);
-
-    setCharacterImages(charImages);
-  }, [reduxCharacters]);
-
-  useEffect(() => {
-    reduxCharacters.map((character) => {
-      firestore
-        .ref(`Avatars/${character.id}.jpeg`)
-        .getDownloadURL()
-        .then((url) => {
-          dispatch({
-            type: "SetCharacterImages",
-            characterImages: [
-              ...reduxImages,
-              { characterId: character.id, imageUrl: url },
-            ],
-          });
-        })
-        .catch(() => {
-          dispatch({
-            type: "SetCharacterImages",
-            characterImages: [
-              ...reduxImages,
-              {
-                characterId: character.id,
-                imageUrl:
-                  "https://www.dndbeyond.com/Content/Skins/Waterdeep/images/characters/default-avatar-builder.png",
-              },
-            ],
-          });
-        });
-    });
-
-    console.log("2 - redux images", reduxImages);
-  }, [reduxCharacters]);
 
   // const createCharacter = () => {
   //   const character = reduxCharacters[0];
@@ -269,8 +208,8 @@ export default () => {
               root: { overflowY: "auto", justifyContent: "space-evenly" },
             }}
           >
-            <Characters characterImages={characterImages} />
-            <Sessions characterImages={characterImages} />
+            <Characters />
+            <Sessions />
           </Stack>
         </Stack>
         <CharacterCreationPanel

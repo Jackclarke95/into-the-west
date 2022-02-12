@@ -1,0 +1,219 @@
+{
+  "characters": {
+    "-MaGKwrksOQXvT7PA5Qd": {
+      "classes": [
+        {
+          "class": "Cleric",
+          "level": 3
+        },
+        {
+          "class": "Sorcerer",
+          "level": 1
+        }
+      ],
+      "id": 1,
+      "name": "De Mauer",
+      "nickname": "",
+      "race": "Dwarf",
+      "subrace": "Mountain",
+      "retirement": {
+        "cause": "",
+        "date": "string"
+      },
+      "starting-level": 1,
+      "player-dndbeyond-name": "Benjywa"
+    },
+    "-MaGKy-zlVyH50zd5SP3": {},
+    "-MaGKyEbEoTT9OdP4pTm": {},
+    "-MaGKyPdpRoGYWbgAzJY": {},
+    "-MaGKyc6_OCu20PUmbGf": {},
+    "-MaGKylLm0FwaNWe-QO8": {},
+    "-MaGKyv9oPHJXuJKjmnl": {},
+    "-MaGKz4-slurxi3kmdJk": {},
+    "-MaGKzGbL5yHTKXce9Hj": {},
+    "-MaGKzRzKIVtbQyxQxDP": {},
+    "-MaGKze3Q36HyzEJh31_": {},
+    "-MaGKzqk5TwaERyJg_Q2": {},
+    "-MaGL-4gVKCPTHwNLSb5": {},
+    "-MaGL-EOTK4GBRD3OPuj": {},
+    "-MaGL-NOrFBzAAtU6Vwo": {},
+    "-MaGL-XpHuHUX4G5uVGm": {},
+    "-MaGL69yjMK5frXnEFKQ": {},
+    "-MaGL6MkgEpZJu34vnAA": {},
+    "-MaGL6cEeA0f0E_nEEMG": {},
+    "-MaGL6w9JHKxxPijYW0m": {},
+    "-MaGL8mAafT0RLJLodi5": {},
+    "-MaGL91rHeTE0-xDAVlb": {},
+    "-MaGL9FMxxrubkwavqrT": {},
+    "-MaGL9RDYDim9iPr5hJJ": {},
+    "-MaGL9dJxtLJgY3d2iZ4": {},
+    "-MaGL9wF8HQM8Hs6_Ups": {},
+    "-MaGLA7aT51hV3vv72qm": {},
+    "-MaGLAIwNsZrmaj59Jg1": {},
+    "-MaGLATY_RNd3u0Y3o_W": {},
+    "-MaGLAdfrrLeLWxdwuUU": {},
+    "-MaGLApepqQmAOqWUIIT": {},
+    "-MbTNa6D2Xvi63oPHETT": {}
+  },
+  "players": {
+    "-MaGM4jWXC3pyeif7isp": {
+      "player-name": "Louis",
+      "discord-name": "SchemingPnda#0518",
+      "dndbeyond-name": "SchemindPnda"
+    },
+    "-MaGM4rbdJBgZ8rKnfbc": {
+      "player-name": "Swedish Fox",
+      "discord-name": "SwedishFox#2134",
+      "dndbeyond-name": "SwedishFox"
+    },
+    "-MaGM4yP9MiI5Cy5CmCL": {
+      "player-name": "Cassie",
+      "discord-name": "Cassie#3862",
+      "dndbeyond-name": "Chaia01"
+    },
+    "-MaGM5544_seqH_FlZLo": {
+      "player-name": "Jack",
+      "discord-name": "Jimbob_#5733",
+      "dndbeyond-name": "JackClarke"
+    },
+    "-MaGM5CRWHK7L7PRyhub": {
+      "player-name": "Perky",
+      "discord-name": "Perky#3726",
+      "dndbeyond-name": "ThePerkyRiolu"
+    },
+    "-MaGM5JL64jM9ODkb1Jr": {
+      "player-name": "The Kingsman",
+      "discord-name": "The Kingsman#2898",
+      "dndbeyond-name": "TheKingsmantm"
+    },
+    "-MaGM5QVGtAGMiUj9Eb_": {
+      "player-name": "BlackRose89",
+      "discord-name": "BlackRose89#8833",
+      "dndbeyond-name": "BlackRoseSarah89"
+    },
+    "-MaGM5WvuAQM8zna7FzB": {
+      "player-name": "SunRester",
+      "discord-name": "SunRester#8899",
+      "dndbeyond-name": "SunRester"
+    },
+    "-MaGM5cq30wDPzwxYLK4": {
+      "player-name": "Ellie",
+      "discord-name": "𓆏 a spooky eel reborn 𓆏#5930",
+      "dndbeyond-name": "Zajay"
+    },
+    "-MaGM5koceXzQAlwRUFN": {
+      "player-name": "Arnaud",
+      "discord-name": "Arnaud#5510",
+      "dndbeyond-name": "Arnaudar"
+    },
+    "-MaGM5tBXrrMWldlbI-X": {
+      "player-name": "Jonno",
+      "discord-name": "Jonno0902#9966",
+      "dndbeyond-name": "Jonno0902"
+    },
+    "-MaGM5zGZ8VcPLiq697T": {
+      "player-name": "WillCarter",
+      "discord-name": "WillCarter#6063",
+      "dndbeyond-name": "WillCarterDM"
+    },
+    "-MaGM6IOnqXNGuNfxZa6": {
+      "player-name": "Patola",
+      "discord-name": "patola#0332",
+      "dndbeyond-name": "patola"
+    },
+    "-MaGM6Q3kpDNynEBURGO": {
+      "player-name": "Benjywa",
+      "discord-name": "benjywa#7340",
+      "dndbeyond-name": "Benjywa"
+    },
+    "-MaGM6YXdS0MHyYRc99v": {
+      "player-name": "No, this is Patrick",
+      "discord-name": "No,this is patrick#1606",
+      "dndbeyond-name": "Bruenorbattlehammeringgiant"
+    },
+    "-MaGM6ezZShojRgShWwd": {
+      "player-name": "BlueLegume",
+      "discord-name": "BlueLegume#4192",
+      "dndbeyond-name": ""
+    },
+    "-MaGM6mfWwwgH4r0KsVA": {
+      "player-name": "Chloe",
+      "discord-name": "Chloe#1673",
+      "dndbeyond-name": "RusselHumphriesIII"
+    },
+    "-MaGM6tYGb2oBuKcNdUQ": {
+      "player-name": "DannyJamesWard",
+      "discord-name": "DannyJamesWard#6089",
+      "dndbeyond-name": ""
+    },
+    "-MaGM7-gsVD6LxBHtulk": {
+      "player-name": "Alastair",
+      "discord-name": "GreyBeard#9358",
+      "dndbeyond-name": "DrGreybeard"
+    },
+    "-MaGM764hCfwnab2wTy8": {
+      "player-name": "HirotoShinori",
+      "discord-name": "HirotoShinori#2838",
+      "dndbeyond-name": "HirotoShinori"
+    },
+    "-MaGM7FH4Tg8C0AptFPR": {
+      "player-name": "Joelmon_Joel",
+      "discord-name": "Joelmon_Joel#6564",
+      "dndbeyond-name": ""
+    },
+    "-MaGM7VISDGDZF-eMIT4": {
+      "player-name": "Kosky",
+      "discord-name": "Kosky101#9128",
+      "dndbeyond-name": "Kosky101"
+    },
+    "-MaGM8eCkJdm1PE4ISuR": {
+      "player-name": "Poor Swimmer",
+      "discord-name": "PoorSwimmer#6126",
+      "dndbeyond-name": ""
+    },
+    "-MaGM8l3BWAoEc3mnmIf": {
+      "player-name": "Poppy",
+      "discord-name": "Poppy#8626",
+      "dndbeyond-name": "just_poppy"
+    },
+    "-MaGM8rpiI0QPEJV3YDw": {
+      "player-name": "Robin",
+      "discord-name": "Robin3009#3267",
+      "dndbeyond-name": ""
+    },
+    "-MaGM8ycWHXnWbaq-WqQ": {
+      "player-name": "Shabbyj",
+      "discord-name": "shabbyj#7019",
+      "dndbeyond-name": "shabbyj"
+    },
+    "-MaGM93zB2p65K1DMMZW": {
+      "player-name": "TheJelly",
+      "discord-name": "TheJelly#7925",
+      "dndbeyond-name": ""
+    },
+    "-MaGM9ApuRxANiYS2eNu": {
+      "player-name": "Thom Prime",
+      "discord-name": "Thom_G83#5580",
+      "dndbeyond-name": "Sanguine_Mesiac"
+    },
+    "-MaGM9IVAiHx1Zdv8hAu": {
+      "player-name": "John",
+      "discord-name": "Pheonixshifter177#2230",
+      "dndbeyond-name": "Phoenixfire177"
+    }
+  },
+  "sessions": {
+    "-MaGM2xEe7-ZSJ1jLSCr": {},
+    "-MaGM34mlje5iT0BB2xv": {},
+    "-MaGM3Eww_53ZLRYNgsh": {},
+    "-MaGM3Z3EJJS3rRwS2hf": {},
+    "-MaGM3fy6j_rPn8hULzG": {},
+    "-MaGM3nQXacedVuI7Qus": {},
+    "-MaGM3tvrn-G-mSvACPX": {},
+    "-MaGM4-reDhyKyJ3ou2t": {},
+    "-MaGM4GFKosOVInCqQXb": {},
+    "-MaGM4O8WLFfR_HVQYJC": {},
+    "-MaGM4Voma6ImJCU8W9s": {}
+  },
+  "user-accounts": {}
+}

@@ -9,8 +9,6 @@ declare module "react-redux" {
   export interface DefaultRootState {
     characters: ICharacter[];
 
-    characterImages: { characterId: number; imageUrl: string }[];
-
     sessions: ISessionD[];
   }
 
