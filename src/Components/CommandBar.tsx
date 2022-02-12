@@ -6,19 +6,11 @@ import {
 } from "@fluentui/react/lib/CommandBar";
 
 export const Commands: React.FC<{
-  // createCharacter: () => void;
-  // createSession: () => void;
-  useDarkTheme: boolean;
-  toggleTheme: (useDarkTheme: boolean) => void;
   setThemeOverride: (useDarkTheme: boolean) => void;
-}> = ({
-  // createCharacter,
-  // createSession,
-  useDarkTheme,
-  toggleTheme,
-  setThemeOverride,
-}) => {
+}> = ({ setThemeOverride }) => {
   const dispatch = useDispatch();
+
+  const darkMode = useSelector((state) => state.darkMode);
 
   const commandBarItems: ICommandBarItemProps[] = [
     {
@@ -37,7 +29,7 @@ export const Commands: React.FC<{
     },
     {
       key: "newItem",
-      text: "Clone Session",
+      text: "New Session",
       cacheKey: "myCacheKey", // changing this key will invalidate this item's cache
       iconProps: { iconName: "AddToShoppingList" },
       onClick: (
@@ -46,7 +38,10 @@ export const Commands: React.FC<{
           | React.KeyboardEvent<HTMLElement>
           | undefined
       ) => {
-        // createSession();
+        dispatch({
+          type: "SetShowNewSessionPanel",
+          showNewSessionPanel: true,
+        });
       },
     },
     {
@@ -70,14 +65,14 @@ export const Commands: React.FC<{
       key: "newItem",
       text: "Toggle Dark Mode",
       cacheKey: "myCacheKey", // changing this key will invalidate this item's cache
-      iconProps: { iconName: useDarkTheme ? "Light" : "Light" },
+      iconProps: { iconName: darkMode ? "Sunny" : "ClearNight" },
       onClick: (
         ev?:
           | React.MouseEvent<HTMLElement, MouseEvent>
           | React.KeyboardEvent<HTMLElement>
           | undefined
       ) => {
-        toggleTheme(!useDarkTheme);
+        dispatch({ type: "SetDarkMode", darkMode: !darkMode });
         setThemeOverride(true);
       },
     },

@@ -13,7 +13,8 @@ export type Action =
   | {
       type: "SetShowNewCharacterPanel";
       showNewCharacterPanel: DefaultRootState["showNewCharacterPanel"];
-    };
+    }
+  | { type: "SetDarkMode"; darkMode: DefaultRootState["darkMode"] };
 
 /** Initial application state */
 export const initialState: DefaultRootState = {
@@ -21,6 +22,9 @@ export const initialState: DefaultRootState = {
   sessions: [],
   showNewSessionPanel: false,
   showNewCharacterPanel: false,
+  darkMode:
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches,
 };
 
 /**
@@ -57,6 +61,12 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         // Action for toggling the New Character Panel
         case "SetShowNewCharacterPanel": {
           draftState.showNewCharacterPanel = action.showNewCharacterPanel;
+          break;
+        }
+
+        // Action for toggling Dark Mode
+        case "SetDarkMode": {
+          draftState.darkMode = action.darkMode;
           break;
         }
       }

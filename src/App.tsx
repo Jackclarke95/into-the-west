@@ -37,25 +37,21 @@ import {
 } from "./Style/Themes";
 import ISessionData from "./Interfaces/ISessionData";
 import ICharacterData from "./Interfaces/ICharacterData";
-import { CharacterCreationPanel } from "./Components/CharacterCreationPanel";
+import { NewCharacterPanel } from "./Components/NewCharacterPanel";
 import { Characters } from "./Components/Characters";
 import { Sessions } from "./Components/Sessions";
 import { Commands } from "./Components/CommandBar";
+import { NewSessionPanel } from "./Components/NewSessionPanel";
 
 export default () => {
   const dispatch = useDispatch();
 
   const [userAccount, setUserAccount] = useState({} as any);
-  const [showCharacterCreationPanel, setShowCharacterCreationPanel] =
-    useState(false);
-  const [name, setName] = useState("");
-  const [useDarkTheme, setUseDarkTheme] = useState(
-    window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-  );
+
   const [themeOverride, setThemeOverride] = useState(false);
 
   const sessions = useSelector((state) => state.sessions);
+  const darkMode = useSelector((state) => state.darkMode);
 
   auth.onAuthStateChanged((user) => {
     setUserAccount(user);
@@ -113,46 +109,6 @@ export default () => {
       });
   }, [firebaseDb]);
 
-  // const createCharacter = () => {
-  //   const character = reduxCharacters[0];
-
-  //   const characterData = {
-  //     classes: character.classes,
-  //     id: new Date().getTime(),
-  //     name: character.name,
-  //     race: character.race,
-  //     ["starting-level"]: character.startingLevel,
-  //   } as ICharacterData;
-
-  //   if (window.confirm(`Create new Character?`)) {
-  //     firebaseDb
-  //       .child(`characters/`)
-  //       .push(characterData)
-  //       .catch((e) =>
-  //         alert(
-  //           `Failed to claim Character. Verify that you are connected to the internet. Please try again.\n\nDetails:\n${e}`
-  //         )
-  //       );
-  //   }
-  // };
-
-  // const dropdownStyles: Partial<IDropdownStyles> = {
-  //   dropdown: { width: 300 },
-  // };
-
-  // const createSession = () => {
-  //   const data = sessionData[0];
-
-  //   const session = data.value;
-
-  //   if (window.confirm(`Create new Session?`)) {
-  //     firebaseDb
-  //       .child(`sessions/`)
-  //       .push(session)
-  //       .catch((e) => alert(`Failed to create Session.\n\nDetails:\n${e}`));
-  //   }
-  // };
-
   const stackStyles: Partial<IStackStyles> = {
     root: {
       width: "100%",
@@ -161,16 +117,12 @@ export default () => {
       color: "#605e5c",
       display: "flex",
       flexDirection: "column",
-      maxHeight: "100vh",
+      maxHeight: "fit-content",
     },
   };
 
-  const enableCharacterCreationPanel = (shouldShow) => {
-    setShowCharacterCreationPanel(shouldShow);
-  };
-
   const getTheme = () => {
-    return useDarkTheme ||
+    return darkMode ||
       (window.matchMedia &&
         window.matchMedia("(prefers-color-scheme: dark)").matches &&
         !themeOverride)
@@ -178,9 +130,7 @@ export default () => {
       : lightTheme;
   };
 
-  // console.log("redux sessions", reduxSessions);
-  // console.log("redux characters", reduxCharacters);
-  // console.log("redux images", reduxImages);
+  console.log("dark mode", darkMode);
 
   return (
     <ThemeProvider theme={getTheme()}>
@@ -193,10 +143,6 @@ export default () => {
         >
           <Text style={{ fontSize: FontSizes.mega }}>Into the West</Text>
           <Commands
-            // createCharacter={createCharacter}
-            // createSession={createSession}
-            useDarkTheme={useDarkTheme}
-            toggleTheme={(useDarkTheme) => setUseDarkTheme(useDarkTheme)}
             setThemeOverride={(useDarkTheme) => setThemeOverride(useDarkTheme)}
           />
           <Stack
@@ -209,7 +155,8 @@ export default () => {
             <Sessions />
           </Stack>
         </Stack>
-        <CharacterCreationPanel />
+        <NewSessionPanel />
+        <NewCharacterPanel />
       </Stack>
     </ThemeProvider>
   );

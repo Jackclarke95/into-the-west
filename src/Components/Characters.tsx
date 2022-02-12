@@ -1,5 +1,5 @@
 import React from "react";
-import { FontSizes, Text, Stack } from "@fluentui/react/";
+import { FontSizes, Text, Stack, PersonaSize } from "@fluentui/react/";
 import { useSelector } from "react-redux";
 import { CharacterPersona } from "./CharacterPersona";
 
@@ -16,6 +16,7 @@ export const Characters: React.FC<{}> = () => {
         <CharacterPersona
           character={character}
           characterImage={undefined} // TODO: get image
+          size={PersonaSize.size100}
         />
       ))}
     </Stack>

@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 export const CharacterPersona: React.FC<{
   character: ICharacter;
   characterImage: { characterId: number; imageUrl: string } | undefined;
-}> = ({ character, characterImage }) => {
+  size: PersonaSize;
+}> = ({ character, characterImage, size }) => {
   const levelProgress = () => (
     <ProgressIndicator
       label={`Level Progress: ${character.sessionToLevelUp}/${
@@ -33,7 +34,7 @@ export const CharacterPersona: React.FC<{
         .join(", ")}`}
       tertiaryText={`Session Count: ${character.sessionCount}`}
       onRenderOptionalText={levelProgress}
-      size={PersonaSize.size100}
+      size={size}
     />
   );
 };

@@ -16,7 +16,7 @@ import {
 import ICharacterClass from "../Interfaces/ICharacterClass";
 import { useDispatch, useSelector } from "react-redux";
 
-export const CharacterCreationPanel: React.FC<{}> = () => {
+export const NewCharacterPanel: React.FC<{}> = () => {
   const dispatch = useDispatch();
 
   const showNewCharacterPanel = useSelector(
@@ -160,7 +160,7 @@ export const CharacterCreationPanel: React.FC<{}> = () => {
       isOpen={showNewCharacterPanel}
       onDismiss={() => toggleCharacterCreationPanel()}
       closeButtonAriaLabel="Close"
-      headerText="Character Creation"
+      headerText="New Character"
       onRenderFooter={onRenderFooterContent}
       isFooterAtBottom={true}
     >

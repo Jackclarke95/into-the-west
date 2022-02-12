@@ -16,6 +16,9 @@ declare module "react-redux" {
 
     // Whether to show the New Character Panel
     showNewCharacterPanel: boolean;
+
+    // Whether the application is in Dark Mode
+    darkMode: boolean;
   }
 
   // Declare dispatcher to take our root provider's action type

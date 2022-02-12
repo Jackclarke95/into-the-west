@@ -52,32 +52,6 @@ const parseCharacterData = (
     sessionCount
   );
 
-  // const imageUrl = (await firestore
-  //   .ref(`Avatars/${character.value.id}`)
-  //   .getDownloadURL()) as string;
-
-  // console.log("imageurl", imageUrl);
-
-  // let imageUrl: string;
-
-  // var foo = await firestore
-  //   .ref(`Avatars/${character.value.id}`)
-  //   .getDownloadURL()
-  //   .then((url) => {
-  //     debugger;
-
-  //     imageUrl = url;
-
-  //     return url;
-  //   })
-  //   .catch((error) => {
-  //     console.error(error);
-
-  //     throw new Error(error);
-  //   });
-
-  // console.log(`imageUrl for ${character.value.name}`, imageUrl);
-
   return {
     databaseKey: character.key,
     id: character.value.id,
@@ -118,4 +92,21 @@ const parseSessionData = (session: {
   };
 };
 
-export { parseCharacterData, parseSessionData };
+const formatDate = function date2str(x, y) {
+  var z = {
+    M: x.getMonth() + 1,
+    d: x.getDate(),
+    h: x.getHours(),
+    m: x.getMinutes(),
+    s: x.getSeconds(),
+  };
+  y = y.replace(/(M+|d+|h+|m+|s+)/g, function (v) {
+    return ((v.length > 1 ? "0" : "") + z[v.slice(-1)]).slice(-2);
+  });
+
+  return y.replace(/(y+)/g, function (v) {
+    return x.getFullYear().toString().slice(-v.length);
+  });
+};
+
+export { parseCharacterData, parseSessionData, formatDate };
