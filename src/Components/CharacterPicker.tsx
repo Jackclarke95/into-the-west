@@ -8,7 +8,7 @@ import {
 } from "@fluentui/react/lib/Persona";
 import {
   IBasePickerSuggestionsProps,
-  NormalPeoplePicker,
+  CompactPeoplePicker,
   ValidationState,
 } from "@fluentui/react/lib/Pickers";
 import { CharacterPersona } from "./CharacterPersona";
@@ -22,31 +22,12 @@ const suggestionProps: IBasePickerSuggestionsProps = {
 export const CharacterPicker: React.FunctionComponent = () => {
   const characters = useSelector((state) => state.characters);
 
-  const characterProps = characters.map((character, index) => {
-    var foo = (
-      <CharacterPersona
-        character={character}
-        characterImage={undefined}
-        size={PersonaSize.size24}
-      />
-    );
-
-    var bar = {
-      imageInitials: "PV",
-      imageUrl: undefined,
-      isValid: true,
-      key: index,
-      optionalText: character.ordinalLevel,
-      presence: 2,
-      secondaryText: character.classes
-        .map((characterClass) => characterClass.class)
-        .join(", "),
-      tertiaryText: character.level.toString(),
-      text: character.name,
-    };
-
-    return bar;
-  });
+  const characterProps = characters.map((character, index) => ({
+    imageUrl: undefined,
+    key: index,
+    optionalText: character.ordinalLevel,
+    text: character.name,
+  }));
   const [delayResults, setDelayResults] = React.useState(false);
   const [isPickerDisabled, setIsPickerDisabled] = React.useState(false);
   const [mostRecentlyUsed, setMostRecentlyUsed] =
@@ -126,7 +107,7 @@ export const CharacterPicker: React.FunctionComponent = () => {
   console.log(characterProps[0]);
 
   return (
-    <NormalPeoplePicker
+    <CompactPeoplePicker
       // eslint-disable-next-line react/jsx-no-bind
       onResolveSuggestions={onFilterChanged}
       // eslint-disable-next-line react/jsx-no-bind

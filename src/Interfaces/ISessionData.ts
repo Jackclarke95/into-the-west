@@ -9,5 +9,5 @@ export default interface ISessionData {
 
   ["scheduled-date"]: string;
 
-  databaseKey: string;
+  databaseKey?: string;
 }
