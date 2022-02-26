@@ -17,30 +17,40 @@ import {
 import { formatDate } from "../Helpers/DataParser";
 import { CharacterPicker } from "./CharacterPicker";
 import ISessionData from "../Interfaces/ISessionData";
-import { createSession } from "../Helpers/DatabaseHandler";
+import { createSession } from "../Helpers/DataService";
 
 export const NewSessionPanel: React.FC<{}> = () => {
   const dispatch = useDispatch();
 
-  const characters = useSelector((state) => state.characters);
-
   const showNewSessionPanel = useSelector((state) => state.showNewSessionPanel);
+  const sessionToCreate = useSelector((state) => state.sessionToCreate);
+
   const [sessionName, setSessionName] = useState<string>("");
   const [sessionDate, setSessionDate] = useState<string>("");
   const [sessionCharacterIds, setSelectedCharacterIds] = useState<number[]>([]);
   const [sessionMap, setSelectedMap] = useState<string>("");
+  const [sessionDescription, setSessionDescription] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const [session, setSession] = useState<ISessionData | null>(null);
 
   useEffect(() => {
-    setSession({
-      characters: [...sessionCharacterIds],
-      id: new Date().getTime() as number,
-      name: sessionName,
-      ["scheduled-date"]: sessionDate,
-      ["dungeon-master"]: "",
+    dispatch({
+      type: "SetSessionToCreate",
+      sessionToCreate: {
+        characters: [...sessionCharacterIds],
+        id: new Date().getTime() as number,
+        name: sessionName,
+        description: sessionDescription,
+        ["scheduled-date"]: sessionDate,
+        ["dungeon-master"]: "",
+      } as ISessionData,
     });
-  }, [sessionName, sessionDate, sessionCharacterIds, sessionMap]);
+  }, [
+    sessionName,
+    sessionDate,
+    sessionCharacterIds,
+    sessionMap,
+    sessionDescription,
+  ]);
 
   const onChangeName = React.useCallback(
     (
@@ -52,19 +62,47 @@ export const NewSessionPanel: React.FC<{}> = () => {
     []
   );
 
+  const onChangeDescription = React.useCallback(
+    (
+      _event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
+      newValue?: string
+    ) => {
+      setSessionDescription(newValue || "");
+    },
+    []
+  );
+
   const dismissnewSessionPanel = () => {
-    dispatch({
-      type: "SetShowNewSessionPanel",
-      showNewSessionPanel: !showNewSessionPanel,
-    });
+    setSessionName("");
+    setSessionDate("");
+    setSelectedCharacterIds([]);
+    setSelectedMap("");
+    setSessionDescription("");
+    setErrorMessage("");
+
+    // dispatch({
+    //   type: "SetShowNewSessionPanel",
+    //   showNewSessionPanel: !showNewSessionPanel,
+    // });
   };
 
-  const onSave = () => {
-    console.log("session", session);
+  const newSession = {
+    characters: [...sessionCharacterIds],
+    id: new Date().getTime() as number,
+    name: sessionName,
+    description: sessionDescription,
+    ["scheduled-date"]: sessionDate,
+    ["dungeon-master"]: "",
+  };
 
-    if (session) {
-      createSession(session);
+  const onSave = async () => {
+    console.log("session", sessionToCreate);
+
+    if (sessionToCreate) {
+      createSession(sessionToCreate);
     }
+
+    dismissnewSessionPanel();
   };
 
   const onRenderFooterContent = React.useCallback(
@@ -86,13 +124,13 @@ export const NewSessionPanel: React.FC<{}> = () => {
   );
 
   const onChangeMap = (
-    _: React.FormEvent<HTMLDivElement>,
+    _event: React.FormEvent<HTMLDivElement>,
     item?: IDropdownOption
   ): void => {
     setSelectedMap(item!.text);
   };
 
-  console.log("state session", session);
+  console.log("state session", sessionToCreate);
 
   return (
     <Panel
@@ -140,6 +178,14 @@ export const NewSessionPanel: React.FC<{}> = () => {
           { key: 4, text: "The Shattered Realm" },
         ]}
         onChange={onChangeMap}
+      />
+      <TextField
+        label="Description"
+        placeholder="Type a description for the adventure"
+        required
+        multiline
+        autoAdjustHeight
+        onChange={onChangeDescription}
       />
     </Panel>
   );

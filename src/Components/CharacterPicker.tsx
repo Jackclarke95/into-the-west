@@ -21,7 +21,7 @@ export const CharacterPicker: React.FunctionComponent<{
   setSelectedCharacterIds: (characterIds: number[]) => void;
 }> = ({ setSelectedCharacterIds }) => {
   const characters = useSelector((state) => state.characters).map(
-    (character, index) => ({
+    (character) => ({
       imageUrl: undefined,
       key: character.id,
       optionalText: character.ordinalLevel,
