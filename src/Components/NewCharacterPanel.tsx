@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import {
   Panel,
   Label,
@@ -15,6 +15,8 @@ import {
 } from "@fluentui/react/";
 import ICharacterClass from "../Interfaces/ICharacterClass";
 import { useDispatch, useSelector } from "react-redux";
+import { createCharacter } from "../Helpers/DataService";
+import ICharacterData from "../Interfaces/ICharacterData";
 
 export const NewCharacterPanel: React.FC<{}> = () => {
   const dispatch = useDispatch();
@@ -23,20 +25,25 @@ export const NewCharacterPanel: React.FC<{}> = () => {
     (state) => state.showNewCharacterPanel
   );
 
-  const [name, setName] = React.useState("");
-  const [classCount, setClassCount] = React.useState(1);
-  const [startingLevel, setStartingLevel] = React.useState(1);
-  const [characterClasses, setCharacterClass] = React.useState<
-    ICharacterClass[]
-  >([] as ICharacterClass[]);
-
-  const [errorMessage, setErrorMessage] = React.useState("");
+  const [characterToCreate, setCharacterToCreate] = useState<
+    ICharacterData | undefined
+  >(undefined);
+  const [name, setName] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const toggleCharacterCreationPanel = () => {
     dispatch({
       type: "SetShowNewCharacterPanel",
       showNewCharacterPanel: !showNewCharacterPanel,
     });
+  };
+
+  const onSave = () => {
+    if (characterToCreate) {
+      createCharacter(characterToCreate);
+
+      toggleCharacterCreationPanel();
+    }
   };
 
   const onRenderFooterContent = React.useCallback(
@@ -50,10 +57,7 @@ export const NewCharacterPanel: React.FC<{}> = () => {
         }}
         tokens={{ childrenGap: 10 }}
       >
-        <PrimaryButton
-          onClick={() => toggleCharacterCreationPanel()}
-          text="Save"
-        />
+        <PrimaryButton onClick={() => onSave()} text="Save" />
         <DefaultButton
           onClick={() => toggleCharacterCreationPanel()}
           text="Cancel"
@@ -63,96 +67,25 @@ export const NewCharacterPanel: React.FC<{}> = () => {
     []
   );
 
-  const onChangeCharacterClass = (
-    item: IDropdownOption<any> | undefined,
-    level: number | undefined
-  ) => {
-    // const newClass = item.value
-    // const allClasses = characterClasses as ICharacterClass[];
-    // setCharacterClass([
-    //   ...allClasses.filter((cls) => cls.class. != item.value),
-    //   item.key, ,
-    // ]);
-  };
+  useEffect(() => {
+    console.log("name:", name);
+  }, [name]);
 
-  const LevelPicker = () => {
-    const [characterClass, setCharacterClass] = useState("");
-    const [ClassLevel, SetClassLevel] = useState<number | undefined>(1);
+  useEffect(() => {
+    const toCreate = {
+      id: new Date().getTime() as number,
+      race: "test race",
+      name: name,
+      classes: [{ class: "Fighter", level: 6 }],
+      ["starting-level"]: 5,
+      ["player-dndbeyond-name"]: "JackClarke",
+      nickname: "nickname",
+      subrace: "test subrace",
+      retirement: null,
+    } as ICharacterData;
 
-    const onChangeLevel = React.useCallback(
-      (_event: any, newValue?: string | undefined) => {
-        if (!newValue) {
-          alert("Please enter a valid level");
-
-          return;
-        }
-
-        let level = 0;
-
-        try {
-          level = parseInt(newValue);
-        } catch (e) {
-          alert(e);
-        }
-
-        SetClassLevel(level);
-      },
-      []
-    );
-
-    const levelPicker = [] as ReactNode[];
-
-    for (let i = 1; i <= startingLevel; i++) {
-      levelPicker.push(
-        <Stack horizontal>
-          <Dropdown
-            placeholder="Select a Class"
-            label="Class"
-            onChange={(_event, item) =>
-              onChangeCharacterClass(item, ClassLevel)
-            }
-            options={[
-              { key: "artificer", text: "Artificer" },
-              { key: "barbarian", text: "Barbarian" },
-              { key: "bard", text: "Bard" },
-              { key: "blood hunter", text: "Blood Hunter" },
-              { key: "cleric", text: "Cleric" },
-              { key: "druid", text: "Druid" },
-              { key: "fighter", text: "Fighter" },
-              { key: "monk", text: "Monk" },
-              { key: "paladin", text: "Paladin" },
-              { key: "ranger", text: "Ranger" },
-              { key: "rogue", text: "Rogue" },
-              { key: "sorcerer", text: "Sorcerer" },
-              { key: "warlock", text: "Warlock" },
-              { key: "wizard", text: "Wizard" },
-            ]}
-          />
-          <SpinButton defaultValue="Starting level" onChange={onChangeLevel} />
-        </Stack>
-      );
-    }
-  };
-
-  const onAddClass = () => {
-    if (classCount === startingLevel) {
-      setErrorMessage("You can't have more classes than starting levels");
-
-      return;
-    }
-
-    setClassCount(classCount + 1);
-  };
-
-  const onChangeName = React.useCallback(
-    (
-      _event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
-      newValue?: string
-    ) => {
-      setName(newValue || "");
-    },
-    []
-  );
+    setCharacterToCreate(toCreate);
+  });
 
   return (
     <Panel
@@ -172,41 +105,10 @@ export const NewCharacterPanel: React.FC<{}> = () => {
       <Label required htmlFor="character-name">
         Character name
       </Label>
-      <TextField value={name} onChange={onChangeName} id="character-name" />
-      <Label required htmlFor="character-starting-level">
-        Starting Level
-      </Label>
-      {LevelPicker()}
-      <PrimaryButton
-        text="Upload Avatar"
-        iconProps={{ iconName: "Upload" }}
-        onClick={(ev?) => {
-          ev?.persist();
-
-          Promise.resolve().then(() => {
-            const inputElement = document.createElement("input");
-            inputElement.style.visibility = "hidden";
-            inputElement.setAttribute("type", "file");
-
-            document.body.appendChild(inputElement);
-
-            const target = ev?.target as HTMLElement | undefined;
-
-            if (target) {
-              setVirtualParent(inputElement, target);
-            }
-
-            inputElement.click();
-
-            if (target) {
-              setVirtualParent(inputElement, null);
-            }
-
-            setTimeout(() => {
-              inputElement.remove();
-            }, 10000);
-          });
-        }}
+      <TextField
+        value={name}
+        onChange={(_, newValue) => setName(newValue?.toString() ?? "")}
+        id="character-name"
       />
     </Panel>
   );

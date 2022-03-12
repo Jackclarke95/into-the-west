@@ -93,6 +93,7 @@ const getCharacterClasses = (characterClasses: ICharacterClass[]) => {
     classList.push({
       class: characterClass.class,
       level: characterClass.level,
+      archetype: null,
     });
   });
 

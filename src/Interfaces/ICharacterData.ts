@@ -1,8 +1,7 @@
+import ICharacterClass from "./ICharacterClass";
+
 export default interface ICharacterData {
-  classes: {
-    class: string;
-    level: number;
-  }[];
+  classes: ICharacterClass[];
   id: number;
   name: string;
   nickname: string | null;
