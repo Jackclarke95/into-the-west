@@ -1,16 +1,19 @@
 import ICharacterClass from "./ICharacterClass";
 
 export default interface ICharacterData {
-  classes: ICharacterClass[];
   id: number;
+  avatarUrl: string;
+  playerDndBeyondName: string;
   name: string;
-  nickname: string | null;
+  nickname: string | undefined;
   race: string;
-  subrace: string | null;
+  subrace: string | undefined;
+  classes: ICharacterClass[];
+  currentLevel: number;
+  sessionsAttended: number;
+  startingLevel: number;
   retirement: {
-    cause: string;
+    reason: string;
     date: string;
-  } | null;
-  ["starting-level"]: number;
-  ["player-dndbeyond-name"]: string;
+  };
 }

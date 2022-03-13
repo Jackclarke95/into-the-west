@@ -14,28 +14,7 @@ import { Data } from "../Data/Data";
 import { ClassIcon } from "./ClassIcon";
 import DefaultAvatar from "../Images/DefaultAvatar.jpeg";
 import { useSelector } from "react-redux";
-
-interface CharacterData {
-  id: number;
-  avatarUrl: string;
-  playerDndBeyondName: string;
-  name: string;
-  nickname: string | undefined;
-  race: string;
-  subrace: string | undefined;
-  classes: {
-    className: string;
-    level: number;
-    archetype: string | undefined;
-  }[];
-  currentLevel: number;
-  sessionsAttended: number;
-  startingLevel: number;
-  retirement: {
-    reason: string;
-    date: string;
-  };
-}
+import ICharacterData from "../Interfaces/ICharacterData";
 
 export const CharacterTable = () => {
   const [compactMode, setCompactMode] = React.useState(false);
@@ -44,7 +23,7 @@ export const CharacterTable = () => {
 
   const characterData = Object.keys(Data.characters)
     .map((key) => {
-      const character = Data.characters[key] as CharacterData;
+      const character = Data.characters[key] as ICharacterData;
 
       return character;
     })
@@ -67,7 +46,7 @@ export const CharacterTable = () => {
     (character) => character.retirement
   );
 
-  const onRenderAvatar = (character: CharacterData) => {
+  const onRenderAvatar = (character: ICharacterData) => {
     return (
       <Image
         src={
@@ -95,12 +74,12 @@ export const CharacterTable = () => {
     );
   };
 
-  const onRenderRace = (character: CharacterData) =>
+  const onRenderRace = (character: ICharacterData) =>
     character.subrace
       ? `${character.subrace} ${character.race}`
       : character.race;
 
-  const onRenderClasses = (character: CharacterData) => (
+  const onRenderClasses = (character: ICharacterData) => (
     <Stack
       horizontal
       tokens={{ childrenGap: 10 }}
@@ -128,7 +107,7 @@ export const CharacterTable = () => {
     </Stack>
   );
 
-  const onRenderLevel = (character: CharacterData) => (
+  const onRenderLevel = (character: ICharacterData) => (
     <span
       style={{
         display: "block",
