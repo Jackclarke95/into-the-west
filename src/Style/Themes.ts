@@ -1,6 +1,6 @@
 import { createTheme } from "@fluentui/react";
 
-const darkTheme = createTheme({
+export const DarkTheme = createTheme({
   palette: {
     themePrimary: "#3292db",
     themeLighterAlt: "#020609",
@@ -27,17 +27,17 @@ const darkTheme = createTheme({
   },
 });
 
-const lightTheme = createTheme({
+export const LightTheme = createTheme({
   palette: {
-    themePrimary: "#0078d4",
-    themeLighterAlt: "#eff6fc",
-    themeLighter: "#deecf9",
-    themeLight: "#c7e0f4",
-    themeTertiary: "#71afe5",
-    themeSecondary: "#2b88d8",
-    themeDarkAlt: "#106ebe",
-    themeDark: "#005a9e",
-    themeDarker: "#004578",
+    themePrimary: "#e40712",
+    themeLighterAlt: "#fef4f5",
+    themeLighter: "#fbd4d6",
+    themeLight: "#f7afb2",
+    themeTertiary: "#ee646a",
+    themeSecondary: "#e6222c",
+    themeDarkAlt: "#cc0610",
+    themeDark: "#ac050e",
+    themeDarker: "#7f040a",
     neutralLighterAlt: "#faf9f8",
     neutralLighter: "#f3f2f1",
     neutralLight: "#edebe9",
@@ -54,7 +54,7 @@ const lightTheme = createTheme({
   },
 });
 
-const darkPurpleTheme = createTheme({
+export const DarkPurpleTheme = createTheme({
   palette: {
     themePrimary: "#b15beb",
     themeLighterAlt: "#070409",
@@ -81,7 +81,7 @@ const darkPurpleTheme = createTheme({
   },
 });
 
-const lightPurpleTheme = createTheme({
+export const LightPurpleTheme = createTheme({
   palette: {
     themePrimary: "#9f2de0",
     themeLighterAlt: "#fbf6fe",
@@ -107,10 +107,3 @@ const lightPurpleTheme = createTheme({
     white: "#ffffff",
   },
 });
-
-export {
-  darkTheme,
-  darkPurpleTheme as darkRedTheme,
-  lightTheme,
-  lightPurpleTheme as lightRedTheme,
-};

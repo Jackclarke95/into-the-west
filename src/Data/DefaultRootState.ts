@@ -1,7 +1,7 @@
 import { Dispatch } from "react";
-import ICharacter from "./Interfaces/ICharacter";
-import ISession from "./Interfaces/ISession";
-import ISessionData from "./Interfaces/ISessionData";
+import ICharacter from "../Interfaces/ICharacter";
+import ISession from "../Interfaces/ISession";
+import ISessionData from "../Interfaces/ISessionData";
 import { Action } from "./Reducers";
 
 /** Interface detailing the Default Root State */
