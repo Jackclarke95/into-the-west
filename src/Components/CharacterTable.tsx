@@ -8,6 +8,7 @@ import {
   SelectionMode,
   ShimmeredDetailsList,
   Stack,
+  Text,
   Toggle,
 } from "@fluentui/react";
 import { Data } from "../Data/Data";
@@ -162,8 +163,20 @@ export const CharacterTable = () => {
   ];
 
   return (
-    <>
+    <Stack
+      className="characters-container"
+      horizontalAlign="center"
+      verticalAlign="center"
+      verticalFill
+      styles={{
+        root: {
+          maxWidth: "100%",
+          textAlign: "center",
+        },
+      }}
+    >
       <Stack>
+        <Text variant="mega">Character List</Text>
         <Toggle
           label="Toggle Compact Table"
           inlineLabel
@@ -204,6 +217,6 @@ export const CharacterTable = () => {
           ]}
         />
       </Stack>
-    </>
+    </Stack>
   );
 };
