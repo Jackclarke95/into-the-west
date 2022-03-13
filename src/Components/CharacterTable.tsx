@@ -199,7 +199,7 @@ export const CharacterTable = () => {
               count: retiredCharacters.length,
               key: "retired",
               name: "Retired Characters",
-              isCollapsed: true,
+              // isCollapsed: true,
             },
           ]}
         />
