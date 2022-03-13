@@ -3,22 +3,17 @@ import {
   DefaultSpacing,
   DetailsListLayoutMode,
   IColumn,
-  IDetailsHeaderProps,
   Image,
   ImageFit,
-  IRenderFunction,
-  ScrollablePane,
-  ScrollbarVisibility,
   SelectionMode,
   ShimmeredDetailsList,
   Stack,
-  Sticky,
-  StickyPositionType,
   Toggle,
 } from "@fluentui/react";
 import { Data } from "../Data/Data";
 import { ClassIcon } from "./ClassIcon";
 import DefaultAvatar from "../Images/DefaultAvatar.jpeg";
+import { useSelector } from "react-redux";
 
 interface CharacterData {
   id: number;
@@ -45,6 +40,8 @@ interface CharacterData {
 export const CharacterTable = () => {
   const [compactMode, setCompactMode] = React.useState(false);
 
+  const currentUser = useSelector((state) => state.currentUser);
+
   const characterData = Object.keys(Data.characters)
     .map((key) => {
       const character = Data.characters[key] as CharacterData;
@@ -70,8 +67,78 @@ export const CharacterTable = () => {
     (character) => character.retirement
   );
 
-  console.log("active", activeCharacters);
-  console.log("retired", retiredCharacters);
+  const onRenderAvatar = (character: CharacterData) => {
+    return (
+      <Image
+        src={
+          character.avatarUrl.length > 0 ? character.avatarUrl : DefaultAvatar
+        }
+        imageFit={ImageFit.contain}
+        styles={{
+          root: {
+            borderRadius: "50%",
+            maxHeight: "20px",
+            maxWidth: "20px",
+            filter:
+              character.avatarUrl.length == 0
+                ? `hue-rotate(${
+                    Math.random() * 360
+                  }deg) brightness(1.5) invert(100%) ${
+                    character.retirement
+                      ? `grayscale(100%) brightness(0.5)`
+                      : ""
+                  }`
+                : undefined,
+          },
+        }}
+      />
+    );
+  };
+
+  const onRenderRace = (character: CharacterData) =>
+    character.subrace
+      ? `${character.subrace} ${character.race}`
+      : character.race;
+
+  const onRenderClasses = (character: CharacterData) => (
+    <Stack
+      horizontal
+      tokens={{ childrenGap: 10 }}
+      styles={{
+        root: { padding: 0, maxHeight: "23px" },
+      }}
+    >
+      {character.classes.map((cls) => (
+        <Stack horizontal horizontalAlign="center" verticalAlign="center">
+          <ClassIcon
+            className={cls.className}
+            styles={{
+              root: {
+                borderRadius: "50%",
+                marginRight: DefaultSpacing.s2,
+                maxWidth: "20px",
+              },
+            }}
+          />
+          {character.classes.length > 1
+            ? `${cls.className} (${cls.level})`
+            : cls.className}
+        </Stack>
+      ))}
+    </Stack>
+  );
+
+  const onRenderLevel = (character: CharacterData) => (
+    <span
+      style={{
+        display: "block",
+        textAlign: "left",
+        paddingLeft: "1em",
+      }}
+    >
+      {character.currentLevel}
+    </span>
+  );
 
   const columns: IColumn[] = [
     {
@@ -80,110 +147,40 @@ export const CharacterTable = () => {
       fieldName: "avatarUrl",
       minWidth: 25,
       maxWidth: 25,
-      onRender: (character: CharacterData) => {
-        return (
-          <Image
-            src={
-              character.avatarUrl.length > 0
-                ? character.avatarUrl
-                : DefaultAvatar
-            }
-            imageFit={ImageFit.contain}
-            styles={{
-              root: {
-                borderRadius: "50%",
-                maxHeight: "20px",
-                maxWidth: "20px",
-                filter:
-                  character.avatarUrl.length == 0
-                    ? `hue-rotate(${
-                        Math.random() * 360
-                      }deg) brightness(1.5) invert(100%) ${
-                        character.retirement
-                          ? `grayscale(100%) brightness(0.5)`
-                          : ""
-                      }`
-                    : undefined,
-              },
-            }}
-          />
-        );
-      },
+      onRender: onRenderAvatar,
     },
     {
       key: "name",
       name: "Name",
       fieldName: "name",
-      minWidth: 100,
+      minWidth: 200,
       isResizable: true,
     },
     {
       key: "race",
       name: "Race",
       fieldName: "race",
-      minWidth: 100,
+      minWidth: 150,
       isResizable: true,
+      onRender: onRenderRace,
     },
     {
       key: "class",
       name: "Class",
       fieldName: "classes",
-      minWidth: 200,
+      minWidth: 175,
       isResizable: true,
-      onRender: (character: CharacterData) => {
-        return (
-          <Stack
-            horizontal
-            tokens={{ childrenGap: 10 }}
-            styles={{
-              root: { padding: 0, maxHeight: "23px" },
-            }}
-          >
-            {character.classes.map((cls) => (
-              <Stack horizontal horizontalAlign="center" verticalAlign="center">
-                <ClassIcon
-                  className={cls.className}
-                  styles={{
-                    root: {
-                      borderRadius: "50%",
-                      marginRight: DefaultSpacing.s2,
-                      maxWidth: "20px",
-                    },
-                  }}
-                />
-                {character.classes.length > 1
-                  ? `${cls.className} (${cls.level})`
-                  : cls.className}
-              </Stack>
-            ))}
-          </Stack>
-        );
-      },
+      onRender: onRenderClasses,
     },
     {
       key: "level",
       name: "Level",
       fieldName: "currentLevel",
-      minWidth: 50,
-      isResizable: true,
-      styles: { root: { textAlign: "center" } },
+      minWidth: 33,
+      maxWidth: 50,
+      onRender: onRenderLevel,
     },
   ];
-
-  const onRenderDetailsHeader: IRenderFunction<IDetailsHeaderProps> = (
-    headerProps,
-    defaultRender
-  ) => {
-    return (
-      <Sticky
-        stickyPosition={StickyPositionType.Header}
-        stickyBackgroundColor="transparent"
-      >
-        {" "}
-        <div>{defaultRender!(headerProps)}</div>
-      </Sticky>
-    );
-  };
 
   return (
     <>
@@ -196,14 +193,21 @@ export const CharacterTable = () => {
           onChange={() => setCompactMode(!compactMode)}
         />
       </Stack>
-      <Stack className="character-table-container" grow={1}>
-        {/* <ScrollablePane scrollbarVisibility={ScrollbarVisibility.auto}> */}
+      <Stack
+        className="character-table-container"
+        grow={1}
+        styles={{
+          root: {
+            overflowY: "scroll",
+          },
+        }}
+      >
         <ShimmeredDetailsList
           layoutMode={DetailsListLayoutMode.fixedColumns}
           items={characterData}
           columns={columns}
-          selectionMode={SelectionMode.none}
           compact={compactMode}
+          selectionMode={SelectionMode.none}
           groups={[
             {
               startIndex: 0,
@@ -216,14 +220,10 @@ export const CharacterTable = () => {
               count: retiredCharacters.length,
               key: "retired",
               name: "Retired Characters",
+              isCollapsed: true,
             },
           ]}
-          // onRenderDetailsFooter={(props) => {
-          //   return props?.columns;
-          // }}
-          onRenderDetailsHeader={onRenderDetailsHeader}
         />
-        {/* </ScrollablePane> */}
       </Stack>
     </>
   );

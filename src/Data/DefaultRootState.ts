@@ -22,6 +22,14 @@ declare module "react-redux" {
     darkMode: boolean;
 
     sessionToCreate: ISessionData | null;
+
+    currentUser: {
+      friendlyName: string;
+      discordName: string;
+      dndBeyondName: string;
+      isDungeonMaster?: true;
+      isGamesMaster?: true;
+    };
   }
 
   // Declare dispatcher to take our root provider's action type

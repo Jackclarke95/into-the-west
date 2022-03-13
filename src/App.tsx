@@ -10,6 +10,7 @@ export default () => {
     <Stack
       horizontalAlign="center"
       verticalAlign="center"
+      verticalFill
       styles={{
         root: {
           width: "100%",
@@ -25,7 +26,7 @@ export default () => {
         </Text>
       </Stack>
       <CharacterTable />
-      <Stack verticalFill grow>
+      <Stack>
         <Text styles={{ root: { paddingTop: "1em" } }}>Footer</Text>
       </Stack>
     </Stack>

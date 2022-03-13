@@ -18,18 +18,32 @@ export type Action =
   | {
       type: "SetSessionToCreate";
       sessionToCreate: DefaultRootState["sessionToCreate"];
-    };
+    }
+  | { type: "SetCurrentUser"; currentUser: DefaultRootState["currentUser"] };
 
 /** Initial application state */
 export const initialState: DefaultRootState = {
   characters: [],
+
   sessions: [],
+
   showNewSessionPanel: false,
+
   showNewCharacterPanel: false,
+
   darkMode:
     window.matchMedia &&
     window.matchMedia("(prefers-color-scheme: dark)").matches,
+
   sessionToCreate: null,
+
+  currentUser: {
+    friendlyName: "Jack",
+    discordName: "Jimbob_#5733",
+    dndBeyondName: "JackClarke",
+    isDungeonMaster: true,
+    isGamesMaster: true,
+  },
 };
 
 /**
@@ -78,6 +92,12 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         // Action for setting the Session to create
         case "SetSessionToCreate": {
           draftState.sessionToCreate = action.sessionToCreate;
+          break;
+        }
+
+        // Action for setting the Current User
+        case "SetCurrentUser": {
+          draftState.currentUser = action.currentUser;
           break;
         }
       }
