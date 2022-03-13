@@ -4,8 +4,6 @@ import { DefaultRootState } from "react-redux";
 
 /** Description of all the Actions taken that can affect the state */
 export type Action =
-  | { type: "SetCharacters"; characters: DefaultRootState["characters"] }
-  | { type: "SetSessions"; sessions: DefaultRootState["sessions"] }
   | {
       type: "SetShowNewSessionPanel";
       showNewSessionPanel: DefaultRootState["showNewSessionPanel"];
@@ -15,18 +13,10 @@ export type Action =
       showNewCharacterPanel: DefaultRootState["showNewCharacterPanel"];
     }
   | { type: "SetDarkMode"; darkMode: DefaultRootState["darkMode"] }
-  | {
-      type: "SetSessionToCreate";
-      sessionToCreate: DefaultRootState["sessionToCreate"];
-    }
   | { type: "SetCurrentUser"; currentUser: DefaultRootState["currentUser"] };
 
 /** Initial application state */
 export const initialState: DefaultRootState = {
-  characters: [],
-
-  sessions: [],
-
   showNewSessionPanel: false,
 
   showNewCharacterPanel: false,
@@ -34,8 +24,6 @@ export const initialState: DefaultRootState = {
   darkMode:
     window.matchMedia &&
     window.matchMedia("(prefers-color-scheme: dark)").matches,
-
-  sessionToCreate: null,
 
   currentUser: {
     friendlyName: "Jack",
@@ -59,18 +47,6 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
     currentState,
     (draftState) => {
       switch (action.type) {
-        // Action for setting the Characters
-        case "SetCharacters": {
-          draftState.characters = action.characters!;
-          break;
-        }
-
-        // Action for setting the Sessions
-        case "SetSessions": {
-          draftState.sessions = action.sessions!;
-          break;
-        }
-
         // Action for toggling the New Session Panel
         case "SetShowNewSessionPanel": {
           draftState.showNewSessionPanel = action.showNewSessionPanel;
@@ -86,12 +62,6 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         // Action for toggling Dark Mode
         case "SetDarkMode": {
           draftState.darkMode = action.darkMode;
-          break;
-        }
-
-        // Action for setting the Session to create
-        case "SetSessionToCreate": {
-          draftState.sessionToCreate = action.sessionToCreate;
           break;
         }
 

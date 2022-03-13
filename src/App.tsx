@@ -8,26 +8,27 @@ export default () => {
   initializeIcons();
 
   return (
-    <Stack>
-      <Stack className="header">
+    <Stack
+      horizontalAlign="center"
+      verticalAlign="center"
+      verticalFill
+      styles={{
+        root: {
+          width: "100%",
+          maxWidth: "100%",
+          textAlign: "center",
+          height: "100vh",
+        },
+      }}
+    >
+      <Stack>
         <Text styles={{ root: { fontSize: FontSizes.mega } }}>
           Into the West
         </Text>
       </Stack>
-      <Stack
-        horizontalAlign="center"
-        verticalAlign="center"
-        verticalFill
-        styles={{
-          root: {
-            width: "100%",
-            maxWidth: "100%",
-            textAlign: "center",
-            height: "100vh",
-          },
-        }}
-      >
-        <CharacterTable />
+      <CharacterTable />
+      <Stack>
+        <Text styles={{ root: { paddingTop: "1em" } }}>Footer</Text>
       </Stack>
     </Stack>
   );

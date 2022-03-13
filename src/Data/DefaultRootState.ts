@@ -1,17 +1,10 @@
 import { Dispatch } from "react";
-import ICharacter from "../Interfaces/ICharacter";
-import ISession from "../Interfaces/ISession";
-import ISessionData from "../Interfaces/ISessionData";
 import { Action } from "./Reducers";
 
 /** Interface detailing the Default Root State */
 declare module "react-redux" {
   /** Default root state */
   export interface DefaultRootState {
-    characters: ICharacter[];
-
-    sessions: ISession[];
-
     // Whether to show the New Session Panel
     showNewSessionPanel: boolean;
 
@@ -20,8 +13,6 @@ declare module "react-redux" {
 
     // Whether the application is in Dark Mode
     darkMode: boolean;
-
-    sessionToCreate: ISessionData | null;
 
     currentUser: {
       friendlyName: string;
