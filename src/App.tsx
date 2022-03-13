@@ -1,13 +1,4 @@
-import {
-  Stack,
-  Text,
-  FontSizes,
-  DocumentCard,
-  DocumentCardImage,
-  DocumentCardDetails,
-  DocumentCardTitle,
-  ImageFit,
-} from "@fluentui/react";
+import { Stack, Text, FontSizes } from "@fluentui/react";
 import { initializeIcons } from "@fluentui/react/lib/Icons";
 import "./Style/App.scss";
 import { CharacterTable } from "./Components/CharacterTable";
