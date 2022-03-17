@@ -552,7 +552,7 @@ export const Data = {
       dndBeyondName: "Jonno0902",
     },
     "-MaGM5zGZ8VcPLiq697T": {
-      friendlyName: "WillCarter",
+      friendlyName: "Will",
       discordName: "WillCarter#6063",
       dndBeyondName: "WillCarterDM",
       isDungeonMaster: true,

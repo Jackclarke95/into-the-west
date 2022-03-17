@@ -85,7 +85,7 @@ export default () => {
         className="body-container"
         verticalFill
         horizontal
-        tokens={{ childrenGap: 35 }}
+        tokens={{ childrenGap: 50 }}
         styles={{ root: { overflowY: "auto" } }}
       >
         <CharacterTable />
