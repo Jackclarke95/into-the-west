@@ -12,30 +12,42 @@ import {
   Toggle,
 } from "@fluentui/react";
 import { Data } from "../Data/Data";
-import { ClassIcon } from "./ClassIcon";
-import DefaultAvatar from "../Images/DefaultAvatar.jpeg";
-import { useSelector } from "react-redux";
-import ISessionData from "../Interfaces/SessionData";
+import ISessionData from "../Interfaces/ISessionData";
+import { useDispatch, useSelector } from "react-redux";
 
 export const SessionTable = () => {
+  const dispatch = useDispatch();
+
+  const sessionData = useSelector((state) => state.sessions);
   const [compactMode, setCompactMode] = React.useState(false);
 
-  const sessionData = Object.keys(Data.sessions)
-    .map((key) => {
-      return Data.sessions[key] as ISessionData;
-    })
-    .sort((sessionA, sessionB) => sessionB.date.localeCompare(sessionA.date));
+  let upcomingSessions = [] as ISessionData[];
+  let pastSessions = [] as ISessionData[];
 
-  const upcomingSessions = sessionData.filter(
-    (session) => new Date(session.date) > new Date()
-  );
+  if (!sessionData.isLoading) {
+    upcomingSessions = sessionData.data.filter(
+      (session) => new Date(session.date) > new Date()
+    );
 
-  const pastSessions = sessionData.filter(
-    (session) => new Date(session.date) < new Date()
-  );
+    pastSessions = sessionData.data.filter(
+      (session) => new Date(session.date) < new Date()
+    );
+  }
 
   const onRenderDate = (session: ISessionData) => (
     <span>{new Date(session.date).toDateString()}</span>
+  );
+
+  const onRenderName = (session: ISessionData) => (
+    <span
+      style={{
+        display: "block",
+        textAlign: "left",
+        paddingLeft: sessionData.isLoading ? "36px" : "auto",
+      }}
+    >
+      {session.name}
+    </span>
   );
 
   const columns: IColumn[] = [
@@ -45,6 +57,7 @@ export const SessionTable = () => {
       fieldName: "name",
       minWidth: 200,
       isResizable: true,
+      onRender: onRenderName,
     },
     {
       key: "date",
@@ -73,7 +86,7 @@ export const SessionTable = () => {
   return (
     <Stack
       className="sessions-container"
-      styles={{ root: { overflow: "auto" } }}
+      styles={{ root: { overflowY: "auto" } }}
     >
       <Stack
         horizontal
@@ -100,31 +113,51 @@ export const SessionTable = () => {
         grow={1}
         styles={{
           root: {
-            overflowY: "auto",
+            overflowY: "scroll",
+            overflowX: "auto",
             flexGrow: 1,
+            width: "100%",
           },
         }}
       >
         <ShimmeredDetailsList
-          layoutMode={DetailsListLayoutMode.fixedColumns}
-          items={sessionData}
+          items={sessionData.isLoading ? [] : sessionData.data}
           columns={columns}
-          compact={compactMode}
+          enableShimmer={sessionData.isLoading}
           selectionMode={SelectionMode.none}
-          groups={[
-            {
-              startIndex: 0,
-              count: upcomingSessions.length,
-              key: "upcoming",
-              name: "Upcoming Sessions",
-            },
-            {
-              startIndex: upcomingSessions.length,
-              count: pastSessions.length,
-              key: "Past",
-              name: "Past Sessions",
-            },
-          ]}
+          compact={compactMode}
+          groups={
+            sessionData.isLoading
+              ? undefined
+              : // [
+                //     {
+                //       startIndex: 0,
+                //       count: 0,
+                //       key: "upcoming",
+                //       name: "Upcoming Sessions",
+                //     },
+                //     {
+                //       startIndex: upcomingSessions.length,
+                //       count: 0,
+                //       key: "Past",
+                //       name: "Past Sessions",
+                //     },
+                //   ]
+                [
+                  {
+                    startIndex: 0,
+                    count: upcomingSessions.length,
+                    key: "upcoming",
+                    name: "Upcoming Sessions",
+                  },
+                  {
+                    startIndex: upcomingSessions.length,
+                    count: pastSessions.length,
+                    key: "Past",
+                    name: "Past Sessions",
+                  },
+                ]
+          }
         />
       </Stack>
     </Stack>

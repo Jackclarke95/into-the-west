@@ -13,7 +13,10 @@ export type Action =
       showNewCharacterPanel: DefaultRootState["showNewCharacterPanel"];
     }
   | { type: "SetDarkMode"; darkMode: DefaultRootState["darkMode"] }
-  | { type: "SetCurrentUser"; currentUser: DefaultRootState["currentUser"] };
+  | { type: "SetCurrentUser"; currentUser: DefaultRootState["currentUser"] }
+  | { type: "SetCharacters"; characters: DefaultRootState["characters"] }
+  | { type: "SetSessions"; sessions: DefaultRootState["sessions"] }
+  | { type: "SetPlayers"; players: DefaultRootState["players"] };
 
 /** Initial application state */
 export const initialState: DefaultRootState = {
@@ -32,6 +35,12 @@ export const initialState: DefaultRootState = {
     isDungeonMaster: true,
     isGamesMaster: true,
   },
+
+  characters: { isLoading: true },
+
+  sessions: { isLoading: true },
+
+  players: { isLoading: true },
 };
 
 /**
@@ -68,6 +77,24 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         // Action for setting the Current User
         case "SetCurrentUser": {
           draftState.currentUser = action.currentUser;
+          break;
+        }
+
+        // Action for setting the Characters
+        case "SetCharacters": {
+          draftState.characters = action.characters;
+          break;
+        }
+
+        // Action for setting the Sessions
+        case "SetSessions": {
+          draftState.sessions = action.sessions;
+          break;
+        }
+
+        // Action for setting the Players
+        case "SetPlayers": {
+          draftState.players = action.players;
           break;
         }
       }

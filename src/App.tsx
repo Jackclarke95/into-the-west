@@ -4,8 +4,56 @@ import { CharacterTable } from "./Components/CharacterTable";
 import { Header } from "./Components/Header";
 import { Footer } from "./Components/Footer";
 import { SessionTable } from "./Components/SessionTable";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { Data } from "./Data/Data";
+import ICharacterData from "./Interfaces/ICharacterData";
+import ISessionData from "./Interfaces/ISessionData";
 
 export default () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({
+      type: "SetCharacters",
+      characters: {
+        isLoading: false,
+        data: Object.keys(Data.characters)
+          .map((key) => Data.characters[key] as ICharacterData)
+          .sort((characterA, characterB) =>
+            characterA.name.localeCompare(characterB.name)
+          )
+          .sort((characterA, characterB) => {
+            if (characterA.retirement && !characterB.retirement) {
+              return 1;
+            } else if (!characterA.retirement && characterB.retirement) {
+              return -1;
+            } else return 0;
+          }),
+      },
+    });
+
+    dispatch({
+      type: "SetSessions",
+      sessions: {
+        isLoading: false,
+        data: Object.keys(Data.sessions)
+          .map((key) => Data.sessions[key] as ISessionData)
+          .sort((sessionA, sessionB) =>
+            sessionB.date.localeCompare(sessionA.date)
+          ),
+      },
+    });
+
+    dispatch({
+      type: "SetPlayers",
+      players: {
+        isLoading: false,
+        data: Object.keys(Data.sessions).map((key) => Data.players[key]),
+      },
+    });
+  }, []);
+
   return (
     <Stack
       verticalFill
@@ -27,7 +75,7 @@ export default () => {
         verticalFill
         horizontal
         tokens={{ childrenGap: 35 }}
-        styles={{ root: { overflow: "auto" } }}
+        styles={{ root: { overflowY: "auto" } }}
       >
         <CharacterTable />
         <SessionTable />

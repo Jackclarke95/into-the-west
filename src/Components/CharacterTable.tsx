@@ -1,7 +1,6 @@
 import React from "react";
 import {
   DefaultSpacing,
-  DetailsListLayoutMode,
   IColumn,
   Image,
   ImageFit,
@@ -12,69 +11,52 @@ import {
   Text,
   Toggle,
 } from "@fluentui/react";
-import { Data } from "../Data/Data";
 import { ClassIcon } from "./ClassIcon";
 import DefaultAvatar from "../Images/DefaultAvatar.jpeg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ICharacterData from "../Interfaces/ICharacterData";
+import { Data } from "../Data/Data";
 
 export const CharacterTable = () => {
+  const dispatch = useDispatch();
+
+  const characterData = useSelector((state) => state.characters);
   const [compactMode, setCompactMode] = React.useState(false);
 
-  const currentUser = useSelector((state) => state.currentUser);
+  let activeCharacters = [] as ICharacterData[];
+  let retiredCharacters = [] as ICharacterData[];
 
-  const characterData = Object.keys(Data.characters)
-    .map((key) => {
-      const character = Data.characters[key] as ICharacterData;
-
-      return character;
-    })
-    .sort((characterA, characterB) =>
-      characterA.name.localeCompare(characterB.name)
-    )
-    .sort((characterA, characterB) => {
-      if (characterA.retirement && !characterB.retirement) {
-        return 1;
-      } else if (!characterA.retirement && characterB.retirement) {
-        return -1;
-      } else return 0;
-    });
-
-  const activeCharacters = characterData.filter(
-    (character) => !character.retirement
-  );
-
-  const retiredCharacters = characterData.filter(
-    (character) => character.retirement
-  );
-
-  const onRenderAvatar = (character: ICharacterData) => {
-    return (
-      <Image
-        src={
-          character.avatarUrl.length > 0 ? character.avatarUrl : DefaultAvatar
-        }
-        imageFit={ImageFit.contain}
-        styles={{
-          root: {
-            borderRadius: "50%",
-            maxHeight: "20px",
-            maxWidth: "20px",
-            filter:
-              character.avatarUrl.length == 0
-                ? `hue-rotate(${
-                    Math.random() * 360
-                  }deg) brightness(1.5) invert(100%) ${
-                    character.retirement
-                      ? `grayscale(100%) brightness(0.5)`
-                      : ""
-                  }`
-                : undefined,
-          },
-        }}
-      />
+  if (!characterData.isLoading) {
+    activeCharacters = characterData.data.filter(
+      (character) => !character.retirement
     );
-  };
+
+    retiredCharacters = characterData.data.filter(
+      (character) => character.retirement
+    );
+  }
+
+  const onRenderAvatar = (character: ICharacterData) => (
+    <Image
+      src={character.avatarUrl.length > 0 ? character.avatarUrl : DefaultAvatar}
+      imageFit={ImageFit.contain}
+      styles={{
+        root: {
+          borderRadius: "50%",
+          maxHeight: "20px",
+          maxWidth: "20px",
+          filter:
+            character.avatarUrl.length == 0
+              ? `hue-rotate(${
+                  Math.random() * 360
+                }deg) brightness(1.5) invert(100%) ${
+                  character.retirement ? `grayscale(100%) brightness(0.5)` : ""
+                }`
+              : undefined,
+        },
+      }}
+    />
+  );
 
   const onRenderName = (character: ICharacterData) =>
     character.sheetUrl ? (
@@ -173,10 +155,13 @@ export const CharacterTable = () => {
     },
   ];
 
+  console.log("isLoading", characterData.isLoading);
+  console.log("character data", characterData);
+
   return (
     <Stack
       className="characters-container"
-      styles={{ root: { overflow: "auto" } }}
+      styles={{ root: { overflowY: "auto" } }}
     >
       <Stack
         horizontal
@@ -203,31 +188,36 @@ export const CharacterTable = () => {
         grow={1}
         styles={{
           root: {
-            overflowY: "auto",
+            overflowY: "scroll",
+            overflowX: "auto",
             flexGrow: 1,
           },
         }}
       >
         <ShimmeredDetailsList
-          layoutMode={DetailsListLayoutMode.fixedColumns}
-          items={characterData}
+          items={characterData.isLoading ? [] : characterData.data}
           columns={columns}
-          compact={compactMode}
+          enableShimmer={characterData.isLoading}
           selectionMode={SelectionMode.none}
-          groups={[
-            {
-              startIndex: 0,
-              count: activeCharacters.length,
-              key: "active",
-              name: "Active Characters",
-            },
-            {
-              startIndex: activeCharacters.length,
-              count: retiredCharacters.length,
-              key: "retired",
-              name: "Retired Characters",
-            },
-          ]}
+          compact={compactMode}
+          groups={
+            characterData.isLoading
+              ? undefined
+              : [
+                  {
+                    startIndex: 0,
+                    count: activeCharacters.length,
+                    key: "active",
+                    name: "Active Characters",
+                  },
+                  {
+                    startIndex: activeCharacters.length,
+                    count: retiredCharacters.length,
+                    key: "retired",
+                    name: "Retired Characters",
+                  },
+                ]
+          }
         />
       </Stack>
     </Stack>
