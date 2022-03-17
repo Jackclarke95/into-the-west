@@ -19,6 +19,7 @@ export const SessionTable = () => {
   const dispatch = useDispatch();
 
   const sessionData = useSelector((state) => state.sessions);
+  const playerData = useSelector((state) => state.players);
   const [compactMode, setCompactMode] = React.useState(false);
 
   let upcomingSessions = [] as ISessionData[];
@@ -50,6 +51,23 @@ export const SessionTable = () => {
     </span>
   );
 
+  const onRenderDungeonMaster = (session: ISessionData) => {
+    console.log(playerData);
+    if (playerData.isLoading) {
+      return;
+    }
+
+    const matchedDm = playerData.data.find(
+      (player) => player.dndBeyondName === session.dungeonMaster
+    );
+
+    if (matchedDm) {
+      return <span>{matchedDm.friendlyName}</span>;
+    } else {
+      return <span>{session.dungeonMaster}</span>;
+    }
+  };
+
   const columns: IColumn[] = [
     {
       key: "name",
@@ -73,6 +91,7 @@ export const SessionTable = () => {
       fieldName: "dungeonMaster",
       minWidth: 175,
       isResizable: true,
+      onRender: onRenderDungeonMaster,
     },
     {
       key: "level",
@@ -129,21 +148,7 @@ export const SessionTable = () => {
           groups={
             sessionData.isLoading
               ? undefined
-              : // [
-                //     {
-                //       startIndex: 0,
-                //       count: 0,
-                //       key: "upcoming",
-                //       name: "Upcoming Sessions",
-                //     },
-                //     {
-                //       startIndex: upcomingSessions.length,
-                //       count: 0,
-                //       key: "Past",
-                //       name: "Past Sessions",
-                //     },
-                //   ]
-                [
+              : [
                   {
                     startIndex: 0,
                     count: upcomingSessions.length,

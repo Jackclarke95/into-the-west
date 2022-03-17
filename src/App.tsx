@@ -4,14 +4,17 @@ import { CharacterTable } from "./Components/CharacterTable";
 import { Header } from "./Components/Header";
 import { Footer } from "./Components/Footer";
 import { SessionTable } from "./Components/SessionTable";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import { Data } from "./Data/Data";
 import ICharacterData from "./Interfaces/ICharacterData";
 import ISessionData from "./Interfaces/ISessionData";
+import IPlayerData from "./Interfaces/IPlayerData";
 
 export default () => {
   const dispatch = useDispatch();
+
+  const players = useSelector((state) => state.players);
 
   useEffect(() => {
     dispatch({
@@ -45,14 +48,22 @@ export default () => {
       },
     });
 
+    console.log(
+      Object.keys(Data.players).map((key) => Data.players[key] as IPlayerData)
+    );
+
     dispatch({
       type: "SetPlayers",
       players: {
         isLoading: false,
-        data: Object.keys(Data.sessions).map((key) => Data.players[key]),
+        data: Object.keys(Data.players).map(
+          (key) => Data.players[key] as IPlayerData
+        ),
       },
     });
   }, []);
+
+  console.log("players", players);
 
   return (
     <Stack
