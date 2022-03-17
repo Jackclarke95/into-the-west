@@ -1,8 +1,8 @@
 export type BloodHunter = {
-  level: number;
+  name: "Blood Hunter";
   archetype:
     | "Order of the Ghostslayer"
     | "Order of the Lycan"
     | "Order of the Mutant"
-    | "Order of the Profane Soul";
+    | "Order of the Profane Soul" | undefined;
 };

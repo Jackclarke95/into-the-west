@@ -8,5 +8,6 @@ export type Ranger = {
     | "Horizon Walker"
     | "Hunter"
     | "Monster Slayer"
-    | "Swarmkeeper";
+    | "Swarmkeeper"
+    | undefined;
 };

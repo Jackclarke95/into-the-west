@@ -7,5 +7,6 @@ export type Druid = {
     | " Circle of the Land"
     | " Circle of the Moon"
     | " Circle of the Shepherd"
-    | " Circle of Wildfire";
+    | " Circle of Wildfire"
+    | undefined;
 };

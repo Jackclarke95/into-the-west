@@ -10,5 +10,6 @@ export type Paladin = {
     | "Oath of the Open Sea"
     | "Oath of the Watchers"
     | "Oath of Vengeance"
-    | "Oathbreaker";
+    | "Oathbreaker"
+    | undefined;
 };

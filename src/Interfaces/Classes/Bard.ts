@@ -8,5 +8,6 @@ export type Bard = {
     | "College of Spirits"
     | "College of Swords"
     | "College of Valor"
-    | "College of Whispers";
+    | "College of Whispers"
+    | undefined;
 };

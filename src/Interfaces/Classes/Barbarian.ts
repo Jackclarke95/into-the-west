@@ -8,5 +8,6 @@ export type Barbarian = {
     | "Path of the Storm Herald"
     | "Path of the Totem Warrior"
     | "Path of the Zealot"
-    | "Path of Wild Magic";
+    | "Path of Wild Magic"
+    | undefined;
 };

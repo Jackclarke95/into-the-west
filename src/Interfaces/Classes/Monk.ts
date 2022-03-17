@@ -11,5 +11,6 @@ export type Monk = {
     | "Way of the Kensei"
     | "Way of the Long Death"
     | "Way of the Open Hand"
-    | "Way of the Sun Soul";
+    | "Way of the Sun Soul"
+    | undefined;
 };

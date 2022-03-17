@@ -14,5 +14,6 @@ export type Cleric = {
     | "Tempest Domain"
     | "Trickery Domain"
     | "Twilight Domain"
-    | "War Domain";
+    | "War Domain"
+    | undefined;
 };

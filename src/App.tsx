@@ -5,7 +5,7 @@ import { Header } from "./Components/Header";
 import { Footer } from "./Components/Footer";
 import { SessionTable } from "./Components/SessionTable";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Data } from "./Data/Data";
 import ICharacterData from "./Interfaces/ICharacterData";
 import ISessionData from "./Interfaces/ISessionData";
@@ -23,6 +23,7 @@ export default () => {
         isLoading: false,
         data: Object.keys(Data.characters)
           .map((key) => Data.characters[key] as ICharacterData)
+
           .sort((characterA, characterB) =>
             characterA.name.localeCompare(characterB.name)
           )
@@ -62,8 +63,6 @@ export default () => {
       },
     });
   }, []);
-
-  console.log("players", players);
 
   return (
     <Stack

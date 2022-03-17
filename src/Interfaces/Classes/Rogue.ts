@@ -8,5 +8,6 @@ export type Rogue = {
     | "Scout"
     | "Soulknife"
     | "Swashbuckler"
-    | "Thief";
+    | "Thief"
+    | undefined;
 };

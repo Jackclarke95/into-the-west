@@ -10,12 +10,17 @@ export const Data = {
       subrace: "Mountain",
       classes: [
         {
-          className: "Cleric",
+          class: {
+            name: "Cleric",
+            archetype: "Forge Domain",
+          },
           level: 3,
-          archetype: "Forge Domain",
         },
         {
-          className: "Sorcerer",
+          class: {
+            name: "Sorcerer",
+            archetype: "Divine Soul",
+          },
           level: 1,
         },
       ],
@@ -34,9 +39,11 @@ export const Data = {
       subrace: "Variant",
       classes: [
         {
-          className: "Blood Hunter",
+          class: {
+            name: "Blood Hunter",
+            archetype: "Order of the Mutant",
+          },
           level: 3,
-          archetype: "Order of the Mutant",
         },
       ],
       currentLevel: 3,
@@ -55,9 +62,11 @@ export const Data = {
       subrace: "Variant",
       classes: [
         {
-          className: "Wizard",
+          class: {
+            name: "Wizard",
+            archetype: "School of Divination",
+          },
           level: 2,
-          archetype: "School of Divination",
         },
       ],
       currentLevel: 3,
@@ -73,9 +82,11 @@ export const Data = {
       race: "Kalashtar",
       classes: [
         {
-          className: "Cleric",
+          class: {
+            name: "Cleric",
+            archetype: "Order Domain",
+          },
           level: 2,
-          archetype: "Order Domain",
         },
       ],
       currentLevel: 2,
@@ -93,9 +104,11 @@ export const Data = {
       subrace: "Drow",
       classes: [
         {
-          className: "Warlock",
+          class: {
+            name: "Warlock",
+            archetype: "The Great Old One",
+          },
           level: 3,
-          archetype: "The Great Old One",
         },
       ],
       currentLevel: 3,
@@ -114,9 +127,11 @@ export const Data = {
       subrace: "Variant",
       classes: [
         {
-          className: "Cleric",
+          class: {
+            name: "Cleric",
+            archetype: "War Domain",
+          },
           level: 5,
-          archetype: "War Domain",
         },
       ],
       currentLevel: 5,
@@ -134,9 +149,11 @@ export const Data = {
       race: "Aarakocra",
       classes: [
         {
-          className: "Wizard",
+          class: {
+            name: "Wizard",
+            archetype: "School of Illusion",
+          },
           level: 2,
-          archetype: "School of Illusion",
         },
       ],
       currentLevel: 2,
@@ -153,7 +170,9 @@ export const Data = {
       race: "Aarakocra",
       classes: [
         {
-          className: "Bard",
+          class: {
+            name: "Bard",
+          },
           level: 2,
         },
       ],
@@ -172,9 +191,11 @@ export const Data = {
       race: "Reborn",
       classes: [
         {
-          className: "Artificer",
+          class: {
+            name: "Artificer",
+            archetype: "Armorer",
+          },
           level: 3,
-          archetype: "Armorer",
         },
       ],
       currentLevel: 3,
@@ -192,9 +213,11 @@ export const Data = {
       subrace: "Ravenite",
       classes: [
         {
-          className: "Ranger",
+          class: {
+            name: "Ranger",
+            archetype: "Drakewarden",
+          },
           level: 3,
-          archetype: "Drakewarden",
         },
       ],
       currentLevel: 3,
@@ -211,9 +234,11 @@ export const Data = {
       race: "Goliath",
       classes: [
         {
-          className: "Fighter",
+          class: {
+            name: "Fighter",
+            archetype: "Rune Knight",
+          },
           level: 4,
-          archetype: "Rune Knight",
         },
       ],
       currentLevel: 4,
@@ -229,7 +254,9 @@ export const Data = {
       race: "Human",
       classes: [
         {
-          className: "Artificer",
+          class: {
+            name: "Artificer",
+          },
           level: 2,
         },
       ],
@@ -252,7 +279,9 @@ export const Data = {
       race: "Half-Orc",
       classes: [
         {
-          className: "Monk",
+          class: {
+            name: "Monk",
+          },
           level: 1,
         },
       ],
@@ -271,9 +300,11 @@ export const Data = {
       subrace: "Fire",
       classes: [
         {
-          className: "Cleric",
+          class: {
+            name: "Cleric",
+            archetype: "Grave Domain",
+          },
           level: 4,
-          archetype: "Grave Domain",
         },
       ],
       currentLevel: 4,
@@ -291,9 +322,11 @@ export const Data = {
       subrace: "Variant",
       classes: [
         {
-          className: "Warlock",
+          class: {
+            name: "Warlock",
+            archetype: "The Fiend",
+          },
           level: 2,
-          archetype: "The Fiend",
         },
       ],
       currentLevel: 2,
@@ -311,7 +344,9 @@ export const Data = {
       race: "Goliath",
       classes: [
         {
-          className: "Paladin",
+          class: {
+            name: "Paladin",
+          },
           level: 1,
         },
       ],
@@ -329,9 +364,11 @@ export const Data = {
       race: "Tabaxi",
       classes: [
         {
-          className: "Paladin",
+          class: {
+            name: "Paladin",
+            archetype: "Oath of Conquest",
+          },
           level: 3,
-          archetype: "Oath of Conquest",
         },
       ],
       currentLevel: 2,
@@ -348,9 +385,11 @@ export const Data = {
       race: "Satyr",
       classes: [
         {
-          className: "Druid",
+          class: {
+            name: "Druid",
+            archetype: "Circle of Stars",
+          },
           level: 4,
-          archetype: "Circle of Stars",
         },
       ],
       currentLevel: 4,
@@ -365,7 +404,9 @@ export const Data = {
       race: "Kobold",
       classes: [
         {
-          className: "Artificer",
+          class: {
+            name: "Artificer",
+          },
           level: 1,
         },
       ],
@@ -389,9 +430,11 @@ export const Data = {
       subrace: "Mountain",
       classes: [
         {
-          className: "Paladin",
+          class: {
+            name: "Paladin",
+            archetype: "Oath of the Ancients",
+          },
           level: 3,
-          archetype: "Oath of the Ancients",
         },
       ],
       currentLevel: 3,
@@ -409,9 +452,11 @@ export const Data = {
       race: "Dragonborn",
       classes: [
         {
-          className: "Cleric",
+          class: {
+            name: "Cleric",
+            archetype: "Life Domain",
+          },
           level: 4,
-          archetype: "Life Domain",
         },
       ],
       currentLevel: 4,
@@ -430,8 +475,10 @@ export const Data = {
       subrace: "Forest",
       classes: [
         {
-          className: "Rogue",
-          level: 1,
+          class: {
+            name: "Rogue",
+            level: 1,
+          },
         },
       ],
       currentLevel: 1,
@@ -448,8 +495,10 @@ export const Data = {
       race: "Simic Hybrid",
       classes: [
         {
-          className: "Barbarian",
-          level: 1,
+          class: {
+            name: "Barbarian",
+            level: 1,
+          },
         },
       ],
       currentLevel: 1,
@@ -470,8 +519,10 @@ export const Data = {
       race: "Hobgoblin",
       classes: [
         {
-          className: "Fighter",
-          level: 1,
+          class: {
+            name: "Fighter",
+            level: 1,
+          },
         },
       ],
       currentLevel: 2,

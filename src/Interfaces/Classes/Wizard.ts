@@ -13,5 +13,6 @@ export type Wizard = {
     | "School of Illusion"
     | "School of Necromancy"
     | "School of Transmutation"
-    | "War Magic";
+    | "War Magic"
+    | undefined;
 };
