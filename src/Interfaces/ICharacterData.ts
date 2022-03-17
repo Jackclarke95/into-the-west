@@ -1,4 +1,7 @@
-import ICharacterClass from "./ICharacterClass";
+import { Artificer } from "./Classes/Artificer";
+import { Barbarian } from "./Classes/Barbarian";
+import { Bard } from "./Classes/Bard";
+import { BloodHunter } from "./Classes/BloodHunter";
 
 export default interface ICharacterData {
   id: number;
@@ -9,7 +12,10 @@ export default interface ICharacterData {
   nickname: string | undefined;
   race: string;
   subrace: string | undefined;
-  classes: ICharacterClass[];
+  classes: {
+    class: Artificer | Barbarian | Bard | BloodHunter;
+    level: number;
+  }[];
   currentLevel: number;
   sessionsAttended: number;
   startingLevel: number;

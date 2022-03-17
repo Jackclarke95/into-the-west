@@ -15,11 +15,8 @@ import { ClassIcon } from "./ClassIcon";
 import DefaultAvatar from "../Images/DefaultAvatar.jpeg";
 import { useDispatch, useSelector } from "react-redux";
 import ICharacterData from "../Interfaces/ICharacterData";
-import { Data } from "../Data/Data";
 
 export const CharacterTable = () => {
-  const dispatch = useDispatch();
-
   const characterData = useSelector((state) => state.characters);
   const [compactMode, setCompactMode] = React.useState(false);
 
@@ -83,7 +80,7 @@ export const CharacterTable = () => {
       {character.classes.map((cls) => (
         <Stack horizontal horizontalAlign="center" verticalAlign="center">
           <ClassIcon
-            className={cls.className}
+            className={cls.class.name}
             styles={{
               root: {
                 borderRadius: "50%",
@@ -93,8 +90,8 @@ export const CharacterTable = () => {
             }}
           />
           {character.classes.length > 1
-            ? `${cls.className} (${cls.level})`
-            : cls.className}
+            ? `${cls.class.name} (${cls.level})`
+            : cls.class.name}
         </Stack>
       ))}
     </Stack>
