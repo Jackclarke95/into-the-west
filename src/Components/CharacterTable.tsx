@@ -163,22 +163,21 @@ export const CharacterTable = () => {
   ];
 
   return (
-    <Stack
-      className="characters-container"
-      horizontalAlign="center"
-      verticalAlign="center"
-      verticalFill
-      styles={{
-        root: {
-          maxWidth: "100%",
-          textAlign: "center",
-        },
-      }}
-    >
-      <Stack>
-        <Text variant="mega">Character List</Text>
+    <Stack styles={{ root: { overflow: "auto" } }}>
+      <Stack
+        horizontal
+        className="character-table-header"
+        styles={{
+          root: {
+            width: "100%",
+            justifyContent: "space-between",
+            alignItems: "flex-end",
+          },
+        }}
+      >
+        <Text variant="superLarge">Characters</Text>
         <Toggle
-          label="Toggle Compact Table"
+          label="Compact Table"
           inlineLabel
           onText="Compact"
           offText="Normal"
@@ -190,7 +189,8 @@ export const CharacterTable = () => {
         grow={1}
         styles={{
           root: {
-            overflowY: "scroll",
+            overflowY: "auto",
+            flexGrow: 1,
           },
         }}
       >
@@ -212,7 +212,6 @@ export const CharacterTable = () => {
               count: retiredCharacters.length,
               key: "retired",
               name: "Retired Characters",
-              // isCollapsed: true,
             },
           ]}
         />

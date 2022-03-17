@@ -1,15 +1,14 @@
 import { Stack } from "@fluentui/react";
-import { initializeIcons } from "@fluentui/react/lib/Icons";
 import "./Style/App.scss";
 import { CharacterTable } from "./Components/CharacterTable";
+import { Header } from "./Components/Header";
+import { Footer } from "./Components/Footer";
 
 export default () => {
-  initializeIcons();
-
   return (
     <Stack
       verticalFill
-      horizontal
+      className="app-container"
       horizontalAlign="center"
       verticalAlign="center"
       styles={{
@@ -21,7 +20,17 @@ export default () => {
       }}
       tokens={{ childrenGap: 20 }}
     >
-      <CharacterTable />
+      <Header />
+      <Stack
+        className="body-container"
+        verticalFill
+        horizontal
+        styles={{ root: { overflow: "auto" } }}
+      >
+        <CharacterTable />
+        <CharacterTable />
+      </Stack>
+      <Footer />
     </Stack>
   );
 };
