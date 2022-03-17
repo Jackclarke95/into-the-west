@@ -610,7 +610,6 @@ export const Data = {
   sessions: {
     "-MaGM2xEe7-ZSJ1jLSCr": {
       id: 1,
-      avatarUrl: "",
       name: "Operation Landgrab",
       dungeonMaster: "SunRester",
       map: "The Shattered Realm",
@@ -619,16 +618,14 @@ export const Data = {
     },
     "-MaGM34mlje5iT0BB2xv": {
       id: 2,
-      avatarUrl: "",
       name: "The Poacher Problem",
       dungeonMaster: "JackClarke",
       map: "The Everwilds",
       date: "2021 11 26",
       attendees: [62565380, 62574844, 74219093, 62804832, 62913829],
     },
-    "-MaGM3Eww_53ZLRYNgsh": {
+    "-MaGM3Eww453ZLRYNgsh": {
       id: 3,
-      avatarUrl: "",
       name: "Viking Incursion",
       dungeonMaster: "SunRester",
       map: "The Lunar Isles",
@@ -637,7 +634,6 @@ export const Data = {
     },
     "-MaGM3Z3EJJS3rRwS2hf": {
       id: 4,
-      avatarUrl: "",
       name: "Finding the Blue Order",
       dungeonMaster: "SunRester",
       map: "The Forgotten Lands",
@@ -646,7 +642,6 @@ export const Data = {
     },
     "-MaGM3fy6j_rPn8hULzG": {
       id: 5,
-      avatarUrl: "",
       name: "Cirque de Snicket",
       dungeonMaster: "SchemingPnda",
       map: "The Shattered Realm",
@@ -655,7 +650,6 @@ export const Data = {
     },
     "-MaGM3nQXacedVuI7Qus": {
       id: 6,
-      avatarUrl: "",
       name: "Mysterious Benefactor",
       dungeonMaster: "JackClarke",
       map: "The Everwilds",
@@ -664,7 +658,6 @@ export const Data = {
     },
     "-MaGM3tvrn-G-mSvACPX": {
       id: 7,
-      avatarUrl: "",
       name: "Elven Exploration",
       dungeonMaster: "Phoenixfire177",
       map: "The Lunar Isles",
@@ -673,7 +666,6 @@ export const Data = {
     },
     "-MaGM4-reDhyKyJ3ou2t": {
       id: 8,
-      avatarUrl: "",
       name: "Forgotten Foothold",
       dungeonMaster: "SunRester",
       map: "The Forgotten Lands",
@@ -682,7 +674,6 @@ export const Data = {
     },
     "-MaGM4GFKosOVInCqQXb": {
       id: 9,
-      avatarUrl: "",
       name: "The Old Man's Message",
       dungeonMaster: "SunRester",
       map: "The Forgotten Lands",
@@ -691,7 +682,6 @@ export const Data = {
     },
     "-MaGM4O8WLFfR_HVQYJC": {
       id: 10,
-      avatarUrl: "",
       name: "Midvalley Mines",
       dungeonMaster: "JackClarke",
       map: "The Forgotten Lands",
@@ -700,7 +690,6 @@ export const Data = {
     },
     "-MaGM4Voma6ImJCU8W9s": {
       id: 11,
-      avatarUrl: "",
       name: "Welp, We Released a Dragon",
       dungeonMaster: "Benjywa",
       map: "The Everwilds",
@@ -709,7 +698,6 @@ export const Data = {
     },
     "-MaGL9dJxtLJgY3d2iZ4": {
       id: 12,
-      avatarUrl: "",
       name: "The Jailor Comes",
       dungeonMaster: "SunRester",
       map: "The Forgotten Lands",
@@ -718,7 +706,6 @@ export const Data = {
     },
     "-MaGL9wF8HQM8Hs6_Ups": {
       id: 13,
-      avatarUrl: "",
       name: "Dead Drop",
       dungeonMaster: "JackClarke",
       map: "The Everwilds",
@@ -727,7 +714,6 @@ export const Data = {
     },
     "-MaGLA7aT51hV3vv72qm": {
       id: 14,
-      avatarUrl: "",
       name: "Making Amends",
       dungeonMaster: "Benjywa",
       map: "The Everwilds",
@@ -736,7 +722,6 @@ export const Data = {
     },
     "-MaGLAIwNsZrmaj59Jg1": {
       id: 15,
-      avatarUrl: "",
       name: "Rumblings of the Legion",
       dungeonMaster: "SunRester",
       map: "The Forgotten Lands",
@@ -745,7 +730,6 @@ export const Data = {
     },
     "-MaGLATY_RNd3u0Y3o_W": {
       id: 16,
-      avatarUrl: "",
       name: "Bad Neighbours",
       dungeonMaster: "SunRester",
       map: "The Everwilds",
@@ -754,7 +738,6 @@ export const Data = {
     },
     "-MaGLApepqQmAOqWUIIT": {
       id: 17,
-      avatarUrl: "",
       name: "North of Midvalley",
       dungeonMaster: "Benjywa",
       map: "The Forgotten Lands",
@@ -763,7 +746,6 @@ export const Data = {
     },
     "-MbTNa6D2Xvi63oPHETT": {
       id: 18,
-      avatarUrl: "",
       name: "Exploring the Realms",
       dungeonMaster: "Benjywa",
       map: "The Shattered Realm",
@@ -772,13 +754,28 @@ export const Data = {
     },
     "-McFJrNI6IuRu2DEk5Dh": {
       id: 19,
-      avatarUrl: "",
       name: "Clearing Dreadshade Fortress",
       dungeonMaster: "Benjywa",
       map: "The Forgotten Lands",
       date: "2022 03 08",
       attendees: [58615947, 33132303, 62176290, 62556497],
     },
+    "-McjF65Dr-fjIa51Ajp1": {
+      id: 19,
+      name: "Fallen Star",
+      dungeonMaster: "JackClarke",
+      map: "The Everwilds",
+      date: "2022 03 14",
+      attendees: [62176290, 33132303, 62565380, 62567125, 62556497],
+    },
+    "-McL5rhZ4FHd8edjK71A": {
+      id: 19,
+      name: "Shadows Over the Mountains",
+      dungeonMaster: "JackClarke",
+      map: "The Forgotten Lands",
+      date: "2022 03 18",
+      attendees: [62176290, 58615947, 62426653],
+    },
   },
-  "user-accounts": {},
+  userAccounts: {},
 };

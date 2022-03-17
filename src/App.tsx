@@ -3,6 +3,7 @@ import "./Style/App.scss";
 import { CharacterTable } from "./Components/CharacterTable";
 import { Header } from "./Components/Header";
 import { Footer } from "./Components/Footer";
+import { SessionTable } from "./Components/SessionTable";
 
 export default () => {
   return (
@@ -25,10 +26,11 @@ export default () => {
         className="body-container"
         verticalFill
         horizontal
+        tokens={{ childrenGap: 35 }}
         styles={{ root: { overflow: "auto" } }}
       >
         <CharacterTable />
-        <CharacterTable />
+        <SessionTable />
       </Stack>
       <Footer />
     </Stack>

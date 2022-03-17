@@ -9,7 +9,7 @@ import {
 import ArtificerIcon from "../Images/ClassIcons/Artificer.jpeg";
 import BarbarianIcon from "../Images/ClassIcons/Barbarian.jpeg";
 import BardIcon from "../Images/ClassIcons/Bard.jpeg";
-import BloodHunter from "../Images/ClassIcons/Bard.jpeg";
+import BloodHunter from "../Images/ClassIcons/BloodHunter.jpeg";
 import ClericIcon from "../Images/ClassIcons/Cleric.jpeg";
 import DruidIcon from "../Images/ClassIcons/Druid.jpeg";
 import FighterIcon from "../Images/ClassIcons/Fighter.jpeg";

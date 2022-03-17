@@ -163,7 +163,10 @@ export const CharacterTable = () => {
   ];
 
   return (
-    <Stack styles={{ root: { overflow: "auto" } }}>
+    <Stack
+      className="characters-container"
+      styles={{ root: { overflow: "auto" } }}
+    >
       <Stack
         horizontal
         className="character-table-header"
