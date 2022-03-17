@@ -1,6 +1,5 @@
 export type Bard = {
   name: "Bard";
-  level: number;
   archetype:
     | "College of Creation"
     | "College of Eloquence"

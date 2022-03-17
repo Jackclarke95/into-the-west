@@ -1,5 +1,4 @@
 export type BloodHunter = {
-  name: "Blood Hunter";
   level: number;
   archetype:
     | "Order of the Ghostslayer"

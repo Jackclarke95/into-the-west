@@ -1,6 +1,5 @@
 export type Barbarian = {
   name: "Barbarian";
-  level: number;
   archetype:
     | "Path of the Ancestral Guardian"
     | "Path of the Battlerager"
