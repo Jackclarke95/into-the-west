@@ -5,6 +5,7 @@ import {
   IColumn,
   Image,
   ImageFit,
+  Link,
   SelectionMode,
   ShimmeredDetailsList,
   Stack,
@@ -75,6 +76,15 @@ export const CharacterTable = () => {
     );
   };
 
+  const onRenderName = (character: ICharacterData) =>
+    character.sheetUrl ? (
+      <Link target="_blank" href={character.sheetUrl}>
+        {character.name}
+      </Link>
+    ) : (
+      <span>{character.name}</span>
+    );
+
   const onRenderRace = (character: ICharacterData) =>
     character.subrace
       ? `${character.subrace} ${character.race}`
@@ -135,6 +145,7 @@ export const CharacterTable = () => {
       fieldName: "name",
       minWidth: 200,
       isResizable: true,
+      onRender: onRenderName,
     },
     {
       key: "race",

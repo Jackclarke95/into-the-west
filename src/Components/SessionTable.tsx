@@ -26,15 +26,9 @@ export const SessionTable = () => {
     })
     .sort((sessionA, sessionB) => sessionB.date.localeCompare(sessionA.date));
 
-  const upcomingSessions = sessionData.filter((session) => {
-    console.log(
-      session.name,
-      new Date(session.date),
-      new Date(session.date) > new Date()
-    );
-
-    return new Date(session.date) > new Date();
-  });
+  const upcomingSessions = sessionData.filter(
+    (session) => new Date(session.date) > new Date()
+  );
 
   const pastSessions = sessionData.filter(
     (session) => new Date(session.date) < new Date()
@@ -75,8 +69,6 @@ export const SessionTable = () => {
       maxWidth: 50,
     },
   ];
-
-  console.log(sessionData);
 
   return (
     <Stack

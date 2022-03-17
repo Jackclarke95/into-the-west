@@ -3,6 +3,7 @@ export const Data = {
     "-MaGKwrksOQXvT7PA5Qd": {
       id: 62565380,
       avatarUrl: "",
+      sheetUrl: "https://www.dndbeyond.com/profile/Benjywa/characters/62565380",
       playerDndBeyondName: "Benjywa",
       name: "De Mauer",
       race: "Dwarf",
@@ -25,6 +26,8 @@ export const Data = {
     "-MaGKy-zlVyH50zd5SP3": {
       id: 64045133,
       avatarUrl: "",
+      sheetUrl:
+        "https://www.dndbeyond.com/profile/SchemingPnda/characters/64045133",
       playerDndBeyondName: "SchemingPnda",
       name: "Belnadis",
       race: "Human",
@@ -43,6 +46,8 @@ export const Data = {
     "-MaGKyEbEoTT9OdP4pTm": {
       id: 62130532,
       avatarUrl: "",
+      sheetUrl:
+        "https://www.dndbeyond.com/profile/SwedishFox/characters/62130532",
       playerDndBeyondName: "SwedishFox",
       name: "Cyrus Sunheart",
       nickname: "Cyrus",
@@ -62,6 +67,7 @@ export const Data = {
     "-MaGKyPdpRoGYWbgAzJY": {
       id: 62380701,
       avatarUrl: "",
+      sheetUrl: "https://www.dndbeyond.com/profile/Zajay/characters/62380701",
       playerDndBeyondName: "Zajay",
       name: "Ishka",
       race: "Kalashtar",
@@ -79,6 +85,7 @@ export const Data = {
     "-MaGKyc6_OCu20PUmbGf": {
       id: 62140202,
       avatarUrl: "",
+      sheetUrl: "https://www.dndbeyond.com/profile/patola/characters/62140202",
       playerDndBeyondName: "patola",
       name: "Kai Desd'en",
       nickname: "Kai",
@@ -98,6 +105,8 @@ export const Data = {
     "-MaGKylLm0FwaNWe-QO8": {
       id: 58615947,
       avatarUrl: "",
+      sheetUrl:
+        "https://www.dndbeyond.com/profile/WillCarterDM/characters/58615947",
       playerDndBeyondName: "WillCarterDM",
       name: "Krastor Vale",
       nickname: "Krastor",
@@ -117,6 +126,8 @@ export const Data = {
     "-MaGKyv9oPHJXuJKjmnl": {
       id: 26267182,
       avatarUrl: "",
+      sheetUrl:
+        "https://www.dndbeyond.com/profile/ThePerkyRiolu/characters/26267182",
       playerDndBeyondName: "ThePerkyRiolu",
       name: "Nando Tennessee",
       nickname: "Nando",
@@ -135,6 +146,8 @@ export const Data = {
     "-MaGKz4-slurxi3kmdJk": {
       id: 62426653,
       avatarUrl: "",
+      sheetUrl:
+        "https://www.dndbeyond.com/profile/TheKingsmantm/characters/62426653",
       playerDndBeyondName: "TheKingsmantm",
       name: "Orgust",
       race: "Aarakocra",
@@ -151,6 +164,8 @@ export const Data = {
     "-MaGKzGbL5yHTKXce9Hj": {
       id: 62556497,
       avatarUrl: "",
+      sheetUrl:
+        "https://www.dndbeyond.com/profile/HonestFee/characters/62556497",
       playerDndBeyondName: "HonestFee",
       name: "Prof Tabbart",
       nickname: "Tabbart",
@@ -169,6 +184,8 @@ export const Data = {
     "-MaGKzRzKIVtbQyxQxDP": {
       id: 63238714,
       avatarUrl: "",
+      sheetUrl:
+        "https://www.dndbeyond.com/profile/JackClarke/characters/63238714",
       playerDndBeyondName: "JackClarke",
       name: "Brightscale",
       race: "Dragonborn",
@@ -187,6 +204,8 @@ export const Data = {
     "-MaGKze3Q36HyzEJh31_": {
       id: 63108982,
       avatarUrl: "",
+      sheetUrl:
+        "https://www.dndbeyond.com/profile/Bruenorbattlehammeringgiant/characters/63108982",
       playerDndBeyondName: "Bruenorbattlehammeringgiant",
       name: "Bruenor",
       race: "Goliath",
@@ -204,6 +223,7 @@ export const Data = {
     "-MaGKzqk5TwaERyJg_Q2": {
       id: 74219093,
       avatarUrl: "",
+      sheetUrl: "",
       playerDndBeyondName: "Bruenorbattlehammeringgiant",
       name: "Argus",
       race: "Human",
@@ -224,6 +244,8 @@ export const Data = {
     "-MaGL-4gVKCPTHwNLSb5": {
       id: 67876495,
       avatarUrl: "",
+      sheetUrl:
+        "https://www.dndbeyond.com/profile/thecdv20/characters/67876495",
       playerDndBeyondName: "thecdv20",
       name: "Destrian Darkeyes",
       nickname: "Destrian",
@@ -241,6 +263,8 @@ export const Data = {
     "-MaGL-EOTK4GBRD3OPuj": {
       id: 33132303,
       avatarUrl: "",
+      sheetUrl:
+        "https://www.dndbeyond.com/profile/BlackRoseSarah89/characters/33132303",
       playerDndBeyondName: "BlackRoseSarah89",
       name: "Ember",
       race: "Genasi",
@@ -259,6 +283,8 @@ export const Data = {
     "-MaGL-NOrFBzAAtU6Vwo": {
       id: 62804832,
       avatarUrl: "",
+      sheetUrl:
+        "https://www.dndbeyond.com/profile/Jonno0902/characters/62804832",
       playerDndBeyondName: "Jonno0902",
       name: "James",
       race: "Human",
@@ -277,6 +303,8 @@ export const Data = {
     "-MaGL-XpHuHUX4G5uVGm": {
       id: 62904516,
       avatarUrl: "",
+      sheetUrl:
+        "https://www.dndbeyond.com/profile/Phoenixfire177/characters/62904516",
       playerDndBeyondName: "Phoenixfire177",
       name: 'Keothi "Steadyhand" Vaimei-Laga',
       nickname: "Keothi",
@@ -294,6 +322,7 @@ export const Data = {
     "-MaGL69yjMK5frXnEFKQ": {
       id: 62574844,
       avatarUrl: "",
+      sheetUrl: "https://www.dndbeyond.com/profile/Chaia01/characters/62574844",
       playerDndBeyondName: "Chaia01",
       name: "Milly Catimus",
       nickname: "Milly",
@@ -312,6 +341,8 @@ export const Data = {
     "-MaGL6MkgEpZJu34vnAA": {
       id: 62567125,
       avatarUrl: "",
+      sheetUrl:
+        "https://www.dndbeyond.com/profile/SunRester/characters/62567125",
       playerDndBeyondName: "SunRester",
       name: "Perran",
       race: "Satyr",
@@ -349,6 +380,8 @@ export const Data = {
     "-MaGL6w9JHKxxPijYW0m": {
       id: 62913829,
       avatarUrl: "",
+      sheetUrl:
+        "https://www.dndbeyond.com/profile/Arnaudar/characters/62913829",
       playerDndBeyondName: "Arnaudar",
       name: "Thuldur Lutgorr",
       nickname: "Thuldurr",
@@ -368,6 +401,8 @@ export const Data = {
     "-MaGL8mAafT0RLJLodi5": {
       id: 62176290,
       avatarUrl: "",
+      sheetUrl:
+        "https://www.dndbeyond.com/profile/DrGreybeard/characters/62176290",
       playerDndBeyondName: "DrGreybeard",
       name: "Tustun Toskan",
       nickname: "Tustun",
@@ -386,6 +421,8 @@ export const Data = {
     "-MaGL91rHeTE0-xDAVlb": {
       id: 63233783,
       avatarUrl: "",
+      sheetUrl:
+        "https://www.dndbeyond.com/profile/RusselHumphriesIII/characters/63233783",
       playerDndBeyondName: "RusselHumphriesIII",
       name: "Wrenn (The Beard) Beren",
       nickname: "Wrenn",
@@ -404,6 +441,7 @@ export const Data = {
     "-MaGL9FMxxrubkwavqrT": {
       id: 18549288,
       avatarUrl: "",
+      sheetUrl: "",
       playerDndBeyondName: "SchemingPnda",
       name: "Edwin Brando",
       nickname: "Edwin",
@@ -425,6 +463,7 @@ export const Data = {
     "-MaGL9RDYDim9iPr5hJJ": {
       id: 51147698,
       avatarUrl: "",
+      sheetUrl: "",
       playerDndBeyondName: "SchemingPnda",
       name: "Rho-LIV",
       nickname: "Rho",

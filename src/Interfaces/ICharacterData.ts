@@ -3,6 +3,7 @@ import ICharacterClass from "./ICharacterClass";
 export default interface ICharacterData {
   id: number;
   avatarUrl: string;
+  sheetUrl: string | undefined;
   playerDndBeyondName: string;
   name: string;
   nickname: string | undefined;
