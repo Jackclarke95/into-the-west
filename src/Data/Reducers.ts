@@ -5,24 +5,32 @@ import { DefaultRootState } from "react-redux";
 /** Description of all the Actions taken that can affect the state */
 export type Action =
   | {
-      type: "SetShowNewSessionPanel";
-      showNewSessionPanel: DefaultRootState["showNewSessionPanel"];
+      type: "SetShowNewSessionDialog";
+      showNewSessionDialog: DefaultRootState["showNewSessionDialog"];
     }
   | {
-      type: "SetShowNewCharacterPanel";
-      showNewCharacterPanel: DefaultRootState["showNewCharacterPanel"];
+      type: "SetShowNewCharacterDialog";
+      showNewCharacterDialog: DefaultRootState["showNewCharacterDialog"];
     }
   | { type: "SetDarkMode"; darkMode: DefaultRootState["darkMode"] }
   | { type: "SetCurrentUser"; currentUser: DefaultRootState["currentUser"] }
   | { type: "SetCharacters"; characters: DefaultRootState["characters"] }
   | { type: "SetSessions"; sessions: DefaultRootState["sessions"] }
-  | { type: "SetPlayers"; players: DefaultRootState["players"] };
+  | { type: "SetPlayers"; players: DefaultRootState["players"] }
+  | {
+      type: "SetShowCharacterCreationDialog";
+      showCharacterCreationDialog: DefaultRootState["showCharacterCreationDialog"];
+    }
+  | {
+      type: "SetShowSessionCreationDialog";
+      showSessionCreationDialog: DefaultRootState["showSessionCreationDialog"];
+    };
 
 /** Initial application state */
 export const initialState: DefaultRootState = {
-  showNewSessionPanel: false,
+  showNewSessionDialog: false,
 
-  showNewCharacterPanel: false,
+  showNewCharacterDialog: false,
 
   darkMode:
     window.matchMedia &&
@@ -41,6 +49,10 @@ export const initialState: DefaultRootState = {
   sessions: { isLoading: true },
 
   players: { isLoading: true },
+
+  showCharacterCreationDialog: false,
+
+  showSessionCreationDialog: false,
 };
 
 /**
@@ -56,15 +68,15 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
     currentState,
     (draftState) => {
       switch (action.type) {
-        // Action for toggling the New Session Panel
-        case "SetShowNewSessionPanel": {
-          draftState.showNewSessionPanel = action.showNewSessionPanel;
+        // Action for toggling the New Session Dialog
+        case "SetShowNewSessionDialog": {
+          draftState.showNewSessionDialog = action.showNewSessionDialog;
           break;
         }
 
-        // Action for toggling the New Character Panel
-        case "SetShowNewCharacterPanel": {
-          draftState.showNewCharacterPanel = action.showNewCharacterPanel;
+        // Action for toggling the New Character Dialog
+        case "SetShowNewCharacterDialog": {
+          draftState.showNewCharacterDialog = action.showNewCharacterDialog;
           break;
         }
 
@@ -95,6 +107,20 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         // Action for setting the Players
         case "SetPlayers": {
           draftState.players = action.players;
+          break;
+        }
+
+        // Action for toggling the Character Creation Dialog
+        case "SetShowCharacterCreationDialog": {
+          draftState.showCharacterCreationDialog =
+            action.showCharacterCreationDialog;
+          break;
+        }
+
+        // Action for toggling the Session Creation Dialog
+        case "SetShowSessionCreationDialog": {
+          draftState.showSessionCreationDialog =
+            action.showSessionCreationDialog;
           break;
         }
       }

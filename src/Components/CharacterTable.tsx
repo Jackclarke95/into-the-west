@@ -5,6 +5,7 @@ import {
   Image,
   ImageFit,
   Link,
+  PrimaryButton,
   SelectionMode,
   ShimmeredDetailsList,
   Stack,
@@ -19,6 +20,8 @@ import ICharacterData from "../Interfaces/ICharacterData";
 export const CharacterTable = () => {
   const characterData = useSelector((state) => state.characters);
   const [compactMode, setCompactMode] = React.useState(false);
+
+  const dispatch = useDispatch();
 
   let activeCharacters = [] as ICharacterData[];
   let retiredCharacters = [] as ICharacterData[];
@@ -80,7 +83,7 @@ export const CharacterTable = () => {
       {character.classes.map((cls) => (
         <Stack horizontal horizontalAlign="center" verticalAlign="center">
           <ClassIcon
-            className={cls.class.name}
+            className={cls.name}
             styles={{
               root: {
                 borderRadius: "50%",
@@ -90,8 +93,8 @@ export const CharacterTable = () => {
             }}
           />
           {character.classes.length > 1
-            ? `${cls.class.name} (${cls.level})`
-            : cls.class.name}
+            ? `${cls.name} (${cls.level})`
+            : cls.name}
         </Stack>
       ))}
     </Stack>
@@ -152,8 +155,12 @@ export const CharacterTable = () => {
     },
   ];
 
-  console.log("isLoading", characterData.isLoading);
-  console.log("character data", characterData);
+  const onPressCreateCharacter = () => {
+    dispatch({
+      type: "SetShowCharacterCreationDialog",
+      showCharacterCreationDialog: true,
+    });
+  };
 
   return (
     <Stack
@@ -168,6 +175,8 @@ export const CharacterTable = () => {
             width: "100%",
             justifyContent: "space-between",
             alignItems: "flex-end",
+            paddingTop: "1em",
+            paddingBottom: "1em",
           },
         }}
       >
@@ -178,6 +187,10 @@ export const CharacterTable = () => {
           onText="Compact"
           offText="Normal"
           onChange={() => setCompactMode(!compactMode)}
+        />
+        <PrimaryButton
+          text="Create Character"
+          onClick={onPressCreateCharacter}
         />
       </Stack>
       <Stack

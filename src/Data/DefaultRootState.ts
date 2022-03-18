@@ -8,11 +8,11 @@ import { Action } from "./Reducers";
 declare module "react-redux" {
   /** Default root state */
   export interface DefaultRootState {
-    // Whether to show the New Session Panel
-    showNewSessionPanel: boolean;
+    // Whether to show the New Session Dialog
+    showNewSessionDialog: boolean;
 
-    // Whether to show the New Character Panel
-    showNewCharacterPanel: boolean;
+    // Whether to show the New Character Dialog
+    showNewCharacterDialog: boolean;
 
     // Whether the application is in Dark Mode
     darkMode: boolean;
@@ -32,6 +32,10 @@ declare module "react-redux" {
       isDungeonMaster?: true;
       isGamesMaster?: true;
     };
+
+    showCharacterCreationDialog: boolean;
+
+    showSessionCreationDialog: boolean;
   }
 
   // Declare dispatcher to take our root provider's action type

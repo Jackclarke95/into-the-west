@@ -5,6 +5,7 @@ import {
   IColumn,
   Image,
   ImageFit,
+  PrimaryButton,
   SelectionMode,
   ShimmeredDetailsList,
   Stack,
@@ -52,7 +53,6 @@ export const SessionTable = () => {
   );
 
   const onRenderDungeonMaster = (session: ISessionData) => {
-    console.log(playerData);
     if (playerData.isLoading) {
       return;
     }
@@ -114,6 +114,8 @@ export const SessionTable = () => {
             width: "100%",
             justifyContent: "space-between",
             alignItems: "flex-end",
+            paddingTop: "1em",
+            paddingBottom: "1em",
           },
         }}
       >
@@ -125,6 +127,10 @@ export const SessionTable = () => {
           offText="Normal"
           onChange={() => setCompactMode(!compactMode)}
         />
+        <PrimaryButton
+          text="Create Session"
+          onClick={() => console.log("Clicked Create Session")}
+        />
       </Stack>
       <Stack
         className="session-table-container"
@@ -134,7 +140,6 @@ export const SessionTable = () => {
             overflowY: "scroll",
             overflowX: "auto",
             flexGrow: 1,
-            width: "100%",
           },
         }}
       >

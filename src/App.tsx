@@ -4,12 +4,13 @@ import { CharacterTable } from "./Components/CharacterTable";
 import { Header } from "./Components/Header";
 import { Footer } from "./Components/Footer";
 import { SessionTable } from "./Components/SessionTable";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { Data } from "./Data/Data";
 import ICharacterData from "./Interfaces/ICharacterData";
 import ISessionData from "./Interfaces/ISessionData";
 import IPlayerData from "./Interfaces/IPlayerData";
+import { CharacterCreationDialog } from "./Components/CharacterCreationDialog";
 
 export default () => {
   const dispatch = useDispatch();
@@ -46,10 +47,6 @@ export default () => {
           ),
       },
     });
-
-    console.log(
-      Object.keys(Data.players).map((key) => Data.players[key] as IPlayerData)
-    );
 
     dispatch({
       type: "SetPlayers",
@@ -88,6 +85,7 @@ export default () => {
         <CharacterTable />
         <SessionTable />
       </Stack>
+      <CharacterCreationDialog />
       <Footer />
     </Stack>
   );
