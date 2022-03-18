@@ -90,6 +90,14 @@ export const CharacterCreationDialog = () => {
     }
   };
 
+  const onValidateTextField = (value: string | undefined) => {
+    if (value) {
+      return;
+    } else {
+      return "Please enter a name";
+    }
+  };
+
   const onClickCreateCharacter = () => {
     if (characterName && characterRace && characterSubrace) {
       createCharacter({
@@ -128,24 +136,29 @@ export const CharacterCreationDialog = () => {
         label="Name"
         value={characterName}
         onChange={onChangeName}
-        placeholder="Character Name"
+        invalid={!characterName}
         required
+        validateOnLoad={false}
+        validateOnFocusOut={true}
+        onGetErrorMessage={onValidateTextField}
       />
       <TextField
         label="Nickname"
         value={characterNickname}
         onChange={onChangeNickname}
-        placeholder="Character Nickname"
+        validateOnLoad={false}
+        validateOnFocusOut={true}
+        onGetErrorMessage={onValidateTextField}
       />
       <Dropdown
-        label="Select Race"
+        label="Select a Race"
         options={raceOptions}
         defaultValue={undefined}
         onChange={onChangeRace}
         required
       />
       <Dropdown
-        label="Select Race"
+        label="Select a Subrace"
         options={subraceOptions}
         defaultValue={undefined}
         onChange={onChangeSubrace}
