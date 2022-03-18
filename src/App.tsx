@@ -14,8 +14,6 @@ import IPlayerData from "./Interfaces/IPlayerData";
 export default () => {
   const dispatch = useDispatch();
 
-  const players = useSelector((state) => state.players);
-
   useEffect(() => {
     dispatch({
       type: "SetCharacters",
