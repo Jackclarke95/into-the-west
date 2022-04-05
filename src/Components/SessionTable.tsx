@@ -32,7 +32,7 @@ export const SessionTable = () => {
     );
 
     pastSessions = sessionData.data.filter(
-      (session) => new Date(session.date) < new Date()
+      (session) => new Date(session.date) <= new Date()
     );
   }
 

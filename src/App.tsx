@@ -57,6 +57,14 @@ export default () => {
         ),
       },
     });
+
+    dispatch({
+      type: "SetExperience",
+      experience: {
+        isLoading: false,
+        data: Object.keys(Data.experience).map((key) => Data.experience[key]),
+      },
+    });
   }, []);
 
   return (

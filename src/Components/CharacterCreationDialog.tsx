@@ -10,8 +10,9 @@ import {
   SpinButton,
   TextField,
 } from "@fluentui/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Classes } from "../Data/Classes";
 import { Races } from "../Data/Races";
 import { createCharacter } from "../Helpers/DataService";
 
@@ -23,13 +24,19 @@ export const CharacterCreationDialog = () => {
   const [characterNickname, setCharacterNickname] = useState<
     string | undefined
   >(undefined);
-  const [characterRace, setSelectedRace] = useState<string | undefined>(
+  const [characterRace, setCharacterRace] = useState<string | undefined>(
     undefined
   );
-  const [characterSubrace, setCharacterSubrace] = useState<string | undefined>(
-    undefined
-  );
+  const [characterSubrace, setCharacterSubrace] = useState<
+    string | undefined | null
+  >(undefined);
   const [characterLevel, setCharacterLevel] = useState<number>(1);
+  const [characterClass, setCharacterClass] = useState<string | undefined>(
+    undefined
+  );
+  const [characterSubclass, setCharacterSubclass] = useState<
+    string | undefined | null
+  >(undefined);
 
   const dispatch = useDispatch();
 
@@ -62,6 +69,48 @@ export const CharacterCreationDialog = () => {
       : []
   ) as IDropdownOption[];
 
+  const classOptions = Classes.map((cls) => ({
+    key: cls.name,
+    text: cls.name,
+  }));
+
+  const subclassOptions = () => {
+    if (!characterClass) {
+      console.log("no character class");
+
+      return [] as IDropdownOption[];
+    }
+
+    const cls = Classes.find((cls) => cls.name === characterClass);
+
+    if (!cls) {
+      console.log("couldn't find class in list");
+
+      return [] as IDropdownOption[];
+    }
+
+    if (cls.archetypeDefinition.level > characterLevel) {
+      console.log("character level too low to pick an archetype");
+
+      return [] as IDropdownOption[];
+    } else {
+      console.log(
+        "level",
+        characterLevel,
+        "archetype level",
+        cls.archetypeDefinition.level,
+        cls.archetypeDefinition
+      );
+
+      var subclasses = cls.archetypeDefinition.subclasses.map((subclass) => ({
+        key: subclass,
+        text: subclass,
+      })) as IDropdownOption[];
+
+      return subclasses;
+    }
+  };
+
   const onChangeName = (_, value: string | undefined) =>
     setCharacterName(value);
 
@@ -70,15 +119,35 @@ export const CharacterCreationDialog = () => {
 
   const onChangeRace = (_, option: IDropdownOption | undefined) => {
     if (!option) {
-      setSelectedRace(undefined);
+      setCharacterRace(undefined);
     } else {
-      setSelectedRace(option.text);
+      setCharacterRace(option.text);
     }
+
+    setCharacterSubrace(null);
   };
 
   const onChangeSubrace = (_, option: IDropdownOption | undefined) => {
     if (!option) {
-      setCharacterSubrace(undefined);
+      setCharacterSubrace(null);
+    } else {
+      setCharacterSubrace(option.text);
+    }
+  };
+
+  const onChangeClass = (_, option: IDropdownOption | undefined) => {
+    if (!option) {
+      setCharacterClass(undefined);
+    } else {
+      setCharacterClass(option.text);
+    }
+
+    setCharacterSubclass(null);
+  };
+
+  const onChangeSubclass = (_, option: IDropdownOption | undefined) => {
+    if (!option) {
+      setCharacterSubclass(null);
     } else {
       setCharacterSubrace(option.text);
     }
@@ -87,14 +156,6 @@ export const CharacterCreationDialog = () => {
   const onChangeCharacterLevel = (_, value: string | undefined) => {
     if (value) {
       setCharacterLevel(parseInt(value));
-    }
-  };
-
-  const onValidateTextField = (value: string | undefined) => {
-    if (value) {
-      return;
-    } else {
-      return "Please enter a name";
     }
   };
 
@@ -126,6 +187,16 @@ export const CharacterCreationDialog = () => {
     startingLevel: characterLevel,
   });
 
+  console.log(characterLevel);
+  console.log(
+    Classes.find((cls) => cls.name === characterClass)?.archetypeDefinition
+      .level
+  );
+  console.log(
+    Classes.find((cls) => cls.name === characterClass)?.archetypeDefinition
+      .level! <= characterLevel
+  );
+
   return (
     <Dialog
       hidden={!showDialog}
@@ -133,37 +204,33 @@ export const CharacterCreationDialog = () => {
       dialogContentProps={contentProps}
     >
       <TextField
-        label="Name"
+        label="Character Name"
         value={characterName}
         onChange={onChangeName}
         invalid={!characterName}
         required
-        validateOnLoad={false}
-        validateOnFocusOut={true}
-        onGetErrorMessage={onValidateTextField}
       />
       <TextField
         label="Nickname"
         value={characterNickname}
         onChange={onChangeNickname}
-        validateOnLoad={false}
-        validateOnFocusOut={true}
-        onGetErrorMessage={onValidateTextField}
+        required={!!characterName && characterName.split(" ").length > 1}
       />
       <Dropdown
-        label="Select a Race"
+        label="Race"
         options={raceOptions}
-        defaultValue={undefined}
         onChange={onChangeRace}
         required
+        calloutProps={{ calloutMaxHeight: 500 }}
       />
       <Dropdown
-        label="Select a Subrace"
+        label="Subrace"
         options={subraceOptions}
         defaultValue={undefined}
         onChange={onChangeSubrace}
         disabled={subraceOptions.length === 0}
         required={subraceOptions.length !== 0}
+        selectedKey={characterSubrace}
       />
       <SpinButton
         label="Level"
@@ -171,6 +238,22 @@ export const CharacterCreationDialog = () => {
         labelPosition={Position.top}
         min={1}
         max={20}
+      />
+      <Dropdown
+        label="Class"
+        options={classOptions}
+        onChange={onChangeClass}
+        required
+      />
+      <Dropdown
+        label="Subclass"
+        options={subclassOptions()}
+        defaultValue={undefined}
+        onChange={onChangeSubclass}
+        disabled={subclassOptions.length === 0}
+        required={subclassOptions.length !== 0}
+        calloutProps={{ calloutMaxHeight: 250 }}
+        selectedKey={characterSubclass}
       />
 
       <DialogFooter>

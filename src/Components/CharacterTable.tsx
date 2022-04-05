@@ -6,19 +6,24 @@ import {
   ImageFit,
   Link,
   PrimaryButton,
+  ProgressIndicator,
   SelectionMode,
   ShimmeredDetailsList,
   Stack,
   Text,
   Toggle,
+  TooltipHost,
 } from "@fluentui/react";
 import { ClassIcon } from "./ClassIcon";
 import DefaultAvatar from "../Images/DefaultAvatar.jpeg";
 import { useDispatch, useSelector } from "react-redux";
 import ICharacterData from "../Interfaces/ICharacterData";
+import { Data } from "../Data/Data";
+import { XpTable } from "../Data/XpTable";
 
 export const CharacterTable = () => {
   const characterData = useSelector((state) => state.characters);
+  const experienceData = useSelector((state) => state.experience);
   const [compactMode, setCompactMode] = React.useState(false);
 
   const dispatch = useDispatch();
@@ -112,6 +117,32 @@ export const CharacterTable = () => {
     </span>
   );
 
+  const onRenderXp = (character: ICharacterData) => {
+    if (experienceData.isLoading) {
+      return <ProgressIndicator />;
+    }
+
+    const characterXp = experienceData.data
+      .filter((experience) => experience.characterId === character.id)
+      .reduce((acc, curr) => acc + curr.xp, 0);
+
+    return (
+      <TooltipHost
+        content={`${characterXp} / ${
+          XpTable[character.currentLevel + 1] - XpTable[character.currentLevel]
+        } XP`}
+      >
+        <ProgressIndicator
+          percentComplete={
+            characterXp /
+            (XpTable[character.currentLevel + 1] -
+              XpTable[character.currentLevel])
+          }
+        />
+      </TooltipHost>
+    );
+  };
+
   const columns: IColumn[] = [
     {
       key: "avatar",
@@ -153,6 +184,14 @@ export const CharacterTable = () => {
       maxWidth: 50,
       onRender: onRenderLevel,
     },
+    {
+      key: "xp",
+      name: "XP",
+      fieldName: "xp",
+      minWidth: 100,
+      maxWidth: 100,
+      onRender: onRenderXp,
+    },
   ];
 
   const onPressCreateCharacter = () => {
@@ -161,6 +200,8 @@ export const CharacterTable = () => {
       showCharacterCreationDialog: true,
     });
   };
+
+  console.log("xp", experienceData);
 
   return (
     <Stack
