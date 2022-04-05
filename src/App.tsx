@@ -11,6 +11,7 @@ import ICharacterData from "./Interfaces/ICharacterData";
 import ISessionData from "./Interfaces/ISessionData";
 import IPlayerData from "./Interfaces/IPlayerData";
 import { CharacterCreationDialog } from "./Components/CharacterCreationDialog";
+import { SessionCreationDialog } from "./Components/SessionCreationDialog";
 
 export default () => {
   const dispatch = useDispatch();
@@ -94,6 +95,7 @@ export default () => {
         <SessionTable />
       </Stack>
       <CharacterCreationDialog />
+      <SessionCreationDialog />
       <Footer />
     </Stack>
   );

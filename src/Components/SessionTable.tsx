@@ -101,6 +101,15 @@ export const SessionTable = () => {
     },
   ];
 
+  const onClickCreateSession = () => {
+    console.log("creating session");
+
+    dispatch({
+      type: "SetShowSessionCreationDialog",
+      showSessionCreationDialog: true,
+    });
+  };
+
   return (
     <Stack
       className="sessions-container"
@@ -127,10 +136,7 @@ export const SessionTable = () => {
           offText="Normal"
           onChange={() => setCompactMode(!compactMode)}
         />
-        <PrimaryButton
-          text="Create Session"
-          onClick={() => console.log("Clicked Create Session")}
-        />
+        <PrimaryButton text="New session" onClick={onClickCreateSession} />
       </Stack>
       <Stack
         className="session-table-container"

@@ -194,7 +194,7 @@ export const CharacterTable = () => {
     },
   ];
 
-  const onPressCreateCharacter = () => {
+  const onClickCreateCharacter = () => {
     dispatch({
       type: "SetShowCharacterCreationDialog",
       showCharacterCreationDialog: true,
@@ -229,10 +229,7 @@ export const CharacterTable = () => {
           offText="Normal"
           onChange={() => setCompactMode(!compactMode)}
         />
-        <PrimaryButton
-          text="Create Character"
-          onClick={onPressCreateCharacter}
-        />
+        <PrimaryButton text="New character" onClick={onClickCreateCharacter} />
       </Stack>
       <Stack
         className="character-table-container"

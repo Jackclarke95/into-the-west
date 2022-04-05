@@ -71,15 +71,15 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
     currentState,
     (draftState) => {
       switch (action.type) {
-        // Action for toggling the New Session Dialog
-        case "SetShowNewSessionDialog": {
-          draftState.showNewSessionDialog = action.showNewSessionDialog;
-          break;
-        }
-
         // Action for toggling the New Character Dialog
         case "SetShowNewCharacterDialog": {
           draftState.showNewCharacterDialog = action.showNewCharacterDialog;
+          break;
+        }
+
+        // Action for toggling the New Session Dialog
+        case "SetShowNewSessionDialog": {
+          draftState.showNewSessionDialog = action.showNewSessionDialog;
           break;
         }
 

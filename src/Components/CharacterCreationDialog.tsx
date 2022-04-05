@@ -18,6 +18,7 @@ import { createCharacter } from "../Helpers/DataService";
 
 export const CharacterCreationDialog = () => {
   const showDialog = useSelector((state) => state.showCharacterCreationDialog);
+
   const [characterName, setCharacterName] = useState<string | undefined>(
     undefined
   );
@@ -49,7 +50,7 @@ export const CharacterCreationDialog = () => {
 
   const contentProps = {
     type: DialogType.largeHeader,
-    title: "Create Character",
+    title: "New character",
     closeButtonAriaLabel: "Close",
   };
 
@@ -111,11 +112,13 @@ export const CharacterCreationDialog = () => {
     }
   };
 
-  const onChangeName = (_, value: string | undefined) =>
+  const onChangeName = (_, value: string | undefined) => {
     setCharacterName(value);
+  };
 
-  const onChangeNickname = (_, value: string | undefined) =>
+  const onChangeNickname = (_, value: string | undefined) => {
     setCharacterNickname(value);
+  };
 
   const onChangeRace = (_, option: IDropdownOption | undefined) => {
     if (!option) {
