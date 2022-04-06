@@ -11,7 +11,7 @@ export const StatBlock = () => {
 
   const monster = dragons[0];
 
-  console.log(monster.Traits);
+  console.log(monster);
 
   return (
     <Stack horizontal>
@@ -54,7 +54,7 @@ export const StatBlock = () => {
           {htmlParse(monster["Legendary Actions"]!)}
         </Text>
       </Stack>
-      <Image src={monster.img_url} width={1500} />
+      <Image src={monster.img_url} width={1000} />
     </Stack>
   );
 };
