@@ -1,0 +1,29 @@
+@font-face {
+    font-family: "Mr Eaves Small Caps";
+    src: url("./Fonts/Mr\ Eaves\ Small\ Caps.otf") format("opentype");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Scaly Sans";
+    src: url("./Fonts/Scaly\ Sans.otf") format("opentype");
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Scaly Sans Italic";
+    src: url("./Fonts//Scaly\ Sans\ Italic.otf") format("opentype");
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Scaly Sans Caps";
+    src: url("./Fonts//Scaly\ Sans\ Caps.otf") format("opentype");
+    font-weight: normal;
+}
+
+p {
+    margin: 0.5em 0
+}

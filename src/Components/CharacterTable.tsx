@@ -201,8 +201,6 @@ export const CharacterTable = () => {
     });
   };
 
-  console.log("xp", experienceData);
-
   return (
     <Stack
       className="characters-container"

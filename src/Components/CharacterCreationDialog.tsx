@@ -77,38 +77,22 @@ export const CharacterCreationDialog = () => {
 
   const subclassOptions = () => {
     if (!characterClass) {
-      console.log("no character class");
-
       return [] as IDropdownOption[];
     }
 
     const cls = Classes.find((cls) => cls.name === characterClass);
 
     if (!cls) {
-      console.log("couldn't find class in list");
-
       return [] as IDropdownOption[];
     }
 
     if (cls.archetypeDefinition.level > characterLevel) {
-      console.log("character level too low to pick an archetype");
-
       return [] as IDropdownOption[];
     } else {
-      console.log(
-        "level",
-        characterLevel,
-        "archetype level",
-        cls.archetypeDefinition.level,
-        cls.archetypeDefinition
-      );
-
-      var subclasses = cls.archetypeDefinition.subclasses.map((subclass) => ({
+      return cls.archetypeDefinition.subclasses.map((subclass) => ({
         key: subclass,
         text: subclass,
       })) as IDropdownOption[];
-
-      return subclasses;
     }
   };
 
@@ -181,24 +165,6 @@ export const CharacterCreationDialog = () => {
       });
     }
   };
-
-  console.log("new character", {
-    name: characterName,
-    nickname: characterNickname,
-    race: characterRace,
-    subrace: characterSubrace,
-    startingLevel: characterLevel,
-  });
-
-  console.log(characterLevel);
-  console.log(
-    Classes.find((cls) => cls.name === characterClass)?.archetypeDefinition
-      .level
-  );
-  console.log(
-    Classes.find((cls) => cls.name === characterClass)?.archetypeDefinition
-      .level! <= characterLevel
-  );
 
   return (
     <Dialog
