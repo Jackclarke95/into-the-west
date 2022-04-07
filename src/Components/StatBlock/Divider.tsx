@@ -7,7 +7,12 @@ export const Divider = () => {
       src={StatBlockDivider}
       height={10}
       imageFit={ImageFit.contain}
-      styles={{ root: { paddingTop: "0.5em", paddingBottom: "0.5em" } }}
+      styles={{
+        root: {
+          minHeight: "10px",
+          width: "350px",
+        },
+      }}
     />
   );
 };

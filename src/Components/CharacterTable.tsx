@@ -19,7 +19,7 @@ import DefaultAvatar from "../Images/DefaultAvatar.jpeg";
 import { useDispatch, useSelector } from "react-redux";
 import ICharacterData from "../Interfaces/ICharacterData";
 import { Data } from "../Data/Data";
-import { XpTable } from "../Data/XpTable";
+import { PlayerXpTable } from "../Data/XpTable";
 
 export const CharacterTable = () => {
   const characterData = useSelector((state) => state.characters);
@@ -129,14 +129,14 @@ export const CharacterTable = () => {
     return (
       <TooltipHost
         content={`${characterXp} / ${
-          XpTable[character.currentLevel + 1] - XpTable[character.currentLevel]
+          PlayerXpTable[character.currentLevel + 1] - PlayerXpTable[character.currentLevel]
         } XP`}
       >
         <ProgressIndicator
           percentComplete={
             characterXp /
-            (XpTable[character.currentLevel + 1] -
-              XpTable[character.currentLevel])
+            (PlayerXpTable[character.currentLevel + 1] -
+              PlayerXpTable[character.currentLevel])
           }
         />
       </TooltipHost>

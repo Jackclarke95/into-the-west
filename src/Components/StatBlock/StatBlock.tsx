@@ -1,17 +1,25 @@
 import { GroupSpacer, Image, Stack, Text } from "@fluentui/react";
-import htmlParse from "html-react-parser";
 import { Monsters } from "../../Data/Monsters";
+import {
+  mainTitleStyles,
+  statBlockBlackStyles,
+  statBlockMetaStyles,
+  statBlockTitleStyles,
+} from "../../Style/Fonts/FontStyles";
+import { AdvanceddCharacteristics } from "./AdvancedCharacteristics";
+import { BasicCharacteristics } from "./BasicCharacteristics";
 import { Divider } from "./Divider";
 import { Stats } from "./Stats";
+import { Traits } from "./Traits";
 
 export const StatBlock = () => {
-  const dragons = Monsters.filter((monster) =>
-    monster.name.toLowerCase().includes("dragon")
-  );
+  const monsters = Monsters;
+  const monsterCount = monsters.length;
+  const rand = Math.floor(Math.random() * monsterCount);
 
-  const monster = dragons[0];
+  const randomMonster = monsters[0];
 
-  console.log(monster);
+  console.log(randomMonster);
 
   return (
     <Stack horizontal>
@@ -20,78 +28,53 @@ export const StatBlock = () => {
           root: {
             textAlign: "left",
             position: "relative",
-            width: "350px",
             padding: "0.5em 1em",
+            height: "500px",
           },
         }}
       >
-        <Text styles={mainTitleStyles}>{monster.name}</Text>
-        <Text styles={metaStyles}>{monster.meta}</Text>
+        <Text styles={mainTitleStyles}>{randomMonster.name}</Text>
+        <Text styles={statBlockMetaStyles}>{`${randomMonster.size} ${
+          randomMonster.type
+        }, ${randomMonster.subtype && `(${randomMonster.subtype}) `}typically ${
+          randomMonster.alignment
+        }`}</Text>
         <Divider />
-        <Stack tokens={{ childrenGap: 5 }}>
-          <Stack horizontal tokens={{ childrenGap: 4 }}>
-            <Text styles={redBoldStyles}>Armor Class</Text>
-            <Text styles={redStyles}>{monster["Armor Class"]}</Text>
-          </Stack>
-          <Stack horizontal tokens={{ childrenGap: 4 }}>
-            <Text styles={redBoldStyles}>Hit Points</Text>
-            <Text styles={redStyles}>{monster["Hit Points"]}</Text>
-          </Stack>
-          <Stack horizontal tokens={{ childrenGap: 4 }}>
-            <Text styles={redBoldStyles}>Speed</Text>
-            <Text styles={redStyles}>{monster.Speed}</Text>
-          </Stack>
-        </Stack>
+        <BasicCharacteristics monster={randomMonster} />
         <Divider />
-        <Stats monster={monster} />
+        <Stats monster={randomMonster} />
         <Divider />
+        <AdvanceddCharacteristics monster={randomMonster} />
         <Divider />
-        <Text styles={blackStyles}>{htmlParse(monster.Traits!)}</Text>
-        <Text styles={titleStyles}>Actions</Text>
-        <Text styles={blackStyles}>{htmlParse(monster.Actions!)}</Text>
-        <Text styles={titleStyles}>Legendary Actions</Text>
-        <Text styles={blackStyles}>
-          {htmlParse(monster["Legendary Actions"]!)}
-        </Text>
+        {randomMonster.special_abilities && (
+          <Traits
+            data={randomMonster.special_abilities}
+            header={undefined}
+            className="traits"
+          />
+        )}
+        {randomMonster.actions && (
+          <Traits
+            data={randomMonster.actions}
+            header="Actions"
+            className="actions"
+          />
+        )}
+        {randomMonster.legendary_actions && (
+          <Traits
+            data={randomMonster.legendary_actions}
+            header="Legendary Actions"
+            className="legendary-actions"
+          />
+        )}
+        {randomMonster.reactions && (
+          <Traits
+            data={randomMonster.reactions}
+            header="Reactions"
+            className="reactions"
+          />
+        )}
       </Stack>
-      <Image src={monster.img_url} width={1000} />
     </Stack>
   );
-};
-
-export const mainTitleStyles = {
-  root: {
-    fontFamily: "Mr Eaves Small Caps",
-    fontWeight: "bold",
-    fontSize: "2em",
-    color: "#8a1c0a",
-  },
-};
-
-export const metaStyles = {
-  root: {
-    fontFamily: "Scaly Sans Italic",
-  },
-};
-
-export const redBoldStyles = {
-  root: { color: "#8a1c0a", fontWeight: "bold", fontFamily: "Scala Sans" },
-};
-
-export const redStyles = {
-  root: { color: "#8a1c0a", fontFamily: "Scala Sans" },
-};
-
-export const blackStyles = { root: { fontFamily: "Scala Sans" } };
-export const blackBoldStyles = {
-  root: { fontWeight: "bold", fontFamily: "Scala Sans" },
-};
-
-export const titleStyles = {
-  root: {
-    fontFamily: "Scaly Sans Caps",
-    fontSize: "1.5em",
-    color: "#8a1c0a",
-    borderBottom: "1px solid #8a1c0a",
-  },
 };
