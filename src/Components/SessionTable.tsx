@@ -12,7 +12,6 @@ import {
   Text,
   Toggle,
 } from "@fluentui/react";
-import Data from "../Data/Data";
 import ISessionData from "../Interfaces/ISessionData";
 import { useDispatch, useSelector } from "react-redux";
 
