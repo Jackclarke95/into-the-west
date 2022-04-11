@@ -18,7 +18,6 @@ import { ClassIcon } from "./ClassIcon";
 import DefaultAvatar from "../Images/DefaultAvatar.jpeg";
 import { useDispatch, useSelector } from "react-redux";
 import ICharacterData from "../Interfaces/ICharacterData";
-import Data from "../Data/Data";
 import { PlayerXpTable } from "../Data/XpTable";
 
 export default () => {
@@ -85,23 +84,25 @@ export default () => {
         root: { padding: 0, maxHeight: "23px" },
       }}
     >
-      {character.classes.map((cls) => (
-        <Stack horizontal horizontalAlign="center" verticalAlign="center">
-          <ClassIcon
-            className={cls.name}
-            styles={{
-              root: {
-                borderRadius: "50%",
-                marginRight: DefaultSpacing.s2,
-                maxWidth: "20px",
-              },
-            }}
-          />
-          {character.classes.length > 1
-            ? `${cls.name} (${cls.level})`
-            : cls.name}
-        </Stack>
-      ))}
+      {character.classes.map((cls) => {
+        return (
+          <Stack horizontal horizontalAlign="center" verticalAlign="center">
+            <ClassIcon
+              className={cls.class.name}
+              styles={{
+                root: {
+                  borderRadius: "50%",
+                  marginRight: DefaultSpacing.s2,
+                  maxWidth: "20px",
+                },
+              }}
+            />
+            {character.classes.length > 1
+              ? `${cls.class.name} (${cls.level})`
+              : cls.class.name}
+          </Stack>
+        );
+      })}
     </Stack>
   );
 

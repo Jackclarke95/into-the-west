@@ -9,9 +9,11 @@ export default interface ICharacterData {
   race: string;
   subrace: string | undefined;
   classes: {
-    name: string;
+    class: {
+      name: string;
+      archetype?: string | undefined;
+    };
     level: number;
-    archetype?: string | undefined;
   }[];
   currentLevel: number;
   sessionsAttended: number;

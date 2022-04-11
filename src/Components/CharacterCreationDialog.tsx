@@ -158,7 +158,9 @@ export default () => {
         nickname: characterNickname,
         race: characterRace,
         subrace: characterSubrace,
-        classes: [{ name: "Fighter", level: 1, archetype: undefined }],
+        classes: [
+          { class: { name: "Fighter", archetype: undefined }, level: 1 },
+        ],
         currentLevel: characterLevel,
         sessionsAttended: 0,
         startingLevel: characterLevel,
