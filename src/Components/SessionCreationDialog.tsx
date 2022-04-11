@@ -16,7 +16,7 @@ import {
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-export default function () {
+const SessionCreationDialog = () => {
   const showDialog = useSelector((state) => state.showSessionCreationDialog);
   const players = useSelector((state) => state.players);
   const characters = useSelector((state) => state.characters);
@@ -157,4 +157,6 @@ export default function () {
       </DialogFooter>
     </Dialog>
   );
-}
+};
+
+export default SessionCreationDialog;

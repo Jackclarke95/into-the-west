@@ -15,7 +15,7 @@ import {
 import ISessionData from "../Interfaces/ISessionData";
 import DataHelper from "../Helpers/DataHelper";
 
-export default function () {
+const SessionTable = () => {
   const dispatch = useDispatch();
 
   const sessionData = useSelector((state) => state.sessions);
@@ -218,4 +218,6 @@ export default function () {
       </Stack>
     </Stack>
   );
-}
+};
+
+export default SessionTable;

@@ -19,7 +19,7 @@ import ICharacterData from "../Interfaces/ICharacterData";
 import LevelUpTable from "../Data/LevelUp";
 import DataHelper from "../Helpers/DataHelper";
 
-export default function () {
+const CharacterTable = () => {
   const characterData = useSelector((state) => state.characters);
   const sessionData = useSelector((state) => state.sessions);
   const isDevMode = useSelector((state) => state.isDevMode);
@@ -270,4 +270,6 @@ export default function () {
       </Stack>
     </Stack>
   );
-}
+};
+
+export default CharacterTable;

@@ -13,7 +13,7 @@ import ICharacterData from "./Interfaces/ICharacterData";
 import ISessionData from "./Interfaces/ISessionData";
 import IPlayerData from "./Interfaces/IPlayerData";
 
-export default function () {
+const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -91,4 +91,5 @@ export default function () {
       <Footer />
     </Stack>
   );
-}
+};
+export default App;

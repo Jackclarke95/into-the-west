@@ -16,7 +16,7 @@ import Classes from "../Data/Classes";
 import Races from "../Data/Races";
 import DataService from "../Helpers/DataService";
 
-export default function () {
+const CharacterCreationDialog = () => {
   const showDialog = useSelector((state) => state.showCharacterCreationDialog);
 
   const [characterName, setCharacterName] = useState<string | undefined>(
@@ -236,4 +236,6 @@ export default function () {
       </DialogFooter>
     </Dialog>
   );
-}
+};
+
+export default CharacterCreationDialog;

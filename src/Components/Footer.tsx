@@ -8,7 +8,7 @@ import {
 } from "@fluentui/react";
 import preval from "preval.macro";
 
-export default function () {
+const Footer = () => {
   const isDevMode = useSelector((state) => state.isDevMode);
 
   return (
@@ -37,4 +37,6 @@ export default function () {
       )}
     </Stack>
   );
-}
+};
+
+export default Footer;
