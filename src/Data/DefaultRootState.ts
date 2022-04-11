@@ -36,6 +36,8 @@ declare module "react-redux" {
     showCharacterCreationDialog: boolean;
 
     showSessionCreationDialog: boolean;
+
+    isDevMode: boolean;
   }
 
   // Declare dispatcher to take our root provider's action type

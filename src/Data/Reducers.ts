@@ -53,6 +53,8 @@ export const initialState: DefaultRootState = {
   showCharacterCreationDialog: false,
 
   showSessionCreationDialog: false,
+
+  isDevMode: window.location.hostname === "localhost",
 };
 
 /**

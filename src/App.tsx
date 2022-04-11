@@ -1,5 +1,5 @@
 import { Stack } from "@fluentui/react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import "./Style/App.scss";
 import CharacterTable from "./Components/CharacterTable";
@@ -14,6 +14,10 @@ import ISessionData from "./Interfaces/ISessionData";
 import IPlayerData from "./Interfaces/IPlayerData";
 
 export default () => {
+  const isDevMode = useSelector((state) => state.isDevMode);
+
+  console.log(isDevMode);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
