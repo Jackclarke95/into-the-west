@@ -75,26 +75,25 @@ const SessionTable = () => {
       return;
     }
 
-    const personas = session.attendees.map((attendee) => {
-      const matchedCharacter = characterData.data.find(
-        (character) => character.id === attendee
-      );
+    const personas = session.attendees
+      .map((attendee) => {
+        const matchedCharacter = characterData.data.find(
+          (character) => character.id === attendee
+        );
 
-      return {
-        imageUrl: matchedCharacter?.avatarUrl,
-        personaName: matchedCharacter?.name,
-      } as IFacepilePersona;
-    });
+        return {
+          imageUrl: matchedCharacter?.avatarUrl,
+          personaName: matchedCharacter?.name,
+        } as IFacepilePersona;
+      })
+      .sort((a, b) => a.personaName!.localeCompare(b.personaName!));
 
     return (
-      <Stack horizontal tokens={{ childrenGap: 5 }}>
-        <span>{personas.length}</span>
-        <Facepile
-          personas={personas}
-          personaSize={PersonaSize.size16}
-          overflowPersonas={personas}
-        />
-      </Stack>
+      <Facepile
+        personas={personas}
+        personaSize={PersonaSize.size16}
+        maxDisplayablePersonas={personas.length}
+      />
     );
   };
 
