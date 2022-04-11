@@ -21,6 +21,7 @@ export default () => {
   const sessionData = useSelector((state) => state.sessions);
   const playerData = useSelector((state) => state.players);
   const characterData = useSelector((state) => state.characters);
+  const isDevMode = useSelector((state) => state.isDevMode);
 
   const [compactMode, setCompactMode] = React.useState(false);
 
@@ -172,7 +173,11 @@ export default () => {
           offText="Normal"
           onChange={() => setCompactMode(!compactMode)}
         />
-        <PrimaryButton text="New session" onClick={onClickCreateSession} />
+        <PrimaryButton
+          text="New session"
+          onClick={onClickCreateSession}
+          disabled={!isDevMode}
+        />
       </Stack>
       <Stack
         className="session-table-container"

@@ -22,6 +22,7 @@ import DataHelper from "../Helpers/DataHelper";
 export default () => {
   const characterData = useSelector((state) => state.characters);
   const sessionData = useSelector((state) => state.sessions);
+  const isDevMode = useSelector((state) => state.isDevMode);
 
   const [compactMode, setCompactMode] = React.useState(false);
 
@@ -224,7 +225,11 @@ export default () => {
           offText="Normal"
           onChange={() => setCompactMode(!compactMode)}
         />
-        <PrimaryButton text="New character" onClick={onClickCreateCharacter} />
+        <PrimaryButton
+          text="New character"
+          onClick={onClickCreateCharacter}
+          disabled={!isDevMode}
+        />
       </Stack>
       <Stack
         className="character-table-container"
