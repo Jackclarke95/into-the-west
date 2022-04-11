@@ -73,7 +73,7 @@ export default () => {
           height: "100vh",
         },
       }}
-      tokens={{ childrenGap: 20 }}
+      tokens={{ childrenGap: 20, padding: 10 }}
     >
       <Header />
       <Stack

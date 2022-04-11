@@ -8,9 +8,8 @@ export default () => {
   return (
     <Stack className="footer-container" horizontal>
       <Text className="footer" styles={{ root: { fontSize: FontSizes.large } }}>
-        Footer
+        Development Mode: {isDevMode.toString()}
       </Text>
-      <Text>Development Mode: {isDevMode}</Text>
     </Stack>
   );
 };
