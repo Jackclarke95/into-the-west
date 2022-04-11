@@ -1,0 +1,15 @@
+import ISessionData from "../Interfaces/ISessionData";
+
+export default class DataHelper {
+  /**
+   * Determines if a session occured has already occured or not
+   *
+   * @param session The session to determine
+   * @return Whether the session occured has already occured or not
+   */
+  public static isSessionInPast(session: ISessionData): boolean {
+    return (
+      Number(new Date(session.date)) >= Number(new Date().setHours(0, 0, 0, 0))
+    );
+  }
+}

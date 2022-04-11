@@ -1,10 +1,7 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
-  DefaultSpacing,
-  DetailsListLayoutMode,
   IColumn,
-  Image,
-  ImageFit,
   PrimaryButton,
   SelectionMode,
   ShimmeredDetailsList,
@@ -13,7 +10,7 @@ import {
   Toggle,
 } from "@fluentui/react";
 import ISessionData from "../Interfaces/ISessionData";
-import { useDispatch, useSelector } from "react-redux";
+import DataHelper from "../Helpers/DataHelper";
 
 export default () => {
   const dispatch = useDispatch();
@@ -26,10 +23,8 @@ export default () => {
   let pastSessions = [] as ISessionData[];
 
   if (!sessionData.isLoading) {
-    upcomingSessions = sessionData.data.filter(
-      (session) =>
-        Number(new Date(session.date)) >=
-        Number(new Date().setHours(0, 0, 0, 0))
+    upcomingSessions = sessionData.data.filter((session) =>
+      DataHelper.isSessionInPast(session)
     );
 
     pastSessions = sessionData.data.filter(

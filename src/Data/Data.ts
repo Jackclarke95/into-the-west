@@ -884,5 +884,4 @@ export default {
       attendees: [62176290, 62567125, 64045133],
     },
   },
-  userAccounts: {},
 };

@@ -17,11 +17,11 @@ import { ClassIcon } from "./ClassIcon";
 import DefaultAvatar from "../Images/DefaultAvatar.jpeg";
 import ICharacterData from "../Interfaces/ICharacterData";
 import LevelUpTable from "../Data/LevelUp";
+import DataHelper from "../Helpers/DataHelper";
 
 export default () => {
   const characterData = useSelector((state) => state.characters);
   const sessionData = useSelector((state) => state.sessions);
-  const currentUser = useSelector((state) => state.currentUser);
 
   const [compactMode, setCompactMode] = React.useState(false);
 
@@ -117,7 +117,9 @@ export default () => {
       );
 
       const sessionRun = sessionData.data.filter(
-        (session) => session.dungeonMaster === character.playerDndBeyondName
+        (session) =>
+          session.dungeonMaster === character.playerDndBeyondName &&
+          DataHelper.isSessionInPast(session)
       );
 
       const adjustedSessions = Math.floor(
@@ -156,6 +158,14 @@ export default () => {
       onRender: onRenderAvatar,
     },
     {
+      key: "level",
+      name: "Level",
+      fieldName: "currentLevel",
+      minWidth: 33,
+      maxWidth: 50,
+      onRender: onRenderLevel,
+    },
+    {
       key: "name",
       name: "Name",
       fieldName: "name",
@@ -178,14 +188,6 @@ export default () => {
       minWidth: 175,
       isResizable: true,
       onRender: onRenderClasses,
-    },
-    {
-      key: "level",
-      name: "Level",
-      fieldName: "currentLevel",
-      minWidth: 33,
-      maxWidth: 50,
-      onRender: onRenderLevel,
     },
   ];
 

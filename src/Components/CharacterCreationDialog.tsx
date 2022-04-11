@@ -14,7 +14,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Classes from "../Data/Classes";
 import Races from "../Data/Races";
-import { createCharacter } from "../Helpers/DataService";
+import DataService from "../Helpers/DataService";
 
 export default () => {
   const showDialog = useSelector((state) => state.showCharacterCreationDialog);
@@ -148,7 +148,7 @@ export default () => {
 
   const onClickCreateCharacter = () => {
     if (characterName && characterRace && characterSubrace) {
-      createCharacter({
+      DataService.createCharacter({
         id: Number(new Date()),
         key: "",
         avatarUrl: "",
