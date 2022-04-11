@@ -1,4 +1,4 @@
-export const Races = [
+export default [
   { name: "Aarakocra" },
   {
     name: "Aasimar",

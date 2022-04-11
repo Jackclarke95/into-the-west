@@ -12,8 +12,8 @@ import {
 } from "@fluentui/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Classes } from "../Data/Classes";
-import { Races } from "../Data/Races";
+import Classes from "../Data/Classes";
+import Races from "../Data/Races";
 import { createCharacter } from "../Helpers/DataService";
 
 export default () => {

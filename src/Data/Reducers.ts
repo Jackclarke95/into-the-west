@@ -17,7 +17,6 @@ export type Action =
   | { type: "SetCharacters"; characters: DefaultRootState["characters"] }
   | { type: "SetSessions"; sessions: DefaultRootState["sessions"] }
   | { type: "SetPlayers"; players: DefaultRootState["players"] }
-  | { type: "SetExperience"; experience: DefaultRootState["experience"] }
   | {
       type: "SetShowCharacterCreationDialog";
       showCharacterCreationDialog: DefaultRootState["showCharacterCreationDialog"];
@@ -50,8 +49,6 @@ export const initialState: DefaultRootState = {
   sessions: { isLoading: true },
 
   players: { isLoading: true },
-
-  experience: { isLoading: true },
 
   showCharacterCreationDialog: false,
 
@@ -110,12 +107,6 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         // Action for setting the Players
         case "SetPlayers": {
           draftState.players = action.players;
-          break;
-        }
-
-        // Action for setting the Experience
-        case "SetExperience": {
-          draftState.experience = action.experience;
           break;
         }
 

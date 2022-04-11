@@ -21,10 +21,6 @@ declare module "react-redux" {
       | { isLoading: true }
       | { isLoading: false; data: ICharacterData[] };
 
-    experience:
-      | { isLoading: true }
-      | { isLoading: false; data: { characterId: number; xp: number }[] };
-
     sessions: { isLoading: true } | { isLoading: false; data: ISessionData[] };
 
     players: { isLoading: true } | { isLoading: false; data: IPlayerData[] };

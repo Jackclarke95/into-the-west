@@ -535,24 +535,6 @@ export default {
       },
     },
   },
-  experience: {
-    "-MaGL6w9JHKxxPijYW0m": {
-      characterId: 62565380,
-      xp: 50,
-    },
-    "-MaGL6cEeA0f0E_nEEMG": {
-      characterId: 64045133,
-      xp: 400,
-    },
-    "-MaGL6MkgEpZJu34vnAA": {
-      characterId: 62567125,
-      xp: 500,
-    },
-    "-MaGL6w9Jdy8c4sdYW0m": {
-      characterId: 62565380,
-      xp: 200,
-    },
-  },
   players: {
     "-MaGLAdfrrLeLWxdwuUU": {
       friendlyName: "Felix",

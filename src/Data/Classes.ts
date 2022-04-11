@@ -1,4 +1,4 @@
-export const Classes = [
+export default [
   {
     name: "Artificer",
     archet2ypeDefinition: {

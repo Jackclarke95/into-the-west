@@ -18,11 +18,9 @@ import { ClassIcon } from "./ClassIcon";
 import DefaultAvatar from "../Images/DefaultAvatar.jpeg";
 import { useDispatch, useSelector } from "react-redux";
 import ICharacterData from "../Interfaces/ICharacterData";
-import { PlayerXpTable } from "../Data/XpTable";
 
 export default () => {
   const characterData = useSelector((state) => state.characters);
-  const experienceData = useSelector((state) => state.experience);
   const [compactMode, setCompactMode] = React.useState(false);
 
   const dispatch = useDispatch();
@@ -118,33 +116,6 @@ export default () => {
     </span>
   );
 
-  const onRenderXp = (character: ICharacterData) => {
-    if (experienceData.isLoading) {
-      return <ProgressIndicator />;
-    }
-
-    const characterXp = experienceData.data
-      .filter((experience) => experience.characterId === character.id)
-      .reduce((acc, curr) => acc + curr.xp, 0);
-
-    return (
-      <TooltipHost
-        content={`${characterXp} / ${
-          PlayerXpTable[character.currentLevel + 1] -
-          PlayerXpTable[character.currentLevel]
-        } XP`}
-      >
-        <ProgressIndicator
-          percentComplete={
-            characterXp /
-            (PlayerXpTable[character.currentLevel + 1] -
-              PlayerXpTable[character.currentLevel])
-          }
-        />
-      </TooltipHost>
-    );
-  };
-
   const columns: IColumn[] = [
     {
       key: "avatar",
@@ -185,14 +156,6 @@ export default () => {
       minWidth: 33,
       maxWidth: 50,
       onRender: onRenderLevel,
-    },
-    {
-      key: "xp",
-      name: "XP",
-      fieldName: "xp",
-      minWidth: 100,
-      maxWidth: 100,
-      onRender: onRenderXp,
     },
   ];
 
