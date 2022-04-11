@@ -60,6 +60,8 @@ const App = () => {
     });
   });
 
+  console.log(JSON.stringify(Data));
+
   return (
     <Stack
       verticalFill

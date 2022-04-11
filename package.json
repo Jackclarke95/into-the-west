@@ -8,6 +8,7 @@
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.1",
     "discord-webhook-node": "^1.1.8",
+    "firebase": "^9.6.10",
     "preval": "^0.0.1",
     "preval.macro": "^5.0.0",
     "react": "^17.0.1",
