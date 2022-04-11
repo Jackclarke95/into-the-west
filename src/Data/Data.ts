@@ -30,7 +30,8 @@ export default {
     },
     "-MaGKy-zlVyH50zd5SP3": {
       id: 64045133,
-      avatarUrl: "",
+      avatarUrl:
+        "https://www.dndbeyond.com/avatars/22370/529/1581111423-64045133.jpeg?width=150&height=150&fit=crop&quality=95&auto=webp",
       sheetUrl:
         "https://www.dndbeyond.com/profile/SchemingPnda/characters/64045133",
       playerDndBeyondName: "SchemingPnda",
@@ -52,7 +53,8 @@ export default {
     },
     "-MaGKyEbEoTT9OdP4pTm": {
       id: 62130532,
-      avatarUrl: "",
+      avatarUrl:
+        "https://www.dndbeyond.com/avatars/21703/797/1581111423-62130532.jpeg?width=150&height=150&fit=crop&quality=95&auto=webp",
       sheetUrl:
         "https://www.dndbeyond.com/profile/SwedishFox/characters/62130532",
       playerDndBeyondName: "SwedishFox",
@@ -117,7 +119,8 @@ export default {
     },
     "-MaGKylLm0FwaNWe-QO8": {
       id: 58615947,
-      avatarUrl: "",
+      avatarUrl:
+        "https://www.dndbeyond.com/avatars/20510/273/1581111423-58615947.jpeg?width=150&height=150&fit=crop&quality=95&auto=webp",
       sheetUrl:
         "https://www.dndbeyond.com/profile/WillCarterDM/characters/58615947",
       playerDndBeyondName: "WillCarterDM",
@@ -227,7 +230,8 @@ export default {
     },
     "-MaGKze3Q36HyzEJh31_": {
       id: 63108982,
-      avatarUrl: "",
+      avatarUrl:
+        "https://www.dndbeyond.com/avatars/9221/722/637202352169308354.jpeg?width=150&height=150&fit=crop&quality=95&auto=webp",
       sheetUrl:
         "https://www.dndbeyond.com/profile/Bruenorbattlehammeringgiant/characters/63108982",
       playerDndBeyondName: "Bruenorbattlehammeringgiant",
@@ -713,7 +717,7 @@ export default {
       dungeonMaster: "JackClarke",
       map: "The Everwilds",
       date: "2021 11 26",
-      attendees: [62565380, 62574844, 74219093, 62804832, 62913829],
+      attendees: [58615947, 74219093, 62130532, 62140202, 62380701],
     },
     "-MaGM3Eww453ZLRYNgsh": {
       id: 3,

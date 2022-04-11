@@ -1,7 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  Facepile,
   IColumn,
+  IFacepilePersona,
+  PersonaSize,
   PrimaryButton,
   SelectionMode,
   ShimmeredDetailsList,
@@ -17,6 +20,8 @@ export default () => {
 
   const sessionData = useSelector((state) => state.sessions);
   const playerData = useSelector((state) => state.players);
+  const characterData = useSelector((state) => state.characters);
+
   const [compactMode, setCompactMode] = React.useState(false);
 
   let upcomingSessions = [] as ISessionData[];
@@ -64,6 +69,34 @@ export default () => {
     }
   };
 
+  const onRenderAttendees = (session: ISessionData) => {
+    if (characterData.isLoading) {
+      return;
+    }
+
+    const personas = session.attendees.map((attendee) => {
+      const matchedCharacter = characterData.data.find(
+        (character) => character.id === attendee
+      );
+
+      return {
+        imageUrl: matchedCharacter?.avatarUrl,
+        personaName: matchedCharacter?.name,
+      } as IFacepilePersona;
+    });
+
+    return (
+      <Stack horizontal tokens={{ childrenGap: 5 }}>
+        <span>{personas.length}</span>
+        <Facepile
+          personas={personas}
+          personaSize={PersonaSize.size16}
+          overflowPersonas={personas}
+        />
+      </Stack>
+    );
+  };
+
   const columns: IColumn[] = [
     {
       key: "name",
@@ -83,9 +116,9 @@ export default () => {
     },
     {
       key: "dungeon-master",
-      name: "Dungeon Master",
+      name: "DM",
       fieldName: "dungeonMaster",
-      minWidth: 120,
+      minWidth: 75,
       isResizable: true,
       onRender: onRenderDungeonMaster,
     },
@@ -94,6 +127,13 @@ export default () => {
       name: "Map",
       fieldName: "map",
       minWidth: 150,
+    },
+    {
+      key: "characters",
+      name: "Characters",
+      fieldName: "attendees",
+      minWidth: 150,
+      onRender: onRenderAttendees,
     },
   ];
 

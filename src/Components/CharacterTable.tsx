@@ -43,12 +43,12 @@ export default () => {
   const onRenderAvatar = (character: ICharacterData) => (
     <Image
       src={character.avatarUrl.length > 0 ? character.avatarUrl : DefaultAvatar}
-      imageFit={ImageFit.contain}
+      imageFit={ImageFit.cover}
       styles={{
         root: {
           borderRadius: "50%",
-          maxHeight: "20px",
-          maxWidth: "20px",
+          height: "20px",
+          width: "20px",
           filter:
             character.avatarUrl.length == 0
               ? `hue-rotate(${
