@@ -1,4 +1,4 @@
-export default [
+const Data = [
   {
     name: "Artificer",
     archet2ypeDefinition: {
@@ -266,3 +266,5 @@ export default [
     subclasses: string[];
   };
 }[];
+
+export default Data;

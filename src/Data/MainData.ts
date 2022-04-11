@@ -1,4 +1,4 @@
-export default {
+const Data = {
   characters: {
     "-MaGKwrksOQXvT7PA5Qd": {
       id: 62565380,
@@ -889,3 +889,5 @@ export default {
     },
   },
 };
+
+export default Data;

@@ -19,7 +19,7 @@ import ICharacterData from "../Interfaces/ICharacterData";
 import LevelUpTable from "../Data/LevelUp";
 import DataHelper from "../Helpers/DataHelper";
 
-export default () => {
+export default function () {
   const characterData = useSelector((state) => state.characters);
   const sessionData = useSelector((state) => state.sessions);
   const isDevMode = useSelector((state) => state.isDevMode);
@@ -51,7 +51,7 @@ export default () => {
           height: "20px",
           width: "20px",
           filter:
-            character.avatarUrl.length == 0
+            character.avatarUrl === ""
               ? `hue-rotate(${
                   Math.random() * 360
                 }deg) brightness(1.5) invert(100%) ${
@@ -270,4 +270,4 @@ export default () => {
       </Stack>
     </Stack>
   );
-};
+}

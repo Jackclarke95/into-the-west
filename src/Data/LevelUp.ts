@@ -1,4 +1,4 @@
-export default [
+const Data = [
   { level: 1, minSessions: 0 },
   { level: 2, minSessions: 2 },
   { level: 3, minSessions: 4 },
@@ -20,3 +20,5 @@ export default [
   { level: 19, minSessions: 81 },
   { level: 20, minSessions: 86 },
 ];
+
+export default Data;

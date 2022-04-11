@@ -8,12 +8,12 @@ import Footer from "./Components/Footer";
 import SessionTable from "./Components/SessionTable";
 import CharacterCreationDialog from "./Components/CharacterCreationDialog";
 import SessionCreationDialog from "./Components/SessionCreationDialog";
-import Data from "./Data/Data";
+import Data from "./Data/MainData";
 import ICharacterData from "./Interfaces/ICharacterData";
 import ISessionData from "./Interfaces/ISessionData";
 import IPlayerData from "./Interfaces/IPlayerData";
 
-export default () => {
+export default function () {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -58,7 +58,7 @@ export default () => {
         ),
       },
     });
-  }, []);
+  });
 
   return (
     <Stack
@@ -91,4 +91,4 @@ export default () => {
       <Footer />
     </Stack>
   );
-};
+}

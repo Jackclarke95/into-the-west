@@ -1,4 +1,4 @@
-export default [
+const Data = [
   { name: "Aarakocra" },
   {
     name: "Aasimar",
@@ -128,3 +128,5 @@ export default [
   { name: "Warforged" },
   { name: "Yuan-Ti Pureblood" },
 ];
+
+export default Data;

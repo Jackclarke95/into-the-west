@@ -8,7 +8,7 @@ import {
 } from "@fluentui/react";
 import preval from "preval.macro";
 
-export default () => {
+export default function () {
   const isDevMode = useSelector((state) => state.isDevMode);
 
   return (
@@ -37,4 +37,4 @@ export default () => {
       )}
     </Stack>
   );
-};
+}
