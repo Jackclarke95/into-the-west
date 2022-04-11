@@ -16,7 +16,7 @@ import { Classes } from "../Data/Classes";
 import { Races } from "../Data/Races";
 import { createCharacter } from "../Helpers/DataService";
 
-export const CharacterCreationDialog = () => {
+export default () => {
   const showDialog = useSelector((state) => state.showCharacterCreationDialog);
 
   const [characterName, setCharacterName] = useState<string | undefined>(

@@ -1,6 +1,6 @@
 import { FontSizes, Stack, Text } from "@fluentui/react";
 
-export const Header = () => {
+export default () => {
   return (
     <Stack className="header-container">
       <Text className="header" styles={{ root: { fontSize: FontSizes.mega } }}>

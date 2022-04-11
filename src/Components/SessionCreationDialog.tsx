@@ -15,9 +15,9 @@ import {
 } from "@fluentui/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Data } from "../Data/Data";
+import  Data from "../Data/Data";
 
-export const SessionCreationDialog = () => {
+export default () => {
   const showDialog = useSelector((state) => state.showSessionCreationDialog);
   const players = useSelector((state) => state.players);
   const characters = useSelector((state) => state.characters);

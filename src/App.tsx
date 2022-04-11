@@ -1,17 +1,17 @@
 import { Stack } from "@fluentui/react";
-import "./Style/App.scss";
-import { CharacterTable } from "./Components/CharacterTable";
-import { Header } from "./Components/Header";
-import { Footer } from "./Components/Footer";
-import { SessionTable } from "./Components/SessionTable";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { Data } from "./Data/Data";
+import "./Style/App.scss";
+import CharacterTable from "./Components/CharacterTable";
+import Header from "./Components/Header";
+import Footer from "./Components/Footer";
+import SessionTable from "./Components/SessionTable";
+import CharacterCreationDialog from "./Components/CharacterCreationDialog";
+import SessionCreationDialog from "./Components/SessionCreationDialog";
+import Data from "./Data/Data";
 import ICharacterData from "./Interfaces/ICharacterData";
 import ISessionData from "./Interfaces/ISessionData";
 import IPlayerData from "./Interfaces/IPlayerData";
-import { CharacterCreationDialog } from "./Components/CharacterCreationDialog";
-import { SessionCreationDialog } from "./Components/SessionCreationDialog";
 
 export default () => {
   const dispatch = useDispatch();

@@ -18,10 +18,10 @@ import { ClassIcon } from "./ClassIcon";
 import DefaultAvatar from "../Images/DefaultAvatar.jpeg";
 import { useDispatch, useSelector } from "react-redux";
 import ICharacterData from "../Interfaces/ICharacterData";
-import { Data } from "../Data/Data";
+import Data from "../Data/Data";
 import { PlayerXpTable } from "../Data/XpTable";
 
-export const CharacterTable = () => {
+export default () => {
   const characterData = useSelector((state) => state.characters);
   const experienceData = useSelector((state) => state.experience);
   const [compactMode, setCompactMode] = React.useState(false);
@@ -129,7 +129,8 @@ export const CharacterTable = () => {
     return (
       <TooltipHost
         content={`${characterXp} / ${
-          PlayerXpTable[character.currentLevel + 1] - PlayerXpTable[character.currentLevel]
+          PlayerXpTable[character.currentLevel + 1] -
+          PlayerXpTable[character.currentLevel]
         } XP`}
       >
         <ProgressIndicator

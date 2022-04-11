@@ -12,11 +12,11 @@ import {
   Text,
   Toggle,
 } from "@fluentui/react";
-import { Data } from "../Data/Data";
+import Data from "../Data/Data";
 import ISessionData from "../Interfaces/ISessionData";
 import { useDispatch, useSelector } from "react-redux";
 
-export const SessionTable = () => {
+export default () => {
   const dispatch = useDispatch();
 
   const sessionData = useSelector((state) => state.sessions);
@@ -28,7 +28,9 @@ export const SessionTable = () => {
 
   if (!sessionData.isLoading) {
     upcomingSessions = sessionData.data.filter(
-      (session) => new Date(session.date) > new Date()
+      (session) =>
+        Number(new Date(session.date)) >=
+        Number(new Date().setHours(0, 0, 0, 0))
     );
 
     pastSessions = sessionData.data.filter(
