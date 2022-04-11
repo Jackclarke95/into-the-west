@@ -14,10 +14,6 @@ import ISessionData from "./Interfaces/ISessionData";
 import IPlayerData from "./Interfaces/IPlayerData";
 
 export default () => {
-  const isDevMode = useSelector((state) => state.isDevMode);
-
-  console.log(isDevMode);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
