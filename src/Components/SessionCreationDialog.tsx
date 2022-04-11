@@ -44,7 +44,7 @@ const SessionCreationDialog = () => {
   };
 
   const onClickAddSession = () => {
-    console.log("creating session");
+    console.log("creating session", sessionName, sessionDate);
   };
 
   const dungeonMasterOptions = players.isLoading
