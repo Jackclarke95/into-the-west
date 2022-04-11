@@ -107,7 +107,7 @@ export default () => {
   );
 
   const onRenderLevel = (character: ICharacterData) => {
-    let levelToRender;
+    let levelToRender: Number;
 
     if (sessionData.isLoading) {
       levelToRender = character.currentLevel;
@@ -129,15 +129,6 @@ export default () => {
       );
 
       const calculatedLevel = levelUp[levelUp.length - 1].level;
-
-      console.log(
-        character.currentLevel !== calculatedLevel,
-        character.currentLevel,
-        character.name,
-        calculatedLevel,
-        adjustedSessions,
-        levelUp
-      );
 
       levelToRender = calculatedLevel;
     }
