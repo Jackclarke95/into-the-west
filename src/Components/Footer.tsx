@@ -29,7 +29,7 @@ export default () => {
           <MessageBar messageBarType={MessageBarType.warning}>
             This site is a work in progress, and data relies on manual updates.
             Last Release:{" "}
-            {`${preval`module.exports = new Date().toDateString();`}. `}
+            <b>{`${preval`module.exports = new Date().toDateString();`}. `}</b>
             Note that this is not the same as the last time the data was
             updated.
           </MessageBar>
