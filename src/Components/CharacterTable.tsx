@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   DefaultSpacing,
   IColumn,
@@ -6,21 +7,22 @@ import {
   ImageFit,
   Link,
   PrimaryButton,
-  ProgressIndicator,
   SelectionMode,
   ShimmeredDetailsList,
   Stack,
   Text,
   Toggle,
-  TooltipHost,
 } from "@fluentui/react";
 import { ClassIcon } from "./ClassIcon";
 import DefaultAvatar from "../Images/DefaultAvatar.jpeg";
-import { useDispatch, useSelector } from "react-redux";
 import ICharacterData from "../Interfaces/ICharacterData";
+import LevelUpTable from "../Data/LevelUp";
 
 export default () => {
   const characterData = useSelector((state) => state.characters);
+  const sessionData = useSelector((state) => state.sessions);
+  const currentUser = useSelector((state) => state.currentUser);
+
   const [compactMode, setCompactMode] = React.useState(false);
 
   const dispatch = useDispatch();
@@ -104,17 +106,54 @@ export default () => {
     </Stack>
   );
 
-  const onRenderLevel = (character: ICharacterData) => (
-    <span
-      style={{
-        display: "block",
-        textAlign: "left",
-        paddingLeft: "1em",
-      }}
-    >
-      {character.currentLevel}
-    </span>
-  );
+  const onRenderLevel = (character: ICharacterData) => {
+    let levelToRender;
+
+    if (sessionData.isLoading) {
+      levelToRender = character.currentLevel;
+    } else {
+      const sessionsAttended = sessionData.data.filter((session) =>
+        session.attendees.includes(character.id)
+      );
+
+      const sessionRun = sessionData.data.filter(
+        (session) => session.dungeonMaster === character.playerDndBeyondName
+      );
+
+      const adjustedSessions = Math.floor(
+        sessionsAttended.length + sessionRun.length / 2
+      );
+
+      const levelUp = LevelUpTable.filter(
+        (level) => level.minSessions <= adjustedSessions
+      );
+
+      const calculatedLevel = levelUp[levelUp.length - 1].level;
+
+      console.log(
+        character.currentLevel !== calculatedLevel,
+        character.currentLevel,
+        character.name,
+        calculatedLevel,
+        adjustedSessions,
+        levelUp
+      );
+
+      levelToRender = calculatedLevel;
+    }
+
+    return (
+      <span
+        style={{
+          display: "block",
+          textAlign: "left",
+          paddingLeft: "1em",
+        }}
+      >
+        {levelToRender}
+      </span>
+    );
+  };
 
   const columns: IColumn[] = [
     {
