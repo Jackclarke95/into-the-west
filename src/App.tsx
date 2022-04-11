@@ -12,7 +12,6 @@ import ISessionData from "./Interfaces/ISessionData";
 import IPlayerData from "./Interfaces/IPlayerData";
 import { CharacterCreationDialog } from "./Components/CharacterCreationDialog";
 import { SessionCreationDialog } from "./Components/SessionCreationDialog";
-import { StatBlock } from "./Components/StatBlock/StatBlock";
 
 export default () => {
   const dispatch = useDispatch();
@@ -92,9 +91,8 @@ export default () => {
         tokens={{ childrenGap: 50 }}
         styles={{ root: { overflowY: "auto" } }}
       >
-        {/* <CharacterTable />
-        <SessionTable /> */}
-        <StatBlock />
+        <CharacterTable />
+        <SessionTable />
       </Stack>
       <CharacterCreationDialog />
       <SessionCreationDialog />
