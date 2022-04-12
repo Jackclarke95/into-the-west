@@ -1,6 +1,5 @@
 import { Stack } from "@fluentui/react";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
 import "./Style/App.scss";
 import CharacterTable from "./Components/CharacterTable";
 import Header from "./Components/Header";
@@ -12,12 +11,7 @@ import ICharacterData from "./Interfaces/ICharacterData";
 import ISessionData from "./Interfaces/ISessionData";
 import IPlayerData from "./Interfaces/IPlayerData";
 
-import firebase, {
-  getDatabase,
-  connectDatabaseEmulator,
-  onValue,
-  ref,
-} from "firebase/database";
+import { getDatabase, onValue, ref } from "firebase/database";
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";

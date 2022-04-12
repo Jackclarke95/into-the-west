@@ -1,5 +1,3 @@
-import ISessionData from "../Interfaces/ISessionData";
-
 export default class DataHelper {
   /**
    * Determines if a Date occured has already occured or not
