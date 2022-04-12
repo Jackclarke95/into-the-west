@@ -146,8 +146,6 @@ const SessionTable = () => {
     });
   };
 
-  console.log(upcomingSessions);
-
   return (
     <Stack
       className="sessions-container"

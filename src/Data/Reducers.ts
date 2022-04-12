@@ -4,14 +4,6 @@ import { DefaultRootState } from "react-redux";
 
 /** Description of all the Actions taken that can affect the state */
 export type Action =
-  | {
-      type: "SetShowNewSessionDialog";
-      showNewSessionDialog: DefaultRootState["showNewSessionDialog"];
-    }
-  | {
-      type: "SetShowNewCharacterDialog";
-      showNewCharacterDialog: DefaultRootState["showNewCharacterDialog"];
-    }
   | { type: "SetDarkMode"; darkMode: DefaultRootState["darkMode"] }
   | { type: "SetCurrentUser"; currentUser: DefaultRootState["currentUser"] }
   | { type: "SetCharacters"; characters: DefaultRootState["characters"] }
@@ -28,10 +20,6 @@ export type Action =
 
 /** Initial application state */
 export const initialState: DefaultRootState = {
-  showNewSessionDialog: false,
-
-  showNewCharacterDialog: false,
-
   darkMode:
     window.matchMedia &&
     window.matchMedia("(prefers-color-scheme: dark)").matches,
@@ -70,18 +58,6 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
     currentState,
     (draftState) => {
       switch (action.type) {
-        // Action for toggling the New Character Dialog
-        case "SetShowNewCharacterDialog": {
-          draftState.showNewCharacterDialog = action.showNewCharacterDialog;
-          break;
-        }
-
-        // Action for toggling the New Session Dialog
-        case "SetShowNewSessionDialog": {
-          draftState.showNewSessionDialog = action.showNewSessionDialog;
-          break;
-        }
-
         // Action for toggling Dark Mode
         case "SetDarkMode": {
           draftState.darkMode = action.darkMode;

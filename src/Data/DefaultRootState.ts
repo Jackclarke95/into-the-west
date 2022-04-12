@@ -8,12 +8,6 @@ import { Action } from "./Reducers";
 declare module "react-redux" {
   /** Default root state */
   export interface DefaultRootState {
-    // Whether to show the New Character Dialog
-    showNewCharacterDialog: boolean;
-
-    // Whether to show the New Session Dialog
-    showNewSessionDialog: boolean;
-
     // Whether the application is in Dark Mode
     darkMode: boolean;
 

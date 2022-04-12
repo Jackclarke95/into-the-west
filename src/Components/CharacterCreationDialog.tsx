@@ -147,24 +147,29 @@ const CharacterCreationDialog = () => {
   };
 
   const onClickCreateCharacter = () => {
-    if (characterName && characterRace && characterSubrace) {
+    if (characterName && characterRace) {
       DataService.createCharacter({
         id: Number(new Date()),
         avatarUrl: "",
         sheetUrl: "",
         playerDndBeyondName: "",
         name: characterName,
-        nickname: characterNickname,
+        nickname: characterNickname ?? "",
         race: characterRace,
-        subrace: characterSubrace,
+        subrace: characterSubrace ?? undefined,
         classes: [
-          { class: { name: "Fighter", archetype: undefined }, level: 1 },
+          { class: { name: "Fighter", archetype: undefined ?? "" }, level: 1 },
         ],
         currentLevel: characterLevel,
         sessionsAttended: 0,
         startingLevel: characterLevel,
       });
     }
+
+    dispatch({
+      type: "SetShowCharacterCreationDialog",
+      showCharacterCreationDialog: false,
+    });
   };
 
   return (
