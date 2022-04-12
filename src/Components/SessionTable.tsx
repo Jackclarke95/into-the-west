@@ -196,7 +196,7 @@ const SessionTable = () => {
           selectionMode={SelectionMode.none}
           compact={compactMode}
           groups={
-            sessionData.isLoading
+            upcomingSessions.length == 0
               ? undefined
               : [
                   {

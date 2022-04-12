@@ -8,7 +8,6 @@ import Footer from "./Components/Footer";
 import SessionTable from "./Components/SessionTable";
 import CharacterCreationDialog from "./Components/CharacterCreationDialog";
 import SessionCreationDialog from "./Components/SessionCreationDialog";
-import Data from "./Data/MainData";
 import ICharacterData from "./Interfaces/ICharacterData";
 import ISessionData from "./Interfaces/ISessionData";
 import IPlayerData from "./Interfaces/IPlayerData";
@@ -75,13 +74,29 @@ const App = () => {
         isLoading: false,
         data: Object.keys(sessionData)
           .map((key) => {
-            const character = sessionData[key];
-            character.key = key;
-            return character;
+            const session = sessionData[key];
+            session.key = key;
+            return session;
           })
           .sort((sessionA, sessionB) =>
             sessionB.date.localeCompare(sessionA.date)
           ),
+      },
+    });
+  });
+
+  onValue(ref(db, "players"), (snapshot) => {
+    const playerData = snapshot.val() as IPlayerData[];
+
+    dispatch({
+      type: "SetPlayers",
+      players: {
+        isLoading: false,
+        data: Object.keys(playerData).map((key) => {
+          const player = playerData[key];
+          player.key = key;
+          return player;
+        }),
       },
     });
   });

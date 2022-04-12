@@ -112,20 +112,21 @@ const CharacterTable = () => {
 
     if (sessionData.isLoading) {
       levelToRender = character.currentLevel;
+      console.log("loading");
     } else {
       const sessionsAttended = sessionData.data.filter((session) =>
         session.attendees.includes(character.id)
-      );
+      ).length;
 
-      const sessionRun = sessionData.data.filter(
+      const sessionsRun = sessionData.data.filter(
         (session) =>
           session.dungeonMaster === character.playerDndBeyondName &&
           DataHelper.isSessionInPast(session)
-      );
+      ).length;
 
-      const adjustedSessions = Math.floor(
-        sessionsAttended.length + sessionRun.length / 2
-      );
+      console.log(character.name, sessionsAttended, sessionsRun);
+
+      const adjustedSessions = Math.floor(sessionsAttended + sessionsRun / 2);
 
       const levelUp = LevelUpTable.filter(
         (level) => level.minSessions <= adjustedSessions
