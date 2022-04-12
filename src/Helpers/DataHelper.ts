@@ -8,8 +8,4 @@ export default class DataHelper {
   public static isDateInPast(date: Date): boolean {
     return Number(new Date(date)) <= Number(new Date().setHours(0, 0, 0, 0));
   }
-
-  public static compareDates(date1: Date, date2: Date): number {
-    return Number(date1) - Number(date2);
-  }
 }
