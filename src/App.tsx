@@ -1,5 +1,5 @@
 import { Stack } from "@fluentui/react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./Style/App.scss";
 import CharacterTable from "./Components/CharacterTable";
 import Header from "./Components/Header";
@@ -26,11 +26,12 @@ const firebaseConfig = {
   appId: "1:1019951241923:web:960fbf221acc3fd05fa076",
 };
 
+initializeApp(firebaseConfig);
+
+export const db = getDatabase();
+
 const App = () => {
   const dispatch = useDispatch();
-
-  initializeApp(firebaseConfig);
-  const db = getDatabase();
 
   onValue(ref(db, "characters"), (snapshot) => {
     const characterData = snapshot.val() as ICharacterData[];
