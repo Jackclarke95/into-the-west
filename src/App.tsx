@@ -13,17 +13,45 @@ import ICharacterData from "./Interfaces/ICharacterData";
 import ISessionData from "./Interfaces/ISessionData";
 import IPlayerData from "./Interfaces/IPlayerData";
 
+import firebase, {
+  getDatabase,
+  connectDatabaseEmulator,
+  onValue,
+  ref,
+} from "firebase/database";
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+const firebaseConfig = {
+  apiKey: "AIzaSyDJLonhBywTBq-R2AyP5Hvcg2Lp-gUMogk",
+  authDomain: "into-the-west-5869d.firebaseapp.com",
+  databaseURL:
+    "https://into-the-west-5869d-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "into-the-west-5869d",
+  storageBucket: "into-the-west-5869d.appspot.com",
+  messagingSenderId: "1019951241923",
+  appId: "1:1019951241923:web:960fbf221acc3fd05fa076",
+};
+
 const App = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  initializeApp(firebaseConfig);
+  const db = getDatabase();
+
+  onValue(ref(db, "characters"), (snapshot) => {
+    const data = snapshot.val() as ICharacterData[];
+
     dispatch({
       type: "SetCharacters",
       characters: {
         isLoading: false,
-        data: Object.keys(Data.characters)
-          .map((key) => Data.characters[key] as ICharacterData)
-
+        data: Object.keys(data)
+          .map((key) => {
+            const character = data[key];
+            character.key = key;
+            return character;
+          })
           .sort((characterA, characterB) =>
             characterA.name.localeCompare(characterB.name)
           )
@@ -36,30 +64,28 @@ const App = () => {
           }),
       },
     });
+  });
+
+  onValue(ref(db, "sessions"), (snapshot) => {
+    const data = snapshot.val() as ISessionData[];
 
     dispatch({
       type: "SetSessions",
       sessions: {
         isLoading: false,
-        data: Object.keys(Data.sessions)
-          .map((key) => Data.sessions[key] as ISessionData)
+        data: Object.keys(data)
+          .map((key) => {
+            const character = data[key];
+            character.key = key;
+            return character;
+          })
           .sort((sessionA, sessionB) =>
             sessionB.date.localeCompare(sessionA.date)
           ),
       },
     });
-
-    dispatch({
-      type: "SetPlayers",
-      players: {
-        isLoading: false,
-        data: Object.keys(Data.players).map(
-          (key) => Data.players[key] as IPlayerData
-        ),
-      },
-    });
   });
-
+  
   return (
     <Stack
       verticalFill
