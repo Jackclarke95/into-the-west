@@ -30,7 +30,7 @@ const SessionTable = () => {
 
   if (!sessionData.isLoading) {
     upcomingSessions = sessionData.data.filter((session) =>
-      DataHelper.isSessionInPast(session)
+      DataHelper.isDateInPast(new Date(session.date))
     );
 
     pastSessions = sessionData.data.filter(

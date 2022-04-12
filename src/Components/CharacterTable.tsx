@@ -116,17 +116,18 @@ const CharacterTable = () => {
     } else {
       const sessionsAttended = sessionData.data.filter((session) =>
         session.attendees.includes(character.id)
-      ).length;
+      );
 
-      const sessionsRun = sessionData.data.filter(
-        (session) =>
-          session.dungeonMaster === character.playerDndBeyondName &&
-          DataHelper.isSessionInPast(session)
-      ).length;
+      const sessionsRun = sessionData.data.filter((session) => {
+        const dmMatch = session.dungeonMaster === character.playerDndBeyondName;
+        const isInpast = DataHelper.isDateInPast(new Date(session.date));
 
-      console.log(character.name, sessionsAttended, sessionsRun);
+        return dmMatch && isInpast;
+      });
 
-      const adjustedSessions = Math.floor(sessionsAttended + sessionsRun / 2);
+      const adjustedSessions = Math.floor(
+        sessionsAttended.length + sessionsRun.length / 2
+      );
 
       const levelUp = LevelUpTable.filter(
         (level) => level.minSessions <= adjustedSessions
