@@ -1,6 +1,6 @@
 export default interface ICharacterData {
   id: number;
-  key: string;
+  key?: string;
   avatarUrl: string;
   sheetUrl: string | undefined;
   playerDndBeyondName: string;

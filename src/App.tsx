@@ -40,15 +40,15 @@ const App = () => {
   const db = getDatabase();
 
   onValue(ref(db, "characters"), (snapshot) => {
-    const data = snapshot.val() as ICharacterData[];
+    const characterData = snapshot.val() as ICharacterData[];
 
     dispatch({
       type: "SetCharacters",
       characters: {
         isLoading: false,
-        data: Object.keys(data)
+        data: Object.keys(characterData)
           .map((key) => {
-            const character = data[key];
+            const character = characterData[key];
             character.key = key;
             return character;
           })
@@ -67,15 +67,15 @@ const App = () => {
   });
 
   onValue(ref(db, "sessions"), (snapshot) => {
-    const data = snapshot.val() as ISessionData[];
+    const sessionData = snapshot.val() as ISessionData[];
 
     dispatch({
       type: "SetSessions",
       sessions: {
         isLoading: false,
-        data: Object.keys(data)
+        data: Object.keys(sessionData)
           .map((key) => {
-            const character = data[key];
+            const character = sessionData[key];
             character.key = key;
             return character;
           })
@@ -85,7 +85,7 @@ const App = () => {
       },
     });
   });
-  
+
   return (
     <Stack
       verticalFill

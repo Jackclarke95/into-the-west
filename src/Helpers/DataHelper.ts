@@ -12,4 +12,8 @@ export default class DataHelper {
       Number(new Date(session.date)) >= Number(new Date().setHours(0, 0, 0, 0))
     );
   }
+
+  public static compareDates(date1: Date, date2: Date): number {
+    return Number(date1) - Number(date2);
+  }
 }

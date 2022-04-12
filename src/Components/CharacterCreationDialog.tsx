@@ -150,7 +150,6 @@ const CharacterCreationDialog = () => {
     if (characterName && characterRace && characterSubrace) {
       DataService.createCharacter({
         id: Number(new Date()),
-        key: "",
         avatarUrl: "",
         sheetUrl: "",
         playerDndBeyondName: "",
