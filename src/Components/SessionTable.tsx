@@ -29,8 +29,8 @@ const SessionTable = () => {
   let pastSessions = [] as ISessionData[];
 
   if (!sessionData.isLoading) {
-    upcomingSessions = sessionData.data.filter((session) =>
-      DataHelper.isDateInPast(new Date(session.date))
+    upcomingSessions = sessionData.data.filter(
+      (session) => !DataHelper.isDateInPast(new Date(session.date))
     );
 
     pastSessions = sessionData.data.filter(
@@ -146,6 +146,8 @@ const SessionTable = () => {
     });
   };
 
+  console.log(upcomingSessions);
+
   return (
     <Stack
       className="sessions-container"
@@ -196,7 +198,7 @@ const SessionTable = () => {
           selectionMode={SelectionMode.none}
           compact={compactMode}
           groups={
-            upcomingSessions.length == 0
+            upcomingSessions.length === 0
               ? undefined
               : [
                   {

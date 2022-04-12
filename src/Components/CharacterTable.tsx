@@ -112,7 +112,6 @@ const CharacterTable = () => {
 
     if (sessionData.isLoading) {
       levelToRender = character.currentLevel;
-      console.log("loading");
     } else {
       const sessionsAttended = sessionData.data.filter((session) =>
         session.attendees.includes(character.id)
@@ -251,7 +250,7 @@ const CharacterTable = () => {
           selectionMode={SelectionMode.none}
           compact={compactMode}
           groups={
-            characterData.isLoading
+            activeCharacters.length === 0
               ? undefined
               : [
                   {
