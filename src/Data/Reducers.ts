@@ -16,6 +16,10 @@ export type Action =
   | {
       type: "SetShowSessionCreationDialog";
       showSessionCreationDialog: DefaultRootState["showSessionCreationDialog"];
+    }
+  | {
+      type: "SetDataToDisplay";
+      dataToDisplay: DefaultRootState["dataToDisplay"];
     };
 
 /** Initial application state */
@@ -43,6 +47,8 @@ export const initialState: DefaultRootState = {
   showSessionCreationDialog: false,
 
   isDevMode: window.location.hostname === "localhost",
+
+  dataToDisplay: "Dashboard",
 };
 
 /**
@@ -99,6 +105,12 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         case "SetShowSessionCreationDialog": {
           draftState.showSessionCreationDialog =
             action.showSessionCreationDialog;
+          break;
+        }
+
+        // Action to toggling which data to render
+        case "SetDataToDisplay": {
+          draftState.dataToDisplay = action.dataToDisplay;
           break;
         }
       }

@@ -86,16 +86,16 @@ const SessionCreationDialog = () => {
 
     if (
       sessionName &&
-      sessionDate &&
       sessionDungeonMaster &&
       sessionMap &&
+      sessionDate &&
       attendeeList.length > 0
     ) {
       DataService.createSession(
         sessionName,
         sessionDungeonMaster,
         sessionMap,
-        sessionDate.toDateString(),
+        sessionDate.toLocaleDateString(),
         attendeeList
       );
     }
@@ -201,7 +201,11 @@ const SessionCreationDialog = () => {
           value={sessionName}
           onChange={onChangeSessionName}
         />
-        <DatePicker label="Session Date" onSelectDate={onSelectDate} />
+        <DatePicker
+          label="Session Date"
+          minDate={new Date()}
+          onSelectDate={onSelectDate}
+        />
         <Dropdown
           label="Dungeon Master"
           options={dungeonMasterOptions}

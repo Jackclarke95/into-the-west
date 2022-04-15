@@ -45,22 +45,17 @@ export default class DataService {
     date: string,
     attendees: number[]
   ) => {
-    console.log("creating session", {
+    const sessionsRef = ref(db, "sessions/");
+
+    const sessionToCreate = {
+      id: getId("session-"),
       name,
       dungeonMaster,
       map,
       date,
       attendees,
-    });
-    const sessionsRef = ref(db, "sessions/");
+    };
 
-    push(sessionsRef, {
-      id: getId("session-"),
-      name: name,
-      dungeonMaster: dungeonMaster,
-      map: map,
-      date: date,
-      attendees: attendees,
-    });
+    push(sessionsRef, sessionToCreate);
   };
 }

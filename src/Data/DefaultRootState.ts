@@ -32,6 +32,8 @@ declare module "react-redux" {
     showSessionCreationDialog: boolean;
 
     isDevMode: boolean;
+
+    dataToDisplay: "Dashboard" | "CharacterTable" | "SessionTable";
   }
 
   // Declare dispatcher to take our root provider's action type
