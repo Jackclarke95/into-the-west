@@ -15,6 +15,7 @@ import {
 } from "@fluentui/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import DataService from "../Helpers/DataService";
 
 const SessionCreationDialog = () => {
   const showDialog = useSelector((state) => state.showSessionCreationDialog);
@@ -25,6 +26,11 @@ const SessionCreationDialog = () => {
   const [sessionDate, setSessionDate] = useState<Date | null | undefined>(
     undefined
   );
+  const [sessionDungeonMaster, setSessionDungeonMaster] = useState<
+    string | undefined
+  >(undefined);
+  const [sessionMap, setSessionMap] = useState<string | undefined>(undefined);
+  const [sessionAttendees, setSessionAttendees] = useState<IPersonaProps[]>([]);
 
   const dispatch = useDispatch();
 
@@ -36,6 +42,30 @@ const SessionCreationDialog = () => {
     setSessionDate(value);
   };
 
+  const onChangeDungeonMaster = (_, option: IDropdownOption | undefined) => {
+    if (!option) {
+      setSessionDungeonMaster(undefined);
+    } else {
+      setSessionDungeonMaster(option.text);
+    }
+  };
+
+  const onChangeMap = (_, option: IDropdownOption | undefined) => {
+    if (!option) {
+      setSessionMap(undefined);
+    } else {
+      setSessionMap(option.text);
+    }
+  };
+
+  const onChangeAttendees = (items: IPersonaProps[] | undefined) => {
+    if (!items?.length || items.length === 0) {
+      setSessionAttendees([]);
+    } else {
+      setSessionAttendees(items);
+    }
+  };
+
   const onDismiss = () => {
     dispatch({
       type: "SetShowSessionCreationDialog",
@@ -44,7 +74,36 @@ const SessionCreationDialog = () => {
   };
 
   const onClickAddSession = () => {
-    console.log("creating session", sessionName, sessionDate);
+    console.log("creating session", sessionAttendees);
+
+    let attendeeList = [] as number[];
+
+    sessionAttendees.forEach((attendee) => {
+      if (typeof attendee.key === "number") {
+        attendeeList.push(attendee.key);
+      }
+    });
+
+    if (
+      sessionName &&
+      sessionDate &&
+      sessionDungeonMaster &&
+      sessionMap &&
+      attendeeList.length > 0
+    ) {
+      DataService.createSession(
+        sessionName,
+        sessionDungeonMaster,
+        sessionMap,
+        sessionDate.toDateString(),
+        attendeeList
+      );
+    }
+
+    dispatch({
+      type: "SetShowSessionCreationDialog",
+      showSessionCreationDialog: false,
+    });
   };
 
   const dungeonMasterOptions = players.isLoading
@@ -91,11 +150,12 @@ const SessionCreationDialog = () => {
     return characters.data
       .filter(
         (character) =>
+          !character.retirement &&
           character.name.toLowerCase().includes(filter.toLowerCase()) &&
           !selectedItems?.find((item) => item.text === character.name)
       )
       .map((character) => ({
-        key: character.name,
+        key: character.id,
         text: character.name,
         imageUrl: character.avatarUrl,
       })) as IPersonaProps[];
@@ -109,10 +169,11 @@ const SessionCreationDialog = () => {
     return characters.data
       .filter(
         (character) =>
+          !character.retirement &&
           !selectedItems?.find((item) => item.text === character.name)
       )
       .map((character) => ({
-        key: character.name,
+        key: character.id,
         text: character.name,
         imageUrl: character.avatarUrl,
       })) as IPersonaProps[];
@@ -141,13 +202,18 @@ const SessionCreationDialog = () => {
           onChange={onChangeSessionName}
         />
         <DatePicker label="Session Date" onSelectDate={onSelectDate} />
-        <Dropdown label="Dungeon Master" options={dungeonMasterOptions} />
-        <Dropdown label="Map" options={mapOptions} />
+        <Dropdown
+          label="Dungeon Master"
+          options={dungeonMasterOptions}
+          onChange={onChangeDungeonMaster}
+        />
+        <Dropdown label="Map" options={mapOptions} onChange={onChangeMap} />
         <Label>Characters</Label>
         <NormalPeoplePicker
           onResolveSuggestions={onResolveSuggestions}
           onEmptyResolveSuggestions={onResolveEmptySuggestions}
           inputProps={inputProps}
+          onChange={onChangeAttendees}
         />
         <DefaultButton text="Cancel" onClick={onDismiss}></DefaultButton>
         <PrimaryButton

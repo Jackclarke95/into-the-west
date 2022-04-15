@@ -19,6 +19,8 @@ import DataService from "../Helpers/DataService";
 const CharacterCreationDialog = () => {
   const showDialog = useSelector((state) => state.showCharacterCreationDialog);
 
+  const currentUser = useSelector((state) => state.currentUser);
+
   const [characterName, setCharacterName] = useState<string | undefined>(
     undefined
   );
@@ -147,18 +149,24 @@ const CharacterCreationDialog = () => {
   };
 
   const onClickCreateCharacter = () => {
-    if (characterName && characterRace) {
+    if (characterName && characterRace && characterClass && characterLevel) {
       DataService.createCharacter({
         id: Number(new Date()),
         avatarUrl: "",
         sheetUrl: "",
-        playerDndBeyondName: "",
+        playerDndBeyondName: currentUser.dndBeyondName,
         name: characterName,
-        nickname: characterNickname ?? "",
+        nickname: characterNickname,
         race: characterRace,
         subrace: characterSubrace ?? undefined,
         classes: [
-          { class: { name: "Fighter", archetype: undefined ?? "" }, level: 1 },
+          {
+            class: {
+              name: characterClass,
+              archetype: undefined ?? "",
+            },
+            level: 1,
+          },
         ],
         currentLevel: characterLevel,
         sessionsAttended: 0,
