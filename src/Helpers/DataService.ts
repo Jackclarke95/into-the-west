@@ -7,7 +7,6 @@ import ICharacterData from "../Interfaces/ICharacterData";
 
 export default class DataService {
   public static createCharacter = (character: ICharacterData) => {
-    console.log("creating character from data:", character);
     const charactersRef = ref(db, "characters");
 
     let characterToCreate = {
@@ -32,8 +31,6 @@ export default class DataService {
       Object.defineProperty(characterToCreate, "subrace", {
         value: character.subrace,
       });
-
-    console.log("character to create:", characterToCreate);
 
     push(charactersRef, characterToCreate);
   };

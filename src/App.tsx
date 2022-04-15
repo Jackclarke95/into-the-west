@@ -116,9 +116,6 @@ const App = () => {
     item?: PivotItem | undefined,
     _?: React.MouseEvent<HTMLElement, MouseEvent> | undefined
   ) => {
-    console.log(item);
-    console.log(item?.props.headerText);
-
     let dataToDisplay: "Dashboard" | "CharacterTable" | "SessionTable";
 
     if (item?.props.headerText) {
@@ -172,7 +169,7 @@ const App = () => {
       >
         <Pivot onLinkClick={onClickPivotLink}>
           <PivotItem headerText="Dashboard" />
-          <PivotItem headerText="Characters" onClick={(e) => console.log(e)} />
+          <PivotItem headerText="Characters" />
           <PivotItem headerText="Sessions" />
         </Pivot>
         {dataToRender()}

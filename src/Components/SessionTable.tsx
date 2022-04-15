@@ -138,8 +138,6 @@ const SessionTable = () => {
   ];
 
   const onClickCreateSession = () => {
-    console.log("creating session");
-
     dispatch({
       type: "SetShowSessionCreationDialog",
       showSessionCreationDialog: true,

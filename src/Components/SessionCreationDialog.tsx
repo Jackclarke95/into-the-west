@@ -74,7 +74,6 @@ const SessionCreationDialog = () => {
   };
 
   const onClickAddSession = () => {
-    console.log("creating session", sessionAttendees);
 
     let attendeeList = [] as number[];
 
