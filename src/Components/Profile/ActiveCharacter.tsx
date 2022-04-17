@@ -9,7 +9,7 @@ import {
   Text,
 } from "@fluentui/react";
 import { useDispatch, useSelector } from "react-redux";
-import CharacterPersona from "./CharacterPersona";
+import CharacterPersona from "../CharacterPersona";
 
 const ActiveCharacter = () => {
   const dispatch = useDispatch();
@@ -18,12 +18,12 @@ const ActiveCharacter = () => {
 
   const dataToRender = () => {
     if (activeCharacter.isLoading) {
-      return <Spinner size={SpinnerSize.large} label="Character Loading" />;
+      return <Spinner size={SpinnerSize.large} label="Loading Character" />;
     } else if (!activeCharacter.data) {
       return (
         <MessageBar messageBarType={MessageBarType.warning} isMultiline>
-          You do not have an active character. Create a new character using the
-          button below.
+          You do not have an character. Create a new character using the button
+          above.
         </MessageBar>
       );
     } else {
@@ -38,6 +38,15 @@ const ActiveCharacter = () => {
     });
   };
 
+  const onClickCreateCharacter = () => {
+    console.log("creating character");
+
+    dispatch({
+      type: "SetShowCharacterCreationDialog",
+      showCharacterCreationDialog: true,
+    });
+  };
+
   return (
     <Stack tokens={{ childrenGap: 10 }}>
       <Stack horizontal styles={{ root: { justifyContent: "space-between" } }}>
@@ -49,15 +58,27 @@ const ActiveCharacter = () => {
           Active Character
         </Text>
         <Stack horizontal tokens={{ childrenGap: 10 }}>
-          <DefaultButton
-            text="Edit"
-            disabled={activeCharacter.isLoading || !activeCharacter.data}
-          />
-          <DefaultButton
-            text="Retire"
-            disabled={activeCharacter.isLoading || !activeCharacter.data}
-            onClick={onClickRetireCharacterButton}
-          />
+          {!activeCharacter.isLoading && activeCharacter.data ? (
+            <>
+              <DefaultButton
+                text="Edit"
+                disabled={activeCharacter.isLoading || !activeCharacter.data}
+              />
+              <DefaultButton
+                text="Retire"
+                disabled={activeCharacter.isLoading || !activeCharacter.data}
+                onClick={onClickRetireCharacterButton}
+              />
+            </>
+          ) : (
+            <DefaultButton
+              text="New Character"
+              disabled={
+                activeCharacter.isLoading || activeCharacter.data !== undefined
+              }
+              onClick={onClickCreateCharacter}
+            />
+          )}
         </Stack>
       </Stack>
       <Stack

@@ -1,7 +1,7 @@
-import { FontSizes, Stack, Text } from "@fluentui/react";
+import { FontSizes, Separator, Stack, Text } from "@fluentui/react";
 import CharacterTable from "./CharacterTable";
 import SessionTable from "./SessionTable";
-import Profile from "./Profile";
+import Profile from "./Profile/Profile";
 
 const Dashboard = () => {
   return (
@@ -25,17 +25,17 @@ const Dashboard = () => {
             root: { fontSize: FontSizes.superLarge, textAlign: "start" },
           }}
         >
-          Characters
+          Sessions
         </Text>
-        <CharacterTable />
+        <SessionTable />
         <Text
           styles={{
             root: { fontSize: FontSizes.superLarge, textAlign: "start" },
           }}
         >
-          Sessions
+          Characters
         </Text>
-        <SessionTable />
+        <CharacterTable />
       </Stack>
     </Stack>
   );

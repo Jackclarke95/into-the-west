@@ -8,6 +8,7 @@ import {
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ActiveCharacter from "./ActiveCharacter";
+import NextSession from "./NextSession";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -38,15 +39,6 @@ const Profile = () => {
     });
   }, [characters, currentUser, dispatch]);
 
-  const onClickCreateCharacter = () => {
-    console.log("creating character");
-
-    dispatch({
-      type: "SetShowCharacterCreationDialog",
-      showCharacterCreationDialog: true,
-    });
-  };
-
   const onClickCreateSession = () => {
     dispatch({
       type: "SetShowSessionCreationDialog",
@@ -74,11 +66,6 @@ const Profile = () => {
         styles={{ root: { width: "100%", justifyContent: "space-between" } }}
       >
         <PrimaryButton
-          text="New character"
-          onClick={onClickCreateCharacter}
-          disabled={!isDevMode}
-        />
-        <PrimaryButton
           text="New session"
           onClick={onClickCreateSession}
           disabled={!isDevMode}
@@ -87,6 +74,7 @@ const Profile = () => {
       <Separator />
       <ActiveCharacter />
       <Separator />
+      <NextSession />
     </Stack>
   );
 };

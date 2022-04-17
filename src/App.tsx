@@ -3,8 +3,8 @@ import { useDispatch } from "react-redux";
 import "./Style/App.scss";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
-import CharacterCreationDialog from "./Components/CharacterCreationDialog";
-import SessionCreationDialog from "./Components/SessionCreationDialog";
+import CharacterCreationDialog from "./Components/Dialogs/CharacterCreationDialog";
+import SessionCreationDialog from "./Components/Dialogs/SessionCreationDialog";
 import ICharacterData from "./Interfaces/ICharacterData";
 import ISessionData from "./Interfaces/ISessionData";
 import IPlayerData from "./Interfaces/IPlayerData";
@@ -14,7 +14,7 @@ import { getDatabase, onValue, ref } from "firebase/database";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import Dashboard from "./Components/Dashboard";
-import CharacterRetirementDialog from "./Components/CharacterRetirementDialog";
+import CharacterRetirementDialog from "./Components/Dialogs/CharacterRetirementDialog";
 const firebaseConfig = {
   apiKey: "AIzaSyDJLonhBywTBq-R2AyP5Hvcg2Lp-gUMogk",
   authDomain: "into-the-west-5869d.firebaseapp.com",
