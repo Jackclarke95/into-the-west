@@ -137,45 +137,11 @@ const SessionTable = () => {
     },
   ];
 
-  const onClickCreateSession = () => {
-    dispatch({
-      type: "SetShowSessionCreationDialog",
-      showSessionCreationDialog: true,
-    });
-  };
-
   return (
     <Stack
       className="sessions-container"
       styles={{ root: { overflowY: "auto" } }}
     >
-      <Stack
-        horizontal
-        className="session-table-header"
-        styles={{
-          root: {
-            width: "100%",
-            justifyContent: "space-between",
-            alignItems: "flex-end",
-            paddingTop: "1em",
-            paddingBottom: "1em",
-          },
-        }}
-      >
-        <Text variant="superLarge">Sessions</Text>
-        <Toggle
-          label="Compact Table"
-          inlineLabel
-          onText="Compact"
-          offText="Normal"
-          onChange={() => setCompactMode(!compactMode)}
-        />
-        <PrimaryButton
-          text="New session"
-          onClick={onClickCreateSession}
-          disabled={!isDevMode}
-        />
-      </Stack>
       <Stack
         className="session-table-container"
         grow={1}
@@ -192,7 +158,7 @@ const SessionTable = () => {
           columns={columns}
           enableShimmer={sessionData.isLoading}
           selectionMode={SelectionMode.none}
-          compact={compactMode}
+          compact
           groups={
             upcomingSessions.length === 0
               ? undefined

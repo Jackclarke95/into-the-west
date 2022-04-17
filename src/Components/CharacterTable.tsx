@@ -193,82 +193,36 @@ const CharacterTable = () => {
     },
   ];
 
-  const onClickCreateCharacter = () => {
-    dispatch({
-      type: "SetShowCharacterCreationDialog",
-      showCharacterCreationDialog: true,
-    });
-  };
-
   return (
     <Stack
       className="characters-container"
       styles={{ root: { overflowY: "auto" } }}
     >
-      <Stack
-        horizontal
-        className="character-table-header"
-        styles={{
-          root: {
-            width: "100%",
-            justifyContent: "space-between",
-            alignItems: "flex-end",
-            paddingTop: "1em",
-            paddingBottom: "1em",
-          },
-        }}
-      >
-        <Text variant="superLarge">Characters</Text>
-        <Toggle
-          label="Compact Table"
-          inlineLabel
-          onText="Compact"
-          offText="Normal"
-          onChange={() => setCompactMode(!compactMode)}
-        />
-        <PrimaryButton
-          text="New character"
-          onClick={onClickCreateCharacter}
-          disabled={!isDevMode}
-        />
-      </Stack>
-      <Stack
-        className="character-table-container"
-        grow={1}
-        styles={{
-          root: {
-            overflowY: "scroll",
-            overflowX: "auto",
-            flexGrow: 1,
-          },
-        }}
-      >
-        <ShimmeredDetailsList
-          items={characterData.isLoading ? [] : characterData.data}
-          columns={columns}
-          enableShimmer={characterData.isLoading}
-          selectionMode={SelectionMode.none}
-          compact={compactMode}
-          groups={
-            activeCharacters.length === 0
-              ? undefined
-              : [
-                  {
-                    startIndex: 0,
-                    count: activeCharacters.length,
-                    key: "active",
-                    name: "Active Characters",
-                  },
-                  {
-                    startIndex: activeCharacters.length,
-                    count: retiredCharacters.length,
-                    key: "retired",
-                    name: "Retired Characters",
-                  },
-                ]
-          }
-        />
-      </Stack>
+      <ShimmeredDetailsList
+        items={characterData.isLoading ? [] : characterData.data}
+        columns={columns}
+        enableShimmer={characterData.isLoading}
+        selectionMode={SelectionMode.none}
+        compact
+        // groups={
+        //   activeCharacters.length === 0
+        //     ? undefined
+        //     : [
+        //         {
+        //           startIndex: 0,
+        //           count: activeCharacters.length,
+        //           key: "active",
+        //           name: "Active Characters",
+        //         },
+        //         {
+        //           startIndex: activeCharacters.length,
+        //           count: retiredCharacters.length,
+        //           key: "retired",
+        //           name: "Retired Characters",
+        //         },
+        //       ]
+        // }
+      />
     </Stack>
   );
 };

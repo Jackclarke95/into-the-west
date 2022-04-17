@@ -155,28 +155,16 @@ const App = () => {
       verticalAlign="center"
       styles={{
         root: {
-          maxWidth: "100%",
           textAlign: "center",
           height: "100vh",
         },
       }}
     >
       <Header />
-      <Stack
-        className="body-container"
-        verticalFill
-        styles={{ root: { overflowY: "auto", height: "100%" } }}
-      >
-        <Pivot onLinkClick={onClickPivotLink}>
-          <PivotItem headerText="Dashboard" />
-          <PivotItem headerText="Characters" />
-          <PivotItem headerText="Sessions" />
-        </Pivot>
-        {dataToRender()}
-      </Stack>
+      <Dashboard />
+      <Footer />
       <CharacterCreationDialog />
       <SessionCreationDialog />
-      <Footer />
     </Stack>
   );
 };
