@@ -1,4 +1,4 @@
-import { FontSizes, Separator, Stack, Text } from "@fluentui/react";
+import { FontSizes, Stack, Text } from "@fluentui/react";
 import CharacterTable from "./CharacterTable";
 import SessionTable from "./SessionTable";
 import Profile from "./Profile/Profile";

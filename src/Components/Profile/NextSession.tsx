@@ -14,7 +14,6 @@ import {
 import { useSelector } from "react-redux";
 import DataHelper from "../../Helpers/DataHelper";
 import ISessionData from "../../Interfaces/ISessionData";
-import CharacterPersona from "../CharacterPersona";
 
 const NextSession = () => {
   const sessions = useSelector((state) => state.sessions);
