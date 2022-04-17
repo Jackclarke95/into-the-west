@@ -8,4 +8,12 @@ export default class DataHelper {
   public static isDateInPast(date: Date): boolean {
     return Number(new Date(date)) <= Number(new Date().setHours(0, 0, 0, 0));
   }
+
+  public static formatOrdinalNumber(number: number): string {
+    const suffix = ["th", "st", "nd", "rd"];
+    const remainder = number % 100;
+    return (
+      number + (suffix[(remainder - 20) % 10] || suffix[remainder] || suffix[0])
+    );
+  }
 }

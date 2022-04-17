@@ -1,6 +1,5 @@
-import { useSelector } from "react-redux";
 import { getId } from "@fluentui/react";
-import { getDatabase, push, ref, set } from "firebase/database";
+import { push, ref } from "firebase/database";
 
 import { db } from "../App";
 import ICharacterData from "../Interfaces/ICharacterData";

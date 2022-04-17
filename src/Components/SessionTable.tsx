@@ -1,29 +1,20 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   Facepile,
   IColumn,
   IFacepilePersona,
   PersonaSize,
-  PrimaryButton,
   SelectionMode,
   ShimmeredDetailsList,
   Stack,
-  Text,
-  Toggle,
 } from "@fluentui/react";
 import ISessionData from "../Interfaces/ISessionData";
 import DataHelper from "../Helpers/DataHelper";
 
 const SessionTable = () => {
-  const dispatch = useDispatch();
-
   const sessionData = useSelector((state) => state.sessions);
   const playerData = useSelector((state) => state.players);
   const characterData = useSelector((state) => state.characters);
-  const isDevMode = useSelector((state) => state.isDevMode);
-
-  const [compactMode, setCompactMode] = React.useState(false);
 
   let upcomingSessions = [] as ISessionData[];
   let pastSessions = [] as ISessionData[];

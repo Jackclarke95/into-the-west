@@ -1,4 +1,4 @@
-import { Pivot, PivotItem, Stack } from "@fluentui/react";
+import { PivotItem, Stack } from "@fluentui/react";
 import { useDispatch, useSelector } from "react-redux";
 import "./Style/App.scss";
 import CharacterTable from "./Components/CharacterTable";

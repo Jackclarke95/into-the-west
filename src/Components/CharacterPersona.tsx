@@ -1,4 +1,5 @@
 import { DefaultSpacing, Persona, PersonaSize, Stack } from "@fluentui/react";
+import DataHelper from "../Helpers/DataHelper";
 import { ClassIcon } from "./ClassIcon";
 
 const CharacterPersona = (props) => {
@@ -36,7 +37,9 @@ const CharacterPersona = (props) => {
 
   return (
     <Persona
-      text={`${character.name} (${character.currentLevel})`}
+      text={`${character.name} (${DataHelper.formatOrdinalNumber(
+        character.currentLevel
+      )} Level)`}
       onRenderSecondaryText={onRenderClasses}
       tertiaryText={
         character.subrace
