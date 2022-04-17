@@ -1,7 +1,7 @@
 import {
-  DefaultButton,
   FontSizes,
   PrimaryButton,
+  Separator,
   Stack,
   Text,
 } from "@fluentui/react";
@@ -13,7 +13,6 @@ const Profile = () => {
   const dispatch = useDispatch();
 
   const characters = useSelector((state) => state.characters);
-  const activeCharacter = useSelector((state) => state.activeCharacter);
   const currentUser = useSelector((state) => state.currentUser);
   const isDevMode = useSelector((state) => state.isDevMode);
 
@@ -55,13 +54,6 @@ const Profile = () => {
     });
   };
 
-  const onClickRetireCharacter = () => {
-    dispatch({
-      type: "SetShowCharacterRetirementDialog",
-      showCharacterRetirementDialog: true,
-    });
-  };
-
   return (
     <Stack tokens={{ childrenGap: 10 }}>
       <Text
@@ -71,6 +63,12 @@ const Profile = () => {
       >
         Profile
       </Text>
+      <Text
+        variant="medium"
+        styles={{
+          root: { fontSize: FontSizes.xLargePlus, textAlign: "start" },
+        }}
+      >{`Welcome back, ${currentUser.friendlyName}`}</Text>
       <Stack
         horizontal
         styles={{ root: { width: "100%", justifyContent: "space-between" } }}
@@ -86,13 +84,9 @@ const Profile = () => {
           disabled={!isDevMode}
         />
       </Stack>
-      <Text
-        variant="medium"
-        styles={{
-          root: { fontSize: FontSizes.medium, textAlign: "start" },
-        }}
-      >{`Welcome back, ${currentUser.friendlyName}`}</Text>
+      <Separator />
       <ActiveCharacter />
+      <Separator />
     </Stack>
   );
 };

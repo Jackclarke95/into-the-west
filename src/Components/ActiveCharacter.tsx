@@ -39,7 +39,7 @@ const ActiveCharacter = () => {
   };
 
   return (
-    <Stack>
+    <Stack tokens={{ childrenGap: 10 }}>
       <Stack horizontal styles={{ root: { justifyContent: "space-between" } }}>
         <Text
           styles={{
