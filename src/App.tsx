@@ -1,10 +1,8 @@
-import { PivotItem, Stack } from "@fluentui/react";
-import { useDispatch, useSelector } from "react-redux";
+import { Stack } from "@fluentui/react";
+import { useDispatch } from "react-redux";
 import "./Style/App.scss";
-import CharacterTable from "./Components/CharacterTable";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
-import SessionTable from "./Components/SessionTable";
 import CharacterCreationDialog from "./Components/CharacterCreationDialog";
 import SessionCreationDialog from "./Components/SessionCreationDialog";
 import ICharacterData from "./Interfaces/ICharacterData";
@@ -33,8 +31,6 @@ export const db = getDatabase();
 
 const App = () => {
   const dispatch = useDispatch();
-
-  const dataToDisplay = useSelector((state) => state.dataToDisplay);
 
   onValue(ref(db, "characters"), (snapshot) => {
     const characterData = snapshot.val() as ICharacterData[];
@@ -98,54 +94,6 @@ const App = () => {
       },
     });
   });
-
-  const dataToRender = () => {
-    switch (dataToDisplay) {
-      case "Dashboard":
-        return <Dashboard />;
-      case "CharacterTable":
-        return <CharacterTable />;
-      case "SessionTable":
-        return <SessionTable />;
-      default:
-        return <Dashboard />;
-    }
-  };
-
-  const onClickPivotLink = (
-    item?: PivotItem | undefined,
-    _?: React.MouseEvent<HTMLElement, MouseEvent> | undefined
-  ) => {
-    let dataToDisplay: "Dashboard" | "CharacterTable" | "SessionTable";
-
-    if (item?.props.headerText) {
-      switch (item?.props.headerText) {
-        case "Dashboard": {
-          dataToDisplay = "Dashboard";
-          break;
-        }
-        case "Characters": {
-          dataToDisplay = "CharacterTable";
-          break;
-        }
-        case "Sessions": {
-          dataToDisplay = "SessionTable";
-          break;
-        }
-        default: {
-          dataToDisplay = "Dashboard";
-          break;
-        }
-      }
-    } else {
-      throw new Error("No header text found");
-    }
-
-    dispatch({
-      type: "SetDataToDisplay",
-      dataToDisplay,
-    });
-  };
 
   return (
     <Stack

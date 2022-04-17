@@ -1,34 +1,9 @@
-import { useDispatch, useSelector } from "react-redux";
 import { FontSizes, Stack, Text } from "@fluentui/react";
-import ICharacterData from "../Interfaces/ICharacterData";
 import CharacterTable from "./CharacterTable";
 import SessionTable from "./SessionTable";
 import Profile from "./Profile";
 
 const Dashboard = () => {
-  const dispatch = useDispatch();
-
-  const isDevMode = useSelector((state) => state.isDevMode);
-  const characters = useSelector((state) => state.characters);
-  const currentUser = useSelector((state) => state.currentUser);
-
-  let activeCharacters = [] as ICharacterData[];
-  let inactiveCharacters = [] as ICharacterData[];
-
-  if (!characters.isLoading) {
-    activeCharacters = characters.data.filter(
-      (character) =>
-        character.playerDndBeyondName === currentUser.dndBeyondName &&
-        !character.retirement
-    );
-
-    inactiveCharacters = characters.data.filter(
-      (character) =>
-        character.retirement &&
-        character.playerDndBeyondName === currentUser.dndBeyondName
-    );
-  }
-
   return (
     <Stack
       className="body-container"

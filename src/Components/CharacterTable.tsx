@@ -1,17 +1,13 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   DefaultSpacing,
   IColumn,
   Image,
   ImageFit,
   Link,
-  PrimaryButton,
   SelectionMode,
   ShimmeredDetailsList,
   Stack,
-  Text,
-  Toggle,
 } from "@fluentui/react";
 import { ClassIcon } from "./ClassIcon";
 import DefaultAvatar from "../Images/DefaultAvatar.jpeg";
@@ -22,24 +18,6 @@ import DataHelper from "../Helpers/DataHelper";
 const CharacterTable = () => {
   const characterData = useSelector((state) => state.characters);
   const sessionData = useSelector((state) => state.sessions);
-  const isDevMode = useSelector((state) => state.isDevMode);
-
-  const [compactMode, setCompactMode] = React.useState(false);
-
-  const dispatch = useDispatch();
-
-  let activeCharacters = [] as ICharacterData[];
-  let retiredCharacters = [] as ICharacterData[];
-
-  if (!characterData.isLoading) {
-    activeCharacters = characterData.data.filter(
-      (character) => !character.retirement
-    );
-
-    retiredCharacters = characterData.data.filter(
-      (character) => character.retirement
-    );
-  }
 
   const onRenderAvatar = (character: ICharacterData) => (
     <Image
