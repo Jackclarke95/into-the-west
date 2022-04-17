@@ -1,14 +1,19 @@
 export default class DataHelper {
   /**
-   * Determines if a Date occured has already occured or not
+   * Determines if a given date is in the past
    *
-   * @param date The Date to determine
-   * @return Whether the datDate has already occured or not
+   * @param date The date to determine
+   * @return Whether the date is in the past
    */
   public static isDateInPast(date: Date): boolean {
     return Number(new Date(date)) <= Number(new Date().setHours(0, 0, 0, 0));
   }
 
+  /**
+   * Formats a number into its ordinal format
+   * @param number The number to format
+   * @returns The formatted number
+   */
   public static formatOrdinalNumber(number: number): string {
     const suffix = ["th", "st", "nd", "rd"];
     const remainder = number % 100;

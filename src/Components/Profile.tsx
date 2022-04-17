@@ -5,6 +5,7 @@ import {
   Stack,
   Text,
 } from "@fluentui/react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ActiveCharacter from "./ActiveCharacter";
 
@@ -12,8 +13,31 @@ const Profile = () => {
   const dispatch = useDispatch();
 
   const characters = useSelector((state) => state.characters);
+  const activeCharacter = useSelector((state) => state.activeCharacter);
   const currentUser = useSelector((state) => state.currentUser);
   const isDevMode = useSelector((state) => state.isDevMode);
+
+  useEffect(() => {
+    if (characters.isLoading) {
+      dispatch({
+        type: "SetActiveCharacter",
+        activeCharacter: { isLoading: true },
+      });
+
+      return;
+    }
+
+    const activeCharacter = characters.data.find(
+      (character) =>
+        character.playerDndBeyondName === currentUser.dndBeyondName &&
+        !character.retirement
+    );
+
+    dispatch({
+      type: "SetActiveCharacter",
+      activeCharacter: { isLoading: false, data: activeCharacter },
+    });
+  }, [characters, currentUser, dispatch]);
 
   const onClickCreateCharacter = () => {
     console.log("creating character");
@@ -28,6 +52,13 @@ const Profile = () => {
     dispatch({
       type: "SetShowSessionCreationDialog",
       showSessionCreationDialog: true,
+    });
+  };
+
+  const onClickRetireCharacter = () => {
+    dispatch({
+      type: "SetShowCharacterRetirementDialog",
+      showCharacterRetirementDialog: true,
     });
   };
 
@@ -50,14 +81,21 @@ const Profile = () => {
         <Text
           variant="large"
           styles={{
-            root: { fontSize: FontSizes.large, textAlign: "start" },
+            root: { fontSize: FontSizes.xLarge, textAlign: "start" },
           }}
         >
           Active Character
         </Text>
         <Stack horizontal tokens={{ childrenGap: 10 }}>
-          <DefaultButton text="Edit" disabled={characters.isLoading} />
-          <DefaultButton text="Retire" disabled={characters.isLoading} />
+          <DefaultButton
+            text="Edit"
+            disabled={activeCharacter.isLoading || !activeCharacter.data}
+          />
+          <DefaultButton
+            text="Retire"
+            disabled={activeCharacter.isLoading || !activeCharacter.data}
+            onClick={onClickRetireCharacter}
+          />
         </Stack>
       </Stack>
       <ActiveCharacter />

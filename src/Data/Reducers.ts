@@ -7,6 +7,10 @@ export type Action =
   | { type: "SetDarkMode"; darkMode: DefaultRootState["darkMode"] }
   | { type: "SetCurrentUser"; currentUser: DefaultRootState["currentUser"] }
   | { type: "SetCharacters"; characters: DefaultRootState["characters"] }
+  | {
+      type: "SetActiveCharacter";
+      activeCharacter: DefaultRootState["activeCharacter"];
+    }
   | { type: "SetSessions"; sessions: DefaultRootState["sessions"] }
   | { type: "SetPlayers"; players: DefaultRootState["players"] }
   | {
@@ -16,6 +20,10 @@ export type Action =
   | {
       type: "SetShowSessionCreationDialog";
       showSessionCreationDialog: DefaultRootState["showSessionCreationDialog"];
+    }
+  | {
+      type: "SetShowCharacterRetirementDialog";
+      showCharacterRetirementDialog: DefaultRootState["showCharacterRetirementDialog"];
     };
 
 /** Initial application state */
@@ -34,6 +42,8 @@ export const initialState: DefaultRootState = {
 
   characters: { isLoading: true },
 
+  activeCharacter: { isLoading: true },
+
   sessions: { isLoading: true },
 
   players: { isLoading: true },
@@ -41,6 +51,8 @@ export const initialState: DefaultRootState = {
   showCharacterCreationDialog: false,
 
   showSessionCreationDialog: false,
+
+  showCharacterRetirementDialog: false,
 
   isDevMode: window.location.hostname === "localhost",
 };
@@ -76,6 +88,12 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
           break;
         }
 
+        // Action for setting the Active Character
+        case "SetActiveCharacter": {
+          draftState.activeCharacter = action.activeCharacter;
+          break;
+        }
+
         // Action for setting the Sessions
         case "SetSessions": {
           draftState.sessions = action.sessions;
@@ -99,6 +117,13 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         case "SetShowSessionCreationDialog": {
           draftState.showSessionCreationDialog =
             action.showSessionCreationDialog;
+          break;
+        }
+
+        // Action for toggling the Character Retirement Dialog
+        case "SetShowCharacterRetirementDialog": {
+          draftState.showCharacterRetirementDialog =
+            action.showCharacterRetirementDialog;
           break;
         }
       }

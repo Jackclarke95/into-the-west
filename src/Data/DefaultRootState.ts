@@ -15,6 +15,10 @@ declare module "react-redux" {
       | { isLoading: true }
       | { isLoading: false; data: ICharacterData[] };
 
+    activeCharacter:
+      | { isLoading: true }
+      | { isLoading: false; data: ICharacterData | undefined };
+
     sessions: { isLoading: true } | { isLoading: false; data: ISessionData[] };
 
     players: { isLoading: true } | { isLoading: false; data: IPlayerData[] };
@@ -30,6 +34,8 @@ declare module "react-redux" {
     showCharacterCreationDialog: boolean;
 
     showSessionCreationDialog: boolean;
+
+    showCharacterRetirementDialog: boolean;
 
     isDevMode: boolean;
   }
