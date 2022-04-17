@@ -71,44 +71,28 @@ const Profile = () => {
       >
         Profile
       </Text>
+      <Stack
+        horizontal
+        styles={{ root: { width: "100%", justifyContent: "space-between" } }}
+      >
+        <PrimaryButton
+          text="New character"
+          onClick={onClickCreateCharacter}
+          disabled={!isDevMode}
+        />
+        <PrimaryButton
+          text="New session"
+          onClick={onClickCreateSession}
+          disabled={!isDevMode}
+        />
+      </Stack>
       <Text
         variant="medium"
         styles={{
           root: { fontSize: FontSizes.medium, textAlign: "start" },
         }}
       >{`Welcome back, ${currentUser.friendlyName}`}</Text>
-      <Stack horizontal styles={{ root: { justifyContent: "space-between" } }}>
-        <Text
-          variant="large"
-          styles={{
-            root: { fontSize: FontSizes.xLarge, textAlign: "start" },
-          }}
-        >
-          Active Character
-        </Text>
-        <Stack horizontal tokens={{ childrenGap: 10 }}>
-          <DefaultButton
-            text="Edit"
-            disabled={activeCharacter.isLoading || !activeCharacter.data}
-          />
-          <DefaultButton
-            text="Retire"
-            disabled={activeCharacter.isLoading || !activeCharacter.data}
-            onClick={onClickRetireCharacter}
-          />
-        </Stack>
-      </Stack>
       <ActiveCharacter />
-      <PrimaryButton
-        text="New character"
-        onClick={onClickCreateCharacter}
-        disabled={!isDevMode}
-      />
-      <PrimaryButton
-        text="New session"
-        onClick={onClickCreateSession}
-        disabled={!isDevMode}
-      />
     </Stack>
   );
 };
