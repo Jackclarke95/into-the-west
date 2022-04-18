@@ -3,6 +3,7 @@ import { push, ref, update } from "firebase/database";
 
 import { db } from "../App";
 import ICharacterData from "../Interfaces/ICharacterData";
+import ISessionData from "../Interfaces/ISessionData";
 
 export default class DataService {
   /**
@@ -68,6 +69,46 @@ export default class DataService {
   };
 
   /**
+   * Signs a character up to a session
+   * @param session The session to sign up tp
+   * @param character The character with whom to sign up
+   */
+  public static signUpToSession = (
+    session: ISessionData,
+    character: ICharacterData
+  ) => {
+    if (!session.key) {
+      throw new Error("Could not update Session; no key provided");
+    }
+    const sessionsRef = ref(db, "sessions/" + session.key);
+
+    update(sessionsRef, {
+      attendees: session.attendees.concat(character.id),
+    });
+  };
+
+  /**
+   * Removes a character from a session
+   * @param session The session from which to remove the character
+   * @param character The character to remove
+   */
+  public static removeCharacterFromSession = (
+    session: ISessionData,
+    character: ICharacterData
+  ) => {
+    if (!session.key) {
+      throw new Error("Could not update Session; no key provided");
+    }
+    const sessionsRef = ref(db, "sessions/" + session.key);
+
+    update(sessionsRef, {
+      attendees: session.attendees.filter(
+        (attendee) => attendee !== character.id
+      ),
+    });
+  };
+
+  /**
    * Retires a given character with a given reason, updating data in the Firebase Realtime Database
    * @param character The character to reason
    * @param reason The reason for the character's retirement
@@ -76,11 +117,11 @@ export default class DataService {
     character: ICharacterData,
     reason: string
   ) => {
-    const charactersRef = ref(db, "characters/" + character.key);
-
     if (!character.key) {
       throw new Error("Could not update character; no key provided");
     }
+
+    const charactersRef = ref(db, "characters/" + character.key);
 
     update(charactersRef, {
       retirement: { reason: reason, date: new Date().toISOString() },

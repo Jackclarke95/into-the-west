@@ -3,20 +3,25 @@ import {
   Facepile,
   FontSizes,
   IColumn,
+  Icon,
   IFacepilePersona,
+  Link,
   PersonaSize,
   SelectionMode,
   ShimmeredDetailsList,
   Stack,
   Text,
+  TooltipHost,
 } from "@fluentui/react";
 import ISessionData from "../../Interfaces/ISessionData";
 import DataHelper from "../../Helpers/DataHelper";
+import DataService from "../../Helpers/DataService";
 
 const SessionTable = () => {
   const sessionData = useSelector((state) => state.sessions);
   const playerData = useSelector((state) => state.players);
   const characterData = useSelector((state) => state.characters);
+  const activeCharacter = useSelector((state) => state.activeCharacter);
 
   let upcomingSessions = [] as ISessionData[];
   let pastSessions = [] as ISessionData[];
@@ -90,6 +95,51 @@ const SessionTable = () => {
     );
   };
 
+  const onClickSignUp = (session: ISessionData) => {
+    console.log("Signing up to session", session);
+
+    if (activeCharacter.isLoading || !activeCharacter.data) {
+      return;
+    }
+
+    DataService.signUpToSession(session, activeCharacter.data);
+  };
+
+  const onClickRemoveFromSession = (session: ISessionData) => {
+    console.log("Signing up to session", session);
+
+    if (activeCharacter.isLoading || !activeCharacter.data) {
+      return;
+    }
+
+    DataService.removeCharacterFromSession(session, activeCharacter.data);
+  };
+
+  const onRenderSignUp = (session: ISessionData) => {
+    if (
+      activeCharacter.isLoading ||
+      !activeCharacter.data ||
+      DataHelper.isDateInPast(new Date(session.date))
+    ) {
+      return null;
+    }
+
+    return session.attendees.includes(activeCharacter.data.id) ? (
+      <TooltipHost content="Click to remove yourself from this session">
+        <Link
+          iconName="UserRemove"
+          onClick={() => onClickRemoveFromSession(session)}
+        >
+          Remove
+        </Link>
+      </TooltipHost>
+    ) : (
+      <TooltipHost content="Click to sign up to this session">
+        <Link onClick={() => onClickSignUp(session)}>Sign Up</Link>
+      </TooltipHost>
+    );
+  };
+
   const columns: IColumn[] = [
     {
       key: "name",
@@ -127,6 +177,13 @@ const SessionTable = () => {
       fieldName: "attendees",
       minWidth: 150,
       onRender: onRenderAttendees,
+    },
+    {
+      key: "sign-up",
+      name: "",
+      fieldName: "signUpUrl",
+      minWidth: 45,
+      onRender: onRenderSignUp,
     },
   ];
 
