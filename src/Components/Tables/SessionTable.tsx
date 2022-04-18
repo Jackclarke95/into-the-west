@@ -3,7 +3,6 @@ import {
   Facepile,
   FontSizes,
   IColumn,
-  Icon,
   IFacepilePersona,
   Link,
   PersonaSize,
