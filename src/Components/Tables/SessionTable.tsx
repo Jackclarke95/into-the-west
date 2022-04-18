@@ -1,12 +1,14 @@
 import { useSelector } from "react-redux";
 import {
   Facepile,
+  FontSizes,
   IColumn,
   IFacepilePersona,
   PersonaSize,
   SelectionMode,
   ShimmeredDetailsList,
   Stack,
+  Text,
 } from "@fluentui/react";
 import ISessionData from "../../Interfaces/ISessionData";
 import DataHelper from "../../Helpers/DataHelper";
@@ -140,6 +142,13 @@ const SessionTable = () => {
           },
         }}
       >
+        <Text
+          styles={{
+            root: { fontSize: FontSizes.xLargePlus, textAlign: "start" },
+          }}
+        >
+          Sessions
+        </Text>
         <ShimmeredDetailsList
           items={sessionData.isLoading ? [] : sessionData.data}
           columns={columns}

@@ -36,7 +36,7 @@ const Profile = () => {
     <Stack tokens={{ childrenGap: 10 }}>
       <Text
         styles={{
-          root: { fontSize: FontSizes.superLarge, textAlign: "start" },
+          root: { fontSize: FontSizes.xLargePlus, textAlign: "start" },
         }}
       >
         Profile
@@ -44,7 +44,7 @@ const Profile = () => {
       <Text
         variant="medium"
         styles={{
-          root: { fontSize: FontSizes.xLargePlus, textAlign: "start" },
+          root: { fontSize: FontSizes.large, textAlign: "start" },
         }}
       >{`Welcome back, ${currentUser.friendlyName}`}</Text>
       <Separator />

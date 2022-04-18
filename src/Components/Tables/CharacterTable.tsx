@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import {
   DefaultSpacing,
+  FontSizes,
   IColumn,
   Image,
   ImageFit,
@@ -8,6 +9,7 @@ import {
   SelectionMode,
   ShimmeredDetailsList,
   Stack,
+  Text,
 } from "@fluentui/react";
 import { ClassIcon } from "../ClassIcon";
 import DefaultAvatar from "../../Images/DefaultAvatar.jpeg";
@@ -41,14 +43,22 @@ const CharacterTable = () => {
     />
   );
 
-  const onRenderName = (character: ICharacterData) =>
-    character.sheetUrl ? (
-      <Link target="_blank" href={character.sheetUrl}>
-        {character.name}
-      </Link>
-    ) : (
-      <span>{character.name}</span>
+  const onRenderName = (character: ICharacterData) => {
+    return (
+      <Stack horizontal tokens={{ childrenGap: 3 }}>
+        {character.sheetUrl ? (
+          <Stack>
+            <Link target="_blank" href={character.sheetUrl}>
+              {character.name}
+            </Link>
+          </Stack>
+        ) : (
+          <span>{character.name}</span>
+        )}
+        {character.retirement && <i>(Retired)</i>}
+      </Stack>
     );
+  };
 
   const onRenderRace = (character: ICharacterData) =>
     character.subrace
@@ -173,30 +183,19 @@ const CharacterTable = () => {
 
   return (
     <Stack styles={{ root: { overflowY: "auto" } }}>
+      <Text
+        styles={{
+          root: { fontSize: FontSizes.xLargePlus, textAlign: "start" },
+        }}
+      >
+        Characters
+      </Text>
       <ShimmeredDetailsList
         items={characterData.isLoading ? [] : characterData.data}
         columns={columns}
         enableShimmer={characterData.isLoading}
         selectionMode={SelectionMode.none}
         compact
-        // groups={
-        //   activeCharacters.length === 0
-        //     ? undefined
-        //     : [
-        //         {
-        //           startIndex: 0,
-        //           count: activeCharacters.length,
-        //           key: "active",
-        //           name: "Active Characters",
-        //         },
-        //         {
-        //           startIndex: activeCharacters.length,
-        //           count: retiredCharacters.length,
-        //           key: "retired",
-        //           name: "Retired Characters",
-        //         },
-        //       ]
-        // }
       />
     </Stack>
   );
