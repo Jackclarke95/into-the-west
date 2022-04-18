@@ -7,7 +7,7 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import { push, ref, set, update } from "firebase/database";
+import { push, ref, update } from "firebase/database";
 
 import { db } from "../App";
 import ICharacterData from "../Interfaces/ICharacterData";
@@ -184,6 +184,8 @@ export default class DataService {
         const user = userCredential.user;
         // ...
 
+        console.log(user);
+
         DataService.createUser(
           email,
           discordName,
@@ -212,7 +214,6 @@ export default class DataService {
         const user = userCredential.user;
         // ...
 
-        const email = user.email;
         console.log(user);
       })
       .catch((error) => {
