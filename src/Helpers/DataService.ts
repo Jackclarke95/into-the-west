@@ -2,9 +2,12 @@ import { getId } from "@fluentui/react";
 import {
   Auth,
   createUserWithEmailAndPassword,
+  getAuth,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import { push, ref, update } from "firebase/database";
+import { useDispatch } from "react-redux";
 
 import { db } from "../App";
 import ICharacterData from "../Interfaces/ICharacterData";
@@ -134,15 +137,15 @@ export default class DataService {
   };
 
   public static registerWithEmailAndPassword = (
-    auth: Auth,
     email: string,
     password: string
   ) => {
-    createUserWithEmailAndPassword(auth, email, password)
+    createUserWithEmailAndPassword(getAuth(), email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
         // ...
+        console.log(user);
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -154,15 +157,15 @@ export default class DataService {
   };
 
   public static logInWithEmailAndPassword = (
-    auth: Auth,
     email: string,
     password: string
   ) => {
-    signInWithEmailAndPassword(auth, email, password)
+    signInWithEmailAndPassword(getAuth(), email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
         // ...
+        console.log(user);
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -170,5 +173,19 @@ export default class DataService {
 
         console.log(errorCode, errorMessage);
       });
+  };
+
+  public static signOut = () => {
+    signOut(getAuth())
+      .then(() => {
+        // Sign-out successful.
+        console.log("successfully signed out");
+      })
+      .catch((error) => {
+        // An error happened.
+        console.log("could not sign out", error);
+      });
+
+    window.location.reload();
   };
 }

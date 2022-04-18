@@ -3,13 +3,12 @@ import {
   Dialog,
   DialogFooter,
   DialogType,
-  MessageBar,
-  MessageBarType,
   PrimaryButton,
   TextField,
 } from "@fluentui/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import DataService from "../../Helpers/DataService";
 
 const RegistrationDialog = () => {
   const dispatch = useDispatch();
@@ -54,6 +53,8 @@ const RegistrationDialog = () => {
 
     if (email && password) {
       console.log(email, password);
+
+      DataService.registerWithEmailAndPassword(email, password);
     }
 
     dispatch({

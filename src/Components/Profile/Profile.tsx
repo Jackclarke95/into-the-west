@@ -1,6 +1,14 @@
-import { FontSizes, Separator, Stack, Text } from "@fluentui/react";
+import {
+  DefaultButton,
+  FontSizes,
+  Separator,
+  Stack,
+  Text,
+} from "@fluentui/react";
+import { getAuth } from "firebase/auth";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import DataService from "../../Helpers/DataService";
 import ActiveCharacter from "./ActiveCharacter";
 import NextSession from "./NextSession";
 
@@ -32,15 +40,22 @@ const Profile = () => {
     });
   }, [characters, currentUser, dispatch]);
 
+  const onClickSignOut = () => {
+    DataService.signOut();
+  };
+
   return (
     <Stack tokens={{ childrenGap: 10 }}>
-      <Text
-        styles={{
-          root: { fontSize: FontSizes.xLargePlus, textAlign: "start" },
-        }}
-      >
-        Profile
-      </Text>
+      <Stack horizontal styles={{ root: { justifyContent: "space-between" } }}>
+        <Text
+          styles={{
+            root: { fontSize: FontSizes.xLargePlus, textAlign: "start" },
+          }}
+        >
+          Profile
+        </Text>
+        <DefaultButton text="Sign Out" onClick={onClickSignOut} />
+      </Stack>
       <Text
         variant="medium"
         styles={{

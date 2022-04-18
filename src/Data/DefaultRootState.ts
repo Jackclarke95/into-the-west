@@ -1,3 +1,4 @@
+import { User } from "firebase/auth";
 import { Dispatch } from "react";
 import ICharacterData from "../Interfaces/ICharacterData";
 import IPlayerData from "../Interfaces/IPlayerData";
@@ -40,6 +41,8 @@ declare module "react-redux" {
     showRegistrationDialog: boolean;
 
     isDevMode: boolean;
+
+    user: User | null;
   }
 
   // Declare dispatcher to take our root provider's action type

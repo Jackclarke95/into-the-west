@@ -28,6 +28,10 @@ export type Action =
   | {
       type: "SetShowRegistrationDialog";
       showRegistrationDialog: DefaultRootState["showRegistrationDialog"];
+    }
+  | {
+      type: "SetUser";
+      user: DefaultRootState["user"];
     };
 
 /** Initial application state */
@@ -61,6 +65,8 @@ export const initialState: DefaultRootState = {
   showRegistrationDialog: false,
 
   isDevMode: window.location.hostname === "localhost",
+
+  user: null,
 };
 
 /**
@@ -136,6 +142,12 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         // Action for toggling the Registration Dialog
         case "SetShowRegistrationDialog": {
           draftState.showRegistrationDialog = action.showRegistrationDialog;
+          break;
+        }
+
+        // Action for setting the User
+        case "SetUser": {
+          draftState.user = action.user;
           break;
         }
       }

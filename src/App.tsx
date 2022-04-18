@@ -1,5 +1,5 @@
-import { Stack, Text } from "@fluentui/react";
-import { useDispatch } from "react-redux";
+import { Stack } from "@fluentui/react";
+import { useDispatch, useSelector } from "react-redux";
 import "./Style/App.scss";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
@@ -14,12 +14,7 @@ import { getDatabase, onValue, ref } from "firebase/database";
 import { initializeApp } from "firebase/app";
 import Dashboard from "./Components/Dashboard";
 
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  GoogleAuthProvider,
-  onAuthStateChanged,
-} from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Login from "./Components/Login";
 import RegistrationDialog from "./Components/Dialogs/RegistrationDialog";
 
@@ -40,6 +35,8 @@ export const db = getDatabase();
 
 const App = () => {
   const dispatch = useDispatch();
+
+  const stateUser = useSelector((state: any) => state.user);
 
   onValue(ref(db, "characters"), (snapshot) => {
     const characterData = snapshot.val() as ICharacterData[];
@@ -113,11 +110,20 @@ const App = () => {
       // https://firebase.google.com/docs/reference/js/firebase.User
       const uid = user.uid;
       // ...
+      console.log(uid);
+
+      dispatch({
+        type: "SetUser",
+        user: user,
+      });
     } else {
       // User is signed out
       // ...
+      console.log("signed out");
     }
   });
+
+  console.log(user, stateUser);
 
   return (
     <Stack
@@ -132,7 +138,7 @@ const App = () => {
         },
       }}
     >
-      {user ? (
+      {stateUser || user ? (
         <>
           <Header />
           <Dashboard />
