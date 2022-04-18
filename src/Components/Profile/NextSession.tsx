@@ -47,6 +47,13 @@ const NextSession = () => {
     } else if (!activeCharacter.data) {
       return (
         <MessageBar messageBarType={MessageBarType.warning} isMultiline>
+          You do not have an character. Create a new character using the button
+          above.
+        </MessageBar>
+      );
+    } else if (upcomingSessions.length === 0) {
+      return (
+        <MessageBar messageBarType={MessageBarType.warning} isMultiline>
           You have no upcoming sessions. Suggest a new adventure or apply to an
           upcoming one.
         </MessageBar>
