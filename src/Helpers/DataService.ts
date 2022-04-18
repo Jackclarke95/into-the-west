@@ -7,7 +7,7 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import { push, ref, update } from "firebase/database";
+import { push, ref, set, update } from "firebase/database";
 
 import { db } from "../App";
 import ICharacterData from "../Interfaces/ICharacterData";
@@ -136,16 +136,62 @@ export default class DataService {
     });
   };
 
+  public static createUser = (
+    email: string,
+    discordName: string,
+    dndBeyondName: string,
+    friendlyName: string,
+    isDungeonMaster: boolean,
+    isGamesMaster: boolean
+  ) => {
+    const usersRef = ref(db, "users/");
+
+    const userToCreate = {
+      id: getId("user-"),
+      email,
+      discordName,
+      dndBeyondName,
+      friendlyName,
+      isDungeonMaster,
+      isGamesMaster,
+    };
+
+    push(usersRef, userToCreate);
+  };
+
   public static registerWithEmailAndPassword = (
     email: string,
-    password: string
+    password: string,
+    discordName: string,
+    dndBeyondName: string,
+    friendlyName: string,
+    isDungeonMaster: boolean,
+    isGamesMaster: boolean
   ) => {
+    console.log(
+      email,
+      password,
+      discordName,
+      dndBeyondName,
+      friendlyName,
+      isDungeonMaster,
+      isGamesMaster
+    );
+
     createUserWithEmailAndPassword(getAuth(), email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
         // ...
-        console.log(user);
+
+        DataService.createUser(
+          email,
+          discordName,
+          dndBeyondName,
+          friendlyName,
+          isDungeonMaster,
+          isGamesMaster
+        );
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -165,6 +211,8 @@ export default class DataService {
         // Signed in
         const user = userCredential.user;
         // ...
+
+        const email = user.email;
         console.log(user);
       })
       .catch((error) => {

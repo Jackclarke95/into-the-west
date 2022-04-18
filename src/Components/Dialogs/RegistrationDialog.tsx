@@ -5,6 +5,7 @@ import {
   DialogType,
   PrimaryButton,
   TextField,
+  Toggle,
 } from "@fluentui/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,6 +21,13 @@ const RegistrationDialog = () => {
   const [passwordRepeat, setPasswordRepeat] = useState<string | undefined>(
     undefined
   );
+  const [name, setName] = useState<string | undefined>(undefined);
+  const [discordName, setDiscordName] = useState<string | undefined>(undefined);
+  const [dndBeyondName, setDndBeyondName] = useState<string | undefined>(
+    undefined
+  );
+  const [isDungeonMaster, setIsDungeonMaster] = useState(false);
+  const [isGamesMaster, setIsGamesMaster] = useState(false);
 
   const onDismiss = () => {
     dispatch({
@@ -46,15 +54,55 @@ const RegistrationDialog = () => {
     setPasswordRepeat(value);
   };
 
+  const onChangeName = (_, value: string | undefined) => {
+    setName(value);
+  };
+
+  const onChangeDiscordName = (_, value: string | undefined) => {
+    setDiscordName(value);
+  };
+
+  const onChangeDndBeyondName = (_, value: string | undefined) => {
+    setDndBeyondName(value);
+  };
+
+  const onChangeIsDungeonMaster = (_, checked: boolean | undefined) => {
+    if (checked) {
+      setIsDungeonMaster(false);
+    }
+  };
+
+  const onChangeIsGamesMaster = (_, checked: boolean | undefined) => {
+    if (checked) {
+      setIsGamesMaster(checked);
+    }
+  };
+
   const onClickRegister = () => {
     if (password !== passwordRepeat) {
       throw new Error("Passwords do not match");
     }
 
-    if (email && password) {
-      console.log(email, password);
+    if (email && password && name && discordName && dndBeyondName) {
+      console.log(
+        email,
+        password,
+        name,
+        discordName,
+        dndBeyondName,
+        isDungeonMaster,
+        isGamesMaster
+      );
 
-      DataService.registerWithEmailAndPassword(email, password);
+      DataService.registerWithEmailAndPassword(
+        email,
+        password,
+        name,
+        discordName,
+        dndBeyondName,
+        isDungeonMaster,
+        isGamesMaster
+      );
     }
 
     dispatch({
@@ -101,6 +149,27 @@ const RegistrationDialog = () => {
             ? "Passwords do not match"
             : ""
         }
+      />
+      <TextField label="Name" value={name} onChange={onChangeName} />
+      <TextField
+        label="Discord name"
+        value={discordName}
+        onChange={onChangeDiscordName}
+      />
+      <TextField
+        label="D&D Beyond name"
+        value={dndBeyondName}
+        onChange={onChangeDndBeyondName}
+      />
+      <Toggle
+        label="Dungeon master"
+        inlineLabel
+        onChange={onChangeIsDungeonMaster}
+      />
+      <Toggle
+        label="Games master"
+        inlineLabel
+        onChange={onChangeIsGamesMaster}
       />
       <DialogFooter>
         <DefaultButton text="Cancel" onClick={onDismiss} />
