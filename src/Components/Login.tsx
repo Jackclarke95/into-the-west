@@ -1,6 +1,8 @@
 import {
   DefaultButton,
   DefaultEffects,
+  DefaultSpacing,
+  Dialog,
   FontSizes,
   Label,
   PrimaryButton,
@@ -45,14 +47,14 @@ const Login = () => {
     }
   };
 
-  const onClickSignInWithGoogle = () => {
-    DataService.logInWithGoogle();
-    setLoading(true);
-  };
-
   return (
     <Stack
-      styles={{ root: { boxShadow: DefaultEffects.elevation16, padding: 16 } }}
+      styles={{
+        root: {
+          boxShadow: DefaultEffects.elevation16,
+          padding: DefaultSpacing.l2,
+        },
+      }}
     >
       <Text styles={{ root: { fontSize: FontSizes.superLarge } }}>
         Into the West
@@ -67,13 +69,6 @@ const Login = () => {
       <PrimaryButton
         text={loading ? "Signing In" : "Sign In"}
         onClick={onClickSignIn}
-        disabled={loading}
-      >
-        {loading && <Spinner />}
-      </PrimaryButton>
-      <PrimaryButton
-        text={loading ? "Signing In" : "Sign In with Google"}
-        onClick={onClickSignInWithGoogle}
         disabled={loading}
       >
         {loading && <Spinner />}
