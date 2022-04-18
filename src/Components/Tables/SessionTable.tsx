@@ -187,7 +187,7 @@ const SessionTable = () => {
   ];
 
   return (
-    <Stack styles={{ root: { overflowY: "auto", maxHeight: "50%" } }}>
+    <Stack styles={{ root: { overflowY: "auto", height: "50%" } }}>
       <Text
         styles={{
           root: { fontSize: FontSizes.xLargePlus, textAlign: "start" },
