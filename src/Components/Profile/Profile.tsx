@@ -1,10 +1,4 @@
-import {
-  FontSizes,
-  PrimaryButton,
-  Separator,
-  Stack,
-  Text,
-} from "@fluentui/react";
+import { FontSizes, Separator, Stack, Text } from "@fluentui/react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ActiveCharacter from "./ActiveCharacter";
@@ -15,7 +9,6 @@ const Profile = () => {
 
   const characters = useSelector((state) => state.characters);
   const currentUser = useSelector((state) => state.currentUser);
-  const isDevMode = useSelector((state) => state.isDevMode);
 
   useEffect(() => {
     if (characters.isLoading) {
@@ -38,13 +31,6 @@ const Profile = () => {
       activeCharacter: { isLoading: false, data: activeCharacter },
     });
   }, [characters, currentUser, dispatch]);
-
-  const onClickCreateSession = () => {
-    dispatch({
-      type: "SetShowSessionCreationDialog",
-      showSessionCreationDialog: true,
-    });
-  };
 
   return (
     <Stack tokens={{ childrenGap: 10 }}>
