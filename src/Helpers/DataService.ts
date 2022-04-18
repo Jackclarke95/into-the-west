@@ -1,13 +1,11 @@
 import { getId } from "@fluentui/react";
 import {
-  Auth,
   createUserWithEmailAndPassword,
   getAuth,
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
 import { push, ref, update } from "firebase/database";
-import { useDispatch } from "react-redux";
 
 import { db } from "../App";
 import ICharacterData from "../Interfaces/ICharacterData";
