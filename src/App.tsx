@@ -10,6 +10,9 @@ import ICharacterData from "./Interfaces/ICharacterData";
 import ISessionData from "./Interfaces/ISessionData";
 import IPlayerData from "./Interfaces/IPlayerData";
 
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { getDatabase, onValue, ref } from "firebase/database";
 import { initializeApp } from "firebase/app";
 import Dashboard from "./Components/Dashboard";
@@ -145,6 +148,7 @@ const App = () => {
           <CharacterCreationDialog />
           <SessionCreationDialog />
           <CharacterRetirementDialog />
+          <ToastContainer hideProgressBar position="top-center" closeButton />
         </>
       ) : (
         <>

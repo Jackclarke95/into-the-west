@@ -15,6 +15,7 @@ import {
 import ISessionData from "../../Interfaces/ISessionData";
 import DataHelper from "../../Helpers/DataHelper";
 import DataService from "../../Helpers/DataService";
+import { toast } from "react-toastify";
 
 const SessionTable = () => {
   const sessionData = useSelector((state) => state.sessions);
@@ -100,6 +101,8 @@ const SessionTable = () => {
     }
 
     DataService.signUpToSession(session, activeCharacter.data);
+
+    toast("Signed up for session");
   };
 
   const onClickRemoveFromSession = (session: ISessionData) => {
@@ -108,6 +111,8 @@ const SessionTable = () => {
     }
 
     DataService.removeCharacterFromSession(session, activeCharacter.data);
+
+    toast("Removed from session");
   };
 
   const onRenderSignUp = (session: ISessionData) => {
