@@ -131,50 +131,39 @@ const SessionTable = () => {
   ];
 
   return (
-    <Stack styles={{ root: { overflowY: "auto" } }}>
-      <Stack
-        grow={1}
+    <Stack styles={{ root: { overflowY: "auto", maxHeight: "50%" } }}>
+      <Text
         styles={{
-          root: {
-            overflowY: "scroll",
-            overflowX: "auto",
-            flexGrow: 1,
-          },
+          root: { fontSize: FontSizes.xLargePlus, textAlign: "start" },
         }}
       >
-        <Text
-          styles={{
-            root: { fontSize: FontSizes.xLargePlus, textAlign: "start" },
-          }}
-        >
-          Sessions
-        </Text>
-        <ShimmeredDetailsList
-          items={sessionData.isLoading ? [] : sessionData.data}
-          columns={columns}
-          enableShimmer={sessionData.isLoading}
-          selectionMode={SelectionMode.none}
-          compact
-          groups={
-            upcomingSessions.length === 0
-              ? undefined
-              : [
-                  {
-                    startIndex: 0,
-                    count: upcomingSessions.length,
-                    key: "upcoming",
-                    name: "Upcoming Sessions",
-                  },
-                  {
-                    startIndex: upcomingSessions.length,
-                    count: pastSessions.length,
-                    key: "Past",
-                    name: "Past Sessions",
-                  },
-                ]
-          }
-        />
-      </Stack>
+        Sessions
+      </Text>
+      <ShimmeredDetailsList
+        items={sessionData.isLoading ? [] : sessionData.data}
+        columns={columns}
+        enableShimmer={sessionData.isLoading}
+        selectionMode={SelectionMode.none}
+        compact
+        groups={
+          upcomingSessions.length === 0
+            ? undefined
+            : [
+                {
+                  startIndex: 0,
+                  count: upcomingSessions.length,
+                  key: "upcoming",
+                  name: "Upcoming Sessions",
+                },
+                {
+                  startIndex: upcomingSessions.length,
+                  count: pastSessions.length,
+                  key: "Past",
+                  name: "Past Sessions",
+                },
+              ]
+        }
+      />
     </Stack>
   );
 };
