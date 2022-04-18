@@ -148,7 +148,6 @@ const App = () => {
           <CharacterCreationDialog />
           <SessionCreationDialog />
           <CharacterRetirementDialog />
-          <ToastContainer hideProgressBar position="top-center" closeButton />
         </>
       ) : (
         <>
@@ -156,6 +155,7 @@ const App = () => {
           <RegistrationDialog />
         </>
       )}
+      <ToastContainer hideProgressBar position="top-center" closeButton />
     </Stack>
   );
 };
