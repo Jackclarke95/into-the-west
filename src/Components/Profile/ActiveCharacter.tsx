@@ -15,6 +15,7 @@ const ActiveCharacter = () => {
   const dispatch = useDispatch();
 
   const activeCharacter = useSelector((state) => state.activeCharacter);
+  const isDevMode = useSelector((state) => state.isDevMode);
 
   const dataToRender = () => {
     if (activeCharacter.isLoading) {
@@ -62,11 +63,19 @@ const ActiveCharacter = () => {
             <>
               <DefaultButton
                 text="Edit"
-                disabled={activeCharacter.isLoading || !activeCharacter.data}
+                disabled={
+                  !isDevMode ||
+                  activeCharacter.isLoading ||
+                  !activeCharacter.data
+                }
               />
               <DefaultButton
                 text="Retire"
-                disabled={activeCharacter.isLoading || !activeCharacter.data}
+                disabled={
+                  !isDevMode ||
+                  activeCharacter.isLoading ||
+                  !activeCharacter.data
+                }
                 onClick={onClickRetireCharacterButton}
               />
             </>
@@ -74,7 +83,9 @@ const ActiveCharacter = () => {
             <DefaultButton
               text="New Character"
               disabled={
-                activeCharacter.isLoading || activeCharacter.data !== undefined
+                !isDevMode ||
+                activeCharacter.isLoading ||
+                activeCharacter.data !== undefined
               }
               onClick={onClickCreateCharacter}
             />

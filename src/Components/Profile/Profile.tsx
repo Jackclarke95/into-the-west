@@ -61,16 +61,6 @@ const Profile = () => {
           root: { fontSize: FontSizes.xLargePlus, textAlign: "start" },
         }}
       >{`Welcome back, ${currentUser.friendlyName}`}</Text>
-      <Stack
-        horizontal
-        styles={{ root: { width: "100%", justifyContent: "space-between" } }}
-      >
-        <PrimaryButton
-          text="New session"
-          onClick={onClickCreateSession}
-          disabled={!isDevMode}
-        />
-      </Stack>
       <Separator />
       <ActiveCharacter />
       <Separator />

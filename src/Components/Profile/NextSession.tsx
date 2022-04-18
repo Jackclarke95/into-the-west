@@ -8,15 +8,18 @@ import {
   Stack,
   Text,
 } from "@fluentui/react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import DataHelper from "../../Helpers/DataHelper";
 import ISessionData from "../../Interfaces/ISessionData";
 import SessionCard from "../Cards/SessionCard";
 
 const NextSession = () => {
+  const dispatch = useDispatch();
+
   const sessions = useSelector((state) => state.sessions);
   const characters = useSelector((state) => state.characters);
   const activeCharacter = useSelector((state) => state.activeCharacter);
+  const isDevMode = useSelector((state) => state.isDevMode);
 
   let upcomingSessions = [] as ISessionData[];
 
@@ -55,6 +58,13 @@ const NextSession = () => {
     }
   };
 
+  const onClickCreateSession = () => {
+    dispatch({
+      type: "SetShowSessionCreationDialog",
+      showSessionCreationDialog: true,
+    });
+  };
+
   return (
     <Stack tokens={{ childrenGap: 0 }}>
       <Stack horizontal styles={{ root: { justifyContent: "space-between" } }}>
@@ -68,7 +78,10 @@ const NextSession = () => {
         <Stack horizontal tokens={{ childrenGap: 10 }}>
           <DefaultButton
             text="New"
-            disabled={activeCharacter.isLoading || !activeCharacter.data}
+            onClick={onClickCreateSession}
+            disabled={
+              !isDevMode || activeCharacter.isLoading || !activeCharacter.data
+            }
           />
         </Stack>
       </Stack>
