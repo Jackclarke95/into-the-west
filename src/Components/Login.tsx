@@ -2,7 +2,6 @@ import {
   DefaultButton,
   DefaultEffects,
   DefaultSpacing,
-  Dialog,
   FontSizes,
   Label,
   PrimaryButton,
