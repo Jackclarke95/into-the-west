@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import {
+  DirectionalHint,
   Facepile,
   FontSizes,
   IColumn,
@@ -73,11 +74,19 @@ const SessionTable = () => {
       return;
     }
 
+    const attendeeNames = [] as string[];
+
     const personas = session.attendees
       .map((attendee) => {
         const matchedCharacter = characterData.data.find(
           (character) => character.id === attendee
         );
+
+        if (matchedCharacter) {
+          attendeeNames.push(
+            matchedCharacter!.nickname ?? matchedCharacter!.name
+          );
+        }
 
         return {
           imageUrl: matchedCharacter?.avatarUrl,
@@ -87,11 +96,16 @@ const SessionTable = () => {
       .sort((a, b) => a.personaName!.localeCompare(b.personaName!));
 
     return (
-      <Facepile
-        personas={personas}
-        personaSize={PersonaSize.size16}
-        maxDisplayablePersonas={personas.length}
-      />
+      <TooltipHost
+        content={attendeeNames.join(", ")}
+        directionalHint={DirectionalHint.leftCenter}
+      >
+        <Facepile
+          personas={personas}
+          personaSize={PersonaSize.size16}
+          maxDisplayablePersonas={personas.length}
+        />
+      </TooltipHost>
     );
   };
 
@@ -102,7 +116,7 @@ const SessionTable = () => {
 
     DataService.signUpToSession(session, activeCharacter.data);
 
-    toast("Signed up for session");
+    toast.success("Signed up for session");
   };
 
   const onClickRemoveFromSession = (session: ISessionData) => {
@@ -112,7 +126,7 @@ const SessionTable = () => {
 
     DataService.removeCharacterFromSession(session, activeCharacter.data);
 
-    toast("Removed from session");
+    toast.success("Removed from session");
   };
 
   const onRenderSignUp = (session: ISessionData) => {
