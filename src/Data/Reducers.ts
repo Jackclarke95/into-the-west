@@ -24,6 +24,10 @@ export type Action =
   | {
       type: "SetShowCharacterRetirementDialog";
       showCharacterRetirementDialog: DefaultRootState["showCharacterRetirementDialog"];
+    }
+  | {
+      type: "SetShowRegistrationDialog";
+      showRegistrationDialog: DefaultRootState["showRegistrationDialog"];
     };
 
 /** Initial application state */
@@ -53,6 +57,8 @@ export const initialState: DefaultRootState = {
   showSessionCreationDialog: false,
 
   showCharacterRetirementDialog: false,
+
+  showRegistrationDialog: false,
 
   isDevMode: window.location.hostname === "localhost",
 };
@@ -124,6 +130,12 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         case "SetShowCharacterRetirementDialog": {
           draftState.showCharacterRetirementDialog =
             action.showCharacterRetirementDialog;
+          break;
+        }
+
+        // Action for toggling the Registration Dialog
+        case "SetShowRegistrationDialog": {
+          draftState.showRegistrationDialog = action.showRegistrationDialog;
           break;
         }
       }

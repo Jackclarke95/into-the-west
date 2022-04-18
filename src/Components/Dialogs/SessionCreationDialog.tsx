@@ -74,7 +74,6 @@ const SessionCreationDialog = () => {
   };
 
   const onClickAddSession = () => {
-
     let attendeeList = [] as number[];
 
     sessionAttendees.forEach((attendee) => {
@@ -194,35 +193,32 @@ const SessionCreationDialog = () => {
       onDismiss={onDismiss}
       dialogContentProps={contentProps}
     >
+      <TextField
+        label="Session name"
+        value={sessionName}
+        onChange={onChangeSessionName}
+      />
+      <DatePicker
+        label="Session Date"
+        minDate={new Date()}
+        onSelectDate={onSelectDate}
+      />
+      <Dropdown
+        label="Dungeon Master"
+        options={dungeonMasterOptions}
+        onChange={onChangeDungeonMaster}
+      />
+      <Dropdown label="Map" options={mapOptions} onChange={onChangeMap} />
+      <Label>Characters</Label>
+      <NormalPeoplePicker
+        onResolveSuggestions={onResolveSuggestions}
+        onEmptyResolveSuggestions={onResolveEmptySuggestions}
+        inputProps={inputProps}
+        onChange={onChangeAttendees}
+      />
       <DialogFooter>
-        <TextField
-          label="Session name"
-          value={sessionName}
-          onChange={onChangeSessionName}
-        />
-        <DatePicker
-          label="Session Date"
-          minDate={new Date()}
-          onSelectDate={onSelectDate}
-        />
-        <Dropdown
-          label="Dungeon Master"
-          options={dungeonMasterOptions}
-          onChange={onChangeDungeonMaster}
-        />
-        <Dropdown label="Map" options={mapOptions} onChange={onChangeMap} />
-        <Label>Characters</Label>
-        <NormalPeoplePicker
-          onResolveSuggestions={onResolveSuggestions}
-          onEmptyResolveSuggestions={onResolveEmptySuggestions}
-          inputProps={inputProps}
-          onChange={onChangeAttendees}
-        />
-        <DefaultButton text="Cancel" onClick={onDismiss}></DefaultButton>
-        <PrimaryButton
-          text="Create"
-          onClick={onClickAddSession}
-        ></PrimaryButton>
+        <DefaultButton text="Cancel" onClick={onDismiss} />
+        <PrimaryButton text="Create" onClick={onClickAddSession} />
       </DialogFooter>
     </Dialog>
   );

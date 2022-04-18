@@ -1,4 +1,9 @@
 import { getId } from "@fluentui/react";
+import {
+  Auth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { push, ref, update } from "firebase/database";
 
 import { db } from "../App";
@@ -126,5 +131,44 @@ export default class DataService {
     update(charactersRef, {
       retirement: { reason: reason, date: new Date().toISOString() },
     });
+  };
+
+  public static registerWithEmailAndPassword = (
+    auth: Auth,
+    email: string,
+    password: string
+  ) => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
+        console.log(errorCode);
+        console.log(errorMessage);
+      });
+  };
+
+  public static logInWithEmailAndPassword = (
+    auth: Auth,
+    email: string,
+    password: string
+  ) => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
+        console.log(errorCode, errorMessage);
+      });
   };
 }

@@ -17,8 +17,9 @@ import Races from "../../Data/Races";
 import DataService from "../../Helpers/DataService";
 
 const CharacterCreationDialog = () => {
-  const showDialog = useSelector((state) => state.showCharacterCreationDialog);
+  const dispatch = useDispatch();
 
+  const showDialog = useSelector((state) => state.showCharacterCreationDialog);
   const currentUser = useSelector((state) => state.currentUser);
 
   const [characterName, setCharacterName] = useState<string | undefined>(
@@ -40,8 +41,6 @@ const CharacterCreationDialog = () => {
   const [characterSubclass, setCharacterSubclass] = useState<
     string | undefined | null
   >(undefined);
-
-  const dispatch = useDispatch();
 
   const onDismiss = () => {
     dispatch({
@@ -240,11 +239,8 @@ const CharacterCreationDialog = () => {
       />
 
       <DialogFooter>
-        <DefaultButton text="Cancel" onClick={onDismiss}></DefaultButton>
-        <PrimaryButton
-          text="Create"
-          onClick={onClickCreateCharacter}
-        ></PrimaryButton>
+        <DefaultButton text="Cancel" onClick={onDismiss} />
+        <PrimaryButton text="Create" onClick={onClickCreateCharacter} />
       </DialogFooter>
     </Dialog>
   );

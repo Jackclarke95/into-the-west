@@ -1,20 +1,27 @@
-import { Stack } from "@fluentui/react";
+import { Stack, Text } from "@fluentui/react";
 import { useDispatch } from "react-redux";
 import "./Style/App.scss";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import CharacterCreationDialog from "./Components/Dialogs/CharacterCreationDialog";
 import SessionCreationDialog from "./Components/Dialogs/SessionCreationDialog";
+import CharacterRetirementDialog from "./Components/Dialogs/CharacterRetirementDialog";
 import ICharacterData from "./Interfaces/ICharacterData";
 import ISessionData from "./Interfaces/ISessionData";
 import IPlayerData from "./Interfaces/IPlayerData";
 
 import { getDatabase, onValue, ref } from "firebase/database";
-
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import Dashboard from "./Components/Dashboard";
-import CharacterRetirementDialog from "./Components/Dialogs/CharacterRetirementDialog";
+
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+} from "firebase/auth";
+import Login from "./Components/Login";
+import RegistrationDialog from "./Components/Dialogs/RegistrationDialog";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDJLonhBywTBq-R2AyP5Hvcg2Lp-gUMogk",
@@ -97,6 +104,21 @@ const App = () => {
     });
   });
 
+  const auth = getAuth();
+  const user = auth.currentUser;
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      const uid = user.uid;
+      // ...
+    } else {
+      // User is signed out
+      // ...
+    }
+  });
+
   return (
     <Stack
       verticalFill
@@ -110,12 +132,21 @@ const App = () => {
         },
       }}
     >
-      <Header />
-      <Dashboard />
-      <Footer />
-      <CharacterCreationDialog />
-      <SessionCreationDialog />
-      <CharacterRetirementDialog />
+      {user ? (
+        <>
+          <Header />
+          <Dashboard />
+          <Footer />
+          <CharacterCreationDialog />
+          <SessionCreationDialog />
+          <CharacterRetirementDialog />
+        </>
+      ) : (
+        <>
+          <Login />
+          <RegistrationDialog />
+        </>
+      )}
     </Stack>
   );
 };

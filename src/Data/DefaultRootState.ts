@@ -37,6 +37,8 @@ declare module "react-redux" {
 
     showCharacterRetirementDialog: boolean;
 
+    showRegistrationDialog: boolean;
+
     isDevMode: boolean;
   }
 
