@@ -1,6 +1,6 @@
 import { DefaultSpacing, Persona, PersonaSize, Stack } from "@fluentui/react";
-import DataHelper from "../Helpers/DataHelper";
-import { ClassIcon } from "./ClassIcon";
+import DataHelper from "../../Helpers/DataHelper";
+import { ClassIcon } from "../ClassIcon";
 
 const CharacterPersona = (props) => {
   const character = props.character;

@@ -1,12 +1,11 @@
 import { FontSizes, Stack, Text } from "@fluentui/react";
-import CharacterTable from "./CharacterTable";
-import SessionTable from "./SessionTable";
+import CharacterTable from "./Tables/CharacterTable";
+import SessionTable from "./Tables/SessionTable";
 import Profile from "./Profile/Profile";
 
 const Dashboard = () => {
   return (
     <Stack
-      className="body-container"
       verticalFill
       horizontal
       horizontalAlign="center"
@@ -15,7 +14,6 @@ const Dashboard = () => {
     >
       <Profile />
       <Stack
-        className="body-container"
         verticalFill
         tokens={{ childrenGap: 10 }}
         styles={{ root: { overflowY: "auto", height: "100%" } }}

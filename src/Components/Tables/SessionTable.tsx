@@ -8,8 +8,8 @@ import {
   ShimmeredDetailsList,
   Stack,
 } from "@fluentui/react";
-import ISessionData from "../Interfaces/ISessionData";
-import DataHelper from "../Helpers/DataHelper";
+import ISessionData from "../../Interfaces/ISessionData";
+import DataHelper from "../../Helpers/DataHelper";
 
 const SessionTable = () => {
   const sessionData = useSelector((state) => state.sessions);
@@ -129,12 +129,8 @@ const SessionTable = () => {
   ];
 
   return (
-    <Stack
-      className="sessions-container"
-      styles={{ root: { overflowY: "auto" } }}
-    >
+    <Stack styles={{ root: { overflowY: "auto" } }}>
       <Stack
-        className="session-table-container"
         grow={1}
         styles={{
           root: {

@@ -9,7 +9,7 @@ import {
   Text,
 } from "@fluentui/react";
 import { useDispatch, useSelector } from "react-redux";
-import CharacterPersona from "../CharacterPersona";
+import CharacterPersona from "../Cards/CharacterCard";
 
 const ActiveCharacter = () => {
   const dispatch = useDispatch();

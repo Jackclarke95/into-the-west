@@ -99,7 +99,6 @@ const App = () => {
   return (
     <Stack
       verticalFill
-      className="app-container"
       horizontalAlign="center"
       verticalAlign="center"
       styles={{

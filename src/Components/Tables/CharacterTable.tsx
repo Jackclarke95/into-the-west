@@ -9,11 +9,11 @@ import {
   ShimmeredDetailsList,
   Stack,
 } from "@fluentui/react";
-import { ClassIcon } from "./ClassIcon";
-import DefaultAvatar from "../Images/DefaultAvatar.jpeg";
-import ICharacterData from "../Interfaces/ICharacterData";
-import LevelUpTable from "../Data/LevelUp";
-import DataHelper from "../Helpers/DataHelper";
+import { ClassIcon } from "../ClassIcon";
+import DefaultAvatar from "../../Images/DefaultAvatar.jpeg";
+import ICharacterData from "../../Interfaces/ICharacterData";
+import LevelUpTable from "../../Data/LevelUp";
+import DataHelper from "../../Helpers/DataHelper";
 
 const CharacterTable = () => {
   const characterData = useSelector((state) => state.characters);
@@ -172,10 +172,7 @@ const CharacterTable = () => {
   ];
 
   return (
-    <Stack
-      className="characters-container"
-      styles={{ root: { overflowY: "auto" } }}
-    >
+    <Stack styles={{ root: { overflowY: "auto" } }}>
       <ShimmeredDetailsList
         items={characterData.isLoading ? [] : characterData.data}
         columns={columns}

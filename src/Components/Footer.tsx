@@ -13,13 +13,11 @@ const Footer = () => {
 
   return (
     <Stack
-      className="footer-container"
       styles={{ root: { width: "100%", display: "flex" } }}
       verticalAlign="center"
     >
       {isDevMode ? (
         <Text
-          className="footer"
           styles={{ root: { fontSize: FontSizes.large } }}
         >
           Development Mode

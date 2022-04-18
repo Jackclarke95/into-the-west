@@ -1,11 +1,8 @@
 import {
   DefaultButton,
-  Facepile,
   FontSizes,
-  IFacepilePersona,
   MessageBar,
   MessageBarType,
-  PersonaSize,
   Spinner,
   SpinnerSize,
   Stack,
@@ -14,6 +11,7 @@ import {
 import { useSelector } from "react-redux";
 import DataHelper from "../../Helpers/DataHelper";
 import ISessionData from "../../Interfaces/ISessionData";
+import SessionCard from "../Cards/SessionCard";
 
 const NextSession = () => {
   const sessions = useSelector((state) => state.sessions);
@@ -51,66 +49,11 @@ const NextSession = () => {
         </MessageBar>
       );
     } else {
-      return upcomingSessions.map((session) => {
-        const onRenderAttendees = () => {
-          const personas = session.attendees
-            .map((attendee) => {
-              const matchedCharacter = characters.data.find(
-                (character) => character.id === attendee
-              );
-
-              return {
-                imageUrl: matchedCharacter?.avatarUrl,
-                personaName: matchedCharacter?.name,
-              } as IFacepilePersona;
-            })
-            .sort((a, b) => a.personaName!.localeCompare(b.personaName!));
-
-          return (
-            <Facepile
-              personas={personas}
-              personaSize={PersonaSize.size16}
-              maxDisplayablePersonas={personas.length}
-            />
-          );
-        };
-
-        return (
-          <Stack tokens={{ childrenGap: 5, padding: 5 }}>
-            <Stack
-              horizontal
-              styles={{
-                root: { width: "100%", justifyContent: "space-between" },
-              }}
-            >
-              <Stack horizontal tokens={{ childrenGap: 5 }}>
-                <Text styles={{ root: { fontWeight: "bold" } }}>DM:</Text>
-                <Text>{session.dungeonMaster}</Text>
-              </Stack>
-              <Stack horizontal tokens={{ childrenGap: 5 }}>
-                <Text styles={{ root: { fontWeight: "bold" } }}>Date:</Text>
-                <Text>{new Date(session.date).toLocaleDateString()}</Text>
-              </Stack>
-            </Stack>
-            <Stack horizontal tokens={{ childrenGap: 5 }}>
-              <Text styles={{ root: { fontWeight: "bold" } }}>Name:</Text>
-              <Text>{session.name}</Text>
-            </Stack>
-            <Stack horizontal tokens={{ childrenGap: 5 }}>
-              <Text styles={{ root: { fontWeight: "bold" } }}>Map:</Text>
-              <Text>{session.map}</Text>
-            </Stack>
-            <Stack horizontal tokens={{ childrenGap: 5 }}>
-              <Text styles={{ root: { fontWeight: "bold" } }}>Players:</Text>
-              {onRenderAttendees()}
-            </Stack>
-          </Stack>
-        );
-      });
+      return upcomingSessions.map((session) => (
+        <SessionCard session={session} characters={characters.data} />
+      ));
     }
   };
-
-  console.log({ upcomingSessions });
 
   return (
     <Stack tokens={{ childrenGap: 0 }}>
