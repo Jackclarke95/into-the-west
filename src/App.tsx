@@ -10,7 +10,7 @@ import ICharacterData from "./Interfaces/ICharacterData";
 import ISessionData from "./Interfaces/ISessionData";
 import IPlayerData from "./Interfaces/IPlayerData";
 
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { getDatabase, onValue, ref } from "firebase/database";
