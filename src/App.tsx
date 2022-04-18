@@ -15,6 +15,7 @@ import { getDatabase, onValue, ref } from "firebase/database";
 import { initializeApp } from "firebase/app";
 import Dashboard from "./Components/Dashboard";
 import CharacterRetirementDialog from "./Components/Dialogs/CharacterRetirementDialog";
+
 const firebaseConfig = {
   apiKey: "AIzaSyDJLonhBywTBq-R2AyP5Hvcg2Lp-gUMogk",
   authDomain: "into-the-west-5869d.firebaseapp.com",
