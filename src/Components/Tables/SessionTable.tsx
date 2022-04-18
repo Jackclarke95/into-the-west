@@ -95,8 +95,6 @@ const SessionTable = () => {
   };
 
   const onClickSignUp = (session: ISessionData) => {
-    console.log("Signing up to session", session);
-
     if (activeCharacter.isLoading || !activeCharacter.data) {
       return;
     }
@@ -105,8 +103,6 @@ const SessionTable = () => {
   };
 
   const onClickRemoveFromSession = (session: ISessionData) => {
-    console.log("Signing up to session", session);
-
     if (activeCharacter.isLoading || !activeCharacter.data) {
       return;
     }

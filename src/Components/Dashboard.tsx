@@ -12,7 +12,6 @@ const Dashboard = () => {
       tokens={{ childrenGap: 20 }}
       styles={{ root: { overflowY: "auto", height: "100%", width: "100%" } }}
     >
-      <Profile />
       <Stack
         verticalFill
         tokens={{ childrenGap: 10 }}
@@ -21,6 +20,7 @@ const Dashboard = () => {
         <SessionTable />
         <CharacterTable />
       </Stack>
+      <Profile />
     </Stack>
   );
 };

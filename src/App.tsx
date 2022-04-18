@@ -36,7 +36,7 @@ export const db = getDatabase();
 const App = () => {
   const dispatch = useDispatch();
 
-  const stateUser = useSelector((state: any) => state.user);
+  const user = useSelector((state: any) => state.user);
 
   onValue(ref(db, "characters"), (snapshot) => {
     const characterData = snapshot.val() as ICharacterData[];
@@ -102,7 +102,6 @@ const App = () => {
   });
 
   const auth = getAuth();
-  const user = auth.currentUser;
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -123,7 +122,7 @@ const App = () => {
     }
   });
 
-  console.log(user, stateUser);
+  console.log(user);
 
   return (
     <Stack
@@ -138,7 +137,7 @@ const App = () => {
         },
       }}
     >
-      {stateUser || user ? (
+      {user ? (
         <>
           <Header />
           <Dashboard />
