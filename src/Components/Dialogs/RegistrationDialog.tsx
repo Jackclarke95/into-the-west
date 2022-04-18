@@ -119,6 +119,7 @@ const RegistrationDialog = () => {
     >
       <TextField
         label="Email"
+        type="email"
         value={email}
         onChange={onChangeEmail}
         invalid={!email}

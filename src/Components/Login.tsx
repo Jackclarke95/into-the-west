@@ -3,6 +3,7 @@ import {
   DefaultEffects,
   DefaultSpacing,
   FontSizes,
+  Image,
   Label,
   PrimaryButton,
   Spinner,
@@ -55,23 +56,33 @@ const Login = () => {
         },
       }}
     >
+      <Image src={process.env.PUBLIC_URL + "logo512.png"} height={256} />
       <Text styles={{ root: { fontSize: FontSizes.superLarge } }}>
         Into the West
       </Text>
-      <TextField label="Email" onChange={onChangeEmail} />
+      <TextField label="Email" type="email" onChange={onChangeEmail} />
       <TextField
         label="Password"
         type="password"
         onChange={onChangePassword}
         canRevealPassword={false}
       />
-      <PrimaryButton
-        text={loading ? "Signing In" : "Sign In"}
-        onClick={onClickSignIn}
-        disabled={loading}
+      <Stack
+        styles={{
+          root: {
+            paddingTop: DefaultSpacing.m,
+            paddingBottom: DefaultSpacing.l1,
+          },
+        }}
       >
-        {loading && <Spinner />}
-      </PrimaryButton>
+        <PrimaryButton
+          text={loading ? "Signing In" : "Sign In"}
+          onClick={onClickSignIn}
+          disabled={loading}
+        >
+          {loading && <Spinner />}
+        </PrimaryButton>
+      </Stack>
       <Label>No account? Register here:</Label>
       <DefaultButton
         text="Register"
