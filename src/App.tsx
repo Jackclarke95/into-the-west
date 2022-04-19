@@ -52,6 +52,7 @@ const App = () => {
           .map((key) => {
             const character = characterData[key];
             character.key = key;
+
             return character;
           })
           .sort((characterA, characterB) =>
@@ -79,6 +80,7 @@ const App = () => {
           .map((key) => {
             const session = sessionData[key];
             session.key = key;
+
             return session;
           })
           .sort((sessionA, sessionB) =>
@@ -98,9 +100,26 @@ const App = () => {
         data: Object.keys(playerData).map((key) => {
           const player = playerData[key];
           player.key = key;
+
           return player;
         }),
       },
+    });
+  });
+
+  onValue(ref(db, "users"), (snapshot) => {
+    const userData = snapshot.val() as IPlayerData[];
+
+    const users = Object.keys(userData).map((key) => {
+      const user = userData[key];
+      user.key = key;
+
+      return user;
+    });
+
+    dispatch({
+      type: "SetUsers",
+      users: { isLoading: false, data: users },
     });
   });
 
@@ -110,10 +129,6 @@ const App = () => {
     if (user) {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
-      const uid = user.uid;
-      // ...
-      console.log(uid);
-      console.log("photo url", user.photoURL);
 
       dispatch({
         type: "SetUser",
@@ -125,8 +140,6 @@ const App = () => {
       console.log("signed out");
     }
   });
-
-  console.log(user);
 
   return (
     <Stack

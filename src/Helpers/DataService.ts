@@ -160,9 +160,9 @@ export default class DataService {
   public static registerWithEmailAndPassword = (
     email: string,
     password: string,
+    friendlyName: string,
     discordName: string,
     dndBeyondName: string,
-    friendlyName: string,
     isDungeonMaster: boolean,
     isGamesMaster: boolean
   ) => {

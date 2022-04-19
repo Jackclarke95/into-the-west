@@ -20,6 +20,8 @@ const Profile = () => {
   const currentUser = useSelector((state) => state.currentUser);
   const user = useSelector((state) => state.user);
 
+  useEffect(() => {}, [currentUser]);
+
   useEffect(() => {
     if (characters.isLoading) {
       dispatch({
@@ -45,6 +47,9 @@ const Profile = () => {
   const onClickSignOut = () => {
     DataService.signOut();
   };
+
+  const users = useSelector((state) => state.users);
+  console.log("users", users);
 
   return (
     <Stack tokens={{ childrenGap: 10 }}>

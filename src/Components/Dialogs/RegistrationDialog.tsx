@@ -72,13 +72,13 @@ const RegistrationDialog = () => {
   };
 
   const onChangeIsDungeonMaster = (_, checked: boolean | undefined) => {
-    if (checked) {
-      setIsDungeonMaster(false);
+    if (checked !== undefined) {
+      setIsDungeonMaster(checked);
     }
   };
 
   const onChangeIsGamesMaster = (_, checked: boolean | undefined) => {
-    if (checked) {
+    if (checked !== undefined) {
       setIsGamesMaster(checked);
     }
   };
@@ -88,7 +88,15 @@ const RegistrationDialog = () => {
       throw new Error("Passwords do not match");
     }
 
-    if (email && password && name && discordName && dndBeyondName) {
+    if (
+      email &&
+      password &&
+      name &&
+      discordName &&
+      dndBeyondName &&
+      isGamesMaster !== undefined &&
+      isDungeonMaster !== undefined
+    ) {
       console.log(
         email,
         password,

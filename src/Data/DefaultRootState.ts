@@ -24,6 +24,8 @@ declare module "react-redux" {
 
     players: { isLoading: true } | { isLoading: false; data: IPlayerData[] };
 
+    users: { isLoading: true } | { isLoading: false; data: IPlayerData[] };
+
     currentUser: {
       friendlyName: string;
       discordName: string;
