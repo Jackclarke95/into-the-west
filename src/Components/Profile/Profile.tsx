@@ -3,7 +3,6 @@ import {
   FontSizes,
   Image,
   ImageFit,
-  PrimaryButton,
   Separator,
   Stack,
   Text,
@@ -21,7 +20,6 @@ const Profile = () => {
   const currentPlayer = useSelector((state) => state.currentPlayer);
   const players = useSelector((state) => state.players);
   const user = useSelector((state) => state.user);
-
 
   // Set the current player based on the signed-in user
   useEffect(() => {
