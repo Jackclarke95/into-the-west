@@ -9,6 +9,7 @@ import { push, ref, update } from "firebase/database";
 
 import { db } from "../App";
 import ICharacterData from "../Interfaces/ICharacterData";
+import IPlayerData from "../Interfaces/IPlayerData";
 import ISessionData from "../Interfaces/ISessionData";
 
 export default class DataService {
@@ -134,35 +135,12 @@ export default class DataService {
     });
   };
 
-  public static createUser = (
-    email: string,
-    discordName: string,
-    dndBeyondName: string,
-    friendlyName: string,
-    isDungeonMaster: boolean,
-    isGamesMaster: boolean
-  ) => {
-    const usersRef = ref(db, "users/");
-
-    const userToCreate = {
-      id: getId("user-"),
-      email,
-      discordName,
-      dndBeyondName,
-      friendlyName,
-      isDungeonMaster,
-      isGamesMaster,
-    };
-
-    push(usersRef, userToCreate);
-  };
-
   public static registerWithEmailAndPassword = (
     email: string,
     password: string,
     friendlyName: string,
-    discordName: string,
     dndBeyondName: string,
+    discordName: string,
     isDungeonMaster: boolean,
     isGamesMaster: boolean
   ) => {
@@ -184,14 +162,17 @@ export default class DataService {
 
         console.log(user);
 
-        DataService.createUser(
-          email,
-          discordName,
-          dndBeyondName,
-          friendlyName,
-          isDungeonMaster,
-          isGamesMaster
-        );
+        const playerToCreate = {
+          id: getId("player-"),
+          email: email,
+          friendlyName: friendlyName,
+          discordName: discordName,
+          dndBeyondName: dndBeyondName,
+          isDungeonMaster: isDungeonMaster,
+          isGamesMaster: isGamesMaster,
+        } as IPlayerData;
+
+        DataService.createPlayer(playerToCreate);
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -200,6 +181,12 @@ export default class DataService {
         console.log(errorCode);
         console.log(errorMessage);
       });
+  };
+
+  public static createPlayer = (player: IPlayerData) => {
+    const usersRef = ref(db, "players/");
+
+    push(usersRef, player);
   };
 
   public static logInWithEmailAndPassword = (

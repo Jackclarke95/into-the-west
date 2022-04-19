@@ -17,13 +17,31 @@ const Profile = () => {
   const dispatch = useDispatch();
 
   const characters = useSelector((state) => state.characters);
-  const currentUser = useSelector((state) => state.currentUser);
+  const currentPlayer = useSelector((state) => state.currentPlayer);
+  const players = useSelector((state) => state.players);
   const user = useSelector((state) => state.user);
 
-  useEffect(() => {}, [currentUser]);
+  useEffect(() => {
+    if (players.isLoading || !user) {
+      return;
+    }
+
+    const currentPlayer = players.data.find(
+      (player) => player.email === user.email
+    );
+
+    dispatch({
+      type: "SetCurrentPlayer",
+      currentPlayer: { isLoading: false, data: currentPlayer },
+    });
+  }, [players]);
 
   useEffect(() => {
-    if (characters.isLoading) {
+    if (
+      characters.isLoading ||
+      currentPlayer.isLoading ||
+      !currentPlayer.data
+    ) {
       dispatch({
         type: "SetActiveCharacter",
         activeCharacter: { isLoading: true },
@@ -34,7 +52,7 @@ const Profile = () => {
 
     const activeCharacter = characters.data.find(
       (character) =>
-        character.playerDndBeyondName === currentUser.dndBeyondName &&
+        character.playerDndBeyondName === currentPlayer.data!.dndBeyondName &&
         !character.retirement
     );
 
@@ -42,14 +60,13 @@ const Profile = () => {
       type: "SetActiveCharacter",
       activeCharacter: { isLoading: false, data: activeCharacter },
     });
-  }, [characters, currentUser, dispatch]);
+  }, [currentPlayer]);
 
   const onClickSignOut = () => {
     DataService.signOut();
   };
 
-  const users = useSelector((state) => state.users);
-  console.log("users", users);
+  console.log("players", players);
 
   return (
     <Stack tokens={{ childrenGap: 10 }}>
@@ -73,12 +90,14 @@ const Profile = () => {
           )}
         </Stack>
       </Stack>
-      <Text
-        variant="medium"
-        styles={{
-          root: { fontSize: FontSizes.large, textAlign: "start" },
-        }}
-      >{`Welcome back, ${currentUser.friendlyName}`}</Text>
+      {!currentPlayer.isLoading && currentPlayer.data && (
+        <Text
+          variant="medium"
+          styles={{
+            root: { fontSize: FontSizes.large, textAlign: "start" },
+          }}
+        >{`Welcome back, ${currentPlayer.data.friendlyName}`}</Text>
+      )}
       <Separator />
       <ActiveCharacter />
       <Separator />

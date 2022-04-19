@@ -5,7 +5,10 @@ import { DefaultRootState } from "react-redux";
 /** Description of all the Actions taken that can affect the state */
 export type Action =
   | { type: "SetDarkMode"; darkMode: DefaultRootState["darkMode"] }
-  | { type: "SetCurrentUser"; currentUser: DefaultRootState["currentUser"] }
+  | {
+      type: "SetCurrentPlayer";
+      currentPlayer: DefaultRootState["currentPlayer"];
+    }
   | { type: "SetCharacters"; characters: DefaultRootState["characters"] }
   | {
       type: "SetActiveCharacter";
@@ -13,7 +16,6 @@ export type Action =
     }
   | { type: "SetSessions"; sessions: DefaultRootState["sessions"] }
   | { type: "SetPlayers"; players: DefaultRootState["players"] }
-  | { type: "SetUsers"; users: DefaultRootState["users"] }
   | {
       type: "SetShowCharacterCreationDialog";
       showCharacterCreationDialog: DefaultRootState["showCharacterCreationDialog"];
@@ -41,14 +43,6 @@ export const initialState: DefaultRootState = {
     window.matchMedia &&
     window.matchMedia("(prefers-color-scheme: dark)").matches,
 
-  currentUser: {
-    friendlyName: "Jack",
-    discordName: "Jimbob_#5733",
-    dndBeyondName: "JackClarke",
-    isDungeonMaster: true,
-    isGamesMaster: true,
-  },
-
   characters: { isLoading: true },
 
   activeCharacter: { isLoading: true },
@@ -57,7 +51,7 @@ export const initialState: DefaultRootState = {
 
   players: { isLoading: true },
 
-  users: { isLoading: true },
+  currentPlayer: { isLoading: true },
 
   showCharacterCreationDialog: false,
 
@@ -92,8 +86,8 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         }
 
         // Action for setting the Current User
-        case "SetCurrentUser": {
-          draftState.currentUser = action.currentUser;
+        case "SetCurrentPlayer": {
+          draftState.currentPlayer = action.currentPlayer;
           break;
         }
 
@@ -118,12 +112,6 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         // Action for setting the Players
         case "SetPlayers": {
           draftState.players = action.players;
-          break;
-        }
-
-        // Action for setting the Players
-        case "SetUsers": {
-          draftState.users = action.users;
           break;
         }
 

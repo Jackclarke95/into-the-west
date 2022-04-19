@@ -20,11 +20,13 @@ const NextSession = () => {
   const characters = useSelector((state) => state.characters);
   const activeCharacter = useSelector((state) => state.activeCharacter);
   const isDevMode = useSelector((state) => state.isDevMode);
-  const currentUser = useSelector((state) => state.currentUser);
+  const currentPlayer = useSelector((state) => state.currentPlayer);
 
   let upcomingSessions = [] as ISessionData[];
 
   if (
+    !currentPlayer.isLoading &&
+    currentPlayer.data &&
     !activeCharacter.isLoading &&
     activeCharacter.data &&
     !sessions.isLoading
@@ -32,7 +34,7 @@ const NextSession = () => {
     upcomingSessions = sessions.data.filter(
       (session) =>
         (session.attendees.includes(activeCharacter.data!.id) ||
-          session.dungeonMaster === currentUser.dndBeyondName) &&
+          session.dungeonMaster === currentPlayer.data!.dndBeyondName) &&
         !DataHelper.isDateInPast(new Date(session.date))
     );
   }

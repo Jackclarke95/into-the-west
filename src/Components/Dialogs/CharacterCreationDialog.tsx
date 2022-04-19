@@ -20,7 +20,7 @@ const CharacterCreationDialog = () => {
   const dispatch = useDispatch();
 
   const showDialog = useSelector((state) => state.showCharacterCreationDialog);
-  const currentUser = useSelector((state) => state.currentUser);
+  const currentPlayer = useSelector((state) => state.currentPlayer);
 
   const [characterName, setCharacterName] = useState<string | undefined>(
     undefined
@@ -148,12 +148,19 @@ const CharacterCreationDialog = () => {
   };
 
   const onClickCreateCharacter = () => {
-    if (characterName && characterRace && characterClass && characterLevel) {
+    if (
+      !currentPlayer.isLoading &&
+      currentPlayer.data &&
+      characterName &&
+      characterRace &&
+      characterClass &&
+      characterLevel
+    ) {
       DataService.createCharacter({
         id: Number(new Date()),
         avatarUrl: "",
         sheetUrl: "",
-        playerDndBeyondName: currentUser.dndBeyondName,
+        playerDndBeyondName: currentPlayer.data.dndBeyondName,
         name: characterName,
         nickname: characterNickname,
         race: characterRace,

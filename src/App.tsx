@@ -107,22 +107,6 @@ const App = () => {
     });
   });
 
-  onValue(ref(db, "users"), (snapshot) => {
-    const userData = snapshot.val() as IPlayerData[];
-
-    const users = Object.keys(userData).map((key) => {
-      const user = userData[key];
-      user.key = key;
-
-      return user;
-    });
-
-    dispatch({
-      type: "SetUsers",
-      users: { isLoading: false, data: users },
-    });
-  });
-
   const auth = getAuth();
 
   onAuthStateChanged(auth, (user) => {
@@ -169,7 +153,12 @@ const App = () => {
           <RegistrationDialog />
         </>
       )}
-      <ToastContainer hideProgressBar position="top-center" closeButton />
+      <ToastContainer
+        hideProgressBar
+        position="top-center"
+        closeButton
+        autoClose={1500}
+      />
     </Stack>
   );
 };
