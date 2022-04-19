@@ -63,7 +63,7 @@ const SessionTable = () => {
     );
 
     if (matchedDm) {
-      return <span>{matchedDm.friendlyName}</span>;
+      return <span>{matchedDm.name}</span>;
     } else {
       return <span>{session.dungeonMaster}</span>;
     }

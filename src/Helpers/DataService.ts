@@ -12,6 +12,16 @@ import ICharacterData from "../Interfaces/ICharacterData";
 import IPlayerData from "../Interfaces/IPlayerData";
 import ISessionData from "../Interfaces/ISessionData";
 
+export type UserData = {
+  email: string;
+  password: string;
+  name: string;
+  dndBeyondName: string;
+  discordName: string;
+  isDungeonMaster: boolean;
+  isGamesMaster: boolean;
+};
+
 export default class DataService {
   /**
    * Creates a character in the Firebase Realtime Database
@@ -135,26 +145,28 @@ export default class DataService {
     });
   };
 
-  public static registerWithEmailAndPassword = (
-    email: string,
-    password: string,
-    friendlyName: string,
-    dndBeyondName: string,
-    discordName: string,
-    isDungeonMaster: boolean,
-    isGamesMaster: boolean
-  ) => {
+  /**
+   * Registers a Firebase user and creates a player record in the Firebase Realtime Database
+   * @param email Email address of the user
+   * @param password Password of the user
+   * @param name Friendly name of the user
+   * @param dndBeyondName User's D&D Beyond name
+   * @param discordName User's Discord name
+   * @param isDungeonMaster Whether the user is a Dungeon Master or not
+   * @param isGamesMaster Whether the user is a Games master or not
+   */
+  public static registerWithEmailAndPassword = (userData: UserData) => {
     console.log(
-      email,
-      password,
-      discordName,
-      dndBeyondName,
-      friendlyName,
-      isDungeonMaster,
-      isGamesMaster
+      userData.email,
+      userData.password,
+      userData.discordName,
+      userData.dndBeyondName,
+      userData.name,
+      userData.isDungeonMaster,
+      userData.isGamesMaster
     );
 
-    createUserWithEmailAndPassword(getAuth(), email, password)
+    createUserWithEmailAndPassword(getAuth(), userData.email, userData.password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
@@ -164,12 +176,12 @@ export default class DataService {
 
         const playerToCreate = {
           id: getId("player-"),
-          email: email,
-          friendlyName: friendlyName,
-          discordName: discordName,
-          dndBeyondName: dndBeyondName,
-          isDungeonMaster: isDungeonMaster,
-          isGamesMaster: isGamesMaster,
+          email: userData.email,
+          name: userData.name,
+          discordName: userData.discordName,
+          dndBeyondName: userData.dndBeyondName,
+          isDungeonMaster: userData.isDungeonMaster,
+          isGamesMaster: userData.isGamesMaster,
         } as IPlayerData;
 
         DataService.createPlayer(playerToCreate);
@@ -183,12 +195,21 @@ export default class DataService {
       });
   };
 
-  public static createPlayer = (player: IPlayerData) => {
+  /**
+   * Creates a player record in the Firebase Realtime Database
+   * @param player The player record to create
+   */
+  public static createPlayer = async (player: IPlayerData) => {
     const usersRef = ref(db, "players/");
 
-    push(usersRef, player);
+    await push(usersRef, player).then((result) => console.log({ result }));
   };
 
+  /**
+   *
+   * @param email
+   * @param password
+   */
   public static logInWithEmailAndPassword = (
     email: string,
     password: string

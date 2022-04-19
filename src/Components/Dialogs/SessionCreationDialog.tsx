@@ -108,12 +108,10 @@ const SessionCreationDialog = () => {
     ? ([] as IDropdownOption[])
     : (players.data
         .filter((player) => player.isDungeonMaster)
-        .sort((playerA, playerB) =>
-          playerA.friendlyName.localeCompare(playerB.friendlyName)
-        )
+        .sort((playerA, playerB) => playerA.name.localeCompare(playerB.name))
         .map((player) => ({
           key: player.dndBeyondName,
-          text: player.friendlyName,
+          text: player.name,
         })) as IDropdownOption[]);
 
   const mapOptions = [

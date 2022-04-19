@@ -1,748 +1,880 @@
 {
   "characters": {
     "-MaGKwrksOQXvT7PA5Qd": {
-      "id": 62565380,
       "avatarUrl": "",
-      "sheetUrl": "https://www.dndbeyond.com/profile/Benjywa/characters/62565380",
-      "playerDndBeyondName": "Benjywa",
-      "name": "De Mauer",
-      "race": "Dwarf",
-      "subrace": "Mountain",
       "classes": [
         {
-          "class": { "name": "Cleric", "archetype": "Forge Domain" },
+          "class": {
+            "archetype": "Forge Domain",
+            "name": "Cleric"
+          },
           "level": 3
         },
         {
-          "class": { "name": "Sorcerer", "archetype": "Divine Soul" },
+          "class": {
+            "archetype": "Divine Soul",
+            "name": "Sorcerer"
+          },
           "level": 1
         }
       ],
       "currentLevel": 4,
+      "id": 62565380,
+      "name": "De Mauer",
+      "playerDndBeyondName": "Benjywa",
+      "race": "Dwarf",
       "sessionsAttended": 6,
-      "startingLevel": 1
+      "sheetUrl": "https://www.dndbeyond.com/profile/Benjywa/characters/62565380",
+      "startingLevel": 1,
+      "subrace": "Mountain"
     },
     "-MaGKy-zlVyH50zd5SP3": {
-      "id": 64045133,
       "avatarUrl": "https://www.dndbeyond.com/avatars/22370/529/1581111423-64045133.jpeg?width=150&height=150&fit=crop&quality=95&auto=webp",
-      "sheetUrl": "https://www.dndbeyond.com/profile/SchemingPnda/characters/64045133",
-      "playerDndBeyondName": "SchemingPnda",
-      "name": "Belnadis",
-      "race": "Human",
-      "subrace": "Variant",
       "classes": [
         {
           "class": {
-            "name": "Blood Hunter",
-            "archetype": "Order of the Mutant"
+            "archetype": "Order of the Mutant",
+            "name": "Blood Hunter"
           },
           "level": 3
         }
       ],
       "currentLevel": 3,
+      "id": 64045133,
+      "name": "Belnadis",
+      "playerDndBeyondName": "SchemingPnda",
+      "race": "Human",
       "sessionsAttended": 4,
-      "startingLevel": 2
+      "sheetUrl": "https://www.dndbeyond.com/profile/SchemingPnda/characters/64045133",
+      "startingLevel": 2,
+      "subrace": "Variant"
     },
     "-MaGKyEbEoTT9OdP4pTm": {
-      "id": 62130532,
       "avatarUrl": "https://www.dndbeyond.com/avatars/21703/797/1581111423-62130532.jpeg?width=150&height=150&fit=crop&quality=95&auto=webp",
-      "sheetUrl": "https://www.dndbeyond.com/profile/SwedishFox/characters/62130532",
-      "playerDndBeyondName": "SwedishFox",
-      "name": "Cyrus Sunheart",
-      "nickname": "Cyrus",
-      "race": "Human",
-      "subrace": "Variant",
       "classes": [
         {
-          "class": { "name": "Wizard", "archetype": "School of Divination" },
+          "class": {
+            "archetype": "School of Divination",
+            "name": "Wizard"
+          },
           "level": 2
         }
       ],
       "currentLevel": 3,
+      "id": 62130532,
+      "name": "Cyrus Sunheart",
+      "nickname": "Cyrus",
+      "playerDndBeyondName": "SwedishFox",
+      "race": "Human",
       "sessionsAttended": 4,
-      "startingLevel": 1
+      "sheetUrl": "https://www.dndbeyond.com/profile/SwedishFox/characters/62130532",
+      "startingLevel": 1,
+      "subrace": "Variant"
     },
     "-MaGKyPdpRoGYWbgAzJY": {
-      "id": 62380701,
       "avatarUrl": "",
-      "sheetUrl": "https://www.dndbeyond.com/profile/Zajay/characters/62380701",
-      "playerDndBeyondName": "Zajay",
-      "name": "Ishka",
-      "race": "Kalashtar",
       "classes": [
         {
-          "class": { "name": "Cleric", "archetype": "Order Domain" },
+          "class": {
+            "archetype": "Order Domain",
+            "name": "Cleric"
+          },
           "level": 2
         }
       ],
       "currentLevel": 2,
+      "id": 62380701,
+      "name": "Ishka",
+      "playerDndBeyondName": "Zajay",
+      "race": "Kalashtar",
       "sessionsAttended": 2,
+      "sheetUrl": "https://www.dndbeyond.com/profile/Zajay/characters/62380701",
       "startingLevel": 1
     },
     "-MaGKyc6_OCu20PUmbGf": {
-      "id": 62140202,
       "avatarUrl": "",
-      "sheetUrl": "https://www.dndbeyond.com/profile/patola/characters/62140202",
-      "playerDndBeyondName": "patola",
-      "name": "Kai Desd'en",
-      "nickname": "Kai",
-      "race": "Half-Elf",
-      "subrace": "Drow",
       "classes": [
         {
-          "class": { "name": "Warlock", "archetype": "The Great Old One" },
+          "class": {
+            "archetype": "The Great Old One",
+            "name": "Warlock"
+          },
           "level": 3
         }
       ],
       "currentLevel": 3,
+      "id": 62140202,
+      "name": "Kai Desd'en",
+      "nickname": "Kai",
+      "playerDndBeyondName": "patola",
+      "race": "Half-Elf",
       "sessionsAttended": 4,
-      "startingLevel": 1
+      "sheetUrl": "https://www.dndbeyond.com/profile/patola/characters/62140202",
+      "startingLevel": 1,
+      "subrace": "Drow"
     },
     "-MaGKylLm0FwaNWe-QO8": {
-      "id": 58615947,
       "avatarUrl": "https://www.dndbeyond.com/avatars/20510/273/1581111423-58615947.jpeg?width=150&height=150&fit=crop&quality=95&auto=webp",
-      "sheetUrl": "https://www.dndbeyond.com/profile/WillCarterDM/characters/58615947",
-      "playerDndBeyondName": "WillCarterDM",
-      "name": "Krastor Vale",
-      "nickname": "Krastor",
-      "race": "Human",
-      "subrace": "Variant",
-      "classes": [
-        { "class": { "name": "Cleric", "archetype": "War Domain" }, "level": 5 }
-      ],
-      "currentLevel": 5,
-      "sessionsAttended": 10,
-      "startingLevel": 1
-    },
-    "-MaGKyv9oPHJXuJKjmnl": {
-      "id": 26267182,
-      "avatarUrl": "",
-      "sheetUrl": "https://www.dndbeyond.com/profile/ThePerkyRiolu/characters/26267182",
-      "playerDndBeyondName": "ThePerkyRiolu",
-      "name": "Nando Tennessee",
-      "nickname": "Nando",
-      "race": "Aarakocra",
       "classes": [
         {
-          "class": { "name": "Wizard", "archetype": "School of Illusion" },
+          "class": {
+            "archetype": "War Domain",
+            "name": "Cleric"
+          },
+          "level": 5
+        }
+      ],
+      "currentLevel": 5,
+      "id": 58615947,
+      "name": "Krastor Vale",
+      "nickname": "Krastor",
+      "playerDndBeyondName": "WillCarterDM",
+      "race": "Human",
+      "sessionsAttended": 10,
+      "sheetUrl": "https://www.dndbeyond.com/profile/WillCarterDM/characters/58615947",
+      "startingLevel": 1,
+      "subrace": "Variant"
+    },
+    "-MaGKyv9oPHJXuJKjmnl": {
+      "avatarUrl": "",
+      "classes": [
+        {
+          "class": {
+            "archetype": "School of Illusion",
+            "name": "Wizard"
+          },
           "level": 2
         }
       ],
       "currentLevel": 2,
+      "id": 26267182,
+      "name": "Nando Tennessee",
+      "nickname": "Nando",
+      "playerDndBeyondName": "ThePerkyRiolu",
+      "race": "Aarakocra",
       "sessionsAttended": 3,
+      "sheetUrl": "https://www.dndbeyond.com/profile/ThePerkyRiolu/characters/26267182",
       "startingLevel": 1
     },
     "-MaGKz4-slurxi3kmdJk": {
-      "id": 62426653,
       "avatarUrl": "",
-      "sheetUrl": "https://www.dndbeyond.com/profile/TheKingsmantm/characters/62426653",
-      "playerDndBeyondName": "TheKingsmantm",
-      "name": "Orgust",
-      "race": "Aarakocra",
-      "classes": [{ "class": { "name": "Bard" }, "level": 2 }],
+      "classes": [
+        {
+          "class": {
+            "name": "Bard"
+          },
+          "level": 2
+        }
+      ],
       "currentLevel": 2,
+      "id": 62426653,
+      "name": "Orgust",
+      "playerDndBeyondName": "TheKingsmantm",
+      "race": "Aarakocra",
       "sessionsAttended": 2,
+      "sheetUrl": "https://www.dndbeyond.com/profile/TheKingsmantm/characters/62426653",
       "startingLevel": 1
     },
     "-MaGKzGbL5yHTKXce9Hj": {
-      "id": 62556497,
       "avatarUrl": "",
-      "sheetUrl": "https://www.dndbeyond.com/profile/HonestFee/characters/62556497",
-      "playerDndBeyondName": "HonestFee",
-      "name": "Prof Tabbart",
-      "nickname": "Tabbart",
-      "race": "Reborn",
       "classes": [
-        { "class": { "name": "Artificer", "archetype": "Armorer" }, "level": 3 }
+        {
+          "class": {
+            "archetype": "Armorer",
+            "name": "Artificer"
+          },
+          "level": 3
+        }
       ],
       "currentLevel": 3,
+      "id": 62556497,
+      "name": "Prof Tabbart",
+      "nickname": "Tabbart",
+      "playerDndBeyondName": "HonestFee",
+      "race": "Reborn",
       "sessionsAttended": 4,
+      "sheetUrl": "https://www.dndbeyond.com/profile/HonestFee/characters/62556497",
       "startingLevel": 1
     },
     "-MaGKzRzKIVtbQyxQxDP": {
-      "id": 63238714,
       "avatarUrl": "https://www.dndbeyond.com/avatars/22090/219/1581111423-63238714.jpeg?width=150&height=150&fit=crop&quality=95&auto=webp",
-      "sheetUrl": "https://www.dndbeyond.com/profile/JackClarke/characters/63238714",
-      "playerDndBeyondName": "JackClarke",
-      "name": "Brightscale",
-      "race": "Dragonborn",
-      "subrace": "Ravenite",
       "classes": [
         {
-          "class": { "name": "Ranger", "archetype": "Drakewarden" },
+          "class": {
+            "archetype": "Drakewarden",
+            "name": "Ranger"
+          },
           "level": 4
         }
       ],
       "currentLevel": 4,
+      "id": 63238714,
+      "name": "Brightscale",
+      "playerDndBeyondName": "JackClarke",
+      "race": "Dragonborn",
       "sessionsAttended": 4,
-      "startingLevel": 1
+      "sheetUrl": "https://www.dndbeyond.com/profile/JackClarke/characters/63238714",
+      "startingLevel": 1,
+      "subrace": "Ravenite"
     },
     "-MaGKze3Q36HyzEJh31_": {
-      "id": 63108982,
       "avatarUrl": "https://www.dndbeyond.com/avatars/9221/722/637202352169308354.jpeg?width=150&height=150&fit=crop&quality=95&auto=webp",
-      "sheetUrl": "https://www.dndbeyond.com/profile/Bruenorbattlehammeringgiant/characters/63108982",
-      "playerDndBeyondName": "Bruenorbattlehammeringgiant",
-      "name": "Bruenor",
-      "race": "Goliath",
       "classes": [
         {
-          "class": { "name": "Fighter", "archetype": "Rune Knight" },
+          "class": {
+            "archetype": "Rune Knight",
+            "name": "Fighter"
+          },
           "level": 4
         }
       ],
       "currentLevel": 4,
+      "id": 63108982,
+      "name": "Bruenor",
+      "playerDndBeyondName": "Bruenorbattlehammeringgiant",
+      "race": "Goliath",
       "sessionsAttended": 4,
+      "sheetUrl": "https://www.dndbeyond.com/profile/Bruenorbattlehammeringgiant/characters/63108982",
       "startingLevel": 2
     },
     "-MaGKzqk5TwaERyJg_Q2": {
-      "id": 74219093,
       "avatarUrl": "",
-      "sheetUrl": "",
-      "playerDndBeyondName": "Bruenorbattlehammeringgiant",
-      "name": "Argus",
-      "race": "Human",
-      "classes": [{ "class": { "name": "Artificer" }, "level": 2 }],
+      "classes": [
+        {
+          "class": {
+            "name": "Artificer"
+          },
+          "level": 2
+        }
+      ],
       "currentLevel": 2,
+      "id": 74219093,
+      "name": "Argus",
+      "playerDndBeyondName": "Bruenorbattlehammeringgiant",
+      "race": "Human",
+      "retirement": {
+        "date": "2021 12 01",
+        "reason": "Retired by Player"
+      },
       "sessionsAttended": 2,
-      "startingLevel": 1,
-      "retirement": { "reason": "Retired by Player", "date": "2021 12 01" }
+      "sheetUrl": "",
+      "startingLevel": 1
     },
     "-MaGL-4gVKCPTHwNLSb5": {
-      "id": 67876495,
       "avatarUrl": "",
-      "sheetUrl": "https://www.dndbeyond.com/profile/thecdv20/characters/67876495",
-      "playerDndBeyondName": "thecdv20",
+      "classes": [
+        {
+          "class": {
+            "name": "Monk"
+          },
+          "level": 1
+        }
+      ],
+      "currentLevel": 1,
+      "id": 67876495,
       "name": "Destrian Darkeyes",
       "nickname": "Destrian",
+      "playerDndBeyondName": "thecdv20",
       "race": "Half-Orc",
-      "classes": [{ "class": { "name": "Monk" }, "level": 1 }],
-      "currentLevel": 1,
       "sessionsAttended": 1,
+      "sheetUrl": "https://www.dndbeyond.com/profile/thecdv20/characters/67876495",
       "startingLevel": 1
     },
     "-MaGL-EOTK4GBRD3OPuj": {
-      "id": 33132303,
       "avatarUrl": "",
-      "sheetUrl": "https://www.dndbeyond.com/profile/BlackRoseSarah89/characters/33132303",
-      "playerDndBeyondName": "BlackRoseSarah89",
-      "name": "Ember",
-      "race": "Genasi",
-      "subrace": "Fire",
       "classes": [
         {
-          "class": { "name": "Cleric", "archetype": "Grave Domain" },
+          "class": {
+            "archetype": "Grave Domain",
+            "name": "Cleric"
+          },
           "level": 4
         }
       ],
       "currentLevel": 4,
+      "id": 33132303,
+      "name": "Ember",
+      "playerDndBeyondName": "BlackRoseSarah89",
+      "race": "Genasi",
       "sessionsAttended": 7,
-      "startingLevel": 1
+      "sheetUrl": "https://www.dndbeyond.com/profile/BlackRoseSarah89/characters/33132303",
+      "startingLevel": 1,
+      "subrace": "Fire"
     },
     "-MaGL-NOrFBzAAtU6Vwo": {
-      "id": 62804832,
       "avatarUrl": "",
-      "sheetUrl": "https://www.dndbeyond.com/profile/Jonno0902/characters/62804832",
-      "playerDndBeyondName": "Jonno0902",
-      "name": "James",
-      "race": "Human",
-      "subrace": "Variant",
       "classes": [
-        { "class": { "name": "Warlock", "archetype": "The Fiend" }, "level": 2 }
+        {
+          "class": {
+            "archetype": "The Fiend",
+            "name": "Warlock"
+          },
+          "level": 2
+        }
       ],
       "currentLevel": 2,
+      "id": 62804832,
+      "name": "James",
+      "playerDndBeyondName": "Jonno0902",
+      "race": "Human",
       "sessionsAttended": 2,
-      "startingLevel": 1
+      "sheetUrl": "https://www.dndbeyond.com/profile/Jonno0902/characters/62804832",
+      "startingLevel": 1,
+      "subrace": "Variant"
     },
     "-MaGL-XpHuHUX4G5uVGm": {
-      "id": 62904516,
       "avatarUrl": "",
-      "sheetUrl": "https://www.dndbeyond.com/profile/Phoenixfire177/characters/62904516",
-      "playerDndBeyondName": "Phoenixfire177",
+      "classes": [
+        {
+          "class": {
+            "name": "Paladin"
+          },
+          "level": 1
+        }
+      ],
+      "currentLevel": 1,
+      "id": 62904516,
       "name": "Keothi \"Steadyhand\" Vaimei-Laga",
       "nickname": "Keothi",
+      "playerDndBeyondName": "Phoenixfire177",
       "race": "Goliath",
-      "classes": [{ "class": { "name": "Paladin" }, "level": 1 }],
-      "currentLevel": 1,
       "sessionsAttended": 1,
+      "sheetUrl": "https://www.dndbeyond.com/profile/Phoenixfire177/characters/62904516",
       "startingLevel": 1
     },
     "-MaGL69yjMK5frXnEFKQ": {
-      "id": 62574844,
       "avatarUrl": "",
-      "sheetUrl": "https://www.dndbeyond.com/profile/Chaia01/characters/62574844",
-      "playerDndBeyondName": "Chaia01",
-      "name": "Milly Catimus",
-      "nickname": "Milly",
-      "race": "Tabaxi",
       "classes": [
         {
-          "class": { "name": "Paladin", "archetype": "Oath of Conquest" },
+          "class": {
+            "archetype": "Oath of Conquest",
+            "name": "Paladin"
+          },
           "level": 3
         }
       ],
       "currentLevel": 2,
+      "id": 62574844,
+      "name": "Milly Catimus",
+      "nickname": "Milly",
+      "playerDndBeyondName": "Chaia01",
+      "race": "Tabaxi",
       "sessionsAttended": 3,
+      "sheetUrl": "https://www.dndbeyond.com/profile/Chaia01/characters/62574844",
       "startingLevel": 1
     },
     "-MaGL6MkgEpZJu34vnAA": {
-      "id": 62567125,
       "avatarUrl": "",
-      "sheetUrl": "https://www.dndbeyond.com/profile/SunRester/characters/62567125",
-      "playerDndBeyondName": "SunRester",
-      "name": "Perran",
-      "race": "Satyr",
       "classes": [
         {
-          "class": { "name": "Druid", "archetype": "Circle of Stars" },
+          "class": {
+            "archetype": "Circle of Stars",
+            "name": "Druid"
+          },
           "level": 4
         }
       ],
       "currentLevel": 4,
+      "id": 62567125,
+      "name": "Perran",
+      "playerDndBeyondName": "SunRester",
+      "race": "Satyr",
       "sessionsAttended": 5,
+      "sheetUrl": "https://www.dndbeyond.com/profile/SunRester/characters/62567125",
       "startingLevel": 1
     },
     "-MaGL6cEeA0f0E_nEEMG": {
-      "id": 73478236,
       "avatarUrl": "",
-      "playerDndBeyondName": "SunRester",
-      "name": "Kricket",
-      "race": "Kobold",
-      "classes": [{ "class": { "name": "Artificer" }, "level": 1 }],
-      "currentLevel": 2,
-      "sessionsAttended": 2,
-      "startingLevel": 1,
-      "retirement": {
-        "reason": "Killed by a bandit while tracking the Mysterious Benefactor",
-        "date": "2021 12 08"
-      }
-    },
-    "-MaGL6w9JHKxxPijYW0m": {
-      "id": 62913829,
-      "avatarUrl": "",
-      "sheetUrl": "https://www.dndbeyond.com/profile/Arnaudar/characters/62913829",
-      "playerDndBeyondName": "Arnaudar",
-      "name": "Thuldur Lutgorr",
-      "nickname": "Thuldurr",
-      "race": "Dwarf",
-      "subrace": "Mountain",
       "classes": [
         {
-          "class": { "name": "Paladin", "archetype": "Oath of the Ancients" },
+          "class": {
+            "name": "Artificer"
+          },
+          "level": 1
+        }
+      ],
+      "currentLevel": 2,
+      "id": 73478236,
+      "name": "Kricket",
+      "playerDndBeyondName": "SunRester",
+      "race": "Kobold",
+      "retirement": {
+        "date": "2021 12 08",
+        "reason": "Killed by a bandit while tracking the Mysterious Benefactor"
+      },
+      "sessionsAttended": 2,
+      "startingLevel": 1
+    },
+    "-MaGL6w9JHKxxPijYW0m": {
+      "avatarUrl": "",
+      "classes": [
+        {
+          "class": {
+            "archetype": "Oath of the Ancients",
+            "name": "Paladin"
+          },
           "level": 3
         }
       ],
       "currentLevel": 3,
+      "id": 62913829,
+      "name": "Thuldur Lutgorr",
+      "nickname": "Thuldurr",
+      "playerDndBeyondName": "Arnaudar",
+      "race": "Dwarf",
       "sessionsAttended": 4,
-      "startingLevel": 1
+      "sheetUrl": "https://www.dndbeyond.com/profile/Arnaudar/characters/62913829",
+      "startingLevel": 1,
+      "subrace": "Mountain"
     },
     "-MaGL8mAafT0RLJLodi5": {
-      "id": 62176290,
       "avatarUrl": "",
-      "sheetUrl": "https://www.dndbeyond.com/profile/DrGreybeard/characters/62176290",
-      "playerDndBeyondName": "DrGreybeard",
-      "name": "Tustan Toskan",
-      "nickname": "Tustun",
-      "race": "Dragonborn",
       "classes": [
         {
-          "class": { "name": "Cleric", "archetype": "Life Domain" },
+          "class": {
+            "archetype": "Life Domain",
+            "name": "Cleric"
+          },
           "level": 4
         }
       ],
       "currentLevel": 4,
+      "id": 62176290,
+      "name": "Tustan Toskan",
+      "nickname": "Tustun",
+      "playerDndBeyondName": "DrGreybeard",
+      "race": "Dragonborn",
       "sessionsAttended": 7,
+      "sheetUrl": "https://www.dndbeyond.com/profile/DrGreybeard/characters/62176290",
       "startingLevel": 1
     },
     "-MaGL91rHeTE0-xDAVlb": {
-      "id": 63233783,
       "avatarUrl": "",
-      "sheetUrl": "https://www.dndbeyond.com/profile/RusselHumphriesIII/characters/63233783",
-      "playerDndBeyondName": "RusselHumphriesIII",
+      "classes": [
+        {
+          "class": {
+            "level": 1,
+            "name": "Rogue"
+          }
+        }
+      ],
+      "currentLevel": 1,
+      "id": 63233783,
       "name": "Wrenn (The Beard) Beren",
       "nickname": "Wrenn",
+      "playerDndBeyondName": "RusselHumphriesIII",
       "race": "Gnome",
-      "subrace": "Forest",
-      "classes": [{ "class": { "name": "Rogue", "level": 1 } }],
-      "currentLevel": 1,
       "sessionsAttended": 1,
-      "startingLevel": 1
+      "sheetUrl": "https://www.dndbeyond.com/profile/RusselHumphriesIII/characters/63233783",
+      "startingLevel": 1,
+      "subrace": "Forest"
     },
     "-MaGL9FMxxrubkwavqrT": {
-      "id": 18549288,
       "avatarUrl": "",
-      "sheetUrl": "",
-      "playerDndBeyondName": "SchemingPnda",
+      "classes": [
+        {
+          "class": {
+            "level": 1,
+            "name": "Barbarian"
+          }
+        }
+      ],
+      "currentLevel": 1,
+      "id": 18549288,
       "name": "Edwin Brando",
       "nickname": "Edwin",
+      "playerDndBeyondName": "SchemingPnda",
       "race": "Simic Hybrid",
-      "classes": [{ "class": { "name": "Barbarian", "level": 1 } }],
-      "currentLevel": 1,
+      "retirement": {
+        "date": "2021 11 25",
+        "reason": "Retired by Player"
+      },
       "sessionsAttended": 1,
-      "startingLevel": 1,
-      "retirement": { "reason": "Retired by Player", "date": "2021 11 25" }
+      "sheetUrl": "",
+      "startingLevel": 1
     },
     "-MaGL9RDYDim9iPr5hJJ": {
-      "id": 51147698,
       "avatarUrl": "",
-      "sheetUrl": "",
-      "playerDndBeyondName": "SchemingPnda",
+      "classes": [
+        {
+          "class": {
+            "level": 1,
+            "name": "Fighter"
+          }
+        }
+      ],
+      "currentLevel": 2,
+      "id": 51147698,
       "name": "Rho-LIV",
       "nickname": "Rho",
+      "playerDndBeyondName": "SchemingPnda",
       "race": "Hobgoblin",
-      "classes": [{ "class": { "name": "Fighter", "level": 1 } }],
-      "currentLevel": 2,
+      "retirement": {
+        "date": "2021 12 10",
+        "reason": "Retired by Player"
+      },
       "sessionsAttended": 1,
-      "startingLevel": 1,
-      "retirement": { "reason": "Retired by Player", "date": "2021 12 10" }
+      "sheetUrl": "",
+      "startingLevel": 1
     }
   },
   "players": {
     "-MaGLAdfrrLeLWxdwuUU": {
-      "friendlyName": "Felix",
       "discordName": "HonestFee#4574",
       "dndBeyondName": "HonestFee",
+      "name": "Felix",
       "isDungeonMaster": true
     },
     "-MaGM4jWXC3pyeif7isp": {
-      "friendlyName": "Louis",
       "discordName": "SchemingPnda#0518",
       "dndBeyondName": "SchemingPnda",
+      "name": "Louis",
       "isDungeonMaster": true,
       "isGamesMaster": true
     },
     "-MaGM4rbdJBgZ8rKnfbc": {
-      "friendlyName": "Swedish Fox",
       "discordName": "SwedishFox#2134",
-      "dndBeyondName": "SwedishFox"
+      "dndBeyondName": "SwedishFox",
+      "name": "Swedish Fox"
     },
     "-MaGM4yP9MiI5Cy5CmCL": {
-      "friendlyName": "Cassie",
       "discordName": "Cassie#3862",
-      "dndBeyondName": "Chaia01"
-    },
-    "-MaGM5544_seqH_FlZLo": {
-      "friendlyName": "Jack",
-      "discordName": "Jimbob_#5733",
-      "dndBeyondName": "JackClarke",
-      "isDungeonMaster": true,
-      "isGamesMaster": true
+      "dndBeyondName": "Chaia01",
+      "name": "Cassie"
     },
     "-MaGM5CRWHK7L7PRyhub": {
-      "friendlyName": "Perky",
       "discordName": "Perky#3726",
-      "dndBeyondName": "ThePerkyRiolu"
+      "dndBeyondName": "ThePerkyRiolu",
+      "name": "Perky"
     },
     "-MaGM5JL64jM9ODkb1Jr": {
-      "friendlyName": "The Kingsman",
       "discordName": "The Kingsman#2898",
-      "dndBeyondName": "TheKingsmantm"
+      "dndBeyondName": "TheKingsmantm",
+      "name": "The Kingsman"
     },
     "-MaGM5QVGtAGMiUj9Eb_": {
-      "friendlyName": "BlackRose89",
       "discordName": "BlackRose89#8833",
-      "dndBeyondName": "BlackRoseSarah89"
+      "dndBeyondName": "BlackRoseSarah89",
+      "name": "BlackRose89"
     },
     "-MaGM5WvuAQM8zna7FzB": {
-      "friendlyName": "SunRester",
       "discordName": "SunRester#8899",
       "dndBeyondName": "SunRester",
+      "name": "SunRester",
       "isDungeonMaster": true,
       "isGamesMaster": true
     },
     "-MaGM5cq30wDPzwxYLK4": {
-      "friendlyName": "Ellie",
       "discordName": "a chrysalid eel#5930",
-      "dndBeyondName": "Zajay"
+      "dndBeyondName": "Zajay",
+      "name": "Ellie"
     },
     "-MaGM5koceXzQAlwRUFN": {
-      "friendlyName": "Arnaud",
       "discordName": "Arnaud#5510",
-      "dndBeyondName": "Arnaudar"
+      "dndBeyondName": "Arnaudar",
+      "name": "Arnaud"
     },
     "-MaGM5tBXrrMWldlbI-X": {
-      "friendlyName": "Jonno",
       "discordName": "Jonno0902#9966",
-      "dndBeyondName": "Jonno0902"
+      "dndBeyondName": "Jonno0902",
+      "name": "Jonno"
     },
     "-MaGM5zGZ8VcPLiq697T": {
-      "friendlyName": "Will",
       "discordName": "WillCarter#6063",
       "dndBeyondName": "WillCarterDM",
+      "name": "Will",
       "isDungeonMaster": true
     },
     "-MaGM6IOnqXNGuNfxZa6": {
-      "friendlyName": "Patola",
       "discordName": "patola#0332",
-      "dndBeyondName": "patola"
+      "dndBeyondName": "patola",
+      "name": "Patola"
     },
     "-MaGM6Q3kpDNynEBURGO": {
-      "friendlyName": "Benjywa",
       "discordName": "benjywa#7340",
       "dndBeyondName": "Benjywa",
+      "name": "Benjywa",
       "isDungeonMaster": true,
       "isGamesMaster": true
     },
     "-MaGM6YXdS0MHyYRc99v": {
-      "friendlyName": "No, this is Patrick",
       "discordName": "No,this is patrick#1606",
-      "dndBeyondName": "Bruenorbattlehammeringgiant"
+      "dndBeyondName": "Bruenorbattlehammeringgiant",
+      "name": "No, this is Patrick"
     },
     "-MaGM6ezZShojRgShWwd": {
-      "friendlyName": "BlueLegume",
       "discordName": "BlueLegume#4192",
-      "dndBeyondName": ""
+      "dndBeyondName": "",
+      "name": "BlueLegume"
     },
     "-MaGM6mfWwwgH4r0KsVA": {
-      "friendlyName": "Chloe",
       "discordName": "Chloe#1673",
-      "dndBeyondName": "RusselHumphriesIII"
+      "dndBeyondName": "RusselHumphriesIII",
+      "name": "Chloe"
     },
     "-MaGM6tYGb2oBuKcNdUQ": {
-      "friendlyName": "DannyJamesWard",
       "discordName": "DannyJamesWard#6089",
-      "dndBeyondName": ""
+      "dndBeyondName": "",
+      "name": "DannyJamesWard"
     },
     "-MaGM7-gsVD6LxBHtulk": {
-      "friendlyName": "Ali",
       "discordName": "GreyBeard#9358",
-      "dndBeyondName": "DrGreybeard"
+      "dndBeyondName": "DrGreybeard",
+      "name": "Ali"
     },
     "-MaGM764hCfwnab2wTy8": {
-      "friendlyName": "HirotoShinori",
       "discordName": "HirotoShinori#2838",
-      "dndBeyondName": "HirotoShinori"
+      "dndBeyondName": "HirotoShinori",
+      "name": "HirotoShinori"
     },
     "-MaGM7FH4Tg8C0AptFPR": {
-      "friendlyName": "Joelmon_Joel",
       "discordName": "Joelmon_Joel#6564",
-      "dndBeyondName": ""
+      "dndBeyondName": "",
+      "name": "Joelmon_Joel"
     },
     "-MaGM7VISDGDZF-eMIT4": {
-      "friendlyName": "Kosky",
       "discordName": "Kosky101#9128",
-      "dndBeyondName": "Kosky101"
+      "dndBeyondName": "Kosky101",
+      "name": "Kosky"
     },
     "-MaGM8eCkJdm1PE4ISuR": {
-      "friendlyName": "Poor Swimmer",
       "discordName": "PoorSwimmer#6126",
-      "dndBeyondName": ""
+      "dndBeyondName": "",
+      "name": "Poor Swimmer"
     },
     "-MaGM8l3BWAoEc3mnmIf": {
-      "friendlyName": "Poppy",
       "discordName": "Poppy#8626",
-      "dndBeyondName": "just_poppy"
+      "dndBeyondName": "just_poppy",
+      "name": "Poppy"
     },
     "-MaGM8rpiI0QPEJV3YDw": {
-      "friendlyName": "Robin",
       "discordName": "Robin3009#3267",
-      "dndBeyondName": ""
+      "dndBeyondName": "",
+      "name": "Robin"
     },
     "-MaGM8ycWHXnWbaq-WqQ": {
-      "friendlyName": "Shabbyj",
       "discordName": "shabbyj#7019",
-      "dndBeyondName": "shabbyj"
+      "dndBeyondName": "shabbyj",
+      "name": "Shabbyj"
     },
     "-MaGM93zB2p65K1DMMZW": {
-      "friendlyName": "TheJelly",
       "discordName": "TheJelly#7925",
-      "dndBeyondName": ""
+      "dndBeyondName": "",
+      "name": "TheJelly"
     },
     "-MaGM9ApuRxANiYS2eNu": {
-      "friendlyName": "Thom Prime",
       "discordName": "Thom_G83#5580",
-      "dndBeyondName": "Sanguine_Mesiac"
+      "dndBeyondName": "Sanguine_Mesiac",
+      "name": "Thom Prime"
     },
     "-MaGM9IVAiHx1Zdv8hAu": {
-      "friendlyName": "John",
       "discordName": "Pheonixshifter177#2230",
       "dndBeyondName": "Phoenixfire177",
+      "name": "John",
       "isDungeonMaster": true
+    },
+    "-N012hCA7tPehofFgQQJ": {
+      "discordName": "JackClarke",
+      "dndBeyondName": "Jimbob_#5733",
+      "email": "jackclarke95@gmail.com",
+      "name": "Jack",
+      "id": "player-138",
+      "isDungeonMaster": true,
+      "isGamesMaster": true
     }
   },
   "sessions": {
-    "-MaGM2xEe7-ZSJ1jLSCr": {
-      "id": 1,
-      "name": "Operation Landgrab",
-      "dungeonMaster": "SunRester",
-      "map": "The Shattered Realm",
-      "date": "2021 11 24",
-      "attendees": [62556497, 62380701, 18549288]
-    },
-    "-MaGM34mlje5iT0BB2xv": {
-      "id": 2,
-      "name": "The Poacher Problem",
-      "dungeonMaster": "JackClarke",
-      "map": "The Everwilds",
-      "date": "2021 11 26",
-      "attendees": [58615947, 74219093, 62130532, 62140202, 62380701]
-    },
-    "-MaGM3Eww453ZLRYNgsh": {
-      "id": 3,
-      "name": "Viking Incursion",
-      "dungeonMaster": "SunRester",
-      "map": "The Lunar Isles",
-      "date": "2021 12 01",
-      "attendees": [62565380, 62574844, 74219093, 62804832, 62913829]
-    },
-    "-MaGM3Z3EJJS3rRwS2hf": {
-      "id": 4,
-      "name": "Finding the Blue Order",
-      "dungeonMaster": "SunRester",
-      "map": "The Forgotten Lands",
-      "date": "2021 12 04",
-      "attendees": [58615947, 62130532, 26267182, 62913829, 62565380]
-    },
-    "-MaGM3fy6j_rPn8hULzG": {
-      "id": 5,
-      "name": "Cirque de Snicket",
-      "dungeonMaster": "SchemingPnda",
-      "map": "The Shattered Realm",
-      "date": "2021 12 06",
-      "attendees": [63238714, 62804832, 62426653, 62913829, 26267182, 63108982]
-    },
-    "-MaGM3nQXacedVuI7Qus": {
-      "id": 6,
-      "name": "Mysterious Benefactor",
-      "dungeonMaster": "JackClarke",
-      "map": "The Everwilds",
-      "date": "2021 12 08",
-      "attendees": [73478236, 62565380, 58615947, 62140202, 33132303]
-    },
-    "-MaGM3tvrn-G-mSvACPX": {
-      "id": 7,
-      "name": "Elven Exploration",
-      "dungeonMaster": "Phoenixfire177",
-      "map": "The Lunar Isles",
-      "date": "2021 12 09",
-      "attendees": [62804832, 62380701, 58615947, 63108982, 62574844]
-    },
-    "-MaGM4-reDhyKyJ3ou2t": {
-      "id": 8,
-      "name": "Forgotten Foothold",
-      "dungeonMaster": "SunRester",
-      "map": "The Forgotten Lands",
-      "date": "2021 12 12",
-      "attendees": [51147698, 62130532, 62565380, 62904516]
-    },
-    "-MaGM4GFKosOVInCqQXb": {
-      "id": 9,
-      "name": "The Old Man's Message",
-      "dungeonMaster": "SunRester",
-      "map": "The Forgotten Lands",
-      "date": "2021 12 16",
-      "attendees": [58615947, 62130532, 26267182, 62913829]
-    },
-    "-MaGM4O8WLFfR_HVQYJC": {
-      "id": 10,
-      "name": "Midvalley Mines",
-      "dungeonMaster": "JackClarke",
-      "map": "The Forgotten Lands",
-      "date": "2022 01 05",
-      "attendees": [63233783, 62176290, 62567125, 62565380]
-    },
-    "-MaGM4Voma6ImJCU8W9s": {
-      "id": 11,
-      "name": "Welp, We Released a Dragon",
-      "dungeonMaster": "Benjywa",
-      "map": "The Everwilds",
-      "date": "2022 01 19",
-      "attendees": [63238714, 62567125, 33132303, 62176290]
-    },
     "-MaGL9dJxtLJgY3d2iZ4": {
-      "id": 12,
-      "name": "The Jailor Comes",
-      "dungeonMaster": "SunRester",
-      "map": "The Forgotten Lands",
+      "attendees": [62565380, 62556497, 64045133, 62176290],
       "date": "2022 01 26",
-      "attendees": [62565380, 62556497, 64045133, 62176290]
+      "dungeonMaster": "SunRester",
+      "id": 12,
+      "map": "The Forgotten Lands",
+      "name": "The Jailor Comes"
     },
     "-MaGL9wF8HQM8Hs6_Ups": {
-      "id": 13,
-      "name": "Dead Drop",
-      "dungeonMaster": "JackClarke",
-      "map": "The Everwilds",
+      "attendees": [63108982, 64045133, 62556497, 33132303, 58615947],
       "date": "2022 01 31",
-      "attendees": [63108982, 64045133, 62556497, 33132303, 58615947]
+      "dungeonMaster": "JackClarke",
+      "id": 13,
+      "map": "The Everwilds",
+      "name": "Dead Drop"
     },
     "-MaGLA7aT51hV3vv72qm": {
-      "id": 14,
-      "name": "Making Amends",
-      "dungeonMaster": "Benjywa",
-      "map": "The Everwilds",
+      "attendees": ["Cass", 62567125, 33132303, 62176290],
       "date": "2022 02 13",
-      "attendees": ["Cass", 62567125, 33132303, 62176290]
+      "dungeonMaster": "Benjywa",
+      "id": 14,
+      "map": "The Everwilds",
+      "name": "Making Amends"
     },
     "-MaGLAIwNsZrmaj59Jg1": {
-      "id": 15,
-      "name": "Rumblings of the Legion",
-      "dungeonMaster": "SunRester",
-      "map": "The Forgotten Lands",
+      "attendees": [63238714, 64045133, 62140202, 62565380, 63108982],
       "date": "2022 02 13",
-      "attendees": [63238714, 64045133, 62140202, 62565380, 63108982]
+      "dungeonMaster": "SunRester",
+      "id": 15,
+      "map": "The Forgotten Lands",
+      "name": "Rumblings of the Legion"
     },
     "-MaGLATY_RNd3u0Y3o_W": {
-      "id": 16,
-      "name": "Bad Neighbours",
-      "dungeonMaster": "SunRester",
-      "map": "The Everwilds",
+      "attendees": [64045133, 58615947, 62426653, 62176290],
       "date": "2022 02 18",
-      "attendees": [64045133, 58615947, 62426653, 62176290]
+      "dungeonMaster": "SunRester",
+      "id": 16,
+      "map": "The Everwilds",
+      "name": "Bad Neighbours"
     },
     "-MaGLApepqQmAOqWUIIT": {
-      "id": 17,
-      "name": "North of Midvalley",
-      "dungeonMaster": "Benjywa",
-      "map": "The Forgotten Lands",
+      "attendees": ["Cass", 62567125, 63108982, 33132303, 58615947],
       "date": "2022 02 19",
-      "attendees": ["Cass", 62567125, 63108982, 33132303, 58615947]
+      "dungeonMaster": "Benjywa",
+      "id": 17,
+      "map": "The Forgotten Lands",
+      "name": "North of Midvalley"
+    },
+    "-MaGM2xEe7-ZSJ1jLSCr": {
+      "attendees": [62556497, 62380701, 18549288],
+      "date": "2021 11 24",
+      "dungeonMaster": "SunRester",
+      "id": 1,
+      "map": "The Shattered Realm",
+      "name": "Operation Landgrab"
+    },
+    "-MaGM34mlje5iT0BB2xv": {
+      "attendees": [58615947, 74219093, 62130532, 62140202, 62380701],
+      "date": "2021 11 26",
+      "dungeonMaster": "JackClarke",
+      "id": 2,
+      "map": "The Everwilds",
+      "name": "The Poacher Problem"
+    },
+    "-MaGM3Eww453ZLRYNgsh": {
+      "attendees": [62565380, 62574844, 74219093, 62804832, 62913829],
+      "date": "2021 12 01",
+      "dungeonMaster": "SunRester",
+      "id": 3,
+      "map": "The Lunar Isles",
+      "name": "Viking Incursion"
+    },
+    "-MaGM3Z3EJJS3rRwS2hf": {
+      "attendees": [58615947, 62130532, 26267182, 62913829, 62565380],
+      "date": "2021 12 04",
+      "dungeonMaster": "SunRester",
+      "id": 4,
+      "map": "The Forgotten Lands",
+      "name": "Finding the Blue Order"
+    },
+    "-MaGM3fy6j_rPn8hULzG": {
+      "attendees": [63238714, 62804832, 62426653, 62913829, 26267182, 63108982],
+      "date": "2021 12 06",
+      "dungeonMaster": "SchemingPnda",
+      "id": 5,
+      "map": "The Shattered Realm",
+      "name": "Cirque de Snicket"
+    },
+    "-MaGM3nQXacedVuI7Qus": {
+      "attendees": [73478236, 62565380, 58615947, 62140202, 33132303],
+      "date": "2021 12 08",
+      "dungeonMaster": "JackClarke",
+      "id": 6,
+      "map": "The Everwilds",
+      "name": "Mysterious Benefactor"
+    },
+    "-MaGM3tvrn-G-mSvACPX": {
+      "attendees": [62804832, 62380701, 58615947, 63108982, 62574844],
+      "date": "2021 12 09",
+      "dungeonMaster": "Phoenixfire177",
+      "id": 7,
+      "map": "The Lunar Isles",
+      "name": "Elven Exploration"
+    },
+    "-MaGM4-reDhyKyJ3ou2t": {
+      "attendees": [51147698, 62130532, 62565380, 62904516],
+      "date": "2021 12 12",
+      "dungeonMaster": "SunRester",
+      "id": 8,
+      "map": "The Forgotten Lands",
+      "name": "Forgotten Foothold"
+    },
+    "-MaGM4GFKosOVInCqQXb": {
+      "attendees": [58615947, 62130532, 26267182, 62913829],
+      "date": "2021 12 16",
+      "dungeonMaster": "SunRester",
+      "id": 9,
+      "map": "The Forgotten Lands",
+      "name": "The Old Man's Message"
+    },
+    "-MaGM4O8WLFfR_HVQYJC": {
+      "attendees": [63233783, 62176290, 62567125, 62565380],
+      "date": "2022 01 05",
+      "dungeonMaster": "JackClarke",
+      "id": 10,
+      "map": "The Forgotten Lands",
+      "name": "Midvalley Mines"
+    },
+    "-MaGM4Voma6ImJCU8W9s": {
+      "attendees": [63238714, 62567125, 33132303, 62176290],
+      "date": "2022 01 19",
+      "dungeonMaster": "Benjywa",
+      "id": 11,
+      "map": "The Everwilds",
+      "name": "Welp, We Released a Dragon"
     },
     "-MbTNa6D2Xvi63oPHETT": {
-      "id": 18,
-      "name": "Exploring the Realms",
-      "dungeonMaster": "Benjywa",
-      "map": "The Shattered Realm",
+      "attendees": [62567125, 58615947, 67876495, 62176290],
       "date": "2022 03 01",
-      "attendees": [62567125, 58615947, 67876495, 62176290]
+      "dungeonMaster": "Benjywa",
+      "id": 18,
+      "map": "The Shattered Realm",
+      "name": "Exploring the Realms"
     },
     "-McFJrNI6IuRu2DEk5Dh": {
-      "id": 19,
-      "name": "Clearing Dreadshade Fortress",
-      "dungeonMaster": "Benjywa",
-      "map": "The Forgotten Lands",
+      "attendees": [58615947, 33132303, 62176290, 62556497],
       "date": "2022 03 08",
-      "attendees": [58615947, 33132303, 62176290, 62556497]
-    },
-    "-McjF65Dr-fjIa51Ajp1": {
+      "dungeonMaster": "Benjywa",
       "id": 19,
-      "name": "Fallen Star",
-      "dungeonMaster": "JackClarke",
-      "map": "The Everwilds",
-      "date": "2022 03 14",
-      "attendees": [62176290, 33132303, 62565380, 62567125, 62556497]
+      "map": "The Forgotten Lands",
+      "name": "Clearing Dreadshade Fortress"
     },
     "-McL5rhZ4FHd8edjK71A": {
-      "id": 19,
-      "name": "Shadows Over the Mountains",
-      "dungeonMaster": "JackClarke",
-      "map": "The Forgotten Lands",
+      "attendees": [62176290, 58615947, 62426653],
       "date": "2022 03 18",
-      "attendees": [62176290, 58615947, 62426653]
+      "dungeonMaster": "JackClarke",
+      "id": 19,
+      "map": "The Forgotten Lands",
+      "name": "Shadows Over the Mountains"
     },
     "-Mcf72aD5g1a8hAb5D4s": {
-      "id": 20,
-      "name": "Quest for the Ring",
-      "dungeonMaster": "SunRester",
-      "map": "The Everwilds",
+      "attendees": [63238714, 58615947, 62176290, 62556497, 33132303],
       "date": "2022 03 29",
-      "attendees": [63238714, 58615947, 62176290, 62556497, 33132303]
+      "dungeonMaster": "SunRester",
+      "id": 20,
+      "map": "The Everwilds",
+      "name": "Quest for the Ring"
     },
     "-Mcfd43g77gdfdg5db2s": {
-      "id": 21,
-      "name": "Return of the Bounty",
-      "dungeonMaster": "Benjywa",
-      "map": "The Shattered Realm",
+      "attendees": [62176290, 62567125, 64045133],
       "date": "2022 04 11",
-      "attendees": [62176290, 62567125, 64045133]
+      "dungeonMaster": "Benjywa",
+      "id": 21,
+      "map": "The Shattered Realm",
+      "name": "Return of the Bounty"
+    },
+    "-McjF65Dr-fjIa51Ajp1": {
+      "attendees": [62176290, 33132303, 62565380, 62567125, 62556497],
+      "date": "2022 03 14",
+      "dungeonMaster": "JackClarke",
+      "id": 19,
+      "map": "The Everwilds",
+      "name": "Fallen Star"
+    },
+    "-N-tVhA0zhZpo9Ycw-CC": {
+      "attendees": [33132303],
+      "date": "27/04/2022",
+      "dungeonMaster": "Benjywa",
+      "id": "session-950",
+      "map": "The Shattered Realms",
+      "name": "Return to \"Mother\""
     }
   }
 }

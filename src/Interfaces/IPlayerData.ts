@@ -1,7 +1,7 @@
 export default interface IPlayerData {
   id: string;
   email: string;
-  friendlyName: string;
+  name: string;
   discordName: string;
   dndBeyondName: string;
   isDungeonMaster: true | undefined;

@@ -9,7 +9,7 @@ import {
 } from "@fluentui/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import DataService from "../../Helpers/DataService";
+import DataService, { UserData } from "../../Helpers/DataService";
 
 const RegistrationDialog = () => {
   const dispatch = useDispatch();
@@ -107,15 +107,17 @@ const RegistrationDialog = () => {
         isGamesMaster
       );
 
-      DataService.registerWithEmailAndPassword(
+      const userData = {
         email,
         password,
         name,
-        discordName,
         dndBeyondName,
+        discordName,
         isDungeonMaster,
-        isGamesMaster
-      );
+        isGamesMaster,
+      } as UserData;
+
+      DataService.registerWithEmailAndPassword(userData);
     }
 
     dispatch({

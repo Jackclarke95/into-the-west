@@ -21,6 +21,7 @@ const Profile = () => {
   const players = useSelector((state) => state.players);
   const user = useSelector((state) => state.user);
 
+  // Set the current player based on the signed-in user
   useEffect(() => {
     if (players.isLoading || !user) {
       return;
@@ -36,6 +37,7 @@ const Profile = () => {
     });
   }, [players, user, dispatch]);
 
+  // Set the active character based on the current player
   useEffect(() => {
     if (
       characters.isLoading ||
@@ -66,8 +68,6 @@ const Profile = () => {
     DataService.signOut();
   };
 
-  console.log("players", players);
-
   return (
     <Stack tokens={{ childrenGap: 10 }}>
       <Stack horizontal styles={{ root: { justifyContent: "space-between" } }}>
@@ -96,7 +96,7 @@ const Profile = () => {
           styles={{
             root: { fontSize: FontSizes.large, textAlign: "start" },
           }}
-        >{`Welcome back, ${currentPlayer.data.friendlyName}`}</Text>
+        >{`Welcome back, ${currentPlayer.data.name}`}</Text>
       )}
       <Separator />
       <ActiveCharacter />
