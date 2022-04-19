@@ -131,6 +131,7 @@ const RegistrationDialog = () => {
         value={password}
         onChange={onChangePassword}
         required
+        canRevealPassword
       />
       <TextField
         label="Repeat Password"
@@ -138,6 +139,7 @@ const RegistrationDialog = () => {
         value={passwordRepeat}
         onChange={onChangePasswordRepeat}
         required
+        canRevealPassword
         invalid={
           password !== undefined &&
           passwordRepeat !== undefined &&
@@ -151,15 +153,17 @@ const RegistrationDialog = () => {
             : ""
         }
       />
-      <TextField label="Name" value={name} onChange={onChangeName} />
+      <TextField label="Name" value={name} required onChange={onChangeName} />
       <TextField
         label="Discord name"
         value={discordName}
+        required
         onChange={onChangeDiscordName}
       />
       <TextField
         label="D&D Beyond name"
         value={dndBeyondName}
+        required
         onChange={onChangeDndBeyondName}
       />
       <Toggle

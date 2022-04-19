@@ -65,7 +65,7 @@ const Login = () => {
         label="Password"
         type="password"
         onChange={onChangePassword}
-        canRevealPassword={false}
+        canRevealPassword
       />
       <Stack
         styles={{
