@@ -1,5 +1,5 @@
 export default interface ICharacterData {
-  id: number;
+  id: string;
   key?: string;
   avatarUrl: string;
   sheetUrl: string | undefined;

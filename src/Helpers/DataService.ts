@@ -1,4 +1,3 @@
-import { getId } from "@fluentui/react";
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -6,6 +5,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { push, ref, update } from "firebase/database";
+import uuid from "react-uuid";
 
 import { db } from "../App";
 import ICharacterData from "../Interfaces/ICharacterData";
@@ -31,7 +31,7 @@ export default class DataService {
     const charactersRef = ref(db, "characters");
 
     let characterToCreate = {
-      id: getId("character-"),
+      id: character.id,
       avatarUrl: "",
       sheetUrl: "",
       playerDndBeyondName: character.playerDndBeyondName,
@@ -74,7 +74,7 @@ export default class DataService {
     const sessionsRef = ref(db, "sessions/");
 
     const sessionToCreate = {
-      id: getId("session-"),
+      id: uuid(),
       name,
       dungeonMaster,
       map,
@@ -147,13 +147,7 @@ export default class DataService {
 
   /**
    * Registers a Firebase user and creates a player record in the Firebase Realtime Database
-   * @param email Email address of the user
-   * @param password Password of the user
-   * @param name Friendly name of the user
-   * @param dndBeyondName User's D&D Beyond name
-   * @param discordName User's Discord name
-   * @param isDungeonMaster Whether the user is a Dungeon Master or not
-   * @param isGamesMaster Whether the user is a Games master or not
+   * @param userData Data about the user to register
    */
   public static registerWithEmailAndPassword = (userData: UserData) => {
     console.log(
@@ -175,7 +169,7 @@ export default class DataService {
         console.log(user);
 
         const playerToCreate = {
-          id: getId("player-"),
+          id: uuid(),
           email: userData.email,
           name: userData.name,
           discordName: userData.discordName,
@@ -206,9 +200,9 @@ export default class DataService {
   };
 
   /**
-   *
-   * @param email
-   * @param password
+   * Logs the user in with their email address and password
+   * @param email The user's email address
+   * @param password The user's password
    */
   public static logInWithEmailAndPassword = (
     email: string,
@@ -226,10 +220,13 @@ export default class DataService {
         const errorCode = error.code;
         const errorMessage = error.message;
 
-        console.log(errorCode, errorMessage);
+        console.error(errorCode, errorMessage);
       });
   };
 
+  /**
+   * Signs the user out
+   */
   public static signOut = () => {
     signOut(getAuth())
       .then(() => {

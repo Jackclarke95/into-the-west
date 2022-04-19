@@ -3,6 +3,7 @@ import {
   FontSizes,
   Image,
   ImageFit,
+  PrimaryButton,
   Separator,
   Stack,
   Text,
@@ -13,6 +14,8 @@ import DataService from "../../Helpers/DataService";
 import ActiveCharacter from "./ActiveCharacter";
 import NextSession from "./NextSession";
 
+import uuid from "react-uuid";
+
 const Profile = () => {
   const dispatch = useDispatch();
 
@@ -20,6 +23,10 @@ const Profile = () => {
   const currentPlayer = useSelector((state) => state.currentPlayer);
   const players = useSelector((state) => state.players);
   const user = useSelector((state) => state.user);
+
+  if (!characters.isLoading) {
+    console.log(characters.data.map((character) => character.name));
+  }
 
   // Set the current player based on the signed-in user
   useEffect(() => {
@@ -70,6 +77,14 @@ const Profile = () => {
 
   return (
     <Stack tokens={{ childrenGap: 10 }}>
+      <PrimaryButton
+        text="New UUID"
+        onClick={() => {
+          const id = uuid() as string;
+          console.log(id);
+          navigator.clipboard.writeText(`"id": "${id}",`);
+        }}
+      />
       <Stack horizontal styles={{ root: { justifyContent: "space-between" } }}>
         <Text
           styles={{

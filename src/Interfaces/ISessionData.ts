@@ -5,5 +5,5 @@ export default interface ISessionData {
   dungeonMaster: string;
   map: string;
   date: string;
-  attendees: number[];
+  attendees: string[];
 }

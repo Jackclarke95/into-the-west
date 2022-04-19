@@ -12,6 +12,7 @@ import {
 } from "@fluentui/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import uuid from "react-uuid";
 import Classes from "../../Data/Classes";
 import Races from "../../Data/Races";
 import DataService from "../../Helpers/DataService";
@@ -157,7 +158,7 @@ const CharacterCreationDialog = () => {
       characterLevel
     ) {
       DataService.createCharacter({
-        id: Number(new Date()),
+        id: uuid(),
         avatarUrl: "",
         sheetUrl: "",
         playerDndBeyondName: currentPlayer.data.dndBeyondName,
