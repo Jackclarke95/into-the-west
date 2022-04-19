@@ -34,7 +34,7 @@ const Profile = () => {
       type: "SetCurrentPlayer",
       currentPlayer: { isLoading: false, data: currentPlayer },
     });
-  }, [players]);
+  }, [players, user, dispatch]);
 
   useEffect(() => {
     if (
@@ -60,7 +60,7 @@ const Profile = () => {
       type: "SetActiveCharacter",
       activeCharacter: { isLoading: false, data: activeCharacter },
     });
-  }, [currentPlayer]);
+  }, [currentPlayer, characters, dispatch]);
 
   const onClickSignOut = () => {
     DataService.signOut();
