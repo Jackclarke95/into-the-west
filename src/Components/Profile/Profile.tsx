@@ -1,10 +1,13 @@
 import {
   DefaultButton,
   FontSizes,
+  Image,
+  ImageFit,
   Separator,
   Stack,
   Text,
 } from "@fluentui/react";
+import { updateProfile } from "firebase/auth";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DataService from "../../Helpers/DataService";
@@ -16,6 +19,7 @@ const Profile = () => {
 
   const characters = useSelector((state) => state.characters);
   const currentUser = useSelector((state) => state.currentUser);
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     if (characters.isLoading) {
@@ -53,7 +57,17 @@ const Profile = () => {
         >
           Profile
         </Text>
-        <DefaultButton text="Sign Out" onClick={onClickSignOut} />
+        <Stack horizontal tokens={{ childrenGap: 10 }}>
+          <DefaultButton text="Sign Out" onClick={onClickSignOut} />
+          {user && user.photoURL && (
+            <Image
+              width={32}
+              src={user!.photoURL!}
+              imageFit={ImageFit.cover}
+              styles={{ root: { borderRadius: "50%" } }}
+            />
+          )}
+        </Stack>
       </Stack>
       <Text
         variant="medium"

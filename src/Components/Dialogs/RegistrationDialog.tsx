@@ -17,6 +17,7 @@ const RegistrationDialog = () => {
   const showDialog = useSelector((state) => state.showRegistrationDialog);
 
   const [email, setEmail] = useState<string | undefined>(undefined);
+  const [emailRepeat, setEmailRepeat] = useState<string | undefined>(undefined);
   const [password, setPassword] = useState<string | undefined>(undefined);
   const [passwordRepeat, setPasswordRepeat] = useState<string | undefined>(
     undefined
@@ -44,6 +45,10 @@ const RegistrationDialog = () => {
 
   const onChangeEmail = (_, value: string | undefined) => {
     setEmail(value);
+  };
+
+  const onChangeEmailRepeat = (_, value: string | undefined) => {
+    setEmailRepeat(value);
   };
 
   const onChangePassword = (_, value: string | undefined) => {
@@ -126,6 +131,26 @@ const RegistrationDialog = () => {
         required
       />
       <TextField
+        label="Repeat email"
+        type="email"
+        value={emailRepeat}
+        onChange={onChangeEmailRepeat}
+        required
+        canRevealPassword
+        invalid={
+          email !== undefined &&
+          emailRepeat !== undefined &&
+          email !== emailRepeat
+        }
+        errorMessage={
+          email !== undefined &&
+          emailRepeat !== undefined &&
+          email !== emailRepeat
+            ? "Email addresses do not match"
+            : ""
+        }
+      />
+      <TextField
         label="Password"
         type="password"
         value={password}
@@ -134,7 +159,7 @@ const RegistrationDialog = () => {
         canRevealPassword
       />
       <TextField
-        label="Repeat Password"
+        label="Repeat password"
         type="password"
         value={passwordRepeat}
         onChange={onChangePasswordRepeat}

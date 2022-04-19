@@ -113,6 +113,7 @@ const App = () => {
       const uid = user.uid;
       // ...
       console.log(uid);
+      console.log("photo url", user.photoURL);
 
       dispatch({
         type: "SetUser",
