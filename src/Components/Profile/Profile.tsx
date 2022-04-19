@@ -7,7 +7,6 @@ import {
   Stack,
   Text,
 } from "@fluentui/react";
-import { updateProfile } from "firebase/auth";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DataService from "../../Helpers/DataService";
