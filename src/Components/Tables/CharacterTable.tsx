@@ -7,9 +7,9 @@ import {
   ImageFit,
   Link,
   SelectionMode,
+  Separator,
   ShimmeredDetailsList,
   Stack,
-  Text,
 } from "@fluentui/react";
 import { ClassIcon } from "../ClassIcon";
 import DefaultAvatar from "../../Images/DefaultAvatar.jpeg";
@@ -182,21 +182,31 @@ const CharacterTable = () => {
   ];
 
   return (
-    <Stack styles={{ root: { overflowY: "auto", height: "50%" } }}>
-      <Text
+    <Stack
+      styles={{
+        root: {
+          maxHeight: "50%",
+        },
+      }}
+    >
+      <Separator
         styles={{
-          root: { fontSize: FontSizes.xLargePlus, textAlign: "start" },
+          root: {
+            fontSize: FontSizes.xLargePlus,
+          },
         }}
       >
         Characters
-      </Text>
-      <ShimmeredDetailsList
-        items={characterData.isLoading ? [] : characterData.data}
-        columns={columns}
-        enableShimmer={characterData.isLoading}
-        selectionMode={SelectionMode.none}
-        compact
-      />
+      </Separator>
+      <Stack styles={{ root: { overflowY: "auto" } }}>
+        <ShimmeredDetailsList
+          items={characterData.isLoading ? [] : characterData.data}
+          columns={columns}
+          enableShimmer={characterData.isLoading}
+          selectionMode={SelectionMode.none}
+          compact
+        />
+      </Stack>
     </Stack>
   );
 };

@@ -10,12 +10,18 @@ const Dashboard = () => {
       horizontal
       horizontalAlign="center"
       tokens={{ childrenGap: 20 }}
-      styles={{ root: { overflowY: "auto", height: "100%", width: "100%" } }}
+      styles={{
+        root: {
+          overflowY: "auto",
+          height: "100%",
+          width: "100%",
+          paddingTop: 10,
+        },
+      }}
     >
       <Stack
         verticalFill
-        tokens={{ childrenGap: 10 }}
-        styles={{ root: { overflowY: "auto", height: "100%" } }}
+        //  tokens={{ childrenGap: 10 }}
       >
         <SessionTable />
         <CharacterTable />

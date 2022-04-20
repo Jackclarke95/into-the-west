@@ -8,9 +8,9 @@ import {
   Link,
   PersonaSize,
   SelectionMode,
+  Separator,
   ShimmeredDetailsList,
   Stack,
-  Text,
   TooltipHost,
 } from "@fluentui/react";
 import ISessionData from "../../Interfaces/ISessionData";
@@ -202,39 +202,43 @@ const SessionTable = () => {
   ];
 
   return (
-    <Stack styles={{ root: { overflowY: "auto", height: "50%" } }}>
-      <Text
+    <Stack styles={{ root: { maxHeight: "50%" } }}>
+      <Separator
         styles={{
-          root: { fontSize: FontSizes.xLargePlus, textAlign: "start" },
+          root: {
+            fontSize: FontSizes.xLargePlus,
+          },
         }}
       >
         Sessions
-      </Text>
-      <ShimmeredDetailsList
-        items={sessionData.isLoading ? [] : sessionData.data}
-        columns={columns}
-        enableShimmer={sessionData.isLoading}
-        selectionMode={SelectionMode.none}
-        compact
-        groups={
-          upcomingSessions.length === 0
-            ? undefined
-            : [
-                {
-                  startIndex: 0,
-                  count: upcomingSessions.length,
-                  key: "upcoming",
-                  name: "Upcoming Sessions",
-                },
-                {
-                  startIndex: upcomingSessions.length,
-                  count: pastSessions.length,
-                  key: "Past",
-                  name: "Past Sessions",
-                },
-              ]
-        }
-      />
+      </Separator>
+      <Stack styles={{ root: { overflowY: "auto" } }}>
+        <ShimmeredDetailsList
+          items={sessionData.isLoading ? [] : sessionData.data}
+          columns={columns}
+          enableShimmer={sessionData.isLoading}
+          selectionMode={SelectionMode.none}
+          compact
+          groups={
+            upcomingSessions.length === 0
+              ? undefined
+              : [
+                  {
+                    startIndex: 0,
+                    count: upcomingSessions.length,
+                    key: "upcoming",
+                    name: "Upcoming Sessions",
+                  },
+                  {
+                    startIndex: upcomingSessions.length,
+                    count: pastSessions.length,
+                    key: "Past",
+                    name: "Past Sessions",
+                  },
+                ]
+          }
+        />
+      </Stack>
     </Stack>
   );
 };

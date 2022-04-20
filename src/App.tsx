@@ -130,7 +130,7 @@ const App = () => {
       verticalFill
       horizontalAlign="center"
       verticalAlign="center"
-      tokens={{ childrenGap: 20 }}
+      // tokens={{ childrenGap: 20 }}
       styles={{
         root: {
           textAlign: "center",
