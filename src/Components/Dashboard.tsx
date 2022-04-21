@@ -19,10 +19,7 @@ const Dashboard = () => {
         },
       }}
     >
-      <Stack
-        verticalFill
-        //  tokens={{ childrenGap: 10 }}
-      >
+      <Stack verticalFill>
         <SessionTable />
         <CharacterTable />
       </Stack>
