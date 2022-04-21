@@ -3,6 +3,7 @@ import {
   FontSizes,
   MessageBar,
   MessageBarType,
+  NeutralColors,
   Stack,
   Text,
 } from "@fluentui/react";
@@ -13,12 +14,23 @@ const Footer = () => {
 
   return (
     <Stack
-      styles={{ root: { width: "100%", display: "flex" } }}
+      styles={{
+        root: {
+          width: "100%",
+          padding: "0.5em",
+          backgroundColor: NeutralColors.gray150,
+        },
+      }}
       verticalAlign="center"
     >
       {isDevMode ? (
         <Text
-          styles={{ root: { fontSize: FontSizes.large } }}
+          styles={{
+            root: {
+              color: NeutralColors.gray30,
+              fontSize: FontSizes.large,
+            },
+          }}
         >
           Development Mode
         </Text>
