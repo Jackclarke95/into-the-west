@@ -18,24 +18,7 @@ const Profile = () => {
 
   const characters = useSelector((state) => state.characters);
   const currentPlayer = useSelector((state) => state.currentPlayer);
-  const players = useSelector((state) => state.players);
   const user = useSelector((state) => state.user);
-
-  // Set the current player based on the signed-in user
-  useEffect(() => {
-    if (players.isLoading || !user) {
-      return;
-    }
-
-    const currentPlayer = players.data.find(
-      (player) => player.email === user.email
-    );
-
-    dispatch({
-      type: "SetCurrentPlayer",
-      currentPlayer: { isLoading: false, data: currentPlayer },
-    });
-  }, [players, user, dispatch]);
 
   // Set the active character based on the current player
   useEffect(() => {
