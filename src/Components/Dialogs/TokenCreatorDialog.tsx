@@ -33,7 +33,7 @@ const TokenCreatorDialog = () => {
 
   const contentProps = {
     type: DialogType.close,
-    title: "New session",
+    title: "Token creator",
     closeButtonAriaLabel: "Close",
   };
 
@@ -49,6 +49,8 @@ const TokenCreatorDialog = () => {
       setCharacterClass(option.text);
     }
   };
+
+  console.log({ characterClass });
 
   return (
     <Dialog
