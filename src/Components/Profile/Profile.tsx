@@ -1,8 +1,6 @@
 import {
   DefaultButton,
   FontSizes,
-  Image,
-  ImageFit,
   Separator,
   Stack,
   Text,
@@ -18,7 +16,6 @@ const Profile = () => {
 
   const characters = useSelector((state) => state.characters);
   const currentPlayer = useSelector((state) => state.currentPlayer);
-  const user = useSelector((state) => state.user);
 
   // Set the active character based on the current player
   useEffect(() => {
@@ -53,34 +50,28 @@ const Profile = () => {
 
   return (
     <Stack tokens={{ childrenGap: 10 }}>
+      <Separator
+        styles={{
+          root: {
+            fontSize: FontSizes.xLargePlus,
+          },
+        }}
+      >
+        Profile
+      </Separator>
       <Stack horizontal styles={{ root: { justifyContent: "space-between" } }}>
-        <Text
-          styles={{
-            root: { fontSize: FontSizes.xLargePlus, textAlign: "start" },
-          }}
-        >
-          Profile
-        </Text>
+        {!currentPlayer.isLoading && currentPlayer.data && (
+          <Text
+            variant="medium"
+            styles={{
+              root: { fontSize: FontSizes.large, textAlign: "start" },
+            }}
+          >{`Welcome back, ${currentPlayer.data.name}`}</Text>
+        )}
         <Stack horizontal tokens={{ childrenGap: 10 }}>
           <DefaultButton text="Sign Out" onClick={onClickSignOut} />
-          {user && user.photoURL && (
-            <Image
-              width={32}
-              src={user!.photoURL!}
-              imageFit={ImageFit.cover}
-              styles={{ root: { borderRadius: "50%" } }}
-            />
-          )}
         </Stack>
       </Stack>
-      {!currentPlayer.isLoading && currentPlayer.data && (
-        <Text
-          variant="medium"
-          styles={{
-            root: { fontSize: FontSizes.large, textAlign: "start" },
-          }}
-        >{`Welcome back, ${currentPlayer.data.name}`}</Text>
-      )}
       <Separator />
       <ActiveCharacter />
       <Separator />

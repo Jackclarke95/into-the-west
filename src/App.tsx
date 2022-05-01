@@ -152,12 +152,14 @@ const App = () => {
         root: {
           textAlign: "center",
           height: "100vh",
-          backgroundImage: `url("${DataHelper.getRandomFromArray([
-            Everwilds,
-            ForgottenLands,
-            LunarIsles,
-            ShatteredRealms,
-          ])}")`,
+          backgroundImage: user
+            ? `url("${DataHelper.getRandomFromArray([
+                Everwilds,
+                ForgottenLands,
+                LunarIsles,
+                ShatteredRealms,
+              ])}")`
+            : "",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
