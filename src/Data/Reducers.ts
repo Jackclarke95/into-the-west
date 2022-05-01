@@ -33,6 +33,10 @@ export type Action =
       showRegistrationDialog: DefaultRootState["showRegistrationDialog"];
     }
   | {
+      type: "SetShowTokenCreatorDialog";
+      showTokenCreatorDialog: DefaultRootState["showTokenCreatorDialog"];
+    }
+  | {
       type: "SetUser";
       user: DefaultRootState["user"];
     };
@@ -60,6 +64,8 @@ export const initialState: DefaultRootState = {
   showCharacterRetirementDialog: false,
 
   showRegistrationDialog: false,
+
+  showTokenCreatorDialog: false,
 
   isDevMode: window.location.hostname === "localhost",
 
@@ -139,6 +145,12 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         // Action for toggling the Registration Dialog
         case "SetShowRegistrationDialog": {
           draftState.showRegistrationDialog = action.showRegistrationDialog;
+          break;
+        }
+
+        // Action for toggling the Token Creator Dialog
+        case "SetShowTokenCreatorDialog": {
+          draftState.showTokenCreatorDialog = action.showTokenCreatorDialog;
           break;
         }
 

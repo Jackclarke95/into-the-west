@@ -36,6 +36,8 @@ declare module "react-redux" {
 
     showRegistrationDialog: boolean;
 
+    showTokenCreatorDialog: boolean;
+
     isDevMode: boolean;
 
     user: User | null;

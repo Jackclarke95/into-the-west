@@ -1,6 +1,17 @@
 import { DefaultButton, FontSizes, Separator, Stack } from "@fluentui/react";
+import { useDispatch } from "react-redux";
 
 const Tools = () => {
+  const dispatch = useDispatch();
+
+  const onClickShowTokenCreator = () => {
+    console.log("Displaying token creator");
+    dispatch({
+      type: "SetShowTokenCreatorDialog",
+      showTokenCreatorDialog: true,
+    });
+  };
+
   return (
     <Stack tokens={{ childrenGap: 10 }}>
       <Separator
@@ -12,7 +23,7 @@ const Tools = () => {
       >
         Tools
       </Separator>
-      <DefaultButton text="Token creator" />
+      <DefaultButton text="Token creator" onClick={onClickShowTokenCreator} />
     </Stack>
   );
 };

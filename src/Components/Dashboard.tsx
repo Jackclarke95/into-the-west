@@ -2,7 +2,7 @@ import { Stack } from "@fluentui/react";
 import CharacterTable from "./Tables/CharacterTable";
 import SessionTable from "./Tables/SessionTable";
 import Profile from "./Profile/Profile";
-import Tools from "./Dialogs/Tools/Tools";
+import Tools from "./Tools/Tools";
 
 const Dashboard = () => {
   return (
