@@ -13,7 +13,7 @@ import IPlayerData from "./Interfaces/IPlayerData";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { getDatabase, onValue, ref } from "firebase/database";
+import { get, getDatabase, onValue, ref } from "firebase/database";
 import { initializeApp } from "firebase/app";
 import Dashboard from "./Components/Dashboard";
 
@@ -35,11 +35,12 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 
 export const db = getDatabase();
+export const auth = getAuth();
 
 const App = () => {
   const dispatch = useDispatch();
 
-  const user = useSelector((state: any) => state.user);
+  const user = useSelector((state) => state.user);
 
   onValue(ref(db, "characters"), (snapshot) => {
     const characterData = snapshot.val() as ICharacterData[];
@@ -107,23 +108,34 @@ const App = () => {
     });
   });
 
-  const auth = getAuth();
-
-  onAuthStateChanged(auth, (user) => {
+  onAuthStateChanged(auth, async (user) => {
     if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
-
       dispatch({
         type: "SetUser",
         user: user,
       });
+
+      const playersRef = ref(db, "players/" + user.uid);
+
+      const playerData = await get(playersRef)
+        .then((response) => {
+          return response.val();
+        })
+        .catch((e) => console.error("error", e));
+
+      dispatch({
+        type: "SetCurrentPlayer",
+        currentPlayer: {
+          isLoading: false,
+          data: playerData,
+        },
+      });
     } else {
-      // User is signed out
-      // ...
       console.log("signed out");
     }
   });
+
+  console.log({ user });
 
   return (
     <Stack

@@ -1,13 +1,12 @@
 import {
   createUserWithEmailAndPassword,
-  getAuth,
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { push, ref, update } from "firebase/database";
+import { get, push, ref, set, update } from "firebase/database";
 import uuid from "react-uuid";
 
-import { db } from "../App";
+import { auth, db } from "../App";
 import ICharacterData from "../Interfaces/ICharacterData";
 import IPlayerData from "../Interfaces/IPlayerData";
 import ISessionData from "../Interfaces/ISessionData";
@@ -160,7 +159,7 @@ export default class DataService {
       userData.isGamesMaster
     );
 
-    createUserWithEmailAndPassword(getAuth(), userData.email, userData.password)
+    createUserWithEmailAndPassword(auth, userData.email, userData.password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
@@ -168,8 +167,9 @@ export default class DataService {
 
         console.log(user);
 
+        const uid = user.uid;
+
         const playerToCreate = {
-          id: uuid(),
           email: userData.email,
           name: userData.name,
           discordName: userData.discordName,
@@ -178,12 +178,13 @@ export default class DataService {
           isGamesMaster: userData.isGamesMaster,
         } as IPlayerData;
 
-        DataService.createPlayer(playerToCreate);
+        DataService.createPlayer(uid, playerToCreate);
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
 
+        console.log(error);
         console.log(errorCode);
         console.log(errorMessage);
       });
@@ -193,10 +194,24 @@ export default class DataService {
    * Creates a player record in the Firebase Realtime Database
    * @param player The player record to create
    */
-  public static createPlayer = async (player: IPlayerData) => {
-    const usersRef = ref(db, "players/");
+  public static createPlayer = async (uid: string, player: IPlayerData) => {
+    const usersRef = ref(db, "players/" + uid);
 
-    await push(usersRef, player).then((result) => console.log({ result }));
+    await set(usersRef, player).then((result) => console.log({ result }));
+  };
+
+  /**
+   * Updates a player record in the Firebase Realtime Database
+   * @param uid The unique ID of the player
+   * @param data The key value pairs of the player to update
+   */
+  public static updatePlayer = async (
+    uid: string,
+    data: { key: string; value: string }[]
+  ) => {
+    const usersRef = ref(db, "players/" + uid);
+
+    await update(usersRef, data);
   };
 
   /**
@@ -208,7 +223,9 @@ export default class DataService {
     email: string,
     password: string
   ) => {
-    signInWithEmailAndPassword(getAuth(), email, password)
+    console.log("signing in");
+
+    signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
@@ -228,7 +245,7 @@ export default class DataService {
    * Signs the user out
    */
   public static signOut = () => {
-    signOut(getAuth())
+    signOut(auth)
       .then(() => {
         // Sign-out successful.
         console.log("successfully signed out");

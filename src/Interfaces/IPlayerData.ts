@@ -1,5 +1,4 @@
 export default interface IPlayerData {
-  id: string;
   email: string;
   name: string;
   discordName: string;
