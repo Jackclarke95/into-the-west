@@ -1,5 +1,17 @@
 import { Stack } from "@fluentui/react";
 import { useDispatch, useSelector } from "react-redux";
+
+import { get, getDatabase, onValue, ref } from "firebase/database";
+import { initializeApp } from "firebase/app";
+import Dashboard from "./Components/Dashboard";
+
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import Login from "./Components/Login";
+import RegistrationDialog from "./Components/Dialogs/RegistrationDialog";
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import "./Style/App.scss";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
@@ -10,16 +22,11 @@ import ICharacterData from "./Interfaces/ICharacterData";
 import ISessionData from "./Interfaces/ISessionData";
 import IPlayerData from "./Interfaces/IPlayerData";
 
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
-import { get, getDatabase, onValue, ref } from "firebase/database";
-import { initializeApp } from "firebase/app";
-import Dashboard from "./Components/Dashboard";
-
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import Login from "./Components/Login";
-import RegistrationDialog from "./Components/Dialogs/RegistrationDialog";
+import Everwilds from "./Images/Maps/The Everwilds - Preview.jpg";
+import ForgottenLands from "./Images/Maps/The Forgotten Lands - Preview.jpg";
+import LunarIsles from "./Images/Maps/The Lunar Isles - Preview.jpg";
+import ShatteredRealms from "./Images/Maps/The Shattered Realms - Preview.jpg";
+import DataHelper from "./Helpers/DataHelper";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDJLonhBywTBq-R2AyP5Hvcg2Lp-gUMogk",
@@ -135,18 +142,27 @@ const App = () => {
     }
   });
 
-  console.log({ user });
-
   return (
     <Stack
+      className="app-container"
       verticalFill
       horizontalAlign="center"
       verticalAlign="center"
-      // tokens={{ childrenGap: 20 }}
       styles={{
         root: {
           textAlign: "center",
           height: "100vh",
+          backgroundImage: `url("${DataHelper.getRandomFromArray([
+            Everwilds,
+            ForgottenLands,
+            LunarIsles,
+            ShatteredRealms,
+          ])}")`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          backgroundComposite: "saturation",
+          backdropFilter: "grayscale(30%)",
         },
       }}
     >

@@ -14,8 +14,8 @@ const Dashboard = () => {
         root: {
           overflowY: "auto",
           height: "100%",
-          width: "100%",
-          paddingTop: 10,
+          padding: "1em",
+          backgroundColor: "white",
         },
       }}
     >

@@ -21,4 +21,13 @@ export default class DataHelper {
       number + (suffix[(remainder - 20) % 10] || suffix[remainder] || suffix[0])
     );
   }
+
+  /**
+   * Gets a random element from an array
+   * @param array The array to get a random element from
+   * @returns A random element from the array
+   */
+  public static getRandomFromArray(array: any[]): any {
+    return array[Math.floor(Math.random() * array.length)];
+  }
 }
