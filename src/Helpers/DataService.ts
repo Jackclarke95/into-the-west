@@ -3,7 +3,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { get, push, ref, set, update } from "firebase/database";
+import { push, ref, set, update } from "firebase/database";
 import uuid from "react-uuid";
 
 import { auth, db } from "../App";
