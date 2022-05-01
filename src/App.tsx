@@ -22,7 +22,11 @@ import ICharacterData from "./Interfaces/ICharacterData";
 import ISessionData from "./Interfaces/ISessionData";
 import IPlayerData from "./Interfaces/IPlayerData";
 
-import ArtificerIcon from "./Images/Maps/The Everwilds - Preview.jpg";
+import Everwilds from "./Images/Maps/The Everwilds - Preview.jpg";
+import ForgottenLands from "./Images/Maps/The Forgotten Lands - Preview.jpg";
+import LunarIsles from "./Images/Maps/The Lunar Isles - Preview.jpg";
+import ShatteredRealms from "./Images/Maps/The Shattered Realms - Preview.jpg";
+import DataHelper from "./Helpers/DataHelper";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDJLonhBywTBq-R2AyP5Hvcg2Lp-gUMogk",
@@ -140,6 +144,7 @@ const App = () => {
 
   return (
     <Stack
+      className="app-container"
       verticalFill
       horizontalAlign="center"
       verticalAlign="center"
@@ -147,7 +152,17 @@ const App = () => {
         root: {
           textAlign: "center",
           height: "100vh",
-          backgroundImage: `url(${ArtificerIcon})`,
+          backgroundImage: `url("${DataHelper.getRandomFromArray([
+            Everwilds,
+            ForgottenLands,
+            LunarIsles,
+            ShatteredRealms,
+          ])}")`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          backgroundComposite: "saturation",
+          backdropFilter: "grayscale(30%)",
         },
       }}
     >
