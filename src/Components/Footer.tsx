@@ -17,7 +17,6 @@ const Footer = () => {
       styles={{
         root: {
           width: "100%",
-          padding: "0.5em",
           backgroundColor: NeutralColors.gray150,
         },
       }}
@@ -27,6 +26,7 @@ const Footer = () => {
         <Text
           styles={{
             root: {
+              margin: "0.5em",
               color: NeutralColors.gray30,
               fontSize: FontSizes.large,
             },
