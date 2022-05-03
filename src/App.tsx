@@ -162,7 +162,7 @@ const App = () => {
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
           backgroundComposite: "saturation",
-          backdropFilter: "grayscale(30%)",
+          backdropFilter: "grayscale(30%) blur(50%)",
         },
       }}
     >

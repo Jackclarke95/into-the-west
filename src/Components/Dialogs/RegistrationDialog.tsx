@@ -190,13 +190,13 @@ const RegistrationDialog = () => {
       />
       <TextField label="Name" value={name} required onChange={onChangeName} />
       <TextField
-        label="Discord name"
+        label="Discord name (name#1234)"
         value={discordName}
         required
         onChange={onChangeDiscordName}
       />
       <TextField
-        label="D&D Beyond name"
+        label="D&D Beyond name (case-sensitive)"
         value={dndBeyondName}
         required
         onChange={onChangeDndBeyondName}

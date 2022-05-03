@@ -53,6 +53,7 @@ const Login = () => {
         root: {
           boxShadow: DefaultEffects.elevation16,
           padding: DefaultSpacing.l2,
+          backgroundColor: "white",
         },
       }}
     >
