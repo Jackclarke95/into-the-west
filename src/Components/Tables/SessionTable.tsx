@@ -1,14 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
-  DetailsRow,
   DirectionalHint,
   Facepile,
   FontSizes,
   IButtonStyles,
   IColumn,
   IconButton,
-  IDetailsListProps,
-  IDetailsRowStyles,
   IFacepilePersona,
   IOverflowSetItemProps,
   Link,
@@ -262,7 +259,6 @@ const SessionTable = () => {
       onRender: onRenderSignUp,
     },
   ];
-
 
   return (
     <Stack styles={{ root: { maxHeight: "50%" } }}>
