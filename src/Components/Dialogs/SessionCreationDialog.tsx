@@ -67,6 +67,12 @@ const SessionCreationDialog = () => {
   };
 
   const onDismiss = () => {
+    setSessionName(undefined);
+    setSessionDate(undefined);
+    setSessionDungeonMaster(undefined);
+    setSessionMap(undefined);
+    setSessionAttendees([]);
+
     dispatch({
       type: "SetShowSessionCreationDialog",
       showSessionCreationDialog: false,
