@@ -33,6 +33,14 @@ export type Action =
       showRegistrationDialog: DefaultRootState["showRegistrationDialog"];
     }
   | {
+      type: "SetShowAccountNameManagementDialog";
+      showAccountNameManagementDialog: DefaultRootState["showAccountNameManagementDialog"];
+    }
+  | {
+      type: "SetShowPasswordManagementDialog";
+      showPasswordManagementDialog: DefaultRootState["showPasswordManagementDialog"];
+    }
+  | {
       type: "SetUser";
       user: DefaultRootState["user"];
     };
@@ -60,6 +68,10 @@ export const initialState: DefaultRootState = {
   showCharacterRetirementDialog: false,
 
   showRegistrationDialog: false,
+
+  showAccountNameManagementDialog: false,
+
+  showPasswordManagementDialog: false,
 
   isDevMode: window.location.hostname === "localhost",
 
@@ -139,6 +151,20 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         // Action for toggling the Registration Dialog
         case "SetShowRegistrationDialog": {
           draftState.showRegistrationDialog = action.showRegistrationDialog;
+          break;
+        }
+
+        // Action for toggling the Account Name Management Dialog
+        case "SetShowAccountNameManagementDialog": {
+          draftState.showAccountNameManagementDialog =
+            action.showAccountNameManagementDialog;
+          break;
+        }
+
+        // Action for toggling the Password Management Dialog
+        case "SetShowPasswordManagementDialog": {
+          draftState.showPasswordManagementDialog =
+            action.showPasswordManagementDialog;
           break;
         }
 

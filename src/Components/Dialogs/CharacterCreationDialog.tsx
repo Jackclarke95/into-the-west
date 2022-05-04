@@ -245,7 +245,6 @@ const CharacterCreationDialog = () => {
         calloutProps={{ calloutMaxHeight: 250 }}
         selectedKey={characterSubclass}
       />
-
       <DialogFooter>
         <DefaultButton text="Cancel" onClick={onDismiss} />
         <PrimaryButton text="Create" onClick={onClickCreateCharacter} />

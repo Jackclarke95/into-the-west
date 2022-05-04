@@ -1,7 +1,11 @@
 import {
+  Auth,
   createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut,
+  updatePassword,
+  User,
 } from "firebase/auth";
 import { push, ref, set, update } from "firebase/database";
 import uuid from "react-uuid";
@@ -191,6 +195,47 @@ export default class DataService {
   };
 
   /**
+   * Changes a user's password
+   * @param user The user whose password to change
+   * @param password The password to change to
+   * @returns Result of the password change
+   */
+  public static changePassword = async (user: User, password: string) => {
+    console.log("updating password", password);
+    return await updatePassword(user, password)
+      .then(() => {
+        console.log("password updated");
+        return true;
+      })
+      .catch((error) => {
+        console.log("password update failed", error);
+
+        throw new Error("Failed to update password\r\n" + error);
+      });
+  };
+
+  /**
+   * Resets a user's password
+   * @param auth The Firebase auth object
+   * @param email The email of the user to reset
+   * @returns Response of the Firebase password reset
+   */
+  public static resetPassword = async (auth: Auth, email: string) => {
+    return sendPasswordResetEmail(auth, email)
+      .then((response) => {
+        console.log("response", response);
+
+        return response;
+      })
+      .catch((error) => {
+        console.log("error", error);
+        console.log("error message", error.message);
+
+        throw new Error(error.message);
+      });
+  };
+
+  /**
    * Creates a player record in the Firebase Realtime Database
    * @param player The player record to create
    */
@@ -219,13 +264,13 @@ export default class DataService {
    * @param email The user's email address
    * @param password The user's password
    */
-  public static logInWithEmailAndPassword = (
+  public static logInWithEmailAndPassword = async (
     email: string,
     password: string
   ) => {
     console.log("signing in");
 
-    signInWithEmailAndPassword(auth, email, password)
+    return await signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
@@ -237,7 +282,9 @@ export default class DataService {
         const errorCode = error.code;
         const errorMessage = error.message;
 
-        console.error(errorCode, errorMessage);
+        console.error({ errorCode }, { errorMessage });
+
+        throw new Error(errorMessage);
       });
   };
 
