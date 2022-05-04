@@ -27,6 +27,7 @@ import ForgottenLands from "./Images/Maps/The Forgotten Lands - Preview.jpg";
 import LunarIsles from "./Images/Maps/The Lunar Isles - Preview.jpg";
 import ShatteredRealms from "./Images/Maps/The Shattered Realms - Preview.jpg";
 import DataHelper from "./Helpers/DataHelper";
+import SessionManagementDialog from "./Components/Dialogs/SessionManagementDialog";
 import AccountNameManagementDialog from "./Components/Dialogs/AccountNameManagementDialog";
 import PasswordManagementDialog from "./Components/Dialogs/PasswordManagementDialog";
 
@@ -174,6 +175,7 @@ const App = () => {
           <CharacterCreationDialog />
           <SessionCreationDialog />
           <CharacterRetirementDialog />
+          <SessionManagementDialog />
           <AccountNameManagementDialog />
           <PasswordManagementDialog />
         </>

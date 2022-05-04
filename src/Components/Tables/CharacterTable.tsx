@@ -1,15 +1,20 @@
 import { useSelector } from "react-redux";
 import {
   DefaultSpacing,
+  DetailsRow,
+  DirectionalHint,
   FontSizes,
   IColumn,
+  IDetailsListProps,
   Image,
   ImageFit,
+  ITooltipProps,
   Link,
   SelectionMode,
   Separator,
   ShimmeredDetailsList,
   Stack,
+  TooltipHost,
 } from "@fluentui/react";
 import { ClassIcon } from "../ClassIcon";
 import DefaultAvatar from "../../Images/DefaultAvatar.jpeg";
@@ -181,6 +186,54 @@ const CharacterTable = () => {
     },
   ];
 
+  const onRenderRow: IDetailsListProps["onRenderRow"] = (props) => {
+    if (props) {
+      const character = props.item as ICharacterData;
+
+      const tooltipProps: ITooltipProps = {
+        onRenderContent: () => {
+          return (
+            <Image
+              src={
+                character.avatarUrl.length > 0
+                  ? character.avatarUrl
+                  : DefaultAvatar
+              }
+              imageFit={ImageFit.cover}
+              styles={{
+                root: {
+                  borderRadius: "50%",
+                  height: "250px",
+                  width: "250px",
+                  filter:
+                    character.avatarUrl === ""
+                      ? `hue-rotate(${
+                          Math.random() * 360
+                        }deg) brightness(1.5) invert(100%) ${
+                          character.retirement
+                            ? `grayscale(100%) brightness(0.5)`
+                            : ""
+                        }`
+                      : undefined,
+                },
+              }}
+            />
+          );
+        },
+      };
+
+      return (
+        <TooltipHost
+          tooltipProps={tooltipProps}
+          directionalHint={DirectionalHint.leftCenter}
+        >
+          <DetailsRow {...props} />
+        </TooltipHost>
+      );
+    }
+    return null;
+  };
+
   return (
     <Stack
       styles={{
@@ -202,6 +255,7 @@ const CharacterTable = () => {
         <ShimmeredDetailsList
           items={characterData.isLoading ? [] : characterData.data}
           columns={columns}
+          onRenderRow={onRenderRow}
           enableShimmer={characterData.isLoading}
           selectionMode={SelectionMode.none}
           compact

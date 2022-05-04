@@ -14,13 +14,12 @@ const CharacterRetirementDialog = () => {
   const dispatch = useDispatch();
 
   const activeCharacter = useSelector((state) => state.activeCharacter);
+  const showDialog = useSelector(
+    (state) => state.showCharacterRetirementDialog
+  );
 
   const [retirementReason, setRetirementReason] = useState<undefined | string>(
     undefined
-  );
-
-  const showDialog = useSelector(
-    (state) => state.showCharacterRetirementDialog
   );
 
   const onDismiss = () => {
