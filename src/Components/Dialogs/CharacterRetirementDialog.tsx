@@ -23,6 +23,8 @@ const CharacterRetirementDialog = () => {
   );
 
   const onDismiss = () => {
+    setRetirementReason(undefined);
+
     dispatch({
       type: "SetShowCharacterRetirementDialog",
       showCharacterRetirementDialog: false,

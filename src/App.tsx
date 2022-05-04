@@ -28,6 +28,8 @@ import LunarIsles from "./Images/Maps/The Lunar Isles - Preview.jpg";
 import ShatteredRealms from "./Images/Maps/The Shattered Realms - Preview.jpg";
 import DataHelper from "./Helpers/DataHelper";
 import SessionManagementDialog from "./Components/Dialogs/SessionManagementDialog";
+import AccountNameManagementDialog from "./Components/Dialogs/AccountNameManagementDialog";
+import PasswordManagementDialog from "./Components/Dialogs/PasswordManagementDialog";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDJLonhBywTBq-R2AyP5Hvcg2Lp-gUMogk",
@@ -138,8 +140,6 @@ const App = () => {
           data: playerData,
         },
       });
-    } else {
-      console.log("signed out");
     }
   });
 
@@ -176,6 +176,8 @@ const App = () => {
           <SessionCreationDialog />
           <CharacterRetirementDialog />
           <SessionManagementDialog />
+          <AccountNameManagementDialog />
+          <PasswordManagementDialog />
         </>
       ) : (
         <>

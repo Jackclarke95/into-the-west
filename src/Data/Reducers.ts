@@ -32,9 +32,18 @@ export type Action =
       type: "SetShowRegistrationDialog";
       showRegistrationDialog: DefaultRootState["showRegistrationDialog"];
     }
-  | {
+  |
+  {
       type: "SetShowSessionManagementDialog";
       showSessionManagementDialog: DefaultRootState["showSessionManagementDialog"];
+    }
+  | {
+      type: "SetShowAccountNameManagementDialog";
+      showAccountNameManagementDialog: DefaultRootState["showAccountNameManagementDialog"];
+    }
+  | {
+      type: "SetShowPasswordManagementDialog";
+      showPasswordManagementDialog: DefaultRootState["showPasswordManagementDialog"];
     }
   | {
       type: "SetUser";
@@ -65,7 +74,12 @@ export const initialState: DefaultRootState = {
 
   showRegistrationDialog: false,
 
+
   showSessionManagementDialog: false,
+
+  showAccountNameManagementDialog: false,
+
+  showPasswordManagementDialog: false,
 
   isDevMode: window.location.hostname === "localhost",
 
@@ -148,10 +162,24 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
           break;
         }
 
+
         // Action for toggling the Session Management Dialog
         case "SetShowSessionManagementDialog": {
           draftState.showSessionManagementDialog =
             action.showSessionManagementDialog;
+
+        // Action for toggling the Account Name Management Dialog
+        case "SetShowAccountNameManagementDialog": {
+          draftState.showAccountNameManagementDialog =
+            action.showAccountNameManagementDialog;
+          break;
+        }
+
+        // Action for toggling the Password Management Dialog
+        case "SetShowPasswordManagementDialog": {
+          draftState.showPasswordManagementDialog =
+            action.showPasswordManagementDialog;
+
           break;
         }
 

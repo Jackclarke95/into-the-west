@@ -1,8 +1,7 @@
 import {
   DefaultButton,
   FontSizes,
-  Image,
-  ImageFit,
+  IContextualMenuProps,
   Separator,
   Stack,
   Text,
@@ -18,7 +17,6 @@ const Profile = () => {
 
   const characters = useSelector((state) => state.characters);
   const currentPlayer = useSelector((state) => state.currentPlayer);
-  const user = useSelector((state) => state.user);
 
   // Set the active character based on the current player
   useEffect(() => {
@@ -47,8 +45,45 @@ const Profile = () => {
     });
   }, [currentPlayer, characters, dispatch]);
 
+  const onClickAccountNameManagement = () => {
+    dispatch({
+      type: "SetShowAccountNameManagementDialog",
+      showAccountNameManagementDialog: true,
+    });
+  };
+
+  const onClickPasswordManagement = () => {
+    dispatch({
+      type: "SetShowPasswordManagementDialog",
+      showPasswordManagementDialog: true,
+    });
+  };
+
   const onClickSignOut = () => {
     DataService.signOut();
+  };
+
+  const menuProps: IContextualMenuProps = {
+    items: [
+      {
+        key: "manageAccount",
+        text: "Manage account",
+        iconProps: { iconName: "AccountManagement" },
+        onClick: onClickAccountNameManagement,
+      },
+      {
+        key: "changePassword",
+        text: "Change password",
+        iconProps: { iconName: "PasswordField" },
+        onClick: onClickPasswordManagement,
+      },
+      {
+        key: "signOut",
+        text: "Sign out",
+        iconProps: { iconName: "SignOut" },
+        onClick: onClickSignOut,
+      },
+    ],
   };
 
   return (
@@ -62,15 +97,7 @@ const Profile = () => {
           Profile
         </Text>
         <Stack horizontal tokens={{ childrenGap: 10 }}>
-          <DefaultButton text="Sign Out" onClick={onClickSignOut} />
-          {user && user.photoURL && (
-            <Image
-              width={32}
-              src={user!.photoURL!}
-              imageFit={ImageFit.cover}
-              styles={{ root: { borderRadius: "50%" } }}
-            />
-          )}
+          <DefaultButton text="Account" split menuProps={menuProps} />
         </Stack>
       </Stack>
       {!currentPlayer.isLoading && currentPlayer.data && (

@@ -1,6 +1,7 @@
 import {
   DefaultButton,
   FontSizes,
+  IContextualMenuProps,
   MessageBar,
   MessageBarType,
   Spinner,
@@ -32,7 +33,7 @@ const ActiveCharacter = () => {
     }
   };
 
-  const onClickRetireCharacterButton = () => {
+  const onClickRetireCharacter = () => {
     dispatch({
       type: "SetShowCharacterRetirementDialog",
       showCharacterRetirementDialog: true,
@@ -46,6 +47,22 @@ const ActiveCharacter = () => {
       type: "SetShowCharacterCreationDialog",
       showCharacterCreationDialog: true,
     });
+  };
+
+  const menuProps: IContextualMenuProps = {
+    items: [
+      {
+        key: "manageCharacter",
+        text: "Manage character",
+        iconProps: { iconName: "EditContact" },
+      },
+      {
+        key: "retire",
+        text: "Retire",
+        iconProps: { iconName: "UserRemove" },
+        onClick: onClickRetireCharacter,
+      },
+    ],
   };
 
   return (
@@ -62,21 +79,14 @@ const ActiveCharacter = () => {
           {!activeCharacter.isLoading && activeCharacter.data ? (
             <>
               <DefaultButton
-                text="Edit"
+                text="Character"
+                split
+                menuProps={menuProps}
                 disabled={
                   !isDevMode ||
                   activeCharacter.isLoading ||
                   !activeCharacter.data
                 }
-              />
-              <DefaultButton
-                text="Retire"
-                disabled={
-                  !isDevMode ||
-                  activeCharacter.isLoading ||
-                  !activeCharacter.data
-                }
-                onClick={onClickRetireCharacterButton}
               />
             </>
           ) : (

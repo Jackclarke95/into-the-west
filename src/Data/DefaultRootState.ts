@@ -38,6 +38,11 @@ declare module "react-redux" {
 
     showSessionManagementDialog: boolean;
 
+    showAccountNameManagementDialog: boolean;
+
+    showPasswordManagementDialog: boolean;
+
+
     isDevMode: boolean;
 
     user: User | null;
