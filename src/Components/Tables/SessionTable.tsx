@@ -1,11 +1,18 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
+  DetailsRow,
   DirectionalHint,
   Facepile,
   FontSizes,
+  IButtonStyles,
   IColumn,
+  IconButton,
+  IDetailsListProps,
+  IDetailsRowStyles,
   IFacepilePersona,
+  IOverflowSetItemProps,
   Link,
+  OverflowSet,
   PersonaSize,
   SelectionMode,
   Separator,
@@ -19,6 +26,8 @@ import DataService from "../../Helpers/DataService";
 import { toast } from "react-toastify";
 
 const SessionTable = () => {
+  const dispatch = useDispatch();
+
   const sessionData = useSelector((state) => state.sessions);
   const playerData = useSelector((state) => state.players);
   const characterData = useSelector((state) => state.characters);
@@ -138,19 +147,72 @@ const SessionTable = () => {
       return null;
     }
 
-    return session.attendees.includes(activeCharacter.data.id) ? (
-      <TooltipHost content="Click to remove yourself from this session">
+    const onRenderItem = (item: IOverflowSetItemProps): JSX.Element => {
+      return (
         <Link
-          iconName="UserRemove"
-          onClick={() => onClickRemoveFromSession(session)}
+          role="menuitem"
+          styles={{ root: { marginRight: 10 } }}
+          onClick={item.onClick}
         >
-          Remove
+          {item.name}
         </Link>
-      </TooltipHost>
-    ) : (
-      <TooltipHost content="Click to sign up to this session">
-        <Link onClick={() => onClickSignUp(session)}>Sign Up</Link>
-      </TooltipHost>
+      );
+    };
+
+    const onRenderOverflowButton = (
+      overflowItems: any[] | undefined
+    ): JSX.Element => {
+      const buttonStyles: Partial<IButtonStyles> = {
+        root: {
+          minWidth: 0,
+          padding: "0 4px",
+          alignSelf: "stretch",
+          height: "auto",
+        },
+      };
+      return (
+        <IconButton
+          role="menuitem"
+          title="More options"
+          styles={buttonStyles}
+          menuIconProps={{ iconName: "More" }}
+          menuProps={{ items: overflowItems! }}
+        />
+      );
+    };
+
+    const onClickManageSession = () => {
+      dispatch({
+        type: "SetShowSessionManagementDialog",
+        showSessionManagementDialog: true,
+      });
+    };
+
+    return (
+      <OverflowSet
+        onRenderItem={onRenderItem}
+        onRenderOverflowButton={onRenderOverflowButton}
+        items={[
+          session.attendees.includes(activeCharacter.data.id)
+            ? {
+                key: "item5",
+                name: "Remove",
+                onClick: () => onClickRemoveFromSession(session),
+              }
+            : {
+                key: "item4",
+                name: "Sign Up",
+                onClick: () => onClickSignUp(session),
+              },
+        ]}
+        overflowItems={[
+          {
+            key: "item1",
+            name: "Manage",
+            onClick: onClickManageSession,
+          },
+        ]}
+      />
     );
   };
 
@@ -189,17 +251,18 @@ const SessionTable = () => {
       key: "characters",
       name: "Characters",
       fieldName: "attendees",
-      minWidth: 150,
+      minWidth: 100,
       onRender: onRenderAttendees,
     },
     {
       key: "sign-up",
       name: "",
       fieldName: "signUpUrl",
-      minWidth: 45,
+      minWidth: 75,
       onRender: onRenderSignUp,
     },
   ];
+
 
   return (
     <Stack styles={{ root: { maxHeight: "50%" } }}>

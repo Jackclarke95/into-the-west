@@ -33,6 +33,10 @@ export type Action =
       showRegistrationDialog: DefaultRootState["showRegistrationDialog"];
     }
   | {
+      type: "SetShowSessionManagementDialog";
+      showSessionManagementDialog: DefaultRootState["showSessionManagementDialog"];
+    }
+  | {
       type: "SetUser";
       user: DefaultRootState["user"];
     };
@@ -60,6 +64,8 @@ export const initialState: DefaultRootState = {
   showCharacterRetirementDialog: false,
 
   showRegistrationDialog: false,
+
+  showSessionManagementDialog: false,
 
   isDevMode: window.location.hostname === "localhost",
 
@@ -139,6 +145,13 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         // Action for toggling the Registration Dialog
         case "SetShowRegistrationDialog": {
           draftState.showRegistrationDialog = action.showRegistrationDialog;
+          break;
+        }
+
+        // Action for toggling the Session Management Dialog
+        case "SetShowSessionManagementDialog": {
+          draftState.showSessionManagementDialog =
+            action.showSessionManagementDialog;
           break;
         }
 
