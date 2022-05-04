@@ -139,8 +139,6 @@ const App = () => {
           data: playerData,
         },
       });
-    } else {
-      console.log("signed out");
     }
   });
 

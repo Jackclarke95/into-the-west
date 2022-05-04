@@ -46,6 +46,10 @@ const AccountNameManagementDialog = () => {
   };
 
   const onDismiss = () => {
+    setName(undefined);
+    setDiscordName(undefined);
+    setDndBeyondName(undefined);
+
     dispatch({
       type: "SetShowAccountNameManagementDialog",
       showAccountNameManagementDialog: false,

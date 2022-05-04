@@ -74,9 +74,8 @@ const Login = () => {
     } else {
       setLoading(true);
 
-      DataService.logInWithEmailAndPassword(email, password)
-        .then((response) => console.log("response", response))
-        .catch((error: Error) => {
+      DataService.logInWithEmailAndPassword(email, password).catch(
+        (error: Error) => {
           setLoading(false);
           setMessageBarType(MessageBarType.error);
 
@@ -92,7 +91,8 @@ const Login = () => {
           } else {
             setMessageBarMessage(error.message);
           }
-        });
+        }
+      );
     }
   };
 
@@ -106,8 +106,6 @@ const Login = () => {
     } else {
       await DataService.resetPassword(getAuth(), email)
         .then((response) => {
-          console.log("response2", response);
-
           setMessageBarMessage("Password reset email sent");
           setMessageBarType(MessageBarType.success);
         })

@@ -44,8 +44,6 @@ const PasswordManagementDialog = () => {
   };
 
   const onClickUpdatePassword = async () => {
-    console.log("Save account settings");
-
     if (!password) {
       setErrorMessage("Please enter a new password");
 
@@ -56,21 +54,29 @@ const PasswordManagementDialog = () => {
       return;
     } else if (password !== passwordRepeat) {
       setErrorMessage("Passwords do not match");
+
+      return;
     }
 
     await DataService.changePassword(user!, password)
-      .then((response) => {
+      .then(() => {
         onDismiss();
-        console.log(response);
         toast.success("Password changed successfully");
       })
       .catch((error) => {
-        onDismiss();
-        toast.error(error.message);
+        setErrorMessage(
+          error.message
+            .replace("FirebaseError: Firebase:", "")
+            .replace(/ *\([^)]*\) */g, "")
+            .trim()
+        );
       });
   };
 
   const onDismiss = () => {
+    setPassword(undefined);
+    setPasswordRepeat(undefined);
+
     dispatch({
       type: "SetShowPasswordManagementDialog",
       showPasswordManagementDialog: false,

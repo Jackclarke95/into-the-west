@@ -201,16 +201,13 @@ export default class DataService {
    * @returns Result of the password change
    */
   public static changePassword = async (user: User, password: string) => {
-    console.log("updating password", password);
     return await updatePassword(user, password)
-      .then(() => {
-        console.log("password updated");
-        return true;
+      .then((response) => {
+        return response;
       })
       .catch((error) => {
-        console.log("password update failed", error);
-
-        throw new Error("Failed to update password\r\n" + error);
+        console.log({ error });
+        throw new Error(error);
       });
   };
 

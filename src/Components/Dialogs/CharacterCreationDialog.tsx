@@ -44,6 +44,14 @@ const CharacterCreationDialog = () => {
   >(undefined);
 
   const onDismiss = () => {
+    setCharacterName(undefined);
+    setCharacterNickname(undefined);
+    setCharacterRace(undefined);
+    setCharacterSubrace(undefined);
+    setCharacterLevel(1);
+    setCharacterClass(undefined);
+    setCharacterSubclass(undefined);
+
     dispatch({
       type: "SetShowCharacterCreationDialog",
       showCharacterCreationDialog: false,
