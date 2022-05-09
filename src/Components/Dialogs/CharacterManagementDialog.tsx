@@ -5,11 +5,9 @@ import {
   DialogType,
   PrimaryButton,
   TextField,
-  Toggle,
 } from "@fluentui/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import DataService, { UserData } from "../../Helpers/DataService";
 
 const CharacterManagementDialog = () => {
   const dispatch = useDispatch();
