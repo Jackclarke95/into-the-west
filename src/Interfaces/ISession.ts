@@ -3,6 +3,6 @@ export default interface ISession {
   name: string;
   dungeonMaster: string;
   map: string;
-  date?: Date;
+  date: Date | undefined;
   attendees: string[];
 }

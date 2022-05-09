@@ -18,7 +18,7 @@ import {
 } from "@fluentui/react";
 import { ClassIcon } from "../ClassIcon";
 import DefaultAvatar from "../../Images/DefaultAvatar.jpeg";
-import ICharacterData from "../../Interfaces/ICharacterData";
+import ICharacter from "../../Interfaces/ICharacter";
 import LevelUpTable from "../../Data/LevelUp";
 import DataHelper from "../../Helpers/DataHelper";
 
@@ -26,9 +26,9 @@ const CharacterTable = () => {
   const characterData = useSelector((state) => state.characters);
   const sessionData = useSelector((state) => state.sessions);
 
-  const onRenderAvatar = (character: ICharacterData) => (
+  const onRenderAvatar = (character: ICharacter) => (
     <Image
-      src={character.avatarUrl.length > 0 ? character.avatarUrl : DefaultAvatar}
+      src={character.avatarUrl ? character.avatarUrl : DefaultAvatar}
       imageFit={ImageFit.cover}
       styles={{
         root: {
@@ -48,7 +48,7 @@ const CharacterTable = () => {
     />
   );
 
-  const onRenderName = (character: ICharacterData) => {
+  const onRenderName = (character: ICharacter) => {
     return (
       <Stack horizontal tokens={{ childrenGap: 3 }}>
         {character.sheetUrl ? (
@@ -65,12 +65,12 @@ const CharacterTable = () => {
     );
   };
 
-  const onRenderRace = (character: ICharacterData) =>
-    character.subrace
-      ? `${character.subrace} ${character.race}`
+  const onRenderRace = (character: ICharacter) =>
+    character.race.subrace
+      ? `${character.race.subrace} ${character.race}`
       : character.race;
 
-  const onRenderClasses = (character: ICharacterData) => (
+  const onRenderClasses = (character: ICharacter) => (
     <Stack
       horizontal
       tokens={{ childrenGap: 10 }}
@@ -82,7 +82,7 @@ const CharacterTable = () => {
         return (
           <Stack horizontal horizontalAlign="center" verticalAlign="center">
             <ClassIcon
-              className={cls.class.name}
+              className={cls.name}
               styles={{
                 root: {
                   borderRadius: "50%",
@@ -92,22 +92,22 @@ const CharacterTable = () => {
               }}
             />
             {character.classes.length > 1
-              ? `${cls.class.name} (${cls.level})`
-              : cls.class.name}
+              ? `${cls.name} (${cls.level})`
+              : cls.name}
           </Stack>
         );
       })}
     </Stack>
   );
 
-  const onRenderLevel = (character: ICharacterData) => {
+  const onRenderLevel = (character: ICharacter) => {
     let levelToRender: Number;
 
     if (sessionData.isLoading) {
       levelToRender = character.currentLevel;
     } else {
       const sessionsAttended = sessionData.data.filter((session) =>
-        session.attendees.includes(character.id)
+        session.attendees.includes(character.key)
       );
 
       const sessionsRun = sessionData.data.filter((session) => {
@@ -188,17 +188,13 @@ const CharacterTable = () => {
 
   const onRenderRow: IDetailsListProps["onRenderRow"] = (props) => {
     if (props) {
-      const character = props.item as ICharacterData;
+      const character = props.item as ICharacter;
 
       const tooltipProps: ITooltipProps = {
         onRenderContent: () => {
           return (
             <Image
-              src={
-                character.avatarUrl.length > 0
-                  ? character.avatarUrl
-                  : DefaultAvatar
-              }
+              src={character.avatarUrl ? character.avatarUrl : DefaultAvatar}
               imageFit={ImageFit.cover}
               styles={{
                 root: {

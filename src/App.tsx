@@ -55,27 +55,29 @@ const App = () => {
   onValue(ref(db, "characters"), (snapshot) => {
     const characterData = snapshot.val() as ICharacterData[];
 
+    const characters = Object.keys(characterData)
+      .map((key) => {
+        const character = characterData[key];
+        character.key = key;
+
+        return character;
+      })
+      .sort((characterA, characterB) =>
+        characterA.name.localeCompare(characterB.name)
+      )
+      .sort((characterA, characterB) => {
+        if (characterA.retirement && !characterB.retirement) {
+          return 1;
+        } else if (!characterA.retirement && characterB.retirement) {
+          return -1;
+        } else return 0;
+      });
+
     dispatch({
       type: "SetCharacters",
       characters: {
         isLoading: false,
-        data: Object.keys(characterData)
-          .map((key) => {
-            const character = characterData[key];
-            character.key = key;
-
-            return character;
-          })
-          .sort((characterA, characterB) =>
-            characterA.name.localeCompare(characterB.name)
-          )
-          .sort((characterA, characterB) => {
-            if (characterA.retirement && !characterB.retirement) {
-              return 1;
-            } else if (!characterA.retirement && characterB.retirement) {
-              return -1;
-            } else return 0;
-          }),
+        data: characters,
       },
     });
   });
@@ -83,20 +85,19 @@ const App = () => {
   onValue(ref(db, "sessions"), (snapshot) => {
     const sessionData = snapshot.val() as ISessionData[];
 
+    const sessions = Object.keys(sessionData)
+      .map((key) => {
+        return DataHelper.parseSessionData(sessionData[key], key);
+      })
+      .sort((sessionA, sessionB) =>
+        DataHelper.sortNullableDatesDescending(sessionA.date, sessionB.date)
+      );
+
     dispatch({
       type: "SetSessions",
       sessions: {
         isLoading: false,
-        data: Object.keys(sessionData)
-          .map((key) => {
-            const session = sessionData[key] as ISessionData;
-            session.key = key;
-
-            return DataHelper.parseSessionData(session);
-          })
-          .sort((sessionA, sessionB) =>
-            DataHelper.sortNullableDatesDescending(sessionA.date, sessionB.date)
-          ),
+        data: sessions,
       },
     });
   });
@@ -104,16 +105,18 @@ const App = () => {
   onValue(ref(db, "players"), (snapshot) => {
     const playerData = snapshot.val() as IPlayerData[];
 
+    const players = Object.keys(playerData).map((key) => {
+      const player = playerData[key];
+      player.key = key;
+
+      return player;
+    });
+
     dispatch({
       type: "SetPlayers",
       players: {
         isLoading: false,
-        data: Object.keys(playerData).map((key) => {
-          const player = playerData[key];
-          player.key = key;
-
-          return player;
-        }),
+        data: players,
       },
     });
   });

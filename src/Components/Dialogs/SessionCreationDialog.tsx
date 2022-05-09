@@ -116,13 +116,13 @@ const SessionCreationDialog = () => {
       return;
     }
 
-    DataService.createSession(
-      sessionName,
-      sessionDungeonMaster,
-      sessionMap,
+    DataService.createSession({
+      name: sessionName,
+      date: sessionDate ? sessionDate.toDateString() : undefined,
+      dungeonMaster: sessionDungeonMaster,
+      map: sessionMap,
       attendees,
-      sessionDate?.toDateString()
-    );
+    });
 
     dispatch({
       type: "SetShowSessionCreationDialog",
@@ -177,7 +177,7 @@ const SessionCreationDialog = () => {
           !selectedItems?.find((item) => item.text === character.name)
       )
       .map((character) => ({
-        key: character.id,
+        key: character.key,
         text: character.name,
         imageUrl: character.avatarUrl,
       })) as IPersonaProps[];
@@ -195,7 +195,7 @@ const SessionCreationDialog = () => {
           !selectedItems?.find((item) => item.text === character.name)
       )
       .map((character) => ({
-        key: character.id,
+        key: character.key,
         text: character.name,
         imageUrl: character.avatarUrl,
       })) as IPersonaProps[];

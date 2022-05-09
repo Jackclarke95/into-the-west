@@ -1,9 +1,7 @@
 export default interface ISessionData {
-  id: number;
-  key: string;
   name: string;
   dungeonMaster: string;
   map: string;
-  date?: string;
+  date: string | undefined;
   attendees: string[];
 }

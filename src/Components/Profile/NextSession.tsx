@@ -31,13 +31,21 @@ const NextSession = () => {
     activeCharacter.data &&
     !sessions.isLoading
   ) {
-    upcomingSessions = sessions.data.filter(
-      (session) =>
-        (session.attendees.includes(activeCharacter.data!.id) ||
-          session.dungeonMaster === currentPlayer.data!.dndBeyondName) &&
-        session.date &&
-        !DataHelper.isDateInPast(new Date(session.date))
-    );
+    upcomingSessions = sessions.data
+      .filter((session) => {
+        return (
+          (session.attendees.includes(activeCharacter.data!.key) ||
+            session.dungeonMaster === currentPlayer.data!.dndBeyondName) &&
+          ((session.date && !DataHelper.isDateInPast(new Date(session.date))) ||
+            !session.date)
+        );
+      })
+      .sort((sessionA, sessionB) => {
+        return DataHelper.sortNullableDatesAscending(
+          sessionA.date,
+          sessionB.date
+        );
+      });
   }
 
   const dataToRender = () => {

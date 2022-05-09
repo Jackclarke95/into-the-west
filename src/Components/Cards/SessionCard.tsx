@@ -5,18 +5,18 @@ import {
   Stack,
   Text,
 } from "@fluentui/react";
-import ICharacterData from "../../Interfaces/ICharacterData";
+import ICharacter from "../../Interfaces/ICharacter";
 import ISession from "../../Interfaces/ISession";
 
 const SessionCard: React.FC<{
   session: ISession;
-  characters: ICharacterData[];
+  characters: ICharacter[];
 }> = ({ session, characters }) => {
   const onRenderAttendees = () => {
     const personas = session.attendees
       .map((attendee) => {
         const matchedCharacter = characters.find(
-          (character) => character.id === attendee
+          (character) => character.key === attendee
         );
 
         return {

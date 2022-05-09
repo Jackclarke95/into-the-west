@@ -77,18 +77,14 @@ const ActiveCharacter = () => {
         </Text>
         <Stack horizontal tokens={{ childrenGap: 10 }}>
           {!activeCharacter.isLoading && activeCharacter.data ? (
-            <>
-              <DefaultButton
-                text="Character"
-                split
-                menuProps={menuProps}
-                disabled={
-                  !isDevMode ||
-                  activeCharacter.isLoading ||
-                  !activeCharacter.data
-                }
-              />
-            </>
+            <DefaultButton
+              text="Character"
+              split
+              menuProps={menuProps}
+              disabled={
+                !isDevMode || activeCharacter.isLoading || !activeCharacter.data
+              }
+            />
           ) : (
             <DefaultButton
               text="New Character"

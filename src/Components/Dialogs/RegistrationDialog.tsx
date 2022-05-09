@@ -23,7 +23,7 @@ const RegistrationDialog = () => {
     undefined
   );
   const [name, setName] = useState<string | undefined>(undefined);
-  const [discordName, setDiscordName] = useState<string | undefined>(undefined);
+  const [discordTag, setDiscordName] = useState<string | undefined>(undefined);
   const [dndBeyondName, setDndBeyondName] = useState<string | undefined>(
     undefined
   );
@@ -92,7 +92,7 @@ const RegistrationDialog = () => {
       email &&
       password &&
       name &&
-      discordName &&
+      discordTag &&
       dndBeyondName &&
       isGamesMaster !== undefined &&
       isDungeonMaster !== undefined
@@ -101,7 +101,7 @@ const RegistrationDialog = () => {
         email,
         password,
         name,
-        discordName,
+        discordTag,
         dndBeyondName,
         isDungeonMaster,
         isGamesMaster
@@ -112,7 +112,7 @@ const RegistrationDialog = () => {
         password,
         name,
         dndBeyondName,
-        discordName,
+        discordTag,
         isDungeonMaster,
         isGamesMaster,
       } as UserData;
@@ -191,7 +191,7 @@ const RegistrationDialog = () => {
       <TextField label="Name" value={name} required onChange={onChangeName} />
       <TextField
         label="Discord name (name#1234)"
-        value={discordName}
+        value={discordTag}
         required
         onChange={onChangeDiscordName}
       />
