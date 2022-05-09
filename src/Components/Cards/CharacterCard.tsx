@@ -10,7 +10,7 @@ const CharacterPersona = (props) => {
       horizontal
       tokens={{ childrenGap: 10 }}
       styles={{
-        root: { padding: 0, maxHeight: "23px" },
+        root: { padding: 0, maxHeight: "23px", boxShadow: "solid green 5px" },
       }}
     >
       {character.classes.map((cls) => {

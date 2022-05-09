@@ -90,7 +90,14 @@ const PasswordManagementDialog = () => {
       onDismiss={onDismiss}
     >
       {errorMessage && (
-        <MessageBar messageBarType={MessageBarType.error}>
+        <MessageBar
+          messageBarType={MessageBarType.error}
+          styles={{
+            root: {
+              maxWidth: "272px",
+            },
+          }}
+        >
           {errorMessage}
         </MessageBar>
       )}

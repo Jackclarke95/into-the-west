@@ -3,12 +3,16 @@ import {
   Dialog,
   DialogFooter,
   DialogType,
+  MessageBar,
+  MessageBarType,
   PrimaryButton,
+  Spinner,
   TextField,
   Toggle,
 } from "@fluentui/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import DataService, { UserData } from "../../Helpers/DataService";
 
 const RegistrationDialog = () => {
@@ -29,6 +33,10 @@ const RegistrationDialog = () => {
   );
   const [isDungeonMaster, setIsDungeonMaster] = useState(false);
   const [isGamesMaster, setIsGamesMaster] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [messageBarMessage, setMessageBarMessage] = useState<
+    string | undefined
+  >(undefined);
 
   const onDismiss = () => {
     dispatch({
@@ -97,16 +105,6 @@ const RegistrationDialog = () => {
       isGamesMaster !== undefined &&
       isDungeonMaster !== undefined
     ) {
-      console.log(
-        email,
-        password,
-        name,
-        discordTag,
-        dndBeyondName,
-        isDungeonMaster,
-        isGamesMaster
-      );
-
       const userData = {
         email,
         password,
@@ -117,13 +115,19 @@ const RegistrationDialog = () => {
         isGamesMaster,
       } as UserData;
 
-      DataService.registerWithEmailAndPassword(userData);
-    }
+      setLoading(true);
 
-    dispatch({
-      type: "SetShowRegistrationDialog",
-      showRegistrationDialog: false,
-    });
+      DataService.registerWithEmailAndPassword(userData)
+        .then(() => {
+          onDismiss();
+          toast.success("Successfully registered account");
+          setLoading(false);
+        })
+        .catch((error) => {
+          setMessageBarMessage(error.message);
+          setLoading(false);
+        });
+    }
   };
 
   return (
@@ -132,6 +136,18 @@ const RegistrationDialog = () => {
       onDismiss={onDismiss}
       dialogContentProps={contentProps}
     >
+      {messageBarMessage && (
+        <MessageBar
+          messageBarType={MessageBarType.error}
+          styles={{
+            root: {
+              maxWidth: "272px",
+            },
+          }}
+        >
+          {messageBarMessage}
+        </MessageBar>
+      )}
       <TextField
         label="Email"
         type="email"
@@ -212,8 +228,14 @@ const RegistrationDialog = () => {
         onChange={onChangeIsGamesMaster}
       />
       <DialogFooter>
-        <DefaultButton text="Cancel" onClick={onDismiss} />
-        <PrimaryButton text="Register" onClick={onClickRegister} />
+        <DefaultButton text="Cancel" onClick={onDismiss} disabled={loading} />
+        <PrimaryButton
+          text="Register"
+          onClick={onClickRegister}
+          disabled={loading}
+        >
+          {loading && <Spinner />}
+        </PrimaryButton>
       </DialogFooter>
     </Dialog>
   );

@@ -133,9 +133,14 @@ export default class DataService {
    * Registers a Firebase user and creates a player record in the Firebase Realtime Database
    * @param userData Data about the user to register
    */
-  public static registerWithEmailAndPassword = (userData: UserData) => {
-    createUserWithEmailAndPassword(auth, userData.email, userData.password)
+  public static registerWithEmailAndPassword = async (userData: UserData) => {
+    return createUserWithEmailAndPassword(
+      auth,
+      userData.email,
+      userData.password
+    )
       .then((userCredential) => {
+        console.log("SUCCESS");
         // Signed in
         const user = userCredential.user;
         // ...
@@ -156,12 +161,9 @@ export default class DataService {
         DataService.createPlayer(uid, playerToCreate);
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        console.log("ERROR");
 
-        console.log(error);
-        console.log(errorCode);
-        console.log(errorMessage);
+        throw new Error(error.message);
       });
   };
 
@@ -247,12 +249,7 @@ export default class DataService {
         console.log(user);
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-
-        console.error({ errorCode }, { errorMessage });
-
-        throw new Error(errorMessage);
+        throw new Error(error.message);
       });
   };
 

@@ -116,6 +116,13 @@ const Login = () => {
     }
   };
 
+  const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    console.log(event);
+    if (event.key === "Enter") {
+      onClickSignIn();
+    }
+  };
+
   return (
     <Stack
       styles={{
@@ -132,16 +139,29 @@ const Login = () => {
         Into the West
       </Text>
       {messageBarMessage && (
-        <MessageBar messageBarType={messageBarType}>
+        <MessageBar
+          messageBarType={messageBarType}
+          styles={{
+            root: {
+              maxWidth: "272px",
+            },
+          }}
+        >
           {messageBarMessage}
         </MessageBar>
       )}
-      <TextField label="Email" type="email" onChange={onChangeEmail} />
+      <TextField
+        label="Email"
+        type="email"
+        onChange={onChangeEmail}
+        onKeyPress={onKeyPress}
+      />
       <TextField
         label="Password"
         type="password"
         onChange={onChangePassword}
         canRevealPassword
+        onKeyPress={onKeyPress}
       />
       <Stack
         styles={{

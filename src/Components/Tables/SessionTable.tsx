@@ -46,9 +46,7 @@ const SessionTable = () => {
 
   const onRenderDate = (session: ISessionData) => (
     <span>
-      {session.date
-        ? new Date(session.date).toDateString()
-        : "Needs scheduling"}
+      {session.date ? new Date(session.date).toDateString() : "Unscheduled"}
     </span>
   );
 
