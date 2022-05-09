@@ -9,6 +9,8 @@ import {
   IInputProps,
   IPersonaProps,
   Label,
+  MessageBar,
+  MessageBarType,
   NormalPeoplePicker,
   PrimaryButton,
   TextField,
@@ -31,6 +33,7 @@ const SessionCreationDialog = () => {
   >(undefined);
   const [sessionMap, setSessionMap] = useState<string | undefined>(undefined);
   const [sessionAttendees, setSessionAttendees] = useState<IPersonaProps[]>([]);
+  const [errorList, setErrorList] = useState<string[]>([]);
 
   const dispatch = useDispatch();
 
@@ -59,7 +62,7 @@ const SessionCreationDialog = () => {
   };
 
   const onChangeAttendees = (items: IPersonaProps[] | undefined) => {
-    if (!items?.length || items.length === 0) {
+    if (!items) {
       setSessionAttendees([]);
     } else {
       setSessionAttendees(items);
@@ -80,29 +83,46 @@ const SessionCreationDialog = () => {
   };
 
   const onClickAddSession = () => {
-    let attendeeList = [] as number[];
+    const attendees = sessionAttendees
+      .filter((attendee) => attendee)
+      .map((attendee) => {
+        return attendee.key?.toString();
+      })
+      .filter((key) => key !== undefined) as string[];
 
-    sessionAttendees.forEach((attendee) => {
-      if (typeof attendee.key === "number") {
-        attendeeList.push(attendee.key);
-      }
-    });
+    if (!sessionName) {
+      setErrorList([...errorList, "Session name is required"]);
+    }
+
+    if (!sessionDungeonMaster) {
+      setErrorList([...errorList, "Dungeon master is required"]);
+    }
+
+    if (!sessionMap) {
+      setErrorList([...errorList, "Map is required"]);
+    }
+
+    if (attendees.length === 0) {
+      setErrorList([...errorList, "At least one attendee is required"]);
+    }
 
     if (
-      sessionName &&
-      sessionDungeonMaster &&
-      sessionMap &&
-      sessionDate &&
-      attendeeList.length > 0
+      !sessionName ||
+      !sessionDungeonMaster ||
+      !sessionMap ||
+      !attendees ||
+      attendees.length === 0
     ) {
-      DataService.createSession(
-        sessionName,
-        sessionDungeonMaster,
-        sessionMap,
-        sessionDate.toLocaleDateString(),
-        attendeeList
-      );
+      return;
     }
+
+    DataService.createSession(
+      sessionName,
+      sessionDungeonMaster,
+      sessionMap,
+      attendees,
+      sessionDate?.toDateString()
+    );
 
     dispatch({
       type: "SetShowSessionCreationDialog",
@@ -197,6 +217,19 @@ const SessionCreationDialog = () => {
       onDismiss={onDismiss}
       dialogContentProps={contentProps}
     >
+      {errorList.length > 0 && (
+        <MessageBar
+          isMultiline
+          messageBarType={MessageBarType.error}
+          styles={{
+            root: {
+              maxWidth: "272px",
+            },
+          }}
+        >
+          {errorList.join("-")}
+        </MessageBar>
+      )}
       <TextField
         label="Session name"
         value={sessionName}

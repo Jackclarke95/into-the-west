@@ -21,6 +21,7 @@ import ISessionData from "../../Interfaces/ISessionData";
 import DataHelper from "../../Helpers/DataHelper";
 import DataService from "../../Helpers/DataService";
 import { toast } from "react-toastify";
+import ISession from "../../Interfaces/ISession";
 
 const SessionTable = () => {
   const dispatch = useDispatch();
@@ -30,21 +31,24 @@ const SessionTable = () => {
   const characterData = useSelector((state) => state.characters);
   const activeCharacter = useSelector((state) => state.activeCharacter);
 
-  let upcomingSessions = [] as ISessionData[];
-  let pastSessions = [] as ISessionData[];
+  let upcomingSessions = [] as ISession[];
+  let pastSessions = [] as ISession[];
 
   if (!sessionData.isLoading) {
     upcomingSessions = sessionData.data.filter(
-      (session) => !DataHelper.isDateInPast(new Date(session.date))
+      (session) =>
+        !session.date || !DataHelper.isDateInPast(new Date(session.date))
     );
 
     pastSessions = sessionData.data.filter(
-      (session) => new Date(session.date) <= new Date()
+      (session) => session.date && new Date(session.date) <= new Date()
     );
   }
 
   const onRenderDate = (session: ISessionData) => (
-    <span>{new Date(session.date).toDateString()}</span>
+    <span>
+      {session.date ? new Date(session.date).toDateString() : "No date set"}
+    </span>
   );
 
   const onRenderName = (session: ISessionData) => (
@@ -139,6 +143,7 @@ const SessionTable = () => {
     if (
       activeCharacter.isLoading ||
       !activeCharacter.data ||
+      !session.date ||
       DataHelper.isDateInPast(new Date(session.date))
     ) {
       return null;
@@ -259,6 +264,10 @@ const SessionTable = () => {
       onRender: onRenderSignUp,
     },
   ];
+
+  if (sessionData.isLoading === false) {
+    console.log(sessionData.data);
+  }
 
   return (
     <Stack styles={{ root: { maxHeight: "50%" } }}>

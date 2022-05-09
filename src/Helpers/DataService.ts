@@ -64,15 +64,15 @@ export default class DataService {
    * @param name The name of the session
    * @param dungeonMaster The DnD Beyond name of the DM
    * @param map The map of the session
-   * @param date The date of the session
    * @param attendees The list of attendees to the session
+   * @param date The date of the session
    */
   public static createSession = (
     name: string,
     dungeonMaster: string,
     map: string,
-    date: string,
-    attendees: number[]
+    attendees: string[],
+    date = null as string | null
   ) => {
     const sessionsRef = ref(db, "sessions/");
 
@@ -81,8 +81,8 @@ export default class DataService {
       name,
       dungeonMaster,
       map,
-      date,
       attendees,
+      date,
     };
 
     push(sessionsRef, sessionToCreate);

@@ -2,7 +2,7 @@ import { User } from "firebase/auth";
 import { Dispatch } from "react";
 import ICharacterData from "../Interfaces/ICharacterData";
 import IPlayerData from "../Interfaces/IPlayerData";
-import ISessionData from "../Interfaces/ISessionData";
+import ISession from "../Interfaces/ISession";
 import { Action } from "./Reducers";
 
 /** Interface detailing the Default Root State */
@@ -20,7 +20,7 @@ declare module "react-redux" {
       | { isLoading: true }
       | { isLoading: false; data: ICharacterData | undefined };
 
-    sessions: { isLoading: true } | { isLoading: false; data: ISessionData[] };
+    sessions: { isLoading: true } | { isLoading: false; data: ISession[] };
 
     players: { isLoading: true } | { isLoading: false; data: IPlayerData[] };
 
@@ -41,7 +41,6 @@ declare module "react-redux" {
     showAccountNameManagementDialog: boolean;
 
     showPasswordManagementDialog: boolean;
-
 
     isDevMode: boolean;
 

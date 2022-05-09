@@ -89,13 +89,13 @@ const App = () => {
         isLoading: false,
         data: Object.keys(sessionData)
           .map((key) => {
-            const session = sessionData[key];
+            const session = sessionData[key] as ISessionData;
             session.key = key;
 
-            return session;
+            return DataHelper.parseSessionData(session);
           })
           .sort((sessionA, sessionB) =>
-            sessionB.date.localeCompare(sessionA.date)
+            DataHelper.sortNullableDatesDescending(sessionA.date, sessionB.date)
           ),
       },
     });

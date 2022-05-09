@@ -10,7 +10,7 @@ import {
 } from "@fluentui/react";
 import { useDispatch, useSelector } from "react-redux";
 import DataHelper from "../../Helpers/DataHelper";
-import ISessionData from "../../Interfaces/ISessionData";
+import ISession from "../../Interfaces/ISession";
 import SessionCard from "../Cards/SessionCard";
 
 const NextSession = () => {
@@ -22,7 +22,7 @@ const NextSession = () => {
   const isDevMode = useSelector((state) => state.isDevMode);
   const currentPlayer = useSelector((state) => state.currentPlayer);
 
-  let upcomingSessions = [] as ISessionData[];
+  let upcomingSessions = [] as ISession[];
 
   if (
     !currentPlayer.isLoading &&
@@ -35,6 +35,7 @@ const NextSession = () => {
       (session) =>
         (session.attendees.includes(activeCharacter.data!.id) ||
           session.dungeonMaster === currentPlayer.data!.dndBeyondName) &&
+        session.date &&
         !DataHelper.isDateInPast(new Date(session.date))
     );
   }

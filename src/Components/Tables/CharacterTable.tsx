@@ -112,7 +112,7 @@ const CharacterTable = () => {
 
       const sessionsRun = sessionData.data.filter((session) => {
         const dmMatch = session.dungeonMaster === character.playerDndBeyondName;
-        const isInpast = DataHelper.isDateInPast(new Date(session.date));
+        const isInpast = !session.date || DataHelper.isDateInPast(session.date);
 
         return dmMatch && isInpast;
       });
