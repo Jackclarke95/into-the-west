@@ -198,6 +198,7 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         case "SetShowCharacterManagementDialog": {
           draftState.showCharacterManagementDialog =
             action.showCharacterManagementDialog;
+          break;
         }
 
         // Action for toggling the Token Creator Dialog
