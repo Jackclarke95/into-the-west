@@ -30,6 +30,7 @@ import DataHelper from "./Helpers/DataHelper";
 import SessionManagementDialog from "./Components/Dialogs/SessionManagementDialog";
 import AccountNameManagementDialog from "./Components/Dialogs/AccountNameManagementDialog";
 import PasswordManagementDialog from "./Components/Dialogs/PasswordManagementDialog";
+import CharacterManagementDialog from "./Components/Dialogs/CharacterManagementDialog";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDJLonhBywTBq-R2AyP5Hvcg2Lp-gUMogk",
@@ -181,6 +182,7 @@ const App = () => {
           <SessionManagementDialog />
           <AccountNameManagementDialog />
           <PasswordManagementDialog />
+          <CharacterManagementDialog />
         </>
       ) : (
         <>

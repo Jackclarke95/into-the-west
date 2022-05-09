@@ -40,6 +40,13 @@ const ActiveCharacter = () => {
     });
   };
 
+  const onClickManageCharacter = () => {
+    dispatch({
+      type: "SetShowCharacterManagementDialog",
+      showCharacterManagementDialog: true,
+    });
+  };
+
   const onClickCreateCharacter = () => {
     console.log("creating character");
 
@@ -55,6 +62,7 @@ const ActiveCharacter = () => {
         key: "manageCharacter",
         text: "Manage character",
         iconProps: { iconName: "EditContact" },
+        onClick: onClickManageCharacter,
       },
       {
         key: "retire",
