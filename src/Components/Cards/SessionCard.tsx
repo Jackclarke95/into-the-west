@@ -79,7 +79,7 @@ const SessionCard: React.FC<{
           <Text>
             {session.date
               ? new Date(session.date).toLocaleDateString()
-              : "No date set"}
+              : "Needs scheduling"}
           </Text>
         </Stack>
       </Stack>

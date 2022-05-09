@@ -46,7 +46,9 @@ const SessionTable = () => {
 
   const onRenderDate = (session: ISessionData) => (
     <span>
-      {session.date ? new Date(session.date).toDateString() : "No date set"}
+      {session.date
+        ? new Date(session.date).toDateString()
+        : "Needs scheduling"}
     </span>
   );
 
@@ -148,8 +150,7 @@ const SessionTable = () => {
     if (
       activeCharacter.isLoading ||
       !activeCharacter.data ||
-      !session.date ||
-      DataHelper.isDateInPast(new Date(session.date))
+      (session.date && DataHelper.isDateInPast(new Date(session.date)))
     ) {
       return null;
     }
