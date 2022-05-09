@@ -45,6 +45,10 @@ export type Action =
       showPasswordManagementDialog: DefaultRootState["showPasswordManagementDialog"];
     }
   | {
+      type: "SetShowCharacterManagementDialog";
+      showCharacterManagementDialog: DefaultRootState["showCharacterManagementDialog"];
+    }
+  | {
       type: "SetUser";
       user: DefaultRootState["user"];
     };
@@ -78,6 +82,8 @@ export const initialState: DefaultRootState = {
   showAccountNameManagementDialog: false,
 
   showPasswordManagementDialog: false,
+
+  showCharacterManagementDialog: false,
 
   isDevMode: window.location.hostname === "localhost",
 
@@ -179,6 +185,13 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
           draftState.showPasswordManagementDialog =
             action.showPasswordManagementDialog;
 
+          break;
+        }
+
+        // Action for toggling the Character Management Dialog
+        case "SetShowCharacterManagementDialog": {
+          draftState.showCharacterManagementDialog =
+            action.showCharacterManagementDialog;
           break;
         }
 

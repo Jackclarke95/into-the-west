@@ -17,7 +17,7 @@ const CharacterPersona = (props) => {
         return (
           <Stack horizontal horizontalAlign="center" verticalAlign="center">
             <ClassIcon
-              className={cls.class.name}
+              className={cls.name}
               styles={{
                 root: {
                   borderRadius: "50%",
@@ -27,8 +27,8 @@ const CharacterPersona = (props) => {
               }}
             />
             {character.classes.length > 1
-              ? `${cls.class.name} (${cls.level})`
-              : cls.class.name}
+              ? `${cls.name} (${cls.level})`
+              : cls.name}
           </Stack>
         );
       })}

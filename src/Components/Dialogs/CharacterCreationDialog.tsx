@@ -12,7 +12,6 @@ import {
 } from "@fluentui/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import uuid from "react-uuid";
 import Classes from "../../Data/Classes";
 import Races from "../../Data/Races";
 import DataService from "../../Helpers/DataService";
@@ -166,7 +165,6 @@ const CharacterCreationDialog = () => {
       characterLevel
     ) {
       DataService.createCharacter({
-        id: uuid(),
         avatarUrl: "",
         sheetUrl: "",
         playerDndBeyondName: currentPlayer.data.dndBeyondName,
@@ -176,16 +174,15 @@ const CharacterCreationDialog = () => {
         subrace: characterSubrace ?? undefined,
         classes: [
           {
-            class: {
-              name: characterClass,
-              archetype: undefined ?? "",
-            },
+            name: characterClass,
+            archetype: undefined ?? "",
             level: 1,
           },
         ],
         currentLevel: characterLevel,
         sessionsAttended: 0,
         startingLevel: characterLevel,
+        retirement: undefined,
       });
     }
 

@@ -1,8 +1,8 @@
 import { User } from "firebase/auth";
 import { Dispatch } from "react";
-import ICharacterData from "../Interfaces/ICharacterData";
-import IPlayerData from "../Interfaces/IPlayerData";
-import ISessionData from "../Interfaces/ISessionData";
+import ICharacter from "../Interfaces/ICharacter";
+import IPlayer from "../Interfaces/IPlayer";
+import ISession from "../Interfaces/ISession";
 import { Action } from "./Reducers";
 
 /** Interface detailing the Default Root State */
@@ -12,21 +12,19 @@ declare module "react-redux" {
     // Whether the application is in Dark Mode
     darkMode: boolean;
 
-    characters:
-      | { isLoading: true }
-      | { isLoading: false; data: ICharacterData[] };
+    characters: { isLoading: true } | { isLoading: false; data: ICharacter[] };
 
     activeCharacter:
       | { isLoading: true }
-      | { isLoading: false; data: ICharacterData | undefined };
+      | { isLoading: false; data: ICharacter | undefined };
 
-    sessions: { isLoading: true } | { isLoading: false; data: ISessionData[] };
+    sessions: { isLoading: true } | { isLoading: false; data: ISession[] };
 
-    players: { isLoading: true } | { isLoading: false; data: IPlayerData[] };
+    players: { isLoading: true } | { isLoading: false; data: IPlayer[] };
 
     currentPlayer:
       | { isLoading: true }
-      | { isLoading: false; data: IPlayerData | undefined };
+      | { isLoading: false; data: IPlayer | undefined };
 
     showCharacterCreationDialog: boolean;
 
@@ -42,6 +40,7 @@ declare module "react-redux" {
 
     showPasswordManagementDialog: boolean;
 
+    showCharacterManagementDialog: boolean;
 
     isDevMode: boolean;
 

@@ -5,18 +5,18 @@ import {
   Stack,
   Text,
 } from "@fluentui/react";
-import ICharacterData from "../../Interfaces/ICharacterData";
-import ISessionData from "../../Interfaces/ISessionData";
+import ICharacter from "../../Interfaces/ICharacter";
+import ISession from "../../Interfaces/ISession";
 
 const SessionCard: React.FC<{
-  session: ISessionData;
-  characters: ICharacterData[];
+  session: ISession;
+  characters: ICharacter[];
 }> = ({ session, characters }) => {
   const onRenderAttendees = () => {
     const personas = session.attendees
       .map((attendee) => {
         const matchedCharacter = characters.find(
-          (character) => character.id === attendee
+          (character) => character.key === attendee
         );
 
         return {
@@ -49,7 +49,11 @@ const SessionCard: React.FC<{
         </Stack>
         <Stack horizontal tokens={{ childrenGap: 5 }}>
           <Text styles={{ root: { fontWeight: "bold" } }}>Date:</Text>
-          <Text>{new Date(session.date).toLocaleDateString()}</Text>
+          <Text>
+            {session.date
+              ? new Date(session.date).toLocaleDateString()
+              : "No date set"}
+          </Text>
         </Stack>
       </Stack>
       <Stack horizontal tokens={{ childrenGap: 5 }}>

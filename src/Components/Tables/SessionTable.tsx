@@ -21,7 +21,7 @@ import ISessionData from "../../Interfaces/ISessionData";
 import DataHelper from "../../Helpers/DataHelper";
 import DataService from "../../Helpers/DataService";
 import { toast } from "react-toastify";
-
+import ISession from "../../Interfaces/ISession";
 const SessionTable = () => {
   const dispatch = useDispatch();
 
@@ -30,21 +30,24 @@ const SessionTable = () => {
   const characterData = useSelector((state) => state.characters);
   const activeCharacter = useSelector((state) => state.activeCharacter);
 
-  let upcomingSessions = [] as ISessionData[];
-  let pastSessions = [] as ISessionData[];
+  let upcomingSessions = [] as ISession[];
+  let pastSessions = [] as ISession[];
 
   if (!sessionData.isLoading) {
     upcomingSessions = sessionData.data.filter(
-      (session) => !DataHelper.isDateInPast(new Date(session.date))
+      (session) =>
+        !session.date || !DataHelper.isDateInPast(new Date(session.date))
     );
 
     pastSessions = sessionData.data.filter(
-      (session) => new Date(session.date) <= new Date()
+      (session) => session.date && new Date(session.date) <= new Date()
     );
   }
 
   const onRenderDate = (session: ISessionData) => (
-    <span>{new Date(session.date).toDateString()}</span>
+    <span>
+      {session.date ? new Date(session.date).toDateString() : "No date set"}
+    </span>
   );
 
   const onRenderName = (session: ISessionData) => (
@@ -85,7 +88,7 @@ const SessionTable = () => {
     const personas = session.attendees
       .map((attendee) => {
         const matchedCharacter = characterData.data.find(
-          (character) => character.id === attendee
+          (character) => character.key === attendee
         );
 
         if (matchedCharacter) {
@@ -99,7 +102,13 @@ const SessionTable = () => {
           personaName: matchedCharacter?.name,
         } as IFacepilePersona;
       })
-      .sort((a, b) => a.personaName!.localeCompare(b.personaName!));
+      .sort((personaA, personaB) => {
+        if (!personaA.personaName || !personaB.personaName) {
+          return 0;
+        } else {
+          return personaA.personaName!.localeCompare(personaB.personaName!);
+        }
+      });
 
     return (
       <TooltipHost
@@ -115,7 +124,7 @@ const SessionTable = () => {
     );
   };
 
-  const onClickSignUp = (session: ISessionData) => {
+  const onClickSignUp = (session: ISession) => {
     if (activeCharacter.isLoading || !activeCharacter.data) {
       return;
     }
@@ -125,7 +134,7 @@ const SessionTable = () => {
     toast.success("Signed up for session");
   };
 
-  const onClickRemoveFromSession = (session: ISessionData) => {
+  const onClickRemoveFromSession = (session: ISession) => {
     if (activeCharacter.isLoading || !activeCharacter.data) {
       return;
     }
@@ -135,10 +144,11 @@ const SessionTable = () => {
     toast.success("Removed from session");
   };
 
-  const onRenderSignUp = (session: ISessionData) => {
+  const onRenderSignUp = (session: ISession) => {
     if (
       activeCharacter.isLoading ||
       !activeCharacter.data ||
+      !session.date ||
       DataHelper.isDateInPast(new Date(session.date))
     ) {
       return null;
@@ -190,7 +200,7 @@ const SessionTable = () => {
         onRenderItem={onRenderItem}
         onRenderOverflowButton={onRenderOverflowButton}
         items={[
-          session.attendees.includes(activeCharacter.data.id)
+          session.attendees.includes(activeCharacter.data.key)
             ? {
                 key: "item5",
                 name: "Remove",

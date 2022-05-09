@@ -40,6 +40,13 @@ const ActiveCharacter = () => {
     });
   };
 
+  const onClickManageCharacter = () => {
+    dispatch({
+      type: "SetShowCharacterManagementDialog",
+      showCharacterManagementDialog: true,
+    });
+  };
+
   const onClickCreateCharacter = () => {
     console.log("creating character");
 
@@ -55,6 +62,7 @@ const ActiveCharacter = () => {
         key: "manageCharacter",
         text: "Manage character",
         iconProps: { iconName: "EditContact" },
+        onClick: onClickManageCharacter,
       },
       {
         key: "retire",
@@ -77,18 +85,14 @@ const ActiveCharacter = () => {
         </Text>
         <Stack horizontal tokens={{ childrenGap: 10 }}>
           {!activeCharacter.isLoading && activeCharacter.data ? (
-            <>
-              <DefaultButton
-                text="Character"
-                split
-                menuProps={menuProps}
-                disabled={
-                  !isDevMode ||
-                  activeCharacter.isLoading ||
-                  !activeCharacter.data
-                }
-              />
-            </>
+            <DefaultButton
+              text="Character"
+              split
+              menuProps={menuProps}
+              disabled={
+                !isDevMode || activeCharacter.isLoading || !activeCharacter.data
+              }
+            />
           ) : (
             <DefaultButton
               text="New Character"

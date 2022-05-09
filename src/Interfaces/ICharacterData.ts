@@ -1,18 +1,14 @@
 export default interface ICharacterData {
-  id: string;
-  key?: string;
-  avatarUrl: string;
-  sheetUrl: string | undefined;
+  avatarUrl?: string;
+  sheetUrl?: string;
   playerDndBeyondName: string;
   name: string;
   nickname: string | undefined;
   race: string;
-  subrace: string | undefined;
+  subrace?: string | undefined;
   classes: {
-    class: {
-      name: string;
-      archetype?: string | undefined;
-    };
+    name: string;
+    archetype?: string;
     level: number;
   }[];
   currentLevel: number;

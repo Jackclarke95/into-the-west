@@ -8,11 +8,12 @@ import {
   User,
 } from "firebase/auth";
 import { push, ref, set, update } from "firebase/database";
-import uuid from "react-uuid";
 
 import { auth, db } from "../App";
+import ICharacter from "../Interfaces/ICharacter";
 import ICharacterData from "../Interfaces/ICharacterData";
 import IPlayerData from "../Interfaces/IPlayerData";
+import ISession from "../Interfaces/ISession";
 import ISessionData from "../Interfaces/ISessionData";
 
 export type UserData = {
@@ -20,7 +21,7 @@ export type UserData = {
   password: string;
   name: string;
   dndBeyondName: string;
-  discordName: string;
+  discordTag: string;
   isDungeonMaster: boolean;
   isGamesMaster: boolean;
 };
@@ -34,9 +35,6 @@ export default class DataService {
     const charactersRef = ref(db, "characters");
 
     let characterToCreate = {
-      id: character.id,
-      avatarUrl: "",
-      sheetUrl: "",
       playerDndBeyondName: character.playerDndBeyondName,
       name: character.name,
       race: character.race,
@@ -64,28 +62,13 @@ export default class DataService {
    * @param name The name of the session
    * @param dungeonMaster The DnD Beyond name of the DM
    * @param map The map of the session
-   * @param date The date of the session
    * @param attendees The list of attendees to the session
+   * @param date The date of the session
    */
-  public static createSession = (
-    name: string,
-    dungeonMaster: string,
-    map: string,
-    date: string,
-    attendees: number[]
-  ) => {
+  public static createSession = (session: ISessionData) => {
     const sessionsRef = ref(db, "sessions/");
 
-    const sessionToCreate = {
-      id: uuid(),
-      name,
-      dungeonMaster,
-      map,
-      date,
-      attendees,
-    };
-
-    push(sessionsRef, sessionToCreate);
+    push(sessionsRef, session);
   };
 
   /**
@@ -94,8 +77,8 @@ export default class DataService {
    * @param character The character with whom to sign up
    */
   public static signUpToSession = (
-    session: ISessionData,
-    character: ICharacterData
+    session: ISession,
+    character: ICharacter
   ) => {
     if (!session.key) {
       throw new Error("Could not update Session; no key provided");
@@ -103,7 +86,7 @@ export default class DataService {
     const sessionsRef = ref(db, "sessions/" + session.key);
 
     update(sessionsRef, {
-      attendees: session.attendees.concat(character.id),
+      attendees: session.attendees.concat(character.key),
     });
   };
 
@@ -113,17 +96,18 @@ export default class DataService {
    * @param character The character to remove
    */
   public static removeCharacterFromSession = (
-    session: ISessionData,
-    character: ICharacterData
+    session: ISession,
+    character: ICharacter
   ) => {
     if (!session.key) {
       throw new Error("Could not update Session; no key provided");
     }
+
     const sessionsRef = ref(db, "sessions/" + session.key);
 
     update(sessionsRef, {
       attendees: session.attendees.filter(
-        (attendee) => attendee !== character.id
+        (attendee) => attendee !== character.key
       ),
     });
   };
@@ -133,10 +117,7 @@ export default class DataService {
    * @param character The character to reason
    * @param reason The reason for the character's retirement
    */
-  public static retireCharacter = (
-    character: ICharacterData,
-    reason: string
-  ) => {
+  public static retireCharacter = (character: ICharacter, reason: string) => {
     if (!character.key) {
       throw new Error("Could not update character; no key provided");
     }
@@ -153,16 +134,6 @@ export default class DataService {
    * @param userData Data about the user to register
    */
   public static registerWithEmailAndPassword = (userData: UserData) => {
-    console.log(
-      userData.email,
-      userData.password,
-      userData.discordName,
-      userData.dndBeyondName,
-      userData.name,
-      userData.isDungeonMaster,
-      userData.isGamesMaster
-    );
-
     createUserWithEmailAndPassword(auth, userData.email, userData.password)
       .then((userCredential) => {
         // Signed in
@@ -176,7 +147,7 @@ export default class DataService {
         const playerToCreate = {
           email: userData.email,
           name: userData.name,
-          discordName: userData.discordName,
+          discordTag: userData.discordTag,
           dndBeyondName: userData.dndBeyondName,
           isDungeonMaster: userData.isDungeonMaster,
           isGamesMaster: userData.isGamesMaster,
