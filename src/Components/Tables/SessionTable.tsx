@@ -22,7 +22,6 @@ import DataHelper from "../../Helpers/DataHelper";
 import DataService from "../../Helpers/DataService";
 import { toast } from "react-toastify";
 import ISession from "../../Interfaces/ISession";
-
 const SessionTable = () => {
   const dispatch = useDispatch();
 
