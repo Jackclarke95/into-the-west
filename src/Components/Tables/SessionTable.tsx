@@ -112,7 +112,7 @@ const SessionTable = () => {
 
     return (
       <TooltipHost
-        content={attendeeNames.join(", ")}
+        content={attendeeNames.sort().join(", ")}
         directionalHint={DirectionalHint.leftCenter}
       >
         <Facepile

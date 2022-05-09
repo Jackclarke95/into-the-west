@@ -4,6 +4,7 @@ import {
   PersonaSize,
   Stack,
   Text,
+  FontSizes,
 } from "@fluentui/react";
 import ICharacter from "../../Interfaces/ICharacter";
 import ISession from "../../Interfaces/ISession";
@@ -37,6 +38,32 @@ const SessionCard: React.FC<{
 
   return (
     <Stack tokens={{ childrenGap: 5 }}>
+      <Stack horizontal tokens={{ childrenGap: 5 }}>
+        <Text
+          styles={{
+            root: {
+              fontSize: FontSizes.size16,
+            },
+          }}
+        >
+          {session.name}
+        </Text>
+      </Stack>
+      <Stack
+        horizontal
+        styles={{
+          root: { width: "100%", justifyContent: "space-between" },
+        }}
+      >
+        <Stack horizontal tokens={{ childrenGap: 5 }}>
+          <Text styles={{ root: { fontWeight: "bold" } }}>Players:</Text>
+          {onRenderAttendees()}
+        </Stack>
+        <Stack horizontal tokens={{ childrenGap: 5 }}>
+          <Text styles={{ root: { fontWeight: "bold" } }}>Map:</Text>
+          <Text>{session.map}</Text>
+        </Stack>
+      </Stack>
       <Stack
         horizontal
         styles={{
@@ -55,18 +82,6 @@ const SessionCard: React.FC<{
               : "No date set"}
           </Text>
         </Stack>
-      </Stack>
-      <Stack horizontal tokens={{ childrenGap: 5 }}>
-        <Text styles={{ root: { fontWeight: "bold" } }}>Name:</Text>
-        <Text>{session.name}</Text>
-      </Stack>
-      <Stack horizontal tokens={{ childrenGap: 5 }}>
-        <Text styles={{ root: { fontWeight: "bold" } }}>Map:</Text>
-        <Text>{session.map}</Text>
-      </Stack>
-      <Stack horizontal tokens={{ childrenGap: 5 }}>
-        <Text styles={{ root: { fontWeight: "bold" } }}>Players:</Text>
-        {onRenderAttendees()}
       </Stack>
     </Stack>
   );

@@ -88,26 +88,26 @@ const Profile = () => {
 
   return (
     <Stack tokens={{ childrenGap: 10 }}>
+      <Separator
+        styles={{
+          root: {
+            fontSize: FontSizes.xLargePlus,
+          },
+        }}
+      >
+        Profile
+      </Separator>
       <Stack horizontal styles={{ root: { justifyContent: "space-between" } }}>
-        <Text
-          styles={{
-            root: { fontSize: FontSizes.xLargePlus, textAlign: "start" },
-          }}
-        >
-          Profile
-        </Text>
-        <Stack horizontal tokens={{ childrenGap: 10 }}>
-          <DefaultButton text="Account" split menuProps={menuProps} />
-        </Stack>
+        {!currentPlayer.isLoading && currentPlayer.data && (
+          <Text
+            variant="medium"
+            styles={{
+              root: { fontSize: FontSizes.large, textAlign: "start" },
+            }}
+          >{`Welcome back, ${currentPlayer.data.name}`}</Text>
+        )}
+        <DefaultButton text="Account" split menuProps={menuProps} />
       </Stack>
-      {!currentPlayer.isLoading && currentPlayer.data && (
-        <Text
-          variant="medium"
-          styles={{
-            root: { fontSize: FontSizes.large, textAlign: "start" },
-          }}
-        >{`Welcome back, ${currentPlayer.data.name}`}</Text>
-      )}
       <Separator />
       <ActiveCharacter />
       <Separator />

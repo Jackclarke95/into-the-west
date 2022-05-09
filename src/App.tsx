@@ -31,6 +31,7 @@ import SessionManagementDialog from "./Components/Dialogs/SessionManagementDialo
 import AccountNameManagementDialog from "./Components/Dialogs/AccountNameManagementDialog";
 import PasswordManagementDialog from "./Components/Dialogs/PasswordManagementDialog";
 import CharacterManagementDialog from "./Components/Dialogs/CharacterManagementDialog";
+import TokenCreatorDialog from "./Components/Dialogs/TokenCreatorDialog";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDJLonhBywTBq-R2AyP5Hvcg2Lp-gUMogk",
@@ -157,12 +158,14 @@ const App = () => {
         root: {
           textAlign: "center",
           height: "100vh",
-          backgroundImage: `url("${DataHelper.getRandomFromArray([
-            Everwilds,
-            ForgottenLands,
-            LunarIsles,
-            ShatteredRealms,
-          ])}")`,
+          backgroundImage: user
+            ? `url("${DataHelper.getRandomFromArray([
+                Everwilds,
+                ForgottenLands,
+                LunarIsles,
+                ShatteredRealms,
+              ])}")`
+            : "",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
@@ -183,6 +186,7 @@ const App = () => {
           <AccountNameManagementDialog />
           <PasswordManagementDialog />
           <CharacterManagementDialog />
+          <TokenCreatorDialog />
         </>
       ) : (
         <>

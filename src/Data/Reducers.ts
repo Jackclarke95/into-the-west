@@ -49,6 +49,10 @@ export type Action =
       showCharacterManagementDialog: DefaultRootState["showCharacterManagementDialog"];
     }
   | {
+      type: "SetShowTokenCreatorDialog";
+      showTokenCreatorDialog: DefaultRootState["showTokenCreatorDialog"];
+    }
+  | {
       type: "SetUser";
       user: DefaultRootState["user"];
     };
@@ -84,6 +88,8 @@ export const initialState: DefaultRootState = {
   showPasswordManagementDialog: false,
 
   showCharacterManagementDialog: false,
+
+  showTokenCreatorDialog: false,
 
   isDevMode: window.location.hostname === "localhost",
 
@@ -192,6 +198,11 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         case "SetShowCharacterManagementDialog": {
           draftState.showCharacterManagementDialog =
             action.showCharacterManagementDialog;
+        }
+
+        // Action for toggling the Token Creator Dialog
+        case "SetShowTokenCreatorDialog": {
+          draftState.showTokenCreatorDialog = action.showTokenCreatorDialog;
           break;
         }
 

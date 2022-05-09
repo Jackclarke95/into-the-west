@@ -42,6 +42,8 @@ declare module "react-redux" {
 
     showCharacterManagementDialog: boolean;
 
+    showTokenCreatorDialog: boolean;
+
     isDevMode: boolean;
 
     user: User | null;
