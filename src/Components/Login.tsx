@@ -105,7 +105,7 @@ const Login = () => {
       setMessageBarType(MessageBarType.error);
     } else {
       await DataService.resetPassword(getAuth(), email)
-        .then((response) => {
+        .then(() => {
           setMessageBarMessage("Password reset email sent");
           setMessageBarType(MessageBarType.success);
         })
@@ -143,7 +143,7 @@ const Login = () => {
           messageBarType={messageBarType}
           styles={{
             root: {
-              maxWidth: "272px",
+              maxWidth: "240px",
             },
           }}
         >

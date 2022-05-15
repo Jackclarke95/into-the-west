@@ -1,7 +1,7 @@
 const Data = [
   {
     name: "Artificer",
-    archet2ypeDefinition: {
+    archetypeDefinition: {
       name: "Artificer Specialist",
       pluralName: "Artificer Specialists",
       level: 3,

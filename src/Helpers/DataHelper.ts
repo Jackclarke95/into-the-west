@@ -24,9 +24,19 @@ export default class DataHelper {
   public static formatOrdinalNumber(number: number): string {
     const suffix = ["th", "st", "nd", "rd"];
     const remainder = number % 100;
+
     return (
       number + (suffix[(remainder - 20) % 10] || suffix[remainder] || suffix[0])
     );
+  }
+
+  /**
+   * Determines whether a string starts with a vowel
+   * @param word The string to determine
+   * @returns Whether the string starts with a vowel
+   */
+  public static startsWithVowell(word: string): boolean {
+    return /^[aeiou]/i.test(word);
   }
 
   /**

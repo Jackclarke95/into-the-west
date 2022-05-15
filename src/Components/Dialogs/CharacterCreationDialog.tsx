@@ -5,6 +5,9 @@ import {
   DialogType,
   Dropdown,
   IDropdownOption,
+  IModalProps,
+  MessageBar,
+  MessageBarType,
   Position,
   PrimaryButton,
   SpinButton,
@@ -14,6 +17,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Classes from "../../Data/Classes";
 import Races from "../../Data/Races";
+import DataHelper from "../../Helpers/DataHelper";
 import DataService from "../../Helpers/DataService";
 
 const CharacterCreationDialog = () => {
@@ -25,21 +29,24 @@ const CharacterCreationDialog = () => {
   const [characterName, setCharacterName] = useState<string | undefined>(
     undefined
   );
-  const [characterNickname, setCharacterNickname] = useState<
+  const [characterShortName, setCharacterNickname] = useState<
     string | undefined
   >(undefined);
   const [characterRace, setCharacterRace] = useState<string | undefined>(
     undefined
   );
-  const [characterSubrace, setCharacterSubrace] = useState<
-    string | undefined | null
-  >(undefined);
+  const [characterSubrace, setCharacterSubrace] = useState<string | undefined>(
+    undefined
+  );
   const [characterLevel, setCharacterLevel] = useState<number>(1);
   const [characterClass, setCharacterClass] = useState<string | undefined>(
     undefined
   );
   const [characterSubclass, setCharacterSubclass] = useState<
-    string | undefined | null
+    string | undefined
+  >(undefined);
+  const [messageBarMessage, setMessageBarMessage] = useState<
+    string | undefined
   >(undefined);
 
   const onDismiss = () => {
@@ -62,6 +69,10 @@ const CharacterCreationDialog = () => {
     title: "New character",
     closeButtonAriaLabel: "Close",
   };
+
+  const modalProps = {
+    isBlocking: true,
+  } as IModalProps;
 
   const raceOptions = Races.map((race) => ({
     key: race.name,
@@ -91,11 +102,7 @@ const CharacterCreationDialog = () => {
 
     const cls = Classes.find((cls) => cls.name === characterClass);
 
-    if (!cls) {
-      return [] as IDropdownOption[];
-    }
-
-    if (cls.archetypeDefinition.level > characterLevel) {
+    if (!cls || cls.archetypeDefinition.level > characterLevel) {
       return [] as IDropdownOption[];
     } else {
       return cls.archetypeDefinition.subclasses.map((subclass) => ({
@@ -109,7 +116,7 @@ const CharacterCreationDialog = () => {
     setCharacterName(value);
   };
 
-  const onChangeNickname = (_, value: string | undefined) => {
+  const onChangeShortName = (_, value: string | undefined) => {
     setCharacterNickname(value);
   };
 
@@ -120,12 +127,12 @@ const CharacterCreationDialog = () => {
       setCharacterRace(option.text);
     }
 
-    setCharacterSubrace(null);
+    setCharacterSubrace(undefined);
   };
 
   const onChangeSubrace = (_, option: IDropdownOption | undefined) => {
     if (!option) {
-      setCharacterSubrace(null);
+      setCharacterSubrace(undefined);
     } else {
       setCharacterSubrace(option.text);
     }
@@ -138,14 +145,14 @@ const CharacterCreationDialog = () => {
       setCharacterClass(option.text);
     }
 
-    setCharacterSubclass(null);
+    setCharacterSubclass(undefined);
   };
 
   const onChangeSubclass = (_, option: IDropdownOption | undefined) => {
     if (!option) {
-      setCharacterSubclass(null);
+      setCharacterSubclass(undefined);
     } else {
-      setCharacterSubrace(option.text);
+      setCharacterSubclass(option.text);
     }
   };
 
@@ -156,48 +163,120 @@ const CharacterCreationDialog = () => {
   };
 
   const onClickCreateCharacter = () => {
+    console.log(validateCharacter());
+
     if (
-      !currentPlayer.isLoading &&
-      currentPlayer.data &&
-      characterName &&
-      characterRace &&
-      characterClass &&
-      characterLevel
+      !validateCharacter() ||
+      currentPlayer.isLoading ||
+      !currentPlayer.data
     ) {
+      console.log("invalid character");
+      return;
+    } else {
+      console.log("creating character");
+
       DataService.createCharacter({
         avatarUrl: "",
         sheetUrl: "",
         playerDndBeyondName: currentPlayer.data.dndBeyondName,
-        name: characterName,
-        nickname: characterNickname,
-        race: characterRace,
+        name: characterName!,
+        nickname: characterShortName,
+        race: characterRace!,
         subrace: characterSubrace ?? undefined,
         classes: [
           {
-            name: characterClass,
-            archetype: undefined ?? "",
+            name: characterClass!,
+            archetype: characterSubclass ?? undefined,
             level: 1,
           },
         ],
         currentLevel: characterLevel,
         sessionsAttended: 0,
         startingLevel: characterLevel,
-        retirement: undefined,
       });
     }
 
-    dispatch({
-      type: "SetShowCharacterCreationDialog",
-      showCharacterCreationDialog: false,
-    });
+    // onDismiss();
   };
+
+  const validateCharacter = () => {
+    if (!characterName) {
+      setMessageBarMessage("Please enter a name");
+
+      return false;
+    }
+
+    if (characterName.trim().split(" ").length > 1 && !characterShortName) {
+      setMessageBarMessage("Please enter a nickname");
+
+      return false;
+    }
+
+    if (!characterRace) {
+      setMessageBarMessage("Please select a race");
+
+      return false;
+    }
+
+    if (
+      Races.find((race) => race.name === characterRace)?.subraces &&
+      !characterSubrace
+    ) {
+      setMessageBarMessage("The selected race requires a subrace");
+
+      return false;
+    }
+
+    if (!characterClass) {
+      setMessageBarMessage("Please select a class");
+
+      return false;
+    }
+
+    const cls = Classes.find((cls) => cls.name === characterClass);
+
+    if (
+      cls &&
+      !characterSubclass &&
+      cls.archetypeDefinition.level <= characterLevel
+    ) {
+      setMessageBarMessage(
+        `The selected must have ${
+          DataHelper.startsWithVowell(cls.archetypeDefinition.name) ? "an" : "a"
+        } ${cls.archetypeDefinition.name} at ${DataHelper.formatOrdinalNumber(
+          characterLevel
+        )} level`
+      );
+
+      return false;
+    }
+
+    setMessageBarMessage(undefined);
+
+    return true;
+  };
+
+  console.log({ characterSubclass });
 
   return (
     <Dialog
       hidden={!showDialog}
       onDismiss={onDismiss}
       dialogContentProps={contentProps}
+      modalProps={modalProps}
     >
+      {messageBarMessage && (
+        <MessageBar
+          messageBarType={MessageBarType.error}
+          styles={{
+            root: {
+              maxWidth: "240px",
+            },
+          }}
+        >
+          {messageBarMessage}
+        </MessageBar>
+      )}
       <TextField
         label="Character Name"
         value={characterName}
@@ -206,10 +285,13 @@ const CharacterCreationDialog = () => {
         required
       />
       <TextField
-        label="Nickname"
-        value={characterNickname}
-        onChange={onChangeNickname}
-        required={!!characterName && characterName.split(" ").length > 1}
+        label="Short name"
+        value={characterShortName}
+        onChange={onChangeShortName}
+        disabled={
+          !characterName || characterName.trim().split(" ").length === 1
+        }
+        required={!!characterName && characterName.trim().split(" ").length > 1}
       />
       <Dropdown
         label="Race"
@@ -241,12 +323,17 @@ const CharacterCreationDialog = () => {
         required
       />
       <Dropdown
-        label="Subclass"
+        label={
+          subclassOptions().length === 0
+            ? "Subclass"
+            : Classes.find((cls) => cls.name === characterClass)
+                ?.archetypeDefinition.name
+        }
         options={subclassOptions()}
         defaultValue={undefined}
         onChange={onChangeSubclass}
-        disabled={subclassOptions.length === 0}
-        required={subclassOptions.length !== 0}
+        disabled={subclassOptions().length === 0}
+        required={subclassOptions().length !== 0}
         calloutProps={{ calloutMaxHeight: 250 }}
         selectedKey={characterSubclass}
       />

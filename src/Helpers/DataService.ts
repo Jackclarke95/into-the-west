@@ -42,6 +42,7 @@ export default class DataService {
       currentLevel: character.currentLevel,
       sessionsAttended: 0,
       startingLevel: character.startingLevel,
+      avatarUrl: character.avatarUrl ?? null,
     };
 
     character.nickname &&

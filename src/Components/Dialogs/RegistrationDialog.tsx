@@ -141,7 +141,7 @@ const RegistrationDialog = () => {
           messageBarType={MessageBarType.error}
           styles={{
             root: {
-              maxWidth: "272px",
+              maxWidth: "240px",
             },
           }}
         >

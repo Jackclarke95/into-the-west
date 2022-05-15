@@ -48,7 +48,7 @@ const ActiveCharacter = () => {
   };
 
   const onClickCreateCharacter = () => {
-    console.log("creating character");
+    console.log("Clicked create character");
 
     dispatch({
       type: "SetShowCharacterCreationDialog",
@@ -70,6 +70,12 @@ const ActiveCharacter = () => {
         iconProps: { iconName: "UserRemove" },
         onClick: onClickRetireCharacter,
       },
+      {
+        key: "createCharacter",
+        text: "Create character",
+        iconProps: { iconName: "AddFriend" },
+        onClick: onClickCreateCharacter,
+      },
     ],
   };
 
@@ -81,7 +87,7 @@ const ActiveCharacter = () => {
             root: { fontSize: FontSizes.xLarge, textAlign: "start" },
           }}
         >
-          Active Character
+          My Character
         </Text>
         <Stack horizontal tokens={{ childrenGap: 10 }}>
           {!activeCharacter.isLoading && activeCharacter.data ? (
@@ -95,7 +101,7 @@ const ActiveCharacter = () => {
             />
           ) : (
             <DefaultButton
-              text="New Character"
+              text="Create character"
               disabled={
                 !isDevMode ||
                 activeCharacter.isLoading ||

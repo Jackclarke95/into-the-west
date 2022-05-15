@@ -202,7 +202,7 @@ const SessionTable = () => {
           session.attendees.includes(activeCharacter.data.key)
             ? {
                 key: "item5",
-                name: "Remove",
+                name: "Leave",
                 onClick: () => onClickRemoveFromSession(session),
               }
             : {
@@ -257,7 +257,7 @@ const SessionTable = () => {
       key: "characters",
       name: "Characters",
       fieldName: "attendees",
-      minWidth: 100,
+      minWidth: 120,
       onRender: onRenderAttendees,
     },
     {

@@ -93,7 +93,7 @@ const NextSession = () => {
             root: { fontSize: FontSizes.xLarge, textAlign: "start" },
           }}
         >
-          Next Session
+          My Sessions
         </Text>
         <Stack horizontal tokens={{ childrenGap: 10 }}>
           <DefaultButton
