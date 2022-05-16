@@ -2,7 +2,7 @@ import { Stack } from "@fluentui/react";
 import CharacterTable from "./Tables/CharacterTable";
 import SessionTable from "./Tables/SessionTable";
 import Profile from "./Profile/Profile";
-import Tools from "./Tools/Tools";
+import Utilities from "./Utilities/Utilities";
 
 const Dashboard = () => {
   return (
@@ -26,7 +26,7 @@ const Dashboard = () => {
       </Stack>
       <Stack>
         <Profile />
-        <Tools />
+        <Utilities />
       </Stack>
     </Stack>
   );

@@ -1,7 +1,7 @@
 import { DefaultButton, FontSizes, Separator, Stack } from "@fluentui/react";
 import { useDispatch } from "react-redux";
 
-const Tools = () => {
+const Utilities = () => {
   const dispatch = useDispatch();
 
   const onClickShowTokenCreator = () => {
@@ -28,4 +28,4 @@ const Tools = () => {
   );
 };
 
-export default Tools;
+export default Utilities;
