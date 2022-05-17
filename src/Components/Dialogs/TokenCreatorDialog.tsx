@@ -28,7 +28,7 @@ const TokenCreatorDialog = () => {
   };
 
   const onClickDownloadToken = () => {
-    console.log("clicked download token");
+    console.log("clicked download token", characterClass);
   };
 
   const contentProps = {
