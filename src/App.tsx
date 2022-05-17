@@ -32,6 +32,8 @@ import AccountNameManagementDialog from "./Components/Dialogs/AccountNameManagem
 import PasswordManagementDialog from "./Components/Dialogs/PasswordManagementDialog";
 import CharacterManagementDialog from "./Components/Dialogs/CharacterManagementDialog";
 import TokenCreatorDialog from "./Components/Dialogs/TokenCreatorDialog";
+import NewRaceDialog from "./Components/Dialogs/NewRaceDialog";
+import NewSubraceDialog from "./Components/Dialogs/NewSubraceDialog";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDJLonhBywTBq-R2AyP5Hvcg2Lp-gUMogk",
@@ -187,6 +189,8 @@ const App = () => {
           <PasswordManagementDialog />
           <CharacterManagementDialog />
           <TokenCreatorDialog />
+          <NewRaceDialog />
+          <NewSubraceDialog />
         </>
       ) : (
         <>

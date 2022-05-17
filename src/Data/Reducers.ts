@@ -55,6 +55,14 @@ export type Action =
   | {
       type: "SetAuthUser";
       authUser: DefaultRootState["authUser"];
+    }
+  | {
+      type: "SetShowNewRaceDialog";
+      showNewRaceDialog: DefaultRootState["showNewRaceDialog"];
+    }
+  | {
+      type: "SetShowNewSubraceDialog";
+      showNewSubraceDialog: DefaultRootState["showNewSubraceDialog"];
     };
 
 /** Initial application state */
@@ -90,6 +98,10 @@ export const initialState: DefaultRootState = {
   showCharacterManagementDialog: false,
 
   showTokenCreatorDialog: false,
+
+  showNewRaceDialog: false,
+
+  showNewSubraceDialog: false,
 
   isDevMode: window.location.hostname === "localhost",
 
@@ -210,6 +222,18 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         // Action for setting the User
         case "SetAuthUser": {
           draftState.authUser = action.authUser;
+          break;
+        }
+
+        // Action for toggling the New Race Dialog
+        case "SetShowNewRaceDialog": {
+          draftState.showNewRaceDialog = action.showNewRaceDialog;
+          break;
+        }
+
+        // Action for toggling the New Sub Race Dialog
+        case "SetShowNewSubraceDialog": {
+          draftState.showNewSubraceDialog = action.showNewSubraceDialog;
           break;
         }
       }

@@ -3,12 +3,14 @@ import { get, ref } from "firebase/database";
 import { useDispatch } from "react-redux";
 import DataService from "../../Helpers/DataService";
 import { db } from "../../App";
+import Races from "../../Data/Races";
 
 const Utilities = () => {
   const dispatch = useDispatch();
 
   const onClickShowTokenCreator = () => {
     console.log("Displaying token creator");
+
     dispatch({
       type: "SetShowTokenCreatorDialog",
       showTokenCreatorDialog: true,
@@ -86,10 +88,6 @@ const Utilities = () => {
       })
       .catch((e) => console.error("error", e));
 
-    console.log("classData", classData);
-    console.log("subclassData", subclassData);
-    console.log("classConfigData", classConfigData);
-
     if (classData && subclassData && classConfigData) {
       const mappedClasses = classData.map((cls) => {
         const matchedConfigs = classConfigData.filter(
@@ -97,8 +95,9 @@ const Utilities = () => {
         );
 
         const subclasses = matchedConfigs.map((config) => {
-          return subclassData.find((sub) => sub.key === config.subclassId)
-            ?.name;
+          return subclassData.find(
+            (subclass) => subclass.key === config.subclassId
+          );
         });
 
         return {
@@ -111,8 +110,141 @@ const Utilities = () => {
         };
       });
 
-      console.log("mappedClasses", mappedClasses);
+      console.log("Mapped Classes", mappedClasses);
     }
+  };
+
+  const onClickDetermineRaces = async () => {
+    const racesRef = ref(db, "races");
+    const subracesRef = ref(db, "subraces");
+    const raceConfigsRef = ref(db, "raceConfigs");
+
+    const raceData = await get(racesRef)
+      .then((response) => {
+        const data = response.val();
+
+        const races = Object.keys(data).map((key) => {
+          const race = data[key];
+          race.key = key;
+
+          return race;
+        });
+
+        return races as {
+          name: string;
+          key: string;
+        }[];
+      })
+      .catch((e) => console.error("error", e));
+
+    const subraceData = await get(subracesRef)
+      .then((response) => {
+        const data = response.val();
+
+        const subraces = Object.keys(data).map((key) => {
+          const subrace = data[key];
+          subrace.key = key;
+
+          return subrace;
+        });
+
+        return subraces as { name: string; key: string }[];
+      })
+      .catch((e) => console.error("error", e));
+
+    const raceConfigData = await get(raceConfigsRef)
+      .then((response) => {
+        const data = response.val();
+
+        const configs = Object.keys(data).map((key) => {
+          const config = data[key];
+          config.key = key;
+
+          return config;
+        });
+
+        return configs as {
+          raceId: string;
+          subraceId: string;
+          key: string;
+        }[];
+      })
+      .catch((e) => console.error("error", e));
+
+    if (raceData && subraceData && raceConfigData) {
+      const mappedRaces = raceData.map((race) => {
+        const matchedConfigs = raceConfigData.filter(
+          (config) => config.raceId === race.key
+        );
+
+        const subraces = matchedConfigs.map((config) =>
+          subraceData.find((subrace) => subrace.key === config.subraceId)
+        );
+
+        return {
+          name: race.name,
+          key: race.key,
+          subraces: subraces,
+        };
+      });
+
+      console.log("Mapped Races", mappedRaces);
+    }
+  };
+
+  const onClickGenerateRaceData = () => {
+    console.log("generating races");
+
+    const subraces = [] as any[];
+    const raceConfigs = [] as string[];
+
+    const races = Races.map((race) => {
+      const raceKey = DataService.generateKey();
+
+      const hasBaseRace =
+        race.subraces?.some((subrace) => subrace === "Base") ?? false;
+
+      const hasSubraces = race.subraces?.some((subrace) => subrace) ?? false;
+
+      const subraceRequired = hasSubraces && !hasBaseRace;
+
+      const generatedRace = `"${raceKey}": { "name": "${race.name}", "subraceRequired": ${subraceRequired} }`;
+
+      race.subraces?.forEach((subrace) => {
+        if (subrace === "Base") {
+          return;
+        }
+
+        const subraceKey = DataService.generateKey();
+        const raceConfigKey = DataService.generateKey();
+
+        const generatedSubrace = `"${subraceKey}": { "name": "${subrace}" }`;
+        const generatedRaceConfig = `"${raceConfigKey}": { "raceId": "${raceKey}", "subraceid": "${subraceKey}" }`;
+
+        subraces.push(generatedSubrace);
+        raceConfigs.push(generatedRaceConfig);
+      });
+
+      return generatedRace;
+    });
+
+    console.log(races.join(","));
+    console.log(subraces.join(","));
+    console.log(raceConfigs.join(","));
+  };
+
+  const onClickShowNewRaceDialog = () => {
+    dispatch({
+      type: "SetShowNewRaceDialog",
+      showNewRaceDialog: true,
+    });
+  };
+
+  const onClickShowNewSubraceDialog = () => {
+    dispatch({
+      type: "SetShowNewSubraceDialog",
+      showNewSubraceDialog: true,
+    });
   };
 
   return (
@@ -132,6 +264,10 @@ const Utilities = () => {
         text="Determine classes"
         onClick={onClickDetermineClasses}
       />
+      <DefaultButton text="Determine races" onClick={onClickDetermineRaces} />
+      <DefaultButton text="Generate races" onClick={onClickGenerateRaceData} />
+      <DefaultButton text="New race" onClick={onClickShowNewRaceDialog} />
+      <DefaultButton text="New subrace" onClick={onClickShowNewSubraceDialog} />
     </Stack>
   );
 };

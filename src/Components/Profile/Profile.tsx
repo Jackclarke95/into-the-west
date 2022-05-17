@@ -20,7 +20,6 @@ const Profile = () => {
 
   // Set the active character based on the current player
   useEffect(() => {
-    console.log(characters);
     if (characters.isLoading || currentUser.isLoading || !currentUser.data) {
       dispatch({
         type: "SetActiveCharacter",

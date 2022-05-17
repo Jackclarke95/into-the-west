@@ -81,6 +81,19 @@ export default class DataService {
   };
 
   /**
+   * Creates a race in the Firebase Realtime Databse
+   * @param name The name of the new race
+   * @param subraceRequired Whether the new race requires a subrace
+   */
+  public static createRace = (name: string, subraceRequired: boolean) => {
+    const racesRef = ref(db, "races/");
+
+    const race = { name: name, subraceRequired: subraceRequired };
+
+    push(racesRef, race);
+  };
+
+  /**
    * Signs a character up to a session
    * @param session The session to sign up tp
    * @param character The character with whom to sign up

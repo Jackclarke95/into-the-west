@@ -44,6 +44,10 @@ declare module "react-redux" {
 
     showTokenCreatorDialog: boolean;
 
+    showNewRaceDialog: boolean;
+
+    showNewSubraceDialog: boolean;
+
     isDevMode: boolean;
 
     authUser: User | null;
