@@ -26,7 +26,7 @@ const SessionTable = () => {
   const dispatch = useDispatch();
 
   const sessionData = useSelector((state) => state.sessions);
-  const playerData = useSelector((state) => state.players);
+  const playerData = useSelector((state) => state.users);
   const characterData = useSelector((state) => state.characters);
   const activeCharacter = useSelector((state) => state.activeCharacter);
 

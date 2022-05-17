@@ -21,7 +21,7 @@ import DataService from "../../Helpers/DataService";
 
 const SessionCreationDialog = () => {
   const showDialog = useSelector((state) => state.showSessionCreationDialog);
-  const players = useSelector((state) => state.players);
+  const players = useSelector((state) => state.users);
   const characters = useSelector((state) => state.characters);
 
   const [sessionName, setSessionName] = useState<string | undefined>(undefined);

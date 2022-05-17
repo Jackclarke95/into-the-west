@@ -6,8 +6,8 @@ import { DefaultRootState } from "react-redux";
 export type Action =
   | { type: "SetDarkMode"; darkMode: DefaultRootState["darkMode"] }
   | {
-      type: "SetCurrentPlayer";
-      currentPlayer: DefaultRootState["currentPlayer"];
+      type: "SetCurrentUser";
+      currentUser: DefaultRootState["currentUser"];
     }
   | { type: "SetCharacters"; characters: DefaultRootState["characters"] }
   | {
@@ -15,7 +15,7 @@ export type Action =
       activeCharacter: DefaultRootState["activeCharacter"];
     }
   | { type: "SetSessions"; sessions: DefaultRootState["sessions"] }
-  | { type: "SetPlayers"; players: DefaultRootState["players"] }
+  | { type: "SetUsers"; users: DefaultRootState["users"] }
   | {
       type: "SetShowCharacterCreationDialog";
       showCharacterCreationDialog: DefaultRootState["showCharacterCreationDialog"];
@@ -53,8 +53,8 @@ export type Action =
       showTokenCreatorDialog: DefaultRootState["showTokenCreatorDialog"];
     }
   | {
-      type: "SetUser";
-      user: DefaultRootState["user"];
+      type: "SetAuthUser";
+      authUser: DefaultRootState["authUser"];
     };
 
 /** Initial application state */
@@ -69,9 +69,9 @@ export const initialState: DefaultRootState = {
 
   sessions: { isLoading: true },
 
-  players: { isLoading: true },
+  users: { isLoading: true },
 
-  currentPlayer: { isLoading: true },
+  currentUser: { isLoading: true },
 
   showCharacterCreationDialog: false,
 
@@ -93,7 +93,7 @@ export const initialState: DefaultRootState = {
 
   isDevMode: window.location.hostname === "localhost",
 
-  user: null,
+  authUser: null,
 };
 
 /**
@@ -116,8 +116,8 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         }
 
         // Action for setting the Current User
-        case "SetCurrentPlayer": {
-          draftState.currentPlayer = action.currentPlayer;
+        case "SetCurrentUser": {
+          draftState.currentUser = action.currentUser;
           break;
         }
 
@@ -140,8 +140,8 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         }
 
         // Action for setting the Players
-        case "SetPlayers": {
-          draftState.players = action.players;
+        case "SetUsers": {
+          draftState.users = action.users;
           break;
         }
 
@@ -208,8 +208,8 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         }
 
         // Action for setting the User
-        case "SetUser": {
-          draftState.user = action.user;
+        case "SetAuthUser": {
+          draftState.authUser = action.authUser;
           break;
         }
       }

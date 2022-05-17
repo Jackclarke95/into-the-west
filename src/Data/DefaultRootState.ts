@@ -1,7 +1,7 @@
 import { User } from "firebase/auth";
 import { Dispatch } from "react";
 import ICharacter from "../Interfaces/ICharacter";
-import IPlayer from "../Interfaces/IPlayer";
+import IUser from "../Interfaces/IUser";
 import ISession from "../Interfaces/ISession";
 import { Action } from "./Reducers";
 
@@ -20,11 +20,11 @@ declare module "react-redux" {
 
     sessions: { isLoading: true } | { isLoading: false; data: ISession[] };
 
-    players: { isLoading: true } | { isLoading: false; data: IPlayer[] };
+    users: { isLoading: true } | { isLoading: false; data: IUser[] };
 
-    currentPlayer:
+    currentUser:
       | { isLoading: true }
-      | { isLoading: false; data: IPlayer | undefined };
+      | { isLoading: false; data: IUser | undefined };
 
     showCharacterCreationDialog: boolean;
 
@@ -46,7 +46,7 @@ declare module "react-redux" {
 
     isDevMode: boolean;
 
-    user: User | null;
+    authUser: User | null;
   }
 
   // Declare dispatcher to take our root provider's action type

@@ -50,8 +50,6 @@ const TokenCreatorDialog = () => {
     }
   };
 
-  console.log({ characterClass });
-
   return (
     <Dialog
       hidden={!showDialog}

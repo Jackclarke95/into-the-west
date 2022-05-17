@@ -1,7 +1,7 @@
 import ICharacter from "../Interfaces/ICharacter";
 import ICharacterData from "../Interfaces/ICharacterData";
-import IPlayer from "../Interfaces/IPlayer";
-import IPlayerData from "../Interfaces/IPlayerData";
+import IUser from "../Interfaces/IUser";
+import IUserData from "../Interfaces/IUserData";
 import ISession from "../Interfaces/ISession";
 import ISessionData from "../Interfaces/ISessionData";
 
@@ -100,7 +100,7 @@ export default class DataHelper {
     };
   }
 
-  public static parsePlayerData(player: IPlayerData, key: string): IPlayer {
+  public static parsePlayerData(player: IUserData, key: string): IUser {
     return {
       key: key,
       name: player.name,

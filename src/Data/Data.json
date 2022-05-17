@@ -481,7 +481,7 @@
       "startingLevel": 3
     }
   },
-  "players": {
+  "users": {
     "-MaGLAdfrrLeLWxdwuUU": {
       "discordTag": "HonestFee#4574",
       "dndBeyondName": "HonestFee",
@@ -979,6 +979,725 @@
       "dungeonMaster": "Jack",
       "map": "The Lunar Isles",
       "name": "Froster's Fables - The Mindflayer War"
+    }
+  },
+  "classes": {
+    "-N2EEHHLGxJmobZ--n4f": {
+      "name": "Artificer",
+      "archetypeFrom": 3,
+      "archetypeName": "Artificer Specialist",
+      "archetypePluralName": "Artificer Specialists"
+    },
+    "-N2EEK1nbKvZFlsHnBsP": {
+      "name": "Barbarian",
+      "archetypeFrom": 3,
+      "archetypeName": "Primal Path",
+      "archetypePluralName": "Primal Paths"
+    },
+    "-N2EEK9PEETQ78H5w6TY": {
+      "name": "Bard",
+      "archetypeFrom": 3,
+      "archetypeName": "Bardic College",
+      "archetypePluralName": "Bardic Colleges"
+    },
+    "-N2EEKGSpfU7hNkO6i7s": {
+      "name": "Blood Hunter",
+      "archetypeFrom": 3,
+      "archetypeName": "Blood Hunter Order",
+      "archetypePluralName": "Blood Hunter Orders"
+    },
+    "-N2EEKJ-KZfrehWji3cv": {
+      "name": "Cleric",
+      "archetypeFrom": 1,
+      "archetypeName": "Divine Domain",
+      "archetypePluralName": "Divine Domains"
+    },
+    "-N2EEKLQ-OgmeZN4Oswj": {
+      "name": "Druid",
+      "archetypeFrom": 2,
+      "archetypeName": "Druid Circle",
+      "archetypePluralName": "Druid Circles"
+    },
+    "-N2EEKQFg13Egsu-QTE7": {
+      "name": "Fighter",
+      "archetypeFrom": 3,
+      "archetypeName": "Martial Archetype",
+      "archetypePluralName": "Martial Archetypes"
+    },
+    "-N2EEKSCjFFWMXzwn6IB": {
+      "name": "Monk",
+      "archetypeFrom": 3,
+      "archetypeName": "Monastic Tradition",
+      "archetypePluralName": "Monastic Traditions"
+    },
+    "-N2EEKUAxxgsDPmyvh4G": {
+      "name": "Paladin",
+      "archetypeFrom": 3,
+      "archetypeName": "Sacred Oath",
+      "archetypePluralName": "Sacred Oaths"
+    },
+    "-N2EEKVvXgGLjk2qdmVw": {
+      "name": "Ranger",
+      "archetypeFrom": 3,
+      "archetypeName": "Ranger Archetype",
+      "archetypePluralName": "Ranger Archetypes"
+    },
+    "-N2EEKXs7BR4ZZobP4hY": {
+      "name": "Rogue",
+      "archetypeFrom": 3,
+      "archetypeName": "Roguish Archetype",
+      "archetypePluralName": "Roguish Archetypes"
+    },
+    "-N2EEKZxWJzn1kSMQN4b": {
+      "name": "Sorcerer",
+      "archetypeFrom": 1,
+      "archetypeName": "Sorcerous Origin",
+      "archetypePluralName": "Sorcerous Origins"
+    },
+    "-N2EEKb7OUBokm-2jXdF": {
+      "name": "Warlock",
+      "archetypeFrom": 1,
+      "archetypeName": "Otherworldly Patron",
+      "archetypePluralName": "Otherworldly Patrons"
+    },
+    "-N2EEKdBChDzdDsDvkuu": {
+      "name": "Wizard",
+      "archetypeFrom": 2,
+      "archetypeName": "Arcane Tradition",
+      "archetypePluralName": "Arcane Traditions"
+    }
+  },
+  "subclasses": {
+    "-N2EHXVvI-yOy3tngd7t": { "name": "Alchemist" },
+    "-N2EHXedg2kI5zubG64R": { "name": "Armorer" },
+    "-N2EHY5ntXm4DcS106Qd": { "name": "Artillerist" },
+    "-N2EHYDVnPbI_AVbugbx": { "name": "Battle Smith" },
+    "-N2H3lL9NcZFhV5Y9nIp": { "name": "Path of the Ancestral Guardian" },
+    "-N2H3lQXNDz5QBj0HoDJ": { "name": "Path of the Battlerager" },
+    "-N2H3lVdezbUR6Suwsrd": { "name": "Path of the Beast" },
+    "-N2H3l_cTn3GR7wYXqko": { "name": "Path of the Berserker" },
+    "-N2H3lfE6VkBmTcBDSUr": { "name": "Path of the Storm Herald" },
+    "-N2H3lk5gUfPPrvmX_VV": { "name": "Path of the Totem Warrior" },
+    "-N2H3lpVhbXmIq8B_cV_": { "name": "Path of the Zealot" },
+    "-N2H3lv_usLpdVy5gtOo": { "name": "Path of Wild Magic" },
+    "-N2H512JFyDSnNUbGVN3": { "name": "College of Creation" },
+    "-N2H514B_LFnriKjeKw_": { "name": "College of Eloquence" },
+    "-N2H51aS1f2brG3BNvOP": { "name": "College of Glamour" },
+    "-N2H51eKB3-xHEhi-2wA": { "name": "College of Lore" },
+    "-N2H51je8L95zIRZmCtf": { "name": "College of Spirits" },
+    "-N2H51oNSKwHIaDFUCK7": { "name": "College of Swords" },
+    "-N2H51tnpw2IN2cwYsiq": { "name": "College of Valor" },
+    "-N2H51yaxBr1UJIUEw6L": { "name": "College of Whispers" },
+    "-N2H7_PfNDcCYL-Uigu2": { "name": "Order of the Ghostslayer" },
+    "-N2H7_SSEE0DNW-1mYUF": { "name": "Order of the Lycan" },
+    "-N2H7_VRPU6TLDbO4I-A": { "name": "Order of the Mutant" },
+    "-N2H7_YYxh81FbZxTIwt": { "name": "Order of the Profane Soul" },
+    "-N2H8RnFnnYJc_FVU5L_": { "name": "Arcana Domain" },
+    "-N2H8SSToRGE0ZrZpcf1": { "name": "Death Domain" },
+    "-N2H8Ssgt2BlMsd5WvbP": { "name": "Forge Domain" },
+    "-N2H8TMLYzJAJ6wSBnWb": { "name": "Grave Domain" },
+    "-N2H8Tlwh7rsxUpcsnnn": { "name": "Knowledge Domain" },
+    "-N2H8UWuT1Wjn_P5PZYr": { "name": "Life Domain" },
+    "-N2H8V2baL_mKDxPoJ5A": { "name": "Light Domain" },
+    "-N2H8VVLlCLAgtWZPBsG": { "name": "Nature Domain" },
+    "-N2H8VtFUtVn_ybtFvAo": { "name": "Order Domain" },
+    "-N2H8WKvBd8eTs2TQSle": { "name": "Peace Domain" },
+    "-N2H8Wq7JhOXKi-Tsvwr": { "name": "Tempest Domain" },
+    "-N2H8XOXGK0XpTiPvaM9": { "name": "Trickery Domain" },
+    "-N2H8Xmx2bPR5q5M2jxe": { "name": "Twilight Domain" },
+    "-N2H8YF11-gAWQSLwCK8": { "name": "War Domain" },
+    "-N2HYl2r1jrmLP7oCoyS": { "name": "Circle of Dreams" },
+    "-N2HYmteXPmz7Wfhc4HR": { "name": "Circle of Spores" },
+    "-N2HYnigMev_WoIcaTxG": { "name": "Circle of Stars" },
+    "-N2HYoHnVAoAUXCf3GUS": { "name": "Circle of the Land" },
+    "-N2HYoxJjDTg1sy_HVai": { "name": "Circle of the Moon" },
+    "-N2HYpNJDUOCWwXMJWkA": { "name": "Circle of the Shepherd" },
+    "-N2HYpqG6nnrYzBcfNrf": { "name": "Circle of Wildfire" },
+    "-N2HcrhlrLfHb0qOYQyl": { "name": "Arcane Archer" },
+    "-N2HcsHMNyCtsDKmGNkZ": { "name": "Battle Master" },
+    "-N2HcsiSrnRFTyZ_INJ6": { "name": "Cavalier" },
+    "-N2Hct8HML5ZaoTrHV1j": { "name": "Champion" },
+    "-N2HctgAq3VHxKwDav3R": { "name": "Echo Knight" },
+    "-N2Hcu4UDM9hIux-6roM": { "name": "Eldritch Knight" },
+    "-N2HcuU5CRh3fzxwVij0": { "name": "Gunslinger" },
+    "-N2Hcv3oPvXkpLHqjFiL": { "name": "Psi Warrior" },
+    "-N2HcvaOTzOxUnVRbbum": { "name": "Purple Dragon Knight" },
+    "-N2Hcvzx0N9IaztRMz-c": { "name": "Rune Knight" },
+    "-N2HcwQyI3D5K-91bJjE": { "name": "Samurai" },
+    "-N2Hev0-qYT5VPprWZEV": { "name": "Way of Mercy" },
+    "-N2HevlpRNndihxRdrNS": { "name": "Way of Shadow" },
+    "-N2HewPOCRJyXU0ptpha": { "name": "Way of the Ascendant Dragon" },
+    "-N2HexHd3okBPd1MDVFE": { "name": "Way of the Astral Self" },
+    "-N2Hexidfz_wvfgSeL6M": { "name": "Way of the Cobalt Soul" },
+    "-N2HeyKXgkRHlAy_oWug": { "name": "Way of the Drunken Master" },
+    "-N2HeyyHm3SafhbLN7ru": { "name": "Way of the Four Elements" },
+    "-N2HezUwGpRcXPbfFF3D": { "name": "Way of the Kensei" },
+    "-N2Hf-czHufzc5cmNv3R": { "name": "Way of the Long Death" },
+    "-N2Hf05r6BS3VDyHzlSk": { "name": "Way of the Open Hand" },
+    "-N2Hf0a66jGL74I06neP": { "name": "Way of the Sun Soul" },
+    "-N2HfbfAxX3Qywzp4Wvm": { "name": "Oath of Conquest" },
+    "-N2HfcAwuJNHz_90QTcv": { "name": "Oath of Devotion" },
+    "-N2Hfcm8lkRm1TODZGeq": { "name": "Oath of Glory" },
+    "-N2HfdJkAH_fWjt7tzGO": { "name": "Oath of Redemption" },
+    "-N2Hfdm0eQlLByxbajdz": { "name": "Oath of the Ancients" },
+    "-N2HfeHLne2gnh3puL_s": { "name": "Oath of the Crown" },
+    "-N2HfewsE8ocJ3NEEjUl": { "name": "Oath of the Open Sea" },
+    "-N2HffTyyk6Co3IQLIVH": { "name": "Oath of the Watchers" },
+    "-N2Hfg5eWDhf4kIc42E4": { "name": "Oath of Vengeance" },
+    "-N2HfgxV5Za7ygbjBN2X": { "name": "Oathbreaker" },
+    "-N2HgQQ43C6HsBSOdE-4": { "name": "Beast Master" },
+    "-N2HgRKSVv9ydb7hDAyj": { "name": "Drakewarden" },
+    "-N2HgQrbeJjejNuGMdXH": { "name": "Fey Wanderer" },
+    "-N2HgRnuunaUpF7nrNa6": { "name": "Gloom Stalker" },
+    "-N2HgSN6INAgO5NkePSa": { "name": "Horizon Walker" },
+    "-N2HgSn3R9bf8s2bkazW": { "name": "Hunter" },
+    "-N2HgTCUTibqmfICCbej": { "name": "Monster Slayer" },
+    "-N2HgTawLhvdA21L1mkw": { "name": "Swarmkeeper" },
+    "-N2HibxThncchsnYiSsS": { "name": "Arcane Trickster" },
+    "-N2HicXuS-bbyyMlF0GX": { "name": "Assassin" },
+    "-N2Hid3zl3PlhMdIExBj": { "name": "Inquisitive" },
+    "-N2HidX3s0FiriQeklY3": { "name": "Mastermind" },
+    "-N2HidxZbeX675JYfKdX": { "name": "Phantom" },
+    "-N2HieNNeJqKCGyRlZrW": { "name": "Scout" },
+    "-N2Hielon3j60DblHmXI": { "name": "Soulknife" },
+    "-N2HifXGPY01W026rQDY": { "name": "Swashbuckler" },
+    "-N2HigCmSo6r-X1sxLHz": { "name": "Thief" },
+    "-N2HighajHsMX7Jda6y_": { "name": "Aberrant Mind" },
+    "-N2Hih5GrTOErntf1-ac": { "name": "Clockwork Soul" },
+    "-N2HihWt1eDm9815B-O4": { "name": "Divine Soul" },
+    "-N2Hihxv7p2X5GH5BcFg": { "name": "Draconic Bloodline" },
+    "-N2HiiOBCLfsC-Yba0NL": { "name": "Shadow Magic" },
+    "-N2HiisWq0gDLBFBjF2O": { "name": "Storm Sorcery" },
+    "-N2HijPi0f9H-UMA4Xbq": { "name": "Wild Magic" },
+    "-N2HijtE9AGbGGFBCMOZ": { "name": "The Archfey" },
+    "-N2HikQ1m4fdlmJNx3KN": { "name": "The Celestial" },
+    "-N2HikyPyJDn51Vdf-xT": { "name": "The Fathomless" },
+    "-N2HilU1Qwpg8jghU4xz": { "name": "The Fiend" },
+    "-N2Hin7F1Xj-Y0BzHSdU": { "name": "The Genie" },
+    "-N2Hin_j0jTylhLZ6_s1": { "name": "The Great Old One" },
+    "-N2Hiow6WB40KDjs6iFY": { "name": "The Hexblade" },
+    "-N2HirVQOKSNsM0wv4JO": { "name": "The Undead" },
+    "-N2HisI6tLbR_XI66GWB": { "name": "The Undying" },
+    "-N2HisjBUam2lBiglyXj": { "name": "Bladesinging" },
+    "-N2Hit_Gvafk59lJ1biZ": { "name": "Chronurgy Magic" },
+    "-N2Hiu3yWijxAX445QYp": { "name": "Graviturgy Magic" },
+    "-N2HiuoDyhRl4QLz_V6G": { "name": "Order of Scribes" },
+    "-N2HivJVpCbFsxkBT91T": { "name": "School of Abjuration" },
+    "-N2HivlaRCvMrw0588zM": { "name": "School of Conjuration" },
+    "-N2HiwDD5PjP4B62djRT": { "name": "School of Divination" },
+    "-N2Hix2c1tRfzB90zrPr": { "name": "School of Enchantment" },
+    "-N2HixYwtjK5cf7xvArg": { "name": "School of Evocation" },
+    "-N2HixxxxQBMJ4KAH4QG": { "name": "School of Illusion" },
+    "-N2HiyQYzGNDEykb25G8": { "name": "School of Necromancy" },
+    "-N2Hiz4SCIcDNlPCY5bi": { "name": "School of Transmutation" },
+    "-N2HizpwqVaaDjlzU0mP": { "name": "War Magic" }
+  },
+  "classConfigs": {
+    "-N2EI9PXvGBkf4zRnZaX": {
+      "classId": "-N2EEHHLGxJmobZ--n4f",
+      "subclassId": "-N2EHXVvI-yOy3tngd7t"
+    },
+    "-N2EI9TBo3Oxqs-4eP3b": {
+      "classId": "-N2EEHHLGxJmobZ--n4f",
+      "subclassId": "-N2EHXedg2kI5zubG64R"
+    },
+    "-N2EI9WFJ1IRLOJDfHg1": {
+      "classId": "-N2EEHHLGxJmobZ--n4f",
+      "subclassId": "-N2EHY5ntXm4DcS106Qd"
+    },
+    "-N2EI9Z6zZNZfBwed2DI": {
+      "classId": "-N2EEHHLGxJmobZ--n4f",
+      "subclassId": "-N2EHYDVnPbI_AVbugbx"
+    },
+    "-N2H4hlE-sKPwI4aqTPy": {
+      "classId": "-N2EEK1nbKvZFlsHnBsP",
+      "subclassId": "-N2H3lL9NcZFhV5Y9nIp"
+    },
+    "-N2H4hMTeJElzItR4NOq": {
+      "classId": "-N2EEK1nbKvZFlsHnBsP",
+      "subclassId": "-N2H3lQXNDz5QBj0HoDJ"
+    },
+    "-N2H4gmRHieh7zqHzZXW": {
+      "classId": "-N2EEK1nbKvZFlsHnBsP",
+      "subclassId": "-N2H3lVdezbUR6Suwsrd"
+    },
+    "-N2H4gC-uMVACgptHH35": {
+      "classId": "-N2EEK1nbKvZFlsHnBsP",
+      "subclassId": "-N2H3l_cTn3GR7wYXqko"
+    },
+    "-N2H4fPXZlmRe172CSXK": {
+      "classId": "-N2EEK1nbKvZFlsHnBsP",
+      "subclassId": "-N2H3lfE6VkBmTcBDSUr"
+    },
+    "-N2H4b2VRK-BiEEq34mC": {
+      "classId": "-N2EEK1nbKvZFlsHnBsP",
+      "subclassId": "-N2H3lk5gUfPPrvmX_VV"
+    },
+    "-N2H4b5bmqW-2CDsQpLi": {
+      "classId": "-N2EEK1nbKvZFlsHnBsP",
+      "subclassId": "-N2H3lpVhbXmIq8B_cV_"
+    },
+    "-N2H4b7-DgjFdlrXn6vb": {
+      "classId": "-N2EEK1nbKvZFlsHnBsP",
+      "subclassId": "-N2H3lv_usLpdVy5gtOo"
+    },
+    "-N2H5Z7ob5F_x9l3XfVv": {
+      "classId": "-N2EEK9PEETQ78H5w6TY",
+      "subclassId": "-N2H512JFyDSnNUbGVN3"
+    },
+    "-N2H5amTwpLXWeZALw9w": {
+      "classId": "-N2EEK9PEETQ78H5w6TY",
+      "subclassId": "-N2H514B_LFnriKjeKw_"
+    },
+    "-N2H5j3FjyoiZzGrPwnP": {
+      "classId": "-N2EEK9PEETQ78H5w6TY",
+      "subclassId": "-N2H51aS1f2brG3BNvOP"
+    },
+    "-N2H5kXzmC-1LwNM44pF": {
+      "classId": "-N2EEK9PEETQ78H5w6TY",
+      "subclassid": "-N2H51eKB3-xHEhi-2wA"
+    },
+    "-N2H5np2dyyhcuWfAWyH": {
+      "classId": "-N2EEK9PEETQ78H5w6TY",
+      "subclassId": "-N2H51je8L95zIRZmCtf"
+    },
+    "-N2H5oWbnFyhy1WFH3zg": {
+      "classId": "-N2EEK9PEETQ78H5w6TY",
+      "subclassId": "-N2H51oNSKwHIaDFUCK7"
+    },
+    "-N2H5p3_bkYPwy70ouVO": {
+      "classId": "-N2EEK9PEETQ78H5w6TY",
+      "subclassId": "-N2H51tnpw2IN2cwYsiq"
+    },
+    "-N2H5pddOapdSvxWq0R3": {
+      "classId": "-N2EEK9PEETQ78H5w6TY",
+      "subclassId": "-N2H51yaxBr1UJIUEw6L"
+    },
+    "-N2H7tirKx8ONeMzp4iT": {
+      "classId": "-N2EEKGSpfU7hNkO6i7s",
+      "subclassId": "-N2H7_PfNDcCYL-Uigu2"
+    },
+    "-N2H7ubXRU1b_g4suW19": {
+      "classId": "-N2EEKGSpfU7hNkO6i7s",
+      "subclassId": "-N2H7_SSEE0DNW-1mYUF"
+    },
+    "-N2H7v5Bkx1fLyfo0rVV": {
+      "classId": "-N2EEKGSpfU7hNkO6i7s",
+      "subclassId": "-N2H7_VRPU6TLDbO4I-A"
+    },
+    "-N2H7vVRM-mD8tkArtGH": {
+      "classId": "-N2EEKGSpfU7hNkO6i7s",
+      "subclassId": "-N2H7_YYxh81FbZxTIwt"
+    },
+    "-N2H8prm3AmRZHFi2Ibs": {
+      "classId": "-N2EEKJ-KZfrehWji3cv",
+      "subclassId": "-N2H8RnFnnYJc_FVU5L_"
+    },
+    "-N2H8qQBk_4Y62jZ_2Rf": {
+      "classId": "-N2EEKJ-KZfrehWji3cv",
+      "subclassId": "-N2H8SSToRGE0ZrZpcf1"
+    },
+    "-N2H8qxQbzIHAcJSBxX4": {
+      "classId": "-N2EEKJ-KZfrehWji3cv",
+      "subclassId": "-N2H8Ssgt2BlMsd5WvbP"
+    },
+    "-N2H8rODUreo0K5odpZY": {
+      "classId": "-N2EEKJ-KZfrehWji3cv",
+      "subclassId": "-N2H8TMLYzJAJ6wSBnWb"
+    },
+    "-N2H8rqMf57A2xAzcDcq": {
+      "classId": "-N2EEKJ-KZfrehWji3cv",
+      "subclassId": "-N2H8Tlwh7rsxUpcsnnn"
+    },
+    "-N2H8sGdAJmx3XT5acj6": {
+      "classId": "-N2EEKJ-KZfrehWji3cv",
+      "subclassId": "-N2H8UWuT1Wjn_P5PZYr"
+    },
+    "-N2H8swLrsrsvZZOa84-": {
+      "classId": "-N2EEKJ-KZfrehWji3cv",
+      "subclassId": "-N2H8V2baL_mKDxPoJ5A"
+    },
+    "-N2H8tR2iA2gly89GNv1": {
+      "classId": "-N2EEKJ-KZfrehWji3cv",
+      "subclassId": "-N2H8VVLlCLAgtWZPBsG"
+    },
+    "-N2H8tqv6SsAHPpOjkx6": {
+      "classId": "-N2EEKJ-KZfrehWji3cv",
+      "subclassId": "-N2H8VtFUtVn_ybtFvAo"
+    },
+    "-N2H8uMeFLbyWU1SjiGz": {
+      "classId": "-N2EEKJ-KZfrehWji3cv",
+      "subclassId": "-N2H8WKvBd8eTs2TQSle"
+    },
+    "-N2H8un6-4CCd2_RLCl8": {
+      "classId": "-N2EEKJ-KZfrehWji3cv",
+      "subclassId": "-N2H8Wq7JhOXKi-Tsvwr"
+    },
+    "-N2H8vDMi_QxjvWu-5FT": {
+      "classId": "-N2EEKJ-KZfrehWji3cv",
+      "subclassId": "-N2H8XOXGK0XpTiPvaM9"
+    },
+    "-N2H8vradO2KJBDWnHHG": {
+      "classId": "-N2EEKJ-KZfrehWji3cv",
+      "subclassId": "-N2H8Xmx2bPR5q5M2jxe"
+    },
+    "-N2H8wR34yuK020cfQEv": {
+      "classId": "-N2EEKJ-KZfrehWji3cv",
+      "subclassId": "-N2H8YF11-gAWQSLwCK8"
+    },
+    "-N2HZRDur102zBZ0T7It": {
+      "classId": "-N2EEKLQ-OgmeZN4Oswj",
+      "subclassId": "-N2HYl2r1jrmLP7oCoyS"
+    },
+    "-N2HZRg6EE4PLWG9uGDv": {
+      "classId": "-N2EEKLQ-OgmeZN4Oswj",
+      "subclassId": "-N2HYmteXPmz7Wfhc4HR"
+    },
+    "-N2HZSEw8IdL0Zi0BzJP": {
+      "classId": "-N2EEKLQ-OgmeZN4Oswj",
+      "subclassId": "-N2HYnigMev_WoIcaTxG"
+    },
+    "-N2HZSikLEWog89SlamG": {
+      "classId": "-N2EEKLQ-OgmeZN4Oswj",
+      "subclassId": "-N2HYoHnVAoAUXCf3GUS"
+    },
+    "-N2HZT9ACDHVczNbUkrf": {
+      "classId": "-N2EEKLQ-OgmeZN4Oswj",
+      "subclassId": "-N2HYoxJjDTg1sy_HVai"
+    },
+    "-N2HZTd2lhZ-O2MByR87": {
+      "classId": "-N2EEKLQ-OgmeZN4Oswj",
+      "subclassId": "-N2HYpNJDUOCWwXMJWkA"
+    },
+    "-N2HZU8B6ldn4odrtVAr": {
+      "classId": "-N2EEKLQ-OgmeZN4Oswj",
+      "subclassId": "-N2HYpqG6nnrYzBcfNrf"
+    },
+    "-N2HdCZQIdFNhCvXOW3f": {
+      "classId": "-N2EEKQFg13Egsu-QTE7",
+      "subclassId": "-N2HcrhlrLfHb0qOYQyl"
+    },
+    "-N2HdewH3-EChRhaOxks": {
+      "classId": "-N2EEKQFg13Egsu-QTE7",
+      "subclassId": "-N2HcsHMNyCtsDKmGNkZ"
+    },
+    "-N2HdfaYBysUaz1zUGrT": {
+      "classId": "-N2EEKQFg13Egsu-QTE7",
+      "subclassId": "-N2HcsiSrnRFTyZ_INJ6"
+    },
+    "-N2HdgfwyUfoKO_RMZvP": {
+      "classId": "-N2EEKQFg13Egsu-QTE7",
+      "subclassId": "-N2Hct8HML5ZaoTrHV1j"
+    },
+    "-N2Hdg7jmaG0UJzO3GrS": {
+      "classId": "-N2EEKQFg13Egsu-QTE7",
+      "subclassId": "-N2HctgAq3VHxKwDav3R"
+    },
+    "-N2Hdi6T74f8z1xz-ntH": {
+      "classId": "-N2EEKQFg13Egsu-QTE7",
+      "subclassId": "-N2Hcu4UDM9hIux-6roM"
+    },
+    "-N2HdiaSItEPSbUOElAI": {
+      "classId": "-N2EEKQFg13Egsu-QTE7",
+      "subclassId": "-N2HcuU5CRh3fzxwVij0"
+    },
+    "-N2HdjJL1rhSkjr9RBf7": {
+      "classId": "-N2EEKQFg13Egsu-QTE7",
+      "subclassId": "-N2Hcv3oPvXkpLHqjFiL"
+    },
+    "-N2HdjhhUxE4ToFVJkP6": {
+      "classId": "-N2EEKQFg13Egsu-QTE7",
+      "subclassId": "-N2HcvaOTzOxUnVRbbum"
+    },
+    "-N2HdkCe3LCZHUuPaE07": {
+      "classId": "-N2EEKQFg13Egsu-QTE7",
+      "subclassId": "-N2Hcvzx0N9IaztRMz-c"
+    },
+    "-N2HdkkzHiV9NLq0-OAN": {
+      "classId": "-N2EEKQFg13Egsu-QTE7",
+      "subclassId": "-N2HcwQyI3D5K-91bJjE"
+    },
+    "-N2HfFQLEuyc77gZ6-kp": {
+      "classId": "-N2EEKSCjFFWMXzwn6IB",
+      "subclassId": "-N2Hev0-qYT5VPprWZEV"
+    },
+    "-N2HfFzIWVdB0M_wXgWg": {
+      "classId": "-N2EEKSCjFFWMXzwn6IB",
+      "subclassId": "-N2HevlpRNndihxRdrNS"
+    },
+    "-N2HfH7fpM7o3_Ke0y_c": {
+      "classId": "-N2EEKSCjFFWMXzwn6IB",
+      "subclassId": "-N2HewPOCRJyXU0ptpha"
+    },
+    "-N2HfI8PvuArosLVc7Ya": {
+      "classId": "-N2EEKSCjFFWMXzwn6IB",
+      "subclassId": "-N2HexHd3okBPd1MDVFE"
+    },
+    "-N2HfIg3ZvptKTBUzlw8": {
+      "classId": "-N2EEKSCjFFWMXzwn6IB",
+      "subclassId": "-N2Hexidfz_wvfgSeL6M"
+    },
+    "-N2HfJ7wrdb2mGfuFqcW": {
+      "classId": "-N2EEKSCjFFWMXzwn6IB",
+      "subclassId": "-N2HeyKXgkRHlAy_oWug"
+    },
+    "-N2HfMQzNSv9YHyGIbsR": {
+      "classId": "-N2EEKSCjFFWMXzwn6IB",
+      "subclassId": "-N2HeyyHm3SafhbLN7ru"
+    },
+    "-N2HfN6BdgGc3DSLCb9q": {
+      "classId": "-N2EEKSCjFFWMXzwn6IB",
+      "subclassId": "-N2HezUwGpRcXPbfFF3D"
+    },
+    "-N2HfNaLOJXgHXlZurm7": {
+      "classId": "-N2EEKSCjFFWMXzwn6IB",
+      "subclassId": "-N2Hf-czHufzc5cmNv3R"
+    },
+    "-N2HfO-QbdoNhGRt5eap": {
+      "classId": "-N2EEKSCjFFWMXzwn6IB",
+      "subclassId": "-N2Hf05r6BS3VDyHzlSk"
+    },
+    "-N2HfOQxBseqk6tmTOJ0": {
+      "classId": "-N2EEKSCjFFWMXzwn6IB",
+      "subclassId": "-N2Hf0a66jGL74I06neP"
+    },
+    "-N2HfrJTXM_EmoufRBcM": {
+      "classId": "-N2EEKUAxxgsDPmyvh4G",
+      "subclassId": "-N2HfbfAxX3Qywzp4Wvm"
+    },
+    "-N2Hfrwy_WMT9yh9KSTT": {
+      "classId": "-N2EEKUAxxgsDPmyvh4G",
+      "subclassId": "-N2HfcAwuJNHz_90QTcv"
+    },
+    "-N2HfsSBupqw31BbrMZ_": {
+      "classId": "-N2EEKUAxxgsDPmyvh4G",
+      "subclassId": "-N2Hfcm8lkRm1TODZGeq"
+    },
+    "-N2HftOp6wFSrMO8_WvK": {
+      "classId": "-N2EEKUAxxgsDPmyvh4G",
+      "subclassId": "-N2HfdJkAH_fWjt7tzGO"
+    },
+    "-N2Hftmm-vUqqexWv8In": {
+      "classId": "-N2EEKUAxxgsDPmyvh4G",
+      "subclassId": "-N2Hfdm0eQlLByxbajdz"
+    },
+    "-N2HfuBZcTMvEiEGhtkh": {
+      "classId": "-N2EEKUAxxgsDPmyvh4G",
+      "subclassId": "-N2HfeHLne2gnh3puL_s"
+    },
+    "-N2Hfu_IpCnhuAGzdNsW": {
+      "classId": "-N2EEKUAxxgsDPmyvh4G",
+      "subclassId": "-N2HfewsE8ocJ3NEEjUl"
+    },
+    "-N2HfvAtDb8_JgyO34zx": {
+      "classId": "-N2EEKUAxxgsDPmyvh4G",
+      "subclassId": "-N2HffTyyk6Co3IQLIVH"
+    },
+    "-N2HfveXZnC-z2nqUk3g": {
+      "classId": "-N2EEKUAxxgsDPmyvh4G",
+      "subclassId": "-N2Hfg5eWDhf4kIc42E4"
+    },
+    "-N2Hfw8sGoxqMwdRh5_I": {
+      "classId": "-N2EEKUAxxgsDPmyvh4G",
+      "subclassId": "-N2HfgxV5Za7ygbjBN2X"
+    },
+    "-N2Hgjn2WIccXmGhSq_5": {
+      "classId": "-N2EEKVvXgGLjk2qdmVw",
+      "subclassId": "-N2HgQQ43C6HsBSOdE-4"
+    },
+    "-N2HgkTKrJ-8kOgy_Ar9": {
+      "classId": "-N2EEKVvXgGLjk2qdmVw",
+      "subclassId": "-N2HgRKSVv9ydb7hDAyj"
+    },
+    "-N2HgkoHr_YmkYrKQpi1": {
+      "classId": "-N2EEKVvXgGLjk2qdmVw",
+      "subclassId": "-N2HgQrbeJjejNuGMdXH"
+    },
+    "-N2HglESf9fmvt9fyXT6": {
+      "classId": "-N2EEKVvXgGLjk2qdmVw",
+      "subclassId": "-N2HgRnuunaUpF7nrNa6"
+    },
+    "-N2HgldtCKgFpg2vXyCr": {
+      "classId": "-N2EEKVvXgGLjk2qdmVw",
+      "subclassId": "-N2HgSN6INAgO5NkePSa"
+    },
+    "-N2Hgm2eSfEUtYkGv--O": {
+      "classId": "-N2EEKVvXgGLjk2qdmVw",
+      "subclassId": "-N2HgSn3R9bf8s2bkazW"
+    },
+    "-N2Hgm_tj4eJCGGF3-gA": {
+      "classId": "-N2EEKVvXgGLjk2qdmVw",
+      "subclassId": "-N2HgTCUTibqmfICCbej"
+    },
+    "-N2Hgn17aWUo5PBqNSv9": {
+      "classId": "-N2EEKVvXgGLjk2qdmVw",
+      "subclassId": "-N2HgTawLhvdA21L1mkw"
+    },
+    "-N2Hjb5M5XWnU0aJQVhL": {
+      "classId": "-N2EEKXs7BR4ZZobP4hY",
+      "subclassId": "-N2HibxThncchsnYiSsS"
+    },
+    "-N2HjbZPiNQpG0J2ZAcV": {
+      "classId": "-N2EEKXs7BR4ZZobP4hY",
+      "subclassId": "-N2HicXuS-bbyyMlF0GX"
+    },
+    "-N2HjbwtAVOdEOWkVAkp": {
+      "classId": "-N2EEKXs7BR4ZZobP4hY",
+      "subclassId": "-N2Hid3zl3PlhMdIExBj"
+    },
+    "-N2HjccUdihHT_ng8M97": {
+      "classId": "-N2EEKXs7BR4ZZobP4hY",
+      "subclassId": "-N2HidX3s0FiriQeklY3"
+    },
+    "-N2Hjd1D6rSEI751XWk_": {
+      "classId": "-N2EEKXs7BR4ZZobP4hY",
+      "subclassId": "-N2HidxZbeX675JYfKdX"
+    },
+    "-N2HjdSQmsDhbXlIvew-": {
+      "classId": "-N2EEKXs7BR4ZZobP4hY",
+      "subclassId": "-N2HieNNeJqKCGyRlZrW"
+    },
+    "-N2Hjdt0GzoAHc3tfAxy": {
+      "classId": "-N2EEKXs7BR4ZZobP4hY",
+      "subclassId": "-N2Hielon3j60DblHmXI"
+    },
+    "-N2HjeKgKNTBY92Kr8cR": {
+      "classId": "-N2EEKXs7BR4ZZobP4hY",
+      "subclassId": "-N2HifXGPY01W026rQDY"
+    },
+    "-N2Hjej5lDzVjqE9Z2_5": {
+      "classId": "-N2EEKXs7BR4ZZobP4hY",
+      "subclassId": "-N2HigCmSo6r-X1sxLHz"
+    },
+    "-N2HjfM8LHUrcSo6bh7V": {
+      "classId": "-N2EEKZxWJzn1kSMQN4b",
+      "subclassId": "-N2HighajHsMX7Jda6y_"
+    },
+    "-N2HjflqXiE8gHJ5TO_B": {
+      "classId": "-N2EEKZxWJzn1kSMQN4b",
+      "subclassId": "-N2Hih5GrTOErntf1-ac"
+    },
+    "-N2HjgBMPhJv8S2itTlY": {
+      "classId": "-N2EEKZxWJzn1kSMQN4b",
+      "subclassId": "-N2HihWt1eDm9815B-O4"
+    },
+    "-N2Hjg_FgZ6NRsCukPB7": {
+      "classId": "-N2EEKZxWJzn1kSMQN4b",
+      "subclassId": "-N2Hihxv7p2X5GH5BcFg"
+    },
+    "-N2HjhVHqHMz7tjbZLUi": {
+      "classId": "-N2EEKZxWJzn1kSMQN4b",
+      "subclassId": "-N2HiiOBCLfsC-Yba0NL"
+    },
+    "-N2Hji1TOXVZ28zMWqsc": {
+      "classId": "-N2EEKZxWJzn1kSMQN4b",
+      "subclassId": "-N2HiisWq0gDLBFBjF2O"
+    },
+    "-N2HjiOvqboMS8v_n3-H": {
+      "classId": "-N2EEKZxWJzn1kSMQN4b",
+      "subclassId": "-N2HijPi0f9H-UMA4Xbq"
+    },
+    "-N2Hjin_mehhE7B2aiCw": {
+      "classId": "-N2EEKb7OUBokm-2jXdF",
+      "subclassId": "-N2HijtE9AGbGGFBCMOZ"
+    },
+    "-N2HjjAKoParEnFxpsB1": {
+      "classId": "-N2EEKb7OUBokm-2jXdF",
+      "subclassId": "-N2HikQ1m4fdlmJNx3KN"
+    },
+    "-N2HjjjhqphiTfMDftVe": {
+      "classId": "-N2EEKb7OUBokm-2jXdF",
+      "subclassId": "-N2HikyPyJDn51Vdf-xT"
+    },
+    "-N2Hjl5cPD-25J87YOz9": {
+      "classId": "-N2EEKb7OUBokm-2jXdF",
+      "subclassId": "-N2HilU1Qwpg8jghU4xz"
+    },
+    "-N2HjlWxVRJytFVO0EtK": {
+      "classId": "-N2EEKb7OUBokm-2jXdF",
+      "subclassId": "-N2Hin7F1Xj-Y0BzHSdU"
+    },
+    "-N2HjlzVqv0bQFhJTGWO": {
+      "classId": "-N2EEKb7OUBokm-2jXdF",
+      "subclassId": "-N2Hin_j0jTylhLZ6_s1"
+    },
+    "-N2Hjn8wn_OzmmUzNPPY": {
+      "classId": "-N2EEKb7OUBokm-2jXdF",
+      "subclassId": "-N2Hiow6WB40KDjs6iFY"
+    },
+    "-N2Hjn_dyS2NhDIqH5AR": {
+      "classId": "-N2EEKb7OUBokm-2jXdF",
+      "subclassId": "-N2HirVQOKSNsM0wv4JO"
+    },
+    "-N2Hjnzm5FZLKN6LsDDF": {
+      "classId": "-N2EEKb7OUBokm-2jXdF",
+      "subclassId": "-N2HisI6tLbR_XI66GWB"
+    },
+    "-N2HjoUFB81DNaWIdTqY": {
+      "classId": "-N2EEKdBChDzdDsDvkuu",
+      "subclassId": "-N2HisjBUam2lBiglyXj"
+    },
+    "-N2HjpOEfZwKDgF29hif": {
+      "classId": "-N2EEKdBChDzdDsDvkuu",
+      "subclassId": "-N2Hit_Gvafk59lJ1biZ"
+    },
+    "-N2Hjq0Pw2UxHmvHPrNf": {
+      "classId": "-N2EEKdBChDzdDsDvkuu",
+      "subclassId": "-N2Hiu3yWijxAX445QYp"
+    },
+    "-N2Hjqe4uSfIu1CSR2hf": {
+      "classId": "-N2EEKdBChDzdDsDvkuu",
+      "subclassId": "-N2HiuoDyhRl4QLz_V6G"
+    },
+    "-N2HjrLLKdaXh5ytJeGa": {
+      "classId": "-N2EEKdBChDzdDsDvkuu",
+      "subclassId": "-N2HivJVpCbFsxkBT91T"
+    },
+    "-N2Hjrjv8njoaDbD7iEW": {
+      "classId": "-N2EEKdBChDzdDsDvkuu",
+      "subclassId": "-N2HivlaRCvMrw0588zM"
+    },
+    "-N2HjsKO3vDMDFwruyNP": {
+      "classId": "-N2EEKdBChDzdDsDvkuu",
+      "subclassId": "-N2HiwDD5PjP4B62djRT"
+    },
+    "-N2Hjt4LxSkWpTa_jr15": {
+      "classId": "-N2EEKdBChDzdDsDvkuu",
+      "subclassId": "-N2Hix2c1tRfzB90zrPr"
+    },
+    "-N2HjtYA6_Pu3BDQNjJV": {
+      "classId": "-N2EEKdBChDzdDsDvkuu",
+      "subclassId": "-N2HixYwtjK5cf7xvArg"
+    },
+    "-N2Hju8MUHq-z8-QVZyt": {
+      "classId": "-N2EEKdBChDzdDsDvkuu",
+      "subclassId": "-N2HixxxxQBMJ4KAH4QG"
+    },
+    "-N2Hjuerm7rdZdCAbb16": {
+      "classId": "-N2EEKdBChDzdDsDvkuu",
+      "subclassId": "-N2HiyQYzGNDEykb25G8"
+    },
+    "-N2Hjv76tlR8rwo8tC-B": {
+      "classId": "-N2EEKdBChDzdDsDvkuu",
+      "subclassId": "-N2Hiz4SCIcDNlPCY5bi"
+    },
+    "-N2HjwMphDn48GAC8NDC": {
+      "classId": "-N2EEKdBChDzdDsDvkuu",
+      "subclassId": "-N2HizpwqVaaDjlzU0mP"
+    }
+  },
+  "maps": {
+    "-N2Ho2Bv9PyId_uPU466": {
+      "name": "The Forgotten Lands"
+    },
+    "-N2Ho35e7smUBHZx7sEZ": {
+      "name": "The Lunar Isles"
+    },
+    "-N2Ho3wDN80qp2cAWF13": {
+      "name": "The Shattered Realm"
+    },
+    "-N2Ho4bDUkhIqi4tAUjC": {
+      "name": "The Everwilds"
     }
   }
 }

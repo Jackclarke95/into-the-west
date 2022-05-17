@@ -19,7 +19,7 @@ const PasswordManagementDialog = () => {
   const showAccountManagementDialog = useSelector(
     (state) => state.showPasswordManagementDialog
   );
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.authUser);
 
   const [password, setPassword] = useState<string | undefined>(undefined);
   const [passwordRepeat, setPasswordRepeat] = useState<string | undefined>(

@@ -20,7 +20,7 @@ import SessionCreationDialog from "./Components/Dialogs/SessionCreationDialog";
 import CharacterRetirementDialog from "./Components/Dialogs/CharacterRetirementDialog";
 import ICharacterData from "./Interfaces/ICharacterData";
 import ISessionData from "./Interfaces/ISessionData";
-import IPlayerData from "./Interfaces/IPlayerData";
+import IUserData from "./Interfaces/IUserData";
 
 import Everwilds from "./Images/Maps/The Everwilds - Preview.jpg";
 import ForgottenLands from "./Images/Maps/The Forgotten Lands - Preview.jpg";
@@ -52,7 +52,7 @@ export const auth = getAuth();
 const App = () => {
   const dispatch = useDispatch();
 
-  const user = useSelector((state) => state.user);
+  const authUser = useSelector((state) => state.authUser);
 
   onValue(ref(db, "characters"), (snapshot) => {
     const characterData = snapshot.val() as ICharacterData[];
@@ -104,21 +104,21 @@ const App = () => {
     });
   });
 
-  onValue(ref(db, "players"), (snapshot) => {
-    const playerData = snapshot.val() as IPlayerData[];
+  onValue(ref(db, "users"), (snapshot) => {
+    const userData = snapshot.val() as IUserData[];
 
-    const players = Object.keys(playerData).map((key) => {
-      const player = playerData[key];
-      player.key = key;
+    const users = Object.keys(userData).map((key) => {
+      const user = userData[key];
+      user.key = key;
 
-      return player;
+      return user;
     });
 
     dispatch({
-      type: "SetPlayers",
-      players: {
+      type: "SetUsers",
+      users: {
         isLoading: false,
-        data: players,
+        data: users,
       },
     });
   });
@@ -126,23 +126,23 @@ const App = () => {
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       dispatch({
-        type: "SetUser",
-        user: user,
+        type: "SetAuthUser",
+        authUser: user,
       });
 
-      const playersRef = ref(db, "players/" + user.uid);
+      const usersRef = ref(db, "users/" + user.uid);
 
-      const playerData = await get(playersRef)
+      const userData = await get(usersRef)
         .then((response) => {
           return response.val();
         })
         .catch((e) => console.error("error", e));
 
       dispatch({
-        type: "SetCurrentPlayer",
-        currentPlayer: {
+        type: "SetCurrentUser",
+        currentUser: {
           isLoading: false,
-          data: playerData,
+          data: userData,
         },
       });
     }
@@ -158,7 +158,7 @@ const App = () => {
         root: {
           textAlign: "center",
           height: "100vh",
-          backgroundImage: user
+          backgroundImage: authUser
             ? `url("${DataHelper.getRandomFromArray([
                 Everwilds,
                 ForgottenLands,
@@ -174,7 +174,7 @@ const App = () => {
         },
       }}
     >
-      {user ? (
+      {authUser ? (
         <>
           <Header />
           <Dashboard />

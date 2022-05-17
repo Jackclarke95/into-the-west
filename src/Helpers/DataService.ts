@@ -12,7 +12,7 @@ import { push, ref, set, update } from "firebase/database";
 import { auth, db } from "../App";
 import ICharacter from "../Interfaces/ICharacter";
 import ICharacterData from "../Interfaces/ICharacterData";
-import IPlayerData from "../Interfaces/IPlayerData";
+import IUserData from "../Interfaces/IUserData";
 import ISession from "../Interfaces/ISession";
 import ISessionData from "../Interfaces/ISessionData";
 
@@ -27,6 +27,14 @@ export type UserData = {
 };
 
 export default class DataService {
+  public static generateKey(): string | null {
+    const testRef = ref(db, "test");
+
+    const key = push(testRef).key;
+
+    return key;
+  }
+
   /**
    * Creates a character in the Firebase Realtime Database
    * @param character The character to create
@@ -157,7 +165,7 @@ export default class DataService {
           dndBeyondName: userData.dndBeyondName,
           isDungeonMaster: userData.isDungeonMaster,
           isGamesMaster: userData.isGamesMaster,
-        } as IPlayerData;
+        } as IUserData;
 
         DataService.createPlayer(uid, playerToCreate);
       })
@@ -210,7 +218,7 @@ export default class DataService {
    * Creates a player record in the Firebase Realtime Database
    * @param player The player record to create
    */
-  public static createPlayer = async (uid: string, player: IPlayerData) => {
+  public static createPlayer = async (uid: string, player: IUserData) => {
     const usersRef = ref(db, "players/" + uid);
 
     await set(usersRef, player).then((result) => console.log({ result }));

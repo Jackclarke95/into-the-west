@@ -1,4 +1,4 @@
-export default interface IPlayer {
+export default interface IUser {
   key: string;
   name: string;
   discordTag: string;

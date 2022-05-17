@@ -1,4 +1,4 @@
-export default interface IPlayerData {
+export default interface IUserData {
   email: string;
   name: string;
   discordTag: string;

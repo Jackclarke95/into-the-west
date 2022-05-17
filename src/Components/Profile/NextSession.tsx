@@ -20,7 +20,7 @@ const NextSession = () => {
   const characters = useSelector((state) => state.characters);
   const activeCharacter = useSelector((state) => state.activeCharacter);
   const isDevMode = useSelector((state) => state.isDevMode);
-  const currentPlayer = useSelector((state) => state.currentPlayer);
+  const currentPlayer = useSelector((state) => state.currentUser);
 
   let upcomingSessions = [] as ISession[];
 

@@ -24,7 +24,7 @@ const CharacterCreationDialog = () => {
   const dispatch = useDispatch();
 
   const showDialog = useSelector((state) => state.showCharacterCreationDialog);
-  const currentPlayer = useSelector((state) => state.currentPlayer);
+  const currentPlayer = useSelector((state) => state.currentUser);
 
   const [characterName, setCharacterName] = useState<string | undefined>(
     undefined
@@ -255,8 +255,6 @@ const CharacterCreationDialog = () => {
 
     return true;
   };
-
-  console.log({ characterSubclass });
 
   return (
     <Dialog
