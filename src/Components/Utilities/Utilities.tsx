@@ -1,12 +1,20 @@
 import { DefaultButton, FontSizes, Separator, Stack } from "@fluentui/react";
 import { get, ref } from "firebase/database";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import DataService from "../../Helpers/DataService";
 import { db } from "../../App";
 import Races from "../../Data/Races";
 
 const Utilities = () => {
   const dispatch = useDispatch();
+
+  const races = useSelector((state) => state.races);
+  const subraces = useSelector((state) => state.subraces);
+  const raceConfigs = useSelector((state) => state.raceConfigs);
+
+  const classes = useSelector((state) => state.classes);
+  const subclasses = useSelector((state) => state.subclasses);
+  const classConfigs = useSelector((state) => state.classConfigs);
 
   const onClickShowTokenCreator = () => {
     console.log("Displaying token creator");

@@ -242,7 +242,7 @@ const CharacterCreationDialog = () => {
     ) {
       setMessageBarMessage(
         `The selected must have ${
-          DataHelper.startsWithVowell(cls.archetypeDefinition.name) ? "an" : "a"
+          DataHelper.startsWithVowel(cls.archetypeDefinition.name) ? "an" : "a"
         } ${cls.archetypeDefinition.name} at ${DataHelper.formatOrdinalNumber(
           characterLevel
         )} level`

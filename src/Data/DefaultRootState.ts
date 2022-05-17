@@ -26,6 +26,18 @@ declare module "react-redux" {
       | { isLoading: true }
       | { isLoading: false; data: IUser | undefined };
 
+    classes: { isLoading: true } | { isLoading: false; data: any };
+
+    subclasses: { isLoading: true } | { isLoading: false; data: any };
+
+    classConfigs: { isLoading: true } | { isLoading: false; data: any };
+
+    races: { isLoading: true } | { isLoading: false; data: any };
+
+    subraces: { isLoading: true } | { isLoading: false; data: any };
+
+    raceConfigs: { isLoading: true } | { isLoading: false; data: any };
+
     showCharacterCreationDialog: boolean;
 
     showSessionCreationDialog: boolean;

@@ -5,10 +5,6 @@ import { DefaultRootState } from "react-redux";
 /** Description of all the Actions taken that can affect the state */
 export type Action =
   | { type: "SetDarkMode"; darkMode: DefaultRootState["darkMode"] }
-  | {
-      type: "SetCurrentUser";
-      currentUser: DefaultRootState["currentUser"];
-    }
   | { type: "SetCharacters"; characters: DefaultRootState["characters"] }
   | {
       type: "SetActiveCharacter";
@@ -16,6 +12,20 @@ export type Action =
     }
   | { type: "SetSessions"; sessions: DefaultRootState["sessions"] }
   | { type: "SetUsers"; users: DefaultRootState["users"] }
+  | {
+      type: "SetCurrentUser";
+      currentUser: DefaultRootState["currentUser"];
+    }
+  | { type: "SetClasses"; classes: DefaultRootState["classes"] }
+  | { type: "SetSubclasses"; subclasses: DefaultRootState["subclasses"] }
+  | { type: "SetClassConfigs"; classConfigs: DefaultRootState["classConfigs"] }
+  | { type: "SetRaces"; races: DefaultRootState["races"] }
+  | { type: "SetSubraces"; subraces: DefaultRootState["subraces"] }
+  | { type: "SetRaceConfigs"; raceConfigs: DefaultRootState["raceConfigs"] }
+  | {
+      type: "SetAuthUser";
+      authUser: DefaultRootState["authUser"];
+    }
   | {
       type: "SetShowCharacterCreationDialog";
       showCharacterCreationDialog: DefaultRootState["showCharacterCreationDialog"];
@@ -53,10 +63,6 @@ export type Action =
       showTokenCreatorDialog: DefaultRootState["showTokenCreatorDialog"];
     }
   | {
-      type: "SetAuthUser";
-      authUser: DefaultRootState["authUser"];
-    }
-  | {
       type: "SetShowNewRaceDialog";
       showNewRaceDialog: DefaultRootState["showNewRaceDialog"];
     }
@@ -80,6 +86,18 @@ export const initialState: DefaultRootState = {
   users: { isLoading: true },
 
   currentUser: { isLoading: true },
+
+  classes: { isLoading: true },
+
+  subclasses: { isLoading: true },
+
+  classConfigs: { isLoading: true },
+
+  races: { isLoading: true },
+
+  subraces: { isLoading: true },
+
+  raceConfigs: { isLoading: true },
 
   showCharacterCreationDialog: false,
 
@@ -154,6 +172,42 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         // Action for setting the Players
         case "SetUsers": {
           draftState.users = action.users;
+          break;
+        }
+
+        // Action for setting the Classes
+        case "SetClasses": {
+          draftState.classes = action.classes;
+          break;
+        }
+
+        // Action for setting the Subclasses
+        case "SetSubclasses": {
+          draftState.subclasses = action.subclasses;
+          break;
+        }
+
+        // Action for setting the Class Configurations
+        case "SetClassConfigs": {
+          draftState.classConfigs = action.classConfigs;
+          break;
+        }
+
+        // Action for setting the Races
+        case "SetRaces": {
+          draftState.races = action.races;
+          break;
+        }
+
+        // Action for setting the Subraces
+        case "SetSubraces": {
+          draftState.subraces = action.subraces;
+          break;
+        }
+
+        // Action for setting the Race Configurations
+        case "SetRaceConfigs": {
+          draftState.raceConfigs = action.raceConfigs;
           break;
         }
 

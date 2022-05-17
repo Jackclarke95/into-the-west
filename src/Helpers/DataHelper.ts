@@ -35,7 +35,7 @@ export default class DataHelper {
    * @param word The string to determine
    * @returns Whether the string starts with a vowel
    */
-  public static startsWithVowell(word: string): boolean {
+  public static startsWithVowel(word: string): boolean {
     return /^[aeiou]/i.test(word);
   }
 

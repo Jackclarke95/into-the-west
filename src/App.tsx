@@ -125,6 +125,119 @@ const App = () => {
     });
   });
 
+  onValue(ref(db, "races"), (snapshot) => {
+    const snapVal = snapshot.val();
+
+    const data = Object.keys(snapVal).map((key) => {
+      const datum = snapVal[key];
+      datum.key = key;
+
+      return datum;
+    });
+
+    dispatch({
+      type: "SetRaces",
+      races: {
+        isLoading: false,
+        data: data,
+      },
+    });
+  });
+
+  onValue(ref(db, "subraces"), (snapshot) => {
+    const snapVal = snapshot.val();
+
+    const data = Object.keys(snapVal).map((key) => {
+      const race = snapVal[key];
+      race.key = key;
+
+      return race;
+    });
+
+    dispatch({
+      type: "SetSubraces",
+      subraces: {
+        isLoading: false,
+        data: data,
+      },
+    });
+  });
+
+  onValue(ref(db, "raceConfigs"), (snapshot) => {
+    const snapVal = snapshot.val();
+
+    const data = Object.keys(snapVal).map((key) => {
+      const race = snapVal[key];
+      race.key = key;
+
+      return race;
+    });
+
+    dispatch({
+      type: "SetRaceConfigs",
+      raceConfigs: {
+        isLoading: false,
+        data: data,
+      },
+    });
+  });
+
+  onValue(ref(db, "classes"), (snapshot) => {
+    const snapVal = snapshot.val();
+
+    const data = Object.keys(snapVal).map((key) => {
+      const datum = snapVal[key];
+      datum.key = key;
+
+      return datum;
+    });
+
+    dispatch({
+      type: "SetClasses",
+      classes: {
+        isLoading: false,
+        data: data,
+      },
+    });
+  });
+
+  onValue(ref(db, "subclasses"), (snapshot) => {
+    const snapVal = snapshot.val();
+
+    const data = Object.keys(snapVal).map((key) => {
+      const datum = snapVal[key];
+      datum.key = key;
+
+      return datum;
+    });
+
+    dispatch({
+      type: "SetSubclasses",
+      subclasses: {
+        isLoading: false,
+        data: data,
+      },
+    });
+  });
+
+  onValue(ref(db, "classConfigs"), (snapshot) => {
+    const snapVal = snapshot.val();
+
+    const data = Object.keys(snapVal).map((key) => {
+      const race = snapVal[key];
+      race.key = key;
+
+      return race;
+    });
+
+    dispatch({
+      type: "SetClassConfigs",
+      classConfigs: {
+        isLoading: false,
+        data: data,
+      },
+    });
+  });
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       dispatch({

@@ -90,7 +90,11 @@ export default class DataService {
 
     const race = { name: name, subraceRequired: subraceRequired };
 
-    push(racesRef, race);
+    return push(racesRef, race)
+      .then((response) => response)
+      .catch((error) => {
+        throw new Error(error.message);
+      });
   };
 
   /**
