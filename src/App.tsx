@@ -238,6 +238,64 @@ const App = () => {
       },
     });
   });
+
+  onValue(ref(db, "events"), (snapshot) => {
+    const snapVal = snapshot.val();
+
+    const data = Object.keys(snapVal).map((key) => {
+      const event = snapVal[key];
+      event.key = key;
+
+      return event;
+    });
+
+    dispatch({
+      type: "SetEvents",
+      events: {
+        isLoading: false,
+        data: data,
+      },
+    });
+  });
+
+  onValue(ref(db, "eventInterests"), (snapshot) => {
+    const snapVal = snapshot.val();
+
+    const data = Object.keys(snapVal).map((key) => {
+      const eventInterest = snapVal[key];
+      eventInterest.key = key;
+
+      return eventInterest;
+    });
+
+    dispatch({
+      type: "SetEventInterests",
+      eventInterests: {
+        isLoading: false,
+        data: data,
+      },
+    });
+  });
+
+  onValue(ref(db, "availabilities"), (snapshot) => {
+    const snapVal = snapshot.val();
+
+    const data = Object.keys(snapVal).map((key) => {
+      const availability = snapVal[key];
+      availability.key = key;
+
+      return availability;
+    });
+
+    dispatch({
+      type: "SetAvailabilities",
+      availabilities: {
+        isLoading: false,
+        data: data,
+      },
+    });
+  });
+
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       dispatch({

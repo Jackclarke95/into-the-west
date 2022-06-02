@@ -38,6 +38,12 @@ declare module "react-redux" {
 
     raceConfigs: { isLoading: true } | { isLoading: false; data: any };
 
+    events: { isLoading: true } | { isLoading: false; data: any };
+
+    eventInterests: { isLoading: true } | { isLoading: false; data: any };
+
+    availabilities: { isLoading: true } | { isLoading: false; data: any };
+
     showCharacterCreationDialog: boolean;
 
     showSessionCreationDialog: boolean;

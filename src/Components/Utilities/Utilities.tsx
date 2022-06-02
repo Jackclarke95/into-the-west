@@ -233,6 +233,117 @@ const Utilities = () => {
     console.log(raceConfigs.join(","));
   };
 
+  const onClickDetermineEvents = async () => {
+    const eventsRef = ref(db, "events");
+    const eventInterestsRef = ref(db, "eventInterests");
+    const availabilitiesRef = ref(db, "availabilities");
+    const mapsRef = ref(db, "maps");
+
+    const eventData = await get(eventsRef)
+      .then((response) => {
+        const data = response.val();
+
+        const events = Object.keys(data).map((key) => {
+          const event = data[key];
+          event.key = key;
+
+          return event;
+        });
+
+        return events as {
+          key: string;
+          title: string;
+          date: string;
+          mapId: string;
+        }[];
+      })
+      .catch((e) => console.error("error", e));
+
+    const eventInterestData = await get(eventInterestsRef)
+      .then((response) => {
+        const data = response.val();
+
+        const eventInterests = Object.keys(data).map((key) => {
+          const eventInterest = data[key];
+          eventInterest.key = key;
+
+          return eventInterest;
+        });
+
+        return eventInterests as {
+          key: string;
+          eventId: string;
+          userId: string;
+          didAttend: boolean;
+          role: number;
+        }[];
+      })
+      .catch((e) => console.error("error", e));
+
+    const availabilityData = await get(availabilitiesRef)
+      .then((response) => {
+        const data = response.val();
+
+        const availabilities = Object.keys(data).map((key) => {
+          const availability = data[key];
+          availability.key = key;
+
+          return availability;
+        });
+
+        return availabilities as {
+          key: string;
+          eventInterestId: string;
+          date: string;
+        }[];
+      })
+      .catch((e) => console.error("error", e));
+
+    const mapData = await get(mapsRef)
+      .then((response) => {
+        const data = response.val();
+
+        const maps = Object.keys(data).map((key) => {
+          const map = data[key];
+          map.key = key;
+
+          return map;
+        });
+
+        return maps as {
+          key: string;
+          name: string;
+        }[];
+      })
+      .catch((e) => console.error("error", e));
+
+    console.log("events", eventData);
+    console.log("interests", eventInterestData);
+    console.log("availabilities", availabilityData);
+    console.log("maps", mapData);
+
+    if (eventData && eventInterestData && availabilityData && mapData) {
+      const events = eventData.map((event) => {
+        const applicableInterests = eventInterestData.filter(
+          (eventInterest) => eventInterest.eventId === event.key
+        );
+
+        const applicableAvailabilities = availabilityData.filter(
+          (availability) =>
+            applicableInterests
+              .map((interest) => interest.key)
+              .includes(availability.eventInterestId)
+        );
+
+        console.log(event.title);
+        console.log("applicable interests", applicableInterests);
+        console.log("applicable availabilities", applicableAvailabilities);
+      });
+
+      console.log("mapped events", events);
+    }
+  };
+
   const onClickShowNewRaceDialog = () => {
     dispatch({
       type: "SetShowNewRaceDialog",
@@ -267,7 +378,12 @@ const Utilities = () => {
       <DefaultButton text="Determine races" onClick={onClickDetermineRaces} />
       <DefaultButton text="Generate races" onClick={onClickGenerateRaceData} />
       <DefaultButton text="New race" onClick={onClickShowNewRaceDialog} />
-      <DefaultButton text="New subrace" onClick={onClickShowNewSubraceDialog} />
+      <DefaultButton
+        text="New subrace"
+        onClick={onClickShowNewSubraceDialog}
+        disabled
+      />
+      <DefaultButton text="Determine events" onClick={onClickDetermineEvents} />
     </Stack>
   );
 };

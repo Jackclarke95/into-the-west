@@ -22,6 +22,15 @@ export type Action =
   | { type: "SetRaces"; races: DefaultRootState["races"] }
   | { type: "SetSubraces"; subraces: DefaultRootState["subraces"] }
   | { type: "SetRaceConfigs"; raceConfigs: DefaultRootState["raceConfigs"] }
+  | { type: "SetEvents"; events: DefaultRootState["events"] }
+  | {
+      type: "SetEventInterests";
+      eventInterests: DefaultRootState["eventInterests"];
+    }
+  | {
+      type: "SetAvailabilities";
+      availabilities: DefaultRootState["availabilities"];
+    }
   | {
       type: "SetAuthUser";
       authUser: DefaultRootState["authUser"];
@@ -98,6 +107,12 @@ export const initialState: DefaultRootState = {
   subraces: { isLoading: true },
 
   raceConfigs: { isLoading: true },
+
+  events: { isLoading: true },
+
+  eventInterests: { isLoading: true },
+
+  availabilities: { isLoading: true },
 
   showCharacterCreationDialog: false,
 
@@ -208,6 +223,24 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         // Action for setting the Race Configurations
         case "SetRaceConfigs": {
           draftState.raceConfigs = action.raceConfigs;
+          break;
+        }
+
+        // Action for setting the Events
+        case "SetEvents": {
+          draftState.events = action.events;
+          break;
+        }
+
+        // Action for setting the Event Interests
+        case "SetEventInterests": {
+          draftState.eventInterests = action.eventInterests;
+          break;
+        }
+
+        // Action for setting the Availabilities
+        case "SetAvailabilities": {
+          draftState.availabilities = action.availabilities;
           break;
         }
 
