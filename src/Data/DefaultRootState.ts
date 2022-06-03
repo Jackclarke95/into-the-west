@@ -9,8 +9,14 @@ import { Action } from "./Reducers";
 declare module "react-redux" {
   /** Default root state */
   export interface DefaultRootState {
-    // Whether the application is in Dark Mode
+    /** Whether the application is in Dark Mode */
     darkMode: boolean;
+
+    /** Whether the application is in Developer Mode */
+    isDevMode: boolean;
+
+    /** The currently logged-in User */
+    authUser: User | null;
 
     characters: { isLoading: true } | { isLoading: false; data: ICharacter[] };
 
@@ -66,9 +72,9 @@ declare module "react-redux" {
 
     showNewSubraceDialog: boolean;
 
-    isDevMode: boolean;
-
-    authUser: User | null;
+    sessionRegistration:
+      | { isShown: false }
+      | { isShown: true; session: ISession };
   }
 
   // Declare dispatcher to take our root provider's action type

@@ -3,13 +3,11 @@ import {
   DirectionalHint,
   Facepile,
   FontSizes,
-  IButtonStyles,
   IColumn,
   IconButton,
+  IContextualMenuProps,
   IFacepilePersona,
-  IOverflowSetItemProps,
-  Link,
-  OverflowSet,
+  IIconProps,
   PersonaSize,
   SelectionMode,
   Separator,
@@ -50,17 +48,7 @@ const SessionTable = () => {
     </span>
   );
 
-  const onRenderName = (session: ISessionData) => (
-    <span
-      style={{
-        display: "block",
-        textAlign: "left",
-        paddingLeft: sessionData.isLoading ? "36px" : "auto",
-      }}
-    >
-      {session.name}
-    </span>
-  );
+  const onRenderName = (session: ISessionData) => <span>{session.name}</span>;
 
   const onRenderDungeonMaster = (session: ISessionData) => {
     if (playerData.isLoading) {
@@ -129,9 +117,16 @@ const SessionTable = () => {
       return;
     }
 
-    DataService.signUpToSession(session, activeCharacter.data);
+    console.log("clicked sign up");
 
-    toast.success("Signed up for session");
+    dispatch({
+      type: "SetSessionRegistration",
+      sessionRegistration: { isShown: true, session: session },
+    });
+
+    // DataService.signUpToSession(session, activeCharacter.data);
+
+    // toast.success("Signed up for session");
   };
 
   const onClickRemoveFromSession = (session: ISession) => {
@@ -145,47 +140,9 @@ const SessionTable = () => {
   };
 
   const onRenderSignUp = (session: ISession) => {
-    if (
-      activeCharacter.isLoading ||
-      !activeCharacter.data ||
-      (session.date && DataHelper.isDateInPast(new Date(session.date)))
-    ) {
+    if (!session || activeCharacter.isLoading || !activeCharacter.data) {
       return null;
     }
-
-    const onRenderItem = (item: IOverflowSetItemProps): JSX.Element => {
-      return (
-        <Link
-          role="menuitem"
-          styles={{ root: { marginRight: 10 } }}
-          onClick={item.onClick}
-        >
-          {item.name}
-        </Link>
-      );
-    };
-
-    const onRenderOverflowButton = (
-      overflowItems: any[] | undefined
-    ): JSX.Element => {
-      const buttonStyles: Partial<IButtonStyles> = {
-        root: {
-          minWidth: 0,
-          padding: "0 4px",
-          alignSelf: "stretch",
-          height: "auto",
-        },
-      };
-      return (
-        <IconButton
-          role="menuitem"
-          title="More options"
-          styles={buttonStyles}
-          menuIconProps={{ iconName: "More" }}
-          menuProps={{ items: overflowItems! }}
-        />
-      );
-    };
 
     const onClickManageSession = () => {
       dispatch({
@@ -194,31 +151,62 @@ const SessionTable = () => {
       });
     };
 
+    const settingsIcon: IIconProps = {
+      iconName: "settings",
+    };
+    const sessionManagementIcon: IIconProps = {
+      iconName: "WorkforceManagement",
+    };
+
+    const menuProps: IContextualMenuProps = {
+      items: [
+        session.attendees.includes(activeCharacter.data.key)
+          ? {
+              key: "Register",
+              text: "Unregister",
+              iconProps: { iconName: "USerRemove" },
+              onClick: () => onClickRemoveFromSession(session),
+            }
+          : {
+              key: "Register",
+              text: "Register",
+              iconProps: { iconName: "AddFriend" },
+              onClick: () => onClickSignUp(session),
+            },
+        {
+          key: "calendarEvent",
+          text: "Volunteer as DM",
+          iconProps: { iconName: "WorkforceManagement" },
+        },
+      ],
+      directionalHintFixed: true,
+    };
+
     return (
-      <OverflowSet
-        onRenderItem={onRenderItem}
-        onRenderOverflowButton={onRenderOverflowButton}
-        items={[
-          session.attendees.includes(activeCharacter.data.key)
-            ? {
-                key: "item5",
-                name: "Leave",
-                onClick: () => onClickRemoveFromSession(session),
-              }
-            : {
-                key: "item4",
-                name: "Sign Up",
-                onClick: () => onClickSignUp(session),
-              },
-        ]}
-        overflowItems={[
-          {
-            key: "item1",
-            name: "Manage",
-            onClick: onClickManageSession,
-          },
-        ]}
-      />
+      <Stack
+        className="icon-button-container"
+        horizontal
+        styles={{ root: { margin: -6 } }}
+      >
+        {DataHelper.isDateInPast(session.date!) ? (
+          <Stack styles={{ root: { width: 52 } }}></Stack>
+        ) : (
+          <TooltipHost content="Register">
+            <IconButton
+              menuProps={menuProps}
+              iconProps={sessionManagementIcon}
+              disabled={false}
+            />
+          </TooltipHost>
+        )}
+        <TooltipHost content="Manage Session">
+          <IconButton
+            iconProps={settingsIcon}
+            disabled={false}
+            onClick={onClickManageSession}
+          />
+        </TooltipHost>
+      </Stack>
     );
   };
 
@@ -268,6 +256,8 @@ const SessionTable = () => {
       onRender: onRenderSignUp,
     },
   ];
+
+  console.log(sessionData);
 
   return (
     <Stack styles={{ root: { maxHeight: "50%" } }}>

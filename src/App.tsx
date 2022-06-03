@@ -3,11 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { get, getDatabase, onValue, ref } from "firebase/database";
 import { initializeApp } from "firebase/app";
-import Dashboard from "./Components/Dashboard";
-
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import Login from "./Components/Login";
-import RegistrationDialog from "./Components/Dialogs/RegistrationDialog";
+
+import DataHelper from "./Helpers/DataHelper";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -15,9 +13,9 @@ import "react-toastify/dist/ReactToastify.css";
 import "./Style/App.scss";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
-import CharacterCreationDialog from "./Components/Dialogs/CharacterCreationDialog";
-import SessionCreationDialog from "./Components/Dialogs/SessionCreationDialog";
-import CharacterRetirementDialog from "./Components/Dialogs/CharacterRetirementDialog";
+import Login from "./Components/Login";
+import Dashboard from "./Components/Dashboard";
+
 import ICharacterData from "./Interfaces/ICharacterData";
 import ISessionData from "./Interfaces/ISessionData";
 import IUserData from "./Interfaces/IUserData";
@@ -26,7 +24,11 @@ import Everwilds from "./Images/Maps/The Everwilds - Preview.jpg";
 import ForgottenLands from "./Images/Maps/The Forgotten Lands - Preview.jpg";
 import LunarIsles from "./Images/Maps/The Lunar Isles - Preview.jpg";
 import ShatteredRealms from "./Images/Maps/The Shattered Realms - Preview.jpg";
-import DataHelper from "./Helpers/DataHelper";
+
+import RegistrationDialog from "./Components/Dialogs/RegistrationDialog";
+import CharacterCreationDialog from "./Components/Dialogs/CharacterCreationDialog";
+import SessionCreationDialog from "./Components/Dialogs/SessionCreationDialog";
+import CharacterRetirementDialog from "./Components/Dialogs/CharacterRetirementDialog";
 import SessionManagementDialog from "./Components/Dialogs/SessionManagementDialog";
 import AccountNameManagementDialog from "./Components/Dialogs/AccountNameManagementDialog";
 import PasswordManagementDialog from "./Components/Dialogs/PasswordManagementDialog";
@@ -34,6 +36,7 @@ import CharacterManagementDialog from "./Components/Dialogs/CharacterManagementD
 import TokenCreatorDialog from "./Components/Dialogs/TokenCreatorDialog";
 import NewRaceDialog from "./Components/Dialogs/NewRaceDialog";
 import NewSubraceDialog from "./Components/Dialogs/NewSubraceDialog";
+import SessionRegistrationDialog from "./Components/Dialogs/SessionRegistrationDialog";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDJLonhBywTBq-R2AyP5Hvcg2Lp-gUMogk",
@@ -362,6 +365,7 @@ const App = () => {
           <TokenCreatorDialog />
           <NewRaceDialog />
           <NewSubraceDialog />
+          <SessionRegistrationDialog />
         </>
       ) : (
         <>

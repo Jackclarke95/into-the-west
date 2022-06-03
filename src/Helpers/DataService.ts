@@ -205,7 +205,51 @@ export default class DataService {
         return response;
       })
       .catch((error) => {
-        console.log({ error });
+        console.log("error:", { error });
+
+        throw new Error(error);
+      });
+  };
+
+  public static registerForSession = (
+    user: User,
+    session: ISession,
+    availableDates: Date[]
+  ) => {
+    if (!session.key || availableDates.length === 0) {
+      throw new Error("Could not update Session; no key provided");
+    }
+
+    const eventInterestsRef = ref(db, "eventInterests");
+
+    push(eventInterestsRef, {
+      eventId: session.key,
+      userId: user.uid,
+      role: 0,
+    })
+      .then((response) => {
+        console.log(response);
+
+        const availabilitiesRef = ref(db, "availabilities");
+
+        availableDates.forEach((date) => {
+          push(availabilitiesRef, {
+            eventInterestId: response.key,
+            date: date.toISOString(),
+          })
+            .then((response) => response)
+            .catch((error) => {
+              console.log("Could not update availabilities", error);
+              console.error("Could not update availabilities", error);
+
+              throw new Error(error);
+            });
+        });
+      })
+      .catch((error) => {
+        console.log("Could not create Event Interest", error);
+        console.error("Could not create Event Interest", error);
+
         throw new Error(error);
       });
   };

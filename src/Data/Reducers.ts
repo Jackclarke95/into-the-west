@@ -78,14 +78,14 @@ export type Action =
   | {
       type: "SetShowNewSubraceDialog";
       showNewSubraceDialog: DefaultRootState["showNewSubraceDialog"];
+    }
+  | {
+      type: "SetSessionRegistration";
+      sessionRegistration: DefaultRootState["sessionRegistration"];
     };
 
 /** Initial application state */
 export const initialState: DefaultRootState = {
-  darkMode:
-    window.matchMedia &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches,
-
   characters: { isLoading: true },
 
   activeCharacter: { isLoading: true },
@@ -114,6 +114,14 @@ export const initialState: DefaultRootState = {
 
   availabilities: { isLoading: true },
 
+  darkMode:
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches,
+
+  isDevMode: window.location.hostname === "localhost",
+
+  authUser: null,
+
   showCharacterCreationDialog: false,
 
   showSessionCreationDialog: false,
@@ -136,9 +144,7 @@ export const initialState: DefaultRootState = {
 
   showNewSubraceDialog: false,
 
-  isDevMode: window.location.hostname === "localhost",
-
-  authUser: null,
+  sessionRegistration: { isShown: false },
 };
 
 /**
@@ -157,6 +163,12 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         // Action for toggling Dark Mode
         case "SetDarkMode": {
           draftState.darkMode = action.darkMode;
+          break;
+        }
+
+        // Action for setting the Logged-in User
+        case "SetAuthUser": {
+          draftState.authUser = action.authUser;
           break;
         }
 
@@ -306,12 +318,6 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
           break;
         }
 
-        // Action for setting the User
-        case "SetAuthUser": {
-          draftState.authUser = action.authUser;
-          break;
-        }
-
         // Action for toggling the New Race Dialog
         case "SetShowNewRaceDialog": {
           draftState.showNewRaceDialog = action.showNewRaceDialog;
@@ -321,6 +327,12 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         // Action for toggling the New Sub Race Dialog
         case "SetShowNewSubraceDialog": {
           draftState.showNewSubraceDialog = action.showNewSubraceDialog;
+          break;
+        }
+
+        // Action for toggling the Session Registration Dialog and the relevant session
+        case "SetSessionRegistration": {
+          draftState.sessionRegistration = action.sessionRegistration;
           break;
         }
       }
