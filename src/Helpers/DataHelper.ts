@@ -77,6 +77,24 @@ export default class DataHelper {
   }
 
   /**
+   * Splits a given array into an array of chunks of a given size
+   * @param array The array to split into chunks
+   * @param chunkSize The size of each chunk
+   * @returns An array of arrays, each of a length which is the size of chunkSize
+   */
+  public static sliceArrayIntoChunks(array: any[], chunkSize: number) {
+    const slicedArray = [] as any[];
+
+    for (let i = 0; i < array.length; i += chunkSize) {
+      const chunk = array.slice(i, i + chunkSize);
+
+      slicedArray.push(chunk);
+    }
+
+    return slicedArray;
+  }
+
+  /**
    * Formats a number into its ordinal format
    * @param number The number to format
    * @returns The formatted number

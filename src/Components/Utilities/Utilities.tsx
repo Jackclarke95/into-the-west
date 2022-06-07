@@ -1,12 +1,14 @@
 import { DefaultButton, FontSizes, Separator, Stack } from "@fluentui/react";
 import { get, ref } from "firebase/database";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import DataService from "../../Helpers/DataService";
 import { db } from "../../App";
 import Races from "../../Data/Races";
 
 const Utilities = () => {
   const dispatch = useDispatch();
+
+  const users = useSelector((state) => state.users);
 
   const onClickShowTokenCreator = () => {
     console.log("Displaying token creator");
@@ -267,6 +269,20 @@ const Utilities = () => {
           const eventInterest = data[key];
           eventInterest.key = key;
 
+          if (users.isLoading) {
+            console.log("loading user data");
+
+            return;
+          }
+
+          const userId = eventInterest.userId;
+
+          const user = users.data.find((user) => user.key === userId);
+
+          console.log(user);
+
+          eventInterest.user = user;
+
           return eventInterest;
         });
 
@@ -335,9 +351,14 @@ const Utilities = () => {
               .includes(availability.eventInterestId)
         );
 
-        console.log(event.title);
-        console.log("applicable interests", applicableInterests);
-        console.log("applicable availabilities", applicableAvailabilities);
+        if (
+          applicableAvailabilities.length > 0 ||
+          applicableInterests.length > 0
+        ) {
+          console.log(event.title, event.key);
+          console.log("applicable interests", applicableInterests);
+          console.log("applicable availabilities", applicableAvailabilities);
+        }
       });
 
       console.log("mapped events", events);
