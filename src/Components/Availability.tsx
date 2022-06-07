@@ -23,7 +23,7 @@ const Availability = () => {
     console.log(availableDates, date);
   };
 
-  const getAvailableDates = (days: number) => {
+  const getAvailableDates = (weeks: number) => {
     const today = DataHelper.getDateWithoutTime(new Date());
 
     const nextMonday = new Date(
@@ -32,7 +32,7 @@ const Availability = () => {
 
     let datesCollection = [] as Date[];
 
-    for (var i = 0; i < days; i++) {
+    for (var i = 0; i < weeks * 7; i++) {
       const newDate = DataHelper.addDaysToDate(nextMonday, i);
 
       datesCollection.push(newDate);
@@ -73,11 +73,11 @@ const Availability = () => {
     );
   };
 
-  const days = 21;
+  const weeksToRender = 5;
   const chunkSize = 7;
 
   const weeks = DataHelper.sliceArrayIntoChunks(
-    getAvailableDates(days),
+    getAvailableDates(weeksToRender),
     chunkSize
   );
 
