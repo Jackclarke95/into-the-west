@@ -6,16 +6,20 @@ import {
   FontWeights,
   NeutralColors,
   useTheme,
+  IconButton,
 } from "@fluentui/react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DataHelper from "../Helpers/DataHelper";
 
-const Availability = (props: { weeksToRender: number }) => {
+const Availability = () => {
   const dispatch = useDispatch();
+  const theme = useTheme();
 
   const selectedDates = useSelector((state) => state.selectedDates);
 
-  const theme = useTheme();
+  const [firstDateOfMonthToRender, setFirstDateOfMonthToRender] =
+    useState<Date>(DataHelper.getFirstDayOfMonth(new Date()));
 
   const onChangeAvailableDate = (
     selectedDate: Date,
@@ -37,31 +41,17 @@ const Availability = (props: { weeksToRender: number }) => {
     }
   };
 
-  const getAvailableDates = (weeks: number) => {
-    const today = DataHelper.getDateWithoutTime(new Date());
-
-    const nextMonday = new Date(
-      today.setDate(today.getDate() + ((7 - today.getDay()) % 7) + 1)
-    );
-
-    let datesCollection = [] as Date[];
-
-    for (var i = 0; i < weeks * 7; i++) {
-      const newDate = DataHelper.addDaysToDate(nextMonday, i);
-
-      datesCollection.push(newDate);
-    }
-
-    return datesCollection;
-  };
-
   const Day = (props: { date: Date }) => {
+    const [hover, setHover] = useState(false);
+
     const date = props.date as Date;
     const dateIsInPast = DataHelper.isDateInPast(date);
     const dateIsToday =
       DataHelper.getDateWithoutTime(new Date()).getTime() === date.getTime();
-    console.log({ dateIsToday });
-    const dateInCurrentMonth = DataHelper.isDateInCurrenttMonth(date);
+    const dateInCurrentMonth = DataHelper.isDateInMonth(
+      date,
+      firstDateOfMonthToRender
+    );
 
     const dateIsSelected = selectedDates.includes(date.getTime());
 
@@ -86,47 +76,62 @@ const Availability = (props: { weeksToRender: number }) => {
     };
 
     const getBackgroundColour = () => {
-      if (dateIsToday) {
-        return theme.palette.accent;
-      } else if (dateIsSelected) {
-        return theme.palette.themeLight;
-      } else {
+      if (dateIsInPast) {
         return NeutralColors.white;
+      } else if (dateIsSelected) {
+        return hover ? NeutralColors.gray50 : NeutralColors.gray30;
+      } else {
+        return hover ? NeutralColors.gray20 : NeutralColors.white;
       }
     };
 
     return (
       <Stack
-        className="day"
         horizontalAlign="center"
+        verticalAlign="center"
         styles={{
           root: {
-            padding: 5,
-            display: "flex",
-            cursor: dateIsInPast ? "default" : "pointer",
-            minWidth: 30,
-            minHeight: 30,
+            width: 28,
+            height: 28,
             backgroundColor: getBackgroundColour(),
-            borderRadius: "50%",
+            border: dateIsSelected ? "1px solid " + NeutralColors.black : "",
           },
         }}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
         onClick={
           dateIsInPast
             ? () => console.log("date in past")
             : () => onChangeAvailableDate(date, undefined, true)
         }
       >
-        <Text
-          variant="small"
+        <Stack
+          horizontalAlign="center"
+          verticalAlign="center"
           styles={{
             root: {
-              fontWeight: getFontWeight(),
-              color: getFontColour(),
+              padding: 5,
+              display: "flex",
+              cursor: dateIsInPast ? "default" : "pointer",
+              width: 24,
+              height: 24,
+              backgroundColor: dateIsToday ? theme.palette.accent : undefined,
+              borderRadius: "50%",
             },
           }}
         >
-          {date.getDate()}
-        </Text>
+          <Text
+            variant="small"
+            styles={{
+              root: {
+                fontWeight: getFontWeight(),
+                color: getFontColour(),
+              },
+            }}
+          >
+            {date.getDate()}
+          </Text>
+        </Stack>
       </Stack>
     );
   };
@@ -136,7 +141,6 @@ const Availability = (props: { weeksToRender: number }) => {
 
     return (
       <Stack
-        className="week"
         horizontal
         tokens={{ childrenGap: 5 }}
         horizontalAlign="space-around"
@@ -149,12 +153,12 @@ const Availability = (props: { weeksToRender: number }) => {
   };
 
   const Month = () => {
-    const weeksToRender = DataHelper.getFullWeeksOfMonth(new Date());
-
-    console.log(weeksToRender);
+    const weeksToRender = DataHelper.getFullWeeksOfMonth(
+      firstDateOfMonthToRender
+    );
 
     return (
-      <Stack tokens={{ childrenGap: 15 }}>
+      <Stack tokens={{ childrenGap: 7 }}>
         {weeksToRender.map((week) => (
           <Week weekOfDates={week} />
         ))}
@@ -162,8 +166,43 @@ const Availability = (props: { weeksToRender: number }) => {
     );
   };
 
+  const onClickPreviousMonth = () => {
+    setFirstDateOfMonthToRender(
+      DataHelper.decrementMonth(firstDateOfMonthToRender)
+    );
+  };
+
+  const onClickNextMonth = () => {
+    setFirstDateOfMonthToRender(
+      DataHelper.incrementMonth(firstDateOfMonthToRender)
+    );
+  };
+
+  console.log(firstDateOfMonthToRender);
+
   return (
-    <Stack tokens={{ childrenGap: 10 }}>
+    <Stack>
+      <Stack horizontal horizontalAlign="space-between">
+        <Text styles={{ root: { fontWeight: FontWeights.semibold } }}>
+          {firstDateOfMonthToRender.toLocaleString("en-GB", {
+            month: "long",
+            year: "numeric",
+          })}
+        </Text>
+        <Stack horizontalAlign="end" horizontal>
+          <IconButton
+            iconProps={{ iconName: "Up" }}
+            onClick={onClickPreviousMonth}
+            disabled={DataHelper.isDateInPast(firstDateOfMonthToRender)}
+            styles={{ rootDisabled: { backgroundColor: NeutralColors.white } }}
+          />
+          <IconButton
+            iconProps={{ iconName: "Down" }}
+            onClick={onClickNextMonth}
+            styles={{ icon: { color: NeutralColors.black } }}
+          />
+        </Stack>
+      </Stack>
       <Month />
       <Calendar
         showMonthPickerAsOverlay

@@ -13,13 +13,17 @@ export default class DataHelper {
    */
   public static isDateInPast(date: Date): boolean {
     return (
-      Number(DataHelper.getDateWithoutTime(new Date(date))) < Number(DataHelper.getDateWithoutTime(new Date()))
+      Number(DataHelper.getDateWithoutTime(new Date(date))) <
+      Number(DataHelper.getDateWithoutTime(new Date()))
     );
   }
 
-  public static isDateInCurrenttMonth(date: Date): boolean {
-    const currentMonth = new Date().getMonth();
-    const dateMonth = date.getMonth();
+  public static isDateInMonth(
+    dateToCheck: Date,
+    dateToCheckAgainst: Date
+  ): boolean {
+    const currentMonth = dateToCheckAgainst.getMonth();
+    const dateMonth = dateToCheck.getMonth();
 
     return currentMonth === dateMonth;
   }
@@ -57,6 +61,20 @@ export default class DataHelper {
     return formattedDate;
   }
 
+  public static incrementMonth(date: Date): Date {
+    const newDate = new Date(date);
+    newDate.setMonth(newDate.getMonth() + 1);
+
+    return newDate;
+  }
+
+  public static decrementMonth(date: Date): Date {
+    const newDate = new Date(date);
+    newDate.setMonth(newDate.getMonth() - 1);
+
+    return newDate;
+  }
+
   /**
    * Gets a given date's day of the week
    * @param date The date
@@ -68,6 +86,10 @@ export default class DataHelper {
     });
 
     return dayOfTheWeek;
+  }
+
+  public static toKebabCase(string: string): string {
+    return string.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
   }
 
   /**

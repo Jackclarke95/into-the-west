@@ -69,7 +69,7 @@ const SessionRegistrationDialog = () => {
     >
       <Stack tokens={{ childrenGap: 20 }}>
         <Text>Please confirm your availability</Text>
-        <Availability weeksToRender={4} />
+        <Availability />
         <DialogFooter>
           <DefaultButton text="Cancel" onClick={onDismiss} />
           <PrimaryButton
