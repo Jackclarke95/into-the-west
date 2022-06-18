@@ -1,5 +1,4 @@
 import {
-  Checkbox,
   DefaultButton,
   Dialog,
   DialogFooter,
@@ -8,9 +7,7 @@ import {
   Stack,
   Text,
 } from "@fluentui/react";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import DataHelper from "../../Helpers/DataHelper";
 import DataService from "../../Helpers/DataService";
 import Availability from "../Availability";
 
@@ -19,19 +16,16 @@ const SessionRegistrationDialog = () => {
 
   const sessionRegistration = useSelector((state) => state.sessionRegistration);
   const authUser = useSelector((state) => state.authUser);
-
-  const [availableDates, setAvailableDates] = useState([] as number[]);
+  const availabilitiesSelections = useSelector((state) => state.selectedDates);
 
   const onDismiss = () => {
-    setAvailableDates([]);
-
     dispatch({
       type: "SetSessionRegistration",
       sessionRegistration: { isShown: false },
     });
   };
 
-  const onClickRegister = () => {
+  const onClickRegister = async () => {
     if (!authUser) {
       console.log("No user");
 
@@ -47,14 +41,16 @@ const SessionRegistrationDialog = () => {
     console.log(
       "clicked register button",
       sessionRegistration.session.key,
-      availableDates.map((date) => new Date(date).toDateString())
+      availabilitiesSelections.map((date) => new Date(date).toDateString())
     );
 
-    DataService.registerForSession(
-      authUser,
-      sessionRegistration.session,
-      availableDates.map((date) => new Date(date))
-    );
+    await DataService.updateAvailableDates(authUser, availabilitiesSelections);
+
+    // DataService.registerForSession(
+    //   authUser,
+    //   sessionRegistration.session,
+    //   availabilitiesSelections.map((date) => new Date(date))
+    // );
   };
 
   const contentProps = sessionRegistration.isShown
@@ -65,8 +61,6 @@ const SessionRegistrationDialog = () => {
       }
     : undefined;
 
-  console.log(availableDates);
-
   return (
     <Dialog
       hidden={!sessionRegistration.isShown}
@@ -75,13 +69,13 @@ const SessionRegistrationDialog = () => {
     >
       <Stack tokens={{ childrenGap: 20 }}>
         <Text>Please confirm your availability</Text>
-        <Availability />
+        <Availability weeksToRender={4} />
         <DialogFooter>
           <DefaultButton text="Cancel" onClick={onDismiss} />
           <PrimaryButton
             text="Register"
             onClick={onClickRegister}
-            disabled={availableDates.length === 0}
+            disabled={availabilitiesSelections.length === 0}
           />
         </DialogFooter>
       </Stack>

@@ -1,26 +1,40 @@
-import { Stack, Checkbox, Separator, Text, FontSizes } from "@fluentui/react";
-import { useState } from "react";
+import {
+  Stack,
+  Text,
+  Calendar,
+  DayOfWeek,
+  FontWeights,
+  NeutralColors,
+  useTheme,
+} from "@fluentui/react";
+import { useDispatch, useSelector } from "react-redux";
 import DataHelper from "../Helpers/DataHelper";
 
-const Availability = () => {
-  const [availableDates, setAvailableDates] = useState<number[]>([]);
+const Availability = (props: { weeksToRender: number }) => {
+  const dispatch = useDispatch();
+
+  const selectedDates = useSelector((state) => state.selectedDates);
+
+  const theme = useTheme();
 
   const onChangeAvailableDate = (
-    date: Date,
+    selectedDate: Date,
     _?: React.FormEvent<HTMLElement | HTMLInputElement>,
     isChecked?: boolean
   ) => {
-    console.log(availableDates);
-
-    if (isChecked) {
-      // add date to availableDates
-      setAvailableDates([...availableDates, date.getTime()]);
+    if (isChecked!! && !selectedDates.includes(selectedDate.getTime())) {
+      dispatch({
+        type: "SetSelectedDates",
+        selectedDates: [...selectedDates, selectedDate.getTime()],
+      });
     } else {
-      // remove date from availableDates
-      setAvailableDates(availableDates.filter((d) => d !== date.getTime()));
+      dispatch({
+        type: "SetSelectedDates",
+        selectedDates: selectedDates.filter(
+          (date) => date !== selectedDate.getTime()
+        ),
+      });
     }
-
-    console.log(availableDates, date);
   };
 
   const getAvailableDates = (weeks: number) => {
@@ -41,58 +55,121 @@ const Availability = () => {
     return datesCollection;
   };
 
-  const AvailableWeek = (props) => {
-    const dates = props.dates as Date[];
+  const Day = (props: { date: Date }) => {
+    const date = props.date as Date;
+    const dateIsInPast = DataHelper.isDateInPast(date);
+    const dateIsToday =
+      DataHelper.getDateWithoutTime(new Date()).getTime() === date.getTime();
+    console.log({ dateIsToday });
+    const dateInCurrentMonth = DataHelper.isDateInCurrenttMonth(date);
+
+    const dateIsSelected = selectedDates.includes(date.getTime());
+
+    const getFontWeight = () => {
+      if (dateIsToday) {
+        return FontWeights.bold;
+      } else if (dateIsInPast || !dateInCurrentMonth) {
+        return FontWeights.light;
+      } else {
+        return FontWeights.semibold;
+      }
+    };
+
+    const getFontColour = () => {
+      if (dateIsToday) {
+        return NeutralColors.white;
+      } else if (dateIsInPast) {
+        return NeutralColors.gray100;
+      } else {
+        return NeutralColors.black;
+      }
+    };
+
+    const getBackgroundColour = () => {
+      if (dateIsToday) {
+        return theme.palette.accent;
+      } else if (dateIsSelected) {
+        return theme.palette.themeLight;
+      } else {
+        return NeutralColors.white;
+      }
+    };
 
     return (
-      <Stack>
-        <Stack horizontal tokens={{ childrenGap: 5 }} horizontalAlign="center">
-          {dates.map((date) => (
-            <Stack
-              horizontalAlign="center"
-              tokens={{ childrenGap: 3 }}
-              styles={{ root: { display: "flex" } }}
-            >
-              <Text styles={{ root: { fontWeight: 500 } }}>
-                {date.toLocaleString("default", { weekday: "short" })[0]}
-              </Text>
-              <Text variant="small">
-                {`${date.getDate()}/${date.getMonth() + 1}`}
-              </Text>
-              <Checkbox
-                checked={availableDates.includes(date.getTime())}
-                onChange={(ev, checked) =>
-                  onChangeAvailableDate(date, ev, checked)
-                }
-                styles={{ root: { marginLeft: "4px" } }}
-              />
-            </Stack>
-          ))}
-        </Stack>
+      <Stack
+        className="day"
+        horizontalAlign="center"
+        styles={{
+          root: {
+            padding: 5,
+            display: "flex",
+            cursor: dateIsInPast ? "default" : "pointer",
+            minWidth: 30,
+            minHeight: 30,
+            backgroundColor: getBackgroundColour(),
+            borderRadius: "50%",
+          },
+        }}
+        onClick={
+          dateIsInPast
+            ? () => console.log("date in past")
+            : () => onChangeAvailableDate(date, undefined, true)
+        }
+      >
+        <Text
+          variant="small"
+          styles={{
+            root: {
+              fontWeight: getFontWeight(),
+              color: getFontColour(),
+            },
+          }}
+        >
+          {date.getDate()}
+        </Text>
       </Stack>
     );
   };
 
-  const weeksToRender = 5;
-  const chunkSize = 7;
+  const Week = (props: { weekOfDates: Date[] }) => {
+    const dates = props.weekOfDates as Date[];
 
-  const weeks = DataHelper.sliceArrayIntoChunks(
-    getAvailableDates(weeksToRender),
-    chunkSize
-  );
+    return (
+      <Stack
+        className="week"
+        horizontal
+        tokens={{ childrenGap: 5 }}
+        horizontalAlign="space-around"
+      >
+        {dates.map((date) => (
+          <Day date={date} />
+        ))}
+      </Stack>
+    );
+  };
+
+  const Month = () => {
+    const weeksToRender = DataHelper.getFullWeeksOfMonth(new Date());
+
+    console.log(weeksToRender);
+
+    return (
+      <Stack tokens={{ childrenGap: 15 }}>
+        {weeksToRender.map((week) => (
+          <Week weekOfDates={week} />
+        ))}
+      </Stack>
+    );
+  };
 
   return (
     <Stack tokens={{ childrenGap: 10 }}>
-      {weeks.map((week, index) => {
-        return (
-          <Stack>
-            <Separator styles={{ root: { fontSize: FontSizes.mediumPlus } }}>
-              {`Week ${index + 1}`}
-            </Separator>
-            <AvailableWeek dates={week} />
-          </Stack>
-        );
-      })}
+      <Month />
+      <Calendar
+        showMonthPickerAsOverlay
+        minDate={new Date()}
+        firstDayOfWeek={DayOfWeek.Monday}
+      />
     </Stack>
   );
 };

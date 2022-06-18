@@ -117,7 +117,6 @@ const Login = () => {
   };
 
   const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    console.log(event);
     if (event.key === "Enter") {
       onClickSignIn();
     }

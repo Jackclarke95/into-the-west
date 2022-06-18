@@ -38,11 +38,14 @@ import NewRaceDialog from "./Components/Dialogs/NewRaceDialog";
 import NewSubraceDialog from "./Components/Dialogs/NewSubraceDialog";
 import SessionRegistrationDialog from "./Components/Dialogs/SessionRegistrationDialog";
 
+const isDevMode = window.location.hostname === "localhost";
+
 const firebaseConfig = {
   apiKey: "AIzaSyDJLonhBywTBq-R2AyP5Hvcg2Lp-gUMogk",
   authDomain: "into-the-west-5869d.firebaseapp.com",
-  databaseURL:
-    "https://into-the-west-5869d-default-rtdb.europe-west1.firebasedatabase.app",
+  databaseURL: isDevMode
+    ? "https://into-the-test.europe-west1.firebasedatabase.app"
+    : "https://into-the-west.europe-west1.firebasedatabase.app",
   projectId: "into-the-west-5869d",
   storageBucket: "into-the-west-5869d.appspot.com",
   messagingSenderId: "1019951241923",
@@ -114,9 +117,8 @@ const App = () => {
 
     const users = Object.keys(userData).map((key) => {
       const user = userData[key];
-      user.key = key;
 
-      return user;
+      return DataHelper.parseUserData(user, userData[key]);
     });
 
     dispatch({
@@ -131,18 +133,18 @@ const App = () => {
   onValue(ref(db, "races"), (snapshot) => {
     const snapVal = snapshot.val();
 
-    const data = Object.keys(snapVal).map((key) => {
-      const datum = snapVal[key];
-      datum.key = key;
+    const races = Object.keys(snapVal).map((key) => {
+      const race = snapVal[key];
+      race.key = key;
 
-      return datum;
+      return race;
     });
 
     dispatch({
       type: "SetRaces",
       races: {
         isLoading: false,
-        data: data,
+        data: races,
       },
     });
   });
@@ -280,25 +282,6 @@ const App = () => {
     });
   });
 
-  onValue(ref(db, "availabilities"), (snapshot) => {
-    const snapVal = snapshot.val();
-
-    const data = Object.keys(snapVal).map((key) => {
-      const availability = snapVal[key];
-      availability.key = key;
-
-      return availability;
-    });
-
-    dispatch({
-      type: "SetAvailabilities",
-      availabilities: {
-        isLoading: false,
-        data: data,
-      },
-    });
-  });
-
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       dispatch({
@@ -318,7 +301,7 @@ const App = () => {
         type: "SetCurrentUser",
         currentUser: {
           isLoading: false,
-          data: userData,
+          data: DataHelper.parseUserData(userData, user.uid),
         },
       });
     }

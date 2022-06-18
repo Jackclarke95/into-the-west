@@ -28,8 +28,8 @@ export type Action =
       eventInterests: DefaultRootState["eventInterests"];
     }
   | {
-      type: "SetAvailabilities";
-      availabilities: DefaultRootState["availabilities"];
+      type: "SetSelectedDates";
+      selectedDates: DefaultRootState["selectedDates"];
     }
   | {
       type: "SetAuthUser";
@@ -112,7 +112,7 @@ export const initialState: DefaultRootState = {
 
   eventInterests: { isLoading: true },
 
-  availabilities: { isLoading: true },
+  selectedDates: [] as number[],
 
   darkMode:
     window.matchMedia &&
@@ -250,9 +250,9 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
           break;
         }
 
-        // Action for setting the Availabilities
-        case "SetAvailabilities": {
-          draftState.availabilities = action.availabilities;
+        // Action for setting the Availability Selections
+        case "SetSelectedDates": {
+          draftState.selectedDates = action.selectedDates;
           break;
         }
 

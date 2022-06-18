@@ -8,6 +8,7 @@ import {
 } from "@fluentui/react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import DataHelper from "../../Helpers/DataHelper";
 import DataService from "../../Helpers/DataService";
 import ActiveCharacter from "./ActiveCharacter";
 import NextSession from "./NextSession";
@@ -40,6 +41,28 @@ const Profile = () => {
       activeCharacter: { isLoading: false, data: activeCharacter },
     });
   }, [currentUser, characters, dispatch]);
+
+  useEffect(() => {
+    if (currentUser.isLoading || !currentUser.data) {
+      dispatch({
+        type: "SetSelectedDates",
+        selectedDates: [] as number[],
+      });
+
+      return;
+    }
+
+    const selectedDates = currentUser.data.availableDates
+      .filter((date) => {
+        return !DataHelper.isDateInPast(new Date(date));
+      })
+      .map((date) => date);
+
+    dispatch({
+      type: "SetSelectedDates",
+      selectedDates: selectedDates,
+    });
+  }, [currentUser, dispatch]);
 
   const onClickAccountNameManagement = () => {
     dispatch({

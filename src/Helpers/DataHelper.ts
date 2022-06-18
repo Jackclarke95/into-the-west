@@ -12,7 +12,16 @@ export default class DataHelper {
    * @return Whether the date is in the past
    */
   public static isDateInPast(date: Date): boolean {
-    return Number(new Date(date)) <= Number(new Date().setHours(0, 0, 0, 0));
+    return (
+      Number(DataHelper.getDateWithoutTime(new Date(date))) < Number(DataHelper.getDateWithoutTime(new Date()))
+    );
+  }
+
+  public static isDateInCurrenttMonth(date: Date): boolean {
+    const currentMonth = new Date().getMonth();
+    const dateMonth = date.getMonth();
+
+    return currentMonth === dateMonth;
   }
 
   /**
@@ -185,6 +194,8 @@ export default class DataHelper {
    * @returns The parsed User
    */
   public static parseUserData(user: IUserData, key: string): IUser {
+    const availableDates = user.availableDates ?? [];
+
     return {
       key: key,
       name: user.name,
@@ -192,6 +203,7 @@ export default class DataHelper {
       dndBeyondName: user.dndBeyondName,
       isDungeonMaster: user.isDungeonMaster ?? false,
       isGamesMaster: user.isGamesMaster ?? false,
+      availableDates: availableDates,
     };
   }
 
@@ -235,5 +247,84 @@ export default class DataHelper {
     }
 
     return 0;
+  }
+
+  /**
+   * Gets the first date of a given month
+   * @param date The given month
+   * @returns The first date of the given month
+   */
+  public static getFirstDayOfMonth(date: Date): Date {
+    const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+
+    return new Date(
+      firstDayOfMonth.getFullYear(),
+      firstDayOfMonth.getMonth(),
+      1
+    );
+  }
+
+  public static getLastDayOfMonth(date: Date): Date {
+    const lastDayOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+
+    return new Date(
+      lastDayOfMonth.getFullYear(),
+      lastDayOfMonth.getMonth(),
+      lastDayOfMonth.getDate()
+    );
+  }
+
+  public static getMondayOfWeek(date: Date): Date {
+    const day = date.getDay();
+
+    return new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate() - day + (day === 0 ? -6 : 1)
+    );
+  }
+
+  public static getDaysOfWeek(date: Date): Date[] {
+    const startDate = this.getMondayOfWeek(date);
+
+    const daysOfWeek = [] as Date[];
+
+    for (let i = 0; i < 7; i++) {
+      daysOfWeek.push(
+        new Date(
+          startDate.getFullYear(),
+          startDate.getMonth(),
+          startDate.getDate() + i
+        )
+      );
+    }
+
+    return daysOfWeek;
+  }
+
+  /**
+   * Gets an array of full weeks for each week in the given month, including weeks that are not fully
+   * in the given month
+   * @param date The date
+   * @returns An array of arrays of dates, each array representing a week
+   */
+  public static getFullWeeksOfMonth(date: Date): Date[][] {
+    let weeksOfMonth = [] as Date[][];
+
+    const firstDayOfMonth = DataHelper.getFirstDayOfMonth(date);
+    const lastDayOfMonth = DataHelper.getLastDayOfMonth(date);
+    const firstMondayToRender = DataHelper.getMondayOfWeek(firstDayOfMonth);
+    const lastMondayToRender = DataHelper.getMondayOfWeek(lastDayOfMonth);
+
+    var currentMonday = firstMondayToRender;
+
+    do {
+      const week = DataHelper.getDaysOfWeek(currentMonday);
+      weeksOfMonth.push(week);
+
+      currentMonday.setDate(currentMonday.getDate() + 7);
+    } while (currentMonday.getTime() <= lastMondayToRender.getTime());
+
+    return weeksOfMonth;
   }
 }

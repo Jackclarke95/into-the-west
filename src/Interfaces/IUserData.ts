@@ -5,4 +5,5 @@ export default interface IUserData {
   dndBeyondName: string;
   isDungeonMaster: true | undefined;
   isGamesMaster: true | undefined;
+  availableDates: number[];
 }

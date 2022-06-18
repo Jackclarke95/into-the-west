@@ -5,4 +5,5 @@ export default interface IUser {
   dndBeyondName: string;
   isDungeonMaster: boolean;
   isGamesMaster: boolean;
+  availableDates: number[];
 }

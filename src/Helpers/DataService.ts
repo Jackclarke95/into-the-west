@@ -102,7 +102,7 @@ export default class DataService {
    * @param session The session to sign up tp
    * @param character The character with whom to sign up
    */
-  public static signUpToSession = (
+  public static signUpToSession = async (
     session: ISession,
     character: ICharacter
   ) => {
@@ -111,7 +111,7 @@ export default class DataService {
     }
     const sessionsRef = ref(db, "sessions/" + session.key);
 
-    update(sessionsRef, {
+    await update(sessionsRef, {
       attendees: session.attendees.concat(character.key),
     });
   };
@@ -211,47 +211,69 @@ export default class DataService {
       });
   };
 
-  public static registerForSession = (
+  public static updateAvailableDates = async (
     user: User,
-    session: ISession,
-    availableDates: Date[]
+    availableDates: number[]
   ) => {
-    if (!session.key || availableDates.length === 0) {
+    console.log("updating available dates", user.uid, availableDates);
+
+    const userAvailableDatesRef = ref(
+      db,
+      "/users/" + user.uid + "/availableDates/"
+    );
+
+    console.log(userAvailableDatesRef);
+
+    await set(userAvailableDatesRef, availableDates);
+  };
+
+  public static registerForSession = async (
+    user: User,
+    availableDates: number[],
+    session: ISession
+  ) => {
+    if (!session.key) {
       throw new Error("Could not update Session; no key provided");
     }
 
-    const eventInterestsRef = ref(db, "eventInterests");
+    if (availableDates.length === 0) {
+      throw new Error("Please provide at least one available date");
+    }
 
-    push(eventInterestsRef, {
-      eventId: session.key,
-      userId: user.uid,
-      role: 0,
-    })
-      .then((response) => {
-        console.log(response);
+    await DataService.updateAvailableDates(user, availableDates);
 
-        const availabilitiesRef = ref(db, "availabilities");
+    // const eventInterestsRef = ref(db, "eventInterests");
 
-        availableDates.forEach((date) => {
-          push(availabilitiesRef, {
-            eventInterestId: response.key,
-            date: date.toISOString(),
-          })
-            .then((response) => response)
-            .catch((error) => {
-              console.log("Could not update availabilities", error);
-              console.error("Could not update availabilities", error);
+    // push(eventInterestsRef, {
+    //   eventId: session.key,
+    //   userId: user.uid,
+    //   role: 0,
+    // })
+    //   .then((response) => {
+    //     console.log(response);
 
-              throw new Error(error);
-            });
-        });
-      })
-      .catch((error) => {
-        console.log("Could not create Event Interest", error);
-        console.error("Could not create Event Interest", error);
+    //     const availabilitiesRef = ref(db, "availabilities");
 
-        throw new Error(error);
-      });
+    //     availableDates.forEach((date) => {
+    //       push(availabilitiesRef, {
+    //         userId: user.uid,
+    //         date: date.toISOString(),
+    //       })
+    //         .then((response) => response)
+    //         .catch((error) => {
+    //           console.log("Could not update availabilities", error);
+    //           console.error("Could not update availabilities", error);
+
+    //           throw new Error(error);
+    //         });
+    //     });
+    //   })
+    //   .catch((error) => {
+    //     console.log("Could not create Event Interest", error);
+    //     console.error("Could not create Event Interest", error);
+
+    //     throw new Error(error);
+    //   });
   };
 
   /**

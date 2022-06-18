@@ -257,8 +257,6 @@ const SessionTable = () => {
     },
   ];
 
-  console.log(sessionData);
-
   return (
     <Stack styles={{ root: { maxHeight: "50%" } }}>
       <Separator
