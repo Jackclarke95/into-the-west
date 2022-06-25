@@ -118,7 +118,7 @@ const App = () => {
     const users = Object.keys(userData).map((key) => {
       const user = userData[key];
 
-      return DataHelper.parseUserData(user, userData[key]);
+      return DataHelper.parseUserData(user, key);
     });
 
     dispatch({

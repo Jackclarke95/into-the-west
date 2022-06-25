@@ -146,8 +146,8 @@ const SessionTable = () => {
 
     const onClickManageSession = () => {
       dispatch({
-        type: "SetShowSessionManagementDialog",
-        showSessionManagementDialog: true,
+        type: "SetSessionManagement",
+        sessionManagement: { isShown: true, session: session },
       });
     };
 
@@ -199,7 +199,7 @@ const SessionTable = () => {
             />
           </TooltipHost>
         )}
-        <TooltipHost content="Manage Session">
+        <TooltipHost content="Manage session">
           <IconButton
             iconProps={settingsIcon}
             disabled={false}
@@ -283,7 +283,7 @@ const SessionTable = () => {
                     startIndex: 0,
                     count: upcomingSessions.length,
                     key: "upcoming",
-                    name: "Upcoming Sessions",
+                    name: "Upcoming sessions",
                   },
                   {
                     startIndex: upcomingSessions.length,

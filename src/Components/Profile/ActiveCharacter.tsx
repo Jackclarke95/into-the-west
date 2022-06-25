@@ -20,7 +20,7 @@ const ActiveCharacter = () => {
 
   const dataToRender = () => {
     if (activeCharacter.isLoading) {
-      return <Spinner size={SpinnerSize.large} label="Loading Character" />;
+      return <Spinner size={SpinnerSize.large} label="Loading character" />;
     } else if (!activeCharacter.data) {
       return (
         <MessageBar messageBarType={MessageBarType.warning} isMultiline>

@@ -240,40 +240,25 @@ export default class DataService {
       throw new Error("Please provide at least one available date");
     }
 
-    await DataService.updateAvailableDates(user, availableDates);
+    return DataService.updateAvailableDates(user, availableDates)
+      .then(() => {
+        const eventInterestsRef = ref(db, "eventInterests");
 
-    // const eventInterestsRef = ref(db, "eventInterests");
+        console.log("eventInterestsRef", eventInterestsRef);
 
-    // push(eventInterestsRef, {
-    //   eventId: session.key,
-    //   userId: user.uid,
-    //   role: 0,
-    // })
-    //   .then((response) => {
-    //     console.log(response);
-
-    //     const availabilitiesRef = ref(db, "availabilities");
-
-    //     availableDates.forEach((date) => {
-    //       push(availabilitiesRef, {
-    //         userId: user.uid,
-    //         date: date.toISOString(),
-    //       })
-    //         .then((response) => response)
-    //         .catch((error) => {
-    //           console.log("Could not update availabilities", error);
-    //           console.error("Could not update availabilities", error);
-
-    //           throw new Error(error);
-    //         });
-    //     });
-    //   })
-    //   .catch((error) => {
-    //     console.log("Could not create Event Interest", error);
-    //     console.error("Could not create Event Interest", error);
-
-    //     throw new Error(error);
-    //   });
+        push(eventInterestsRef, {
+          eventId: session.key,
+          userId: user.uid,
+          role: 0,
+        })
+          .then((response) => response)
+          .catch((error) => {
+            throw new Error(error);
+          });
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
   };
 
   /**

@@ -276,7 +276,7 @@ const CharacterCreationDialog = () => {
         </MessageBar>
       )}
       <TextField
-        label="Character Name"
+        label="Character name"
         value={characterName}
         onChange={onChangeName}
         invalid={!characterName}

@@ -236,7 +236,7 @@ const SessionCreationDialog = () => {
         onChange={onChangeSessionName}
       />
       <DatePicker
-        label="Session Date"
+        label="Session date"
         minDate={new Date()}
         onSelectDate={onSelectDate}
       />

@@ -1068,15 +1068,15 @@
       "role": 0,
       "userId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13"
     },
-    "-N4O9U7rRBUVtnDTPRUP": {
+    "-N5Mk5a8Y9WT2RWK16-I": {
       "eventId": "-N-tVhA0zhZpo9Ycw-CC",
       "role": 0,
       "userId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13"
     },
-    "-N4rF7t6AYtef2TA6HK8": {
+    "-N5PvAw9zazMuW6dtS9Z": {
       "eventId": "-N-tVhA0zhZpo9Ycw-CC",
       "role": 0,
-      "userId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13"
+      "userId": "7zD6gWfMUza6BPRXkJpara46fy83"
     }
   },
   "events": {
@@ -2712,6 +2712,10 @@
       "name": "David"
     },
     "7zD6gWfMUza6BPRXkJpara46fy83": {
+      "availableDates": [
+        1656716400000, 1656370800000, 1656457200000, 1656284400000,
+        1656802800000, 1656198000000, 1659740400000, 1656630000000
+      ],
       "discordTag": "GreyBeard#9358",
       "dndBeyondName": "DrGreybeard",
       "email": "alastair.smith@hotmail.com",
@@ -2720,7 +2724,10 @@
       "name": "Ali"
     },
     "9QqPgpLp23cEYeK3Jvq9MmIMpY13": {
-      "availableDates": [1656025200000],
+      "availableDates": [
+        1656716400000, 1656370800000, 1656457200000, 1656284400000,
+        1656802800000, 1656198000000, 1659740400000, 1656630000000
+      ],
       "discordTag": "Jimbob_#5733",
       "dndBeyondName": "JackClarke",
       "email": "jackclarke95@gmail.com",

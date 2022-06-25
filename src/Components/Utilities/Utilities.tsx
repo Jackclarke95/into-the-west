@@ -112,7 +112,7 @@ const Utilities = () => {
         };
       });
 
-      console.log("Mapped Classes", mappedClasses);
+      console.log("Mapped classes", mappedClasses);
     }
   };
 

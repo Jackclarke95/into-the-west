@@ -46,11 +46,11 @@ const SessionRegistrationDialog = () => {
 
     await DataService.updateAvailableDates(authUser, availabilitiesSelections);
 
-    // DataService.registerForSession(
-    //   authUser,
-    //   sessionRegistration.session,
-    //   availabilitiesSelections.map((date) => new Date(date))
-    // );
+    DataService.registerForSession(
+      authUser,
+      availabilitiesSelections,
+      sessionRegistration.session
+    );
   };
 
   const contentProps = sessionRegistration.isShown

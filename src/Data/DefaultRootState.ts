@@ -76,9 +76,6 @@ declare module "react-redux" {
     /** Whether to show the Registration Dialog */
     showRegistrationDialog: boolean;
 
-    /** Whether to show the Session Management Dialog */
-    showSessionManagementDialog: boolean;
-
     /** Whether to show the Account Name Management Dialog */
     showAccountNameManagementDialog: boolean;
 
@@ -99,6 +96,11 @@ declare module "react-redux" {
 
     /** Whether the Session Registration dialog should be shown, along with which Session it will be shown for */
     sessionRegistration:
+      | { isShown: false }
+      | { isShown: true; session: ISession };
+
+    /** Whether the Session Management dialog should be shown, along with which Session it will be shown for */
+    sessionManagement:
       | { isShown: false }
       | { isShown: true; session: ISession };
   }

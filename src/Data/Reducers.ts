@@ -52,10 +52,6 @@ export type Action =
       showRegistrationDialog: DefaultRootState["showRegistrationDialog"];
     }
   | {
-      type: "SetShowSessionManagementDialog";
-      showSessionManagementDialog: DefaultRootState["showSessionManagementDialog"];
-    }
-  | {
       type: "SetShowAccountNameManagementDialog";
       showAccountNameManagementDialog: DefaultRootState["showAccountNameManagementDialog"];
     }
@@ -82,6 +78,10 @@ export type Action =
   | {
       type: "SetSessionRegistration";
       sessionRegistration: DefaultRootState["sessionRegistration"];
+    }
+  | {
+      type: "SetSessionManagement";
+      sessionManagement: DefaultRootState["sessionManagement"];
     };
 
 /** Initial application state */
@@ -130,8 +130,6 @@ export const initialState: DefaultRootState = {
 
   showRegistrationDialog: false,
 
-  showSessionManagementDialog: false,
-
   showAccountNameManagementDialog: false,
 
   showPasswordManagementDialog: false,
@@ -145,6 +143,8 @@ export const initialState: DefaultRootState = {
   showNewSubraceDialog: false,
 
   sessionRegistration: { isShown: false },
+
+  sessionManagement: { isShown: false },
 };
 
 /**
@@ -283,13 +283,6 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
           break;
         }
 
-        // Action for toggling the Session Management Dialog
-        case "SetShowSessionManagementDialog": {
-          draftState.showSessionManagementDialog =
-            action.showSessionManagementDialog;
-          break;
-        }
-
         // Action for toggling the Account Name Management Dialog
         case "SetShowAccountNameManagementDialog": {
           draftState.showAccountNameManagementDialog =
@@ -333,6 +326,12 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         // Action for toggling the Session Registration Dialog and the relevant session
         case "SetSessionRegistration": {
           draftState.sessionRegistration = action.sessionRegistration;
+          break;
+        }
+
+        // Action for toggling the Session Management Dialog and the relevant session
+        case "SetSessionManagement": {
+          draftState.sessionManagement = action.sessionManagement;
           break;
         }
       }
