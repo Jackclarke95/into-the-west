@@ -32,7 +32,7 @@ const TokenCreatorDialog = () => {
   };
 
   const contentProps = {
-    type: DialogType.close,
+    type: DialogType.largeHeader,
     title: "Token creator",
     closeButtonAriaLabel: "Close",
   };

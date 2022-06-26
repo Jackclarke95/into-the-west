@@ -204,11 +204,6 @@ const Availability = () => {
         </Stack>
       </Stack>
       <Month />
-      <Calendar
-        showMonthPickerAsOverlay
-        minDate={new Date()}
-        firstDayOfWeek={DayOfWeek.Monday}
-      />
     </Stack>
   );
 };

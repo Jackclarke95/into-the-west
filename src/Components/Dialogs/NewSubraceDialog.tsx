@@ -24,7 +24,7 @@ const NewSubraceDialog = () => {
   };
 
   const contentProps = {
-    type: DialogType.close,
+    type: DialogType.largeHeader,
     title: "New race",
     closeButtonAriaLabel: "Close",
   };

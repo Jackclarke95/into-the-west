@@ -55,7 +55,7 @@ const SessionRegistrationDialog = () => {
 
   const contentProps = sessionRegistration.isShown
     ? {
-        type: DialogType.close,
+        type: DialogType.largeHeader,
         title: sessionRegistration.session.name,
         closeButtonAriaLabel: "Close",
       }
