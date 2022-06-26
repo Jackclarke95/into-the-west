@@ -1,18 +1,24 @@
 import {
   DefaultButton,
-  Dialog,
   DialogFooter,
-  DialogType,
+  DirectionalHint,
   Facepile,
+  FontSizes,
+  FontWeights,
   IColumn,
+  Modal,
+  OverflowButtonType,
   PersonaSize,
   PrimaryButton,
   SelectionMode,
   ShimmeredDetailsList,
   Stack,
   Text,
+  TooltipHost,
+  useTheme,
 } from "@fluentui/react";
 import { useDispatch, useSelector } from "react-redux";
+import DataHelper from "../../Helpers/DataHelper";
 import IUser from "../../Interfaces/IUser";
 
 const SessionManagementDialog = () => {
@@ -22,7 +28,8 @@ const SessionManagementDialog = () => {
   const sessions = useSelector((state) => state.sessions);
   const users = useSelector((state) => state.users);
   const eventInterests = useSelector((state) => state.eventInterests);
-  const characters = useSelector((state) => state.characters);
+
+  const theme = useTheme();
 
   const onDismiss = () => {
     dispatch({
@@ -37,69 +44,60 @@ const SessionManagementDialog = () => {
     onDismiss();
   };
 
-  const contentProps = {
-    type: DialogType.largeHeader,
-    title: "Manage session",
-    closeButtonAriaLabel: "Close",
+  const getInterestedUsers = () => {
+    if (
+      sessions.isLoading ||
+      users.isLoading ||
+      eventInterests.isLoading ||
+      !sessionManagement.isShown
+    ) {
+      return [];
+    } else {
+      return users.data.filter((user) =>
+        eventInterests.data
+          .filter(
+            (interest) =>
+              interest.eventId ===
+              sessions.data.find(
+                (session) => session.key === sessionManagement.session.key
+              )!.key
+          )
+          .map((interest) => interest.userId)
+          .includes(user.key)
+      );
+    }
   };
-
-  const interestedUsers =
-    sessions.isLoading ||
-    users.isLoading ||
-    eventInterests.isLoading ||
-    !sessionManagement.isShown
-      ? []
-      : users.data.filter((user) =>
-          eventInterests.data
-            .filter(
-              (interest) =>
-                interest.eventId ===
-                sessions.data.find(
-                  (session) => session.key === sessionManagement.session.key
-                )!.key
-            )
-            .map((interest) => interest.userId)
-            .includes(user.key)
-        );
 
   const onRenderPlayers = (datesAndUsers: {
     date: string;
     interestedUsers: IUser[];
   }) => {
-    if (characters.isLoading) {
-      return;
-    }
-
-    const charactersToRender = datesAndUsers.interestedUsers
+    const interestedUsersToRender = datesAndUsers.interestedUsers
       .map((user) => ({
-        character: characters.data.find(
-          (character) => character.playerDndBeyondName === user.dndBeyondName
-        ),
+        date: dates,
+        user: user,
       }))
-      .map((character) => character.character);
+      .sort((userA, userB) => userA.user.name.localeCompare(userB.user.name));
 
     return (
-      <Facepile
-        personaSize={PersonaSize.size24}
-        personas={charactersToRender.map((character) => ({
-          imageUrl: character?.avatarUrl,
-          personaName: character?.name,
-        }))}
-      />
-    );
-  };
-
-  const onRenderTotalPlayers = (datesAndUsers) => {
-    return (
-      <span
-        style={{
-          display: "block",
-          textAlign: "left",
-          paddingLeft: "1em",
-        }}
-      >
-        {datesAndUsers.interestedUsers.length}
-      </span>
+      <Stack horizontal tokens={{ childrenGap: 10 }}>
+        <span>{datesAndUsers.interestedUsers.length}</span>
+        <TooltipHost
+          content={interestedUsersToRender
+            .map(({ user }) => user.name)
+            .join(", ")}
+          directionalHint={DirectionalHint.leftCenter}
+        >
+          <Facepile
+            overflowButtonType={OverflowButtonType.descriptive}
+            showTooltip={false}
+            personaSize={PersonaSize.size24}
+            personas={interestedUsersToRender.map(({ user }) => ({
+              personaName: user.name,
+            }))}
+          />
+        </TooltipHost>
+      </Stack>
     );
   };
 
@@ -113,90 +111,65 @@ const SessionManagementDialog = () => {
       isResizable: true,
     },
     {
-      key: "userCount",
-      name: "Total",
-      fieldName: "userCount",
-      minWidth: 20,
-      maxWidth: 40,
-      isResizable: true,
-      onRender: onRenderTotalPlayers,
-    },
-    {
       key: "users",
       name: "Players",
       fieldName: "users",
-      minWidth: 20,
-      maxWidth: 50,
+      minWidth: 50,
       isResizable: true,
       onRender: onRenderPlayers,
     },
   ];
 
   const dates = Array.from(
-    new Set(interestedUsers.flatMap((user) => user.availableDates).sort())
+    new Set(
+      getInterestedUsers()
+        .flatMap((user) => user.availableDates)
+        .sort()
+    )
   ).map((date) => ({
-    date: new Date(date).toLocaleDateString(),
-    interestedUsers: interestedUsers.filter((user) =>
+    date: DataHelper.getDateInDayDateMonthFormat(new Date(date)),
+    interestedUsers: getInterestedUsers().filter((user) =>
       user.availableDates.includes(date)
     ),
   }));
 
-  const onClickDetermineInterests = () => {
-    if (
-      sessions.isLoading ||
-      users.isLoading ||
-      eventInterests.isLoading ||
-      !sessionManagement.isShown
-    ) {
-      return;
-    }
-
-    console.log(eventInterests.data);
-
-    const interestedUsers = users.data.filter((user) =>
-      eventInterests.data
-        .filter(
-          (interest) =>
-            interest.eventId ===
-            sessions.data.find(
-              (session) => session.key === sessionManagement.session.key
-            )!.key
-        )
-        .map((interest) => interest.userId)
-        .includes(user.key)
-    );
-
-    console.log({ interestedUsers });
-    console.log({ datesToShow: dates });
-  };
-
   return (
-    <Dialog
-      hidden={sessionManagement.isShown === false}
-      onDismiss={onDismiss}
-      dialogContentProps={contentProps}
-    >
-      <DefaultButton
-        text="Determine interests"
-        onClick={onClickDetermineInterests}
-      />
-      <ShimmeredDetailsList
-        compact
-        items={dates}
-        selectionMode={SelectionMode.single}
-        columns={columns}
-      />
-      <Stack>
-        <Text>Interested Users:</Text>
-        {interestedUsers.map((user) => (
-          <Text>{user.name}</Text>
-        ))}
+    <Modal isOpen={sessionManagement.isShown} onDismiss={onDismiss}>
+      <Stack
+        tokens={{ childrenGap: 10 }}
+        styles={{
+          root: {
+            padding: 24,
+            borderTopWidth: 4,
+            borderTopStyle: "solid",
+            borderTopColor: theme.palette.accent,
+            minWidth: 400,
+          },
+        }}
+      >
+        <Text
+          styles={{
+            root: {
+              color: theme.palette.accent,
+              fontSize: FontSizes.xLarge,
+              fontWeight: FontWeights.semibold,
+            },
+          }}
+        >
+          {sessionManagement.isShown ? sessionManagement.session.name : ""}
+        </Text>
+        <Text>Please select a date for this session.</Text>
+        <ShimmeredDetailsList
+          items={dates}
+          selectionMode={SelectionMode.single}
+          columns={columns}
+        />
+        <DialogFooter>
+          <DefaultButton text="Cancel" onClick={onDismiss} />
+          <PrimaryButton text="Save" onClick={onClickSave} />
+        </DialogFooter>
       </Stack>
-      <DialogFooter>
-        <DefaultButton text="Cancel" onClick={onDismiss} />
-        <PrimaryButton text="Save" onClick={onClickSave} />
-      </DialogFooter>
-    </Dialog>
+    </Modal>
   );
 };
 

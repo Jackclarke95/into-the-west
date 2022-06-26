@@ -1077,6 +1077,26 @@
       "eventId": "-N-tVhA0zhZpo9Ycw-CC",
       "role": 0,
       "userId": "7zD6gWfMUza6BPRXkJpara46fy83"
+    },
+    "-N5QrKw-neH2g_hJvgTP": {
+      "eventId": "-N-tVhA0zhZpo9Ycw-CC",
+      "role": 0,
+      "userId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2"
+    },
+    "-N5QrN44hDlM3oxR-xot": {
+      "eventId": "-N-tVhA0zhZpo9Ycw-CC",
+      "role": 0,
+      "userId": "LQXJ3bqnXpbHPTfdGRzO2AkRIbm1"
+    },
+    "-N5QrNoWgfEcX3nBRX9y": {
+      "eventId": "-N-tVhA0zhZpo9Ycw-CC",
+      "role": 0,
+      "userId": "cWIubiixD6hbnefPdn3108qn5kI3"
+    },
+    "-N5QrOk9BCR08rpc7lrp": {
+      "eventId": "-N-tVhA0zhZpo9Ycw-CC",
+      "role": 0,
+      "userId": "hVn1TdlBSgc2y92GOeKBAjOfl853"
     }
   },
   "events": {
@@ -2614,12 +2634,6 @@
       "dndBeyondName": "Jonno0902",
       "name": "Jonno"
     },
-    "-MaGM5zGZ8VcPLiq697T": {
-      "discordTag": "WillCarter#6063",
-      "dndBeyondName": "WillCarterDM",
-      "isDungeonMaster": true,
-      "name": "Will"
-    },
     "-MaGM6IOnqXNGuNfxZa6": {
       "discordTag": "patola#0332",
       "dndBeyondName": "patola",
@@ -2637,60 +2651,30 @@
       "dndBeyondName": "Bruenorbattlehammeringgiant",
       "name": "No, this is Patrick"
     },
-    "-MaGM6ezZShojRgShWwd": {
-      "discordTag": "BlueLegume#4192",
-      "dndBeyondName": "",
-      "name": "BlueLegume"
-    },
     "-MaGM6mfWwwgH4r0KsVA": {
       "discordTag": "Chloe#1673",
       "dndBeyondName": "RusselHumphriesIII",
       "name": "Chloe"
-    },
-    "-MaGM6tYGb2oBuKcNdUQ": {
-      "discordTag": "DannyJamesWard#6089",
-      "dndBeyondName": "",
-      "name": "DannyJamesWard"
     },
     "-MaGM764hCfwnab2wTy8": {
       "discordTag": "HirotoShinori#2838",
       "dndBeyondName": "HirotoShinori",
       "name": "HirotoShinori"
     },
-    "-MaGM7FH4Tg8C0AptFPR": {
-      "discordTag": "Joelmon_Joel#6564",
-      "dndBeyondName": "",
-      "name": "Joelmon_Joel"
-    },
     "-MaGM7VISDGDZF-eMIT4": {
       "discordTag": "Kosky101#9128",
       "dndBeyondName": "Kosky101",
       "name": "Kosky"
-    },
-    "-MaGM8eCkJdm1PE4ISuR": {
-      "discordTag": "PoorSwimmer#6126",
-      "dndBeyondName": "",
-      "name": "Poor Swimmer"
     },
     "-MaGM8l3BWAoEc3mnmIf": {
       "discordTag": "Poppy#8626",
       "dndBeyondName": "just_poppy",
       "name": "Poppy"
     },
-    "-MaGM8rpiI0QPEJV3YDw": {
-      "discordTag": "Robin3009#3267",
-      "dndBeyondName": "",
-      "name": "Robin"
-    },
     "-MaGM8ycWHXnWbaq-WqQ": {
       "discordTag": "shabbyj#7019",
       "dndBeyondName": "shabbyj",
       "name": "Shabbyj"
-    },
-    "-MaGM93zB2p65K1DMMZW": {
-      "discordTag": "TheJelly#7925",
-      "dndBeyondName": "",
-      "name": "TheJelly"
     },
     "-MaGM9ApuRxANiYS2eNu": {
       "discordTag": "Thom_G83#5580",
@@ -2704,6 +2688,10 @@
       "name": "John"
     },
     "2Fv3wHgqwjV64m6IEPOp9brzKvb2": {
+      "availableDates": [
+        1656716400000, 1656284400000, 1656802800000, 1656198000000,
+        1659740400000
+      ],
       "discordTag": "SunRester#8899",
       "dndBeyondName": "SunRester",
       "email": "Davidcope@live.co.uk",
@@ -2713,8 +2701,7 @@
     },
     "7zD6gWfMUza6BPRXkJpara46fy83": {
       "availableDates": [
-        1656716400000, 1656370800000, 1656457200000, 1656284400000,
-        1656802800000, 1656198000000, 1659740400000, 1656630000000
+        1656370800000, 1656802800000, 1656198000000, 1656630000000
       ],
       "discordTag": "GreyBeard#9358",
       "dndBeyondName": "DrGreybeard",
@@ -2725,8 +2712,7 @@
     },
     "9QqPgpLp23cEYeK3Jvq9MmIMpY13": {
       "availableDates": [
-        1656716400000, 1656370800000, 1656457200000, 1656284400000,
-        1656802800000, 1656198000000, 1659740400000, 1656630000000
+        1656457200000, 1656284400000, 1656802800000, 1656198000000
       ],
       "discordTag": "Jimbob_#5733",
       "dndBeyondName": "JackClarke",
@@ -2736,6 +2722,10 @@
       "name": "Jack"
     },
     "LQXJ3bqnXpbHPTfdGRzO2AkRIbm1": {
+      "availableDates": [
+        1656716400000, 1656370800000, 1656284400000, 1659740400000,
+        1656630000000
+      ],
       "discordTag": "2004BakerB#9649",
       "dndBeyondName": " benjaminbaker020304",
       "email": "benjaminbaker02.03.04@gmail.com",
@@ -2744,6 +2734,10 @@
       "name": "Ben Baker"
     },
     "cWIubiixD6hbnefPdn3108qn5kI3": {
+      "availableDates": [
+        1656716400000, 1656284400000, 1656802800000, 1656198000000,
+        1659740400000
+      ],
       "discordTag": "SchemingPnda#0518",
       "dndBeyondName": "SchemingPnda",
       "email": "louiswilliams1000@gmail.com",
@@ -2752,6 +2746,10 @@
       "name": "Louis"
     },
     "hVn1TdlBSgc2y92GOeKBAjOfl853": {
+      "availableDates": [
+        1656716400000, 1656370800000, 1656284400000, 1656802800000,
+        1656198000000, 1659740400000, 1656630000000
+      ],
       "discordTag": "WillCarter#6063",
       "dndBeyondName": "WillCarterDM",
       "email": "wdcarter@live.co.uk",
