@@ -122,7 +122,7 @@ const CharacterTable = () => {
       );
 
       const levelUp = LevelUpTable.filter(
-        (level) => level.minSessions <= adjustedSessions
+        (level) => level.sessionsRequired <= adjustedSessions
       );
 
       const calculatedLevel = levelUp[levelUp.length - 1].level;

@@ -282,6 +282,63 @@ const App = () => {
     });
   });
 
+  onValue(ref(db, "newCharacters"), (snapshot) => {
+    const snapVal = snapshot.val();
+
+    const data = Object.keys(snapVal).map((key) => {
+      const newCharacter = snapVal[key];
+      newCharacter.key = key;
+
+      return newCharacter;
+    });
+
+    dispatch({
+      type: "SetNewCharacters",
+      newCharacters: {
+        isLoading: false,
+        data: data,
+      },
+    });
+  });
+
+  onValue(ref(db, "characterClasses"), (snapshot) => {
+    const snapVal = snapshot.val();
+
+    const data = Object.keys(snapVal).map((key) => {
+      const characterClass = snapVal[key];
+      characterClass.key = key;
+
+      return characterClass;
+    });
+
+    dispatch({
+      type: "SetCharacterClasses",
+      characterClasses: {
+        isLoading: false,
+        data: data,
+      },
+    });
+  });
+
+  onValue(ref(db, "characterRaces"), (snapshot) => {
+    const snapVal = snapshot.val();
+
+    const data = Object.keys(snapVal).map((key) => {
+      const characterRace = snapVal[key];
+      characterRace.key = key;
+
+      return characterRace;
+    });
+
+    dispatch({
+      type: "SetCharacterRaces",
+      characterRaces: {
+        isLoading: false,
+        data: data,
+      },
+    });
+  });
+
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       dispatch({

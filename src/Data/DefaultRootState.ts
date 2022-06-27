@@ -4,6 +4,9 @@ import ICharacter from "../Interfaces/ICharacter";
 import IUser from "../Interfaces/IUser";
 import ISession from "../Interfaces/ISession";
 import { Action } from "./Reducers";
+import IParsedCharacter from "../Interfaces/Parsed/IParsedCharacter";
+import IParsedSession from "../Interfaces/Parsed/IParsedSession";
+import IParsedUser from "../Interfaces/Parsed/IParsedUser";
 
 /** Interface detailing the Default Root State */
 declare module "react-redux" {
@@ -18,8 +21,35 @@ declare module "react-redux" {
     /** The currently logged-in User as a Firebase User */
     authUser: User | null;
 
+    parsedUsers:
+      | { isLoading: true }
+      | { isLoading: false; data: IParsedUser[] };
+
+    currentParsedUser:
+      | { isLoading: true }
+      | { isLoading: false; data: IParsedUser | undefined };
+
+    parsedCharacters:
+      | { isLoading: true }
+      | { isLoading: false; data: IParsedCharacter[] };
+
+    activeParsedCharacter:
+      | { isLoading: true }
+      | { isLoading: false; data: IParsedCharacter | undefined };
+
+    parsedSessions:
+      | { isLoading: true }
+      | { isLoading: false; data: IParsedSession[] };
+
     /** The Characters stored in the Firebase Realtime Database */
     characters: { isLoading: true } | { isLoading: false; data: ICharacter[] };
+
+    /** The Characters stored in the Firebase Realtime Database, in the new format */
+    newCharacters: { isLoading: true } | { isLoading: false; data: any[] };
+
+    characterClasses: { isLoading: true } | { isLoading: false; data: any[] };
+
+    characterRaces: { isLoading: true } | { isLoading: false; data: any[] };
 
     /** The currently logged-in user's Active Character from the Firebase Realtime Database */
     activeCharacter:

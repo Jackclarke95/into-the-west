@@ -481,6 +481,33 @@
       "startingLevel": 3
     }
   },
+  "newCharacters": {
+    "-N5W0C090Fz2bSdJVuQx": {
+      "userId": "-MaGM6Q3kpDNynEBURGO",
+      "avatarUrl": "",
+      "name": "De Mauer",
+      "sheetUrl": "https://www.dndbeyond.com/characters/62565380",
+      "startingLevel": 1
+    }
+  },
+  "characterClasses": {
+    "-N5W05Z8ZzAZPNy7gKXX": {
+      "characterId": "-N5W0C090Fz2bSdJVuQx",
+      "classConfigId": "-N2HjgBMPhJv8S2itTlY",
+      "level": 1
+    },
+    "-N5W06dVTgHPlGaGF1SU": {
+      "characterId": "-N5W0C090Fz2bSdJVuQx",
+      "classConfigId": "-N2H8qxQbzIHAcJSBxX4",
+      "level": 4
+    }
+  },
+  "characterRaces": {
+    "-N5W2r3HiqT2UBqESlWL": {
+      "raceConfigId": "-N2IP0vGkENX1ag_bDYK",
+      "characterId": "-N5W0C090Fz2bSdJVuQx"
+    }
+  },
   "classConfigs": {
     "-N2EI9PXvGBkf4zRnZaX": {
       "classId": "-N2EEHHLGxJmobZ--n4f",
@@ -1097,6 +1124,84 @@
       "eventId": "-N-tVhA0zhZpo9Ycw-CC",
       "role": 0,
       "userId": "hVn1TdlBSgc2y92GOeKBAjOfl853"
+    },
+    "-N5X0HuG2qrX_TbpgYUV": {
+      "didAttend": true,
+      "eventId": "-N3LNGxLbEugSM-igDxf",
+      "role": 0,
+      "userId": "-MaGM6Q3kpDNynEBURGO"
+    },
+    "-N5X0IKIF6GgTiZjxXRJ": {
+      "didAttend": true,
+      "eventId": "-N3LNHMoZVGYQlswgwJY",
+      "role": 0,
+      "userId": "-MaGM6Q3kpDNynEBURGO"
+    },
+    "-N5X0Io0v1nV8F9FNnqT": {
+      "didAttend": true,
+      "eventId": "-N3LNI6zRFS-u13RbWdS",
+      "role": 0,
+      "userId": "-MaGM6Q3kpDNynEBURGO"
+    },
+    "-N5X0JHgOOok-7mV8mo7": {
+      "didAttend": true,
+      "eventId": "-N3LNJ5JjCz9DKtD9tl-",
+      "role": 0,
+      "userId": "-MaGM6Q3kpDNynEBURGO"
+    },
+    "-N5X0JhgQM01113OTbTd": {
+      "didAttend": true,
+      "eventId": "-N3LNK-uvO0YGG6NtgAn",
+      "role": 0,
+      "userId": "-MaGM6Q3kpDNynEBURGO"
+    },
+    "-N5X146lsecrhP39rsq2": {
+      "didAttend": true,
+      "eventId": "-N3LNMiva_S6FO0qWApU",
+      "role": 0,
+      "userId": "-MaGM6Q3kpDNynEBURGO"
+    },
+    "-N5X14otI-NXsOWdnPTf": {
+      "didAttend": true,
+      "eventId": "-N3LNPJIIaTu4Oa0LB9_",
+      "role": 0,
+      "userId": "-MaGM6Q3kpDNynEBURGO"
+    },
+    "-N5X0RLTmTEloPr4zr-F": {
+      "didAttend": true,
+      "eventId": "-N3LNKO6GPFbjxwM8c9e",
+      "role": 1,
+      "userId": "-MaGM6Q3kpDNynEBURGO"
+    },
+    "-N5X0Rzyq3rvJCITPsLd": {
+      "didAttend": true,
+      "eventId": "-N3LNMGpPxYkzFp5NZ8M",
+      "role": 1,
+      "userId": "-MaGM6Q3kpDNynEBURGO"
+    },
+    "-N5X0SURWi7c4_WIcNFS": {
+      "didAttend": true,
+      "eventId": "-N3LNNafr1wHnpo_OgWr",
+      "role": 1,
+      "userId": "-MaGM6Q3kpDNynEBURGO"
+    },
+    "-N5X0T-TDT6Ywu3bLCZO": {
+      "didAttend": true,
+      "eventId": "-N3LNOAQz4P8OzPtcjFg",
+      "role": 1,
+      "userId": "-MaGM6Q3kpDNynEBURGO"
+    },
+    "-N5X0TWUf_ctDGOq5dLX": {
+      "didAttend": true,
+      "eventId": "-N3LNOpE6itnNoUF9DM6",
+      "role": 1,
+      "userId": "-MaGM6Q3kpDNynEBURGO"
+    },
+    "-N5X0TzrPV8Ed7sQGKFB": {
+      "didAttend": true,
+      "eventId": "-N3LNR7z6nH3e6a3vzAD",
+      "role": 1,
+      "userId": "-MaGM6Q3kpDNynEBURGO"
     }
   },
   "events": {

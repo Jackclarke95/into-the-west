@@ -4,8 +4,40 @@ import { DefaultRootState } from "react-redux";
 
 /** Description of all the Actions taken that can affect the state */
 export type Action =
+  | {
+      type: "SetParsedCharacters";
+      parsedCharacters: DefaultRootState["parsedCharacters"];
+    }
+  | {
+      type: "SetParsedSessions";
+      parsedSessions: DefaultRootState["parsedSessions"];
+    }
+  | {
+      type: "SetParsedUsers";
+      parsedUsers: DefaultRootState["parsedUsers"];
+    }
+  | {
+      type: "SetCurrentParsedUser ";
+      currentParsedUser: DefaultRootState["currentParsedUser"];
+    }
+  | {
+      type: "SetActiveParsedCharacter";
+      activeParsedCharacter: DefaultRootState["activeParsedCharacter"];
+    }
   | { type: "SetDarkMode"; darkMode: DefaultRootState["darkMode"] }
   | { type: "SetCharacters"; characters: DefaultRootState["characters"] }
+  | {
+      type: "SetNewCharacters";
+      newCharacters: DefaultRootState["newCharacters"];
+    }
+  | {
+      type: "SetCharacterClasses";
+      characterClasses: DefaultRootState["characterClasses"];
+    }
+  | {
+      type: "SetCharacterRaces";
+      characterRaces: DefaultRootState["characterRaces"];
+    }
   | {
       type: "SetActiveCharacter";
       activeCharacter: DefaultRootState["activeCharacter"];
@@ -86,7 +118,23 @@ export type Action =
 
 /** Initial application state */
 export const initialState: DefaultRootState = {
+  parsedUsers: { isLoading: true },
+
+  currentParsedUser: { isLoading: true },
+
+  parsedCharacters: { isLoading: true },
+
+  activeParsedCharacter: { isLoading: true },
+
+  parsedSessions: { isLoading: true },
+
   characters: { isLoading: true },
+
+  newCharacters: { isLoading: true },
+
+  characterClasses: { isLoading: true },
+
+  characterRaces: { isLoading: true },
 
   activeCharacter: { isLoading: true },
 
@@ -160,6 +208,18 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
     currentState,
     (draftState) => {
       switch (action.type) {
+        // Action for setting the parsed characters
+        case "SetParsedCharacters": {
+          draftState.parsedCharacters = action.parsedCharacters;
+          break;
+        }
+
+        // Action for setting the parsed sessions
+        case "SetParsedSessions": {
+          draftState.parsedSessions = action.parsedSessions;
+          break;
+        }
+
         // Action for toggling Dark Mode
         case "SetDarkMode": {
           draftState.darkMode = action.darkMode;
@@ -181,6 +241,23 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         // Action for setting the Characters
         case "SetCharacters": {
           draftState.characters = action.characters;
+          break;
+        }
+
+        // Action for setting the New Characters
+        case "SetNewCharacters": {
+          draftState.newCharacters = action.newCharacters;
+          break;
+        }
+
+        // Action for setting the New Characters
+        case "SetCharacterClasses": {
+          draftState.characterClasses = action.characterClasses;
+          break;
+        }
+        // Action for setting the New Characters
+        case "SetCharacterRaces": {
+          draftState.characterRaces = action.characterRaces;
           break;
         }
 
