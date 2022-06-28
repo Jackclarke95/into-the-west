@@ -37,9 +37,7 @@ declare module "react-redux" {
       | { isLoading: true }
       | { isLoading: false; data: IParsedCharacter | undefined };
 
-    parsedSessions:
-      | { isLoading: true }
-      | { isLoading: false; data: IParsedSession[] };
+    parsedSessions: { isLoading: true } | { isLoading: false; data: any[] };
 
     /** The Characters stored in the Firebase Realtime Database */
     characters: { isLoading: true } | { isLoading: false; data: ICharacter[] };

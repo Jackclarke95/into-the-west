@@ -99,13 +99,8 @@ const NewCharacterTable = () => {
     const xpToNextLevel =
       LevelUpData[Math.floor(character.user.xp / 120)].xpRequired;
 
-    console.log(xpForCurrentLevel, character.user.xp, xpToNextLevel);
-
-    const low = 0;
     const current = character.user.xp - xpForCurrentLevel;
     const high = xpToNextLevel - xpForCurrentLevel;
-
-    console.log(low, current, high);
 
     return (
       <TooltipHost
@@ -157,6 +152,7 @@ const NewCharacterTable = () => {
 
   return (
     <ShimmeredDetailsList
+      styles={{ root: { overFlowY: "auto" } }}
       columns={columns}
       enableShimmer={characters.isLoading}
       items={characters.isLoading ? [] : characters.data}

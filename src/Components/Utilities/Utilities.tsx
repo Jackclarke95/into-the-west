@@ -248,6 +248,9 @@ const Utilities = () => {
         const events = Object.keys(data).map((key) => {
           const event = data[key];
           event.key = key;
+          event.selectedDate = new Date(
+            event.selectedDate.replace(/(\d+[/])(\d+[/])/, "$2$1")
+          ).getTime();
 
           return event;
         });
@@ -255,7 +258,7 @@ const Utilities = () => {
         return events as {
           key: string;
           title: string;
-          date: string;
+          date: number;
           mapId: string;
         }[];
       })
@@ -275,11 +278,9 @@ const Utilities = () => {
             return;
           }
 
-          const userId = eventInterest.userId;
-
-          const user = users.data.find((user) => user.key === userId);
-
-          console.log(user);
+          const user = users.data.find(
+            (user) => user.key === eventInterest.userId
+          );
 
           eventInterest.user = user;
 
@@ -333,7 +334,7 @@ const Utilities = () => {
       })
       .catch((e) => console.error("error", e));
 
-    console.log("events", eventData);
+    console.log({ eventData });
     console.log("interests", eventInterestData);
     console.log("availabilities", availabilityData);
     console.log("maps", mapData);

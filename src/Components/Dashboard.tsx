@@ -8,8 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import IParsedUser from "../Interfaces/Parsed/IParsedUser";
 import SessionRole from "../Enums/SessionRole";
-import LevelUpTable from "../Data/LevelUp";
 import IParsedCharacter from "../Interfaces/Parsed/IParsedCharacter";
+import NewSessionTable from "./Tables/NewSessionTable";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -88,8 +88,6 @@ const Dashboard = () => {
       const passiveXp = unattendedUserSessions.length * 12;
 
       const totalXp = earnedXp + passiveXp;
-
-      const calculatedLevel = Math.floor(totalXp / 120);
 
       return {
         availableDates: user.availableDates.map((date) => new Date(date)),
@@ -188,8 +186,46 @@ const Dashboard = () => {
 
     console.log({ parsedCharacters });
 
-    const parsedSessions = events.data.map((session) => {
-      // parse sessions
+    const parsedSessions = events.data
+      .map((event) => {
+        const matchingEventInterests = eventInterests.data.filter(
+          (interest) =>
+            interest.eventId === event.key && interest.didAttend === true
+        );
+
+        console.log(event.key, event.title);
+
+        const attendees = matchingEventInterests.map((interest) =>
+          newCharacters.data.filter(
+            (character) =>
+              interest.role === SessionRole.Player &&
+              character.userId === interest.userId
+          )
+        );
+
+        console.log("attendeed", attendees);
+
+        const dungeonMaster =
+          matchingEventInterests.map((interest) =>
+            parsedUsers.find(
+              (user) =>
+                interest.role === SessionRole["Dungeon Master"] &&
+                user.id === interest.userId
+            )
+          )[0] ?? null;
+
+        return {
+          name: event.title,
+          dungeonMaster: dungeonMaster,
+          date: event.selectedDate,
+          attendees: attendees,
+        };
+      })
+      .sort((a, b) => b.date - a.date);
+
+    dispatch({
+      type: "SetParsedSessions",
+      parsedSessions: { isLoading: false, data: parsedSessions },
     });
   }, [
     dispatch,
@@ -225,6 +261,9 @@ const Dashboard = () => {
       <Pivot>
         <PivotItem headerText="New Characters">
           <NewCharacterTable />
+        </PivotItem>
+        <PivotItem headerText="New Sessions">
+          <NewSessionTable />
         </PivotItem>
         <PivotItem headerText="Characters">
           <CharacterTable />
