@@ -26,7 +26,7 @@ const SessionManagementDialog = () => {
 
   const sessionManagement = useSelector((state) => state.sessionManagement);
   const sessions = useSelector((state) => state.sessions);
-  const users = useSelector((state) => state.users);
+  const users = useSelector((state) => state.players);
   const eventInterests = useSelector((state) => state.eventInterests);
 
   const theme = useTheme();
@@ -59,10 +59,10 @@ const SessionManagementDialog = () => {
             (interest) =>
               interest.eventId ===
               sessions.data.find(
-                (session) => session.key === sessionManagement.session.key
+                (session) => session.key === sessionManagement.session.id
               )!.key
           )
-          .map((interest) => interest.userId)
+          .map((interest) => interest.playerId)
           .includes(user.key)
       );
     }

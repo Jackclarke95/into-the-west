@@ -483,11 +483,18 @@
   },
   "newCharacters": {
     "-N5W0C090Fz2bSdJVuQx": {
-      "userId": "-MaGM6Q3kpDNynEBURGO",
+      "playerId": "-MaGM6Q3kpDNynEBURGO",
       "avatarUrl": "",
-      "name": "De Mauer",
+      "fullName": "De Mauer",
       "sheetUrl": "https://www.dndbeyond.com/characters/62565380",
       "startingLevel": 1
+    },
+    "-N6YptZrLS6AGaf1BLiG": {
+      "playerId": "cWIubiixD6hbnefPdn3108qn5kI3",
+      "avatarUrl": "https://www.dndbeyond.com/avatars/22370/529/1581111423-64045133.jpeg?width=150&height=150&fit=crop&quality=95&auto=webp",
+      "fullName": "Belnadis",
+      "sheetUrl": "https://www.dndbeyond.com/profile/SchemingPnda/characters/64045133",
+      "startingLevel": 2
     }
   },
   "characterClasses": {
@@ -500,12 +507,21 @@
       "characterId": "-N5W0C090Fz2bSdJVuQx",
       "classConfigId": "-N2H8qxQbzIHAcJSBxX4",
       "level": 4
+    },
+    "-N6YpvD1EseOPRGZ39dq": {
+      "characterId": "-N6YptZrLS6AGaf1BLiG",
+      "classConfigId": "-N2H7v5Bkx1fLyfo0rVV",
+      "level": 2
     }
   },
   "characterRaces": {
     "-N5W2r3HiqT2UBqESlWL": {
       "raceConfigId": "-N2IP0vGkENX1ag_bDYK",
       "characterId": "-N5W0C090Fz2bSdJVuQx"
+    },
+    "-N6YqCnIoFEgn8C63zxx": {
+      "raceConfigId": "-N2IP0vH2jaDaBpZAtHL",
+      "characterId": "-N6YptZrLS6AGaf1BLiG"
     }
   },
   "classConfigs": {
@@ -1093,115 +1109,85 @@
       "didAttend": true,
       "eventId": "-N3LNGR4rzXmngzrk49C",
       "role": 0,
-      "userId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13"
-    },
-    "-N5Mk5a8Y9WT2RWK16-I": {
-      "eventId": "-N-tVhA0zhZpo9Ycw-CC",
-      "role": 0,
-      "userId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13"
-    },
-    "-N5PvAw9zazMuW6dtS9Z": {
-      "eventId": "-N-tVhA0zhZpo9Ycw-CC",
-      "role": 0,
-      "userId": "7zD6gWfMUza6BPRXkJpara46fy83"
-    },
-    "-N5QrKw-neH2g_hJvgTP": {
-      "eventId": "-N-tVhA0zhZpo9Ycw-CC",
-      "role": 0,
-      "userId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2"
-    },
-    "-N5QrN44hDlM3oxR-xot": {
-      "eventId": "-N-tVhA0zhZpo9Ycw-CC",
-      "role": 0,
-      "userId": "LQXJ3bqnXpbHPTfdGRzO2AkRIbm1"
-    },
-    "-N5QrNoWgfEcX3nBRX9y": {
-      "eventId": "-N-tVhA0zhZpo9Ycw-CC",
-      "role": 0,
-      "userId": "cWIubiixD6hbnefPdn3108qn5kI3"
-    },
-    "-N5QrOk9BCR08rpc7lrp": {
-      "eventId": "-N-tVhA0zhZpo9Ycw-CC",
-      "role": 0,
-      "userId": "hVn1TdlBSgc2y92GOeKBAjOfl853"
+      "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13"
     },
     "-N5X0HuG2qrX_TbpgYUV": {
       "didAttend": true,
       "eventId": "-N3LNGxLbEugSM-igDxf",
       "role": 0,
-      "userId": "-MaGM6Q3kpDNynEBURGO"
+      "playerId": "-MaGM6Q3kpDNynEBURGO"
     },
     "-N5X0IKIF6GgTiZjxXRJ": {
       "didAttend": true,
       "eventId": "-N3LNHMoZVGYQlswgwJY",
       "role": 0,
-      "userId": "-MaGM6Q3kpDNynEBURGO"
+      "playerId": "-MaGM6Q3kpDNynEBURGO"
     },
     "-N5X0Io0v1nV8F9FNnqT": {
       "didAttend": true,
       "eventId": "-N3LNI6zRFS-u13RbWdS",
       "role": 0,
-      "userId": "-MaGM6Q3kpDNynEBURGO"
+      "playerId": "-MaGM6Q3kpDNynEBURGO"
     },
     "-N5X0JHgOOok-7mV8mo7": {
       "didAttend": true,
       "eventId": "-N3LNJ5JjCz9DKtD9tl-",
       "role": 0,
-      "userId": "-MaGM6Q3kpDNynEBURGO"
+      "playerId": "-MaGM6Q3kpDNynEBURGO"
     },
     "-N5X0JhgQM01113OTbTd": {
       "didAttend": true,
       "eventId": "-N3LNK-uvO0YGG6NtgAn",
       "role": 0,
-      "userId": "-MaGM6Q3kpDNynEBURGO"
+      "playerId": "-MaGM6Q3kpDNynEBURGO"
     },
     "-N5X146lsecrhP39rsq2": {
       "didAttend": true,
       "eventId": "-N3LNMiva_S6FO0qWApU",
       "role": 0,
-      "userId": "-MaGM6Q3kpDNynEBURGO"
+      "playerId": "-MaGM6Q3kpDNynEBURGO"
     },
     "-N5X14otI-NXsOWdnPTf": {
       "didAttend": true,
       "eventId": "-N3LNPJIIaTu4Oa0LB9_",
       "role": 0,
-      "userId": "-MaGM6Q3kpDNynEBURGO"
+      "playerId": "-MaGM6Q3kpDNynEBURGO"
     },
     "-N5X0RLTmTEloPr4zr-F": {
       "didAttend": true,
       "eventId": "-N3LNKO6GPFbjxwM8c9e",
       "role": 1,
-      "userId": "-MaGM6Q3kpDNynEBURGO"
+      "playerId": "-MaGM6Q3kpDNynEBURGO"
     },
     "-N5X0Rzyq3rvJCITPsLd": {
       "didAttend": true,
       "eventId": "-N3LNMGpPxYkzFp5NZ8M",
       "role": 1,
-      "userId": "-MaGM6Q3kpDNynEBURGO"
+      "playerId": "-MaGM6Q3kpDNynEBURGO"
     },
     "-N5X0SURWi7c4_WIcNFS": {
       "didAttend": true,
       "eventId": "-N3LNNafr1wHnpo_OgWr",
       "role": 1,
-      "userId": "-MaGM6Q3kpDNynEBURGO"
+      "playerId": "-MaGM6Q3kpDNynEBURGO"
     },
     "-N5X0T-TDT6Ywu3bLCZO": {
       "didAttend": true,
       "eventId": "-N3LNOAQz4P8OzPtcjFg",
       "role": 1,
-      "userId": "-MaGM6Q3kpDNynEBURGO"
+      "playerId": "-MaGM6Q3kpDNynEBURGO"
     },
     "-N5X0TWUf_ctDGOq5dLX": {
       "didAttend": true,
       "eventId": "-N3LNOpE6itnNoUF9DM6",
       "role": 1,
-      "userId": "-MaGM6Q3kpDNynEBURGO"
+      "playerId": "-MaGM6Q3kpDNynEBURGO"
     },
     "-N5X0TzrPV8Ed7sQGKFB": {
       "didAttend": true,
       "eventId": "-N3LNR7z6nH3e6a3vzAD",
       "role": 1,
-      "userId": "-MaGM6Q3kpDNynEBURGO"
+      "playerId": "-MaGM6Q3kpDNynEBURGO"
     }
   },
   "events": {
@@ -2692,7 +2678,7 @@
       "name": "Zariel"
     }
   },
-  "users": {
+  "players": {
     "-MaGLAdfrrLeLWxdwuUU": {
       "discordTag": "HonestFee#4574",
       "dndBeyondName": "HonestFee",

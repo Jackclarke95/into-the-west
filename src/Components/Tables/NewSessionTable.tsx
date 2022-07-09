@@ -1,45 +1,128 @@
 import {
   Facepile,
   IColumn,
+  IconButton,
+  IContextualMenuProps,
+  IIconProps,
   OverflowButtonType,
-  Persona,
   PersonaSize,
   SelectionMode,
   ShimmeredDetailsList,
   Stack,
+  TooltipHost,
 } from "@fluentui/react";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import DataHelper from "../../Helpers/DataHelper";
+import { Session } from "../../Types/LocalStructures";
 
 const NewSessionTable = () => {
+  const dispatch = useDispatch();
+
   const sessions = useSelector((state) => state.parsedSessions);
+  const activeCharacter = useSelector((state) => state.activeCharacter);
 
   const onRenderAttendees = (session) => {
-    console.log(session.attendees);
     return (
       <Facepile
         overflowButtonType={OverflowButtonType.descriptive}
         showTooltip={false}
         personaSize={PersonaSize.size24}
-        personas={session.attendees.map((attendee) => {
-          console.log("attendee", attendee);
-          return { personaName: attendee.name };
-        })}
+        personas={session.attendees.map((attendee) => ({
+          personaName: attendee.name,
+        }))}
       />
     );
   };
 
   const onRenderDungeonMaster = (session) => {
-    return (
-      <Persona
-        text={session.dungeonMaster?.name}
-        coinSize={PersonaSize.size100}
-      />
-    );
+    return session.dungeonMaster?.name;
   };
 
   const onRenderDate = (session) => {
     return new Date(session.date).toDateString();
+  };
+
+  const onRenderActions = (session: Session) => {
+    if (!session || activeCharacter.isLoading || !activeCharacter.data) {
+      return null;
+    }
+
+    const onClickManageSession = () => {
+      dispatch({
+        type: "SetSessionManagement",
+        sessionManagement: { isShown: true, session: session },
+      });
+    };
+
+    const onClickRemoveFromSession = (session: Session) => {
+      console.log("Remove from session", session);
+    };
+
+    const onClickAddToSession = (session: Session) => {
+      console.log("Add to session", session);
+    };
+
+    const settingsIcon: IIconProps = {
+      iconName: "settings",
+    };
+    const sessionManagementIcon: IIconProps = {
+      iconName: "WorkforceManagement",
+    };
+
+    const menuProps: IContextualMenuProps = {
+      items: session.attendees
+        ? [
+            session.attendees
+              .map((character) => character.id)
+              .includes(activeCharacter.data.key)
+              ? {
+                  key: "Register",
+                  text: "Unregister",
+                  iconProps: { iconName: "USerRemove" },
+                  onClick: () => onClickRemoveFromSession(session),
+                }
+              : {
+                  key: "Register",
+                  text: "Register",
+                  iconProps: { iconName: "AddFriend" },
+                  onClick: () => onClickAddToSession(session),
+                },
+            {
+              key: "calendarEvent",
+              text: "Volunteer as DM",
+              iconProps: { iconName: "WorkforceManagement" },
+            },
+          ]
+        : [],
+      directionalHintFixed: true,
+    };
+
+    return (
+      <Stack
+        className="icon-button-container"
+        horizontal
+        styles={{ root: { margin: -6 } }}
+      >
+        {DataHelper.isDateInPast(session.date!) ? (
+          <Stack styles={{ root: { width: 52 } }}></Stack>
+        ) : (
+          <TooltipHost content="Register">
+            <IconButton
+              menuProps={menuProps}
+              iconProps={sessionManagementIcon}
+              disabled={false}
+            />
+          </TooltipHost>
+        )}
+        <TooltipHost content="Manage session">
+          <IconButton
+            iconProps={settingsIcon}
+            disabled={false}
+            onClick={onClickManageSession}
+          />
+        </TooltipHost>
+      </Stack>
+    );
   };
 
   const columns: IColumn[] = [
@@ -47,7 +130,7 @@ const NewSessionTable = () => {
       key: "name",
       name: "Name",
       fieldName: "name",
-      minWidth: 150,
+      minWidth: 250,
     },
     {
       key: "dungeonMaster",
@@ -69,6 +152,12 @@ const NewSessionTable = () => {
       fieldName: "scheduledDate",
       minWidth: 150,
       onRender: onRenderDate,
+    },
+    {
+      key: "actions",
+      name: "Actions",
+      minWidth: 50,
+      onRender: onRenderActions,
     },
   ];
 

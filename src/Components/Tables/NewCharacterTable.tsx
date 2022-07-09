@@ -11,15 +11,15 @@ import {
   TooltipHost,
 } from "@fluentui/react";
 import { useSelector } from "react-redux";
-import IParsedCharacter from "../../Interfaces/Parsed/IParsedCharacter";
 import { ClassIcon } from "../ClassIcon";
 import DefaultAvatar from "../../Images/DefaultAvatar.jpeg";
 import LevelUpData from "../../Data/LevelUp";
+import { Character } from "../../Types/LocalStructures";
 
 const NewCharacterTable = () => {
   const characters = useSelector((state) => state.parsedCharacters);
 
-  const onRenderAvatar = (character: IParsedCharacter) => (
+  const onRenderAvatar = (character: Character) => (
     <Image
       src={character.avatarUrl ? character.avatarUrl : DefaultAvatar}
       imageFit={ImageFit.cover}
@@ -41,14 +41,14 @@ const NewCharacterTable = () => {
     />
   );
 
-  const onRenderName = (character: IParsedCharacter) =>
+  const onRenderName = (character: Character) =>
     character.sheetUrl ? (
-      <Link href={character.sheetUrl}>{character.name}</Link>
+      <Link href={character.sheetUrl}>{character.fullName}</Link>
     ) : (
-      character.name
+      character.fullName
     );
 
-  const onRenderRace = (character: IParsedCharacter) => {
+  const onRenderRace = (character: Character) => {
     if (characters.isLoading) {
       return <span>Loading</span>;
     } else {
@@ -62,7 +62,7 @@ const NewCharacterTable = () => {
     }
   };
 
-  const onRenderClass = (character: IParsedCharacter) => {
+  const onRenderClass = (character: Character) => {
     if (characters.isLoading) {
       return <span>Loading</span>;
     } else {
@@ -92,19 +92,29 @@ const NewCharacterTable = () => {
     }
   };
 
-  const onRenderXpBar = (character: IParsedCharacter) => {
+  const onRenderXpBar = (character: Character) => {
+    if (!character.player) {
+      return (
+        <TooltipHost content="Could not find player for this character">
+          <ProgressIndicator />
+        </TooltipHost>
+      );
+    }
+
+    console.log(character);
+
     const xpForCurrentLevel =
-      LevelUpData[Math.floor(character.user.xp / 120) - 1].xpRequired;
+      LevelUpData[Math.floor(character.player.xp / 120) - 1].xpRequired;
 
     const xpToNextLevel =
-      LevelUpData[Math.floor(character.user.xp / 120)].xpRequired;
+      LevelUpData[Math.floor(character.player.xp / 120)].xpRequired;
 
-    const current = character.user.xp - xpForCurrentLevel;
+    const current = character.player.xp - xpForCurrentLevel;
     const high = xpToNextLevel - xpForCurrentLevel;
 
     return (
       <TooltipHost
-        content={`${character.user.xp - xpForCurrentLevel} / ${
+        content={`${character.player.xp - xpForCurrentLevel} / ${
           xpToNextLevel - xpForCurrentLevel
         }`}
       >

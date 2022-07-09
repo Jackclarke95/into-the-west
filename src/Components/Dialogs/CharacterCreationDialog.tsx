@@ -24,7 +24,7 @@ const CharacterCreationDialog = () => {
   const dispatch = useDispatch();
 
   const showDialog = useSelector((state) => state.showCharacterCreationDialog);
-  const currentPlayer = useSelector((state) => state.currentUser);
+  const currentPlayer = useSelector((state) => state.currentPlayer);
 
   const [characterName, setCharacterName] = useState<string | undefined>(
     undefined

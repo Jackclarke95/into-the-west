@@ -1,7 +1,7 @@
 import ICharacter from "../Interfaces/ICharacter";
 import ICharacterData from "../Interfaces/ICharacterData";
 import IUser from "../Interfaces/IUser";
-import IUserData from "../Interfaces/IUserData";
+import IPlayerData from "../Interfaces/IUserData";
 import ISession from "../Interfaces/ISession";
 import ISessionData from "../Interfaces/ISessionData";
 
@@ -11,7 +11,7 @@ export default class DataHelper {
    * @param date The date to determine
    * @return Whether the date is in the past
    */
-  public static isDateInPast(date: Date): boolean {
+  public static isDateInPast(date: Date | number): boolean {
     return (
       Number(DataHelper.getDateWithoutTime(new Date(date))) <
       Number(DataHelper.getDateWithoutTime(new Date()))
@@ -211,20 +211,20 @@ export default class DataHelper {
 
   /**
    * Parses User data from the Firebase Realtime Database into IUserData format
-   * @param user The User to parse
+   * @param player The User to parse
    * @param key The key of the User in the Database
    * @returns The parsed User
    */
-  public static parseUserData(user: IUserData, key: string): IUser {
-    const availableDates = user.availableDates ?? [];
+  public static parsePlayerData(player: IPlayerData, key: string): IUser {
+    const availableDates = player.availableDates ?? [];
 
     return {
       key: key,
-      name: user.name,
-      discordTag: user.discordTag,
-      dndBeyondName: user.dndBeyondName,
-      isDungeonMaster: user.isDungeonMaster ?? false,
-      isGamesMaster: user.isGamesMaster ?? false,
+      name: player.name,
+      discordTag: player.discordTag,
+      dndBeyondName: player.dndBeyondName,
+      isDungeonMaster: player.isDungeonMaster ?? false,
+      isGamesMaster: player.isGamesMaster ?? false,
       availableDates: availableDates,
     };
   }

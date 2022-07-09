@@ -18,7 +18,7 @@ import Dashboard from "./Components/Dashboard";
 
 import ICharacterData from "./Interfaces/ICharacterData";
 import ISessionData from "./Interfaces/ISessionData";
-import IUserData from "./Interfaces/IUserData";
+import IPlayerData from "./Interfaces/IUserData";
 
 import Everwilds from "./Images/Maps/The Everwilds - Preview.jpg";
 import ForgottenLands from "./Images/Maps/The Forgotten Lands - Preview.jpg";
@@ -112,20 +112,20 @@ const App = () => {
     });
   });
 
-  onValue(ref(db, "users"), (snapshot) => {
-    const userData = snapshot.val() as IUserData[];
+  onValue(ref(db, "players"), (snapshot) => {
+    const playerData = snapshot.val() as IPlayerData[];
 
-    const users = Object.keys(userData).map((key) => {
-      const user = userData[key];
+    const players = Object.keys(playerData).map((key) => {
+      const player = playerData[key];
 
-      return DataHelper.parseUserData(user, key);
+      return DataHelper.parsePlayerData(player, key);
     });
 
     dispatch({
-      type: "SetUsers",
-      users: {
+      type: "SetPlayers",
+      players: {
         isLoading: false,
-        data: users,
+        data: players,
       },
     });
   });
@@ -346,19 +346,17 @@ const App = () => {
         authUser: user,
       });
 
-      const usersRef = ref(db, "users/" + user.uid);
+      const playersRef = ref(db, "players/" + user.uid);
 
-      const userData = await get(usersRef)
-        .then((response) => {
-          return response.val();
-        })
+      const playerData = await get(playersRef)
+        .then((response) => response.val())
         .catch((e) => console.error("error", e));
 
       dispatch({
-        type: "SetCurrentUser",
-        currentUser: {
+        type: "SetCurrentPlayer",
+        currentPlayer: {
           isLoading: false,
-          data: DataHelper.parseUserData(userData, user.uid),
+          data: DataHelper.parsePlayerData(playerData, user.uid),
         },
       });
     }

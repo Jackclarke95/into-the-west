@@ -1,8 +1,6 @@
 import {
   Stack,
   Text,
-  Calendar,
-  DayOfWeek,
   FontWeights,
   NeutralColors,
   useTheme,
@@ -194,12 +192,15 @@ const Availability = () => {
             iconProps={{ iconName: "Up" }}
             onClick={onClickPreviousMonth}
             disabled={DataHelper.isDateInPast(firstDateOfMonthToRender)}
-            styles={{ rootDisabled: { backgroundColor: NeutralColors.white } }}
+            styles={{
+              rootDisabled: { backgroundColor: NeutralColors.white },
+              icon: { color: theme.palette.accent },
+            }}
           />
           <IconButton
             iconProps={{ iconName: "Down" }}
             onClick={onClickNextMonth}
-            styles={{ icon: { color: NeutralColors.black } }}
+            styles={{ icon: { color: theme.palette.accent } }}
           />
         </Stack>
       </Stack>

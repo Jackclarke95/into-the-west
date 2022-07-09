@@ -6,15 +6,14 @@ import Utilities from "./Utilities/Utilities";
 import NewCharacterTable from "./Tables/NewCharacterTable";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import IParsedUser from "../Interfaces/Parsed/IParsedUser";
 import SessionRole from "../Enums/SessionRole";
-import IParsedCharacter from "../Interfaces/Parsed/IParsedCharacter";
 import NewSessionTable from "./Tables/NewSessionTable";
+import { Character, Session, Player } from "../Types/LocalStructures";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
 
-  const users = useSelector((state) => state.users);
+  const users = useSelector((state) => state.players);
 
   const newCharacters = useSelector((state) => state.newCharacters);
   const characterClasses = useSelector((state) => state.characterClasses);
@@ -51,177 +50,221 @@ const Dashboard = () => {
 
     console.log("Loaded");
 
-    const parsedUsers = users.data.map((user) => {
-      const attendedUserSessions = eventInterests.data
-        .filter((eventInterest) => eventInterest.userId === user.key)
+    const parsedPlayers: Player[] = users.data.map((player) => {
+      const attendedPlayerSessions = eventInterests.data
+        .filter((eventInterest) => eventInterest.playerId === player.key)
         .map((interest) => {
           const session = events.data.find(
             (event) => event.key === interest.eventId
           );
 
+          console.log(interest);
+
           if (!session) {
-            return null;
+            throw new Error(
+              `Could not find matching session for event interest ${interest.key}`
+            );
           }
 
           return {
             id: session.key,
             name: session.title,
-            date: new Date(session.selectedDate),
+            date: session.selectedDate,
             role: interest.role,
           };
         })
         .filter((session) => session !== null);
 
-      const earnedXp = attendedUserSessions.reduce((total, currentSession) => {
-        if (currentSession.role === SessionRole.Player) {
-          return total + 60;
-        } else {
-          return total + 30;
-        }
-      }, 0);
+      const sessionsPlayed = attendedPlayerSessions.filter(
+        (session) => session.role === SessionRole.Player
+      ).length;
 
-      const unattendedUserSessions = events.data.filter(
+      const sessionsRun = attendedPlayerSessions.filter(
+        (session) => session.role === SessionRole["Dungeon Master"]
+      ).length;
+
+      const unattendedSessions = events.data.filter(
         (event) =>
-          !attendedUserSessions.map((session) => session.id).includes(event.key)
-      );
+          !attendedPlayerSessions.some((session) => session.id === event.key)
+      ).length;
 
-      const passiveXp = unattendedUserSessions.length * 12;
-
-      const totalXp = earnedXp + passiveXp;
+      const xp =
+        sessionsPlayed * 60 + sessionsRun * 30 + unattendedSessions * 12;
 
       return {
-        availableDates: user.availableDates.map((date) => new Date(date)),
-        discordTag: user.discordTag,
-        id: user.key,
-        isGamesMaster: user.isGamesMaster,
-        isDungeonMaster: user.isDungeonMaster,
-        name: user.name,
-        attendedSessions: attendedUserSessions,
-        characterLevel: Math.floor(totalXp / 120),
-        xp: totalXp,
-      } as IParsedUser;
+        availableDates: player.availableDates,
+        discordTag: player.discordTag,
+        id: player.key,
+        isGamesMaster: player.isGamesMaster,
+        isDungeonMaster: player.isDungeonMaster,
+        name: player.name,
+        characterLevel: Math.floor(xp / 120),
+        xp: xp,
+        sessionsPlayed: sessionsPlayed,
+        sessionsRun: sessionsRun,
+      };
     });
 
     dispatch({
-      type: "SetParsedUsers",
-      parsedUsers: { isLoading: false, data: parsedUsers },
+      type: "SetParsedPlayers",
+      parsedPlayers: { isLoading: false, data: parsedPlayers },
     });
 
-    const parsedCharacters = newCharacters.data.map((character) => {
-      // Parse character's race
-      const matchingCharacterRace = characterRaces.data.find(
-        (race) => race.characterId === character.key
-      );
+    const parsedCharacters: Character[] = newCharacters.data.map(
+      (character) => {
+        // Parse character's race
+        const matchingCharacterRace = characterRaces.data.find(
+          (race) => race.characterId === character.key
+        );
 
-      const matchingRaceConfig = raceConfigs.data.find(
-        (config) => config.key === matchingCharacterRace.raceConfigId
-      );
-
-      const matchingRace = races.data.find(
-        (race) => race.key === matchingRaceConfig.raceId
-      );
-
-      const matchingSubrace = subraces.data.find(
-        (subrace) => subrace.key === matchingRaceConfig.subraceId
-      );
-
-      const parsedRace = {
-        race: matchingRace.name,
-        subrace: matchingSubrace?.name,
-      };
-
-      // Parse character's class(es)
-      const parsedClasses = characterClasses.data
-        .filter((cls) => cls.characterId === character.key)
-        .map((matchedCharacterClass) => {
-          const matchingClassConfig = classConfigs.data.find(
-            (config) => config.key === matchedCharacterClass.classConfigId
+        if (!matchingCharacterRace) {
+          throw new Error(
+            `Could not find matching Character Race Data for character ${character.key}`
           );
+        }
 
-          const matchingClass = classes.data.find(
-            (cls) => cls.key === matchingClassConfig.classId
+        const matchingRaceConfig = raceConfigs.data.find(
+          (config) => config.key === matchingCharacterRace.raceConfigId
+        );
+
+        if (!matchingRaceConfig) {
+          throw new Error(
+            `Could not find matching Race Config Data for character ${character.key}`
           );
+        }
 
-          const matchingSubclass = subclasses.data.find(
-            (subClass) => subClass.key === matchingClassConfig.subclassId
+        const matchingRace = races.data.find(
+          (race) => race.key === matchingRaceConfig.raceId
+        );
+
+        if (!matchingRace) {
+          throw new Error(
+            `Could not find matching Race Data for character ${character.key}`
           );
+        }
 
-          return {
-            level: matchedCharacterClass.level as number,
-            class: matchingClass.name as string,
-            subclass: matchingSubclass.name as string | undefined,
-          };
-        });
+        const matchingSubrace = subraces.data.find(
+          (subrace) => subrace.key === matchingRaceConfig.subraceId
+        );
 
-      // Parse character's owner/user
-      const matchingUser = parsedUsers.find(
-        (user) => user.id === character.userId
-      );
+        const parsedRace = {
+          race: matchingRace.name,
+          subrace: matchingSubrace?.name,
+        };
 
-      const sessionsPlayed =
-        matchingUser?.attendedSessions.filter(
-          (interest) => interest.role === SessionRole.Player
-        ).length ?? 0;
+        // Parse character's class(es)
+        const parsedClasses = characterClasses.data
+          .filter((cls) => cls.characterId === character.key)
+          .map((matchedCharacterClass) => {
+            const matchingClassConfig = classConfigs.data.find(
+              (config) => config.key === matchedCharacterClass.classConfigId
+            );
 
-      return {
-        id: character.key,
-        user: matchingUser,
-        name: character.name,
-        nickname: character.nickname ?? undefined,
-        race: parsedRace,
-        classes: parsedClasses,
-        sessionCount: sessionsPlayed,
-        startingLevel: character.startingLevel,
-        currentLevel: matchingUser?.characterLevel,
-        avatarUrl: character.avatarUrl,
-        retirement: character.retirement,
-        sheetUrl: character.sheetUrl,
-      } as IParsedCharacter;
-    });
+            if (!matchingClassConfig) {
+              throw new Error(
+                `Could not find matching Class Config Data for character ${character.key}`
+              );
+            }
+
+            const matchingClass = classes.data.find(
+              (cls) => cls.key === matchingClassConfig.classId
+            );
+
+            if (!matchingClass) {
+              throw new Error(
+                `Could not find matching Class Data for character ${character.key}`
+              );
+            }
+
+            const matchingSubclass = subclasses.data.find(
+              (subClass) => subClass.key === matchingClassConfig.subclassId
+            );
+
+            return {
+              level: matchedCharacterClass.level,
+              class: matchingClass.name,
+              subclass: matchingSubclass
+                ? matchingSubclass.subclassName
+                : undefined,
+            };
+          });
+
+        // Parse character's owner/player
+        const matchingPlayer = parsedPlayers.find(
+          (player) => player.id === character.playerId
+        );
+
+        if (!matchingPlayer) {
+          throw new Error(
+            `Could not find matching Player for character ${character.key}`
+          );
+        }
+
+        return {
+          id: character.key,
+          player: matchingPlayer,
+          fullName: character.fullName,
+          nickname: character.nickname ?? undefined,
+          race: parsedRace,
+          classes: parsedClasses,
+          startingLevel: character.startingLevel,
+          currentLevel: matchingPlayer?.characterLevel,
+          avatarUrl: character.avatarUrl,
+          retirement: character.retirement
+            ? {
+                isRetired: true,
+                level: character.retirement.level,
+                date: character.retirement.date,
+                reason: character.retirement.reason,
+              }
+            : { isRetired: false },
+          sheetUrl: character.sheetUrl,
+        };
+      }
+    );
 
     dispatch({
       type: "SetParsedCharacters",
       parsedCharacters: { isLoading: false, data: parsedCharacters },
     });
 
-    console.log({ parsedCharacters });
-
-    const parsedSessions = events.data
+    const parsedSessions: Session[] = events.data
       .map((event) => {
         const matchingEventInterests = eventInterests.data.filter(
           (interest) =>
             interest.eventId === event.key && interest.didAttend === true
         );
 
-        console.log(event.key, event.title);
-
-        const attendees = matchingEventInterests.map((interest) =>
-          newCharacters.data.filter(
+        const attendees = matchingEventInterests.flatMap((interest) =>
+          parsedCharacters.filter(
             (character) =>
               interest.role === SessionRole.Player &&
-              character.userId === interest.userId
+              character.player?.id === interest.playerId
           )
         );
 
-        console.log("attendeed", attendees);
+        console.log("attendees", attendees);
 
         const dungeonMaster =
-          matchingEventInterests.map((interest) =>
-            parsedUsers.find(
+          matchingEventInterests.flatMap((interest) =>
+            parsedPlayers.find(
               (user) =>
                 interest.role === SessionRole["Dungeon Master"] &&
-                user.id === interest.userId
+                user.id === interest.playerId
             )
-          )[0] ?? null;
+          )[0] ?? undefined;
 
         return {
+          id: event.key,
           name: event.title,
           dungeonMaster: dungeonMaster,
           date: event.selectedDate,
           attendees: attendees,
         };
       })
-      .sort((a, b) => b.date - a.date);
+      .sort((a, b) => (a.date && b.date ? b.date - a.date : 0));
+
+    console.log("parsedSessions", parsedSessions);
 
     dispatch({
       type: "SetParsedSessions",
@@ -272,8 +315,6 @@ const Dashboard = () => {
           <SessionTable />
         </PivotItem>
       </Pivot>
-      {/* <SessionTable />
-        <CharacterTable /> */}
       <Stack>
         <Profile />
         <Utilities />

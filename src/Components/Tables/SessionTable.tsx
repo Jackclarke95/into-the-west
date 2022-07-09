@@ -24,7 +24,7 @@ const SessionTable = () => {
   const dispatch = useDispatch();
 
   const sessionData = useSelector((state) => state.sessions);
-  const playerData = useSelector((state) => state.users);
+  const playerData = useSelector((state) => state.players);
   const characterData = useSelector((state) => state.characters);
   const activeCharacter = useSelector((state) => state.activeCharacter);
 
@@ -145,10 +145,7 @@ const SessionTable = () => {
     }
 
     const onClickManageSession = () => {
-      dispatch({
-        type: "SetSessionManagement",
-        sessionManagement: { isShown: true, session: session },
-      });
+      console.log("clicked manage session");
     };
 
     const settingsIcon: IIconProps = {

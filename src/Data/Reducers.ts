@@ -13,12 +13,12 @@ export type Action =
       parsedSessions: DefaultRootState["parsedSessions"];
     }
   | {
-      type: "SetParsedUsers";
-      parsedUsers: DefaultRootState["parsedUsers"];
+      type: "SetParsedPlayers";
+      parsedPlayers: DefaultRootState["parsedPlayers"];
     }
   | {
-      type: "SetCurrentParsedUser ";
-      currentParsedUser: DefaultRootState["currentParsedUser"];
+      type: "SetCurrentParsedPlayer";
+      currentParsedUser: DefaultRootState["currentParsedPlayer"];
     }
   | {
       type: "SetActiveParsedCharacter";
@@ -43,10 +43,10 @@ export type Action =
       activeCharacter: DefaultRootState["activeCharacter"];
     }
   | { type: "SetSessions"; sessions: DefaultRootState["sessions"] }
-  | { type: "SetUsers"; users: DefaultRootState["users"] }
+  | { type: "SetPlayers"; players: DefaultRootState["players"] }
   | {
-      type: "SetCurrentUser";
-      currentUser: DefaultRootState["currentUser"];
+      type: "SetCurrentPlayer";
+      currentPlayer: DefaultRootState["currentPlayer"];
     }
   | { type: "SetClasses"; classes: DefaultRootState["classes"] }
   | { type: "SetSubclasses"; subclasses: DefaultRootState["subclasses"] }
@@ -118,9 +118,9 @@ export type Action =
 
 /** Initial application state */
 export const initialState: DefaultRootState = {
-  parsedUsers: { isLoading: true },
+  parsedPlayers: { isLoading: true },
 
-  currentParsedUser: { isLoading: true },
+  currentParsedPlayer: { isLoading: true },
 
   parsedCharacters: { isLoading: true },
 
@@ -140,9 +140,9 @@ export const initialState: DefaultRootState = {
 
   sessions: { isLoading: true },
 
-  users: { isLoading: true },
+  players: { isLoading: true },
 
-  currentUser: { isLoading: true },
+  currentPlayer: { isLoading: true },
 
   classes: { isLoading: true },
 
@@ -233,8 +233,8 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         }
 
         // Action for setting the Current User
-        case "SetCurrentUser": {
-          draftState.currentUser = action.currentUser;
+        case "SetCurrentPlayer": {
+          draftState.currentPlayer = action.currentPlayer;
           break;
         }
 
@@ -274,8 +274,8 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         }
 
         // Action for setting the Players
-        case "SetUsers": {
-          draftState.users = action.users;
+        case "SetPlayers": {
+          draftState.players = action.players;
           break;
         }
 

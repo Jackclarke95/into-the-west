@@ -1,12 +1,23 @@
 import { User } from "firebase/auth";
 import { Dispatch } from "react";
 import ICharacter from "../Interfaces/ICharacter";
-import IUser from "../Interfaces/IUser";
+import IPlayer from "../Interfaces/IUser";
 import ISession from "../Interfaces/ISession";
 import { Action } from "./Reducers";
-import IParsedCharacter from "../Interfaces/Parsed/IParsedCharacter";
-import IParsedSession from "../Interfaces/Parsed/IParsedSession";
-import IParsedUser from "../Interfaces/Parsed/IParsedUser";
+import { Character, Player, Session } from "../Types/LocalStructures";
+import {
+  CharacterClassData,
+  CharacterData,
+  CharacterRaceData,
+  ClassConfigData,
+  ClassData,
+  EventData,
+  EventInterestData,
+  RaceConfigData,
+  RaceData,
+  SubclassData,
+  SubraceData,
+} from "../Types/DatabaseStructures";
 
 /** Interface detailing the Default Root State */
 declare module "react-redux" {
@@ -21,35 +32,39 @@ declare module "react-redux" {
     /** The currently logged-in User as a Firebase User */
     authUser: User | null;
 
-    parsedUsers:
-      | { isLoading: true }
-      | { isLoading: false; data: IParsedUser[] };
+    parsedPlayers: { isLoading: true } | { isLoading: false; data: Player[] };
 
-    currentParsedUser:
+    currentParsedPlayer:
       | { isLoading: true }
-      | { isLoading: false; data: IParsedUser | undefined };
+      | { isLoading: false; data: Player | undefined };
 
     parsedCharacters:
       | { isLoading: true }
-      | { isLoading: false; data: IParsedCharacter[] };
+      | { isLoading: false; data: Character[] };
 
     activeParsedCharacter:
       | { isLoading: true }
-      | { isLoading: false; data: IParsedCharacter | undefined };
+      | { isLoading: false; data: Character | undefined };
 
-    parsedSessions: { isLoading: true } | { isLoading: false; data: any[] };
+    parsedSessions: { isLoading: true } | { isLoading: false; data: Session[] };
 
     /** The Characters stored in the Firebase Realtime Database */
     characters: { isLoading: true } | { isLoading: false; data: ICharacter[] };
 
     /** The Characters stored in the Firebase Realtime Database, in the new format */
-    newCharacters: { isLoading: true } | { isLoading: false; data: any[] };
+    newCharacters:
+      | { isLoading: true }
+      | { isLoading: false; data: CharacterData[] };
 
-    characterClasses: { isLoading: true } | { isLoading: false; data: any[] };
+    characterClasses:
+      | { isLoading: true }
+      | { isLoading: false; data: CharacterClassData[] };
 
-    characterRaces: { isLoading: true } | { isLoading: false; data: any[] };
+    characterRaces:
+      | { isLoading: true }
+      | { isLoading: false; data: CharacterRaceData[] };
 
-    /** The currently logged-in user's Active Character from the Firebase Realtime Database */
+    /** The currently logged-in player's Active Character from the Firebase Realtime Database */
     activeCharacter:
       | { isLoading: true }
       | { isLoading: false; data: ICharacter | undefined };
@@ -57,39 +72,47 @@ declare module "react-redux" {
     /** The Sessions stored in the Firebase Realtime Database */
     sessions: { isLoading: true } | { isLoading: false; data: ISession[] };
 
-    /** The Users stored in the Firebase Realtime Database */
-    users: { isLoading: true } | { isLoading: false; data: IUser[] };
+    /** The Players stored in the Firebase Realtime Database */
+    players: { isLoading: true } | { isLoading: false; data: IPlayer[] };
 
-    /** The currently logged-in User from the Firebase Realtime Database */
-    currentUser:
+    /** The currently logged-in Player from the Firebase Realtime Database */
+    currentPlayer:
       | { isLoading: true }
-      | { isLoading: false; data: IUser | undefined };
+      | { isLoading: false; data: IPlayer | undefined };
 
     /** The Classes stored in the Firebase Realtime Database */
-    classes: { isLoading: true } | { isLoading: false; data: any };
+    classes: { isLoading: true } | { isLoading: false; data: ClassData[] };
 
     /** The Subclasses stored in the Firebase Realtime Database */
-    subclasses: { isLoading: true } | { isLoading: false; data: any };
+    subclasses:
+      | { isLoading: true }
+      | { isLoading: false; data: SubclassData[] };
 
     /** The Class Configurations stored in the Firebase Realtime Database */
-    classConfigs: { isLoading: true } | { isLoading: false; data: any };
+    classConfigs:
+      | { isLoading: true }
+      | { isLoading: false; data: ClassConfigData[] };
 
     /** The Races stored in the Firebase Realtime Database */
-    races: { isLoading: true } | { isLoading: false; data: any };
+    races: { isLoading: true } | { isLoading: false; data: RaceData[] };
 
     /** The Subraces stored in the Firebase Realtime Database */
-    subraces: { isLoading: true } | { isLoading: false; data: any };
+    subraces: { isLoading: true } | { isLoading: false; data: SubraceData[] };
 
     /** The Race Configurations stored in the Firebase Realtime Database */
-    raceConfigs: { isLoading: true } | { isLoading: false; data: any };
+    raceConfigs:
+      | { isLoading: true }
+      | { isLoading: false; data: RaceConfigData[] };
 
     /** The Events stored in the Firebase Realtime Database */
-    events: { isLoading: true } | { isLoading: false; data: any };
+    events: { isLoading: true } | { isLoading: false; data: EventData[] };
 
     /** The Event Interests stored in the Firebase Realtime Database */
-    eventInterests: { isLoading: true } | { isLoading: false; data: any };
+    eventInterests:
+      | { isLoading: true }
+      | { isLoading: false; data: EventInterestData[] };
 
-    /** The current user's Available Dates as a selection in the UI */
+    /** The current player's Available Dates as a selection in the UI */
     selectedDates: number[];
 
     /** Whether to show the Character Creation Dialog */
@@ -128,9 +151,7 @@ declare module "react-redux" {
       | { isShown: true; session: ISession };
 
     /** Whether the Session Management dialog should be shown, along with which Session it will be shown for */
-    sessionManagement:
-      | { isShown: false }
-      | { isShown: true; session: ISession };
+    sessionManagement: { isShown: false } | { isShown: true; session: Session };
   }
 
   // Declare dispatcher to take our root provider's action type

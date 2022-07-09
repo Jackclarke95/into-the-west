@@ -8,7 +8,7 @@ import Races from "../../Data/Races";
 const Utilities = () => {
   const dispatch = useDispatch();
 
-  const users = useSelector((state) => state.users);
+  const users = useSelector((state) => state.players);
 
   const onClickShowTokenCreator = () => {
     console.log("Displaying token creator");
@@ -279,7 +279,7 @@ const Utilities = () => {
           }
 
           const user = users.data.find(
-            (user) => user.key === eventInterest.userId
+            (user) => user.key === eventInterest.playerId
           );
 
           eventInterest.user = user;
@@ -290,7 +290,7 @@ const Utilities = () => {
         return eventInterests as {
           key: string;
           eventId: string;
-          userId: string;
+          playerId: string;
           didAttend: boolean;
           role: number;
         }[];

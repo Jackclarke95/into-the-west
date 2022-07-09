@@ -17,7 +17,7 @@ const Profile = () => {
   const dispatch = useDispatch();
 
   const characters = useSelector((state) => state.characters);
-  const currentUser = useSelector((state) => state.currentUser);
+  const currentUser = useSelector((state) => state.currentPlayer);
 
   // Set the active character based on the current player
   useEffect(() => {
