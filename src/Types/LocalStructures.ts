@@ -17,9 +17,9 @@ export type Character = {
   classes: Class[];
   race: Race;
   startingLevel: number;
-  currentLevel: number;
-  avatarUrl: string;
-  sheetUrl: string;
+  currentLevel: number | undefined;
+  avatarUrl: string | undefined;
+  sheetUrl: string | undefined;
   retirement:
     | { isRetired: false }
     | { isRetired: true; reason: string; date: number; level: number };

@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import SessionRole from "../Enums/SessionRole";
 import NewSessionTable from "./Tables/NewSessionTable";
 import { Character, Session, Player } from "../Types/LocalStructures";
+import DataService from "../Helpers/DataService";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -43,12 +44,8 @@ const Dashboard = () => {
       eventInterests.isLoading ||
       users.isLoading
     ) {
-      console.log("Loading...");
-
       return;
     }
-
-    console.log("Loaded");
 
     const parsedPlayers: Player[] = users.data.map((player) => {
       const attendedPlayerSessions = eventInterests.data
@@ -57,8 +54,6 @@ const Dashboard = () => {
           const session = events.data.find(
             (event) => event.key === interest.eventId
           );
-
-          console.log(interest);
 
           if (!session) {
             throw new Error(
@@ -194,12 +189,6 @@ const Dashboard = () => {
           (player) => player.id === character.playerId
         );
 
-        if (!matchingPlayer) {
-          throw new Error(
-            `Could not find matching Player for character ${character.key}`
-          );
-        }
-
         return {
           id: character.key,
           player: matchingPlayer,
@@ -243,8 +232,6 @@ const Dashboard = () => {
           )
         );
 
-        console.log("attendees", attendees);
-
         const dungeonMaster =
           matchingEventInterests.flatMap((interest) =>
             parsedPlayers.find(
@@ -263,8 +250,6 @@ const Dashboard = () => {
         };
       })
       .sort((a, b) => (a.date && b.date ? b.date - a.date : 0));
-
-    console.log("parsedSessions", parsedSessions);
 
     dispatch({
       type: "SetParsedSessions",
@@ -302,16 +287,16 @@ const Dashboard = () => {
       }}
     >
       <Pivot>
-        <PivotItem headerText="New Characters">
+        <PivotItem headerText="Characters">
           <NewCharacterTable />
         </PivotItem>
-        <PivotItem headerText="New Sessions">
+        <PivotItem headerText="Sessions">
           <NewSessionTable />
         </PivotItem>
-        <PivotItem headerText="Characters">
+        <PivotItem headerText="Characters (Legacy)">
           <CharacterTable />
         </PivotItem>
-        <PivotItem headerText="Sessions">
+        <PivotItem headerText="Sessions (Legacy)">
           <SessionTable />
         </PivotItem>
       </Pivot>

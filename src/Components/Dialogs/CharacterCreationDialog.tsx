@@ -15,8 +15,6 @@ import {
 } from "@fluentui/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Classes from "../../Data/Classes";
-import Races from "../../Data/Races";
 import DataHelper from "../../Helpers/DataHelper";
 import DataService from "../../Helpers/DataService";
 
@@ -25,6 +23,12 @@ const CharacterCreationDialog = () => {
 
   const showDialog = useSelector((state) => state.showCharacterCreationDialog);
   const currentPlayer = useSelector((state) => state.currentPlayer);
+  const classes = useSelector((state) => state.classes);
+  const subclasses = useSelector((state) => state.subclasses);
+  const classConfigs = useSelector((state) => state.classConfigs);
+  const races = useSelector((state) => state.races);
+  const subraces = useSelector((state) => state.subraces);
+  const raceConfigs = useSelector((state) => state.raceConfigs);
 
   const [characterName, setCharacterName] = useState<string | undefined>(
     undefined
@@ -74,43 +78,12 @@ const CharacterCreationDialog = () => {
     isBlocking: true,
   } as IModalProps;
 
-  const raceOptions = Races.map((race) => ({
-    key: race.name,
-    text: race.name,
-  }));
-
-  const subraceOptions = (
-    characterRace && Races.find((race) => race.name === characterRace)?.subraces
-      ? Races.find((race) => race.name === characterRace)?.subraces!.map(
-          (subrace) => ({
-            key: subrace,
-            text: subrace,
-          })
-        )
-      : []
-  ) as IDropdownOption[];
-
-  const classOptions = Classes.map((cls) => ({
-    key: cls.name,
-    text: cls.name,
-  }));
-
-  const subclassOptions = () => {
-    if (!characterClass) {
-      return [] as IDropdownOption[];
-    }
-
-    const cls = Classes.find((cls) => cls.name === characterClass);
-
-    if (!cls || cls.archetypeDefinition.level > characterLevel) {
-      return [] as IDropdownOption[];
-    } else {
-      return cls.archetypeDefinition.subclasses.map((subclass) => ({
-        key: subclass,
-        text: subclass,
-      })) as IDropdownOption[];
-    }
-  };
+  const raceOptions = races.isLoading
+    ? []
+    : races.data.map((race) => ({
+        key: race.name,
+        text: race.name,
+      }));
 
   const onChangeName = (_, value: string | undefined) => {
     setCharacterName(value);
@@ -200,6 +173,19 @@ const CharacterCreationDialog = () => {
   };
 
   const validateCharacter = () => {
+    if (
+      classes.isLoading ||
+      subclasses.isLoading ||
+      classConfigs.isLoading ||
+      races.isLoading ||
+      subraces.isLoading ||
+      raceConfigs.isLoading
+    ) {
+      setMessageBarMessage("Data still loading");
+
+      return;
+    }
+
     if (!characterName) {
       setMessageBarMessage("Please enter a name");
 
@@ -219,7 +205,7 @@ const CharacterCreationDialog = () => {
     }
 
     if (
-      Races.find((race) => race.name === characterRace)?.subraces &&
+      races.data.find((race) => race.name === characterRace)?.subraceRequired &&
       !characterSubrace
     ) {
       setMessageBarMessage("The selected race requires a subrace");
@@ -233,17 +219,13 @@ const CharacterCreationDialog = () => {
       return false;
     }
 
-    const cls = Classes.find((cls) => cls.name === characterClass);
+    const cls = classes.data.find((cls) => cls.name === characterClass);
 
-    if (
-      cls &&
-      !characterSubclass &&
-      cls.archetypeDefinition.level <= characterLevel
-    ) {
+    if (cls && !characterSubclass && cls.levelFrom <= characterLevel) {
       setMessageBarMessage(
-        `The selected must have ${
-          DataHelper.startsWithVowel(cls.archetypeDefinition.name) ? "an" : "a"
-        } ${cls.archetypeDefinition.name} at ${DataHelper.formatOrdinalNumber(
+        `The selected archetype must have ${
+          DataHelper.startsWithVowel(cls.archetypeName) ? "an" : "a"
+        } ${cls.archetypeName} at ${DataHelper.formatOrdinalNumber(
           characterLevel
         )} level`
       );
@@ -298,7 +280,7 @@ const CharacterCreationDialog = () => {
         required
         calloutProps={{ calloutMaxHeight: 500 }}
       />
-      <Dropdown
+      {/* <Dropdown
         label="Subrace"
         options={subraceOptions}
         defaultValue={undefined}
@@ -319,8 +301,8 @@ const CharacterCreationDialog = () => {
         options={classOptions}
         onChange={onChangeClass}
         required
-      />
-      <Dropdown
+      /> */}
+      {/* <Dropdown
         label={
           subclassOptions().length === 0
             ? "Subclass"
@@ -334,7 +316,7 @@ const CharacterCreationDialog = () => {
         required={subclassOptions().length !== 0}
         calloutProps={{ calloutMaxHeight: 250 }}
         selectedKey={characterSubclass}
-      />
+      /> */}
       <DialogFooter>
         <DefaultButton text="Cancel" onClick={onDismiss} />
         <PrimaryButton text="Create" onClick={onClickCreateCharacter} />

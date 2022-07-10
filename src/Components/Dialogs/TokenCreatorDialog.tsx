@@ -9,12 +9,12 @@ import {
 } from "@fluentui/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Classes from "../../Data/Classes";
 
 const TokenCreatorDialog = () => {
   const dispatch = useDispatch();
 
   const showDialog = useSelector((state) => state.showTokenCreatorDialog);
+  const classes = useSelector((state) => state.classes);
 
   const [characterClass, setCharacterClass] = useState<string | undefined>(
     undefined
@@ -37,10 +37,12 @@ const TokenCreatorDialog = () => {
     closeButtonAriaLabel: "Close",
   };
 
-  const classOptions = Classes.map((cls) => ({
-    key: cls.name,
-    text: cls.name,
-  }));
+  const classOptions = classes.isLoading
+    ? []
+    : classes.data.map((cls) => ({
+        key: cls.name,
+        text: cls.name,
+      }));
 
   const onChangeClass = (_, option: IDropdownOption | undefined) => {
     if (!option) {

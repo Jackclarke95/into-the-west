@@ -80,10 +80,10 @@ export type UserData = {
 
 export type CharacterData = {
   key: string;
-  playerId: string;
+  playerId: string | undefined;
   fullName: string;
   nickname: string | undefined;
-  avatarUrl: string;
+  avatarUrl: string | undefined;
   sheetUrl: string;
   startingLevel: number;
   retirement: {

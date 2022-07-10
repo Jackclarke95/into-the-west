@@ -101,8 +101,6 @@ const NewCharacterTable = () => {
       );
     }
 
-    console.log(character);
-
     const xpForCurrentLevel =
       LevelUpData[Math.floor(character.player.xp / 120) - 1].xpRequired;
 
