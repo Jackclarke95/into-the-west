@@ -8,11 +8,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import SessionRole from "../Enums/SessionRole";
 import NewSessionTable from "./Tables/NewSessionTable";
-import { Character, Session, Player } from "../Types/LocalStructures";
+import { Character, Session, Player, Map } from "../Types/LocalStructures";
 import DataService from "../Helpers/DataService";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
+
+  const maps = useSelector((state) => state.maps);
 
   const users = useSelector((state) => state.players);
 
@@ -31,6 +33,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (
+      maps.isLoading ||
       newCharacters.isLoading ||
       characterClasses.isLoading ||
       characterRaces.isLoading ||
@@ -46,6 +49,16 @@ const Dashboard = () => {
     ) {
       return;
     }
+
+    const parsedMaps: Map[] = maps.data.map((map) => ({
+      id: map.key,
+      name: map.name,
+    }));
+
+    dispatch({
+      type: "SetParsedMaps",
+      parsedMaps: { isLoading: false, data: parsedMaps },
+    });
 
     const parsedPlayers: Player[] = users.data.map((player) => {
       const attendedPlayerSessions = eventInterests.data

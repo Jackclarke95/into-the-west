@@ -45,3 +45,8 @@ export type Player = {
   sessionsPlayed: number;
   sessionsRun: number;
 };
+
+export type Map = {
+  id: string;
+  name: string;
+};

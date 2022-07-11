@@ -20,6 +20,7 @@ const NewSessionTable = () => {
 
   const sessions = useSelector((state) => state.parsedSessions);
   const activeCharacter = useSelector((state) => state.activeCharacter);
+  const maps = useSelector((state) => state.maps);
 
   const onRenderAttendees = (session) => {
     return (
@@ -114,13 +115,15 @@ const NewSessionTable = () => {
             />
           </TooltipHost>
         )}
-        <TooltipHost content="Manage session">
-          <IconButton
-            iconProps={settingsIcon}
-            disabled={false}
-            onClick={onClickManageSession}
-          />
-        </TooltipHost>
+        {DataHelper.isDateInPast(session.date!) ? (
+          <TooltipHost content="Manage session">
+            <IconButton
+              iconProps={settingsIcon}
+              disabled={false}
+              onClick={onClickManageSession}
+            />
+          </TooltipHost>
+        ) : null}
       </Stack>
     );
   };

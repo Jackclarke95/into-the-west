@@ -6,6 +6,8 @@ import {
   FontSizes,
   FontWeights,
   IColumn,
+  MessageBar,
+  MessageBarType,
   Modal,
   OverflowButtonType,
   PersonaSize,
@@ -60,7 +62,7 @@ const SessionManagementDialog = () => {
               interest.eventId ===
               sessions.data.find(
                 (session) => session.key === sessionManagement.session.id
-              )!.key
+              )?.key
           )
           .map((interest) => interest.playerId)
           .includes(user.key)
@@ -158,12 +160,20 @@ const SessionManagementDialog = () => {
         >
           {sessionManagement.isShown ? sessionManagement.session.name : ""}
         </Text>
-        <Text>Please select a date for this session.</Text>
-        <ShimmeredDetailsList
-          items={dates}
-          selectionMode={SelectionMode.single}
-          columns={columns}
-        />
+        {getInterestedUsers().length > 0 ? (
+          <>
+            <Text>Please select a date for this session.</Text>
+            <ShimmeredDetailsList
+              items={dates}
+              selectionMode={SelectionMode.single}
+              columns={columns}
+            />
+          </>
+        ) : (
+          <MessageBar messageBarType={MessageBarType.error}>
+            No players have selected any available dates for this session .
+          </MessageBar>
+        )}
         <DialogFooter>
           <DefaultButton text="Cancel" onClick={onDismiss} />
           <PrimaryButton text="Save" onClick={onClickSave} />

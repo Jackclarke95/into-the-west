@@ -339,6 +339,25 @@ const App = () => {
     });
   });
 
+  onValue(ref(db, "maps"), (snapshot) => {
+    const snapVal = snapshot.val();
+
+    const data = Object.keys(snapVal).map((key) => {
+      const map = snapVal[key];
+      map.key = key;
+
+      return map;
+    });
+
+    dispatch({
+      type: "SetMaps",
+      maps: {
+        isLoading: false,
+        data: data,
+      },
+    });
+  });
+
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       dispatch({

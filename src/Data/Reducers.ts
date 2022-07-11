@@ -114,6 +114,14 @@ export type Action =
   | {
       type: "SetSessionManagement";
       sessionManagement: DefaultRootState["sessionManagement"];
+    }
+  | {
+      type: "SetParsedMaps";
+      parsedMaps: DefaultRootState["parsedMaps"];
+    }
+  | {
+      type: "SetMaps";
+      maps: DefaultRootState["maps"];
     };
 
 /** Initial application state */
@@ -128,6 +136,8 @@ export const initialState: DefaultRootState = {
 
   parsedSessions: { isLoading: true },
 
+  parsedMaps: { isLoading: true },
+
   characters: { isLoading: true },
 
   newCharacters: { isLoading: true },
@@ -135,6 +145,8 @@ export const initialState: DefaultRootState = {
   characterClasses: { isLoading: true },
 
   characterRaces: { isLoading: true },
+
+  maps: { isLoading: true },
 
   activeCharacter: { isLoading: true },
 

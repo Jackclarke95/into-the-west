@@ -4,7 +4,7 @@ import ICharacter from "../Interfaces/ICharacter";
 import IPlayer from "../Interfaces/IUser";
 import ISession from "../Interfaces/ISession";
 import { Action } from "./Reducers";
-import { Character, Player, Session } from "../Types/LocalStructures";
+import { Character, Map, Player, Session } from "../Types/LocalStructures";
 import {
   CharacterClassData,
   CharacterData,
@@ -13,6 +13,7 @@ import {
   ClassData,
   EventData,
   EventInterestData,
+  MapData,
   RaceConfigData,
   RaceData,
   SubclassData,
@@ -48,6 +49,8 @@ declare module "react-redux" {
 
     parsedSessions: { isLoading: true } | { isLoading: false; data: Session[] };
 
+    parsedMaps: { isLoading: true } | { isLoading: false; data: Map[] };
+
     /** The Characters stored in the Firebase Realtime Database */
     characters: { isLoading: true } | { isLoading: false; data: ICharacter[] };
 
@@ -63,6 +66,9 @@ declare module "react-redux" {
     characterRaces:
       | { isLoading: true }
       | { isLoading: false; data: CharacterRaceData[] };
+
+    /** The Maps stored in the Firebase Realtime Database */
+    maps: { isLoading: true } | { isLoading: false; data: MapData[] };
 
     /** The currently logged-in player's Active Character from the Firebase Realtime Database */
     activeCharacter:
