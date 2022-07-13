@@ -8,8 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import SessionRole from "../Enums/SessionRole";
 import NewSessionTable from "./Tables/NewSessionTable";
-import { Character, Session, Player, Map } from "../Types/LocalStructures";
-import DataService from "../Helpers/DataService";
+import { Character, Map, Player, Session } from "../Types/LocalStructures";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -64,9 +63,14 @@ const Dashboard = () => {
       const attendedPlayerSessions = eventInterests.data
         .filter((eventInterest) => eventInterest.playerId === player.key)
         .map((interest) => {
+          console.log(events.data.map((event) => event.key));
+          console.log(interest);
+
           const session = events.data.find(
             (event) => event.key === interest.eventId
           );
+
+          console.log(interest.eventId);
 
           if (!session) {
             throw new Error(
@@ -237,22 +241,70 @@ const Dashboard = () => {
             interest.eventId === event.key && interest.didAttend === true
         );
 
-        const attendees = matchingEventInterests.flatMap((interest) =>
-          parsedCharacters.filter(
+        const attendees = parsedCharacters
+          .filter(
             (character) =>
-              interest.role === SessionRole.Player &&
-              character.player?.id === interest.playerId
+              (!character.retirement?.isRetired ||
+                character.retirement.date >
+                  (event.selectedDate ?? new Date().getTime())) &&
+              character.player &&
+              eventInterests.data
+                .filter(
+                  (interest) =>
+                    interest.eventId === event.key &&
+                    interest.role === SessionRole.Player
+                )
+                .map((interest) => interest.playerId)
+                .includes(character.player?.id)
           )
+          .sort((a, b) =>
+            a.player && b.player ? a.player?.id.localeCompare(b.player?.id) : 0
+          )
+          .sort((a, b) => {
+            if (a.retirement.isRetired && b.retirement.isRetired) {
+              return a.retirement.date - b.retirement.date;
+            } else {
+              if (a.retirement.isRetired) {
+                return -1;
+              } else {
+                return 1;
+              }
+            }
+          })
+          .reduce((prev: Character[], current) => {
+            if (!prev.map((character) => character.id).includes(current.id)) {
+              prev.push(current);
+            }
+          }, []);
+
+        // Remove all non-attending characters also owned by attending players
+
+        console.log(
+          attendees.map((attendee) => ({
+            name: attendee.fullName,
+            retirement: attendee.retirement.isRetired
+              ? new Date(attendee.retirement.date).toDateString()
+              : false,
+          }))
         );
 
-        const dungeonMaster =
-          matchingEventInterests.flatMap((interest) =>
-            parsedPlayers.find(
-              (user) =>
-                interest.role === SessionRole["Dungeon Master"] &&
-                user.id === interest.playerId
-            )
-          )[0] ?? undefined;
+        const dungeonMaster = parsedPlayers.find(
+          (player) =>
+            player.id ===
+            matchingEventInterests.find(
+              (interest) =>
+                interest.eventId === event.key &&
+                interest.role === SessionRole["Dungeon Master"]
+            )?.playerId
+        );
+
+        const matchingMap = parsedMaps.find((map) => map.id === event.mapId);
+
+        if (!matchingMap) {
+          throw new Error(
+            `Could not find matching Map Data for event ${event.key}`
+          );
+        }
 
         return {
           id: event.key,
@@ -260,6 +312,7 @@ const Dashboard = () => {
           dungeonMaster: dungeonMaster,
           date: event.selectedDate,
           attendees: attendees,
+          map: matchingMap,
         };
       })
       .sort((a, b) => (a.date && b.date ? b.date - a.date : 0));
@@ -282,6 +335,7 @@ const Dashboard = () => {
     events,
     eventInterests,
     users,
+    maps,
   ]);
 
   return (

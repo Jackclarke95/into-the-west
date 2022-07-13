@@ -31,6 +31,7 @@ export type Session = {
   attendees: Character[];
   dungeonMaster: Player | undefined;
   date: number | undefined;
+  map: Map;
 };
 
 export type Player = {

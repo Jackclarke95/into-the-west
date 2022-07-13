@@ -273,6 +273,18 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
           break;
         }
 
+        // Action for setting the Maps
+        case "SetMaps": {
+          draftState.maps = action.maps;
+          break;
+        }
+
+        // Action for setting the Parsed Maps
+        case "SetParsedMaps": {
+          draftState.parsedMaps = action.parsedMaps;
+          break;
+        }
+
         // Action for setting the Active Character
         case "SetActiveCharacter": {
           draftState.activeCharacter = action.activeCharacter;

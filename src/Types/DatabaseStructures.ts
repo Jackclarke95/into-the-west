@@ -51,7 +51,7 @@ export type CharacterRaceData = {
 
 export type EventData = {
   key: string;
-  mapid: string;
+  mapId: string;
   title: string;
   selectedDate: number | undefined;
 };

@@ -467,7 +467,7 @@
   "newCharacters": {
     "-N5W0C090Fz2bSdJVuQx": {
       "playerId": "-MaGM6Q3kpDNynEBURGO",
-      "avatarUrl": null,
+      "avatarUrl": "-MaGM6Q3kpDNynEBURGO",
       "fullName": "De Mauer",
       "sheetUrl": "https://www.dndbeyond.com/characters/62565380",
       "startingLevel": 1
@@ -479,7 +479,7 @@
       "sheetUrl": "https://www.dndbeyond.com/profile/SchemingPnda/characters/64045133",
       "startingLevel": 2,
       "retirement": {
-        "date": "2022 4 6",
+        "date": 1649199600000,
         "reason": "Retired by Player",
         "level": 3
       }
@@ -492,7 +492,7 @@
       "startingLevel": 3
     },
     "-N6d7Eq_o58VUPGN_Ujm": {
-      "playerId": null,
+      "playerId": "-MaGM4rbdJBgZ8rKnfbc",
       "avatarUrl": "https://www.dndbeyond.com/avatars/21703/797/1581111423-62130532.jpeg",
       "fullName": "Cyrus Sunheart",
       "nickname": "Cyrus",
@@ -507,22 +507,14 @@
       "startingLevel": 1
     },
     "-N6dzTMPvl5LlHjgytiI": {
-      "playerId": null,
+      "playerId": "-MaGM6YXdS0MHyYRc99v",
       "avatarUrl": "https://www.dndbeyond.com/avatars/9221/722/637202352169308354.jpeg",
       "fullName": "Bruenor",
       "sheetUrl": "https://www.dndbeyond.com/characters/63108982",
       "startingLevel": 2
     },
-    "-N6dzU79wPwZlwxzGmPx": {
-      "playerId": null,
-      "avatarUrl": null,
-      "fullName": "Destrian Darkeyes",
-      "nickname": "Destrian",
-      "sheetUrl": "https://www.dndbeyond.com/characters/67876495",
-      "startingLevel": 1
-    },
     "-N6dzbY0R_UKUJJuCFcd": {
-      "playerId": null,
+      "playerId": "-MaGM5QVGtAGMiUj9Eb_",
       "avatarUrl": "https://www.dndbeyond.com/avatars/11957/368/1581111423-33132303.jpeg",
       "fullName": "Ember",
       "sheetUrl": "https://www.dndbeyond.com/characters/33132303",
@@ -537,21 +529,21 @@
       "startingLevel": 3
     },
     "-N6dzin3uqGnFfHYywCU": {
-      "playerId": null,
+      "playerId": "-MaGM5cq30wDPzwxYLK4",
       "avatarUrl": "https://www.dndbeyond.com/avatars/21808/761/1581111423-62380701.jpeg",
       "fullName": "Ishka",
       "sheetUrl": "https://www.dndbeyond.com/characters/62380701",
       "startingLevel": 1
     },
     "-N6dzjKcAHj8BG8tPthc": {
-      "playerId": null,
+      "playerId": "-MaGM5tBXrrMWldlbI-X",
       "avatarUrl": null,
       "fullName": "James",
       "sheetUrl": "https://www.dndbeyond.com/characters/62804832",
       "startingLevel": 1
     },
     "-N6dzk35js99aMTjRtQE": {
-      "playerId": null,
+      "playerId": "-MaGM6IOnqXNGuNfxZa6",
       "avatarUrl": "https://www.dndbeyond.com/avatars/9107/498/637196230043758055.jpeg",
       "fullName": "Kai Des'den",
       "nickname": "Kai",
@@ -567,7 +559,7 @@
       "startingLevel": 1
     },
     "-N6dzkuyY5OpH5yOTTub": {
-      "playerId": null,
+      "playerId": "-MaGM4yP9MiI5Cy5CmCL",
       "avatarUrl": null,
       "fullName": "Milly Catimus",
       "nickname": "Milly",
@@ -575,7 +567,7 @@
       "startingLevel": 1
     },
     "-N6dzm26f2HqimEMX9WI": {
-      "playerId": null,
+      "playerId": "-MaGM5CRWHK7L7PRyhub",
       "avatarUrl": "https://www.dndbeyond.com/avatars/21816/480/1581111423-26267182.jpeg",
       "fullName": "Nando Tennessee",
       "nickname": "Nando",
@@ -583,7 +575,7 @@
       "startingLevel": 1
     },
     "-N6dzmOjRQPnpiMlARHe": {
-      "playerId": null,
+      "playerId": "-MaGM5JL64jM9ODkb1Jr",
       "avatarUrl": "https://www.dndbeyond.com/avatars/21808/599/1581111423-62426653.jpeg",
       "fullName": "Orgust",
       "sheetUrl": "https://www.dndbeyond.com/characters/62426653",
@@ -597,7 +589,7 @@
       "startingLevel": 1
     },
     "-N6dzs9UdIzIKst58V2i": {
-      "playerId": null,
+      "playerId": "-MaGLAdfrrLeLWxdwuUU",
       "avatarUrl": "https://www.dndbeyond.com/avatars/21853/454/1581111423-62556497.jpeg",
       "fullName": "Prof. Tabbart",
       "nickname": "Tabbart",
@@ -605,7 +597,7 @@
       "startingLevel": 1
     },
     "-N6dzs_EB0i5lfRAmQwi": {
-      "playerId": null,
+      "playerId": "-MaGM5koceXzQAlwRUFN",
       "avatarUrl": "https://www.dndbeyond.com/avatars/21977/940/1581111423-62913829.jpeg",
       "fullName": "Thuldurr Lotgorr",
       "sheetUrl": "https://www.dndbeyond.com/characters/62913829",
@@ -620,18 +612,18 @@
       "startingLevel": 1
     },
     "-N6dztQpmT4rTZZVH5ue": {
-      "playerId": null,
+      "playerId": "-MaGM6mfWwwgH4r0KsVA",
       "avatarUrl": "https://www.dndbeyond.com/avatars/17/413/636377884703064507.jpeg",
       "fullName": "Wrenn (The Beard) Beren",
       "sheetUrl": "https://www.dndbeyond.com/characters/63233783",
       "startingLevel": 1
     },
     "-N6dztpHto11gKCNlauM": {
-      "playerId": null,
+      "playerId": "-MaGM6YXdS0MHyYRc99v",
       "avatarUrl": null,
       "fullName": "Argus",
       "sheetUrl": null,
-      "startingLevel": 0
+      "startingLevel": 1
     },
     "-N6e2dh0YdvQnV_fNdc1": {
       "playerId": "cWIubiixD6hbnefPdn3108qn5kI3",
@@ -639,21 +631,31 @@
       "fullName": "Edwin Brando",
       "nickname": "Edwin",
       "sheetUrl": null,
-      "startingLevel": 0
+      "startingLevel": 1,
+      "retirement": {
+        "level": 2,
+        "reason": "Retired by player",
+        "date": 1643328000000
+      }
     },
     "-N6e2eTGIvFBW7QGYqM5": {
       "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
       "avatarUrl": null,
       "fullName": "Kricket",
       "sheetUrl": null,
-      "startingLevel": 0
+      "startingLevel": 1
     },
     "-N6e2fF9T641YD7WuvqC": {
       "playerId": "cWIubiixD6hbnefPdn3108qn5kI3",
       "avatarUrl": null,
       "fullName": "Rho-LIV",
       "sheetUrl": null,
-      "startingLevel": 0
+      "startingLevel": 2,
+      "retirement": {
+        "level": 3,
+        "reason": "Retired by player",
+        "date": 1644019200000
+      }
     }
   },
   "characterClasses": {
@@ -1527,11 +1529,149 @@
     }
   },
   "eventInterests": {
-    "-N3LKjCCfOYLdKNofaM4": {
+    "-N6oVlJWfgL1ImJzcDES": {
+      "eventId": "-N3LNSCvKJYMuf3blwBm",
       "didAttend": true,
+      "playerId": "cWIubiixD6hbnefPdn3108qn5kI3",
+      "role": 0
+    },
+    "-N6oOrv3-abX4jKzG3mG": {
+      "eventId": "-N3LNFSEtKmJDoqihyUA",
+      "didAttend": true,
+      "playerId": "cWIubiixD6hbnefPdn3108qn5kI3",
+      "role": 0
+    },
+    "-N6oFWD1QUNr-T1Ow6ZI": {
+      "eventId": "-N3LNFSEtKmJDoqihyUA",
+      "didAttend": true,
+      "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
+      "role": 1
+    },
+    "-N6oFWo1K2rfFdh-j13q": {
       "eventId": "-N3LNGR4rzXmngzrk49C",
-      "role": 0,
-      "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13"
+      "didAttend": true,
+      "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
+      "role": 1
+    },
+    "-N6oFXP3szQTPjm_KopC": {
+      "eventId": "-N3LNGxLbEugSM-igDxf",
+      "didAttend": true,
+      "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
+      "role": 1
+    },
+    "-N6oFYF6i-rPR8FUfFpg": {
+      "eventId": "-N3LNHMoZVGYQlswgwJY",
+      "didAttend": true,
+      "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
+      "role": 1
+    },
+    "-N6oFYjhNwnpyOz0UObH": {
+      "eventId": "-N3LNHmGLBnk7y8S2bZK",
+      "didAttend": true,
+      "playerId": "cWIubiixD6hbnefPdn3108qn5kI3",
+      "role": 1
+    },
+    "-N6oFZ9-sJSA15pDotUx": {
+      "eventId": "-N3LNI6zRFS-u13RbWdS",
+      "didAttend": true,
+      "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
+      "role": 1
+    },
+    "-N6oFZbWg8FrdlnpQJ6w": {
+      "eventId": "-N3LNIfVXI73h1p4ttFL",
+      "didAttend": true,
+      "playerId": "-MaGM9IVAiHx1Zdv8hAu",
+      "role": 1
+    },
+    "-N6oF_qNA--fZBOO53TQ": {
+      "eventId": "-N3LNJ5JjCz9DKtD9tl-",
+      "didAttend": true,
+      "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
+      "role": 1
+    },
+    "-N6oFaGGcr6pRjW6UJ9H": {
+      "eventId": "-N3LNJScFs9LyKGO2-kH",
+      "didAttend": true,
+      "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
+      "role": 1
+    },
+    "-N6oFaoURS8N2iKBweoi": {
+      "eventId": "-N3LNK-uvO0YGG6NtgAn",
+      "didAttend": true,
+      "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
+      "role": 1
+    },
+    "-N6oFbh-KV7OhEPVYGDr": {
+      "eventId": "-N3LNKkH9J-m44ch9bTL",
+      "didAttend": true,
+      "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
+      "role": 1
+    },
+    "-N6oFcB2welMZwf7MhYQ": {
+      "eventId": "-N3LNLq0jhFHtxtg-aEb",
+      "didAttend": true,
+      "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
+      "role": 1
+    },
+    "-N6oFdKrFGPpYPdiLgOL": {
+      "eventId": "-N3LNMiva_S6FO0qWApU",
+      "didAttend": true,
+      "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
+      "role": 1
+    },
+    "-N6oFdlKOXQO8xQTs41e": {
+      "eventId": "-N3LNNC6prlaWs1UK9MN",
+      "didAttend": true,
+      "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
+      "role": 1
+    },
+    "-N6oFgZcfVfb_9dc5Xau": {
+      "eventId": "-N3LNPJIIaTu4Oa0LB9_",
+      "didAttend": true,
+      "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
+      "role": 1
+    },
+    "-N6oFh-P3SOJHF4eNijd": {
+      "eventId": "-N3LNQ5pGw-kM1FTMq0I",
+      "didAttend": true,
+      "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
+      "role": 1
+    },
+    "-N6oFhjXBmNoV2fpIHX1": {
+      "eventId": "-N3LNQ_uI7ekplXbjeoy",
+      "didAttend": true,
+      "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
+      "role": 1
+    },
+    "-N6oFigXpK9jA8dL1fL2": {
+      "eventId": "-N3LNRW-NpnVMSG5iXwB",
+      "didAttend": true,
+      "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
+      "role": 1
+    },
+    "-N6oFj7kshrmfThwq_7L": {
+      "eventId": "-N3LNSCvKJYMuf3blwBm",
+      "didAttend": true,
+      "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
+      "role": 1
+    },
+    "-N6oFjtKZx1p1cOH4J10": {
+      "eventId": "-N6eNcIWrx2-E4c5KNSY",
+      "didAttend": true,
+      "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
+      "role": 1
+    },
+    "-N6oFkOTXzLUzUsOmWda": {
+      "eventId": "-N6eNcqRKJJmGJUkbr3N",
+      "didAttend": true,
+      "playerId": "cWIubiixD6hbnefPdn3108qn5kI3",
+      "role": 1
+    },
+    "-N6oFkorURAR6ZYpH0Cf": {
+      "eventId": "-N6eNdZgrlLJlh0wdbL6",
+      "didAttend": true,
+      "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
+      "role": 1
     },
     "-N5X0HuG2qrX_TbpgYUV": {
       "didAttend": true,
@@ -3195,6 +3335,105 @@
     }
   },
   "players": {
+    "-MaGLAdfrrLeLWxdwuUU": {
+      "discordTag": "HonestFee#4574",
+      "dndBeyondName": "HonestFee",
+      "isDungeonMaster": true,
+      "name": "Felix"
+    },
+    "-MaGM4rbdJBgZ8rKnfbc": {
+      "discordTag": "SwedishFox#2134",
+      "dndBeyondName": "SwedishFox",
+      "name": "Swedish Fox"
+    },
+    "-MaGM4yP9MiI5Cy5CmCL": {
+      "discordTag": "Cassie#3862",
+      "dndBeyondName": "Chaia01",
+      "name": "Cassie"
+    },
+    "-MaGM5CRWHK7L7PRyhub": {
+      "discordTag": "Perky#3726",
+      "dndBeyondName": "ThePerkyRiolu",
+      "name": "Perky"
+    },
+    "-MaGM5JL64jM9ODkb1Jr": {
+      "discordTag": "The Kingsman#2898",
+      "dndBeyondName": "TheKingsmantm",
+      "name": "The Kingsman"
+    },
+    "-MaGM5QVGtAGMiUj9Eb_": {
+      "discordTag": "BlackRose89#8833",
+      "dndBeyondName": "BlackRoseSarah89",
+      "name": "BlackRose89"
+    },
+    "-MaGM5cq30wDPzwxYLK4": {
+      "discordTag": "a chrysalid eel#5930",
+      "dndBeyondName": "Zajay",
+      "name": "Ellie"
+    },
+    "-MaGM5koceXzQAlwRUFN": {
+      "discordTag": "Arnaud#5510",
+      "dndBeyondName": "Arnaudar",
+      "name": "Arnaud"
+    },
+    "-MaGM5tBXrrMWldlbI-X": {
+      "discordTag": "Jonno0902#9966",
+      "dndBeyondName": "Jonno0902",
+      "name": "Jonno"
+    },
+    "-MaGM6IOnqXNGuNfxZa6": {
+      "discordTag": "patola#0332",
+      "dndBeyondName": "patola",
+      "name": "Patola"
+    },
+    "-MaGM6Q3kpDNynEBURGO": {
+      "discordTag": "benjywa#7340",
+      "dndBeyondName": "Benjywa",
+      "isDungeonMaster": true,
+      "isGamesMaster": true,
+      "name": "Benjywa"
+    },
+    "-MaGM6YXdS0MHyYRc99v": {
+      "discordTag": "No,this is patrick#1606",
+      "dndBeyondName": "Bruenorbattlehammeringgiant",
+      "name": "No, this is Patrick"
+    },
+    "-MaGM6mfWwwgH4r0KsVA": {
+      "discordTag": "Chloe#1673",
+      "dndBeyondName": "RusselHumphriesIII",
+      "name": "Chloe"
+    },
+    "-MaGM764hCfwnab2wTy8": {
+      "discordTag": "HirotoShinori#2838",
+      "dndBeyondName": "HirotoShinori",
+      "name": "HirotoShinori"
+    },
+    "-MaGM7VISDGDZF-eMIT4": {
+      "discordTag": "Kosky101#9128",
+      "dndBeyondName": "Kosky101",
+      "name": "Kosky"
+    },
+    "-MaGM8l3BWAoEc3mnmIf": {
+      "discordTag": "Poppy#8626",
+      "dndBeyondName": "just_poppy",
+      "name": "Poppy"
+    },
+    "-MaGM8ycWHXnWbaq-WqQ": {
+      "discordTag": "shabbyj#7019",
+      "dndBeyondName": "shabbyj",
+      "name": "Shabbyj"
+    },
+    "-MaGM9ApuRxANiYS2eNu": {
+      "discordTag": "Thom_G83#5580",
+      "dndBeyondName": "Sanguine_Mesiac",
+      "name": "Thom Prime"
+    },
+    "-MaGM9IVAiHx1Zdv8hAu": {
+      "discordTag": "Pheonixshifter177#2230",
+      "dndBeyondName": "Phoenixfire177",
+      "isDungeonMaster": true,
+      "name": "John"
+    },
     "2Fv3wHgqwjV64m6IEPOp9brzKvb2": {
       "availableDates": [
         1656716400000, 1656284400000, 1656802800000, 1656198000000,

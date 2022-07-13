@@ -20,16 +20,15 @@ const NewSessionTable = () => {
 
   const sessions = useSelector((state) => state.parsedSessions);
   const activeCharacter = useSelector((state) => state.activeCharacter);
-  const maps = useSelector((state) => state.maps);
 
-  const onRenderAttendees = (session) => {
+  const onRenderAttendees = (session: Session) => {
     return (
       <Facepile
         overflowButtonType={OverflowButtonType.descriptive}
         showTooltip={false}
         personaSize={PersonaSize.size24}
         personas={session.attendees.map((attendee) => ({
-          personaName: attendee.name,
+          personaName: attendee.fullName,
         }))}
       />
     );
@@ -37,6 +36,10 @@ const NewSessionTable = () => {
 
   const onRenderDungeonMaster = (session) => {
     return session.dungeonMaster?.name;
+  };
+
+  const onRenderMap = (session: Session) => {
+    return session.map.name;
   };
 
   const onRenderDate = (session) => {
@@ -139,8 +142,15 @@ const NewSessionTable = () => {
       key: "dungeonMaster",
       name: "Dungeon Master",
       fieldName: "dungeonMaster",
-      minWidth: 150,
+      minWidth: 100,
       onRender: onRenderDungeonMaster,
+    },
+    {
+      key: "map",
+      name: "Map",
+      fieldName: "map",
+      minWidth: 150,
+      onRender: onRenderMap,
     },
     {
       key: "attendees",
