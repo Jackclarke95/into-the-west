@@ -63,14 +63,9 @@ const Dashboard = () => {
       const attendedPlayerSessions = eventInterests.data
         .filter((eventInterest) => eventInterest.playerId === player.key)
         .map((interest) => {
-          console.log(events.data.map((event) => event.key));
-          console.log(interest);
-
           const session = events.data.find(
             (event) => event.key === interest.eventId
           );
-
-          console.log(interest.eventId);
 
           if (!session) {
             throw new Error(
@@ -241,6 +236,8 @@ const Dashboard = () => {
             interest.eventId === event.key && interest.didAttend === true
         );
 
+        console.log("interests", matchingEventInterests);
+
         const attendees = parsedCharacters
           .filter(
             (character) =>
@@ -270,23 +267,23 @@ const Dashboard = () => {
                 return 1;
               }
             }
-          })
-          .reduce((prev: Character[], current) => {
-            if (!prev.map((character) => character.id).includes(current.id)) {
-              prev.push(current);
-            }
-          }, []);
+          });
 
-        // Remove all non-attending characters also owned by attending players
+        console.log(event.title);
+        console.log(attendees);
 
-        console.log(
-          attendees.map((attendee) => ({
-            name: attendee.fullName,
-            retirement: attendee.retirement.isRetired
-              ? new Date(attendee.retirement.date).toDateString()
-              : false,
-          }))
-        );
+        const deduplicatedAttendees: Character[] = [];
+
+        // For each player, only include the character who actually attended
+        attendees.forEach((attendee) => {
+          if (
+            !deduplicatedAttendees.some(
+              (character) => character.player?.id === attendee.player?.id
+            )
+          ) {
+            deduplicatedAttendees.push(attendee);
+          }
+        });
 
         const dungeonMaster = parsedPlayers.find(
           (player) =>
@@ -311,11 +308,11 @@ const Dashboard = () => {
           name: event.title,
           dungeonMaster: dungeonMaster,
           date: event.selectedDate,
-          attendees: attendees,
+          attendees: deduplicatedAttendees,
           map: matchingMap,
         };
       })
-      .sort((a, b) => (a.date && b.date ? b.date - a.date : 0));
+      .sort((a, b) => (a.date && b.date ? b.date - a.date : -1));
 
     dispatch({
       type: "SetParsedSessions",

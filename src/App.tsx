@@ -121,6 +121,8 @@ const App = () => {
       return DataHelper.parsePlayerData(player, key);
     });
 
+    console.log({ players });
+
     dispatch({
       type: "SetPlayers",
       players: {

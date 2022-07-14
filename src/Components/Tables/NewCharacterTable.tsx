@@ -41,11 +41,22 @@ const NewCharacterTable = () => {
     />
   );
 
+  const onRenderLevel = (character: Character) =>
+    character.retirement.isRetired
+      ? character.retirement.level
+      : character.currentLevel;
+
   const onRenderName = (character: Character) =>
-    character.sheetUrl ? (
-      <Link href={character.sheetUrl}>{character.fullName}</Link>
+    !character.retirement.isRetired ? (
+      character.sheetUrl ? (
+        <Link href={character.sheetUrl} target="_blank">
+          {character.fullName}
+        </Link>
+      ) : (
+        character.fullName
+      )
     ) : (
-      character.fullName
+      `${character.fullName} (Retired)`
     );
 
   const onRenderRace = (character: Character) => {
@@ -135,6 +146,7 @@ const NewCharacterTable = () => {
       name: "Level",
       fieldName: "currentLevel",
       minWidth: 40,
+      onRender: onRenderLevel,
     },
     {
       key: "name",

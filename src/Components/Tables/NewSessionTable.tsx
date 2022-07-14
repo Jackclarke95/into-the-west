@@ -1,4 +1,5 @@
 import {
+  DirectionalHint,
   Facepile,
   IColumn,
   IconButton,
@@ -23,27 +24,37 @@ const NewSessionTable = () => {
 
   const onRenderAttendees = (session: Session) => {
     return (
-      <Facepile
-        overflowButtonType={OverflowButtonType.descriptive}
-        showTooltip={false}
-        personaSize={PersonaSize.size24}
-        personas={session.attendees.map((attendee) => ({
-          personaName: attendee.fullName,
-        }))}
-      />
+      <TooltipHost
+        content={session.attendees
+          .map((attendee) => attendee.fullName)
+          .join(", ")}
+        directionalHint={DirectionalHint.leftCenter}
+      >
+        <Stack verticalFill verticalAlign="center">
+          <Facepile
+            overflowButtonType={OverflowButtonType.descriptive}
+            showTooltip={false}
+            personaSize={PersonaSize.size16}
+            personas={session.attendees.map((attendee) => ({
+              personaName: attendee.fullName,
+              imageUrl: attendee.avatarUrl,
+            }))}
+          />
+        </Stack>
+      </TooltipHost>
     );
   };
 
-  const onRenderDungeonMaster = (session) => {
-    return session.dungeonMaster?.name;
+  const onRenderDungeonMaster = (session: Session) => {
+    return session.dungeonMaster?.name ?? "Unassigned";
   };
 
   const onRenderMap = (session: Session) => {
     return session.map.name;
   };
 
-  const onRenderDate = (session) => {
-    return new Date(session.date).toDateString();
+  const onRenderDate = (session: Session) => {
+    return session.date ? new Date(session.date).toDateString() : "Unscheduled";
   };
 
   const onRenderActions = (session: Session) => {
