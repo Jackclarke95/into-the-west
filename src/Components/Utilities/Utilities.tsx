@@ -5,15 +5,6 @@ import DataService from "../../Helpers/DataService";
 const Utilities = () => {
   const dispatch = useDispatch();
 
-  const onClickShowTokenCreator = () => {
-    console.log("Displaying token creator");
-
-    dispatch({
-      type: "SetShowTokenCreatorDialog",
-      showTokenCreatorDialog: true,
-    });
-  };
-
   const onClickGenerateKey = () => {
     const key = DataService.generateKey();
 
@@ -50,7 +41,6 @@ const Utilities = () => {
       >
         Tools
       </Separator>
-      <DefaultButton text="Token creator" onClick={onClickShowTokenCreator} />
       <DefaultButton text="Generate key" onClick={onClickGenerateKey} />
       <DefaultButton text="New race" onClick={onClickShowNewRaceDialog} />
       <DefaultButton

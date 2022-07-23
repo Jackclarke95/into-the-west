@@ -127,9 +127,6 @@ declare module "react-redux" {
     /** Whether to show the Character Creation Dialog */
     showCharacterManagementDialog: boolean;
 
-    /** Whether to show the Token Creator Dialog */
-    showTokenCreatorDialog: boolean;
-
     /** Whether to show the New Race Dialog */
     showNewRaceDialog: boolean;
 

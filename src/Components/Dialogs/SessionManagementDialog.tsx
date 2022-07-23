@@ -28,7 +28,7 @@ const SessionManagementDialog = () => {
 
   const sessionManagement = useSelector((state) => state.sessionManagement);
   const sessions = useSelector((state) => state.sessions);
-  const players = useSelector((state) => state.databasePlayers);
+  const players = useSelector((state) => state.players);
   const sessionInterests = useSelector((state) => state.sessionInterests);
 
   const theme = useTheme();

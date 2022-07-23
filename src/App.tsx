@@ -28,7 +28,6 @@ import SessionManagementDialog from "./Components/Dialogs/SessionManagementDialo
 import AccountNameManagementDialog from "./Components/Dialogs/AccountNameManagementDialog";
 import PasswordManagementDialog from "./Components/Dialogs/PasswordManagementDialog";
 import CharacterManagementDialog from "./Components/Dialogs/CharacterManagementDialog";
-import TokenCreatorDialog from "./Components/Dialogs/TokenCreatorDialog";
 import NewRaceDialog from "./Components/Dialogs/NewRaceDialog";
 import NewSubraceDialog from "./Components/Dialogs/NewSubraceDialog";
 import SessionRegistrationDialog from "./Components/Dialogs/SessionRegistrationDialog";
@@ -353,7 +352,6 @@ const App = () => {
           <AccountNameManagementDialog />
           <PasswordManagementDialog />
           <CharacterManagementDialog />
-          <TokenCreatorDialog />
           <NewRaceDialog />
           <NewSubraceDialog />
           <SessionRegistrationDialog />
