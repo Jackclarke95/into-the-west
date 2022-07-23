@@ -15,6 +15,7 @@ import {
   RaceData,
   SubclassData,
   SubraceData,
+  PlayerData,
 } from "../Types/DatabaseStructures";
 
 /** Interface detailing the Default Root State */
@@ -59,7 +60,9 @@ declare module "react-redux" {
     databaseMaps: { isLoading: true } | { isLoading: false; data: MapData[] };
 
     /** The Players stored in the Firebase Realtime Database */
-    databasePlayers: { isLoading: true } | { isLoading: false; data: Player[] };
+    databasePlayers:
+      | { isLoading: true }
+      | { isLoading: false; data: PlayerData[] };
 
     /** The currently logged-in Player from the Firebase Realtime Database */
     currentPlayer:

@@ -56,9 +56,11 @@ const Dashboard = () => {
       maps: { isLoading: false, data: parsedMaps },
     });
 
+    console.log(players.data);
+
     const parsedPlayers: Player[] = players.data.map((player) => {
       const attendedPlayerSessions = sessionInterests.data
-        .filter((sessionInterest) => sessionInterest.playerId === player.id)
+        .filter((sessionInterest) => sessionInterest.playerId === player.key)
         .map((interest) => {
           const session = sessions.data.find(
             (session) => session.key === interest.sessionId
@@ -100,7 +102,7 @@ const Dashboard = () => {
       return {
         availableDates: player.availableDates,
         discordTag: player.discordTag,
-        id: player.id,
+        id: player.key,
         isGamesMaster: player.isGamesMaster,
         isDungeonMaster: player.isDungeonMaster,
         name: player.name,
@@ -310,10 +312,6 @@ const Dashboard = () => {
       type: "SetSessions",
       sessions: { isLoading: false, data: parsedSessions },
     });
-
-    console.log(parsedPlayers);
-    console.log(parsedCharacters);
-    console.log(parsedSessions);
   }, [
     dispatch,
     characters,

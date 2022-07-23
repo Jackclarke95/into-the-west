@@ -63,9 +63,12 @@ const App = () => {
 
     const players = Object.keys(playerData).map((key) => {
       const player = playerData[key];
+      player.key = key;
 
       return player;
     });
+
+    console.log({ playerData });
 
     dispatch({
       type: "SetDatabasePlayers",

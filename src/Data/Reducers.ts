@@ -287,6 +287,12 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
           break;
         }
 
+        // Action for setting the Players
+        case "SetPlayers": {
+          draftState.players = action.players;
+          break;
+        }
+
         // Action for setting the Classes
         case "SetClasses": {
           draftState.classes = action.classes;
