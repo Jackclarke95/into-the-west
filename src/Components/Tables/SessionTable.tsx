@@ -3,7 +3,6 @@ import {
   Facepile,
   IColumn,
   IconButton,
-  IContextualMenuProps,
   IIconProps,
   OverflowButtonType,
   PersonaSize,
@@ -14,7 +13,7 @@ import {
 } from "@fluentui/react";
 import { useDispatch, useSelector } from "react-redux";
 import DataHelper from "../../Helpers/DataHelper";
-import { Session } from "../../Types/LocalStructures";
+import { Character, Session } from "../../Types/LocalStructures";
 
 const SessionTable = () => {
   const dispatch = useDispatch();
@@ -23,11 +22,17 @@ const SessionTable = () => {
   const activeCharacter = useSelector((state) => state.activeCharacter);
 
   const onRenderAttendees = (session: Session) => {
+    let attendees: Character[] = [];
+
+    if (session.date && DataHelper.isDateInPast(session.date)) {
+      attendees = session.attendees.attending;
+    } else {
+      attendees = session.attendees.interested;
+    }
+
     return (
       <TooltipHost
-        content={session.attendees
-          .map((attendee) => attendee.fullName)
-          .join(", ")}
+        content={attendees.map((attendee) => attendee.fullName).join(", ")}
         directionalHint={DirectionalHint.leftCenter}
       >
         <Stack verticalFill verticalAlign="center">
@@ -35,7 +40,7 @@ const SessionTable = () => {
             overflowButtonType={OverflowButtonType.descriptive}
             showTooltip={false}
             personaSize={PersonaSize.size16}
-            personas={session.attendees.map((attendee) => ({
+            personas={attendees.map((attendee) => ({
               personaName: attendee.fullName,
               imageUrl: attendee.avatarUrl,
             }))}
@@ -62,54 +67,25 @@ const SessionTable = () => {
       return null;
     }
 
-    const onClickManageSession = () => {
-      dispatch({
-        type: "SetSessionManagement",
-        sessionManagement: { isShown: true, session: session },
-      });
-    };
-
     const onClickRemoveFromSession = (session: Session) => {
       console.log("Remove from session", session);
     };
 
     const onClickAddToSession = (session: Session) => {
       console.log("Add to session", session);
+
+      dispatch({
+        type: "SetSessionRegistration",
+        sessionRegistration: { isShown: true, session: session },
+      });
     };
 
-    const settingsIcon: IIconProps = {
-      iconName: "settings",
-    };
-    const sessionManagementIcon: IIconProps = {
-      iconName: "WorkforceManagement",
+    const registerIcon: IIconProps = {
+      iconName: "AddFriend",
     };
 
-    const menuProps: IContextualMenuProps = {
-      items: session.attendees
-        ? [
-            session.attendees
-              .map((character) => character.id)
-              .includes(activeCharacter.data.id)
-              ? {
-                  key: "Register",
-                  text: "Unregister",
-                  iconProps: { iconName: "USerRemove" },
-                  onClick: () => onClickRemoveFromSession(session),
-                }
-              : {
-                  key: "Register",
-                  text: "Register",
-                  iconProps: { iconName: "AddFriend" },
-                  onClick: () => onClickAddToSession(session),
-                },
-            {
-              key: "calendarEvent",
-              text: "Volunteer as DM",
-              iconProps: { iconName: "WorkforceManagement" },
-            },
-          ]
-        : [],
-      directionalHintFixed: true,
+    const unregisterIcon: IIconProps = {
+      iconName: "UserRemove",
     };
 
     return (
@@ -121,23 +97,14 @@ const SessionTable = () => {
         {DataHelper.isDateInPast(session.date!) ? (
           <Stack styles={{ root: { width: 52 } }}></Stack>
         ) : (
-          <TooltipHost content="Register">
+          <TooltipHost content="Manage session">
             <IconButton
-              menuProps={menuProps}
-              iconProps={sessionManagementIcon}
+              iconProps={registerIcon}
               disabled={false}
+              onClick={() => onClickAddToSession(session)}
             />
           </TooltipHost>
         )}
-        {DataHelper.isDateInPast(session.date!) ? (
-          <TooltipHost content="Manage session">
-            <IconButton
-              iconProps={settingsIcon}
-              disabled={false}
-              onClick={onClickManageSession}
-            />
-          </TooltipHost>
-        ) : null}
       </Stack>
     );
   };

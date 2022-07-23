@@ -34,7 +34,7 @@ const NextSession = () => {
     upcomingSessions = sessions.data
       .filter((session) => {
         return (
-          (session.attendees
+          (session.attendees.interested
             .map((attendee) => attendee.id)
             .includes(activeCharacter.data!.id) ||
             session.dungeonMaster?.id === currentPlayer.data!.id) &&

@@ -176,8 +176,6 @@ const Availability = () => {
     );
   };
 
-  console.log(firstDateOfMonthToRender);
-
   return (
     <Stack>
       <Stack horizontal horizontalAlign="space-between">
@@ -203,6 +201,22 @@ const Availability = () => {
             styles={{ icon: { color: theme.palette.accent } }}
           />
         </Stack>
+      </Stack>
+      <Stack horizontal horizontalAlign="space-between">
+        {["M", "T", "W", "T", "F", "S", "S"].map((day) => (
+          <Text
+            styles={{
+              root: {
+                height: 28,
+                width: 28,
+                textAlign: "center",
+                fontWeight: FontWeights.semibold,
+              },
+            }}
+          >
+            {day}
+          </Text>
+        ))}
       </Stack>
       <Month />
     </Stack>

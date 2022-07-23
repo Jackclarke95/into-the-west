@@ -267,12 +267,11 @@ const Dashboard = () => {
 
     const parsedSessions: Session[] = databaseSessions.data
       .map((session) => {
-        const matchingsessionInterests = sessionInterests.data.filter(
-          (interest) =>
-            interest.sessionId === session.key && interest.didAttend === true
+        const matchingSessionAttendedInterests = sessionInterests.data.filter(
+          (interest) => interest.sessionId === session.key
         );
 
-        const attendees = parsedCharacters.filter(
+        const attendedCharacters = parsedCharacters.filter(
           (character) =>
             (!character.retirement?.isRetired ||
               character.retirement.date >
@@ -282,29 +281,60 @@ const Dashboard = () => {
               .filter(
                 (interest) =>
                   interest.sessionId === session.key &&
-                  interest.role === SessionRole.Player
+                  interest.role === SessionRole.Player &&
+                  interest.didAttend === true
               )
               .map((interest) => interest.playerId)
               .includes(character.player?.id)
         );
 
-        const deduplicatedAttendees: Character[] = [];
+        const deduplicatedAttendedCharacters: Character[] = [];
 
         // For each player, only include the character who actually attended
-        attendees.forEach((attendee) => {
+        attendedCharacters.forEach((attendee) => {
           if (
-            !deduplicatedAttendees.some(
+            !deduplicatedAttendedCharacters.some(
               (character) => character.player?.id === attendee.player?.id
             )
           ) {
-            deduplicatedAttendees.push(attendee);
+            deduplicatedAttendedCharacters.push(attendee);
+          }
+        });
+
+        const interestedCharacters = parsedCharacters.filter(
+          (character) =>
+            (!character.retirement?.isRetired ||
+              character.retirement.date >
+                (session.selectedDate ?? new Date().getTime())) &&
+            character.player &&
+            sessionInterests.data
+              .filter(
+                (interest) =>
+                  interest.sessionId === session.key &&
+                  interest.role === SessionRole.Player &&
+                  !interest.didAttend
+              )
+              .map((interest) => interest.playerId)
+              .includes(character.player?.id)
+        );
+
+        const deduplicatedInterestedCharacters: Character[] = [];
+
+        // For each player, only include the character who actually attended
+        interestedCharacters.forEach((attendee) => {
+          if (
+            !deduplicatedInterestedCharacters.some(
+              (character) => character.player?.id === attendee.player?.id
+            )
+          ) {
+            deduplicatedInterestedCharacters.push(attendee);
           }
         });
 
         const dungeonMaster = parsedPlayers.find(
           (player) =>
             player.id ===
-            matchingsessionInterests.find(
+            matchingSessionAttendedInterests.find(
               (interest) =>
                 interest.sessionId === session.key &&
                 interest.role === SessionRole["Dungeon Master"]
@@ -324,7 +354,10 @@ const Dashboard = () => {
           name: session.title,
           dungeonMaster: dungeonMaster,
           date: session.selectedDate,
-          attendees: deduplicatedAttendees,
+          attendees: {
+            attending: deduplicatedAttendedCharacters,
+            interested: deduplicatedInterestedCharacters,
+          },
           map: matchingMap,
         };
       })

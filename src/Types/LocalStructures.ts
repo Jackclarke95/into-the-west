@@ -28,7 +28,7 @@ export type Character = {
 export type Session = {
   id: string;
   name: string;
-  attendees: Character[];
+  attendees: { attending: Character[]; interested: Character[] };
   dungeonMaster: Player | undefined;
   date: number | undefined;
   map: Map;

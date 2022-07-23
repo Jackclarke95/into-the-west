@@ -884,6 +884,35 @@
       "playerId": "cWIubiixD6hbnefPdn3108qn5kI3",
       "role": 1
     },
+    "-N7hQI4oBBM_nRaHXa5s": {
+      "sessionId": "-N6eNdZgrlLJlh0wdbL6",
+      "playerId": "kQHelre21sgGsU8FDu1CKY33im12",
+      "role": 0,
+      "didAttend": true
+    },
+    "-N7hU9Lf61xmQawfINnB": {
+      "sessionId": "-N6eNdZgrlLJlh0wdbL6",
+      "playerId": "LQXJ3bqnXpbHPTfdGRzO2AkRIbm1",
+      "role": 0,
+      "didAttend": true
+    },
+    "-N7hUAFk4EYw0xi_vc9E": {
+      "sessionId": "-N6eNdZgrlLJlh0wdbL6",
+      "playerId": "7zD6gWfMUza6BPRXkJpara46fy83",
+      "role": 0,
+      "didAttend": true
+    },
+    "-N7hUAo5LgOnOR14Iq9Y": {
+      "sessionId": "-N6eNdZgrlLJlh0wdbL6",
+      "playerId": "hVn1TdlBSgc2y92GOeKBAjOfl853",
+      "role": 0,
+      "didAttend": true
+    },
+    "-N7hQHSQOBzjOx01s6nM": {
+      "sessionId": "-N6eNdZgrlLJlh0wdbL6",
+      "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
+      "role": 0
+    },
     "-N6xNdQ2iRhgqTBeIMdz": {
       "role": 0,
       "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
@@ -2022,7 +2051,8 @@
     },
     "-N6eNdZgrlLJlh0wdbL6": {
       "mapId": "-N2Ho4bDUkhIqi4tAUjC",
-      "title": "Eastwatch Harbour"
+      "title": "Eastwatch Harbour",
+      "selectedDate": 1658444400000
     },
     "-N6yWBPaPzXm2HW4cGfO": {
       "mapId": "-N2Ho2Bv9PyId_uPU466",
