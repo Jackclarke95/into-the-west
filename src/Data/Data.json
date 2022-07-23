@@ -130,14 +130,14 @@
       "classConfigId": "-N6eQdHGw9lBYMj_P7oz",
       "level": 1
     },
-    "-N6xKgFylNs14QfWOh61": {
-      "characterId": "",
-      "classConfigId": "-N6eQdHGw9lBYMj_P7oz",
-      "level": 1
-    },
     "-N6xLlfIUb4RRoqBSvfq": {
       "characterId": "-N6xK912nY4MImulJ45D",
       "classConfigId": "-N2HfFQLEuyc77gZ6-kp",
+      "level": 3
+    },
+    "-N7gBo5xKBeOgZChukOG": {
+      "characterId": "-N7gBmNGr9RPU_oxoAYr",
+      "classConfigId": "-N2HdewH3-EChRhaOxks",
       "level": 3
     }
   },
@@ -245,471 +245,10 @@
     "-N6xKbjFW2NEjD3RITbG": {
       "characterId": "-N6xK912nY4MImulJ45D",
       "raceConfigId": "-N6eG1KJRidyQw6bAX1e"
-    }
-  },
-  "characters": {
-    "-MaGKwrksOQXvT7PA5Qd": {
-      "avatarUrl": "",
-      "classes": [
-        {
-          "archetype": "Forge Domain",
-          "level": 3,
-          "name": "Cleric"
-        },
-        {
-          "archetype": "Divine Soul",
-          "level": 1,
-          "name": "Sorcerer"
-        }
-      ],
-      "currentLevel": 4,
-      "name": "De Mauer",
-      "playerDndBeyondName": "Benjywa",
-      "race": "Dwarf",
-      "sessionsAttended": 6,
-      "sheetUrl": "https://www.dndbeyond.com/characters/62565380",
-      "startingLevel": 1,
-      "subrace": "Mountain"
     },
-    "-MaGKy-zlVyH50zd5SP3": {
-      "avatarUrl": "https://www.dndbeyond.com/avatars/22370/529/1581111423-64045133.jpeg",
-      "classes": [
-        {
-          "archetype": "Order of the Mutant",
-          "level": 3,
-          "name": "Blood Hunter"
-        }
-      ],
-      "currentLevel": 3,
-      "name": "Belnadis",
-      "playerDndBeyondName": "SchemingPnda",
-      "race": "Human",
-      "retirement": {
-        "date": "2022 4 6",
-        "reason": "Retired by player"
-      },
-      "sessionsAttended": 4,
-      "sheetUrl": "https://www.dndbeyond.com/profile/SchemingPnda/characters/64045133",
-      "startingLevel": 2,
-      "subrace": "Variant"
-    },
-    "-MaGKyEbEoTT9OdP4pTm": {
-      "avatarUrl": "https://www.dndbeyond.com/avatars/21703/797/1581111423-62130532.jpeg",
-      "classes": [
-        {
-          "archetype": "School of Divination",
-          "level": 2,
-          "name": "Wizard"
-        }
-      ],
-      "currentLevel": 3,
-      "name": "Cyrus Sunheart",
-      "nickname": "Cyrus",
-      "playerDndBeyondName": "SwedishFox",
-      "race": "Human",
-      "sessionsAttended": 4,
-      "sheetUrl": "https://www.dndbeyond.com/profile/SwedishFox/characters/62130532",
-      "startingLevel": 1,
-      "subrace": "Variant"
-    },
-    "-MaGKyPdpRoGYWbgAzJY": {
-      "avatarUrl": "https://www.dndbeyond.com/avatars/21808/761/1581111423-62380701.jpeg",
-      "classes": [
-        {
-          "archetype": "Order Domain",
-          "level": 2,
-          "name": "Cleric"
-        }
-      ],
-      "currentLevel": 2,
-      "name": "Ishka",
-      "playerDndBeyondName": "Zajay",
-      "race": "Kalashtar",
-      "sessionsAttended": 2,
-      "sheetUrl": "https://www.dndbeyond.com/profile/Zajay/characters/62380701",
-      "startingLevel": 1
-    },
-    "-MaGKyc6_OCu20PUmbGf": {
-      "avatarUrl": "https://www.dndbeyond.com/avatars/9107/498/637196230043758055.jpeg",
-      "classes": [
-        {
-          "archetype": "The Great Old One",
-          "level": 3,
-          "name": "Warlock"
-        }
-      ],
-      "currentLevel": 3,
-      "name": "Kai Desd'en",
-      "nickname": "Kai",
-      "playerDndBeyondName": "patola",
-      "race": "Half-Elf",
-      "sessionsAttended": 4,
-      "sheetUrl": "https://www.dndbeyond.com/profile/patola/characters/62140202",
-      "startingLevel": 1,
-      "subrace": "Drow"
-    },
-    "-MaGKylLm0FwaNWe-QO8": {
-      "avatarUrl": "https://www.dndbeyond.com/avatars/20510/273/1581111423-58615947.jpeg",
-      "classes": [
-        {
-          "archetype": "War Domain",
-          "level": 5,
-          "name": "Cleric"
-        }
-      ],
-      "currentLevel": 5,
-      "name": "Krastor Vale",
-      "nickname": "Krastor",
-      "playerDndBeyondName": "WillCarterDM",
-      "race": "Human",
-      "sessionsAttended": 10,
-      "sheetUrl": "https://www.dndbeyond.com/profile/WillCarterDM/characters/58615947",
-      "startingLevel": 1,
-      "subrace": "Variant"
-    },
-    "-MaGKyv9oPHJXuJKjmnl": {
-      "avatarUrl": "https://www.dndbeyond.com/avatars/21816/480/1581111423-26267182.jpeg",
-      "classes": [
-        {
-          "archetype": "School of Illusion",
-          "level": 2,
-          "name": "Wizard"
-        }
-      ],
-      "currentLevel": 2,
-      "name": "Nando Tennessee",
-      "nickname": "Nando",
-      "playerDndBeyondName": "ThePerkyRiolu",
-      "race": "Aarakocra",
-      "sessionsAttended": 3,
-      "sheetUrl": "https://www.dndbeyond.com/profile/ThePerkyRiolu/characters/26267182",
-      "startingLevel": 1
-    },
-    "-MaGKz4-slurxi3kmdJk": {
-      "avatarUrl": "https://www.dndbeyond.com/avatars/21808/599/1581111423-62426653.jpeg",
-      "classes": [
-        {
-          "level": 2,
-          "name": "Bard"
-        }
-      ],
-      "currentLevel": 2,
-      "name": "Orgust",
-      "playerDndBeyondName": "TheKingsmantm",
-      "race": "Aarakocra",
-      "sessionsAttended": 2,
-      "sheetUrl": "https://www.dndbeyond.com/profile/TheKingsmantm/characters/62426653",
-      "startingLevel": 1
-    },
-    "-MaGKzGbL5yHTKXce9Hj": {
-      "avatarUrl": "https://www.dndbeyond.com/avatars/21853/454/1581111423-62556497.jpeg",
-      "classes": [
-        {
-          "archetype": "Ar`mo`rer",
-          "level": 3,
-          "name": "Artificer"
-        }
-      ],
-      "currentLevel": 3,
-      "name": "Prof Tabbart",
-      "nickname": "Tabbart",
-      "playerDndBeyondName": "HonestFee",
-      "race": "Reborn",
-      "sessionsAttended": 4,
-      "sheetUrl": "https://www.dndbeyond.com/profile/HonestFee/characters/62556497",
-      "startingLevel": 1
-    },
-    "-MaGKzRzKIVtbQyxQxDP": {
-      "avatarUrl": "https://www.dndbeyond.com/avatars/22090/219/1581111423-63238714.jpeg",
-      "classes": [
-        {
-          "archetype": "Drakewarden",
-          "level": 4,
-          "name": "Ranger"
-        }
-      ],
-      "currentLevel": 4,
-      "name": "Brightscale",
-      "playerDndBeyondName": "JackClarke",
-      "race": "Dragonborn",
-      "sessionsAttended": 4,
-      "sheetUrl": "https://www.dndbeyond.com/profile/JackClarke/characters/63238714",
-      "startingLevel": 1,
-      "subrace": "Ravenite"
-    },
-    "-MaGKze3Q36HyzEJh31_": {
-      "avatarUrl": "https://www.dndbeyond.com/avatars/9221/722/637202352169308354.jpeg",
-      "classes": [
-        {
-          "archetype": "Rune Knight",
-          "level": 4,
-          "name": "Fighter"
-        }
-      ],
-      "currentLevel": 4,
-      "name": "Bruenor",
-      "playerDndBeyondName": "Bruenorbattlehammeringgiant",
-      "race": "Goliath",
-      "sessionsAttended": 4,
-      "sheetUrl": "https://www.dndbeyond.com/profile/Bruenorbattlehammeringgiant/characters/63108982",
-      "startingLevel": 2
-    },
-    "-MaGKzqk5TwaERyJg_Q2": {
-      "avatarUrl": "",
-      "classes": [
-        {
-          "level": 2,
-          "name": "Artificer"
-        }
-      ],
-      "currentLevel": 2,
-      "name": "Argus",
-      "playerDndBeyondName": "Bruenorbattlehammeringgiant",
-      "race": "Human",
-      "retirement": {
-        "date": "2021 12 01",
-        "reason": "Retired by Player"
-      },
-      "sessionsAttended": 2,
-      "sheetUrl": "",
-      "startingLevel": 1
-    },
-    "-MaGL-4gVKCPTHwNLSb5": {
-      "avatarUrl": "",
-      "classes": [
-        {
-          "level": 1,
-          "name": "Monk"
-        }
-      ],
-      "currentLevel": 1,
-      "name": "Destrian Darkeyes",
-      "nickname": "Destrian",
-      "playerDndBeyondName": "thecdv20",
-      "race": "Half-Orc",
-      "sessionsAttended": 1,
-      "sheetUrl": "https://www.dndbeyond.com/profile/thecdv20/characters/67876495",
-      "startingLevel": 1
-    },
-    "-MaGL-EOTK4GBRD3OPuj": {
-      "avatarUrl": "https://www.dndbeyond.com/avatars/11957/368/1581111423-33132303.jpeg",
-      "classes": [
-        {
-          "archetype": "Grave Domain",
-          "level": 4,
-          "name": "Cleric"
-        }
-      ],
-      "currentLevel": 4,
-      "name": "Ember",
-      "playerDndBeyondName": "BlackRoseSarah89",
-      "race": "Genasi",
-      "sessionsAttended": 7,
-      "sheetUrl": "https://www.dndbeyond.com/profile/BlackRoseSarah89/characters/33132303",
-      "startingLevel": 1,
-      "subrace": "Fire"
-    },
-    "-MaGL-NOrFBzAAtU6Vwo": {
-      "avatarUrl": "",
-      "classes": [
-        {
-          "archetype": "The Fiend",
-          "level": 2,
-          "name": "Warlock"
-        }
-      ],
-      "currentLevel": 2,
-      "name": "James",
-      "playerDndBeyondName": "Jonno0902",
-      "race": "Human",
-      "sessionsAttended": 2,
-      "sheetUrl": "https://www.dndbeyond.com/profile/Jonno0902/characters/62804832",
-      "startingLevel": 1,
-      "subrace": "Variant"
-    },
-    "-MaGL69yjMK5frXnEFKQ": {
-      "avatarUrl": "",
-      "classes": [
-        {
-          "archetype": "Oath of Conquest",
-          "level": 3,
-          "name": "Paladin"
-        }
-      ],
-      "currentLevel": 2,
-      "name": "Milly Catimus",
-      "nickname": "Milly",
-      "playerDndBeyondName": "Chaia01",
-      "race": "Tabaxi",
-      "sessionsAttended": 3,
-      "sheetUrl": "https://www.dndbeyond.com/profile/Chaia01/characters/62574844",
-      "startingLevel": 1
-    },
-    "-MaGL6MkgEpZJu34vnAA": {
-      "avatarUrl": "",
-      "classes": [
-        {
-          "archetype": "Circle of Stars",
-          "level": 4,
-          "name": "Druid"
-        }
-      ],
-      "currentLevel": 4,
-      "name": "Perran",
-      "playerDndBeyondName": "SunRester",
-      "race": "Satyr",
-      "sessionsAttended": 5,
-      "sheetUrl": "https://www.dndbeyond.com/profile/SunRester/characters/62567125",
-      "startingLevel": 1
-    },
-    "-MaGL6cEeA0f0E_nEEMG": {
-      "avatarUrl": "",
-      "classes": [
-        {
-          "level": 1,
-          "name": "Artificer"
-        }
-      ],
-      "currentLevel": 2,
-      "name": "Kricket",
-      "playerDndBeyondName": "SunRester",
-      "race": "Kobold",
-      "retirement": {
-        "date": "2021 12 08",
-        "reason": "Killed by a bandit while tracking the Mysterious Benefactor"
-      },
-      "sessionsAttended": 2,
-      "startingLevel": 1
-    },
-    "-MaGL6w9JHKxxPijYW0m": {
-      "avatarUrl": "https://www.dndbeyond.com/avatars/21977/940/1581111423-62913829.jpeg",
-      "classes": [
-        {
-          "archetype": "Oath of the Ancients",
-          "level": 3,
-          "name": "Paladin"
-        }
-      ],
-      "currentLevel": 3,
-      "name": "Thuldur Lutgorr",
-      "nickname": "Thuldurr",
-      "playerDndBeyondName": "Arnaudar",
-      "race": "Dwarf",
-      "sessionsAttended": 4,
-      "sheetUrl": "https://www.dndbeyond.com/profile/Arnaudar/characters/62913829",
-      "startingLevel": 1,
-      "subrace": "Mountain"
-    },
-    "-MaGL8mAafT0RLJLodi5": {
-      "avatarUrl": "https://www.dndbeyond.com/avatars/22088/39/1581111423-62176290.jpeg",
-      "classes": [
-        {
-          "archetype": "Life Domain",
-          "level": 4,
-          "name": "Cleric"
-        }
-      ],
-      "currentLevel": 4,
-      "name": "Tustan Toskan",
-      "nickname": "Tustun",
-      "playerDndBeyondName": "DrGreybeard",
-      "race": "Dragonborn",
-      "sessionsAttended": 7,
-      "sheetUrl": "https://www.dndbeyond.com/profile/DrGreybeard/characters/62176290",
-      "startingLevel": 1
-    },
-    "-MaGL91rHeTE0-xDAVlb": {
-      "avatarUrl": "https://www.dndbeyond.com/avatars/17/413/636377884703064507.jpeg",
-      "classes": [
-        {
-          "level": 1,
-          "name": "Rogue"
-        }
-      ],
-      "currentLevel": 1,
-      "name": "Wrenn (The Beard) Beren",
-      "nickname": "Wrenn",
-      "playerDndBeyondName": "RusselHumphriesIII",
-      "race": "Gnome",
-      "sessionsAttended": 1,
-      "sheetUrl": "https://www.dndbeyond.com/profile/RusselHumphriesIII/characters/63233783",
-      "startingLevel": 1,
-      "subrace": "Forest"
-    },
-    "-MaGL9FMxxrubkwavqrT": {
-      "avatarUrl": "",
-      "classes": [
-        {
-          "level": 1,
-          "name": "Barbarian"
-        }
-      ],
-      "currentLevel": 1,
-      "name": "Edwin Brando",
-      "nickname": "Edwin",
-      "playerDndBeyondName": "SchemingPnda",
-      "race": "Simic Hybrid",
-      "retirement": {
-        "date": "2021 11 25",
-        "reason": "Retired by Player"
-      },
-      "sessionsAttended": 1,
-      "sheetUrl": "",
-      "startingLevel": 1
-    },
-    "-MaGL9RDYDim9iPr5hJJ": {
-      "avatarUrl": "",
-      "classes": [
-        {
-          "level": 1,
-          "name": "Fighter"
-        }
-      ],
-      "currentLevel": 2,
-      "name": "Rho-LIV",
-      "nickname": "Rho",
-      "playerDndBeyondName": "SchemingPnda",
-      "race": "Hobgoblin",
-      "retirement": {
-        "date": "2021 12 10",
-        "reason": "Retired by Player"
-      },
-      "sessionsAttended": 1,
-      "sheetUrl": "",
-      "startingLevel": 1
-    },
-    "-N1ewVKWgq6D3o_3npTF": {
-      "avatarUrl": "",
-      "classes": [
-        {
-          "level": 3,
-          "name": "Barbarian"
-        }
-      ],
-      "currentLevel": 3,
-      "name": "Holg Ovak",
-      "nickname": "Holg",
-      "playerDndBeyondName": "benjaminbaker020304",
-      "race": "Half-Orc",
-      "sheetUrl": "https://www.dndbeyond.com/characters/68753225",
-      "startingLevel": 3
-    },
-    "-N22YkMmU3MQZire4ND6": {
-      "avatarUrl": "",
-      "classes": [
-        {
-          "archetype": "Divine Soul",
-          "level": 3,
-          "name": "Sorcerer"
-        }
-      ],
-      "currentLevel": 3,
-      "name": "Nana",
-      "playerDndBeyondName": "SchemingPnda",
-      "race": "Owlin",
-      "sessionsAttended": 2,
-      "sheetUrl": "https://www.dndbeyond.com/characters/71760142",
-      "startingLevel": 3
+    "-N7gBuolcSpyVvNBGeMf": {
+      "characterId": "-N7gBmNGr9RPU_oxoAYr",
+      "raceConfigId": "-N2IP0vGkENX1ag_bDYi"
     }
   },
   "classConfigs": {
@@ -1334,1008 +873,1018 @@
       "name": "Wizard"
     }
   },
-  "eventInterests": {
+  "sessionInterests": {
+    "-N6yXAKFPZYHAW3X01tn": {
+      "sessionId": "-N6yWBPaPzXm2HW4cGfO",
+      "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
+      "role": 1
+    },
+    "-N6yXBf_fSThuzoBeLg7": {
+      "sessionId": "-N6yWBr6Utf2zP5ioFMt",
+      "playerId": "cWIubiixD6hbnefPdn3108qn5kI3",
+      "role": 1
+    },
     "-N6xNdQ2iRhgqTBeIMdz": {
       "role": 0,
       "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
-      "eventId": "-N3LNMiva_S6FO0qWApU",
+      "sessionId": "-N3LNMiva_S6FO0qWApU",
       "didAttend": true,
       "title": "Rumblings of the Legion"
     },
     "-N6xNe3k_8XwTiBoarB7": {
       "role": 0,
       "playerId": "cWIubiixD6hbnefPdn3108qn5kI3",
-      "eventId": "-N3LNMiva_S6FO0qWApU",
+      "sessionId": "-N3LNMiva_S6FO0qWApU",
       "didAttend": true,
       "title": "Rumblings of the Legion"
     },
     "-N6xNeX0GZClAW-fNEb8": {
       "role": 0,
       "playerId": "-MaGM6IOnqXNGuNfxZa6",
-      "eventId": "-N3LNMiva_S6FO0qWApU",
+      "sessionId": "-N3LNMiva_S6FO0qWApU",
       "didAttend": true,
       "title": "Rumblings of the Legion"
     },
     "-N6xNf2UiM_LAqHd2aSR": {
       "role": 0,
       "playerId": "-MaGM6YXdS0MHyYRc99v",
-      "eventId": "-N3LNMiva_S6FO0qWApU",
+      "sessionId": "-N3LNMiva_S6FO0qWApU",
       "didAttend": true,
       "title": "Rumblings of the Legion"
     },
     "-N6xNfdHFyFR3zRD1S2e": {
       "role": 0,
       "playerId": "cWIubiixD6hbnefPdn3108qn5kI3",
-      "eventId": "-N3LNNC6prlaWs1UK9MN",
+      "sessionId": "-N3LNNC6prlaWs1UK9MN",
       "didAttend": true,
       "title": "Bad Neighbours"
     },
     "-N6xNg4Y-Jigx2AUAB9p": {
       "role": 0,
       "playerId": "hVn1TdlBSgc2y92GOeKBAjOfl853",
-      "eventId": "-N3LNNC6prlaWs1UK9MN",
+      "sessionId": "-N3LNNC6prlaWs1UK9MN",
       "didAttend": true,
       "title": "Bad Neighbours"
     },
     "-N6xNgTrH8xg0KIJSXiT": {
       "role": 0,
       "playerId": "7zD6gWfMUza6BPRXkJpara46fy83",
-      "eventId": "-N3LNNC6prlaWs1UK9MN",
+      "sessionId": "-N3LNNC6prlaWs1UK9MN",
       "didAttend": true,
       "title": "Bad Neighbours"
     },
     "-N6xNh4AizoiNCmGPykZ": {
       "role": 0,
       "playerId": "-MaGM5JL64jM9ODkb1Jr",
-      "eventId": "-N3LNNC6prlaWs1UK9MN",
+      "sessionId": "-N3LNNC6prlaWs1UK9MN",
       "didAttend": true,
       "title": "Bad Neighbours"
     },
     "-N6xNhUoVeXBM1vtTMVb": {
       "role": 0,
       "playerId": "-MaGM4yP9MiI5Cy5CmCL",
-      "eventId": "-N3LNNafr1wHnpo_OgWr",
+      "sessionId": "-N3LNNafr1wHnpo_OgWr",
       "didAttend": true,
       "title": "North of Midvalley"
     },
     "-N6xNi-pmGbW0U0xrCO2": {
       "role": 0,
       "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
-      "eventId": "-N3LNNafr1wHnpo_OgWr",
+      "sessionId": "-N3LNNafr1wHnpo_OgWr",
       "didAttend": true,
       "title": "North of Midvalley"
     },
     "-N6xNiRxjd3RmosME6mr": {
       "role": 0,
       "playerId": "-MaGM6YXdS0MHyYRc99v",
-      "eventId": "-N3LNNafr1wHnpo_OgWr",
+      "sessionId": "-N3LNNafr1wHnpo_OgWr",
       "didAttend": true,
       "title": "North of Midvalley"
     },
     "-N6xNixF1K1QopUToOmT": {
       "role": 0,
       "playerId": "hVn1TdlBSgc2y92GOeKBAjOfl853",
-      "eventId": "-N3LNNafr1wHnpo_OgWr",
+      "sessionId": "-N3LNNafr1wHnpo_OgWr",
       "didAttend": true,
       "title": "North of Midvalley"
     },
     "-N6xNjWa1rteUU85COgg": {
       "role": 0,
       "playerId": "-MaGM5QVGtAGMiUj9Eb_",
-      "eventId": "-N3LNNafr1wHnpo_OgWr",
+      "sessionId": "-N3LNNafr1wHnpo_OgWr",
       "didAttend": true,
       "title": "North of Midvalley"
     },
     "-N6xNjzEXp1hA4YkPWeW": {
       "role": 0,
       "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
-      "eventId": "-N3LNOAQz4P8OzPtcjFg",
+      "sessionId": "-N3LNOAQz4P8OzPtcjFg",
       "didAttend": true,
       "title": "Exploring the Realms"
     },
     "-N6xNkQFuT6Yn15NkQfd": {
       "role": 0,
       "playerId": "hVn1TdlBSgc2y92GOeKBAjOfl853",
-      "eventId": "-N3LNOAQz4P8OzPtcjFg",
+      "sessionId": "-N3LNOAQz4P8OzPtcjFg",
       "didAttend": true,
       "title": "Exploring the Realms"
     },
     "-N6xNko7dmJD32vMbTbj": {
       "role": 0,
       "playerId": "7zD6gWfMUza6BPRXkJpara46fy83",
-      "eventId": "-N3LNOAQz4P8OzPtcjFg",
+      "sessionId": "-N3LNOAQz4P8OzPtcjFg",
       "didAttend": true,
       "title": "Exploring the Realms"
     },
     "-N6xNlHlCJ-ADO7oge2I": {
       "role": 0,
       "playerId": "-N6xK912nY4MImulJ45D",
-      "eventId": "-N3LNOAQz4P8OzPtcjFg",
+      "sessionId": "-N3LNOAQz4P8OzPtcjFg",
       "didAttend": true,
       "title": "Exploring the Realms"
     },
     "-N6xNllrOmncvyBdgtsL": {
       "role": 0,
       "playerId": "hVn1TdlBSgc2y92GOeKBAjOfl853",
-      "eventId": "-N3LNOpE6itnNoUF9DM6",
+      "sessionId": "-N3LNOpE6itnNoUF9DM6",
       "didAttend": true,
       "title": "Clearing Dreadshade Fortress"
     },
     "-N6xNmDFp6_k1lrYacNH": {
       "role": 0,
       "playerId": "-MaGM5QVGtAGMiUj9Eb_",
-      "eventId": "-N3LNOpE6itnNoUF9DM6",
+      "sessionId": "-N3LNOpE6itnNoUF9DM6",
       "didAttend": true,
       "title": "Clearing Dreadshade Fortress"
     },
     "-N6xNmmGahAtXBMlAIUI": {
       "role": 0,
       "playerId": "7zD6gWfMUza6BPRXkJpara46fy83",
-      "eventId": "-N3LNOpE6itnNoUF9DM6",
+      "sessionId": "-N3LNOpE6itnNoUF9DM6",
       "didAttend": true,
       "title": "Clearing Dreadshade Fortress"
     },
     "-N6xNnIXrAxvgx0OR3UP": {
       "role": 0,
       "playerId": "-MaGLAdfrrLeLWxdwuUU",
-      "eventId": "-N3LNOpE6itnNoUF9DM6",
+      "sessionId": "-N3LNOpE6itnNoUF9DM6",
       "didAttend": true,
       "title": "Clearing Dreadshade Fortress"
     },
     "-N6xNnptVTZHiDhV6xhj": {
       "role": 0,
       "playerId": "-MaGM5QVGtAGMiUj9Eb_",
-      "eventId": "-N3LNPJIIaTu4Oa0LB9_",
+      "sessionId": "-N3LNPJIIaTu4Oa0LB9_",
       "didAttend": true,
       "title": "Fallen Light"
     },
     "-N6xNoIHPJTsfTxJXdJw": {
       "role": 0,
       "playerId": "7zD6gWfMUza6BPRXkJpara46fy83",
-      "eventId": "-N3LNPJIIaTu4Oa0LB9_",
+      "sessionId": "-N3LNPJIIaTu4Oa0LB9_",
       "didAttend": true,
       "title": "Fallen Light"
     },
     "-N6xNoggJMpwWKMIy8K4": {
       "role": 0,
       "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
-      "eventId": "-N3LNPJIIaTu4Oa0LB9_",
+      "sessionId": "-N3LNPJIIaTu4Oa0LB9_",
       "didAttend": true,
       "title": "Fallen Light"
     },
     "-N6xNpFMSzrCkXyQLNaC": {
       "role": 0,
       "playerId": "-MaGLAdfrrLeLWxdwuUU",
-      "eventId": "-N3LNPJIIaTu4Oa0LB9_",
+      "sessionId": "-N3LNPJIIaTu4Oa0LB9_",
       "didAttend": true,
       "title": "Fallen Light"
     },
     "-N6xNpqmiSL_6k-cPH77": {
       "role": 0,
       "playerId": "hVn1TdlBSgc2y92GOeKBAjOfl853",
-      "eventId": "-N3LNQ5pGw-kM1FTMq0I",
+      "sessionId": "-N3LNQ5pGw-kM1FTMq0I",
       "didAttend": true,
       "title": "Shadows Over the Mountains"
     },
     "-N6xNr21RuZhL0GXzmR7": {
       "role": 0,
       "playerId": "7zD6gWfMUza6BPRXkJpara46fy83",
-      "eventId": "-N3LNQ5pGw-kM1FTMq0I",
+      "sessionId": "-N3LNQ5pGw-kM1FTMq0I",
       "didAttend": true,
       "title": "Shadows Over the Mountains"
     },
     "-N6xNrdpFz8-2jgHRj-E": {
       "role": 0,
       "playerId": "-MaGM5JL64jM9ODkb1Jr",
-      "eventId": "-N3LNQ5pGw-kM1FTMq0I",
+      "sessionId": "-N3LNQ5pGw-kM1FTMq0I",
       "didAttend": true,
       "title": "Shadows Over the Mountains"
     },
     "-N6xNskQ43Kfx-qS2rqt": {
       "role": 0,
       "playerId": "-MaGM5QVGtAGMiUj9Eb_",
-      "eventId": "-N3LNQ_uI7ekplXbjeoy",
+      "sessionId": "-N3LNQ_uI7ekplXbjeoy",
       "didAttend": true,
       "title": "Quest for the Ring"
     },
     "-N6xNtXwKDjwmzrscyUm": {
       "role": 0,
       "playerId": "-MaGLAdfrrLeLWxdwuUU",
-      "eventId": "-N3LNQ_uI7ekplXbjeoy",
+      "sessionId": "-N3LNQ_uI7ekplXbjeoy",
       "didAttend": true,
       "title": "Quest for the Ring"
     },
     "-N6xNu-5hiwHriP8qAvn": {
       "role": 0,
       "playerId": "7zD6gWfMUza6BPRXkJpara46fy83",
-      "eventId": "-N3LNQ_uI7ekplXbjeoy",
+      "sessionId": "-N3LNQ_uI7ekplXbjeoy",
       "didAttend": true,
       "title": "Quest for the Ring"
     },
     "-N6xNuOYLJ7q0MaRgWYW": {
       "role": 0,
       "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
-      "eventId": "-N3LNQ_uI7ekplXbjeoy",
+      "sessionId": "-N3LNQ_uI7ekplXbjeoy",
       "didAttend": true,
       "title": "Quest for the Ring"
     },
     "-N6xNvDvE9-QBV-Ux27T": {
       "role": 0,
       "playerId": "hVn1TdlBSgc2y92GOeKBAjOfl853",
-      "eventId": "-N3LNQ_uI7ekplXbjeoy",
+      "sessionId": "-N3LNQ_uI7ekplXbjeoy",
       "didAttend": true,
       "title": "Quest for the Ring"
     },
     "-N6xNw5wOhA8XBxBl05V": {
       "role": 0,
       "playerId": "cWIubiixD6hbnefPdn3108qn5kI3",
-      "eventId": "-N3LNR7z6nH3e6a3vzAD",
+      "sessionId": "-N3LNR7z6nH3e6a3vzAD",
       "didAttend": true,
       "title": "Return of the Bounty"
     },
     "-N6xNwUzYy-eEI4RI7nL": {
       "role": 0,
       "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
-      "eventId": "-N3LNR7z6nH3e6a3vzAD",
+      "sessionId": "-N3LNR7z6nH3e6a3vzAD",
       "didAttend": true,
       "title": "Return of the Bounty"
     },
     "-N6xNwsBP3nwIkRxl_wG": {
       "role": 0,
       "playerId": "7zD6gWfMUza6BPRXkJpara46fy83",
-      "eventId": "-N3LNR7z6nH3e6a3vzAD",
+      "sessionId": "-N3LNR7z6nH3e6a3vzAD",
       "didAttend": true,
       "title": "Return of the Bounty"
     },
     "-N6xNxDKi5nza3fd_gI5": {
       "role": 0,
       "playerId": "LQXJ3bqnXpbHPTfdGRzO2AkRIbm1",
-      "eventId": "-N3LNRW-NpnVMSG5iXwB",
+      "sessionId": "-N3LNRW-NpnVMSG5iXwB",
       "didAttend": true,
       "title": "The Legion Round 2"
     },
     "-N6xNxe_er1tYvNnzrNL": {
       "role": 0,
       "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
-      "eventId": "-N3LNRW-NpnVMSG5iXwB",
+      "sessionId": "-N3LNRW-NpnVMSG5iXwB",
       "didAttend": true,
       "title": "The Legion Round 2"
     },
     "-N6xNy1uzp1WtjFv43zH": {
       "role": 0,
       "playerId": "cWIubiixD6hbnefPdn3108qn5kI3",
-      "eventId": "-N3LNRW-NpnVMSG5iXwB",
+      "sessionId": "-N3LNRW-NpnVMSG5iXwB",
       "didAttend": true,
       "title": "The Legion Round 2"
     },
     "-N6xNyQF9F9m7EdEZZ_m": {
       "role": 0,
       "playerId": "7zD6gWfMUza6BPRXkJpara46fy83",
-      "eventId": "-N3LNRW-NpnVMSG5iXwB",
+      "sessionId": "-N3LNRW-NpnVMSG5iXwB",
       "didAttend": true,
       "title": "The Legion Round 2"
     },
     "-N6xNyo6agsm2Q8hav24": {
       "role": 0,
       "playerId": "-MaGM5QVGtAGMiUj9Eb_",
-      "eventId": "-N3LNRW-NpnVMSG5iXwB",
+      "sessionId": "-N3LNRW-NpnVMSG5iXwB",
       "didAttend": true,
       "title": "The Legion Round 2"
     },
     "-N6xO5xxemnPyrDTr8_J": {
       "role": 0,
       "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
-      "eventId": "-N3LNSCvKJYMuf3blwBm",
+      "sessionId": "-N3LNSCvKJYMuf3blwBm",
       "didAttend": true,
       "title": "Froster's Fables - The Mindflayer War"
     },
     "-N6xO6NGomShlnhtdQs_": {
       "role": 0,
       "playerId": "cWIubiixD6hbnefPdn3108qn5kI3",
-      "eventId": "-N3LNSCvKJYMuf3blwBm",
+      "sessionId": "-N3LNSCvKJYMuf3blwBm",
       "didAttend": true,
       "title": "Froster's Fables - The Mindflayer War"
     },
     "-N6xO6n1CMH-1R2yxI9E": {
       "role": 0,
       "playerId": "7zD6gWfMUza6BPRXkJpara46fy83",
-      "eventId": "-N3LNSCvKJYMuf3blwBm",
+      "sessionId": "-N3LNSCvKJYMuf3blwBm",
       "didAttend": true,
       "title": "Froster's Fables - The Mindflayer War"
     },
     "-N6xO7CtBhqWBsoJ_weL": {
       "role": 0,
       "playerId": "hVn1TdlBSgc2y92GOeKBAjOfl853",
-      "eventId": "-N3LNSCvKJYMuf3blwBm",
+      "sessionId": "-N3LNSCvKJYMuf3blwBm",
       "didAttend": true,
       "title": "Froster's Fables - The Mindflayer War"
     },
     "-N6xO7_uLeYQosNwTx79": {
       "role": 0,
       "playerId": "-MaGM5JL64jM9ODkb1Jr",
-      "eventId": "-N3LNSCvKJYMuf3blwBm",
+      "sessionId": "-N3LNSCvKJYMuf3blwBm",
       "didAttend": true,
       "title": "Froster's Fables - The Mindflayer War"
     },
     "-N6xO8-DkXq8zTwyEhTE": {
       "role": 0,
       "playerId": "7zD6gWfMUza6BPRXkJpara46fy83",
-      "eventId": "-N6eNcIWrx2-E4c5KNSY",
+      "sessionId": "-N6eNcIWrx2-E4c5KNSY",
       "didAttend": true,
       "title": "The Legion Round 3"
     },
     "-N6xO8aBuua19qXyGBTG": {
       "role": 0,
       "playerId": "LQXJ3bqnXpbHPTfdGRzO2AkRIbm1",
-      "eventId": "-N6eNcIWrx2-E4c5KNSY",
+      "sessionId": "-N6eNcIWrx2-E4c5KNSY",
       "didAttend": true,
       "title": "The Legion Round 3"
     },
     "-N6xO988p8BUASP-jQWa": {
       "role": 0,
       "playerId": "-MaGLAdfrrLeLWxdwuUU",
-      "eventId": "-N6eNcIWrx2-E4c5KNSY",
+      "sessionId": "-N6eNcIWrx2-E4c5KNSY",
       "didAttend": true,
       "title": "The Legion Round 3"
     },
     "-N6xO9YxHpbq9uaZdWkG": {
       "role": 0,
       "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
-      "eventId": "-N6eNcqRKJJmGJUkbr3N",
+      "sessionId": "-N6eNcqRKJJmGJUkbr3N",
       "didAttend": true,
       "title": "Frozen Crystals"
     },
     "-N6xO9wD9uKDrNrpr_oF": {
       "role": 0,
       "playerId": "7zD6gWfMUza6BPRXkJpara46fy83",
-      "eventId": "-N6eNcqRKJJmGJUkbr3N",
+      "sessionId": "-N6eNcqRKJJmGJUkbr3N",
       "didAttend": true,
       "title": "Frozen Crystals"
     },
     "-N6xOAhwfciBOYINLcIg": {
       "role": 0,
       "playerId": "LQXJ3bqnXpbHPTfdGRzO2AkRIbm1",
-      "eventId": "-N6eNcqRKJJmGJUkbr3N",
+      "sessionId": "-N6eNcqRKJJmGJUkbr3N",
       "didAttend": true,
       "title": "Frozen Crystals"
     },
     "-N6xOB8OUqBHngqszEGN": {
       "role": 0,
       "playerId": "-MaGM6YXdS0MHyYRc99v",
-      "eventId": "-N6eNcqRKJJmGJUkbr3N",
+      "sessionId": "-N6eNcqRKJJmGJUkbr3N",
       "didAttend": true,
       "title": "Frozen Crystals"
     },
     "-N6xOBrdJpx7GlZrXI8M": {
       "role": 0,
       "playerId": "-MaGM5JL64jM9ODkb1Jr",
-      "eventId": "-N6eNcqRKJJmGJUkbr3N",
+      "sessionId": "-N6eNcqRKJJmGJUkbr3N",
       "didAttend": true,
       "title": "Frozen Crystals"
     },
     "-N6xIRkkLWbth5qg0Wog": {
       "role": 0,
       "playerId": "-MaGM6YXdS0MHyYRc99v",
-      "eventId": "-N3LNLq0jhFHtxtg-aEb",
+      "sessionId": "-N3LNLq0jhFHtxtg-aEb",
       "didAttend": true,
       "title": "Dead Drop"
     },
     "-N6xISCYW2dDvDqZZHWy": {
       "role": 0,
       "playerId": "cWIubiixD6hbnefPdn3108qn5kI3",
-      "eventId": "-N3LNLq0jhFHtxtg-aEb",
+      "sessionId": "-N3LNLq0jhFHtxtg-aEb",
       "didAttend": true,
       "title": "Dead Drop"
     },
     "-N6xISgkhwyr2lsquXfV": {
       "role": 0,
       "playerId": "-MaGLAdfrrLeLWxdwuUU",
-      "eventId": "-N3LNLq0jhFHtxtg-aEb",
+      "sessionId": "-N3LNLq0jhFHtxtg-aEb",
       "didAttend": true,
       "title": "Dead Drop"
     },
     "-N6xIT94BZUu3gu_J9ZF": {
       "role": 0,
       "playerId": "-MaGM5QVGtAGMiUj9Eb_",
-      "eventId": "-N3LNLq0jhFHtxtg-aEb",
+      "sessionId": "-N3LNLq0jhFHtxtg-aEb",
       "didAttend": true,
       "title": "Dead Drop"
     },
     "-N6xIT_q6dY6K3B4ApYN": {
       "role": 0,
       "playerId": "hVn1TdlBSgc2y92GOeKBAjOfl853",
-      "eventId": "-N3LNLq0jhFHtxtg-aEb",
+      "sessionId": "-N3LNLq0jhFHtxtg-aEb",
       "didAttend": true,
       "title": "Dead Drop"
     },
     "-N6xIU2IGka2SMu09RbV": {
       "role": 0,
       "playerId": "-MaGM4yP9MiI5Cy5CmCL",
-      "eventId": "-N3LNMGpPxYkzFp5NZ8M",
+      "sessionId": "-N3LNMGpPxYkzFp5NZ8M",
       "didAttend": true,
       "title": "Making Amends"
     },
     "-N6xIUX0LJsgFyANd7jI": {
       "role": 0,
       "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
-      "eventId": "-N3LNMGpPxYkzFp5NZ8M",
+      "sessionId": "-N3LNMGpPxYkzFp5NZ8M",
       "didAttend": true,
       "title": "Making Amends"
     },
     "-N6xIUxt4sFUweby7iG_": {
       "role": 0,
       "playerId": "-MaGM5QVGtAGMiUj9Eb_",
-      "eventId": "-N3LNMGpPxYkzFp5NZ8M",
+      "sessionId": "-N3LNMGpPxYkzFp5NZ8M",
       "didAttend": true,
       "title": "Making Amends"
     },
     "-N6xIVZYiDjLWjjHBx5z": {
       "role": 0,
       "playerId": "7zD6gWfMUza6BPRXkJpara46fy83",
-      "eventId": "-N3LNMGpPxYkzFp5NZ8M",
+      "sessionId": "-N3LNMGpPxYkzFp5NZ8M",
       "didAttend": true,
       "title": "Making Amends"
     },
     "-N5X0HuG2qrX_TbpgYUV": {
       "didAttend": true,
-      "eventId": "-N3LNGxLbEugSM-igDxf",
+      "sessionId": "-N3LNGxLbEugSM-igDxf",
       "playerId": "-MaGM6Q3kpDNynEBURGO",
       "role": 0
     },
     "-N5X0IKIF6GgTiZjxXRJ": {
       "didAttend": true,
-      "eventId": "-N3LNHMoZVGYQlswgwJY",
+      "sessionId": "-N3LNHMoZVGYQlswgwJY",
       "playerId": "-MaGM6Q3kpDNynEBURGO",
       "role": 0
     },
     "-N5X0Io0v1nV8F9FNnqT": {
       "didAttend": true,
-      "eventId": "-N3LNI6zRFS-u13RbWdS",
+      "sessionId": "-N3LNI6zRFS-u13RbWdS",
       "playerId": "-MaGM6Q3kpDNynEBURGO",
       "role": 0
     },
     "-N5X0JHgOOok-7mV8mo7": {
       "didAttend": true,
-      "eventId": "-N3LNJ5JjCz9DKtD9tl-",
+      "sessionId": "-N3LNJ5JjCz9DKtD9tl-",
       "playerId": "-MaGM6Q3kpDNynEBURGO",
       "role": 0
     },
     "-N5X0JhgQM01113OTbTd": {
       "didAttend": true,
-      "eventId": "-N3LNK-uvO0YGG6NtgAn",
+      "sessionId": "-N3LNK-uvO0YGG6NtgAn",
       "playerId": "-MaGM6Q3kpDNynEBURGO",
       "role": 0
     },
     "-N5X0RLTmTEloPr4zr-F": {
       "didAttend": true,
-      "eventId": "-N3LNKO6GPFbjxwM8c9e",
+      "sessionId": "-N3LNKO6GPFbjxwM8c9e",
       "playerId": "-MaGM6Q3kpDNynEBURGO",
       "role": 1
     },
     "-N5X0Rzyq3rvJCITPsLd": {
       "didAttend": true,
-      "eventId": "-N3LNMGpPxYkzFp5NZ8M",
+      "sessionId": "-N3LNMGpPxYkzFp5NZ8M",
       "playerId": "-MaGM6Q3kpDNynEBURGO",
       "role": 1
     },
     "-N5X0SURWi7c4_WIcNFS": {
       "didAttend": true,
-      "eventId": "-N3LNNafr1wHnpo_OgWr",
+      "sessionId": "-N3LNNafr1wHnpo_OgWr",
       "playerId": "-MaGM6Q3kpDNynEBURGO",
       "role": 1
     },
     "-N5X0T-TDT6Ywu3bLCZO": {
       "didAttend": true,
-      "eventId": "-N3LNOAQz4P8OzPtcjFg",
+      "sessionId": "-N3LNOAQz4P8OzPtcjFg",
       "playerId": "-MaGM6Q3kpDNynEBURGO",
       "role": 1
     },
     "-N5X0TWUf_ctDGOq5dLX": {
       "didAttend": true,
-      "eventId": "-N3LNOpE6itnNoUF9DM6",
+      "sessionId": "-N3LNOpE6itnNoUF9DM6",
       "playerId": "-MaGM6Q3kpDNynEBURGO",
       "role": 1
     },
     "-N5X0TzrPV8Ed7sQGKFB": {
       "didAttend": true,
-      "eventId": "-N3LNR7z6nH3e6a3vzAD",
+      "sessionId": "-N3LNR7z6nH3e6a3vzAD",
       "playerId": "-MaGM6Q3kpDNynEBURGO",
       "role": 1
     },
     "-N5X146lsecrhP39rsq2": {
       "didAttend": true,
-      "eventId": "-N3LNMiva_S6FO0qWApU",
+      "sessionId": "-N3LNMiva_S6FO0qWApU",
       "playerId": "-MaGM6Q3kpDNynEBURGO",
       "role": 0
     },
     "-N5X14otI-NXsOWdnPTf": {
       "didAttend": true,
-      "eventId": "-N3LNPJIIaTu4Oa0LB9_",
+      "sessionId": "-N3LNPJIIaTu4Oa0LB9_",
       "playerId": "-MaGM6Q3kpDNynEBURGO",
       "role": 0
     },
     "-N6oFWD1QUNr-T1Ow6ZI": {
       "didAttend": true,
-      "eventId": "-N3LNFSEtKmJDoqihyUA",
+      "sessionId": "-N3LNFSEtKmJDoqihyUA",
       "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
       "role": 1
     },
     "-N6oFWo1K2rfFdh-j13q": {
       "didAttend": true,
-      "eventId": "-N3LNGR4rzXmngzrk49C",
+      "sessionId": "-N3LNGR4rzXmngzrk49C",
       "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
       "role": 1
     },
     "-N6oFXP3szQTPjm_KopC": {
       "didAttend": true,
-      "eventId": "-N3LNGxLbEugSM-igDxf",
+      "sessionId": "-N3LNGxLbEugSM-igDxf",
       "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
       "role": 1
     },
     "-N6oFYF6i-rPR8FUfFpg": {
       "didAttend": true,
-      "eventId": "-N3LNHMoZVGYQlswgwJY",
+      "sessionId": "-N3LNHMoZVGYQlswgwJY",
       "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
       "role": 1
     },
     "-N6oFYjhNwnpyOz0UObH": {
       "didAttend": true,
-      "eventId": "-N3LNHmGLBnk7y8S2bZK",
+      "sessionId": "-N3LNHmGLBnk7y8S2bZK",
       "playerId": "cWIubiixD6hbnefPdn3108qn5kI3",
       "role": 1
     },
     "-N6oFZ9-sJSA15pDotUx": {
       "didAttend": true,
-      "eventId": "-N3LNI6zRFS-u13RbWdS",
+      "sessionId": "-N3LNI6zRFS-u13RbWdS",
       "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
       "role": 1
     },
     "-N6oFZbWg8FrdlnpQJ6w": {
       "didAttend": true,
-      "eventId": "-N3LNIfVXI73h1p4ttFL",
+      "sessionId": "-N3LNIfVXI73h1p4ttFL",
       "playerId": "-MaGM9IVAiHx1Zdv8hAu",
       "role": 1
     },
     "-N6oF_qNA--fZBOO53TQ": {
       "didAttend": true,
-      "eventId": "-N3LNJ5JjCz9DKtD9tl-",
+      "sessionId": "-N3LNJ5JjCz9DKtD9tl-",
       "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
       "role": 1
     },
     "-N6oFaGGcr6pRjW6UJ9H": {
       "didAttend": true,
-      "eventId": "-N3LNJScFs9LyKGO2-kH",
+      "sessionId": "-N3LNJScFs9LyKGO2-kH",
       "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
       "role": 1
     },
     "-N6oFaoURS8N2iKBweoi": {
       "didAttend": true,
-      "eventId": "-N3LNK-uvO0YGG6NtgAn",
+      "sessionId": "-N3LNK-uvO0YGG6NtgAn",
       "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
       "role": 1
     },
     "-N6oFbh-KV7OhEPVYGDr": {
       "didAttend": true,
-      "eventId": "-N3LNKkH9J-m44ch9bTL",
+      "sessionId": "-N3LNKkH9J-m44ch9bTL",
       "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
       "role": 1
     },
     "-N6oFcB2welMZwf7MhYQ": {
       "didAttend": true,
-      "eventId": "-N3LNLq0jhFHtxtg-aEb",
+      "sessionId": "-N3LNLq0jhFHtxtg-aEb",
       "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
       "role": 1
     },
     "-N6oFdKrFGPpYPdiLgOL": {
       "didAttend": true,
-      "eventId": "-N3LNMiva_S6FO0qWApU",
+      "sessionId": "-N3LNMiva_S6FO0qWApU",
       "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
       "role": 1
     },
     "-N6oFdlKOXQO8xQTs41e": {
       "didAttend": true,
-      "eventId": "-N3LNNC6prlaWs1UK9MN",
+      "sessionId": "-N3LNNC6prlaWs1UK9MN",
       "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
       "role": 1
     },
     "-N6oFgZcfVfb_9dc5Xau": {
       "didAttend": true,
-      "eventId": "-N3LNPJIIaTu4Oa0LB9_",
+      "sessionId": "-N3LNPJIIaTu4Oa0LB9_",
       "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
       "role": 1
     },
     "-N6oFh-P3SOJHF4eNijd": {
       "didAttend": true,
-      "eventId": "-N3LNQ5pGw-kM1FTMq0I",
+      "sessionId": "-N3LNQ5pGw-kM1FTMq0I",
       "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
       "role": 1
     },
     "-N6oFhjXBmNoV2fpIHX1": {
       "didAttend": true,
-      "eventId": "-N3LNQ_uI7ekplXbjeoy",
+      "sessionId": "-N3LNQ_uI7ekplXbjeoy",
       "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
       "role": 1
     },
     "-N6oFigXpK9jA8dL1fL2": {
       "didAttend": true,
-      "eventId": "-N3LNRW-NpnVMSG5iXwB",
+      "sessionId": "-N3LNRW-NpnVMSG5iXwB",
       "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
       "role": 1
     },
     "-N6oFj7kshrmfThwq_7L": {
       "didAttend": true,
-      "eventId": "-N3LNSCvKJYMuf3blwBm",
+      "sessionId": "-N3LNSCvKJYMuf3blwBm",
       "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
       "role": 1
     },
     "-N6oFjtKZx1p1cOH4J10": {
       "didAttend": true,
-      "eventId": "-N6eNcIWrx2-E4c5KNSY",
+      "sessionId": "-N6eNcIWrx2-E4c5KNSY",
       "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
       "role": 1
     },
     "-N6oFkOTXzLUzUsOmWda": {
       "didAttend": true,
-      "eventId": "-N6eNcqRKJJmGJUkbr3N",
+      "sessionId": "-N6eNcqRKJJmGJUkbr3N",
       "playerId": "cWIubiixD6hbnefPdn3108qn5kI3",
       "role": 1
     },
     "-N6oFkorURAR6ZYpH0Cf": {
       "didAttend": true,
-      "eventId": "-N6eNdZgrlLJlh0wdbL6",
+      "sessionId": "-N6eNdZgrlLJlh0wdbL6",
       "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
       "role": 1
     },
     "-N6oOrv3-abX4jKzG3mG": {
       "didAttend": true,
-      "eventId": "-N3LNFSEtKmJDoqihyUA",
+      "sessionId": "-N3LNFSEtKmJDoqihyUA",
       "playerId": "cWIubiixD6hbnefPdn3108qn5kI3",
       "role": 0
     },
     "-N6oVlJWfgL1ImJzcDES": {
       "didAttend": true,
-      "eventId": "-N3LNSCvKJYMuf3blwBm",
+      "sessionId": "-N3LNSCvKJYMuf3blwBm",
       "playerId": "cWIubiixD6hbnefPdn3108qn5kI3",
       "role": 0
     },
     "-N6w_R8owY8W27Hojba4": {
       "didAttend": true,
-      "eventId": "-N3LNFSEtKmJDoqihyUA",
+      "sessionId": "-N3LNFSEtKmJDoqihyUA",
       "playerId": "-MaGLAdfrrLeLWxdwuUU",
       "role": 0,
       "title": "Operation Landgrab"
     },
     "-N6w_RcmBF-oRuR-kjRq": {
       "didAttend": true,
-      "eventId": "-N3LNFSEtKmJDoqihyUA",
+      "sessionId": "-N3LNFSEtKmJDoqihyUA",
       "playerId": "-MaGM5cq30wDPzwxYLK4",
       "role": 0,
       "title": "Operation Landgrab"
     },
     "-N6w_SMU1dBfcr16Qltk": {
       "didAttend": true,
-      "eventId": "-N3LNGR4rzXmngzrk49C",
+      "sessionId": "-N3LNGR4rzXmngzrk49C",
       "playerId": "hVn1TdlBSgc2y92GOeKBAjOfl853",
       "role": 0,
       "title": "The Poacher Problem"
     },
     "-N6w_SuccBTBZNB7-1-D": {
       "didAttend": true,
-      "eventId": "-N3LNGR4rzXmngzrk49C",
+      "sessionId": "-N3LNGR4rzXmngzrk49C",
       "playerId": "-MaGM6YXdS0MHyYRc99v",
       "role": 0,
       "title": "The Poacher Problem"
     },
     "-N6w_TMcg79iy-Ro-WjY": {
       "didAttend": true,
-      "eventId": "-N3LNGR4rzXmngzrk49C",
+      "sessionId": "-N3LNGR4rzXmngzrk49C",
       "playerId": "-MaGM4rbdJBgZ8rKnfbc",
       "role": 0,
       "title": "The Poacher Problem"
     },
     "-N6w_Tuw0gBuOpjtgClt": {
       "didAttend": true,
-      "eventId": "-N3LNGR4rzXmngzrk49C",
+      "sessionId": "-N3LNGR4rzXmngzrk49C",
       "playerId": "-MaGM6IOnqXNGuNfxZa6",
       "role": 0,
       "title": "The Poacher Problem"
     },
     "-N6w_URVHfhCjT6cad5s": {
       "didAttend": true,
-      "eventId": "-N3LNGR4rzXmngzrk49C",
+      "sessionId": "-N3LNGR4rzXmngzrk49C",
       "playerId": "-MaGM5cq30wDPzwxYLK4",
       "role": 0,
       "title": "The Poacher Problem"
     },
     "-N6w_V6V4aYUIKPC9kCO": {
       "didAttend": true,
-      "eventId": "-N3LNGxLbEugSM-igDxf",
+      "sessionId": "-N3LNGxLbEugSM-igDxf",
       "playerId": "-MaGM4yP9MiI5Cy5CmCL",
       "role": 0,
       "title": "Viking Incursion"
     },
     "-N6w_VZy6i_YfXEQPlA0": {
       "didAttend": true,
-      "eventId": "-N3LNGxLbEugSM-igDxf",
+      "sessionId": "-N3LNGxLbEugSM-igDxf",
       "playerId": "-MaGM6YXdS0MHyYRc99v",
       "role": 0,
       "title": "Viking Incursion"
     },
     "-N6w_W22L8_LmeLaXpSm": {
       "didAttend": true,
-      "eventId": "-N3LNGxLbEugSM-igDxf",
+      "sessionId": "-N3LNGxLbEugSM-igDxf",
       "playerId": "-MaGM5tBXrrMWldlbI-X",
       "role": 0,
       "title": "Viking Incursion"
     },
     "-N6w_WavOKnzJRp11kTg": {
       "didAttend": true,
-      "eventId": "-N3LNGxLbEugSM-igDxf",
+      "sessionId": "-N3LNGxLbEugSM-igDxf",
       "playerId": "-MaGM5koceXzQAlwRUFN",
       "role": 0,
       "title": "Viking Incursion"
     },
     "-N6waVWaYpGyNP79qek8": {
       "didAttend": true,
-      "eventId": "-N3LNHMoZVGYQlswgwJY",
+      "sessionId": "-N3LNHMoZVGYQlswgwJY",
       "playerId": "hVn1TdlBSgc2y92GOeKBAjOfl853",
       "role": 0,
       "title": "Finding the Blue Oder"
     },
     "-N6waVz3sQh5TeDQgfBs": {
       "didAttend": true,
-      "eventId": "-N3LNHMoZVGYQlswgwJY",
+      "sessionId": "-N3LNHMoZVGYQlswgwJY",
       "playerId": "-MaGM4rbdJBgZ8rKnfbc",
       "role": 0,
       "title": "Finding the Blue Oder"
     },
     "-N6waW_kdcLIQxc3CP-Y": {
       "didAttend": true,
-      "eventId": "-N3LNHMoZVGYQlswgwJY",
+      "sessionId": "-N3LNHMoZVGYQlswgwJY",
       "playerId": "-MaGM5CRWHK7L7PRyhub",
       "role": 0,
       "title": "Finding the Blue Oder"
     },
     "-N6waWzzu6b2j3kmxkqf": {
       "didAttend": true,
-      "eventId": "-N3LNHMoZVGYQlswgwJY",
+      "sessionId": "-N3LNHMoZVGYQlswgwJY",
       "playerId": "-MaGM5koceXzQAlwRUFN",
       "role": 0,
       "title": "Finding the Blue Oder"
     },
     "-N6wanzPNsBo-KM2ck_0": {
       "didAttend": true,
-      "eventId": "-N3LNHmGLBnk7y8S2bZK",
+      "sessionId": "-N3LNHmGLBnk7y8S2bZK",
       "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
       "role": 0,
       "title": "Cirque d'Snicket"
     },
     "-N6waoR-tOTlTq-Bvnfj": {
       "didAttend": true,
-      "eventId": "-N3LNHmGLBnk7y8S2bZK",
+      "sessionId": "-N3LNHmGLBnk7y8S2bZK",
       "playerId": "-MaGM5tBXrrMWldlbI-X",
       "role": 0,
       "title": "Cirque d'Snicket"
     },
     "-N6wap5PJa_73IdabjD4": {
       "didAttend": true,
-      "eventId": "-N3LNHmGLBnk7y8S2bZK",
+      "sessionId": "-N3LNHmGLBnk7y8S2bZK",
       "playerId": "-MaGM5JL64jM9ODkb1Jr",
       "role": 0,
       "title": "Cirque d'Snicket"
     },
     "-N6wapbpMu8mN38LXUBm": {
       "didAttend": true,
-      "eventId": "-N3LNHmGLBnk7y8S2bZK",
+      "sessionId": "-N3LNHmGLBnk7y8S2bZK",
       "playerId": "-MaGM5koceXzQAlwRUFN",
       "role": 0,
       "title": "Cirque d'Snicket"
     },
     "-N6waq2DAbca-GtcKSWQ": {
       "didAttend": true,
-      "eventId": "-N3LNHmGLBnk7y8S2bZK",
+      "sessionId": "-N3LNHmGLBnk7y8S2bZK",
       "playerId": "-MaGM5CRWHK7L7PRyhub",
       "role": 0,
       "title": "Cirque d'Snicket"
     },
     "-N6waqaaQwYiHc9ICOsG": {
       "didAttend": true,
-      "eventId": "-N3LNHmGLBnk7y8S2bZK",
+      "sessionId": "-N3LNHmGLBnk7y8S2bZK",
       "playerId": "-MaGM6YXdS0MHyYRc99v",
       "role": 0,
       "title": "Cirque d'Snicket"
     },
     "-N6whbs4iQnt3kvn0jys": {
       "didAttend": true,
-      "eventId": "-N3LNI6zRFS-u13RbWdS",
+      "sessionId": "-N3LNI6zRFS-u13RbWdS",
       "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
       "role": 0,
       "title": "Mysterious Benefactor"
     },
     "-N6whcIJ77hD_aWYKk2u": {
       "didAttend": true,
-      "eventId": "-N3LNI6zRFS-u13RbWdS",
+      "sessionId": "-N3LNI6zRFS-u13RbWdS",
       "playerId": "hVn1TdlBSgc2y92GOeKBAjOfl853",
       "role": 0,
       "title": "Mysterious Benefactor"
     },
     "-N6whcfEtoTyYjLvcssH": {
       "didAttend": true,
-      "eventId": "-N3LNI6zRFS-u13RbWdS",
+      "sessionId": "-N3LNI6zRFS-u13RbWdS",
       "playerId": "-MaGM6IOnqXNGuNfxZa6",
       "role": 0,
       "title": "Mysterious Benefactor"
     },
     "-N6whd4djWyY9qNwv5RN": {
       "didAttend": true,
-      "eventId": "-N3LNI6zRFS-u13RbWdS",
+      "sessionId": "-N3LNI6zRFS-u13RbWdS",
       "playerId": "-MaGM5QVGtAGMiUj9Eb_",
       "role": 0,
       "title": "Mysterious Benefactor"
     },
     "-N6wvTIkK-qV__N7FFGU": {
       "didAttend": true,
-      "eventId": "-N3LNIfVXI73h1p4ttFL",
+      "sessionId": "-N3LNIfVXI73h1p4ttFL",
       "playerId": "-MaGM5tBXrrMWldlbI-X",
       "role": 0,
       "title": "Elven Exploration"
     },
     "-N6wvTqCY2r8ntgVOkPo": {
       "didAttend": true,
-      "eventId": "-N3LNIfVXI73h1p4ttFL",
+      "sessionId": "-N3LNIfVXI73h1p4ttFL",
       "playerId": "-MaGM5cq30wDPzwxYLK4",
       "role": 0,
       "title": "Elven Exploration"
     },
     "-N6wvUVdnwkVHRXotrN4": {
       "didAttend": true,
-      "eventId": "-N3LNIfVXI73h1p4ttFL",
+      "sessionId": "-N3LNIfVXI73h1p4ttFL",
       "playerId": "hVn1TdlBSgc2y92GOeKBAjOfl853",
       "role": 0,
       "title": "Elven Exploration"
     },
     "-N6wvVBhCS4kJ5_93OyP": {
       "didAttend": true,
-      "eventId": "-N3LNIfVXI73h1p4ttFL",
+      "sessionId": "-N3LNIfVXI73h1p4ttFL",
       "playerId": "-MaGM6YXdS0MHyYRc99v",
       "role": 0,
       "title": "Elven Exploration"
     },
     "-N6wvVgVyIQ8CgNokmiD": {
       "didAttend": true,
-      "eventId": "-N3LNIfVXI73h1p4ttFL",
+      "sessionId": "-N3LNIfVXI73h1p4ttFL",
       "playerId": "-MaGM4yP9MiI5Cy5CmCL",
       "role": 0,
       "title": "Elven Exploration"
     },
     "-N6wvWGKRkkP0hM5Facs": {
       "didAttend": true,
-      "eventId": "-N3LNJ5JjCz9DKtD9tl-",
+      "sessionId": "-N3LNJ5JjCz9DKtD9tl-",
       "playerId": "-MaGM4rbdJBgZ8rKnfbc",
       "role": 0,
       "title": "Forgotten Foothold"
     },
     "-N6wvWiey8Ylr5QJYmhW": {
       "didAttend": true,
-      "eventId": "-N3LNJ5JjCz9DKtD9tl-",
+      "sessionId": "-N3LNJ5JjCz9DKtD9tl-",
       "playerId": "cWIubiixD6hbnefPdn3108qn5kI3",
       "role": 0,
       "title": "Forgotten Foothold"
     },
     "-N6wvX7WRsGLWg---ZDB": {
       "didAttend": true,
-      "eventId": "-N3LNJ5JjCz9DKtD9tl-",
+      "sessionId": "-N3LNJ5JjCz9DKtD9tl-",
       "playerId": "-MaGM9IVAiHx1Zdv8hAu",
       "role": 0,
       "title": "Forgotten Foothold"
     },
     "-N6wvXXO0MSXV2bF2XWM": {
       "didAttend": true,
-      "eventId": "-N3LNJScFs9LyKGO2-kH",
+      "sessionId": "-N3LNJScFs9LyKGO2-kH",
       "playerId": "-MaGM4rbdJBgZ8rKnfbc",
       "role": 0,
       "title": "The Old Man's Message"
     },
     "-N6wvXzA2UBIQqagZ0B3": {
       "didAttend": true,
-      "eventId": "-N3LNJScFs9LyKGO2-kH",
+      "sessionId": "-N3LNJScFs9LyKGO2-kH",
       "playerId": "-MaGM5CRWHK7L7PRyhub",
       "role": 0,
       "title": "The Old Man's Message"
     },
     "-N6wvYUOJSw_rTpT5dTr": {
       "didAttend": true,
-      "eventId": "-N3LNJScFs9LyKGO2-kH",
+      "sessionId": "-N3LNJScFs9LyKGO2-kH",
       "playerId": "-MaGM5koceXzQAlwRUFN",
       "role": 0,
       "title": "The Old Man's Message"
     },
     "-N6wvZ60urjUClPhoN-2": {
       "didAttend": true,
-      "eventId": "-N3LNJScFs9LyKGO2-kH",
+      "sessionId": "-N3LNJScFs9LyKGO2-kH",
       "playerId": "-hVn1TdlBSgc2y92GOeKBAjOfl853",
       "role": 0,
       "title": "The Old Man's Message"
     },
     "-N6wv_8T-2Ao9nyRDSN1": {
       "didAttend": true,
-      "eventId": "-N3LNK-uvO0YGG6NtgAn",
+      "sessionId": "-N3LNK-uvO0YGG6NtgAn",
       "playerId": "-MaGM6mfWwwgH4r0KsVA",
       "role": 0,
       "title": "Midvalley Mines"
     },
     "-N6wv_kbYLqbqYDoNmSk": {
       "didAttend": true,
-      "eventId": "-N3LNK-uvO0YGG6NtgAn",
+      "sessionId": "-N3LNK-uvO0YGG6NtgAn",
       "playerId": "7zD6gWfMUza6BPRXkJpara46fy83",
       "role": 0,
       "title": "Midvalley Mines"
     },
     "-N6wvaM8mLDdjKDSPbFv": {
       "didAttend": true,
-      "eventId": "-N3LNK-uvO0YGG6NtgAn",
+      "sessionId": "-N3LNK-uvO0YGG6NtgAn",
       "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
       "role": 0,
       "title": "Midvalley Mines"
     },
     "-N6wvamSjjmPQeCXm5to": {
       "didAttend": true,
-      "eventId": "-N3LNKO6GPFbjxwM8c9e",
+      "sessionId": "-N3LNKO6GPFbjxwM8c9e",
       "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
       "role": 0,
       "title": "Welp, We Released a Dragon"
     },
     "-N6wvbD5rCqeA8UseIRP": {
       "didAttend": true,
-      "eventId": "-N3LNKO6GPFbjxwM8c9e",
+      "sessionId": "-N3LNKO6GPFbjxwM8c9e",
       "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
       "role": 0,
       "title": "Welp, We Released a Dragon"
     },
     "-N6wvbkeqC4sCjHj_2RH": {
       "didAttend": true,
-      "eventId": "-N3LNKO6GPFbjxwM8c9e",
+      "sessionId": "-N3LNKO6GPFbjxwM8c9e",
       "playerId": "7zD6gWfMUza6BPRXkJpara46fy83",
       "role": 0,
       "title": "Welp, We Released a Dragon"
     },
     "-N6wvcWwUNkrfipB0QMr": {
       "didAttend": true,
-      "eventId": "-N3LNKO6GPFbjxwM8c9e",
+      "sessionId": "-N3LNKO6GPFbjxwM8c9e",
       "playerId": "-MaGM5QVGtAGMiUj9Eb_",
       "role": 0,
       "title": "Welp, We Released a Dragon"
     },
     "-N6wvd5S8B2XE4WG1k_n": {
       "didAttend": true,
-      "eventId": "-N3LNKkH9J-m44ch9bTL",
+      "sessionId": "-N3LNKkH9J-m44ch9bTL",
       "playerId": "-MaGLAdfrrLeLWxdwuUU",
       "role": 0,
       "title": "The Jailer Comes"
     },
     "-N6wve1PPVPinaR_5zA9": {
       "didAttend": true,
-      "eventId": "-N3LNKkH9J-m44ch9bTL",
+      "sessionId": "-N3LNKkH9J-m44ch9bTL",
       "playerId": "cWIubiixD6hbnefPdn3108qn5kI3",
       "role": 0,
       "title": "The Jailer Comes"
     },
     "-N6wvefv-gjn5-Bs6tNz": {
       "didAttend": true,
-      "eventId": "-N3LNKkH9J-m44ch9bTL",
+      "sessionId": "-N3LNKkH9J-m44ch9bTL",
       "playerId": "7zD6gWfMUza6BPRXkJpara46fy83",
       "role": 0,
       "title": "The Jailer Comes"
     },
     "-N6x5-nH-7ORzvH4AYFM": {
       "didAttend": true,
-      "eventId": "-N3LNKkH9J-m44ch9bTL",
+      "sessionId": "-N3LNKkH9J-m44ch9bTL",
       "playerId": "-MaGM6Q3kpDNynEBURGO",
       "role": 0,
       "title": "The Jailer Comes"
     }
   },
-  "events": {
+  "sessions": {
     "-N3LNFSEtKmJDoqihyUA": {
       "mapId": "-N2Ho3wDN80qp2cAWF13",
       "selectedDate": 1637712000000,
@@ -2474,6 +2023,14 @@
     "-N6eNdZgrlLJlh0wdbL6": {
       "mapId": "-N2Ho4bDUkhIqi4tAUjC",
       "title": "Eastwatch Harbour"
+    },
+    "-N6yWBPaPzXm2HW4cGfO": {
+      "mapId": "-N2Ho2Bv9PyId_uPU466",
+      "title": "The Legion Round 4"
+    },
+    "-N6yWBr6Utf2zP5ioFMt": {
+      "mapId": "-N2Ho35e7smUBHZx7sEZ",
+      "title": "Frozen Crystals Continued"
     }
   },
   "maps": {
@@ -2490,9 +2047,8 @@
       "name": "The Everwilds"
     }
   },
-  "newCharacters": {
+  "characters": {
     "-N5W0C090Fz2bSdJVuQx": {
-      "avatarUrl": "-MaGM6Q3kpDNynEBURGO",
       "fullName": "De Mauer",
       "playerId": "-MaGM6Q3kpDNynEBURGO",
       "sheetUrl": "https://www.dndbeyond.com/characters/62565380",
@@ -2687,6 +2243,14 @@
       "playerId": "-N6xJxUeqevomce8WaX9",
       "sheetUrl": "https://www.dndbeyond.com/characters/67876495",
       "startingLevel": 3
+    },
+    "-N7gBmNGr9RPU_oxoAYr": {
+      "fullName": "Yandar Danorin",
+      "nickname": "Yandar",
+      "playerId": "kQHelre21sgGsU8FDu1CKY33im12",
+      "sheetUrl": "https://www.dndbeyond.com/characters/77694254",
+      "avatarUrl": "https://www.dndbeyond.com/avatars/27012/909/1581111423-77694254.jpeg",
+      "startingLevel": 3
     }
   },
   "players": {
@@ -2857,6 +2421,11 @@
       "isDungeonMaster": true,
       "isGamesMaster": false,
       "name": "Will Carter"
+    },
+    "kQHelre21sgGsU8FDu1CKY33im12": {
+      "discordTag": "RickDeyja#9719",
+      "dndBeyondName": "RickDeyja_",
+      "name": "Thomas"
     }
   },
   "raceConfigs": {
@@ -3358,325 +2927,6 @@
     "-N2J7lt9YAG0yRfDCsiy": {
       "name": "Grung",
       "subraceRequired": false
-    }
-  },
-  "sessions": {
-    "-MaGL9dJxtLJgY3d2iZ4": {
-      "attendees": [
-        "-MaGKwrksOQXvT7PA5Qd",
-        "-MaGKzGbL5yHTKXce9Hj",
-        "-MaGKy-zlVyH50zd5SP3",
-        "-MaGL8mAafT0RLJLodi5"
-      ],
-      "date": "2022 01 26",
-      "dungeonMaster": "SunRester",
-      "map": "The Forgotten Lands",
-      "name": "The Jailor Comes"
-    },
-    "-MaGL9wF8HQM8Hs6_Ups": {
-      "attendees": [
-        "-MaGKze3Q36HyzEJh31_",
-        "-MaGKy-zlVyH50zd5SP3",
-        "-MaGKzGbL5yHTKXce9Hj",
-        "-MaGL-EOTK4GBRD3OPuj",
-        "-MaGKylLm0FwaNWe-QO8"
-      ],
-      "date": "2022 01 31",
-      "dungeonMaster": "JackClarke",
-      "map": "The Everwilds",
-      "name": "Dead Drop"
-    },
-    "-MaGLA7aT51hV3vv72qm": {
-      "attendees": [
-        "-MaGL69yjMK5frXnEFKQ",
-        "-MaGL6MkgEpZJu34vnAA",
-        "-MaGL-EOTK4GBRD3OPuj",
-        "-MaGL8mAafT0RLJLodi5"
-      ],
-      "date": "2022 02 13",
-      "dungeonMaster": "Benjywa",
-      "map": "The Everwilds",
-      "name": "Making Amends"
-    },
-    "-MaGLAIwNsZrmaj59Jg1": {
-      "attendees": [
-        "-MaGKzRzKIVtbQyxQxDP",
-        "-MaGKy-zlVyH50zd5SP3",
-        "-MaGKyc6_OCu20PUmbGf",
-        "-MaGKwrksOQXvT7PA5Qd",
-        "-MaGKze3Q36HyzEJh31_"
-      ],
-      "date": "2022 02 13",
-      "dungeonMaster": "SunRester",
-      "map": "The Forgotten Lands",
-      "name": "Rumblings of the Legion"
-    },
-    "-MaGLATY_RNd3u0Y3o_W": {
-      "attendees": [
-        "-MaGKwrksOQXvT7PA5Qd",
-        "-MaGKylLm0FwaNWe-QO8",
-        "-MaGKz4-slurxi3kmdJk",
-        "-MaGL8mAafT0RLJLodi5"
-      ],
-      "date": "2022 02 18",
-      "dungeonMaster": "SunRester",
-      "map": "The Everwilds",
-      "name": "Bad Neighbours"
-    },
-    "-MaGLApepqQmAOqWUIIT": {
-      "attendees": [
-        "-MaGL69yjMK5frXnEFKQ",
-        "-MaGL6MkgEpZJu34vnAA",
-        "-MaGKze3Q36HyzEJh31_",
-        "-MaGL-EOTK4GBRD3OPuj",
-        "-MaGKylLm0FwaNWe-QO8"
-      ],
-      "date": "2022 02 19",
-      "dungeonMaster": "Benjywa",
-      "map": "The Forgotten Lands",
-      "name": "North of Midvalley"
-    },
-    "-MaGM2xEe7-ZSJ1jLSCr": {
-      "attendees": [
-        "-MaGKzGbL5yHTKXce9Hj",
-        "-MaGKyPdpRoGYWbgAzJY",
-        "-MaGL9FMxxrubkwavqrT"
-      ],
-      "date": "2021 11 24",
-      "dungeonMaster": "SunRester",
-      "map": "The Shattered Realm",
-      "name": "Operation Landgrab"
-    },
-    "-MaGM34mlje5iT0BB2xv": {
-      "attendees": [
-        "-MaGKylLm0FwaNWe-QO8",
-        "-MaGKzqk5TwaERyJg_Q2",
-        "d2e20-30b2-8b80-5a3-e760d3c842b",
-        "-MaGKyc6_OCu20PUmbGf",
-        "-MaGKyPdpRoGYWbgAzJY"
-      ],
-      "date": "2021 11 26",
-      "dungeonMaster": "JackClarke",
-      "map": "The Everwilds",
-      "name": "The Poacher Problem"
-    },
-    "-MaGM3Eww453ZLRYNgsh": {
-      "attendees": [
-        "-MaGKwrksOQXvT7PA5Qd",
-        "-MaGL69yjMK5frXnEFKQ",
-        "-MaGKzqk5TwaERyJg_Q2",
-        "-MaGL-NOrFBzAAtU6Vwo",
-        "-MaGL6w9JHKxxPijYW0m"
-      ],
-      "date": "2021 12 01",
-      "dungeonMaster": "SunRester",
-      "map": "The Lunar Isles",
-      "name": "Viking Incursion"
-    },
-    "-MaGM3Z3EJJS3rRwS2hf": {
-      "attendees": [
-        "-MaGKylLm0FwaNWe-QO8",
-        "d2e20-30b2-8b80-5a3-e760d3c842b",
-        "-MaGKyv9oPHJXuJKjmnl",
-        "-MaGL6w9JHKxxPijYW0m",
-        "-MaGKwrksOQXvT7PA5Qd"
-      ],
-      "date": "2021 12 04",
-      "dungeonMaster": "SunRester",
-      "map": "The Forgotten Lands",
-      "name": "Finding the Blue Order"
-    },
-    "-MaGM3fy6j_rPn8hULzG": {
-      "attendees": [
-        "-MaGKzRzKIVtbQyxQxDP",
-        "-MaGL-NOrFBzAAtU6Vwo",
-        "-MaGKz4-slurxi3kmdJk",
-        "-MaGL6w9JHKxxPijYW0m",
-        "-MaGKyv9oPHJXuJKjmnl",
-        "-MaGKze3Q36HyzEJh31_"
-      ],
-      "date": "2021 12 06",
-      "dungeonMaster": "SchemingPnda",
-      "map": "The Shattered Realm",
-      "name": "Cirque de Snicket"
-    },
-    "-MaGM3nQXacedVuI7Qus": {
-      "attendees": [
-        "-MaGL6cEeA0f0E_nEEMG",
-        "-MaGKwrksOQXvT7PA5Qd",
-        "-MaGKylLm0FwaNWe-QO8",
-        "-MaGKyc6_OCu20PUmbGf",
-        "-MaGL-EOTK4GBRD3OPuj"
-      ],
-      "date": "2021 12 08",
-      "dungeonMaster": "JackClarke",
-      "map": "The Everwilds",
-      "name": "Mysterious Benefactor"
-    },
-    "-MaGM3tvrn-G-mSvACPX": {
-      "attendees": [
-        "-MaGL-NOrFBzAAtU6Vwo",
-        "-MaGKyPdpRoGYWbgAzJY",
-        "-MaGKylLm0FwaNWe-QO8",
-        "-MaGKze3Q36HyzEJh31_",
-        "-MaGL69yjMK5frXnEFKQ"
-      ],
-      "date": "2021 12 09",
-      "dungeonMaster": "Phoenixfire177",
-      "map": "The Lunar Isles",
-      "name": "Elven Exploration"
-    },
-    "-MaGM4-reDhyKyJ3ou2t": {
-      "attendees": [
-        "-MaGL9RDYDim9iPr5hJJ",
-        "d2e20-30b2-8b80-5a3-e760d3c842b",
-        "-MaGKwrksOQXvT7PA5Qd",
-        "-MaGL-XpHuHUX4G5uVGm"
-      ],
-      "date": "2021 12 12",
-      "dungeonMaster": "SunRester",
-      "map": "The Forgotten Lands",
-      "name": "Forgotten Foothold"
-    },
-    "-MaGM4GFKosOVInCqQXb": {
-      "attendees": [
-        "-MaGKylLm0FwaNWe-QO8",
-        "d2e20-30b2-8b80-5a3-e760d3c842b",
-        "-MaGKyv9oPHJXuJKjmnl",
-        "-MaGL6w9JHKxxPijYW0m"
-      ],
-      "date": "2021 12 16",
-      "dungeonMaster": "SunRester",
-      "map": "The Forgotten Lands",
-      "name": "The Old Man's Message"
-    },
-    "-MaGM4O8WLFfR_HVQYJC": {
-      "attendees": [
-        "-MaGL91rHeTE0-xDAVlb",
-        "-MaGL8mAafT0RLJLodi5",
-        "-MaGL6MkgEpZJu34vnAA",
-        "-MaGKwrksOQXvT7PA5Qd"
-      ],
-      "date": "2022 01 05",
-      "dungeonMaster": "JackClarke",
-      "map": "The Forgotten Lands",
-      "name": "Midvalley Mines"
-    },
-    "-MaGM4Voma6ImJCU8W9s": {
-      "attendees": [
-        "-MaGKzRzKIVtbQyxQxDP",
-        "-MaGL6MkgEpZJu34vnAA",
-        "-MaGL-EOTK4GBRD3OPuj",
-        "-MaGL8mAafT0RLJLodi5"
-      ],
-      "date": "2022 01 19",
-      "dungeonMaster": "Benjywa",
-      "map": "The Everwilds",
-      "name": "Welp, We Released a Dragon"
-    },
-    "-MbTNa6D2Xvi63oPHETT": {
-      "attendees": [
-        "-MaGL6MkgEpZJu34vnAA",
-        "-MaGKylLm0FwaNWe-QO8",
-        "-MaGL-4gVKCPTHwNLSb5",
-        "-MaGL8mAafT0RLJLodi5"
-      ],
-      "date": "2022 03 01",
-      "dungeonMaster": "Benjywa",
-      "map": "The Shattered Realm",
-      "name": "Exploring the Realms"
-    },
-    "-McFJrNI6IuRu2DEk5Dh": {
-      "attendees": [
-        "-MaGL-EOTK4GBRD3OPuj",
-        "-MaGL8mAafT0RLJLodi5",
-        "-MaGKzGbL5yHTKXce9Hj",
-        "-MaGKylLm0FwaNWe-QO8"
-      ],
-      "date": "2022 03 08",
-      "dungeonMaster": "Benjywa",
-      "map": "The Forgotten Lands",
-      "name": "Clearing Dreadshade Fortress"
-    },
-    "-McL5rhZ4FHd8edjK71A": {
-      "attendees": [
-        "-MaGL8mAafT0RLJLodi5",
-        "-MaGKylLm0FwaNWe-QO8",
-        "-MaGKz4-slurxi3kmdJk"
-      ],
-      "date": "2022 03 18",
-      "dungeonMaster": "JackClarke",
-      "map": "The Forgotten Lands",
-      "name": "Shadows Over the Mountains"
-    },
-    "-Mcf72aD5g1a8hAb5D4s": {
-      "attendees": [
-        "-MaGKzRzKIVtbQyxQxDP",
-        "-MaGKylLm0FwaNWe-QO8",
-        "-MaGL8mAafT0RLJLodi5",
-        "-MaGKzGbL5yHTKXce9Hj",
-        "-MaGL-EOTK4GBRD3OPuj"
-      ],
-      "date": "2022 03 29",
-      "dungeonMaster": "SunRester",
-      "map": "The Everwilds",
-      "name": "Quest for the Ring"
-    },
-    "-Mcfd43g77gdfdg5db2s": {
-      "attendees": [
-        "-MaGL8mAafT0RLJLodi5",
-        "-MaGL6MkgEpZJu34vnAA",
-        "-N22YkMmU3MQZire4ND6"
-      ],
-      "date": "2022 04 11",
-      "dungeonMaster": "Benjywa",
-      "map": "The Shattered Realm",
-      "name": "Return of the Bounty"
-    },
-    "-McjF65Dr-fjIa51Ajp1": {
-      "attendees": [
-        "-MaGL8mAafT0RLJLodi5",
-        "-MaGL-EOTK4GBRD3OPuj",
-        "-MaGKwrksOQXvT7PA5Qd",
-        "-MaGL6MkgEpZJu34vnAA",
-        "-MaGKzGbL5yHTKXce9Hj"
-      ],
-      "date": "2022 03 14",
-      "dungeonMaster": "JackClarke",
-      "map": "The Everwilds",
-      "name": "Fallen Star"
-    },
-    "-N-tVhA0zhZpo9Ycw-CC": {
-      "attendees": ["-MaGL-EOTK4GBRD3OPuj", "-MaGL8mAafT0RLJLodi5"],
-      "dungeonMaster": "Benjywa",
-      "map": "The Shattered Realms",
-      "name": "Return to \"Mother\""
-    },
-    "-N1ewVKWgq6D3o_3npTF": {
-      "attendees": [
-        "-MaGKzRzKIVtbQyxQxDP",
-        "-MaGL-EOTK4GBRD3OPuj",
-        "-MaGL8mAafT0RLJLodi5",
-        "-N22YkMmU3MQZire4ND6",
-        "-N1ewVKWgq6D3o_3npTF"
-      ],
-      "date": "Wed May 11 2022",
-      "dungeonMaster": "David",
-      "map": "The Forgotten Lands",
-      "name": "The Legion Round 2"
-    },
-    "-N22jzp3s8h80YRbsii0": {
-      "attendees": [
-        "-MaGL8mAafT0RLJLodi5",
-        "-MaGKylLm0FwaNWe-QO8",
-        "-MaGKz4-slurxi3kmdJk",
-        "-MaGKzGbL5yHTKXce9Hj",
-        "-MaGL6MkgEpZJu34vnAA"
-      ],
-      "date": "Tue May 24 2022",
-      "dungeonMaster": "Jack",
-      "map": "The Lunar Isles",
-      "name": "Froster's Fables - The Mindflayer War"
     }
   },
   "subclasses": {

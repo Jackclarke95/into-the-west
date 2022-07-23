@@ -32,8 +32,7 @@ const Profile = () => {
 
     const activeCharacter = characters.data.find(
       (character) =>
-        character.playerDndBeyondName === currentUser.data!.dndBeyondName &&
-        !character.retirement
+        character.player?.id === currentUser.data!.id && !character.retirement
     );
 
     dispatch({

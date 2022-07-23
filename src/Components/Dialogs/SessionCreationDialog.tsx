@@ -17,12 +17,12 @@ import {
 } from "@fluentui/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import DataService from "../../Helpers/DataService";
 
 const SessionCreationDialog = () => {
   const showDialog = useSelector((state) => state.showSessionCreationDialog);
   const players = useSelector((state) => state.players);
   const characters = useSelector((state) => state.characters);
+  const maps = useSelector((state) => state.maps);
 
   const [sessionName, setSessionName] = useState<string | undefined>(undefined);
   const [sessionDate, setSessionDate] = useState<Date | null | undefined>(
@@ -83,46 +83,7 @@ const SessionCreationDialog = () => {
   };
 
   const onClickAddSession = () => {
-    const attendees = sessionAttendees
-      .filter((attendee) => attendee)
-      .map((attendee) => {
-        return attendee.key?.toString();
-      })
-      .filter((key) => key !== undefined) as string[];
-
-    if (!sessionName) {
-      setErrorList([...errorList, "Session name is required"]);
-    }
-
-    if (!sessionDungeonMaster) {
-      setErrorList([...errorList, "Dungeon master is required"]);
-    }
-
-    if (!sessionMap) {
-      setErrorList([...errorList, "Map is required"]);
-    }
-
-    if (attendees.length === 0) {
-      setErrorList([...errorList, "At least one attendee is required"]);
-    }
-
-    if (
-      !sessionName ||
-      !sessionDungeonMaster ||
-      !sessionMap ||
-      !attendees ||
-      attendees.length === 0
-    ) {
-      return;
-    }
-
-    DataService.createSession({
-      name: sessionName,
-      date: sessionDate ? sessionDate.toDateString() : undefined,
-      dungeonMaster: sessionDungeonMaster,
-      map: sessionMap,
-      attendees,
-    });
+    console.log("Clicked create session");
 
     dispatch({
       type: "SetShowSessionCreationDialog",
@@ -136,30 +97,20 @@ const SessionCreationDialog = () => {
         .filter((player) => player.isDungeonMaster)
         .sort((playerA, playerB) => playerA.name.localeCompare(playerB.name))
         .map((player) => ({
-          key: player.dndBeyondName,
+          key: player.id,
           text: player.name,
         })) as IDropdownOption[]);
 
-  const mapOptions = [
-    {
-      key: "the-everwilds",
-      text: "The Everwilds",
-    },
-    {
-      key: "the-forgotten-lands",
-      text: "The Forgotten Lands",
-    },
-    {
-      key: "the-shattered-realms",
-      text: "The Shattered Realms",
-    },
-    {
-      key: "the-lunar-isles",
-      text: "The Lunar Isles",
-    },
-  ].sort((optionA, optionB) =>
-    optionA.text.localeCompare(optionB.text)
-  ) as IDropdownOption[];
+  const mapOptions = maps.isLoading
+    ? []
+    : (maps.data
+        .map((map) => ({
+          key: map.id,
+          text: map.name,
+        }))
+        .sort((optionA, optionB) =>
+          optionA.text.localeCompare(optionB.text)
+        ) as IDropdownOption[]);
 
   const onResolveSuggestions = (
     filter: string,
@@ -173,12 +124,12 @@ const SessionCreationDialog = () => {
       .filter(
         (character) =>
           !character.retirement &&
-          character.name.toLowerCase().includes(filter.toLowerCase()) &&
-          !selectedItems?.find((item) => item.text === character.name)
+          character.fullName.toLowerCase().includes(filter.toLowerCase()) &&
+          !selectedItems?.find((item) => item.text === character.fullName)
       )
       .map((character) => ({
-        key: character.key,
-        text: character.name,
+        key: character.id,
+        text: character.fullName,
         imageUrl: character.avatarUrl,
       })) as IPersonaProps[];
   };
@@ -192,11 +143,11 @@ const SessionCreationDialog = () => {
       .filter(
         (character) =>
           !character.retirement &&
-          !selectedItems?.find((item) => item.text === character.name)
+          !selectedItems?.find((item) => item.text === character.fullName)
       )
       .map((character) => ({
-        key: character.key,
-        text: character.name,
+        key: character.id,
+        text: character.fullName,
         imageUrl: character.avatarUrl,
       })) as IPersonaProps[];
   };

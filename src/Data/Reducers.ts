@@ -5,30 +5,29 @@ import { DefaultRootState } from "react-redux";
 /** Description of all the Actions taken that can affect the state */
 export type Action =
   | {
-      type: "SetParsedCharacters";
-      parsedCharacters: DefaultRootState["parsedCharacters"];
+      type: "SetCharacters";
+      characters: DefaultRootState["characters"];
     }
   | {
-      type: "SetParsedSessions";
-      parsedSessions: DefaultRootState["parsedSessions"];
+      type: "SetSessions";
+      sessions: DefaultRootState["sessions"];
     }
   | {
-      type: "SetParsedPlayers";
-      parsedPlayers: DefaultRootState["parsedPlayers"];
+      type: "SetPlayers";
+      players: DefaultRootState["players"];
     }
   | {
-      type: "SetCurrentParsedPlayer";
-      currentParsedUser: DefaultRootState["currentParsedPlayer"];
+      type: "SetCurrentPlayer";
+      currentPlayer: DefaultRootState["currentPlayer"];
     }
   | {
-      type: "SetActiveParsedCharacter";
-      activeParsedCharacter: DefaultRootState["activeParsedCharacter"];
+      type: "SetActiveCharacter";
+      activeCharacter: DefaultRootState["activeCharacter"];
     }
   | { type: "SetDarkMode"; darkMode: DefaultRootState["darkMode"] }
-  | { type: "SetCharacters"; characters: DefaultRootState["characters"] }
   | {
-      type: "SetNewCharacters";
-      newCharacters: DefaultRootState["newCharacters"];
+      type: "SetDatabaseCharacters";
+      databaseCharacters: DefaultRootState["databaseCharacters"];
     }
   | {
       type: "SetCharacterClasses";
@@ -42,8 +41,10 @@ export type Action =
       type: "SetActiveCharacter";
       activeCharacter: DefaultRootState["activeCharacter"];
     }
-  | { type: "SetSessions"; sessions: DefaultRootState["sessions"] }
-  | { type: "SetPlayers"; players: DefaultRootState["players"] }
+  | {
+      type: "SetDatabasePlayers";
+      databasePlayers: DefaultRootState["databasePlayers"];
+    }
   | {
       type: "SetCurrentPlayer";
       currentPlayer: DefaultRootState["currentPlayer"];
@@ -54,10 +55,13 @@ export type Action =
   | { type: "SetRaces"; races: DefaultRootState["races"] }
   | { type: "SetSubraces"; subraces: DefaultRootState["subraces"] }
   | { type: "SetRaceConfigs"; raceConfigs: DefaultRootState["raceConfigs"] }
-  | { type: "SetEvents"; events: DefaultRootState["events"] }
   | {
-      type: "SetEventInterests";
-      eventInterests: DefaultRootState["eventInterests"];
+      type: "SetDatabaseSessions";
+      databaseSessions: DefaultRootState["databaseSessions"];
+    }
+  | {
+      type: "SetSessionInterests";
+      sessionInterests: DefaultRootState["sessionInterests"];
     }
   | {
       type: "SetSelectedDates";
@@ -116,45 +120,39 @@ export type Action =
       sessionManagement: DefaultRootState["sessionManagement"];
     }
   | {
-      type: "SetParsedMaps";
-      parsedMaps: DefaultRootState["parsedMaps"];
-    }
-  | {
       type: "SetMaps";
       maps: DefaultRootState["maps"];
+    }
+  | {
+      type: "SetDatabaseMaps";
+      databaseMaps: DefaultRootState["databaseMaps"];
     };
 
 /** Initial application state */
 export const initialState: DefaultRootState = {
-  parsedPlayers: { isLoading: true },
+  players: { isLoading: true },
 
-  currentParsedPlayer: { isLoading: true },
-
-  parsedCharacters: { isLoading: true },
-
-  activeParsedCharacter: { isLoading: true },
-
-  parsedSessions: { isLoading: true },
-
-  parsedMaps: { isLoading: true },
+  currentPlayer: { isLoading: true },
 
   characters: { isLoading: true },
-
-  newCharacters: { isLoading: true },
-
-  characterClasses: { isLoading: true },
-
-  characterRaces: { isLoading: true },
-
-  maps: { isLoading: true },
 
   activeCharacter: { isLoading: true },
 
   sessions: { isLoading: true },
 
-  players: { isLoading: true },
+  maps: { isLoading: true },
 
-  currentPlayer: { isLoading: true },
+  databaseCharacters: { isLoading: true },
+
+  characterClasses: { isLoading: true },
+
+  characterRaces: { isLoading: true },
+
+  databaseMaps: { isLoading: true },
+
+  databasePlayers: { isLoading: true },
+
+  databaseSessions: { isLoading: true },
 
   classes: { isLoading: true },
 
@@ -168,9 +166,7 @@ export const initialState: DefaultRootState = {
 
   raceConfigs: { isLoading: true },
 
-  events: { isLoading: true },
-
-  eventInterests: { isLoading: true },
+  sessionInterests: { isLoading: true },
 
   selectedDates: [] as number[],
 
@@ -221,14 +217,14 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
     (draftState) => {
       switch (action.type) {
         // Action for setting the parsed characters
-        case "SetParsedCharacters": {
-          draftState.parsedCharacters = action.parsedCharacters;
+        case "SetCharacters": {
+          draftState.characters = action.characters;
           break;
         }
 
         // Action for setting the parsed sessions
-        case "SetParsedSessions": {
-          draftState.parsedSessions = action.parsedSessions;
+        case "SetSessions": {
+          draftState.sessions = action.sessions;
           break;
         }
 
@@ -251,14 +247,8 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         }
 
         // Action for setting the Characters
-        case "SetCharacters": {
-          draftState.characters = action.characters;
-          break;
-        }
-
-        // Action for setting the New Characters
-        case "SetNewCharacters": {
-          draftState.newCharacters = action.newCharacters;
+        case "SetDatabaseCharacters": {
+          draftState.databaseCharacters = action.databaseCharacters;
           break;
         }
 
@@ -274,14 +264,14 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         }
 
         // Action for setting the Maps
-        case "SetMaps": {
-          draftState.maps = action.maps;
+        case "SetDatabaseMaps": {
+          draftState.databaseMaps = action.databaseMaps;
           break;
         }
 
         // Action for setting the Parsed Maps
-        case "SetParsedMaps": {
-          draftState.parsedMaps = action.parsedMaps;
+        case "SetMaps": {
+          draftState.maps = action.maps;
           break;
         }
 
@@ -291,15 +281,9 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
           break;
         }
 
-        // Action for setting the Sessions
-        case "SetSessions": {
-          draftState.sessions = action.sessions;
-          break;
-        }
-
         // Action for setting the Players
-        case "SetPlayers": {
-          draftState.players = action.players;
+        case "SetDatabasePlayers": {
+          draftState.databasePlayers = action.databasePlayers;
           break;
         }
 
@@ -339,15 +323,15 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
           break;
         }
 
-        // Action for setting the Events
-        case "SetEvents": {
-          draftState.events = action.events;
+        // Action for setting the Sessions
+        case "SetDatabaseSessions": {
+          draftState.databaseSessions = action.databaseSessions;
           break;
         }
 
-        // Action for setting the Event Interests
-        case "SetEventInterests": {
-          draftState.eventInterests = action.eventInterests;
+        // Action for setting the Session Interests
+        case "SetSessionInterests": {
+          draftState.sessionInterests = action.sessionInterests;
           break;
         }
 

@@ -40,17 +40,11 @@ const SessionRegistrationDialog = () => {
 
     console.log(
       "clicked register button",
-      sessionRegistration.session.key,
+      sessionRegistration.session.id,
       availabilitiesSelections.map((date) => new Date(date).toDateString())
     );
 
     await DataService.updateAvailableDates(authUser, availabilitiesSelections);
-
-    DataService.registerForSession(
-      authUser,
-      availabilitiesSelections,
-      sessionRegistration.session
-    );
   };
 
   const contentProps = sessionRegistration.isShown

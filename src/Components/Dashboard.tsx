@@ -1,23 +1,20 @@
 import { Pivot, PivotItem, Stack } from "@fluentui/react";
-import CharacterTable from "./Tables/CharacterTable";
-import SessionTable from "./Tables/SessionTable";
 import Profile from "./Profile/Profile";
 import Utilities from "./Utilities/Utilities";
-import NewCharacterTable from "./Tables/NewCharacterTable";
+import CharacterTable from "./Tables/CharacterTable";
+import SessionTable from "./Tables/SessionTable";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import SessionRole from "../Enums/SessionRole";
-import NewSessionTable from "./Tables/NewSessionTable";
 import { Character, Map, Player, Session } from "../Types/LocalStructures";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
 
-  const maps = useSelector((state) => state.maps);
+  const maps = useSelector((state) => state.databaseMaps);
+  const players = useSelector((state) => state.databasePlayers);
 
-  const users = useSelector((state) => state.players);
-
-  const newCharacters = useSelector((state) => state.newCharacters);
+  const characters = useSelector((state) => state.databaseCharacters);
   const characterClasses = useSelector((state) => state.characterClasses);
   const characterRaces = useSelector((state) => state.characterRaces);
   const raceConfigs = useSelector((state) => state.raceConfigs);
@@ -27,13 +24,13 @@ const Dashboard = () => {
   const classes = useSelector((state) => state.classes);
   const subclasses = useSelector((state) => state.subclasses);
 
-  const events = useSelector((state) => state.events);
-  const eventInterests = useSelector((state) => state.eventInterests);
+  const sessions = useSelector((state) => state.databaseSessions);
+  const sessionInterests = useSelector((state) => state.sessionInterests);
 
   useEffect(() => {
     if (
       maps.isLoading ||
-      newCharacters.isLoading ||
+      characters.isLoading ||
       characterClasses.isLoading ||
       characterRaces.isLoading ||
       raceConfigs.isLoading ||
@@ -42,9 +39,9 @@ const Dashboard = () => {
       subraces.isLoading ||
       classes.isLoading ||
       subclasses.isLoading ||
-      events.isLoading ||
-      eventInterests.isLoading ||
-      users.isLoading
+      sessions.isLoading ||
+      sessionInterests.isLoading ||
+      players.isLoading
     ) {
       return;
     }
@@ -55,21 +52,21 @@ const Dashboard = () => {
     }));
 
     dispatch({
-      type: "SetParsedMaps",
-      parsedMaps: { isLoading: false, data: parsedMaps },
+      type: "SetMaps",
+      maps: { isLoading: false, data: parsedMaps },
     });
 
-    const parsedPlayers: Player[] = users.data.map((player) => {
-      const attendedPlayerSessions = eventInterests.data
-        .filter((eventInterest) => eventInterest.playerId === player.key)
+    const parsedPlayers: Player[] = players.data.map((player) => {
+      const attendedPlayerSessions = sessionInterests.data
+        .filter((sessionInterest) => sessionInterest.playerId === player.id)
         .map((interest) => {
-          const session = events.data.find(
-            (event) => event.key === interest.eventId
+          const session = sessions.data.find(
+            (session) => session.key === interest.sessionId
           );
 
           if (!session) {
             throw new Error(
-              `Could not find matching session for event interest ${interest.key}`
+              `Could not find matching session for session interest ${interest.key}`
             );
           }
 
@@ -90,9 +87,11 @@ const Dashboard = () => {
         (session) => session.role === SessionRole["Dungeon Master"]
       ).length;
 
-      const unattendedSessions = events.data.filter(
-        (event) =>
-          !attendedPlayerSessions.some((session) => session.id === event.key)
+      const unattendedSessions = sessions.data.filter(
+        (session) =>
+          !attendedPlayerSessions.some(
+            (attendedSession) => attendedSession.id === session.key
+          )
       ).length;
 
       const xp =
@@ -101,7 +100,7 @@ const Dashboard = () => {
       return {
         availableDates: player.availableDates,
         discordTag: player.discordTag,
-        id: player.key,
+        id: player.id,
         isGamesMaster: player.isGamesMaster,
         isDungeonMaster: player.isDungeonMaster,
         name: player.name,
@@ -113,142 +112,138 @@ const Dashboard = () => {
     });
 
     dispatch({
-      type: "SetParsedPlayers",
-      parsedPlayers: { isLoading: false, data: parsedPlayers },
+      type: "SetPlayers",
+      players: { isLoading: false, data: parsedPlayers },
     });
 
-    const parsedCharacters: Character[] = newCharacters.data.map(
-      (character) => {
-        // Parse character's race
-        const matchingCharacterRace = characterRaces.data.find(
-          (race) => race.characterId === character.key
+    const parsedCharacters: Character[] = characters.data.map((character) => {
+      // Parse character's race
+      const matchingCharacterRace = characterRaces.data.find(
+        (race) => race.characterId === character.key
+      );
+
+      if (!matchingCharacterRace) {
+        throw new Error(
+          `Could not find matching Character Race Data for character ${character.key}`
         );
-
-        if (!matchingCharacterRace) {
-          throw new Error(
-            `Could not find matching Character Race Data for character ${character.key}`
-          );
-        }
-
-        const matchingRaceConfig = raceConfigs.data.find(
-          (config) => config.key === matchingCharacterRace.raceConfigId
-        );
-
-        if (!matchingRaceConfig) {
-          throw new Error(
-            `Could not find matching Race Config Data for character ${character.key}`
-          );
-        }
-
-        const matchingRace = races.data.find(
-          (race) => race.key === matchingRaceConfig.raceId
-        );
-
-        if (!matchingRace) {
-          throw new Error(
-            `Could not find matching Race Data for character ${character.key}`
-          );
-        }
-
-        const matchingSubrace = subraces.data.find(
-          (subrace) => subrace.key === matchingRaceConfig.subraceId
-        );
-
-        const parsedRace = {
-          race: matchingRace.name,
-          subrace: matchingSubrace?.name,
-        };
-
-        // Parse character's class(es)
-        const parsedClasses = characterClasses.data
-          .filter((cls) => cls.characterId === character.key)
-          .map((matchedCharacterClass) => {
-            const matchingClassConfig = classConfigs.data.find(
-              (config) => config.key === matchedCharacterClass.classConfigId
-            );
-
-            if (!matchingClassConfig) {
-              throw new Error(
-                `Could not find matching Class Config Data for character ${character.key}`
-              );
-            }
-
-            const matchingClass = classes.data.find(
-              (cls) => cls.key === matchingClassConfig.classId
-            );
-
-            if (!matchingClass) {
-              throw new Error(
-                `Could not find matching Class Data for character ${character.key}`
-              );
-            }
-
-            const matchingSubclass = subclasses.data.find(
-              (subClass) => subClass.key === matchingClassConfig.subclassId
-            );
-
-            return {
-              level: matchedCharacterClass.level,
-              class: matchingClass.name,
-              subclass: matchingSubclass
-                ? matchingSubclass.subclassName
-                : undefined,
-            };
-          });
-
-        // Parse character's owner/player
-        const matchingPlayer = parsedPlayers.find(
-          (player) => player.id === character.playerId
-        );
-
-        return {
-          id: character.key,
-          player: matchingPlayer,
-          fullName: character.fullName,
-          nickname: character.nickname ?? undefined,
-          race: parsedRace,
-          classes: parsedClasses,
-          startingLevel: character.startingLevel,
-          currentLevel: matchingPlayer?.characterLevel,
-          avatarUrl: character.avatarUrl,
-          retirement: character.retirement
-            ? {
-                isRetired: true,
-                level: character.retirement.level,
-                date: character.retirement.date,
-                reason: character.retirement.reason,
-              }
-            : { isRetired: false },
-          sheetUrl: character.sheetUrl,
-        };
       }
-    );
+
+      const matchingRaceConfig = raceConfigs.data.find(
+        (config) => config.key === matchingCharacterRace.raceConfigId
+      );
+
+      if (!matchingRaceConfig) {
+        throw new Error(
+          `Could not find matching Race Config Data for character ${character.key}`
+        );
+      }
+
+      const matchingRace = races.data.find(
+        (race) => race.key === matchingRaceConfig.raceId
+      );
+
+      if (!matchingRace) {
+        throw new Error(
+          `Could not find matching Race Data for character ${character.key}`
+        );
+      }
+
+      const matchingSubrace = subraces.data.find(
+        (subrace) => subrace.key === matchingRaceConfig.subraceId
+      );
+
+      const parsedRace = {
+        race: matchingRace.name,
+        subrace: matchingSubrace?.name,
+      };
+
+      // Parse character's class(es)
+      const parsedClasses = characterClasses.data
+        .filter((cls) => cls.characterId === character.key)
+        .map((matchedCharacterClass) => {
+          const matchingClassConfig = classConfigs.data.find(
+            (config) => config.key === matchedCharacterClass.classConfigId
+          );
+
+          if (!matchingClassConfig) {
+            throw new Error(
+              `Could not find matching Class Config Data for character ${character.key}`
+            );
+          }
+
+          const matchingClass = classes.data.find(
+            (cls) => cls.key === matchingClassConfig.classId
+          );
+
+          if (!matchingClass) {
+            throw new Error(
+              `Could not find matching Class Data for character ${character.key}`
+            );
+          }
+
+          const matchingSubclass = subclasses.data.find(
+            (subClass) => subClass.key === matchingClassConfig.subclassId
+          );
+
+          return {
+            level: matchedCharacterClass.level,
+            class: matchingClass.name,
+            subclass: matchingSubclass
+              ? matchingSubclass.subclassName
+              : undefined,
+          };
+        });
+
+      // Parse character's owner/player
+      const matchingPlayer = parsedPlayers.find(
+        (player) => player.id === character.playerId
+      );
+
+      return {
+        id: character.key,
+        player: matchingPlayer,
+        fullName: character.fullName,
+        nickname: character.nickname ?? undefined,
+        race: parsedRace,
+        classes: parsedClasses,
+        startingLevel: character.startingLevel,
+        currentLevel: matchingPlayer?.characterLevel,
+        avatarUrl: character.avatarUrl,
+        retirement: character.retirement
+          ? {
+              isRetired: true,
+              level: character.retirement.level,
+              date: character.retirement.date,
+              reason: character.retirement.reason,
+            }
+          : { isRetired: false },
+        sheetUrl: character.sheetUrl,
+      };
+    });
 
     dispatch({
-      type: "SetParsedCharacters",
-      parsedCharacters: { isLoading: false, data: parsedCharacters },
+      type: "SetCharacters",
+      characters: { isLoading: false, data: parsedCharacters },
     });
 
-    const parsedSessions: Session[] = events.data
-      .map((event) => {
-        const matchingEventInterests = eventInterests.data.filter(
+    const parsedSessions: Session[] = sessions.data
+      .map((session) => {
+        const matchingsessionInterests = sessionInterests.data.filter(
           (interest) =>
-            interest.eventId === event.key && interest.didAttend === true
+            interest.sessionId === session.key && interest.didAttend === true
         );
-
-        console.log("interests", matchingEventInterests);
 
         const attendees = parsedCharacters
           .filter(
             (character) =>
               (!character.retirement?.isRetired ||
                 character.retirement.date >
-                  (event.selectedDate ?? new Date().getTime())) &&
+                  (session.selectedDate ?? new Date().getTime())) &&
               character.player &&
-              eventInterests.data
+              sessionInterests.data
                 .filter(
                   (interest) =>
-                    interest.eventId === event.key &&
+                    interest.sessionId === session.key &&
                     interest.role === SessionRole.Player
                 )
                 .map((interest) => interest.playerId)
@@ -269,9 +264,6 @@ const Dashboard = () => {
             }
           });
 
-        console.log(event.title);
-        console.log(attendees);
-
         const deduplicatedAttendees: Character[] = [];
 
         // For each player, only include the character who actually attended
@@ -288,26 +280,26 @@ const Dashboard = () => {
         const dungeonMaster = parsedPlayers.find(
           (player) =>
             player.id ===
-            matchingEventInterests.find(
+            matchingsessionInterests.find(
               (interest) =>
-                interest.eventId === event.key &&
+                interest.sessionId === session.key &&
                 interest.role === SessionRole["Dungeon Master"]
             )?.playerId
         );
 
-        const matchingMap = parsedMaps.find((map) => map.id === event.mapId);
+        const matchingMap = parsedMaps.find((map) => map.id === session.mapId);
 
         if (!matchingMap) {
           throw new Error(
-            `Could not find matching Map Data for event ${event.key}`
+            `Could not find matching Map Data for session ${session.key}`
           );
         }
 
         return {
-          id: event.key,
-          name: event.title,
+          id: session.key,
+          name: session.title,
           dungeonMaster: dungeonMaster,
-          date: event.selectedDate,
+          date: session.selectedDate,
           attendees: deduplicatedAttendees,
           map: matchingMap,
         };
@@ -315,12 +307,16 @@ const Dashboard = () => {
       .sort((a, b) => (a.date && b.date ? b.date - a.date : -1));
 
     dispatch({
-      type: "SetParsedSessions",
-      parsedSessions: { isLoading: false, data: parsedSessions },
+      type: "SetSessions",
+      sessions: { isLoading: false, data: parsedSessions },
     });
+
+    console.log(parsedPlayers);
+    console.log(parsedCharacters);
+    console.log(parsedSessions);
   }, [
     dispatch,
-    newCharacters,
+    characters,
     characterClasses,
     characterRaces,
     raceConfigs,
@@ -329,9 +325,9 @@ const Dashboard = () => {
     subraces,
     classes,
     subclasses,
-    events,
-    eventInterests,
-    users,
+    sessions,
+    sessionInterests,
+    players,
     maps,
   ]);
 
@@ -352,15 +348,9 @@ const Dashboard = () => {
     >
       <Pivot>
         <PivotItem headerText="Characters">
-          <NewCharacterTable />
-        </PivotItem>
-        <PivotItem headerText="Sessions">
-          <NewSessionTable />
-        </PivotItem>
-        <PivotItem headerText="Characters (Legacy)">
           <CharacterTable />
         </PivotItem>
-        <PivotItem headerText="Sessions (Legacy)">
+        <PivotItem headerText="Sessions">
           <SessionTable />
         </PivotItem>
       </Pivot>

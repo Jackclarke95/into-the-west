@@ -14,13 +14,11 @@ import {
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DataHelper from "../../Helpers/DataHelper";
-import DataService from "../../Helpers/DataService";
 
 const CharacterCreationDialog = () => {
   const dispatch = useDispatch();
 
   const showDialog = useSelector((state) => state.showCharacterCreationDialog);
-  const currentPlayer = useSelector((state) => state.currentPlayer);
   const classes = useSelector((state) => state.classes);
   const subclasses = useSelector((state) => state.subclasses);
   const classConfigs = useSelector((state) => state.classConfigs);
@@ -101,73 +99,8 @@ const CharacterCreationDialog = () => {
     setCharacterSubrace(undefined);
   };
 
-  const onChangeSubrace = (_, option: IDropdownOption | undefined) => {
-    if (!option) {
-      setCharacterSubrace(undefined);
-    } else {
-      setCharacterSubrace(option.text);
-    }
-  };
-
-  const onChangeClass = (_, option: IDropdownOption | undefined) => {
-    if (!option) {
-      setCharacterClass(undefined);
-    } else {
-      setCharacterClass(option.text);
-    }
-
-    setCharacterSubclass(undefined);
-  };
-
-  const onChangeSubclass = (_, option: IDropdownOption | undefined) => {
-    if (!option) {
-      setCharacterSubclass(undefined);
-    } else {
-      setCharacterSubclass(option.text);
-    }
-  };
-
-  const onChangeCharacterLevel = (_, value: string | undefined) => {
-    if (value) {
-      setCharacterLevel(parseInt(value));
-    }
-  };
-
   const onClickCreateCharacter = () => {
     console.log(validateCharacter());
-
-    if (
-      !validateCharacter() ||
-      currentPlayer.isLoading ||
-      !currentPlayer.data
-    ) {
-      console.log("invalid character");
-      return;
-    } else {
-      console.log("creating character");
-
-      DataService.createCharacter({
-        avatarUrl: "",
-        sheetUrl: "",
-        playerDndBeyondName: currentPlayer.data.dndBeyondName,
-        name: characterName!,
-        nickname: characterShortName,
-        race: characterRace!,
-        subrace: characterSubrace ?? undefined,
-        classes: [
-          {
-            name: characterClass!,
-            archetype: characterSubclass ?? undefined,
-            level: 1,
-          },
-        ],
-        currentLevel: characterLevel,
-        sessionsAttended: 0,
-        startingLevel: characterLevel,
-      });
-    }
-
-    // onDismiss();
   };
 
   const validateCharacter = () => {

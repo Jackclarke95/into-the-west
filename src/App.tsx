@@ -1,7 +1,7 @@
 import { Stack } from "@fluentui/react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { get, getDatabase, onValue, ref } from "firebase/database";
+import { getDatabase, onValue, ref } from "firebase/database";
 import { initializeApp } from "firebase/app";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
@@ -16,10 +16,6 @@ import Footer from "./Components/Footer";
 import Login from "./Components/Login";
 import Dashboard from "./Components/Dashboard";
 
-import ICharacterData from "./Interfaces/ICharacterData";
-import ISessionData from "./Interfaces/ISessionData";
-import IPlayerData from "./Interfaces/IUserData";
-
 import Everwilds from "./Images/Maps/The Everwilds - Preview.jpg";
 import ForgottenLands from "./Images/Maps/The Forgotten Lands - Preview.jpg";
 import LunarIsles from "./Images/Maps/The Lunar Isles - Preview.jpg";
@@ -28,7 +24,6 @@ import ShatteredRealms from "./Images/Maps/The Shattered Realms - Preview.jpg";
 import RegistrationDialog from "./Components/Dialogs/RegistrationDialog";
 import CharacterCreationDialog from "./Components/Dialogs/CharacterCreationDialog";
 import SessionCreationDialog from "./Components/Dialogs/SessionCreationDialog";
-import CharacterRetirementDialog from "./Components/Dialogs/CharacterRetirementDialog";
 import SessionManagementDialog from "./Components/Dialogs/SessionManagementDialog";
 import AccountNameManagementDialog from "./Components/Dialogs/AccountNameManagementDialog";
 import PasswordManagementDialog from "./Components/Dialogs/PasswordManagementDialog";
@@ -37,6 +32,7 @@ import TokenCreatorDialog from "./Components/Dialogs/TokenCreatorDialog";
 import NewRaceDialog from "./Components/Dialogs/NewRaceDialog";
 import NewSubraceDialog from "./Components/Dialogs/NewSubraceDialog";
 import SessionRegistrationDialog from "./Components/Dialogs/SessionRegistrationDialog";
+import { PlayerData } from "./Types/DatabaseStructures";
 
 const isDevMode = window.location.hostname === "localhost";
 
@@ -62,70 +58,18 @@ const App = () => {
 
   const authUser = useSelector((state) => state.authUser);
 
-  onValue(ref(db, "characters"), (snapshot) => {
-    const characterData = snapshot.val() as ICharacterData[];
-
-    const characters = Object.keys(characterData)
-      .map((key) => {
-        const character = characterData[key];
-        character.key = key;
-
-        return character;
-      })
-      .sort((characterA, characterB) =>
-        characterA.name.localeCompare(characterB.name)
-      )
-      .sort((characterA, characterB) => {
-        if (characterA.retirement && !characterB.retirement) {
-          return 1;
-        } else if (!characterA.retirement && characterB.retirement) {
-          return -1;
-        } else return 0;
-      });
-
-    dispatch({
-      type: "SetCharacters",
-      characters: {
-        isLoading: false,
-        data: characters,
-      },
-    });
-  });
-
-  onValue(ref(db, "sessions"), (snapshot) => {
-    const sessionData = snapshot.val() as ISessionData[];
-
-    const sessions = Object.keys(sessionData)
-      .map((key) => {
-        return DataHelper.parseSessionData(sessionData[key], key);
-      })
-      .sort((sessionA, sessionB) =>
-        DataHelper.sortNullableDatesDescending(sessionA.date, sessionB.date)
-      );
-
-    dispatch({
-      type: "SetSessions",
-      sessions: {
-        isLoading: false,
-        data: sessions,
-      },
-    });
-  });
-
   onValue(ref(db, "players"), (snapshot) => {
-    const playerData = snapshot.val() as IPlayerData[];
+    const playerData = snapshot.val() as PlayerData[];
 
     const players = Object.keys(playerData).map((key) => {
       const player = playerData[key];
 
-      return DataHelper.parsePlayerData(player, key);
+      return player;
     });
 
-    console.log({ players });
-
     dispatch({
-      type: "SetPlayers",
-      players: {
+      type: "SetDatabasePlayers",
+      databasePlayers: {
         isLoading: false,
         data: players,
       },
@@ -246,45 +190,45 @@ const App = () => {
     });
   });
 
-  onValue(ref(db, "events"), (snapshot) => {
+  onValue(ref(db, "sessions"), (snapshot) => {
     const snapVal = snapshot.val();
 
     const data = Object.keys(snapVal).map((key) => {
-      const event = snapVal[key];
-      event.key = key;
+      const session = snapVal[key];
+      session.key = key;
 
-      return event;
+      return session;
     });
 
     dispatch({
-      type: "SetEvents",
-      events: {
+      type: "SetDatabaseSessions",
+      databaseSessions: {
         isLoading: false,
         data: data,
       },
     });
   });
 
-  onValue(ref(db, "eventInterests"), (snapshot) => {
+  onValue(ref(db, "sessionInterests"), (snapshot) => {
     const snapVal = snapshot.val();
 
     const data = Object.keys(snapVal).map((key) => {
-      const eventInterest = snapVal[key];
-      eventInterest.key = key;
+      const sessionInterest = snapVal[key];
+      sessionInterest.key = key;
 
-      return eventInterest;
+      return sessionInterest;
     });
 
     dispatch({
-      type: "SetEventInterests",
-      eventInterests: {
+      type: "SetSessionInterests",
+      sessionInterests: {
         isLoading: false,
         data: data,
       },
     });
   });
 
-  onValue(ref(db, "newCharacters"), (snapshot) => {
+  onValue(ref(db, "characters"), (snapshot) => {
     const snapVal = snapshot.val();
 
     const data = Object.keys(snapVal).map((key) => {
@@ -295,8 +239,8 @@ const App = () => {
     });
 
     dispatch({
-      type: "SetNewCharacters",
-      newCharacters: {
+      type: "SetDatabaseCharacters",
+      databaseCharacters: {
         isLoading: false,
         data: data,
       },
@@ -352,8 +296,8 @@ const App = () => {
     });
 
     dispatch({
-      type: "SetMaps",
-      maps: {
+      type: "SetDatabaseMaps",
+      databaseMaps: {
         isLoading: false,
         data: data,
       },
@@ -365,20 +309,6 @@ const App = () => {
       dispatch({
         type: "SetAuthUser",
         authUser: user,
-      });
-
-      const playersRef = ref(db, "players/" + user.uid);
-
-      const playerData = await get(playersRef)
-        .then((response) => response.val())
-        .catch((e) => console.error("error", e));
-
-      dispatch({
-        type: "SetCurrentPlayer",
-        currentPlayer: {
-          isLoading: false,
-          data: DataHelper.parsePlayerData(playerData, user.uid),
-        },
       });
     }
   });
@@ -416,7 +346,6 @@ const App = () => {
           <Footer />
           <CharacterCreationDialog />
           <SessionCreationDialog />
-          <CharacterRetirementDialog />
           <SessionManagementDialog />
           <AccountNameManagementDialog />
           <PasswordManagementDialog />

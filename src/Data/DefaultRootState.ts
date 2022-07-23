@@ -1,8 +1,5 @@
 import { User } from "firebase/auth";
 import { Dispatch } from "react";
-import ICharacter from "../Interfaces/ICharacter";
-import IPlayer from "../Interfaces/IUser";
-import ISession from "../Interfaces/ISession";
 import { Action } from "./Reducers";
 import { Character, Map, Player, Session } from "../Types/LocalStructures";
 import {
@@ -11,8 +8,8 @@ import {
   CharacterRaceData,
   ClassConfigData,
   ClassData,
-  EventData,
-  EventInterestData,
+  SessionData,
+  SessionInterestData,
   MapData,
   RaceConfigData,
   RaceData,
@@ -33,29 +30,20 @@ declare module "react-redux" {
     /** The currently logged-in User as a Firebase User */
     authUser: User | null;
 
-    parsedPlayers: { isLoading: true } | { isLoading: false; data: Player[] };
+    players: { isLoading: true } | { isLoading: false; data: Player[] };
 
-    currentParsedPlayer:
-      | { isLoading: true }
-      | { isLoading: false; data: Player | undefined };
+    characters: { isLoading: true } | { isLoading: false; data: Character[] };
 
-    parsedCharacters:
-      | { isLoading: true }
-      | { isLoading: false; data: Character[] };
-
-    activeParsedCharacter:
+    activeCharacter:
       | { isLoading: true }
       | { isLoading: false; data: Character | undefined };
 
-    parsedSessions: { isLoading: true } | { isLoading: false; data: Session[] };
+    sessions: { isLoading: true } | { isLoading: false; data: Session[] };
 
-    parsedMaps: { isLoading: true } | { isLoading: false; data: Map[] };
+    maps: { isLoading: true } | { isLoading: false; data: Map[] };
 
     /** The Characters stored in the Firebase Realtime Database */
-    characters: { isLoading: true } | { isLoading: false; data: ICharacter[] };
-
-    /** The Characters stored in the Firebase Realtime Database, in the new format */
-    newCharacters:
+    databaseCharacters:
       | { isLoading: true }
       | { isLoading: false; data: CharacterData[] };
 
@@ -68,23 +56,15 @@ declare module "react-redux" {
       | { isLoading: false; data: CharacterRaceData[] };
 
     /** The Maps stored in the Firebase Realtime Database */
-    maps: { isLoading: true } | { isLoading: false; data: MapData[] };
-
-    /** The currently logged-in player's Active Character from the Firebase Realtime Database */
-    activeCharacter:
-      | { isLoading: true }
-      | { isLoading: false; data: ICharacter | undefined };
-
-    /** The Sessions stored in the Firebase Realtime Database */
-    sessions: { isLoading: true } | { isLoading: false; data: ISession[] };
+    databaseMaps: { isLoading: true } | { isLoading: false; data: MapData[] };
 
     /** The Players stored in the Firebase Realtime Database */
-    players: { isLoading: true } | { isLoading: false; data: IPlayer[] };
+    databasePlayers: { isLoading: true } | { isLoading: false; data: Player[] };
 
     /** The currently logged-in Player from the Firebase Realtime Database */
     currentPlayer:
       | { isLoading: true }
-      | { isLoading: false; data: IPlayer | undefined };
+      | { isLoading: false; data: Player | undefined };
 
     /** The Classes stored in the Firebase Realtime Database */
     classes: { isLoading: true } | { isLoading: false; data: ClassData[] };
@@ -110,13 +90,15 @@ declare module "react-redux" {
       | { isLoading: true }
       | { isLoading: false; data: RaceConfigData[] };
 
-    /** The Events stored in the Firebase Realtime Database */
-    events: { isLoading: true } | { isLoading: false; data: EventData[] };
-
-    /** The Event Interests stored in the Firebase Realtime Database */
-    eventInterests:
+    /** The Sessions stored in the Firebase Realtime Database */
+    databaseSessions:
       | { isLoading: true }
-      | { isLoading: false; data: EventInterestData[] };
+      | { isLoading: false; data: SessionData[] };
+
+    /** The session Interests stored in the Firebase Realtime Database */
+    sessionInterests:
+      | { isLoading: true }
+      | { isLoading: false; data: SessionInterestData[] };
 
     /** The current player's Available Dates as a selection in the UI */
     selectedDates: number[];
@@ -154,7 +136,7 @@ declare module "react-redux" {
     /** Whether the Session Registration dialog should be shown, along with which Session it will be shown for */
     sessionRegistration:
       | { isShown: false }
-      | { isShown: true; session: ISession };
+      | { isShown: true; session: Session };
 
     /** Whether the Session Management dialog should be shown, along with which Session it will be shown for */
     sessionManagement: { isShown: false } | { isShown: true; session: Session };

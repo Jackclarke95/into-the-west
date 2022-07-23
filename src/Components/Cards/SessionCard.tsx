@@ -6,23 +6,22 @@ import {
   Text,
   FontSizes,
 } from "@fluentui/react";
-import ICharacter from "../../Interfaces/ICharacter";
-import ISession from "../../Interfaces/ISession";
+import { Session, Character } from "../../Types/LocalStructures";
 
 const SessionCard: React.FC<{
-  session: ISession;
-  characters: ICharacter[];
+  session: Session;
+  characters: Character[];
 }> = ({ session, characters }) => {
   const onRenderAttendees = () => {
     const personas = session.attendees
       .map((attendee) => {
         const matchedCharacter = characters.find(
-          (character) => character.key === attendee
+          (character) => character.id === attendee.id
         );
 
         return {
           imageUrl: matchedCharacter?.avatarUrl,
-          personaName: matchedCharacter?.name,
+          personaName: matchedCharacter?.fullName,
         } as IFacepilePersona;
       })
       .sort((a, b) => a.personaName!.localeCompare(b.personaName!));

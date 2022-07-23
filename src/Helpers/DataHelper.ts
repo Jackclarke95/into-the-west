@@ -1,10 +1,3 @@
-import ICharacter from "../Interfaces/ICharacter";
-import ICharacterData from "../Interfaces/ICharacterData";
-import IUser from "../Interfaces/IUser";
-import IPlayerData from "../Interfaces/IUserData";
-import ISession from "../Interfaces/ISession";
-import ISessionData from "../Interfaces/ISessionData";
-
 export default class DataHelper {
   /**
    * Determines if a given date is in the past
@@ -155,78 +148,6 @@ export default class DataHelper {
    */
   public static getRandomFromArray(array: any[]): any {
     return array[Math.floor(Math.random() * array.length)];
-  }
-
-  /**
-   * Parses Session data from the Firebase Realtim Database into ISession format
-   * @param session The session data to parse
-   * @param key The key of the Session in the Database
-   * @returns The parsed Session
-   */
-  public static parseSessionData(session: ISessionData, key: string): ISession {
-    return {
-      key: key,
-      name: session.name,
-      dungeonMaster: session.dungeonMaster,
-      map: session.map,
-      date: session.date ? new Date(session.date) : undefined,
-      attendees: session.attendees,
-    };
-  }
-
-  /**
-   * Parses Character data from the Firebase Realtime Database into ICharacter format
-   * @param character The character to parse
-   * @param key The key of the Character in the Database
-   * @returns The parsed Character
-   */
-  public static parseCharacterData(
-    character: ICharacterData,
-    key: string
-  ): ICharacter {
-    return {
-      key: key,
-      avatarUrl: character.avatarUrl ?? undefined,
-      sheetUrl: character.sheetUrl ?? undefined,
-      playerDndBeyondName: character.playerDndBeyondName,
-      name: character.name,
-      nickname: character.nickname,
-      classes: character.classes.map((cls) => ({
-        name: cls.name,
-        archetype: cls.archetype,
-        level: cls.level,
-      })),
-      currentLevel: character.currentLevel,
-      startingLevel: character.startingLevel,
-      sessionsAttended: character.sessionsAttended,
-      retirement: character.retirement
-        ? {
-            reason: character.retirement.reason,
-            date: new Date(character.retirement.date),
-          }
-        : undefined,
-      race: { race: character.race, subrace: character.subrace },
-    };
-  }
-
-  /**
-   * Parses User data from the Firebase Realtime Database into IUserData format
-   * @param player The User to parse
-   * @param key The key of the User in the Database
-   * @returns The parsed User
-   */
-  public static parsePlayerData(player: IPlayerData, key: string): IUser {
-    const availableDates = player.availableDates ?? [];
-
-    return {
-      key: key,
-      name: player.name,
-      discordTag: player.discordTag,
-      dndBeyondName: player.dndBeyondName,
-      isDungeonMaster: player.isDungeonMaster ?? false,
-      isGamesMaster: player.isGamesMaster ?? false,
-      availableDates: availableDates,
-    };
   }
 
   /**

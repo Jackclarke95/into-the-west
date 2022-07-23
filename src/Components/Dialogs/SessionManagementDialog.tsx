@@ -21,15 +21,15 @@ import {
 } from "@fluentui/react";
 import { useDispatch, useSelector } from "react-redux";
 import DataHelper from "../../Helpers/DataHelper";
-import IUser from "../../Interfaces/IUser";
+import { Player } from "../../Types/LocalStructures";
 
 const SessionManagementDialog = () => {
   const dispatch = useDispatch();
 
   const sessionManagement = useSelector((state) => state.sessionManagement);
   const sessions = useSelector((state) => state.sessions);
-  const users = useSelector((state) => state.players);
-  const eventInterests = useSelector((state) => state.eventInterests);
+  const players = useSelector((state) => state.databasePlayers);
+  const sessionInterests = useSelector((state) => state.sessionInterests);
 
   const theme = useTheme();
 
@@ -49,30 +49,30 @@ const SessionManagementDialog = () => {
   const getInterestedUsers = () => {
     if (
       sessions.isLoading ||
-      users.isLoading ||
-      eventInterests.isLoading ||
+      players.isLoading ||
+      sessionInterests.isLoading ||
       !sessionManagement.isShown
     ) {
       return [];
     } else {
-      return users.data.filter((user) =>
-        eventInterests.data
+      return players.data.filter((player) =>
+        sessionInterests.data
           .filter(
             (interest) =>
-              interest.eventId ===
+              interest.sessionId ===
               sessions.data.find(
-                (session) => session.key === sessionManagement.session.id
-              )?.key
+                (session) => session.id === sessionManagement.session.id
+              )?.id
           )
           .map((interest) => interest.playerId)
-          .includes(user.key)
+          .includes(player.id)
       );
     }
   };
 
   const onRenderPlayers = (datesAndUsers: {
     date: string;
-    interestedUsers: IUser[];
+    interestedUsers: Player[];
   }) => {
     const interestedUsersToRender = datesAndUsers.interestedUsers
       .map((user) => ({

@@ -49,19 +49,19 @@ export type CharacterRaceData = {
   raceConfigId: string;
 };
 
-export type EventData = {
+export type SessionInterestData = {
+  key: string;
+  sessionId: string;
+  playerId: string;
+  didAttend: boolean | undefined;
+  role: SessionRole;
+};
+
+export type SessionData = {
   key: string;
   mapId: string;
   title: string;
   selectedDate: number | undefined;
-};
-
-export type EventInterestData = {
-  key: string;
-  eventId: string;
-  playerId: string;
-  didAttend: boolean | undefined;
-  role: SessionRole;
 };
 
 export type MapData = {
@@ -69,7 +69,7 @@ export type MapData = {
   name: string;
 };
 
-export type UserData = {
+export type PlayerData = {
   key: string;
   name: string;
   isDungeonMaster: boolean;
@@ -80,6 +80,37 @@ export type UserData = {
 
 export type CharacterData = {
   key: string;
+  playerId: string | undefined;
+  fullName: string;
+  nickname: string | undefined;
+  avatarUrl: string | undefined;
+  sheetUrl: string;
+  startingLevel: number;
+  retirement: {
+    reason: string;
+    date: number;
+    level: number;
+  };
+};
+
+export type SessionDataToCreate = {
+  mapId: string;
+  title: string;
+  selectedDate: number | undefined;
+};
+
+export type MapDataToCreate = {
+  name: string;
+};
+
+export type PlayerDataToCreate = {
+  name: string;
+  isDungeonMaster: boolean;
+  isGamesMaster: boolean;
+  discordTag: string;
+};
+
+export type CharacterDataToCreate = {
   playerId: string | undefined;
   fullName: string;
   nickname: string | undefined;

@@ -10,7 +10,7 @@ import {
 } from "@fluentui/react";
 import { useDispatch, useSelector } from "react-redux";
 import DataHelper from "../../Helpers/DataHelper";
-import ISession from "../../Interfaces/ISession";
+import { Session } from "../../Types/LocalStructures";
 import SessionCard from "../Cards/SessionCard";
 
 const NextSession = () => {
@@ -22,7 +22,7 @@ const NextSession = () => {
   const isDevMode = useSelector((state) => state.isDevMode);
   const currentPlayer = useSelector((state) => state.currentPlayer);
 
-  let upcomingSessions = [] as ISession[];
+  let upcomingSessions = [] as Session[];
 
   if (
     !currentPlayer.isLoading &&
@@ -34,17 +34,23 @@ const NextSession = () => {
     upcomingSessions = sessions.data
       .filter((session) => {
         return (
-          (session.attendees.includes(activeCharacter.data!.key) ||
-            session.dungeonMaster === currentPlayer.data!.dndBeyondName) &&
-          ((session.date && !DataHelper.isDateInPast(new Date(session.date))) ||
+          (session.attendees
+            .map((attendee) => attendee.id)
+            .includes(activeCharacter.data!.id) ||
+            session.dungeonMaster?.id === currentPlayer.data!.id) &&
+          ((session.date && !DataHelper.isDateInPast(session.date)) ||
             !session.date)
         );
       })
       .sort((sessionA, sessionB) => {
-        return DataHelper.sortNullableDatesAscending(
-          sessionA.date,
-          sessionB.date
-        );
+        if (!!sessionA.date && !!sessionB.date) {
+          return DataHelper.sortNullableDatesAscending(
+            new Date(sessionA.date),
+            new Date(sessionB.date)
+          );
+        } else {
+          return 0;
+        }
       });
   }
 

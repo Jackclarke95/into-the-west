@@ -1,40 +1,33 @@
-import { useSelector } from "react-redux";
 import {
   DefaultSpacing,
-  DetailsRow,
-  DirectionalHint,
-  FontSizes,
   IColumn,
-  IDetailsListProps,
   Image,
   ImageFit,
-  ITooltipProps,
   Link,
+  ProgressIndicator,
   SelectionMode,
-  Separator,
   ShimmeredDetailsList,
   Stack,
   TooltipHost,
 } from "@fluentui/react";
+import { useSelector } from "react-redux";
 import { ClassIcon } from "../ClassIcon";
 import DefaultAvatar from "../../Images/DefaultAvatar.jpeg";
-import ICharacter from "../../Interfaces/ICharacter";
-import LevelUpTable from "../../Data/LevelUp";
-import DataHelper from "../../Helpers/DataHelper";
+import LevelUpData from "../../Data/LevelUp";
+import { Character } from "../../Types/LocalStructures";
 
 const CharacterTable = () => {
-  const characterData = useSelector((state) => state.characters);
-  const sessionData = useSelector((state) => state.sessions);
+  const characters = useSelector((state) => state.characters);
 
-  const onRenderAvatar = (character: ICharacter) => (
+  const onRenderAvatar = (character: Character) => (
     <Image
       src={character.avatarUrl ? character.avatarUrl : DefaultAvatar}
       imageFit={ImageFit.cover}
       styles={{
         root: {
           borderRadius: "50%",
-          height: "20px",
-          width: "20px",
+          height: 16,
+          width: 16,
           filter:
             character.avatarUrl === ""
               ? `hue-rotate(${
@@ -48,98 +41,94 @@ const CharacterTable = () => {
     />
   );
 
-  const onRenderName = (character: ICharacter) => {
-    return (
-      <Stack horizontal tokens={{ childrenGap: 3 }}>
-        {character.sheetUrl ? (
-          <Stack>
-            <Link target="_blank" href={character.sheetUrl}>
-              {character.name}
-            </Link>
-          </Stack>
-        ) : (
-          <span>{character.name}</span>
-        )}
-        {character.retirement && <i>(Retired)</i>}
-      </Stack>
+  const onRenderLevel = (character: Character) =>
+    character.retirement.isRetired
+      ? character.retirement.level
+      : character.currentLevel;
+
+  const onRenderName = (character: Character) =>
+    !character.retirement.isRetired ? (
+      character.sheetUrl ? (
+        <Link href={character.sheetUrl} target="_blank">
+          {character.fullName}
+        </Link>
+      ) : (
+        character.fullName
+      )
+    ) : (
+      `${character.fullName} (Retired)`
     );
+
+  const onRenderRace = (character: Character) => {
+    if (characters.isLoading) {
+      return <span>Loading</span>;
+    } else {
+      if (character.race.subrace) {
+        return (
+          <span>{`${character.race.subrace} ${character.race.race}`}</span>
+        );
+      } else {
+        return <span>{character.race.race}</span>;
+      }
+    }
   };
 
-  const onRenderRace = (character: ICharacter) =>
-    character.race.subrace
-      ? `${character.race.subrace} ${character.race}`
-      : character.race;
-
-  const onRenderClasses = (character: ICharacter) => (
-    <Stack
-      horizontal
-      tokens={{ childrenGap: 10 }}
-      styles={{
-        root: { padding: 0, maxHeight: "23px" },
-      }}
-    >
-      {character.classes.map((cls) => {
-        return (
-          <Stack horizontal horizontalAlign="center" verticalAlign="center">
-            <ClassIcon
-              className={cls.name}
-              styles={{
-                root: {
-                  borderRadius: "50%",
-                  marginRight: DefaultSpacing.s2,
-                  maxWidth: "20px",
-                },
-              }}
-            />
-            {character.classes.length > 1
-              ? `${cls.name} (${cls.level})`
-              : cls.name}
-          </Stack>
-        );
-      })}
-    </Stack>
-  );
-
-  const onRenderLevel = (character: ICharacter) => {
-    let levelToRender: Number;
-
-    if (sessionData.isLoading) {
-      levelToRender = character.currentLevel;
+  const onRenderClass = (character: Character) => {
+    if (characters.isLoading) {
+      return <span>Loading</span>;
     } else {
-      const sessionsAttended = sessionData.data.filter((session) =>
-        session.attendees.includes(character.key)
+      return (
+        <Stack horizontal tokens={{ childrenGap: 10 }}>
+          {character.classes.map((cls) => {
+            return (
+              <Stack horizontal horizontalAlign="center" verticalAlign="center">
+                <ClassIcon
+                  className={cls.class}
+                  styles={{
+                    root: {
+                      borderRadius: "50%",
+                      marginRight: DefaultSpacing.s2,
+                      maxWidth: 16,
+                    },
+                  }}
+                />
+                {character.classes.length > 1
+                  ? `${cls.class} (${cls.level})`
+                  : cls.class}
+              </Stack>
+            );
+          })}
+        </Stack>
       );
+    }
+  };
 
-      const sessionsRun = sessionData.data.filter((session) => {
-        const dmMatch = session.dungeonMaster === character.playerDndBeyondName;
-        const isInpast = !session.date || DataHelper.isDateInPast(session.date);
-
-        return dmMatch && isInpast;
-      });
-
-      const adjustedSessions = Math.floor(
-        sessionsAttended.length + sessionsRun.length / 2
+  const onRenderXpBar = (character: Character) => {
+    if (!character.player) {
+      return (
+        <TooltipHost content="Could not find player for this character">
+          <ProgressIndicator />
+        </TooltipHost>
       );
-
-      const levelUp = LevelUpTable.filter(
-        (level) => level.sessionsRequired <= adjustedSessions
-      );
-
-      const calculatedLevel = levelUp[levelUp.length - 1].level;
-
-      levelToRender = calculatedLevel;
     }
 
+    const xpForCurrentLevel =
+      LevelUpData[Math.floor(character.player.xp / 120) - 1].xpRequired;
+
+    const xpToNextLevel =
+      LevelUpData[Math.floor(character.player.xp / 120)].xpRequired;
+
+    const current = character.player.xp - xpForCurrentLevel;
+    const high = xpToNextLevel - xpForCurrentLevel;
+
     return (
-      <span
-        style={{
-          display: "block",
-          textAlign: "left",
-          paddingLeft: "1em",
-        }}
+      <TooltipHost
+        content={`${character.player.xp - xpForCurrentLevel} / ${
+          xpToNextLevel - xpForCurrentLevel
+        }`}
       >
-        {levelToRender}
-      </span>
+        <ProgressIndicator percentComplete={current / high} />
+      </TooltipHost>
     );
   };
 
@@ -147,117 +136,48 @@ const CharacterTable = () => {
     {
       key: "avatar",
       name: "",
-      fieldName: "avatarUrl",
-      minWidth: 25,
-      maxWidth: 25,
+      fieldName: "avatar",
+      minWidth: 20,
+      maxWidth: 20,
       onRender: onRenderAvatar,
     },
     {
       key: "level",
       name: "Level",
       fieldName: "currentLevel",
-      minWidth: 33,
-      maxWidth: 50,
+      minWidth: 40,
       onRender: onRenderLevel,
     },
     {
       key: "name",
       name: "Name",
       fieldName: "name",
-      minWidth: 200,
-      isResizable: true,
+      minWidth: 150,
       onRender: onRenderName,
     },
     {
       key: "race",
       name: "Race",
-      fieldName: "race",
-      minWidth: 150,
-      isResizable: true,
+      minWidth: 100,
       onRender: onRenderRace,
     },
     {
       key: "class",
       name: "Class",
-      fieldName: "classes",
-      minWidth: 175,
-      isResizable: true,
-      onRender: onRenderClasses,
+      minWidth: 200,
+      onRender: onRenderClass,
     },
+    { key: "xp", name: "XP", minWidth: 200, onRender: onRenderXpBar },
   ];
 
-  const onRenderRow: IDetailsListProps["onRenderRow"] = (props) => {
-    if (props) {
-      const character = props.item as ICharacter;
-
-      const tooltipProps: ITooltipProps = {
-        onRenderContent: () => {
-          return (
-            <Image
-              src={character.avatarUrl ? character.avatarUrl : DefaultAvatar}
-              imageFit={ImageFit.cover}
-              styles={{
-                root: {
-                  borderRadius: "50%",
-                  height: "250px",
-                  width: "250px",
-                  filter:
-                    character.avatarUrl === ""
-                      ? `hue-rotate(${
-                          Math.random() * 360
-                        }deg) brightness(1.5) invert(100%) ${
-                          character.retirement
-                            ? `grayscale(100%) brightness(0.5)`
-                            : ""
-                        }`
-                      : undefined,
-                },
-              }}
-            />
-          );
-        },
-      };
-
-      return (
-        <TooltipHost
-          tooltipProps={tooltipProps}
-          directionalHint={DirectionalHint.leftCenter}
-        >
-          <DetailsRow {...props} />
-        </TooltipHost>
-      );
-    }
-    return null;
-  };
-
   return (
-    <Stack
-      styles={{
-        root: {
-          maxHeight: "50%",
-        },
-      }}
-    >
-      <Separator
-        styles={{
-          root: {
-            fontSize: FontSizes.xLargePlus,
-          },
-        }}
-      >
-        Characters
-      </Separator>
-      <Stack styles={{ root: { overflowY: "auto" } }}>
-        <ShimmeredDetailsList
-          items={characterData.isLoading ? [] : characterData.data}
-          columns={columns}
-          onRenderRow={onRenderRow}
-          enableShimmer={characterData.isLoading}
-          selectionMode={SelectionMode.none}
-          compact
-        />
-      </Stack>
-    </Stack>
+    <ShimmeredDetailsList
+      styles={{ root: { overFlowY: "auto" } }}
+      columns={columns}
+      enableShimmer={characters.isLoading}
+      items={characters.isLoading ? [] : characters.data}
+      selectionMode={SelectionMode.none}
+    />
   );
 };
 

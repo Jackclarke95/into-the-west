@@ -13,7 +13,8 @@ import {
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import DataService, { UserData } from "../../Helpers/DataService";
+import DataService from "../../Helpers/DataService";
+import { PlayerDataToCreate } from "../../Types/DatabaseStructures";
 
 const RegistrationDialog = () => {
   const dispatch = useDispatch();
@@ -106,14 +107,12 @@ const RegistrationDialog = () => {
       isDungeonMaster !== undefined
     ) {
       const userData = {
-        email,
-        password,
         name,
         dndBeyondName,
         discordTag,
         isDungeonMaster,
         isGamesMaster,
-      } as UserData;
+      } as PlayerDataToCreate;
 
       setLoading(true);
 

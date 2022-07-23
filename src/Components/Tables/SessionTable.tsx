@@ -1,151 +1,80 @@
-import { useDispatch, useSelector } from "react-redux";
 import {
   DirectionalHint,
   Facepile,
-  FontSizes,
   IColumn,
   IconButton,
   IContextualMenuProps,
-  IFacepilePersona,
   IIconProps,
+  OverflowButtonType,
   PersonaSize,
   SelectionMode,
-  Separator,
   ShimmeredDetailsList,
   Stack,
   TooltipHost,
 } from "@fluentui/react";
-import ISessionData from "../../Interfaces/ISessionData";
+import { useDispatch, useSelector } from "react-redux";
 import DataHelper from "../../Helpers/DataHelper";
-import DataService from "../../Helpers/DataService";
-import { toast } from "react-toastify";
-import ISession from "../../Interfaces/ISession";
+import { Session } from "../../Types/LocalStructures";
+
 const SessionTable = () => {
   const dispatch = useDispatch();
 
-  const sessionData = useSelector((state) => state.sessions);
-  const playerData = useSelector((state) => state.players);
-  const characterData = useSelector((state) => state.characters);
+  const sessions = useSelector((state) => state.sessions);
   const activeCharacter = useSelector((state) => state.activeCharacter);
 
-  let upcomingSessions = [] as ISession[];
-  let pastSessions = [] as ISession[];
-
-  if (!sessionData.isLoading) {
-    upcomingSessions = sessionData.data.filter(
-      (session) =>
-        !session.date || !DataHelper.isDateInPast(new Date(session.date))
-    );
-
-    pastSessions = sessionData.data.filter(
-      (session) => session.date && new Date(session.date) <= new Date()
-    );
-  }
-
-  const onRenderDate = (session: ISessionData) => (
-    <span>
-      {session.date ? new Date(session.date).toDateString() : "Unscheduled"}
-    </span>
-  );
-
-  const onRenderName = (session: ISessionData) => <span>{session.name}</span>;
-
-  const onRenderDungeonMaster = (session: ISessionData) => {
-    if (playerData.isLoading) {
-      return;
-    }
-
-    const matchedDm = playerData.data.find(
-      (player) => player.dndBeyondName === session.dungeonMaster
-    );
-
-    if (matchedDm) {
-      return <span>{matchedDm.name}</span>;
-    } else {
-      return <span>{session.dungeonMaster}</span>;
-    }
-  };
-
-  const onRenderAttendees = (session: ISessionData) => {
-    if (characterData.isLoading) {
-      return;
-    }
-
-    const attendeeNames = [] as string[];
-
-    const personas = session.attendees
-      .map((attendee) => {
-        const matchedCharacter = characterData.data.find(
-          (character) => character.key === attendee
-        );
-
-        if (matchedCharacter) {
-          attendeeNames.push(
-            matchedCharacter!.nickname ?? matchedCharacter!.name
-          );
-        }
-
-        return {
-          imageUrl: matchedCharacter?.avatarUrl,
-          personaName: matchedCharacter?.name,
-        } as IFacepilePersona;
-      })
-      .sort((personaA, personaB) => {
-        if (!personaA.personaName || !personaB.personaName) {
-          return 0;
-        } else {
-          return personaA.personaName!.localeCompare(personaB.personaName!);
-        }
-      });
-
+  const onRenderAttendees = (session: Session) => {
     return (
       <TooltipHost
-        content={attendeeNames.sort().join(", ")}
+        content={session.attendees
+          .map((attendee) => attendee.fullName)
+          .join(", ")}
         directionalHint={DirectionalHint.leftCenter}
       >
-        <Facepile
-          personas={personas}
-          personaSize={PersonaSize.size16}
-          maxDisplayablePersonas={personas.length}
-        />
+        <Stack verticalFill verticalAlign="center">
+          <Facepile
+            overflowButtonType={OverflowButtonType.descriptive}
+            showTooltip={false}
+            personaSize={PersonaSize.size16}
+            personas={session.attendees.map((attendee) => ({
+              personaName: attendee.fullName,
+              imageUrl: attendee.avatarUrl,
+            }))}
+          />
+        </Stack>
       </TooltipHost>
     );
   };
 
-  const onClickSignUp = (session: ISession) => {
-    if (activeCharacter.isLoading || !activeCharacter.data) {
-      return;
-    }
-
-    console.log("clicked sign up");
-
-    dispatch({
-      type: "SetSessionRegistration",
-      sessionRegistration: { isShown: true, session: session },
-    });
-
-    // DataService.signUpToSession(session, activeCharacter.data);
-
-    // toast.success("Signed up for session");
+  const onRenderDungeonMaster = (session: Session) => {
+    return session.dungeonMaster?.name ?? "Unassigned";
   };
 
-  const onClickRemoveFromSession = (session: ISession) => {
-    if (activeCharacter.isLoading || !activeCharacter.data) {
-      return;
-    }
-
-    DataService.removeCharacterFromSession(session, activeCharacter.data);
-
-    toast.success("Removed from session");
+  const onRenderMap = (session: Session) => {
+    return session.map.name;
   };
 
-  const onRenderSignUp = (session: ISession) => {
+  const onRenderDate = (session: Session) => {
+    return session.date ? new Date(session.date).toDateString() : "Unscheduled";
+  };
+
+  const onRenderActions = (session: Session) => {
     if (!session || activeCharacter.isLoading || !activeCharacter.data) {
       return null;
     }
 
     const onClickManageSession = () => {
-      console.log("clicked manage session");
+      dispatch({
+        type: "SetSessionManagement",
+        sessionManagement: { isShown: true, session: session },
+      });
+    };
+
+    const onClickRemoveFromSession = (session: Session) => {
+      console.log("Remove from session", session);
+    };
+
+    const onClickAddToSession = (session: Session) => {
+      console.log("Add to session", session);
     };
 
     const settingsIcon: IIconProps = {
@@ -156,26 +85,30 @@ const SessionTable = () => {
     };
 
     const menuProps: IContextualMenuProps = {
-      items: [
-        session.attendees.includes(activeCharacter.data.key)
-          ? {
-              key: "Register",
-              text: "Unregister",
-              iconProps: { iconName: "USerRemove" },
-              onClick: () => onClickRemoveFromSession(session),
-            }
-          : {
-              key: "Register",
-              text: "Register",
-              iconProps: { iconName: "AddFriend" },
-              onClick: () => onClickSignUp(session),
+      items: session.attendees
+        ? [
+            session.attendees
+              .map((character) => character.id)
+              .includes(activeCharacter.data.id)
+              ? {
+                  key: "Register",
+                  text: "Unregister",
+                  iconProps: { iconName: "USerRemove" },
+                  onClick: () => onClickRemoveFromSession(session),
+                }
+              : {
+                  key: "Register",
+                  text: "Register",
+                  iconProps: { iconName: "AddFriend" },
+                  onClick: () => onClickAddToSession(session),
+                },
+            {
+              key: "calendarEvent",
+              text: "Volunteer as DM",
+              iconProps: { iconName: "WorkforceManagement" },
             },
-        {
-          key: "calendarEvent",
-          text: "Volunteer as DM",
-          iconProps: { iconName: "WorkforceManagement" },
-        },
-      ],
+          ]
+        : [],
       directionalHintFixed: true,
     };
 
@@ -196,13 +129,15 @@ const SessionTable = () => {
             />
           </TooltipHost>
         )}
-        <TooltipHost content="Manage session">
-          <IconButton
-            iconProps={settingsIcon}
-            disabled={false}
-            onClick={onClickManageSession}
-          />
-        </TooltipHost>
+        {DataHelper.isDateInPast(session.date!) ? (
+          <TooltipHost content="Manage session">
+            <IconButton
+              iconProps={settingsIcon}
+              disabled={false}
+              onClick={onClickManageSession}
+            />
+          </TooltipHost>
+        ) : null}
       </Stack>
     );
   };
@@ -212,24 +147,13 @@ const SessionTable = () => {
       key: "name",
       name: "Name",
       fieldName: "name",
-      minWidth: 200,
-      isResizable: true,
-      onRender: onRenderName,
+      minWidth: 250,
     },
     {
-      key: "date",
-      name: "Date",
-      fieldName: "date",
-      minWidth: 100,
-      isResizable: true,
-      onRender: onRenderDate,
-    },
-    {
-      key: "dungeon-master",
-      name: "DM",
+      key: "dungeonMaster",
+      name: "Dungeon Master",
       fieldName: "dungeonMaster",
-      minWidth: 75,
-      isResizable: true,
+      minWidth: 100,
       onRender: onRenderDungeonMaster,
     },
     {
@@ -237,61 +161,50 @@ const SessionTable = () => {
       name: "Map",
       fieldName: "map",
       minWidth: 150,
+      onRender: onRenderMap,
     },
     {
-      key: "characters",
-      name: "Characters",
+      key: "attendees",
+      name: "Attendees",
       fieldName: "attendees",
-      minWidth: 120,
+      minWidth: 150,
       onRender: onRenderAttendees,
     },
     {
-      key: "sign-up",
-      name: "",
-      fieldName: "signUpUrl",
-      minWidth: 75,
-      onRender: onRenderSignUp,
+      key: "date",
+      name: "Date",
+      fieldName: "scheduledDate",
+      minWidth: 150,
+      onRender: onRenderDate,
+    },
+    {
+      key: "actions",
+      name: "Actions",
+      minWidth: 50,
+      onRender: onRenderActions,
     },
   ];
 
   return (
-    <Stack styles={{ root: { maxHeight: "50%" } }}>
-      <Separator
-        styles={{
-          root: {
-            fontSize: FontSizes.xLargePlus,
-          },
-        }}
-      >
-        Sessions
-      </Separator>
-      <Stack styles={{ root: { overflowY: "auto" } }}>
-        <ShimmeredDetailsList
-          items={sessionData.isLoading ? [] : sessionData.data}
-          columns={columns}
-          enableShimmer={sessionData.isLoading}
-          selectionMode={SelectionMode.none}
-          compact
-          groups={
-            upcomingSessions.length === 0
-              ? undefined
-              : [
-                  {
-                    startIndex: 0,
-                    count: upcomingSessions.length,
-                    key: "upcoming",
-                    name: "Upcoming sessions",
-                  },
-                  {
-                    startIndex: upcomingSessions.length,
-                    count: pastSessions.length,
-                    key: "Past",
-                    name: "Past Sessions",
-                  },
-                ]
-          }
-        />
-      </Stack>
+    <Stack
+      styles={{
+        root: {
+          display: "flex",
+          flexFlow: "column nowrap",
+          width: "auto",
+          height: "auto",
+          boxSizing: "border-box",
+          maxHeight: "50%",
+          overflow: "auto",
+        },
+      }}
+    >
+      <ShimmeredDetailsList
+        columns={columns}
+        enableShimmer={sessions.isLoading}
+        items={sessions.isLoading ? [] : sessions.data}
+        selectionMode={SelectionMode.none}
+      />
     </Stack>
   );
 };

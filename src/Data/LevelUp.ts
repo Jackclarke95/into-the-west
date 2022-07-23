@@ -16,9 +16,9 @@ const Data = [
   { level: 15, sessionsRequired: 54, xpRequired: 3240 },
   { level: 16, sessionsRequired: 60, xpRequired: 3600 },
   { level: 17, sessionsRequired: 67, xpRequired: 4020 },
-  { level: 18, sessionsRequired: 73, xpRequired: 4380 },
+  { level: 18, sessionsRequired: 74, xpRequired: 4380 },
   { level: 19, sessionsRequired: 81, xpRequired: 4860 },
-  { level: 20, sessionsRequired: 86, xpRequired: 5160 },
+  { level: 20, sessionsRequired: 89, xpRequired: 5160 },
 ];
 
 export default Data;
