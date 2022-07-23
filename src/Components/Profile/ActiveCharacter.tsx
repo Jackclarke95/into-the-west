@@ -10,7 +10,7 @@ import {
   Text,
 } from "@fluentui/react";
 import { useDispatch, useSelector } from "react-redux";
-import CharacterPersona from "../Cards/CharacterCard";
+import CharacterCard from "../Cards/CharacterCard";
 
 const ActiveCharacter = () => {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const ActiveCharacter = () => {
         </MessageBar>
       );
     } else {
-      return <CharacterPersona character={activeCharacter.data} />;
+      return <CharacterCard character={activeCharacter.data} />;
     }
   };
 

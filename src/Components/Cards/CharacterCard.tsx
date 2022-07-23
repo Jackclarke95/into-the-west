@@ -1,10 +1,11 @@
 import { DefaultSpacing, Persona, PersonaSize, Stack } from "@fluentui/react";
 import DataHelper from "../../Helpers/DataHelper";
+import { Character } from "../../Types/LocalStructures";
 import { ClassIcon } from "../ClassIcon";
 
-const CharacterPersona = (props) => {
-  const character = props.character;
-
+const CharacterCard: React.FC<{
+  character: Character;
+}> = ({ character }) => {
   const onRenderClasses = () => (
     <Stack
       horizontal
@@ -17,7 +18,7 @@ const CharacterPersona = (props) => {
         return (
           <Stack horizontal horizontalAlign="center" verticalAlign="center">
             <ClassIcon
-              className={cls.name}
+              className={cls.class}
               styles={{
                 root: {
                   borderRadius: "50%",
@@ -27,30 +28,32 @@ const CharacterPersona = (props) => {
               }}
             />
             {character.classes.length > 1
-              ? `${cls.name} (${cls.level})`
-              : cls.name}
+              ? `${cls.class} (${cls.level})`
+              : cls.class}
           </Stack>
         );
       })}
     </Stack>
   );
 
+  const text = `${character.fullName} (${DataHelper.formatOrdinalNumber(
+    character.currentLevel ?? 0
+  )} Level)`;
+
+  const tertiaryText = character.race.subrace
+    ? `${character.race.subrace} ${character.race}`
+    : character.race.race;
+
   return (
     <Persona
-      text={`${character.name} (${DataHelper.formatOrdinalNumber(
-        character.currentLevel
-      )} Level)`}
+      text={text}
       onRenderSecondaryText={onRenderClasses}
-      tertiaryText={
-        character.subrace
-          ? `${character.subrace} ${character.race}`
-          : character.race
-      }
-      imageUrl={props.character.avatarUrl}
+      tertiaryText={tertiaryText}
+      imageUrl={character.avatarUrl}
       size={PersonaSize.size72}
       styles={{ root: { width: 350 } }}
     />
   );
 };
 
-export default CharacterPersona;
+export default CharacterCard;

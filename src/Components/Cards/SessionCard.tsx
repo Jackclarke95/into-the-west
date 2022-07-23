@@ -60,7 +60,7 @@ const SessionCard: React.FC<{
         </Stack>
         <Stack horizontal tokens={{ childrenGap: 5 }}>
           <Text styles={{ root: { fontWeight: "bold" } }}>Map:</Text>
-          <Text>{session.map}</Text>
+          <Text>{session.map.name}</Text>
         </Stack>
       </Stack>
       <Stack
@@ -71,7 +71,9 @@ const SessionCard: React.FC<{
       >
         <Stack horizontal tokens={{ childrenGap: 5 }}>
           <Text styles={{ root: { fontWeight: "bold" } }}>DM:</Text>
-          <Text>{session.dungeonMaster}</Text>
+          <Text>
+            {session.dungeonMaster ? session.dungeonMaster?.name : "Unassigned"}
+          </Text>
         </Stack>
         <Stack horizontal tokens={{ childrenGap: 5 }}>
           <Text styles={{ root: { fontWeight: "bold" } }}>Date:</Text>

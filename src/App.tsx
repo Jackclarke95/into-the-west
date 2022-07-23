@@ -67,8 +67,6 @@ const App = () => {
       return player;
     });
 
-    console.log({ playerData });
-
     dispatch({
       type: "SetDatabasePlayers",
       databasePlayers: {
