@@ -13,7 +13,6 @@ import { auth, db } from "../App";
 import SessionRole from "../Enums/SessionRole";
 import {
   PlayerDataToCreate,
-  SessionData,
   SessionInterestData,
 } from "../Types/DatabaseStructures";
 import { Player } from "../Types/LocalStructures";
@@ -29,19 +28,22 @@ export default class DataService {
 
   /**
    * Creates a session in the Firebase Realtime Database
-   * @param name The name of the session
-   * @param dungeonMaster The DnD Beyond name of the DM
-   * @param map The map of the session
-   * @param attendees The list of attendees to the session
-   * @param date The date of the session
+   * @param sessionName The name of the session
+   * @param mapId The ID of the map of the session
+
    */
-  public static createSession = (session: SessionData) => {
+  public static createSession = async (sessionName: string, mapId: string) => {
     const sessionsRef = ref(db, "sessions/");
 
-    push(sessionsRef, session);
+    const sessionToAdd = {
+      title: sessionName,
+      mapId: mapId,
+    };
+
+    await push(sessionsRef, sessionToAdd);
   };
 
-  public static registerForSession = (
+  public static registerForSession = async (
     session: Session,
     player: Player,
     role: SessionRole
@@ -51,13 +53,13 @@ export default class DataService {
     const newSessionInterest = {
       sessionId: session.id,
       playerId: player.id,
-      role: role,
+      role: SessionRole[role],
     };
 
-    push(sessionInterestsRef, newSessionInterest);
+    await push(sessionInterestsRef, newSessionInterest);
   };
 
-  public static unregisterFromSession = (
+  public static unregisterFromSession = async (
     sessionInterest: SessionInterestData
   ) => {
     const sessionInterestRef = ref(
@@ -65,7 +67,7 @@ export default class DataService {
       "sessionInterests/" + sessionInterest.key
     );
 
-    remove(sessionInterestRef);
+    await remove(sessionInterestRef);
   };
 
   /**
@@ -142,14 +144,10 @@ export default class DataService {
     user: User,
     availableDates: number[]
   ) => {
-    console.log("updating available dates", user.uid, availableDates);
-
     const userAvailableDatesRef = ref(
       db,
       "/players/" + user.uid + "/availableDates/"
     );
-
-    console.log(userAvailableDatesRef);
 
     await set(userAvailableDatesRef, availableDates);
   };

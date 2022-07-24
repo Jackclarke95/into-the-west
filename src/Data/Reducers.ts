@@ -116,6 +116,10 @@ export type Action =
       sessionManagement: DefaultRootState["sessionManagement"];
     }
   | {
+      type: "SetConfirmation";
+      confirmation: DefaultRootState["confirmation"];
+    }
+  | {
       type: "SetMaps";
       maps: DefaultRootState["maps"];
     }
@@ -195,6 +199,8 @@ export const initialState: DefaultRootState = {
   sessionRegistration: { isShown: false },
 
   sessionManagement: { isShown: false },
+
+  confirmation: { isShown: false },
 };
 
 /**
@@ -411,6 +417,12 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         // Action for toggling the Session Management Dialog and the relevant session
         case "SetSessionManagement": {
           draftState.sessionManagement = action.sessionManagement;
+          break;
+        }
+
+        // Action for toggling the Confirmation Dialog
+        case "SetConfirmation": {
+          draftState.confirmation = action.confirmation;
           break;
         }
       }

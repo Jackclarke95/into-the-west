@@ -40,9 +40,9 @@ const CharacterCard: React.FC<{
     character.currentLevel ?? 0
   )} Level)`;
 
-  const tertiaryText = character.race.subrace
-    ? `${character.race.subrace} ${character.race}`
-    : character.race.race;
+  const tertiaryText = `${character.race.subrace ?? ""} ${
+    character.race.race
+  }`.trim();
 
   return (
     <Persona

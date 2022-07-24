@@ -140,6 +140,11 @@ declare module "react-redux" {
 
     /** Whether the Session Management dialog should be shown, along with which Session it will be shown for */
     sessionManagement: { isShown: false } | { isShown: true; session: Session };
+
+    /** Whether the Confirmation dialog should be shown, along with the configuration with which to populate the dialog */
+    confirmation:
+      | { isShown: false }
+      | { isShown: true; message: string | undefined; onConfirm: () => void };
   }
 
   // Declare dispatcher to take our root provider's action type

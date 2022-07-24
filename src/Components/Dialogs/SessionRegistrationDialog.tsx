@@ -10,6 +10,7 @@ import {
   Text,
   TooltipHost,
 } from "@fluentui/react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SessionRole from "../../Enums/SessionRole";
 import DataService from "../../Helpers/DataService";
@@ -23,6 +24,35 @@ const SessionRegistrationDialog = () => {
   const availabilitiesSelections = useSelector((state) => state.selectedDates);
   const currentPlayer = useSelector((state) => state.currentPlayer);
 
+  const [interestedRole, setInterestedRole] = useState<SessionRole | undefined>(
+    undefined
+  );
+  const [playerIsDungeonMaster, setPlayerIsDungeonMaster] =
+    useState<boolean>(false);
+
+  useEffect(() => {
+    if (!currentPlayer) {
+      setPlayerIsDungeonMaster(false);
+
+      return;
+    }
+
+    const playerIsDungeonMaster =
+      !currentPlayer.isLoading && !!currentPlayer.data?.isDungeonMaster;
+
+    setPlayerIsDungeonMaster(playerIsDungeonMaster);
+  }, [currentPlayer]);
+
+  useEffect(() => {
+    if (!playerIsDungeonMaster) {
+      setInterestedRole(SessionRole.Player);
+
+      return;
+    }
+
+    setInterestedRole(undefined);
+  }, [playerIsDungeonMaster]);
+
   const onDismiss = () => {
     dispatch({
       type: "SetSessionRegistration",
@@ -31,37 +61,38 @@ const SessionRegistrationDialog = () => {
   };
 
   const onClickRegister = async () => {
-    if (!authUser) {
-      console.log("No user");
-
+    if (
+      currentPlayer.isLoading ||
+      !authUser ||
+      !sessionRegistration.isShown ||
+      !currentPlayer.data ||
+      !interestedRole
+    ) {
       return;
     }
-
-    if (!sessionRegistration.isShown) {
-      console.log("No session");
-
-      return;
-    }
-
-    if (currentPlayer.isLoading || !currentPlayer.data) {
-      console.log("Player loading or no current player", currentPlayer);
-
-      return;
-    }
-
-    console.log(
-      "clicked register button",
-      sessionRegistration.session.id,
-      availabilitiesSelections.map((date) => new Date(date).toDateString())
-    );
 
     await DataService.registerForSession(
       sessionRegistration.session,
       currentPlayer.data,
-      SessionRole.Player
+      interestedRole
     );
 
     await DataService.updateAvailableDates(authUser, availabilitiesSelections);
+
+    onDismiss();
+  };
+
+  const onChangeSessionRole = (
+    _: React.FormEvent<HTMLDivElement>,
+    option: IDropdownOption | undefined
+  ) => {
+    if (!option) {
+      setInterestedRole(undefined);
+
+      return;
+    }
+
+    setInterestedRole(SessionRole[option.key] as SessionRole);
   };
 
   const contentProps = sessionRegistration.isShown
@@ -73,14 +104,24 @@ const SessionRegistrationDialog = () => {
     : undefined;
 
   const roleOptions: IDropdownOption[] = [
-    { key: "player", text: "Player" },
+    { key: SessionRole.Player, text: SessionRole[SessionRole.Player] },
     {
-      key: "dungeon-master",
-      text: "Dungeon Master",
+      key: SessionRole["Dungeon Master"],
+      text: SessionRole[SessionRole["Dungeon Master"]],
       disabled:
         !currentPlayer.isLoading && !currentPlayer.data?.isDungeonMaster,
     },
   ];
+
+  const getRegisterDisabledTooltipContent = () => {
+    if (availabilitiesSelections.length === 0) {
+      return "Select at least one date to continue.";
+    }
+
+    if (!interestedRole) {
+      return "Please select a role to continue.";
+    }
+  };
 
   return (
     <Dialog
@@ -94,21 +135,23 @@ const SessionRegistrationDialog = () => {
         <Dropdown
           label="Role"
           options={roleOptions}
-          defaultSelectedKey="player"
+          defaultSelectedKey={
+            !currentPlayer.isLoading && !currentPlayer.data?.isDungeonMaster
+              ? SessionRole.Player
+              : undefined
+          }
+          required
+          onChange={onChangeSessionRole}
         />
         <DialogFooter>
           <DefaultButton text="Cancel" onClick={onDismiss} />
-          <TooltipHost
-            content={
-              availabilitiesSelections.length === 0
-                ? "Select at least one date to continue"
-                : ""
-            }
-          >
+          <TooltipHost content={getRegisterDisabledTooltipContent()}>
             <PrimaryButton
               text="Register"
               onClick={onClickRegister}
-              disabled={availabilitiesSelections.length === 0}
+              disabled={
+                availabilitiesSelections.length === 0 || !interestedRole
+              }
             />
           </TooltipHost>
         </DialogFooter>

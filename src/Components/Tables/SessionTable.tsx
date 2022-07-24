@@ -3,6 +3,7 @@ import {
   Facepile,
   IColumn,
   IconButton,
+  IGroup,
   IIconProps,
   OverflowButtonType,
   PersonaSize,
@@ -11,10 +12,12 @@ import {
   Stack,
   TooltipHost,
 } from "@fluentui/react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DataHelper from "../../Helpers/DataHelper";
 import DataService from "../../Helpers/DataService";
 import { Character, Session } from "../../Types/LocalStructures";
+import ConfirmationDialog from "../Dialogs/ConfirmationDialog";
 
 const SessionTable = () => {
   const dispatch = useDispatch();
@@ -23,6 +26,49 @@ const SessionTable = () => {
   const activeCharacter = useSelector((state) => state.activeCharacter);
   const sessionInterests = useSelector((state) => state.sessionInterests);
   const currentPlayer = useSelector((state) => state.currentPlayer);
+
+  const [sortedSessions, setSortedSessions] = useState<Session[]>([]);
+  const [upcomingSessions, setUpcomingSessions] = useState<Session[]>([]);
+  const [pastSessions, setPastSessions] = useState<Session[]>([]);
+
+  useEffect(() => {
+    if (sessions.isLoading) {
+      setSortedSessions([]);
+
+      return;
+    }
+
+    const sortedSessions = [...sessions.data].sort((a, b) => {
+      if (a.date && b.date) {
+        return b.date - a.date;
+      } else if (a.date && !b.date) {
+        return 1;
+      } else if (b.date && !a.date) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+
+    setSortedSessions(sortedSessions);
+  }, [sessions]);
+
+  useEffect(() => {
+    const sessionsToFilter = [...sortedSessions].sort((a, b) =>
+      a.date && b.date ? b.date - a.date : -1
+    );
+
+    const previousSessions = sessionsToFilter.filter(
+      (session) => session.date && DataHelper.isDateInPast(session.date)
+    );
+
+    const upcomingSessions = sessionsToFilter.filter(
+      (session) => !(session.date && DataHelper.isDateInPast(session.date))
+    );
+
+    setPastSessions(previousSessions);
+    setUpcomingSessions(upcomingSessions);
+  }, [sortedSessions]);
 
   const onRenderAttendees = (session: Session) => {
     let attendees: Character[] = [];
@@ -86,19 +132,21 @@ const SessionTable = () => {
 
     const onClickRemoveFromSession = async (session: Session) => {
       if (!playerInterestInSession) {
-        console.log("No interest in session");
-
         return;
       }
 
-      console.log("Remove from session", session, playerInterestInSession);
-
-      await DataService.unregisterFromSession(playerInterestInSession);
+      dispatch({
+        type: "SetConfirmation",
+        confirmation: {
+          isShown: true,
+          message: "Are you sure you wish to unregister from this session?",
+          onConfirm: async () =>
+            await DataService.unregisterFromSession(playerInterestInSession),
+        },
+      });
     };
 
     const onClickAddToSession = (session: Session) => {
-      console.log("Add to session", session);
-
       dispatch({
         type: "SetSessionRegistration",
         sessionRegistration: { isShown: true, session: session },
@@ -185,6 +233,21 @@ const SessionTable = () => {
     },
   ];
 
+  const groups: IGroup[] = [
+    {
+      key: "upcoming",
+      name: "Upcoming Sessions",
+      startIndex: 0,
+      count: upcomingSessions.length,
+    },
+    {
+      key: "past",
+      name: "Past Sessions",
+      startIndex: upcomingSessions.length,
+      count: pastSessions.length,
+    },
+  ];
+
   return (
     <Stack
       styles={{
@@ -202,9 +265,11 @@ const SessionTable = () => {
       <ShimmeredDetailsList
         columns={columns}
         enableShimmer={sessions.isLoading}
-        items={sessions.isLoading ? [] : sessions.data}
+        items={sortedSessions}
         selectionMode={SelectionMode.none}
+        groups={groups}
       />
+      <ConfirmationDialog />
     </Stack>
   );
 };

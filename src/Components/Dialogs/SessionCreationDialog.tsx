@@ -1,39 +1,26 @@
 import {
-  DatePicker,
   DefaultButton,
   Dialog,
   DialogFooter,
   DialogType,
   Dropdown,
   IDropdownOption,
-  IInputProps,
-  IPersonaProps,
-  Label,
-  MessageBar,
-  MessageBarType,
-  NormalPeoplePicker,
   PrimaryButton,
   TextField,
+  TooltipHost,
 } from "@fluentui/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import DataService from "../../Helpers/DataService";
+import { Map } from "../../Types/LocalStructures";
 
 const SessionCreationDialog = () => {
   const showDialog = useSelector((state) => state.showSessionCreationDialog);
-  const players = useSelector((state) => state.players);
-  const characters = useSelector((state) => state.characters);
   const maps = useSelector((state) => state.maps);
 
   const [sessionName, setSessionName] = useState<string | undefined>(undefined);
-  const [sessionDate, setSessionDate] = useState<Date | null | undefined>(
-    undefined
-  );
-  const [sessionDungeonMaster, setSessionDungeonMaster] = useState<
-    string | undefined
-  >(undefined);
-  const [sessionMap, setSessionMap] = useState<string | undefined>(undefined);
-  const [sessionAttendees, setSessionAttendees] = useState<IPersonaProps[]>([]);
-  const [errorList, setErrorList] = useState<string[]>([]);
+
+  const [sessionMap, setSessionMap] = useState<Map | undefined>(undefined);
 
   const dispatch = useDispatch();
 
@@ -41,40 +28,19 @@ const SessionCreationDialog = () => {
     setSessionName(value);
   };
 
-  const onSelectDate = (value: Date | null | undefined) => {
-    setSessionDate(value);
-  };
-
-  const onChangeDungeonMaster = (_, option: IDropdownOption | undefined) => {
-    if (!option) {
-      setSessionDungeonMaster(undefined);
-    } else {
-      setSessionDungeonMaster(option.text);
-    }
-  };
-
   const onChangeMap = (_, option: IDropdownOption | undefined) => {
-    if (!option) {
+    if (!option || maps.isLoading) {
       setSessionMap(undefined);
     } else {
-      setSessionMap(option.text);
-    }
-  };
+      const matchingMap = maps.data.find((map) => map.id === option.key);
 
-  const onChangeAttendees = (items: IPersonaProps[] | undefined) => {
-    if (!items) {
-      setSessionAttendees([]);
-    } else {
-      setSessionAttendees(items);
+      setSessionMap(matchingMap);
     }
   };
 
   const onDismiss = () => {
     setSessionName(undefined);
-    setSessionDate(undefined);
-    setSessionDungeonMaster(undefined);
     setSessionMap(undefined);
-    setSessionAttendees([]);
 
     dispatch({
       type: "SetShowSessionCreationDialog",
@@ -82,24 +48,15 @@ const SessionCreationDialog = () => {
     });
   };
 
-  const onClickAddSession = () => {
-    console.log("Clicked create session");
+  const onClickAddSession = async () => {
+    if (!sessionName || sessionName.length === 0 || !sessionMap) {
+      return;
+    }
 
-    dispatch({
-      type: "SetShowSessionCreationDialog",
-      showSessionCreationDialog: false,
-    });
+    await DataService.createSession(sessionName, sessionMap.id);
+
+    onDismiss();
   };
-
-  const dungeonMasterOptions = players.isLoading
-    ? ([] as IDropdownOption[])
-    : (players.data
-        .filter((player) => player.isDungeonMaster)
-        .sort((playerA, playerB) => playerA.name.localeCompare(playerB.name))
-        .map((player) => ({
-          key: player.id,
-          text: player.name,
-        })) as IDropdownOption[]);
 
   const mapOptions = maps.isLoading
     ? []
@@ -112,54 +69,20 @@ const SessionCreationDialog = () => {
           optionA.text.localeCompare(optionB.text)
         ) as IDropdownOption[]);
 
-  const onResolveSuggestions = (
-    filter: string,
-    selectedItems?: IPersonaProps[]
-  ) => {
-    if (characters.isLoading) {
-      return [] as IPersonaProps[];
-    }
-
-    return characters.data
-      .filter(
-        (character) =>
-          !character.retirement &&
-          character.fullName.toLowerCase().includes(filter.toLowerCase()) &&
-          !selectedItems?.find((item) => item.text === character.fullName)
-      )
-      .map((character) => ({
-        key: character.id,
-        text: character.fullName,
-        imageUrl: character.avatarUrl,
-      })) as IPersonaProps[];
-  };
-
-  const onResolveEmptySuggestions = (selectedItems?: IPersonaProps[]) => {
-    if (characters.isLoading) {
-      return [] as IPersonaProps[];
-    }
-
-    return characters.data
-      .filter(
-        (character) =>
-          !character.retirement &&
-          !selectedItems?.find((item) => item.text === character.fullName)
-      )
-      .map((character) => ({
-        key: character.id,
-        text: character.fullName,
-        imageUrl: character.avatarUrl,
-      })) as IPersonaProps[];
-  };
-
-  const inputProps = {
-    placeholder: "Search for a character",
-  } as IInputProps;
-
   const contentProps = {
     type: DialogType.largeHeader,
     title: "New session",
     closeButtonAriaLabel: "Close",
+  };
+
+  const getRegisterDisabledTooltipContent = () => {
+    if (sessionName?.length === 0) {
+      return "Session name required to continue.";
+    }
+
+    if (!sessionMap) {
+      return "Please select a Map to continue.";
+    }
   };
 
   return (
@@ -168,45 +91,27 @@ const SessionCreationDialog = () => {
       onDismiss={onDismiss}
       dialogContentProps={contentProps}
     >
-      {errorList.length > 0 && (
-        <MessageBar
-          isMultiline
-          messageBarType={MessageBarType.error}
-          styles={{
-            root: {
-              maxWidth: "240px",
-            },
-          }}
-        >
-          {errorList.join("-")}
-        </MessageBar>
-      )}
       <TextField
         label="Session name"
         value={sessionName}
         onChange={onChangeSessionName}
-      />
-      <DatePicker
-        label="Session date"
-        minDate={new Date()}
-        onSelectDate={onSelectDate}
+        required
       />
       <Dropdown
-        label="Dungeon Master"
-        options={dungeonMasterOptions}
-        onChange={onChangeDungeonMaster}
-      />
-      <Dropdown label="Map" options={mapOptions} onChange={onChangeMap} />
-      <Label>Characters</Label>
-      <NormalPeoplePicker
-        onResolveSuggestions={onResolveSuggestions}
-        onEmptyResolveSuggestions={onResolveEmptySuggestions}
-        inputProps={inputProps}
-        onChange={onChangeAttendees}
+        label="Map"
+        options={mapOptions}
+        onChange={onChangeMap}
+        required
       />
       <DialogFooter>
         <DefaultButton text="Cancel" onClick={onDismiss} />
-        <PrimaryButton text="Create" onClick={onClickAddSession} />
+        <TooltipHost content={getRegisterDisabledTooltipContent()}>
+          <PrimaryButton
+            text="Create"
+            onClick={onClickAddSession}
+            disabled={sessionName?.length === 0 || !sessionMap}
+          />
+        </TooltipHost>
       </DialogFooter>
     </Dialog>
   );

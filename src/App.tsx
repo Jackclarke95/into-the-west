@@ -32,6 +32,7 @@ import NewRaceDialog from "./Components/Dialogs/NewRaceDialog";
 import NewSubraceDialog from "./Components/Dialogs/NewSubraceDialog";
 import SessionRegistrationDialog from "./Components/Dialogs/SessionRegistrationDialog";
 import { PlayerData } from "./Types/DatabaseStructures";
+import ConfirmationDialog from "./Components/Dialogs/ConfirmationDialog";
 
 const isDevMode = window.location.hostname === "localhost";
 

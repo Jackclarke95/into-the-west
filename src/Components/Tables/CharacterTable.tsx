@@ -10,7 +10,6 @@ import {
   SharedColors,
   ShimmeredDetailsList,
   Stack,
-  ThemeContext,
   TooltipHost,
   useTheme,
 } from "@fluentui/react";
@@ -37,8 +36,10 @@ const CharacterTable = () => {
   useEffect(() => {
     if (characters.isLoading) {
       setSortedCharacters([]);
+
       return;
     }
+
     var sortedCharacters = [...characters.data].sort((a, b) =>
       a.fullName.localeCompare(b.fullName)
     );
@@ -48,22 +49,15 @@ const CharacterTable = () => {
   }, [characters]);
 
   useEffect(() => {
-    if (sortedCharacters.length === 0) {
-      setActiveCharacters([]);
-      setInactiveCharacters([]);
+    const activeCharacters = sortedCharacters.filter(
+      (character) => !character.retirement.isRetired
+    );
+    const inactiveCharacters = sortedCharacters.filter(
+      (character) => character.retirement.isRetired
+    );
 
-      return;
-    } else {
-      const activeCharacters = sortedCharacters.filter(
-        (character) => !character.retirement.isRetired
-      );
-      const inactiveCharacters = sortedCharacters.filter(
-        (character) => character.retirement.isRetired
-      );
-
-      setActiveCharacters(activeCharacters);
-      setInactiveCharacters(inactiveCharacters);
-    }
+    setActiveCharacters(activeCharacters);
+    setInactiveCharacters(inactiveCharacters);
   }, [sortedCharacters]);
 
   const onRenderAvatar = (character: Character) => (
