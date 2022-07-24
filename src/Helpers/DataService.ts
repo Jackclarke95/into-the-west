@@ -70,6 +70,12 @@ export default class DataService {
     await remove(sessionInterestRef);
   };
 
+  public static setDateForSession = async (session: Session, date: number) => {
+    const sessionRef = ref(db, "sessions/" + session.id);
+
+    await update(sessionRef, { selectedDate: date });
+  };
+
   /**
    * Creates a race in the Firebase Realtime Databse
    * @param name The name of the new race

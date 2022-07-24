@@ -152,12 +152,23 @@ const SessionTable = () => {
       });
     };
 
+    const onClickManageSession = (session: Session) => {
+      dispatch({
+        type: "SetSessionManagement",
+        sessionManagement: { isShown: true, session: session },
+      });
+    };
+
     const registerIcon: IIconProps = {
       iconName: "AddFriend",
     };
 
     const unregisterIcon: IIconProps = {
       iconName: "UserRemove",
+    };
+
+    const manageIcon: IIconProps = {
+      iconName: "Settings",
     };
 
     return (
@@ -185,6 +196,17 @@ const SessionTable = () => {
             />
           </TooltipHost>
         )}
+        {!DataHelper.isDateInPast(session.date!) &&
+          !currentPlayer.isLoading &&
+          currentPlayer.data?.isDungeonMaster && (
+            <TooltipHost content="Manage session">
+              <IconButton
+                iconProps={manageIcon}
+                disabled={false}
+                onClick={() => onClickManageSession(session)}
+              />
+            </TooltipHost>
+          )}
       </Stack>
     );
   };

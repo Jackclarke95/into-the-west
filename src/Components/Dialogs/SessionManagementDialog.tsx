@@ -1,4 +1,5 @@
 import {
+  Checkbox,
   DefaultButton,
   DialogFooter,
   DirectionalHint,
@@ -19,8 +20,11 @@ import {
   TooltipHost,
   useTheme,
 } from "@fluentui/react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import SessionRole from "../../Enums/SessionRole";
 import DataHelper from "../../Helpers/DataHelper";
+import DataService from "../../Helpers/DataService";
 import { Player } from "../../Types/LocalStructures";
 
 const SessionManagementDialog = () => {
@@ -31,18 +35,32 @@ const SessionManagementDialog = () => {
   const players = useSelector((state) => state.players);
   const sessionInterests = useSelector((state) => state.sessionInterests);
 
+  const [selectedDate, setSelectedDate] = useState<number | undefined>(
+    undefined
+  );
+
   const theme = useTheme();
 
   const onDismiss = () => {
+    setSelectedDate(undefined);
+
     dispatch({
       type: "SetSessionManagement",
       sessionManagement: { isShown: false },
     });
   };
 
-  const onClickSave = () => {
+  const onClickSave = async () => {
+    if (!sessionManagement.isShown || !selectedDate) {
+      return;
+    }
+
     console.log("Clicked save");
 
+    await DataService.setDateForSession(
+      sessionManagement.session,
+      selectedDate
+    );
     onDismiss();
   };
 
@@ -69,6 +87,21 @@ const SessionManagementDialog = () => {
       );
     }
   };
+
+  const dungeonMaster =
+    sessions.isLoading ||
+    players.isLoading ||
+    sessionInterests.isLoading ||
+    !sessionManagement.isShown
+      ? undefined
+      : players.data.find((player) =>
+          sessionInterests.data.find(
+            (interest) =>
+              interest.playerId === player.id &&
+              interest.sessionId === sessionManagement.session.id &&
+              interest.role === SessionRole["Dungeon Master"]
+          )
+        );
 
   const onRenderPlayers = (datesAndUsers: {
     date: string;
@@ -103,12 +136,44 @@ const SessionManagementDialog = () => {
     );
   };
 
+  const onRenderSelect = (datesAndUsers: {
+    date: number;
+    displayDate: string;
+    interestedUsers: Player[];
+  }) => {
+    const onChange = (
+      ev?: React.FormEvent<HTMLElement | HTMLInputElement> | undefined,
+      checked?: boolean | undefined
+    ) => {
+      if (checked) {
+        setSelectedDate(datesAndUsers.date);
+      } else {
+        setSelectedDate(undefined);
+      }
+    };
+
+    return (
+      <Checkbox
+        onChange={onChange}
+        checked={selectedDate === datesAndUsers.date}
+      />
+    );
+  };
+
   const columns: IColumn[] = [
+    {
+      key: "select",
+      name: "",
+      fieldName: "select",
+      minWidth: 25,
+      maxWidth: 40,
+      onRender: onRenderSelect,
+    },
     {
       key: "date",
       name: "Date",
-      fieldName: "date",
-      minWidth: 10,
+      fieldName: "displayDate",
+      minWidth: 25,
       maxWidth: 70,
       isResizable: true,
     },
@@ -128,12 +193,15 @@ const SessionManagementDialog = () => {
         .flatMap((user) => user.availableDates)
         .sort()
     )
-  ).map((date) => ({
-    date: DataHelper.getDateInDayDateMonthFormat(new Date(date)),
-    interestedUsers: getInterestedUsers().filter((user) =>
-      user.availableDates.includes(date)
-    ),
-  }));
+  )
+    .map((date) => ({
+      date: date,
+      displayDate: DataHelper.getDateInDayDateMonthFormat(new Date(date)),
+      interestedUsers: getInterestedUsers().filter((user) =>
+        user.availableDates.includes(date)
+      ),
+    }))
+    .filter((date) => !DataHelper.isDateInPast(date.date));
 
   return (
     <Modal isOpen={sessionManagement.isShown} onDismiss={onDismiss}>
@@ -162,10 +230,25 @@ const SessionManagementDialog = () => {
         </Text>
         {getInterestedUsers().length > 0 ? (
           <>
+            {!dungeonMaster && (
+              <MessageBar messageBarType={MessageBarType.error}>
+                No dungeon master found for this session.
+              </MessageBar>
+            )}
             <Text>Please select a date for this session.</Text>
+            {dungeonMaster && (
+              <Stack>
+                <Text>
+                  {`The Dungeon Master for this session is ${dungeonMaster.name}.`}
+                </Text>
+                <Text>
+                  {`Please ensure they are available on the selected date.`}
+                </Text>
+              </Stack>
+            )}
             <ShimmeredDetailsList
               items={dates}
-              selectionMode={SelectionMode.single}
+              selectionMode={SelectionMode.none}
               columns={columns}
             />
           </>
@@ -176,7 +259,11 @@ const SessionManagementDialog = () => {
         )}
         <DialogFooter>
           <DefaultButton text="Cancel" onClick={onDismiss} />
-          <PrimaryButton text="Save" onClick={onClickSave} />
+          <PrimaryButton
+            text="Save"
+            onClick={onClickSave}
+            disabled={!selectedDate || !dungeonMaster}
+          />
         </DialogFooter>
       </Stack>
     </Modal>
