@@ -8,13 +8,11 @@ import {
   PrimaryButton,
   Spinner,
   TextField,
-  Toggle,
 } from "@fluentui/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import DataService from "../../Helpers/DataService";
-import { PlayerDataToCreate } from "../../Types/DatabaseStructures";
 
 const RegistrationDialog = () => {
   const dispatch = useDispatch();
@@ -28,12 +26,6 @@ const RegistrationDialog = () => {
     undefined
   );
   const [name, setName] = useState<string | undefined>(undefined);
-  const [discordTag, setDiscordName] = useState<string | undefined>(undefined);
-  const [dndBeyondName, setDndBeyondName] = useState<string | undefined>(
-    undefined
-  );
-  const [isDungeonMaster, setIsDungeonMaster] = useState(false);
-  const [isGamesMaster, setIsGamesMaster] = useState(false);
   const [loading, setLoading] = useState(false);
   const [messageBarMessage, setMessageBarMessage] = useState<
     string | undefined
@@ -72,58 +64,24 @@ const RegistrationDialog = () => {
     setName(value);
   };
 
-  const onChangeDiscordName = (_, value: string | undefined) => {
-    setDiscordName(value);
-  };
-
-  const onChangeDndBeyondName = (_, value: string | undefined) => {
-    setDndBeyondName(value);
-  };
-
-  const onChangeIsDungeonMaster = (_, checked: boolean | undefined) => {
-    if (checked !== undefined) {
-      setIsDungeonMaster(checked);
-    }
-  };
-
-  const onChangeIsGamesMaster = (_, checked: boolean | undefined) => {
-    if (checked !== undefined) {
-      setIsGamesMaster(checked);
-    }
-  };
-
   const onClickRegister = () => {
     if (password !== passwordRepeat) {
       throw new Error("Passwords do not match");
     }
 
-    if (
-      email &&
-      password &&
-      name &&
-      discordTag &&
-      dndBeyondName &&
-      isGamesMaster !== undefined &&
-      isDungeonMaster !== undefined
-    ) {
-      const userData = {
-        name,
-        dndBeyondName,
-        discordTag,
-        isDungeonMaster,
-        isGamesMaster,
-      } as PlayerDataToCreate;
-
+    if (email && password && name) {
       setLoading(true);
 
-      DataService.registerWithEmailAndPassword(userData)
+      DataService.registerWithEmailAndPassword(email, password, name)
         .then(() => {
           onDismiss();
           toast.success("Successfully registered account");
+
           setLoading(false);
         })
         .catch((error) => {
           setMessageBarMessage(error.message);
+
           setLoading(false);
         });
     }
@@ -147,6 +105,7 @@ const RegistrationDialog = () => {
           {messageBarMessage}
         </MessageBar>
       )}
+      <TextField label="Name" value={name} required onChange={onChangeName} />
       <TextField
         label="Email"
         type="email"
@@ -202,29 +161,6 @@ const RegistrationDialog = () => {
             ? "Passwords do not match"
             : ""
         }
-      />
-      <TextField label="Name" value={name} required onChange={onChangeName} />
-      <TextField
-        label="Discord name (name#1234)"
-        value={discordTag}
-        required
-        onChange={onChangeDiscordName}
-      />
-      <TextField
-        label="D&D Beyond name (case-sensitive)"
-        value={dndBeyondName}
-        required
-        onChange={onChangeDndBeyondName}
-      />
-      <Toggle
-        label="Dungeon master"
-        inlineLabel
-        onChange={onChangeIsDungeonMaster}
-      />
-      <Toggle
-        label="Games master"
-        inlineLabel
-        onChange={onChangeIsGamesMaster}
       />
       <DialogFooter>
         <DefaultButton text="Cancel" onClick={onDismiss} disabled={loading} />

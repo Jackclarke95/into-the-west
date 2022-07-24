@@ -1095,103 +1095,64 @@
   },
   "players": {
     "-MaGLAdfrrLeLWxdwuUU": {
-      "discordTag": "HonestFee#4574",
-      "dndBeyondName": "HonestFee",
       "isDungeonMaster": true,
       "name": "Felix"
     },
     "-MaGM4rbdJBgZ8rKnfbc": {
-      "discordTag": "SwedishFox#2134",
-      "dndBeyondName": "SwedishFox",
       "name": "Swedish Fox"
     },
     "-MaGM4yP9MiI5Cy5CmCL": {
-      "discordTag": "Cassie#3862",
-      "dndBeyondName": "Chaia01",
       "name": "Cassie"
     },
     "-MaGM5CRWHK7L7PRyhub": {
-      "discordTag": "Perky#3726",
-      "dndBeyondName": "ThePerkyRiolu",
       "name": "Perky"
     },
-
     "-MaGM5QVGtAGMiUj9Eb_": {
-      "discordTag": "BlackRose89#8833",
-      "dndBeyondName": "BlackRoseSarah89",
       "name": "BlackRose89"
     },
     "-MaGM5cq30wDPzwxYLK4": {
-      "discordTag": "a chrysalid eel#5930",
-      "dndBeyondName": "Zajay",
       "name": "Ellie"
     },
     "-MaGM5koceXzQAlwRUFN": {
-      "discordTag": "Arnaud#5510",
-      "dndBeyondName": "Arnaudar",
       "name": "Arnaud"
     },
     "-MaGM5tBXrrMWldlbI-X": {
-      "discordTag": "Jonno0902#9966",
-      "dndBeyondName": "Jonno0902",
       "name": "Jonno"
     },
     "-MaGM6IOnqXNGuNfxZa6": {
-      "discordTag": "patola#0332",
-      "dndBeyondName": "patola",
       "name": "Patola"
     },
     "-MaGM6Q3kpDNynEBURGO": {
-      "discordTag": "benjywa#7340",
-      "dndBeyondName": "Benjywa",
       "isDungeonMaster": true,
       "isGamesMaster": true,
       "name": "Benjywa"
     },
     "-MaGM6YXdS0MHyYRc99v": {
-      "discordTag": "No,this is patrick#1606",
-      "dndBeyondName": "Bruenorbattlehammeringgiant",
       "name": "No, this is Patrick"
     },
     "-MaGM6mfWwwgH4r0KsVA": {
-      "discordTag": "Chloe#1673",
-      "dndBeyondName": "RusselHumphriesIII",
       "name": "Chloe"
     },
     "-MaGM764hCfwnab2wTy8": {
-      "discordTag": "HirotoShinori#2838",
-      "dndBeyondName": "HirotoShinori",
       "name": "HirotoShinori"
     },
     "-MaGM7VISDGDZF-eMIT4": {
-      "discordTag": "Kosky101#9128",
-      "dndBeyondName": "Kosky101",
       "name": "Kosky"
     },
     "-MaGM8l3BWAoEc3mnmIf": {
-      "discordTag": "Poppy#8626",
-      "dndBeyondName": "just_poppy",
       "name": "Poppy"
     },
     "-MaGM8ycWHXnWbaq-WqQ": {
-      "discordTag": "shabbyj#7019",
-      "dndBeyondName": "shabbyj",
       "name": "Shabbyj"
     },
     "-MaGM9ApuRxANiYS2eNu": {
-      "discordTag": "Thom_G83#5580",
-      "dndBeyondName": "Sanguine_Mesiac",
       "name": "Thom Prime"
     },
     "-MaGM9IVAiHx1Zdv8hAu": {
-      "discordTag": "Pheonixshifter177#2230",
-      "dndBeyondName": "Phoenixfire177",
       "isDungeonMaster": true,
       "name": "John"
     },
     "-N6xJxUeqevomce8WaX9": {
-      "discordTag": "PoorSwimmer#6126",
-      "dndBeyondName": "thecdv20",
       "name": "Michael"
     },
     "2Fv3wHgqwjV64m6IEPOp9brzKvb2": {
@@ -1199,8 +1160,7 @@
         1656716400000, 1656284400000, 1656802800000, 1656198000000,
         1659740400000
       ],
-      "discordTag": "SunRester#8899",
-      "dndBeyondName": "SunRester",
+
       "isDungeonMaster": true,
       "isGamesMaster": true,
       "name": "David"
@@ -1209,15 +1169,12 @@
       "availableDates": [
         1656370800000, 1656802800000, 1656198000000, 1656630000000
       ],
-      "discordTag": "GreyBeard#9358",
-      "dndBeyondName": "DrGreybeard",
+
       "isDungeonMaster": false,
       "isGamesMaster": false,
       "name": "Ali"
     },
     "g48dYVQDXcOImdJ6AKI3UCaKu8T2": {
-      "discordTag": "The Kingsman#2898",
-      "dndBeyondName": "TheKingsmantm",
       "name": "The Kingsman",
       "isDungeonMaster": false,
       "isGamesMaster": false
@@ -1227,8 +1184,7 @@
         1659222000000, 1659049200000, 1659308400000, 1659394800000,
         1659481200000, 1659654000000
       ],
-      "discordTag": "Jimbob_#5733",
-      "dndBeyondName": "JackClarke",
+
       "isDungeonMaster": true,
       "isGamesMaster": true,
       "name": "Jack"
@@ -1238,8 +1194,7 @@
         1656716400000, 1656370800000, 1656284400000, 1659740400000,
         1656630000000
       ],
-      "discordTag": "2004BakerB#9649",
-      "dndBeyondName": "benjaminbaker020304",
+
       "isDungeonMaster": false,
       "isGamesMaster": false,
       "name": "Ben Baker"
@@ -1249,8 +1204,7 @@
         1656716400000, 1656284400000, 1656802800000, 1656198000000,
         1659740400000
       ],
-      "discordTag": "SchemingPnda#0518",
-      "dndBeyondName": "SchemingPnda",
+
       "isDungeonMaster": true,
       "isGamesMaster": true,
       "name": "Louis"
@@ -1260,15 +1214,12 @@
         1656716400000, 1656370800000, 1656284400000, 1656802800000,
         1656198000000, 1659740400000, 1656630000000
       ],
-      "discordTag": "WillCarter#6063",
-      "dndBeyondName": "WillCarterDM",
+
       "isDungeonMaster": true,
       "isGamesMaster": false,
       "name": "Will Carter"
     },
     "kQHelre21sgGsU8FDu1CKY33im12": {
-      "discordTag": "RickDeyja#9719",
-      "dndBeyondName": "RickDeyja_",
       "name": "Thomas"
     }
   },

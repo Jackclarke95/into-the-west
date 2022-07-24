@@ -75,7 +75,6 @@ export type PlayerData = {
   name: string;
   isDungeonMaster: boolean;
   isGamesMaster: boolean;
-  discordTag: string;
   availableDates: number[];
 };
 
@@ -108,7 +107,6 @@ export type PlayerDataToCreate = {
   name: string;
   isDungeonMaster: boolean;
   isGamesMaster: boolean;
-  discordTag: string;
 };
 
 export type CharacterDataToCreate = {

@@ -40,7 +40,6 @@ export type Player = {
   name: string;
   isDungeonMaster: boolean;
   isGamesMaster: boolean;
-  discordTag: string;
   availableDates: number[];
   characterLevel: number;
   xp: number;

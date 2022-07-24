@@ -136,7 +136,6 @@ const Dashboard = () => {
 
       return {
         availableDates: player.availableDates,
-        discordTag: player.discordTag,
         id: player.key,
         isGamesMaster: player.isGamesMaster,
         isDungeonMaster: player.isDungeonMaster,

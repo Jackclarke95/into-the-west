@@ -5,17 +5,16 @@ import {
   signInWithEmailAndPassword,
   signOut,
   updatePassword,
+  updateProfile,
   User,
 } from "firebase/auth";
 import { push, ref, set, update, remove } from "firebase/database";
 import { Session } from "../Types/LocalStructures";
 import { auth, db } from "../App";
 import SessionRole from "../Enums/SessionRole";
-import {
-  PlayerDataToCreate,
-  SessionInterestData,
-} from "../Types/DatabaseStructures";
+import { SessionInterestData } from "../Types/DatabaseStructures";
 import { Player } from "../Types/LocalStructures";
+import { toast } from "react-toastify";
 
 export default class DataService {
   public static generateKey(): string | null {
@@ -102,34 +101,37 @@ export default class DataService {
 
   /**
    * Registers a Firebase user and creates a player record in the Firebase Realtime Database
-   * @param userData Data about the user to register
+   * @param email The email of the user
+   * @param password The password of the user
+   * @param name The name of the user
    */
-  public static registerWithEmailAndPassword = async (userData) => {
-    return createUserWithEmailAndPassword(
-      auth,
-      userData.email,
-      userData.password
-    )
+  public static registerWithEmailAndPassword = async (
+    email: string,
+    password: string,
+    name: string
+  ) => {
+    return createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log("SUCCESS");
         // Signed in
         const user = userCredential.user;
-        // ...
 
         console.log(user);
 
-        const playerToCreate = {
-          discordTag: userData.discordTag,
-          name: userData.name,
-          isDungeonMaster: userData.isDungeonMaster,
-          isGamesMaster: userData.isGamesMaster,
-          availableDates: [],
-        } as PlayerDataToCreate;
+        updateProfile(user, {
+          displayName: name,
+        })
+          .then(() => {
+            console.log("updated display name");
+          })
+          .catch((error) => {
+            console.log("Error occurred updating display name", error);
+          });
 
-        DataService.createPlayer(user.uid, playerToCreate);
+        DataService.createPlayer(user.uid, name);
       })
       .catch((error) => {
-        console.log("ERROR");
+        console.log("Error signing up", error);
 
         throw new Error(error.message);
       });
@@ -188,15 +190,15 @@ export default class DataService {
 
   /**
    * Creates a player record in the Firebase Realtime Database
-   * @param player The player record to create
+   * @param userId The ID of the user to create a player record for
+   * @param name The name of the player
    */
-  public static createPlayer = async (
-    userId: string,
-    player: PlayerDataToCreate
-  ) => {
+  public static createPlayer = async (userId: string, name: string) => {
     const usersRef = ref(db, "players/" + userId);
 
-    await set(usersRef, player).then((result) => console.log({ result }));
+    await set(usersRef, { name: name }).then((result) =>
+      console.log({ result })
+    );
   };
 
   /**
@@ -226,9 +228,7 @@ export default class DataService {
 
     return await signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in
         const user = userCredential.user;
-        // ...
 
         console.log(user);
       })
@@ -243,12 +243,10 @@ export default class DataService {
   public static signOut = () => {
     signOut(auth)
       .then(() => {
-        // Sign-out successful.
-        console.log("successfully signed out");
+        toast.success("Successfully signed out");
       })
       .catch((error) => {
-        // An error happened.
-        console.log("could not sign out", error);
+        toast.error("could not sign out", error);
       });
 
     window.location.reload();

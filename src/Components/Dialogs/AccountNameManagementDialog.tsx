@@ -18,21 +18,9 @@ const AccountNameManagementDialog = () => {
   );
 
   const [name, setName] = useState<string | undefined>(undefined);
-  const [discordName, setDiscordName] = useState<string | undefined>(undefined);
-  const [dndBeyondName, setDndBeyondName] = useState<string | undefined>(
-    undefined
-  );
 
   const onChangeName = (_, value: string | undefined) => {
     setName(value);
-  };
-
-  const onChangeDiscordName = (_, value: string | undefined) => {
-    setDiscordName(value);
-  };
-
-  const onChangeDndBeyondName = (_, value: string | undefined) => {
-    setDndBeyondName(value);
   };
 
   const contentProps = {
@@ -47,8 +35,6 @@ const AccountNameManagementDialog = () => {
 
   const onDismiss = () => {
     setName(undefined);
-    setDiscordName(undefined);
-    setDndBeyondName(undefined);
 
     dispatch({
       type: "SetShowAccountNameManagementDialog",
@@ -64,16 +50,6 @@ const AccountNameManagementDialog = () => {
     >
       <Text>Leave blank to omit from update</Text>
       <TextField label="Name" value={name} onChange={onChangeName} />
-      <TextField
-        label="Discord name (name#1234)"
-        value={discordName}
-        onChange={onChangeDiscordName}
-      />
-      <TextField
-        label="D&D Beyond name (case-sensitive)"
-        value={dndBeyondName}
-        onChange={onChangeDndBeyondName}
-      />
       <DialogFooter>
         <DefaultButton text="Cancel" onClick={onDismiss} />
         <PrimaryButton text="Save" onClick={onClickSaveAccountSettings} />
