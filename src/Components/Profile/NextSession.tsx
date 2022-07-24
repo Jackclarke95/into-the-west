@@ -19,7 +19,6 @@ const NextSession = () => {
   const sessions = useSelector((state) => state.sessions);
   const characters = useSelector((state) => state.characters);
   const activeCharacter = useSelector((state) => state.activeCharacter);
-  const isDevMode = useSelector((state) => state.isDevMode);
   const currentPlayer = useSelector((state) => state.currentPlayer);
 
   let upcomingSessions = [] as Session[];
@@ -105,9 +104,7 @@ const NextSession = () => {
           <DefaultButton
             text="New"
             onClick={onClickCreateSession}
-            disabled={
-              !isDevMode || activeCharacter.isLoading || !activeCharacter.data
-            }
+            disabled={activeCharacter.isLoading || !activeCharacter.data}
           />
         </Stack>
       </Stack>

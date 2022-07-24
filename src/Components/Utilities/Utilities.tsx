@@ -1,9 +1,12 @@
 import { DefaultButton, FontSizes, Separator, Stack } from "@fluentui/react";
-import { useDispatch } from "react-redux";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import DataService from "../../Helpers/DataService";
 
 const Utilities = () => {
   const dispatch = useDispatch();
+
+  const isDevMode = useSelector((state) => state.isDevMode);
 
   const onClickGenerateKey = () => {
     const key = DataService.generateKey();
@@ -41,8 +44,16 @@ const Utilities = () => {
       >
         Tools
       </Separator>
-      <DefaultButton text="Generate key" onClick={onClickGenerateKey} />
-      <DefaultButton text="New race" onClick={onClickShowNewRaceDialog} />
+      <DefaultButton
+        text="Generate key"
+        onClick={onClickGenerateKey}
+        disabled={!isDevMode}
+      />
+      <DefaultButton
+        text="New race"
+        onClick={onClickShowNewRaceDialog}
+        disabled={!isDevMode}
+      />
       <DefaultButton
         text="New subrace"
         onClick={onClickShowNewSubraceDialog}
