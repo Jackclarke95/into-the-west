@@ -135,11 +135,6 @@ const SessionRegistrationDialog = () => {
         <Dropdown
           label="Role"
           options={roleOptions}
-          defaultSelectedKey={
-            !currentPlayer.isLoading && !currentPlayer.data?.isDungeonMaster
-              ? SessionRole.Player
-              : undefined
-          }
           required
           onChange={onChangeSessionRole}
         />

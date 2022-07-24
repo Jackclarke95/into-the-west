@@ -360,7 +360,7 @@
     "-N6dzmOjRQPnpiMlARHe": {
       "avatarUrl": "https://www.dndbeyond.com/avatars/21808/599/1581111423-62426653.jpeg",
       "fullName": "Orgust",
-      "playerId": "-MaGM5JL64jM9ODkb1Jr",
+      "playerId": "g48dYVQDXcOImdJ6AKI3UCaKu8T2",
       "sheetUrl": "https://www.dndbeyond.com/characters/62426653",
       "startingLevel": 1
     },
@@ -1115,11 +1115,7 @@
       "dndBeyondName": "ThePerkyRiolu",
       "name": "Perky"
     },
-    "-MaGM5JL64jM9ODkb1Jr": {
-      "discordTag": "The Kingsman#2898",
-      "dndBeyondName": "TheKingsmantm",
-      "name": "The Kingsman"
-    },
+
     "-MaGM5QVGtAGMiUj9Eb_": {
       "discordTag": "BlackRose89#8833",
       "dndBeyondName": "BlackRoseSarah89",
@@ -1218,6 +1214,13 @@
       "isDungeonMaster": false,
       "isGamesMaster": false,
       "name": "Ali"
+    },
+    "g48dYVQDXcOImdJ6AKI3UCaKu8T2": {
+      "discordTag": "The Kingsman#2898",
+      "dndBeyondName": "TheKingsmantm",
+      "name": "The Kingsman",
+      "isDungeonMaster": false,
+      "isGamesMaster": false
     },
     "9QqPgpLp23cEYeK3Jvq9MmIMpY13": {
       "availableDates": [
@@ -2114,7 +2117,7 @@
     },
     "-N6wap5PJa_73IdabjD4": {
       "didAttend": true,
-      "playerId": "-MaGM5JL64jM9ODkb1Jr",
+      "playerId": "g48dYVQDXcOImdJ6AKI3UCaKu8T2",
       "role": 0,
       "sessionId": "-N3LNHmGLBnk7y8S2bZK",
       "title": "Cirque d'Snicket"
@@ -2443,7 +2446,7 @@
     },
     "-N6xNh4AizoiNCmGPykZ": {
       "didAttend": true,
-      "playerId": "-MaGM5JL64jM9ODkb1Jr",
+      "playerId": "g48dYVQDXcOImdJ6AKI3UCaKu8T2",
       "role": 0,
       "sessionId": "-N3LNNC6prlaWs1UK9MN",
       "title": "Bad Neighbours"
@@ -2583,7 +2586,7 @@
     },
     "-N6xNrdpFz8-2jgHRj-E": {
       "didAttend": true,
-      "playerId": "-MaGM5JL64jM9ODkb1Jr",
+      "playerId": "g48dYVQDXcOImdJ6AKI3UCaKu8T2",
       "role": 0,
       "sessionId": "-N3LNQ5pGw-kM1FTMq0I",
       "title": "Shadows Over the Mountains"
@@ -2709,7 +2712,7 @@
     },
     "-N6xO7_uLeYQosNwTx79": {
       "didAttend": true,
-      "playerId": "-MaGM5JL64jM9ODkb1Jr",
+      "playerId": "g48dYVQDXcOImdJ6AKI3UCaKu8T2",
       "role": 0,
       "sessionId": "-N3LNSCvKJYMuf3blwBm",
       "title": "Froster's Fables - The Mindflayer War"
@@ -2765,7 +2768,7 @@
     },
     "-N6xOBrdJpx7GlZrXI8M": {
       "didAttend": true,
-      "playerId": "-MaGM5JL64jM9ODkb1Jr",
+      "playerId": "g48dYVQDXcOImdJ6AKI3UCaKu8T2",
       "role": 0,
       "sessionId": "-N6eNcqRKJJmGJUkbr3N",
       "title": "Frozen Crystals"
