@@ -17,7 +17,6 @@ import { useDispatch, useSelector } from "react-redux";
 import DataHelper from "../../Helpers/DataHelper";
 import DataService from "../../Helpers/DataService";
 import { Character, Session } from "../../Types/LocalStructures";
-import ConfirmationDialog from "../Dialogs/ConfirmationDialog";
 
 const SessionTable = () => {
   const dispatch = useDispatch();
@@ -269,7 +268,6 @@ const SessionTable = () => {
         selectionMode={SelectionMode.none}
         groups={groups}
       />
-      <ConfirmationDialog />
     </Stack>
   );
 };

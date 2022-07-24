@@ -354,6 +354,7 @@ const App = () => {
           <NewRaceDialog />
           <NewSubraceDialog />
           <SessionRegistrationDialog />
+          <ConfirmationDialog />
         </>
       ) : (
         <>

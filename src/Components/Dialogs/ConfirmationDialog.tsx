@@ -5,7 +5,6 @@ import {
   DialogType,
   IDialogContentProps,
   PrimaryButton,
-  Text,
 } from "@fluentui/react";
 import { useDispatch, useSelector } from "react-redux";
 
