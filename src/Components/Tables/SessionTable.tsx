@@ -13,6 +13,7 @@ import {
 } from "@fluentui/react";
 import { useDispatch, useSelector } from "react-redux";
 import DataHelper from "../../Helpers/DataHelper";
+import DataService from "../../Helpers/DataService";
 import { Character, Session } from "../../Types/LocalStructures";
 
 const SessionTable = () => {
@@ -20,6 +21,8 @@ const SessionTable = () => {
 
   const sessions = useSelector((state) => state.sessions);
   const activeCharacter = useSelector((state) => state.activeCharacter);
+  const sessionInterests = useSelector((state) => state.sessionInterests);
+  const currentPlayer = useSelector((state) => state.currentPlayer);
 
   const onRenderAttendees = (session: Session) => {
     let attendees: Character[] = [];
@@ -63,12 +66,34 @@ const SessionTable = () => {
   };
 
   const onRenderActions = (session: Session) => {
-    if (!session || activeCharacter.isLoading || !activeCharacter.data) {
+    if (
+      !session ||
+      sessionInterests.isLoading ||
+      currentPlayer.isLoading ||
+      activeCharacter.isLoading ||
+      !activeCharacter.data
+    ) {
       return null;
     }
 
-    const onClickRemoveFromSession = (session: Session) => {
-      console.log("Remove from session", session);
+    const playerInterestInSession = sessionInterests.data.find(
+      (interest) =>
+        interest.playerId === currentPlayer.data?.id &&
+        interest.sessionId === session.id
+    );
+
+    const playerIsInterested = !!playerInterestInSession;
+
+    const onClickRemoveFromSession = async (session: Session) => {
+      if (!playerInterestInSession) {
+        console.log("No interest in session");
+
+        return;
+      }
+
+      console.log("Remove from session", session, playerInterestInSession);
+
+      await DataService.unregisterFromSession(playerInterestInSession);
     };
 
     const onClickAddToSession = (session: Session) => {
@@ -96,8 +121,16 @@ const SessionTable = () => {
       >
         {DataHelper.isDateInPast(session.date!) ? (
           <Stack styles={{ root: { width: 52 } }}></Stack>
+        ) : playerIsInterested ? (
+          <TooltipHost content="Unregister from session">
+            <IconButton
+              iconProps={unregisterIcon}
+              disabled={false}
+              onClick={() => onClickRemoveFromSession(session)}
+            />
+          </TooltipHost>
         ) : (
-          <TooltipHost content="Manage session">
+          <TooltipHost content="Register for session">
             <IconButton
               iconProps={registerIcon}
               disabled={false}

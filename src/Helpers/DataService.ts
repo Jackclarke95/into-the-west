@@ -7,9 +7,16 @@ import {
   updatePassword,
   User,
 } from "firebase/auth";
-import { push, ref, set, update } from "firebase/database";
+import { push, ref, set, update, remove } from "firebase/database";
+import { Session } from "../Types/LocalStructures";
 import { auth, db } from "../App";
-import { PlayerDataToCreate, SessionData } from "../Types/DatabaseStructures";
+import SessionRole from "../Enums/SessionRole";
+import {
+  PlayerDataToCreate,
+  SessionData,
+  SessionInterestData,
+} from "../Types/DatabaseStructures";
+import { Player } from "../Types/LocalStructures";
 
 export default class DataService {
   public static generateKey(): string | null {
@@ -32,6 +39,33 @@ export default class DataService {
     const sessionsRef = ref(db, "sessions/");
 
     push(sessionsRef, session);
+  };
+
+  public static registerForSession = (
+    session: Session,
+    player: Player,
+    role: SessionRole
+  ) => {
+    const sessionInterestsRef = ref(db, "sessionInterests/");
+
+    const newSessionInterest = {
+      sessionId: session.id,
+      playerId: player.id,
+      role: role,
+    };
+
+    push(sessionInterestsRef, newSessionInterest);
+  };
+
+  public static unregisterFromSession = (
+    sessionInterest: SessionInterestData
+  ) => {
+    const sessionInterestRef = ref(
+      db,
+      "sessionInterests/" + sessionInterest.key
+    );
+
+    remove(sessionInterestRef);
   };
 
   /**
@@ -112,7 +146,7 @@ export default class DataService {
 
     const userAvailableDatesRef = ref(
       db,
-      "/users/" + user.uid + "/availableDates/"
+      "/players/" + user.uid + "/availableDates/"
     );
 
     console.log(userAvailableDatesRef);
