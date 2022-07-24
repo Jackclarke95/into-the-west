@@ -10,7 +10,7 @@ import {
   Text,
 } from "@fluentui/react";
 import { useDispatch, useSelector } from "react-redux";
-import CharacterPersona from "../Cards/CharacterCard";
+import CharacterCard from "../Cards/CharacterCard";
 
 const ActiveCharacter = () => {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const ActiveCharacter = () => {
 
   const dataToRender = () => {
     if (activeCharacter.isLoading) {
-      return <Spinner size={SpinnerSize.large} label="Loading Character" />;
+      return <Spinner size={SpinnerSize.large} label="Loading character" />;
     } else if (!activeCharacter.data) {
       return (
         <MessageBar messageBarType={MessageBarType.warning} isMultiline>
@@ -29,7 +29,7 @@ const ActiveCharacter = () => {
         </MessageBar>
       );
     } else {
-      return <CharacterPersona character={activeCharacter.data} />;
+      return <CharacterCard character={activeCharacter.data} />;
     }
   };
 
@@ -48,7 +48,7 @@ const ActiveCharacter = () => {
   };
 
   const onClickCreateCharacter = () => {
-    console.log("creating character");
+    console.log("Clicked create character");
 
     dispatch({
       type: "SetShowCharacterCreationDialog",
@@ -70,6 +70,12 @@ const ActiveCharacter = () => {
         iconProps: { iconName: "UserRemove" },
         onClick: onClickRetireCharacter,
       },
+      {
+        key: "createCharacter",
+        text: "Create character",
+        iconProps: { iconName: "AddFriend" },
+        onClick: onClickCreateCharacter,
+      },
     ],
   };
 
@@ -81,7 +87,7 @@ const ActiveCharacter = () => {
             root: { fontSize: FontSizes.xLarge, textAlign: "start" },
           }}
         >
-          Active Character
+          My Character
         </Text>
         <Stack horizontal tokens={{ childrenGap: 10 }}>
           {!activeCharacter.isLoading && activeCharacter.data ? (
@@ -95,7 +101,7 @@ const ActiveCharacter = () => {
             />
           ) : (
             <DefaultButton
-              text="New Character"
+              text="Create character"
               disabled={
                 !isDevMode ||
                 activeCharacter.isLoading ||

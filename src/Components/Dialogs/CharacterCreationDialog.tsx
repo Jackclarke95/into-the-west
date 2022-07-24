@@ -5,41 +5,48 @@ import {
   DialogType,
   Dropdown,
   IDropdownOption,
-  Position,
+  IModalProps,
+  MessageBar,
+  MessageBarType,
   PrimaryButton,
-  SpinButton,
   TextField,
 } from "@fluentui/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Classes from "../../Data/Classes";
-import Races from "../../Data/Races";
-import DataService from "../../Helpers/DataService";
+import DataHelper from "../../Helpers/DataHelper";
 
 const CharacterCreationDialog = () => {
   const dispatch = useDispatch();
 
   const showDialog = useSelector((state) => state.showCharacterCreationDialog);
-  const currentPlayer = useSelector((state) => state.currentPlayer);
+  const classes = useSelector((state) => state.classes);
+  const subclasses = useSelector((state) => state.subclasses);
+  const classConfigs = useSelector((state) => state.classConfigs);
+  const races = useSelector((state) => state.races);
+  const subraces = useSelector((state) => state.subraces);
+  const raceConfigs = useSelector((state) => state.raceConfigs);
 
   const [characterName, setCharacterName] = useState<string | undefined>(
     undefined
   );
-  const [characterNickname, setCharacterNickname] = useState<
+  const [characterShortName, setCharacterNickname] = useState<
     string | undefined
   >(undefined);
   const [characterRace, setCharacterRace] = useState<string | undefined>(
     undefined
   );
-  const [characterSubrace, setCharacterSubrace] = useState<
-    string | undefined | null
-  >(undefined);
+  const [characterSubrace, setCharacterSubrace] = useState<string | undefined>(
+    undefined
+  );
   const [characterLevel, setCharacterLevel] = useState<number>(1);
   const [characterClass, setCharacterClass] = useState<string | undefined>(
     undefined
   );
   const [characterSubclass, setCharacterSubclass] = useState<
-    string | undefined | null
+    string | undefined
+  >(undefined);
+  const [messageBarMessage, setMessageBarMessage] = useState<
+    string | undefined
   >(undefined);
 
   const onDismiss = () => {
@@ -63,53 +70,22 @@ const CharacterCreationDialog = () => {
     closeButtonAriaLabel: "Close",
   };
 
-  const raceOptions = Races.map((race) => ({
-    key: race.name,
-    text: race.name,
-  }));
+  const modalProps = {
+    isBlocking: true,
+  } as IModalProps;
 
-  const subraceOptions = (
-    characterRace && Races.find((race) => race.name === characterRace)?.subraces
-      ? Races.find((race) => race.name === characterRace)?.subraces!.map(
-          (subrace) => ({
-            key: subrace,
-            text: subrace,
-          })
-        )
-      : []
-  ) as IDropdownOption[];
-
-  const classOptions = Classes.map((cls) => ({
-    key: cls.name,
-    text: cls.name,
-  }));
-
-  const subclassOptions = () => {
-    if (!characterClass) {
-      return [] as IDropdownOption[];
-    }
-
-    const cls = Classes.find((cls) => cls.name === characterClass);
-
-    if (!cls) {
-      return [] as IDropdownOption[];
-    }
-
-    if (cls.archetypeDefinition.level > characterLevel) {
-      return [] as IDropdownOption[];
-    } else {
-      return cls.archetypeDefinition.subclasses.map((subclass) => ({
-        key: subclass,
-        text: subclass,
-      })) as IDropdownOption[];
-    }
-  };
+  const raceOptions = races.isLoading
+    ? []
+    : races.data.map((race) => ({
+        key: race.name,
+        text: race.name,
+      }));
 
   const onChangeName = (_, value: string | undefined) => {
     setCharacterName(value);
   };
 
-  const onChangeNickname = (_, value: string | undefined) => {
+  const onChangeShortName = (_, value: string | undefined) => {
     setCharacterNickname(value);
   };
 
@@ -120,76 +96,77 @@ const CharacterCreationDialog = () => {
       setCharacterRace(option.text);
     }
 
-    setCharacterSubrace(null);
-  };
-
-  const onChangeSubrace = (_, option: IDropdownOption | undefined) => {
-    if (!option) {
-      setCharacterSubrace(null);
-    } else {
-      setCharacterSubrace(option.text);
-    }
-  };
-
-  const onChangeClass = (_, option: IDropdownOption | undefined) => {
-    if (!option) {
-      setCharacterClass(undefined);
-    } else {
-      setCharacterClass(option.text);
-    }
-
-    setCharacterSubclass(null);
-  };
-
-  const onChangeSubclass = (_, option: IDropdownOption | undefined) => {
-    if (!option) {
-      setCharacterSubclass(null);
-    } else {
-      setCharacterSubrace(option.text);
-    }
-  };
-
-  const onChangeCharacterLevel = (_, value: string | undefined) => {
-    if (value) {
-      setCharacterLevel(parseInt(value));
-    }
+    setCharacterSubrace(undefined);
   };
 
   const onClickCreateCharacter = () => {
+    console.log(validateCharacter());
+  };
+
+  const validateCharacter = () => {
     if (
-      !currentPlayer.isLoading &&
-      currentPlayer.data &&
-      characterName &&
-      characterRace &&
-      characterClass &&
-      characterLevel
+      classes.isLoading ||
+      subclasses.isLoading ||
+      classConfigs.isLoading ||
+      races.isLoading ||
+      subraces.isLoading ||
+      raceConfigs.isLoading
     ) {
-      DataService.createCharacter({
-        avatarUrl: "",
-        sheetUrl: "",
-        playerDndBeyondName: currentPlayer.data.dndBeyondName,
-        name: characterName,
-        nickname: characterNickname,
-        race: characterRace,
-        subrace: characterSubrace ?? undefined,
-        classes: [
-          {
-            name: characterClass,
-            archetype: undefined ?? "",
-            level: 1,
-          },
-        ],
-        currentLevel: characterLevel,
-        sessionsAttended: 0,
-        startingLevel: characterLevel,
-        retirement: undefined,
-      });
+      setMessageBarMessage("Data still loading");
+
+      return;
     }
 
-    dispatch({
-      type: "SetShowCharacterCreationDialog",
-      showCharacterCreationDialog: false,
-    });
+    if (!characterName) {
+      setMessageBarMessage("Please enter a name");
+
+      return false;
+    }
+
+    if (characterName.trim().split(" ").length > 1 && !characterShortName) {
+      setMessageBarMessage("Please enter a nickname");
+
+      return false;
+    }
+
+    if (!characterRace) {
+      setMessageBarMessage("Please select a race");
+
+      return false;
+    }
+
+    if (
+      races.data.find((race) => race.name === characterRace)?.subraceRequired &&
+      !characterSubrace
+    ) {
+      setMessageBarMessage("The selected race requires a subrace");
+
+      return false;
+    }
+
+    if (!characterClass) {
+      setMessageBarMessage("Please select a class");
+
+      return false;
+    }
+
+    const cls = classes.data.find((cls) => cls.name === characterClass);
+
+    if (cls && !characterSubclass && cls.levelFrom <= characterLevel) {
+      setMessageBarMessage(
+        `The selected archetype must have ${
+          DataHelper.startsWithVowel(cls.archetypeName) ? "an" : "a"
+        } ${cls.archetypeName} at ${DataHelper.formatOrdinalNumber(
+          characterLevel
+        )} level`
+      );
+
+      return false;
+    }
+
+    setMessageBarMessage(undefined);
+
+    return true;
   };
 
   return (
@@ -197,19 +174,35 @@ const CharacterCreationDialog = () => {
       hidden={!showDialog}
       onDismiss={onDismiss}
       dialogContentProps={contentProps}
+      modalProps={modalProps}
     >
+      {messageBarMessage && (
+        <MessageBar
+          messageBarType={MessageBarType.error}
+          styles={{
+            root: {
+              maxWidth: "240px",
+            },
+          }}
+        >
+          {messageBarMessage}
+        </MessageBar>
+      )}
       <TextField
-        label="Character Name"
+        label="Character name"
         value={characterName}
         onChange={onChangeName}
         invalid={!characterName}
         required
       />
       <TextField
-        label="Nickname"
-        value={characterNickname}
-        onChange={onChangeNickname}
-        required={!!characterName && characterName.split(" ").length > 1}
+        label="Short name"
+        value={characterShortName}
+        onChange={onChangeShortName}
+        disabled={
+          !characterName || characterName.trim().split(" ").length === 1
+        }
+        required={!!characterName && characterName.trim().split(" ").length > 1}
       />
       <Dropdown
         label="Race"
@@ -218,7 +211,7 @@ const CharacterCreationDialog = () => {
         required
         calloutProps={{ calloutMaxHeight: 500 }}
       />
-      <Dropdown
+      {/* <Dropdown
         label="Subrace"
         options={subraceOptions}
         defaultValue={undefined}
@@ -239,17 +232,22 @@ const CharacterCreationDialog = () => {
         options={classOptions}
         onChange={onChangeClass}
         required
-      />
-      <Dropdown
-        label="Subclass"
+      /> */}
+      {/* <Dropdown
+        label={
+          subclassOptions().length === 0
+            ? "Subclass"
+            : Classes.find((cls) => cls.name === characterClass)
+                ?.archetypeDefinition.name
+        }
         options={subclassOptions()}
         defaultValue={undefined}
         onChange={onChangeSubclass}
-        disabled={subclassOptions.length === 0}
-        required={subclassOptions.length !== 0}
+        disabled={subclassOptions().length === 0}
+        required={subclassOptions().length !== 0}
         calloutProps={{ calloutMaxHeight: 250 }}
         selectedKey={characterSubclass}
-      />
+      /> */}
       <DialogFooter>
         <DefaultButton text="Cancel" onClick={onDismiss} />
         <PrimaryButton text="Create" onClick={onClickCreateCharacter} />

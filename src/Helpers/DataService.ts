@@ -7,133 +7,91 @@ import {
   updatePassword,
   User,
 } from "firebase/auth";
-import { push, ref, set, update } from "firebase/database";
-
+import { push, ref, set, update, remove } from "firebase/database";
+import { Session } from "../Types/LocalStructures";
 import { auth, db } from "../App";
-import ICharacter from "../Interfaces/ICharacter";
-import ICharacterData from "../Interfaces/ICharacterData";
-import IPlayerData from "../Interfaces/IPlayerData";
-import ISession from "../Interfaces/ISession";
-import ISessionData from "../Interfaces/ISessionData";
-
-export type UserData = {
-  email: string;
-  password: string;
-  name: string;
-  dndBeyondName: string;
-  discordTag: string;
-  isDungeonMaster: boolean;
-  isGamesMaster: boolean;
-};
+import SessionRole from "../Enums/SessionRole";
+import {
+  PlayerDataToCreate,
+  SessionInterestData,
+} from "../Types/DatabaseStructures";
+import { Player } from "../Types/LocalStructures";
 
 export default class DataService {
-  /**
-   * Creates a character in the Firebase Realtime Database
-   * @param character The character to create
-   */
-  public static createCharacter = (character: ICharacterData) => {
-    const charactersRef = ref(db, "characters");
+  public static generateKey(): string | null {
+    const testRef = ref(db, "test");
 
-    let characterToCreate = {
-      playerDndBeyondName: character.playerDndBeyondName,
-      name: character.name,
-      race: character.race,
-      classes: character.classes,
-      currentLevel: character.currentLevel,
-      sessionsAttended: 0,
-      startingLevel: character.startingLevel,
-    };
+    const key = push(testRef).key;
 
-    character.nickname &&
-      Object.defineProperty(characterToCreate, "nickname", {
-        value: character.nickname,
-      });
-
-    character.subrace &&
-      Object.defineProperty(characterToCreate, "subrace", {
-        value: character.subrace,
-      });
-
-    push(charactersRef, characterToCreate);
-  };
+    return key;
+  }
 
   /**
    * Creates a session in the Firebase Realtime Database
-   * @param name The name of the session
-   * @param dungeonMaster The DnD Beyond name of the DM
-   * @param map The map of the session
-   * @param attendees The list of attendees to the session
-   * @param date The date of the session
+   * @param sessionName The name of the session
+   * @param mapId The ID of the map of the session
+
    */
-  public static createSession = (session: ISessionData) => {
+  public static createSession = async (sessionName: string, mapId: string) => {
     const sessionsRef = ref(db, "sessions/");
 
-    push(sessionsRef, session);
+    const sessionToAdd = {
+      title: sessionName,
+      mapId: mapId,
+    };
+
+    await push(sessionsRef, sessionToAdd);
   };
 
-  /**
-   * Signs a character up to a session
-   * @param session The session to sign up tp
-   * @param character The character with whom to sign up
-   */
-  public static signUpToSession = (
-    session: ISession,
-    character: ICharacter
+  public static registerForSession = async (
+    session: Session,
+    player: Player,
+    role: SessionRole
   ) => {
-    if (!session.key) {
-      throw new Error("Could not update Session; no key provided");
-    }
-    const sessionsRef = ref(db, "sessions/" + session.key);
+    const sessionInterestsRef = ref(db, "sessionInterests/");
 
-    update(sessionsRef, {
-      attendees: session.attendees.concat(character.key),
-    });
+    const newSessionInterest = {
+      sessionId: session.id,
+      playerId: player.id,
+      role: SessionRole[role],
+    };
+
+    await push(sessionInterestsRef, newSessionInterest);
   };
 
-  /**
-   * Removes a character from a session
-   * @param session The session from which to remove the character
-   * @param character The character to remove
-   */
-  public static removeCharacterFromSession = (
-    session: ISession,
-    character: ICharacter
+  public static unregisterFromSession = async (
+    sessionInterest: SessionInterestData
   ) => {
-    if (!session.key) {
-      throw new Error("Could not update Session; no key provided");
-    }
+    const sessionInterestRef = ref(
+      db,
+      "sessionInterests/" + sessionInterest.key
+    );
 
-    const sessionsRef = ref(db, "sessions/" + session.key);
-
-    update(sessionsRef, {
-      attendees: session.attendees.filter(
-        (attendee) => attendee !== character.key
-      ),
-    });
+    await remove(sessionInterestRef);
   };
 
   /**
-   * Retires a given character with a given reason, updating data in the Firebase Realtime Database
-   * @param character The character to reason
-   * @param reason The reason for the character's retirement
+   * Creates a race in the Firebase Realtime Databse
+   * @param name The name of the new race
+   * @param subraceRequired Whether the new race requires a subrace
    */
-  public static retireCharacter = (character: ICharacter, reason: string) => {
-    if (!character.key) {
-      throw new Error("Could not update character; no key provided");
-    }
+  public static createRace = (name: string, subraceRequired: boolean) => {
+    const racesRef = ref(db, "races/");
 
-    const charactersRef = ref(db, "characters/" + character.key);
+    const race = { name: name, subraceRequired: subraceRequired };
 
-    update(charactersRef, {
-      retirement: { reason: reason, date: new Date().toISOString() },
-    });
+    return push(racesRef, race)
+      .then((response) => response)
+      .catch((error) => {
+        throw new Error(error.message);
+      });
   };
 
   /**
    * Registers a Firebase user and creates a player record in the Firebase Realtime Database
    * @param userData Data about the user to register
    */
-  public static registerWithEmailAndPassword = async (userData: UserData) => {
+  public static registerWithEmailAndPassword = async (userData) => {
     return createUserWithEmailAndPassword(
       auth,
       userData.email,
@@ -147,18 +105,15 @@ export default class DataService {
 
         console.log(user);
 
-        const uid = user.uid;
-
         const playerToCreate = {
-          email: userData.email,
-          name: userData.name,
           discordTag: userData.discordTag,
-          dndBeyondName: userData.dndBeyondName,
+          name: userData.name,
           isDungeonMaster: userData.isDungeonMaster,
           isGamesMaster: userData.isGamesMaster,
-        } as IPlayerData;
+          availableDates: [],
+        } as PlayerDataToCreate;
 
-        DataService.createPlayer(uid, playerToCreate);
+        DataService.createPlayer(user.uid, playerToCreate);
       })
       .catch((error) => {
         console.log("ERROR");
@@ -179,9 +134,22 @@ export default class DataService {
         return response;
       })
       .catch((error) => {
-        console.log({ error });
+        console.log("error:", { error });
+
         throw new Error(error);
       });
+  };
+
+  public static updateAvailableDates = async (
+    user: User,
+    availableDates: number[]
+  ) => {
+    const userAvailableDatesRef = ref(
+      db,
+      "/players/" + user.uid + "/availableDates/"
+    );
+
+    await set(userAvailableDatesRef, availableDates);
   };
 
   /**
@@ -209,8 +177,11 @@ export default class DataService {
    * Creates a player record in the Firebase Realtime Database
    * @param player The player record to create
    */
-  public static createPlayer = async (uid: string, player: IPlayerData) => {
-    const usersRef = ref(db, "players/" + uid);
+  public static createPlayer = async (
+    userId: string,
+    player: PlayerDataToCreate
+  ) => {
+    const usersRef = ref(db, "players/" + userId);
 
     await set(usersRef, player).then((result) => console.log({ result }));
   };

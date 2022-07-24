@@ -1,224 +1,192 @@
-import { useDispatch, useSelector } from "react-redux";
 import {
   DirectionalHint,
   Facepile,
-  FontSizes,
-  IButtonStyles,
   IColumn,
   IconButton,
-  IFacepilePersona,
-  IOverflowSetItemProps,
-  Link,
-  OverflowSet,
+  IGroup,
+  IIconProps,
+  OverflowButtonType,
   PersonaSize,
   SelectionMode,
-  Separator,
   ShimmeredDetailsList,
   Stack,
   TooltipHost,
 } from "@fluentui/react";
-import ISessionData from "../../Interfaces/ISessionData";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import DataHelper from "../../Helpers/DataHelper";
 import DataService from "../../Helpers/DataService";
-import { toast } from "react-toastify";
-import ISession from "../../Interfaces/ISession";
+import { Character, Session } from "../../Types/LocalStructures";
+import ConfirmationDialog from "../Dialogs/ConfirmationDialog";
+
 const SessionTable = () => {
   const dispatch = useDispatch();
 
-  const sessionData = useSelector((state) => state.sessions);
-  const playerData = useSelector((state) => state.players);
-  const characterData = useSelector((state) => state.characters);
+  const sessions = useSelector((state) => state.sessions);
   const activeCharacter = useSelector((state) => state.activeCharacter);
+  const sessionInterests = useSelector((state) => state.sessionInterests);
+  const currentPlayer = useSelector((state) => state.currentPlayer);
 
-  let upcomingSessions = [] as ISession[];
-  let pastSessions = [] as ISession[];
+  const [sortedSessions, setSortedSessions] = useState<Session[]>([]);
+  const [upcomingSessions, setUpcomingSessions] = useState<Session[]>([]);
+  const [pastSessions, setPastSessions] = useState<Session[]>([]);
 
-  if (!sessionData.isLoading) {
-    upcomingSessions = sessionData.data.filter(
-      (session) =>
-        !session.date || !DataHelper.isDateInPast(new Date(session.date))
-    );
+  useEffect(() => {
+    if (sessions.isLoading) {
+      setSortedSessions([]);
 
-    pastSessions = sessionData.data.filter(
-      (session) => session.date && new Date(session.date) <= new Date()
-    );
-  }
-
-  const onRenderDate = (session: ISessionData) => (
-    <span>
-      {session.date ? new Date(session.date).toDateString() : "Unscheduled"}
-    </span>
-  );
-
-  const onRenderName = (session: ISessionData) => (
-    <span
-      style={{
-        display: "block",
-        textAlign: "left",
-        paddingLeft: sessionData.isLoading ? "36px" : "auto",
-      }}
-    >
-      {session.name}
-    </span>
-  );
-
-  const onRenderDungeonMaster = (session: ISessionData) => {
-    if (playerData.isLoading) {
       return;
     }
 
-    const matchedDm = playerData.data.find(
-      (player) => player.dndBeyondName === session.dungeonMaster
+    const sortedSessions = [...sessions.data].sort((a, b) => {
+      if (a.date && b.date) {
+        return b.date - a.date;
+      } else if (a.date && !b.date) {
+        return 1;
+      } else if (b.date && !a.date) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+
+    setSortedSessions(sortedSessions);
+  }, [sessions]);
+
+  useEffect(() => {
+    const sessionsToFilter = [...sortedSessions].sort((a, b) =>
+      a.date && b.date ? b.date - a.date : -1
     );
 
-    if (matchedDm) {
-      return <span>{matchedDm.name}</span>;
+    const previousSessions = sessionsToFilter.filter(
+      (session) => session.date && DataHelper.isDateInPast(session.date)
+    );
+
+    const upcomingSessions = sessionsToFilter.filter(
+      (session) => !(session.date && DataHelper.isDateInPast(session.date))
+    );
+
+    setPastSessions(previousSessions);
+    setUpcomingSessions(upcomingSessions);
+  }, [sortedSessions]);
+
+  const onRenderAttendees = (session: Session) => {
+    let attendees: Character[] = [];
+
+    if (session.date && DataHelper.isDateInPast(session.date)) {
+      attendees = session.attendees.attending;
     } else {
-      return <span>{session.dungeonMaster}</span>;
+      attendees = session.attendees.interested;
     }
-  };
-
-  const onRenderAttendees = (session: ISessionData) => {
-    if (characterData.isLoading) {
-      return;
-    }
-
-    const attendeeNames = [] as string[];
-
-    const personas = session.attendees
-      .map((attendee) => {
-        const matchedCharacter = characterData.data.find(
-          (character) => character.key === attendee
-        );
-
-        if (matchedCharacter) {
-          attendeeNames.push(
-            matchedCharacter!.nickname ?? matchedCharacter!.name
-          );
-        }
-
-        return {
-          imageUrl: matchedCharacter?.avatarUrl,
-          personaName: matchedCharacter?.name,
-        } as IFacepilePersona;
-      })
-      .sort((personaA, personaB) => {
-        if (!personaA.personaName || !personaB.personaName) {
-          return 0;
-        } else {
-          return personaA.personaName!.localeCompare(personaB.personaName!);
-        }
-      });
 
     return (
       <TooltipHost
-        content={attendeeNames.sort().join(", ")}
+        content={attendees.map((attendee) => attendee.fullName).join(", ")}
         directionalHint={DirectionalHint.leftCenter}
       >
-        <Facepile
-          personas={personas}
-          personaSize={PersonaSize.size16}
-          maxDisplayablePersonas={personas.length}
-        />
+        <Stack verticalFill verticalAlign="center">
+          <Facepile
+            overflowButtonType={OverflowButtonType.descriptive}
+            showTooltip={false}
+            personaSize={PersonaSize.size16}
+            personas={attendees.map((attendee) => ({
+              personaName: attendee.fullName,
+              imageUrl: attendee.avatarUrl,
+            }))}
+          />
+        </Stack>
       </TooltipHost>
     );
   };
 
-  const onClickSignUp = (session: ISession) => {
-    if (activeCharacter.isLoading || !activeCharacter.data) {
-      return;
-    }
-
-    DataService.signUpToSession(session, activeCharacter.data);
-
-    toast.success("Signed up for session");
+  const onRenderDungeonMaster = (session: Session) => {
+    return session.dungeonMaster?.name ?? "Unassigned";
   };
 
-  const onClickRemoveFromSession = (session: ISession) => {
-    if (activeCharacter.isLoading || !activeCharacter.data) {
-      return;
-    }
-
-    DataService.removeCharacterFromSession(session, activeCharacter.data);
-
-    toast.success("Removed from session");
+  const onRenderMap = (session: Session) => {
+    return session.map.name;
   };
 
-  const onRenderSignUp = (session: ISession) => {
+  const onRenderDate = (session: Session) => {
+    return session.date ? new Date(session.date).toDateString() : "Unscheduled";
+  };
+
+  const onRenderActions = (session: Session) => {
     if (
+      !session ||
+      sessionInterests.isLoading ||
+      currentPlayer.isLoading ||
       activeCharacter.isLoading ||
-      !activeCharacter.data ||
-      (session.date && DataHelper.isDateInPast(new Date(session.date)))
+      !activeCharacter.data
     ) {
       return null;
     }
 
-    const onRenderItem = (item: IOverflowSetItemProps): JSX.Element => {
-      return (
-        <Link
-          role="menuitem"
-          styles={{ root: { marginRight: 10 } }}
-          onClick={item.onClick}
-        >
-          {item.name}
-        </Link>
-      );
-    };
+    const playerInterestInSession = sessionInterests.data.find(
+      (interest) =>
+        interest.playerId === currentPlayer.data?.id &&
+        interest.sessionId === session.id
+    );
 
-    const onRenderOverflowButton = (
-      overflowItems: any[] | undefined
-    ): JSX.Element => {
-      const buttonStyles: Partial<IButtonStyles> = {
-        root: {
-          minWidth: 0,
-          padding: "0 4px",
-          alignSelf: "stretch",
-          height: "auto",
-        },
-      };
-      return (
-        <IconButton
-          role="menuitem"
-          title="More options"
-          styles={buttonStyles}
-          menuIconProps={{ iconName: "More" }}
-          menuProps={{ items: overflowItems! }}
-        />
-      );
-    };
+    const playerIsInterested = !!playerInterestInSession;
 
-    const onClickManageSession = () => {
+    const onClickRemoveFromSession = async (session: Session) => {
+      if (!playerInterestInSession) {
+        return;
+      }
+
       dispatch({
-        type: "SetShowSessionManagementDialog",
-        showSessionManagementDialog: true,
+        type: "SetConfirmation",
+        confirmation: {
+          isShown: true,
+          message: "Are you sure you wish to unregister from this session?",
+          onConfirm: async () =>
+            await DataService.unregisterFromSession(playerInterestInSession),
+        },
       });
     };
 
+    const onClickAddToSession = (session: Session) => {
+      dispatch({
+        type: "SetSessionRegistration",
+        sessionRegistration: { isShown: true, session: session },
+      });
+    };
+
+    const registerIcon: IIconProps = {
+      iconName: "AddFriend",
+    };
+
+    const unregisterIcon: IIconProps = {
+      iconName: "UserRemove",
+    };
+
     return (
-      <OverflowSet
-        onRenderItem={onRenderItem}
-        onRenderOverflowButton={onRenderOverflowButton}
-        items={[
-          session.attendees.includes(activeCharacter.data.key)
-            ? {
-                key: "item5",
-                name: "Remove",
-                onClick: () => onClickRemoveFromSession(session),
-              }
-            : {
-                key: "item4",
-                name: "Sign Up",
-                onClick: () => onClickSignUp(session),
-              },
-        ]}
-        overflowItems={[
-          {
-            key: "item1",
-            name: "Manage",
-            onClick: onClickManageSession,
-          },
-        ]}
-      />
+      <Stack
+        className="icon-button-container"
+        horizontal
+        styles={{ root: { margin: -6 } }}
+      >
+        {DataHelper.isDateInPast(session.date!) ? (
+          <Stack styles={{ root: { width: 52 } }}></Stack>
+        ) : playerIsInterested ? (
+          <TooltipHost content="Unregister from session">
+            <IconButton
+              iconProps={unregisterIcon}
+              disabled={false}
+              onClick={() => onClickRemoveFromSession(session)}
+            />
+          </TooltipHost>
+        ) : (
+          <TooltipHost content="Register for session">
+            <IconButton
+              iconProps={registerIcon}
+              disabled={false}
+              onClick={() => onClickAddToSession(session)}
+            />
+          </TooltipHost>
+        )}
+      </Stack>
     );
   };
 
@@ -227,24 +195,13 @@ const SessionTable = () => {
       key: "name",
       name: "Name",
       fieldName: "name",
-      minWidth: 200,
-      isResizable: true,
-      onRender: onRenderName,
+      minWidth: 250,
     },
     {
-      key: "date",
-      name: "Date",
-      fieldName: "date",
-      minWidth: 100,
-      isResizable: true,
-      onRender: onRenderDate,
-    },
-    {
-      key: "dungeon-master",
-      name: "DM",
+      key: "dungeonMaster",
+      name: "Dungeon Master",
       fieldName: "dungeonMaster",
-      minWidth: 75,
-      isResizable: true,
+      minWidth: 100,
       onRender: onRenderDungeonMaster,
     },
     {
@@ -252,61 +209,67 @@ const SessionTable = () => {
       name: "Map",
       fieldName: "map",
       minWidth: 150,
+      onRender: onRenderMap,
     },
     {
-      key: "characters",
-      name: "Characters",
+      key: "attendees",
+      name: "Attendees",
       fieldName: "attendees",
-      minWidth: 100,
+      minWidth: 150,
       onRender: onRenderAttendees,
     },
     {
-      key: "sign-up",
-      name: "",
-      fieldName: "signUpUrl",
-      minWidth: 75,
-      onRender: onRenderSignUp,
+      key: "date",
+      name: "Date",
+      fieldName: "scheduledDate",
+      minWidth: 150,
+      onRender: onRenderDate,
+    },
+    {
+      key: "actions",
+      name: "Actions",
+      minWidth: 50,
+      onRender: onRenderActions,
+    },
+  ];
+
+  const groups: IGroup[] = [
+    {
+      key: "upcoming",
+      name: "Upcoming Sessions",
+      startIndex: 0,
+      count: upcomingSessions.length,
+    },
+    {
+      key: "past",
+      name: "Past Sessions",
+      startIndex: upcomingSessions.length,
+      count: pastSessions.length,
     },
   ];
 
   return (
-    <Stack styles={{ root: { maxHeight: "50%" } }}>
-      <Separator
-        styles={{
-          root: {
-            fontSize: FontSizes.xLargePlus,
-          },
-        }}
-      >
-        Sessions
-      </Separator>
-      <Stack styles={{ root: { overflowY: "auto" } }}>
-        <ShimmeredDetailsList
-          items={sessionData.isLoading ? [] : sessionData.data}
-          columns={columns}
-          enableShimmer={sessionData.isLoading}
-          selectionMode={SelectionMode.none}
-          compact
-          groups={
-            upcomingSessions.length === 0
-              ? undefined
-              : [
-                  {
-                    startIndex: 0,
-                    count: upcomingSessions.length,
-                    key: "upcoming",
-                    name: "Upcoming Sessions",
-                  },
-                  {
-                    startIndex: upcomingSessions.length,
-                    count: pastSessions.length,
-                    key: "Past",
-                    name: "Past Sessions",
-                  },
-                ]
-          }
-        />
-      </Stack>
+    <Stack
+      styles={{
+        root: {
+          display: "flex",
+          flexFlow: "column nowrap",
+          width: "auto",
+          height: "auto",
+          boxSizing: "border-box",
+          maxHeight: "50%",
+          overflow: "auto",
+        },
+      }}
+    >
+      <ShimmeredDetailsList
+        columns={columns}
+        enableShimmer={sessions.isLoading}
+        items={sortedSessions}
+        selectionMode={SelectionMode.none}
+        groups={groups}
+      />
+      <ConfirmationDialog />
     </Stack>
   );
 };

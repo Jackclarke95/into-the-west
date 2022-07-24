@@ -36,7 +36,7 @@ const CharacterManagementDialog = () => {
   };
 
   const onClickUpdate = () => {
-    console.log("Clicked Update", name);
+    console.log("Clicked update", name);
 
     dispatch({
       type: "SetShowCharacterManagementDialog",

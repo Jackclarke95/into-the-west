@@ -4,18 +4,73 @@ import { DefaultRootState } from "react-redux";
 
 /** Description of all the Actions taken that can affect the state */
 export type Action =
-  | { type: "SetDarkMode"; darkMode: DefaultRootState["darkMode"] }
+  | {
+      type: "SetCharacters";
+      characters: DefaultRootState["characters"];
+    }
+  | {
+      type: "SetSessions";
+      sessions: DefaultRootState["sessions"];
+    }
+  | {
+      type: "SetPlayers";
+      players: DefaultRootState["players"];
+    }
   | {
       type: "SetCurrentPlayer";
       currentPlayer: DefaultRootState["currentPlayer"];
     }
-  | { type: "SetCharacters"; characters: DefaultRootState["characters"] }
   | {
       type: "SetActiveCharacter";
       activeCharacter: DefaultRootState["activeCharacter"];
     }
-  | { type: "SetSessions"; sessions: DefaultRootState["sessions"] }
-  | { type: "SetPlayers"; players: DefaultRootState["players"] }
+  | { type: "SetDarkMode"; darkMode: DefaultRootState["darkMode"] }
+  | {
+      type: "SetDatabaseCharacters";
+      databaseCharacters: DefaultRootState["databaseCharacters"];
+    }
+  | {
+      type: "SetCharacterClasses";
+      characterClasses: DefaultRootState["characterClasses"];
+    }
+  | {
+      type: "SetCharacterRaces";
+      characterRaces: DefaultRootState["characterRaces"];
+    }
+  | {
+      type: "SetActiveCharacter";
+      activeCharacter: DefaultRootState["activeCharacter"];
+    }
+  | {
+      type: "SetDatabasePlayers";
+      databasePlayers: DefaultRootState["databasePlayers"];
+    }
+  | {
+      type: "SetCurrentPlayer";
+      currentPlayer: DefaultRootState["currentPlayer"];
+    }
+  | { type: "SetClasses"; classes: DefaultRootState["classes"] }
+  | { type: "SetSubclasses"; subclasses: DefaultRootState["subclasses"] }
+  | { type: "SetClassConfigs"; classConfigs: DefaultRootState["classConfigs"] }
+  | { type: "SetRaces"; races: DefaultRootState["races"] }
+  | { type: "SetSubraces"; subraces: DefaultRootState["subraces"] }
+  | { type: "SetRaceConfigs"; raceConfigs: DefaultRootState["raceConfigs"] }
+  | {
+      type: "SetDatabaseSessions";
+      databaseSessions: DefaultRootState["databaseSessions"];
+    }
+  | {
+      type: "SetSessionInterests";
+      sessionInterests: DefaultRootState["sessionInterests"];
+    }
+  | {
+      type: "SetSelectedDates";
+      selectedDates: DefaultRootState["selectedDates"];
+    }
+  | {
+      type: "SetAuthUser";
+      authUser: DefaultRootState["authUser"];
+    }
   | {
       type: "SetShowCharacterCreationDialog";
       showCharacterCreationDialog: DefaultRootState["showCharacterCreationDialog"];
@@ -33,10 +88,6 @@ export type Action =
       showRegistrationDialog: DefaultRootState["showRegistrationDialog"];
     }
   | {
-      type: "SetShowSessionManagementDialog";
-      showSessionManagementDialog: DefaultRootState["showSessionManagementDialog"];
-    }
-  | {
       type: "SetShowAccountNameManagementDialog";
       showAccountNameManagementDialog: DefaultRootState["showAccountNameManagementDialog"];
     }
@@ -49,19 +100,39 @@ export type Action =
       showCharacterManagementDialog: DefaultRootState["showCharacterManagementDialog"];
     }
   | {
-      type: "SetShowTokenCreatorDialog";
-      showTokenCreatorDialog: DefaultRootState["showTokenCreatorDialog"];
+      type: "SetShowNewRaceDialog";
+      showNewRaceDialog: DefaultRootState["showNewRaceDialog"];
     }
   | {
-      type: "SetUser";
-      user: DefaultRootState["user"];
+      type: "SetShowNewSubraceDialog";
+      showNewSubraceDialog: DefaultRootState["showNewSubraceDialog"];
+    }
+  | {
+      type: "SetSessionRegistration";
+      sessionRegistration: DefaultRootState["sessionRegistration"];
+    }
+  | {
+      type: "SetSessionManagement";
+      sessionManagement: DefaultRootState["sessionManagement"];
+    }
+  | {
+      type: "SetConfirmation";
+      confirmation: DefaultRootState["confirmation"];
+    }
+  | {
+      type: "SetMaps";
+      maps: DefaultRootState["maps"];
+    }
+  | {
+      type: "SetDatabaseMaps";
+      databaseMaps: DefaultRootState["databaseMaps"];
     };
 
 /** Initial application state */
 export const initialState: DefaultRootState = {
-  darkMode:
-    window.matchMedia &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches,
+  players: { isLoading: true },
+
+  currentPlayer: { isLoading: true },
 
   characters: { isLoading: true },
 
@@ -69,9 +140,43 @@ export const initialState: DefaultRootState = {
 
   sessions: { isLoading: true },
 
-  players: { isLoading: true },
+  maps: { isLoading: true },
 
-  currentPlayer: { isLoading: true },
+  databaseCharacters: { isLoading: true },
+
+  characterClasses: { isLoading: true },
+
+  characterRaces: { isLoading: true },
+
+  databaseMaps: { isLoading: true },
+
+  databasePlayers: { isLoading: true },
+
+  databaseSessions: { isLoading: true },
+
+  classes: { isLoading: true },
+
+  subclasses: { isLoading: true },
+
+  classConfigs: { isLoading: true },
+
+  races: { isLoading: true },
+
+  subraces: { isLoading: true },
+
+  raceConfigs: { isLoading: true },
+
+  sessionInterests: { isLoading: true },
+
+  selectedDates: [] as number[],
+
+  darkMode:
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches,
+
+  isDevMode: window.location.hostname === "localhost",
+
+  authUser: null,
 
   showCharacterCreationDialog: false,
 
@@ -81,19 +186,21 @@ export const initialState: DefaultRootState = {
 
   showRegistrationDialog: false,
 
-  showSessionManagementDialog: false,
-
   showAccountNameManagementDialog: false,
 
   showPasswordManagementDialog: false,
 
   showCharacterManagementDialog: false,
 
-  showTokenCreatorDialog: false,
+  showNewRaceDialog: false,
 
-  isDevMode: window.location.hostname === "localhost",
+  showNewSubraceDialog: false,
 
-  user: null,
+  sessionRegistration: { isShown: false },
+
+  sessionManagement: { isShown: false },
+
+  confirmation: { isShown: false },
 };
 
 /**
@@ -109,9 +216,27 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
     currentState,
     (draftState) => {
       switch (action.type) {
+        // Action for setting the parsed characters
+        case "SetCharacters": {
+          draftState.characters = action.characters;
+          break;
+        }
+
+        // Action for setting the parsed sessions
+        case "SetSessions": {
+          draftState.sessions = action.sessions;
+          break;
+        }
+
         // Action for toggling Dark Mode
         case "SetDarkMode": {
           draftState.darkMode = action.darkMode;
+          break;
+        }
+
+        // Action for setting the Logged-in User
+        case "SetAuthUser": {
+          draftState.authUser = action.authUser;
           break;
         }
 
@@ -122,8 +247,31 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         }
 
         // Action for setting the Characters
-        case "SetCharacters": {
-          draftState.characters = action.characters;
+        case "SetDatabaseCharacters": {
+          draftState.databaseCharacters = action.databaseCharacters;
+          break;
+        }
+
+        // Action for setting the New Characters
+        case "SetCharacterClasses": {
+          draftState.characterClasses = action.characterClasses;
+          break;
+        }
+        // Action for setting the New Characters
+        case "SetCharacterRaces": {
+          draftState.characterRaces = action.characterRaces;
+          break;
+        }
+
+        // Action for setting the Maps
+        case "SetDatabaseMaps": {
+          draftState.databaseMaps = action.databaseMaps;
+          break;
+        }
+
+        // Action for setting the Parsed Maps
+        case "SetMaps": {
+          draftState.maps = action.maps;
           break;
         }
 
@@ -133,15 +281,69 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
           break;
         }
 
-        // Action for setting the Sessions
-        case "SetSessions": {
-          draftState.sessions = action.sessions;
+        // Action for setting the Players
+        case "SetDatabasePlayers": {
+          draftState.databasePlayers = action.databasePlayers;
           break;
         }
 
         // Action for setting the Players
         case "SetPlayers": {
           draftState.players = action.players;
+          break;
+        }
+
+        // Action for setting the Classes
+        case "SetClasses": {
+          draftState.classes = action.classes;
+          break;
+        }
+
+        // Action for setting the Subclasses
+        case "SetSubclasses": {
+          draftState.subclasses = action.subclasses;
+          break;
+        }
+
+        // Action for setting the Class Configurations
+        case "SetClassConfigs": {
+          draftState.classConfigs = action.classConfigs;
+          break;
+        }
+
+        // Action for setting the Races
+        case "SetRaces": {
+          draftState.races = action.races;
+          break;
+        }
+
+        // Action for setting the Subraces
+        case "SetSubraces": {
+          draftState.subraces = action.subraces;
+          break;
+        }
+
+        // Action for setting the Race Configurations
+        case "SetRaceConfigs": {
+          draftState.raceConfigs = action.raceConfigs;
+          break;
+        }
+
+        // Action for setting the Sessions
+        case "SetDatabaseSessions": {
+          draftState.databaseSessions = action.databaseSessions;
+          break;
+        }
+
+        // Action for setting the Session Interests
+        case "SetSessionInterests": {
+          draftState.sessionInterests = action.sessionInterests;
+          break;
+        }
+
+        // Action for setting the Availability Selections
+        case "SetSelectedDates": {
+          draftState.selectedDates = action.selectedDates;
           break;
         }
 
@@ -172,13 +374,6 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
           break;
         }
 
-        // Action for toggling the Session Management Dialog
-        case "SetShowSessionManagementDialog": {
-          draftState.showSessionManagementDialog =
-            action.showSessionManagementDialog;
-          break;
-        }
-
         // Action for toggling the Account Name Management Dialog
         case "SetShowAccountNameManagementDialog": {
           draftState.showAccountNameManagementDialog =
@@ -201,15 +396,33 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
           break;
         }
 
-        // Action for toggling the Token Creator Dialog
-        case "SetShowTokenCreatorDialog": {
-          draftState.showTokenCreatorDialog = action.showTokenCreatorDialog;
+        // Action for toggling the New Race Dialog
+        case "SetShowNewRaceDialog": {
+          draftState.showNewRaceDialog = action.showNewRaceDialog;
           break;
         }
 
-        // Action for setting the User
-        case "SetUser": {
-          draftState.user = action.user;
+        // Action for toggling the New Sub Race Dialog
+        case "SetShowNewSubraceDialog": {
+          draftState.showNewSubraceDialog = action.showNewSubraceDialog;
+          break;
+        }
+
+        // Action for toggling the Session Registration Dialog and the relevant session
+        case "SetSessionRegistration": {
+          draftState.sessionRegistration = action.sessionRegistration;
+          break;
+        }
+
+        // Action for toggling the Session Management Dialog and the relevant session
+        case "SetSessionManagement": {
+          draftState.sessionManagement = action.sessionManagement;
+          break;
+        }
+
+        // Action for toggling the Confirmation Dialog
+        case "SetConfirmation": {
+          draftState.confirmation = action.confirmation;
           break;
         }
       }

@@ -1,40 +1,74 @@
-import { useSelector } from "react-redux";
 import {
   DefaultSpacing,
-  DetailsRow,
-  DirectionalHint,
-  FontSizes,
   IColumn,
-  IDetailsListProps,
+  IGroup,
   Image,
   ImageFit,
-  ITooltipProps,
   Link,
+  ProgressIndicator,
   SelectionMode,
-  Separator,
+  SharedColors,
   ShimmeredDetailsList,
   Stack,
   TooltipHost,
+  useTheme,
 } from "@fluentui/react";
+import { useSelector } from "react-redux";
 import { ClassIcon } from "../ClassIcon";
 import DefaultAvatar from "../../Images/DefaultAvatar.jpeg";
-import ICharacter from "../../Interfaces/ICharacter";
-import LevelUpTable from "../../Data/LevelUp";
-import DataHelper from "../../Helpers/DataHelper";
+import LevelUpData from "../../Data/LevelUp";
+import { Character } from "../../Types/LocalStructures";
+import { useEffect, useState } from "react";
 
 const CharacterTable = () => {
-  const characterData = useSelector((state) => state.characters);
-  const sessionData = useSelector((state) => state.sessions);
+  const theme = useTheme();
 
-  const onRenderAvatar = (character: ICharacter) => (
+  const characters = useSelector((state) => state.characters);
+
+  const [sortedCharacters, setSortedCharacters] = useState<Character[]>([]);
+  const [activeCharacters, setActiveCharacters] = useState<Character[]>([]);
+  const [inactiveCharacters, setInactiveCharacters] = useState<Character[]>([]);
+  const [sortedColumn, setSortedColumn] = useState<{
+    column: string;
+    descending: boolean;
+  }>({ column: "name", descending: false });
+
+  useEffect(() => {
+    if (characters.isLoading) {
+      setSortedCharacters([]);
+
+      return;
+    }
+
+    var sortedCharacters = [...characters.data].sort((a, b) =>
+      a.fullName.localeCompare(b.fullName)
+    );
+
+    setSortedCharacters(sortedCharacters);
+    setSortedColumn({ column: "name", descending: false });
+  }, [characters]);
+
+  useEffect(() => {
+    const activeCharacters = sortedCharacters.filter(
+      (character) => !character.retirement.isRetired
+    );
+    const inactiveCharacters = sortedCharacters.filter(
+      (character) => character.retirement.isRetired
+    );
+
+    setActiveCharacters(activeCharacters);
+    setInactiveCharacters(inactiveCharacters);
+  }, [sortedCharacters]);
+
+  const onRenderAvatar = (character: Character) => (
     <Image
       src={character.avatarUrl ? character.avatarUrl : DefaultAvatar}
       imageFit={ImageFit.cover}
       styles={{
         root: {
           borderRadius: "50%",
-          height: "20px",
-          width: "20px",
+          height: 16,
+          width: 16,
           filter:
             character.avatarUrl === ""
               ? `hue-rotate(${
@@ -48,216 +82,271 @@ const CharacterTable = () => {
     />
   );
 
-  const onRenderName = (character: ICharacter) => {
+  const onRenderLevel = (character: Character) =>
+    character.retirement.isRetired
+      ? character.retirement.level
+      : character.currentLevel;
+
+  const onRenderName = (character: Character) =>
+    !character.retirement.isRetired ? (
+      character.sheetUrl ? (
+        <Link href={character.sheetUrl} target="_blank">
+          {character.fullName}
+        </Link>
+      ) : (
+        character.fullName
+      )
+    ) : (
+      `${character.fullName} (Retired)`
+    );
+
+  const onRenderRace = (character: Character) => {
+    if (characters.isLoading) {
+      return <span>Loading</span>;
+    } else {
+      if (character.race.subrace) {
+        return (
+          <span>{`${character.race.subrace} ${character.race.race}`}</span>
+        );
+      } else {
+        return <span>{character.race.race}</span>;
+      }
+    }
+  };
+
+  const onRenderClass = (character: Character) => {
+    if (characters.isLoading) {
+      return <span>Loading</span>;
+    } else {
+      return (
+        <Stack horizontal tokens={{ childrenGap: 10 }}>
+          {[...character.classes]
+            .sort((a, b) => b.level - a.level)
+            .map((cls) => {
+              return (
+                <Stack
+                  horizontal
+                  horizontalAlign="center"
+                  verticalAlign="center"
+                >
+                  <ClassIcon
+                    className={cls.class}
+                    styles={{
+                      root: {
+                        borderRadius: "50%",
+                        marginRight: DefaultSpacing.s2,
+                        maxWidth: 16,
+                      },
+                    }}
+                  />
+                  {character.classes.length > 1
+                    ? `${cls.class} (${cls.level})`
+                    : cls.class}
+                </Stack>
+              );
+            })}
+        </Stack>
+      );
+    }
+  };
+
+  const onRenderXpBar = (character: Character) => {
+    if (!character.player) {
+      return (
+        <TooltipHost content="Could not find player for this character">
+          <ProgressIndicator />
+        </TooltipHost>
+      );
+    }
+
+    const xpForCurrentLevel =
+      LevelUpData[Math.floor(character.player.xp / 120) - 1].xpRequired;
+
+    const xpToNextLevel =
+      LevelUpData[Math.floor(character.player.xp / 120)].xpRequired;
+
+    const current = character.player.xp - xpForCurrentLevel;
+    const high = xpToNextLevel - xpForCurrentLevel;
+
     return (
-      <Stack horizontal tokens={{ childrenGap: 3 }}>
-        {character.sheetUrl ? (
-          <Stack>
-            <Link target="_blank" href={character.sheetUrl}>
-              {character.name}
-            </Link>
-          </Stack>
-        ) : (
-          <span>{character.name}</span>
-        )}
-        {character.retirement && <i>(Retired)</i>}
-      </Stack>
+      <TooltipHost
+        content={`${character.player.xp - xpForCurrentLevel} / ${
+          xpToNextLevel - xpForCurrentLevel
+        }`}
+      >
+        <Stack verticalFill verticalAlign="center">
+          <ProgressIndicator
+            barHeight={3}
+            percentComplete={current / high}
+            styles={{
+              itemProgress: {
+                padding: 0,
+              },
+              progressBar: {
+                backgroundColor:
+                  current >= high
+                    ? SharedColors.greenCyan10
+                    : theme.palette.accent,
+              },
+            }}
+          />
+        </Stack>
+      </TooltipHost>
     );
   };
 
-  const onRenderRace = (character: ICharacter) =>
-    character.race.subrace
-      ? `${character.race.subrace} ${character.race}`
-      : character.race;
+  const onColumnClick = (
+    _: React.MouseEvent<HTMLElement, MouseEvent>,
+    column: IColumn
+  ) => {
+    var newlySortedCharacters = sortedCharacters;
 
-  const onRenderClasses = (character: ICharacter) => (
-    <Stack
-      horizontal
-      tokens={{ childrenGap: 10 }}
-      styles={{
-        root: { padding: 0, maxHeight: "23px" },
-      }}
-    >
-      {character.classes.map((cls) => {
-        return (
-          <Stack horizontal horizontalAlign="center" verticalAlign="center">
-            <ClassIcon
-              className={cls.name}
-              styles={{
-                root: {
-                  borderRadius: "50%",
-                  marginRight: DefaultSpacing.s2,
-                  maxWidth: "20px",
-                },
-              }}
-            />
-            {character.classes.length > 1
-              ? `${cls.name} (${cls.level})`
-              : cls.name}
-          </Stack>
+    switch (column.key) {
+      case "level": {
+        newlySortedCharacters = sortedCharacters.sort(
+          (a, b) => a.currentLevel! - b.currentLevel!
         );
-      })}
-    </Stack>
-  );
 
-  const onRenderLevel = (character: ICharacter) => {
-    let levelToRender: Number;
+        break;
+      }
 
-    if (sessionData.isLoading) {
-      levelToRender = character.currentLevel;
-    } else {
-      const sessionsAttended = sessionData.data.filter((session) =>
-        session.attendees.includes(character.key)
-      );
+      case "name": {
+        newlySortedCharacters = sortedCharacters.sort((a, b) =>
+          a.fullName.localeCompare(b.fullName)
+        );
 
-      const sessionsRun = sessionData.data.filter((session) => {
-        const dmMatch = session.dungeonMaster === character.playerDndBeyondName;
-        const isInpast = !session.date || DataHelper.isDateInPast(session.date);
+        break;
+      }
 
-        return dmMatch && isInpast;
-      });
+      case "race": {
+        newlySortedCharacters = sortedCharacters.sort((a, b) =>
+          `${a.race.subrace ?? a.race.race}`.localeCompare(
+            `${b.race.subrace ?? b.race.race}`
+          )
+        );
 
-      const adjustedSessions = Math.floor(
-        sessionsAttended.length + sessionsRun.length / 2
-      );
+        break;
+      }
 
-      const levelUp = LevelUpTable.filter(
-        (level) => level.minSessions <= adjustedSessions
-      );
+      case "class": {
+        newlySortedCharacters = sortedCharacters.sort((a, b) =>
+          a.classes[0].class.localeCompare(b.classes[0].class)
+        );
 
-      const calculatedLevel = levelUp[levelUp.length - 1].level;
+        break;
+      }
 
-      levelToRender = calculatedLevel;
+      default:
+        return;
     }
 
-    return (
-      <span
-        style={{
-          display: "block",
-          textAlign: "left",
-          paddingLeft: "1em",
-        }}
-      >
-        {levelToRender}
-      </span>
+    if (column.isSortedDescending) {
+      newlySortedCharacters = sortedCharacters;
+    } else {
+      newlySortedCharacters = sortedCharacters.reverse();
+    }
+
+    const activeCharacters = newlySortedCharacters.filter(
+      (character) => !character.retirement.isRetired
     );
+    const inactiveCharacters = newlySortedCharacters.filter(
+      (character) => character.retirement.isRetired
+    );
+
+    setActiveCharacters(activeCharacters);
+    setInactiveCharacters(inactiveCharacters);
+
+    setSortedColumn({
+      column: column.key,
+      descending: !column.isSortedDescending,
+    });
   };
 
   const columns: IColumn[] = [
     {
       key: "avatar",
       name: "",
-      fieldName: "avatarUrl",
-      minWidth: 25,
-      maxWidth: 25,
+      minWidth: 20,
+      maxWidth: 20,
       onRender: onRenderAvatar,
     },
     {
       key: "level",
       name: "Level",
-      fieldName: "currentLevel",
-      minWidth: 33,
-      maxWidth: 50,
+      minWidth: 50,
+      isSorted: sortedColumn.column === "level",
+      isSortedDescending:
+        sortedColumn.column === "level" && sortedColumn.descending,
       onRender: onRenderLevel,
+      onColumnClick: onColumnClick,
     },
     {
       key: "name",
       name: "Name",
-      fieldName: "name",
-      minWidth: 200,
-      isResizable: true,
+      minWidth: 150,
+      isSorted: sortedColumn.column === "name",
+      isSortedDescending:
+        sortedColumn.column === "name" && sortedColumn.descending,
       onRender: onRenderName,
+      onColumnClick: onColumnClick,
     },
     {
       key: "race",
       name: "Race",
-      fieldName: "race",
-      minWidth: 150,
-      isResizable: true,
+      minWidth: 100,
+      isSorted: sortedColumn.column === "race",
+      isSortedDescending:
+        sortedColumn.column === "race" && sortedColumn.descending,
       onRender: onRenderRace,
+      onColumnClick: onColumnClick,
     },
     {
       key: "class",
       name: "Class",
-      fieldName: "classes",
-      minWidth: 175,
-      isResizable: true,
-      onRender: onRenderClasses,
+      minWidth: 200,
+      isSorted: sortedColumn.column === "class",
+      isSortedDescending:
+        sortedColumn.column === "class" && sortedColumn.descending,
+      onRender: onRenderClass,
+      onColumnClick: onColumnClick,
+    },
+    {
+      key: "xp",
+      name: "Experience Points",
+      minWidth: 200,
+      onRender: onRenderXpBar,
     },
   ];
 
-  const onRenderRow: IDetailsListProps["onRenderRow"] = (props) => {
-    if (props) {
-      const character = props.item as ICharacter;
-
-      const tooltipProps: ITooltipProps = {
-        onRenderContent: () => {
-          return (
-            <Image
-              src={character.avatarUrl ? character.avatarUrl : DefaultAvatar}
-              imageFit={ImageFit.cover}
-              styles={{
-                root: {
-                  borderRadius: "50%",
-                  height: "250px",
-                  width: "250px",
-                  filter:
-                    character.avatarUrl === ""
-                      ? `hue-rotate(${
-                          Math.random() * 360
-                        }deg) brightness(1.5) invert(100%) ${
-                          character.retirement
-                            ? `grayscale(100%) brightness(0.5)`
-                            : ""
-                        }`
-                      : undefined,
-                },
-              }}
-            />
-          );
-        },
-      };
-
-      return (
-        <TooltipHost
-          tooltipProps={tooltipProps}
-          directionalHint={DirectionalHint.leftCenter}
-        >
-          <DetailsRow {...props} />
-        </TooltipHost>
-      );
-    }
-    return null;
-  };
+  const groups: IGroup[] = [
+    {
+      key: "active",
+      name: "Active Characters",
+      startIndex: 0,
+      count: activeCharacters.length,
+    },
+    {
+      key: "inactive",
+      name: "Inactive Characters",
+      startIndex: activeCharacters.length,
+      count: inactiveCharacters.length,
+      isCollapsed: true,
+    },
+  ];
 
   return (
-    <Stack
-      styles={{
-        root: {
-          maxHeight: "50%",
-        },
+    <ShimmeredDetailsList
+      styles={{ root: { overFlowY: "auto" } }}
+      columns={columns}
+      enableShimmer={activeCharacters.length === 0}
+      items={[...activeCharacters, ...inactiveCharacters]}
+      groups={groups}
+      selectionMode={SelectionMode.none}
+      columnReorderOptions={{
+        frozenColumnCountFromStart: 1,
+        frozenColumnCountFromEnd: 1,
       }}
-    >
-      <Separator
-        styles={{
-          root: {
-            fontSize: FontSizes.xLargePlus,
-          },
-        }}
-      >
-        Characters
-      </Separator>
-      <Stack styles={{ root: { overflowY: "auto" } }}>
-        <ShimmeredDetailsList
-          items={characterData.isLoading ? [] : characterData.data}
-          columns={columns}
-          onRenderRow={onRenderRow}
-          enableShimmer={characterData.isLoading}
-          selectionMode={SelectionMode.none}
-          compact
-        />
-      </Stack>
-    </Stack>
+    />
   );
 };
 

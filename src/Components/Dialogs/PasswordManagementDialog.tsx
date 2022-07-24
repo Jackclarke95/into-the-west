@@ -19,7 +19,7 @@ const PasswordManagementDialog = () => {
   const showAccountManagementDialog = useSelector(
     (state) => state.showPasswordManagementDialog
   );
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.authUser);
 
   const [password, setPassword] = useState<string | undefined>(undefined);
   const [passwordRepeat, setPasswordRepeat] = useState<string | undefined>(
@@ -61,15 +61,25 @@ const PasswordManagementDialog = () => {
     await DataService.changePassword(user!, password)
       .then(() => {
         onDismiss();
+        
         toast.success("Password changed successfully");
       })
       .catch((error) => {
-        setErrorMessage(
-          error.message
+        console.log("returned error:", error);
+
+        let formattedErrorMessage = "";
+
+        if (error.message.includes("requires-recent-login")) {
+          formattedErrorMessage =
+            "You need to log out and back in again to change your password";
+        } else {
+          formattedErrorMessage = error.message
             .replace("FirebaseError: Firebase:", "")
             .replace(/ *\([^)]*\) */g, "")
-            .trim()
-        );
+            .trim();
+        }
+
+        setErrorMessage(formattedErrorMessage);
       });
   };
 
@@ -94,7 +104,7 @@ const PasswordManagementDialog = () => {
           messageBarType={MessageBarType.error}
           styles={{
             root: {
-              maxWidth: "272px",
+              maxWidth: "240px",
             },
           }}
         >
