@@ -232,7 +232,7 @@ const SessionManagementDialog = () => {
           <>
             {!dungeonMaster && (
               <MessageBar messageBarType={MessageBarType.error}>
-                No dungeon master found for this session.
+                No Dungeon Master found for this session.
               </MessageBar>
             )}
             <Text>Please select a date for this session.</Text>
@@ -250,6 +250,7 @@ const SessionManagementDialog = () => {
               items={dates}
               selectionMode={SelectionMode.none}
               columns={columns}
+              compact
             />
           </>
         ) : (
