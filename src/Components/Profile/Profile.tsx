@@ -52,10 +52,12 @@ const Profile = () => {
     }
 
     const selectedDates = currentUser.data.availableDates
-      .filter((date) => {
-        return !DataHelper.isDateInPast(new Date(date));
-      })
-      .map((date) => date);
+      ? currentUser.data.availableDates
+          .filter((date) => {
+            return !DataHelper.isDateInPast(new Date(date));
+          })
+          .map((date) => date)
+      : [];
 
     dispatch({
       type: "SetSelectedDates",
