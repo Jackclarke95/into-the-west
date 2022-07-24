@@ -32,6 +32,7 @@ export type Session = {
   dungeonMaster: Player | undefined;
   date: number | undefined;
   map: Map;
+  suggestedByPlayerId: string | undefined;
 };
 
 export type Player = {

@@ -32,12 +32,17 @@ export default class DataService {
    * @param mapId The ID of the map of the session
 
    */
-  public static createSession = async (sessionName: string, mapId: string) => {
+  public static createSession = async (
+    sessionName: string,
+    mapId: string,
+    player: Player
+  ) => {
     const sessionsRef = ref(db, "sessions/");
 
     const sessionToAdd = {
       title: sessionName,
       mapId: mapId,
+      suggestedByPlayerId: player.id,
     };
 
     await push(sessionsRef, sessionToAdd);
@@ -73,7 +78,9 @@ export default class DataService {
   public static setDateForSession = async (session: Session, date: number) => {
     const sessionRef = ref(db, "sessions/" + session.id);
 
-    await update(sessionRef, { selectedDate: date });
+    await update(sessionRef, {
+      selectedDate: date,
+    });
   };
 
   /**

@@ -17,6 +17,7 @@ import { Map } from "../../Types/LocalStructures";
 const SessionCreationDialog = () => {
   const showDialog = useSelector((state) => state.showSessionCreationDialog);
   const maps = useSelector((state) => state.maps);
+  const currentPlayer = useSelector((state) => state.currentPlayer);
 
   const [sessionName, setSessionName] = useState<string | undefined>(undefined);
 
@@ -49,11 +50,21 @@ const SessionCreationDialog = () => {
   };
 
   const onClickAddSession = async () => {
-    if (!sessionName || sessionName.length === 0 || !sessionMap) {
+    if (
+      !sessionName ||
+      sessionName.length === 0 ||
+      !sessionMap ||
+      currentPlayer.isLoading ||
+      !currentPlayer.data
+    ) {
       return;
     }
 
-    await DataService.createSession(sessionName, sessionMap.id);
+    await DataService.createSession(
+      sessionName,
+      sessionMap.id,
+      currentPlayer.data
+    );
 
     onDismiss();
   };

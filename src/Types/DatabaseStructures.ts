@@ -62,6 +62,7 @@ export type SessionData = {
   mapId: string;
   title: string;
   selectedDate: number | undefined;
+  suggestedByPlayerId: any;
 };
 
 export type MapData = {

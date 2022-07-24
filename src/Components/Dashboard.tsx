@@ -358,6 +358,7 @@ const Dashboard = () => {
           interested: deduplicatedInterestedCharacters,
         },
         map: matchingMap,
+        suggestedByPlayerId: session.suggestedByPlayerId,
       };
     });
 

@@ -198,7 +198,8 @@ const SessionTable = () => {
         )}
         {!DataHelper.isDateInPast(session.date!) &&
           !currentPlayer.isLoading &&
-          currentPlayer.data?.isDungeonMaster && (
+          (currentPlayer.data?.isDungeonMaster ||
+            session.suggestedByPlayerId === currentPlayer.data?.id) && (
             <TooltipHost content="Manage session">
               <IconButton
                 iconProps={manageIcon}
