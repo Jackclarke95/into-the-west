@@ -1,6 +1,5 @@
 import { Stack } from "@fluentui/react";
 import { useSelector } from "react-redux";
-import DataHelper from "../Helpers/DataHelper";
 import SessionCard from "./Cards/SessionCard";
 
 const MobileCharacterList = () => {
@@ -14,13 +13,9 @@ const MobileCharacterList = () => {
     >
       {!sessions.isLoading &&
         !characters.isLoading &&
-        sessions.data
-          // .sort((sessionA, sessionB) =>
-          //   DataHelper.sortNullableDatesDescending(sessionA.date, sessionB.date)
-          // )
-          .map((session) => (
-            <SessionCard session={session} characters={characters.data} />
-          ))}
+        sessions.data.map((session) => (
+          <SessionCard session={session} characters={characters.data} />
+        ))}
     </Stack>
   );
 };

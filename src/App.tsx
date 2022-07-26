@@ -38,6 +38,7 @@ import DataParse from "./Components/DataParse";
 import React from "react";
 import MobileHeader from "./Components/MobileHeader";
 import MobileDashboard from "./Components/MobileDashboard";
+import MobileFooter from "./Components/MobileFooter";
 
 const isDevMode = window.location.hostname === "localhost";
 
@@ -352,16 +353,6 @@ const App = () => {
                 <DesktopHeader />
                 <DesktopDashboard />
                 <DesktopFooter />
-                <CharacterCreationDialog />
-                <SessionCreationDialog />
-                <SessionManagementDialog />
-                <AccountNameManagementDialog />
-                <PasswordManagementDialog />
-                <CharacterManagementDialog />
-                <NewRaceDialog />
-                <NewSubraceDialog />
-                <SessionRegistrationDialog />
-                <ConfirmationDialog />
               </Stack>
             </BrowserView>
             <MobileView>
@@ -370,13 +361,15 @@ const App = () => {
                   <MobileHeader />
                 </Sticky>
                 <MobileDashboard />
+                <Sticky>
+                  <MobileFooter />
+                </Sticky>
               </ScrollablePane>
             </MobileView>
           </React.Fragment>
         ) : (
           <>
             <Login />
-            <RegistrationDialog />
           </>
         )}
       </DataParse>
@@ -386,6 +379,17 @@ const App = () => {
         closeButton
         autoClose={1500}
       />
+      <RegistrationDialog />
+      <CharacterCreationDialog />
+      <SessionCreationDialog />
+      <SessionManagementDialog />
+      <AccountNameManagementDialog />
+      <PasswordManagementDialog />
+      <CharacterManagementDialog />
+      <NewRaceDialog />
+      <NewSubraceDialog />
+      <SessionRegistrationDialog />
+      <ConfirmationDialog />
     </React.Fragment>
   );
 };
