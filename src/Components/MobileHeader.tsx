@@ -1,6 +1,6 @@
 import { FontSizes, Image, NeutralColors, Stack, Text } from "@fluentui/react";
 
-const Header = () => {
+const MobileHeader = () => {
   return (
     <Stack
       horizontal
@@ -10,27 +10,26 @@ const Header = () => {
       styles={{
         root: {
           width: "100%",
-          padding: "0.2em",
-          fontSize: FontSizes.superLarge,
+          padding: "1em",
           backgroundColor: NeutralColors.gray150,
           display: "flex",
         },
       }}
     >
-      <Image src={process.env.PUBLIC_URL + "logo512.png"} height={64} />
+      <Image src={process.env.PUBLIC_URL + "logo512.png"} height={48} />
       <Text
         styles={{
           root: {
             color: NeutralColors.gray30,
-            fontSize: FontSizes.superLarge,
+            fontSize: FontSizes.xxLargePlus,
           },
         }}
       >
         Into the West
       </Text>
-      <Image src={process.env.PUBLIC_URL + "logo512.png"} height={64} />
+      <Image src={process.env.PUBLIC_URL + "logo512.png"} height={48} />
     </Stack>
   );
 };
 
-export default Header;
+export default MobileHeader;
