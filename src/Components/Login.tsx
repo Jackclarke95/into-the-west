@@ -124,70 +124,76 @@ const Login = () => {
 
   return (
     <Stack
-      styles={{
-        root: {
-          boxShadow: DefaultEffects.elevation16,
-          padding: DefaultSpacing.l2,
-          backgroundColor: "white",
-          width: "320px",
-        },
-      }}
+      verticalAlign="center"
+      horizontalAlign="center"
+      styles={{ root: { height: "100vh" } }}
     >
-      <Image src={process.env.PUBLIC_URL + "logo512.png"} height={256} />
-      <Text styles={{ root: { fontSize: FontSizes.superLarge } }}>
-        Into the West
-      </Text>
-      {messageBarMessage && (
-        <MessageBar
-          messageBarType={messageBarType}
-          styles={{
-            root: {
-              maxWidth: "240px",
-            },
-          }}
-        >
-          {messageBarMessage}
-        </MessageBar>
-      )}
-      <TextField
-        label="Email"
-        type="email"
-        onChange={onChangeEmail}
-        onKeyPress={onKeyPress}
-      />
-      <TextField
-        label="Password"
-        type="password"
-        onChange={onChangePassword}
-        canRevealPassword
-        onKeyPress={onKeyPress}
-      />
       <Stack
         styles={{
           root: {
-            paddingTop: DefaultSpacing.m,
-            paddingBottom: DefaultSpacing.m,
+            boxShadow: DefaultEffects.elevation16,
+            padding: DefaultSpacing.l2,
+            backgroundColor: "white",
+            width: "320px",
           },
         }}
       >
-        <PrimaryButton
-          text={loading ? "Signing in" : "Sign in"}
-          onClick={onClickSignIn}
-          disabled={loading}
+        <Image src={process.env.PUBLIC_URL + "logo512.png"} height={256} />
+        <Text styles={{ root: { fontSize: FontSizes.superLarge } }}>
+          Into the West
+        </Text>
+        {messageBarMessage && (
+          <MessageBar
+            messageBarType={messageBarType}
+            styles={{
+              root: {
+                maxWidth: "240px",
+              },
+            }}
+          >
+            {messageBarMessage}
+          </MessageBar>
+        )}
+        <TextField
+          label="Email"
+          type="email"
+          onChange={onChangeEmail}
+          onKeyPress={onKeyPress}
+        />
+        <TextField
+          label="Password"
+          type="password"
+          onChange={onChangePassword}
+          canRevealPassword
+          onKeyPress={onKeyPress}
+        />
+        <Stack
+          styles={{
+            root: {
+              paddingTop: DefaultSpacing.m,
+              paddingBottom: DefaultSpacing.m,
+            },
+          }}
         >
-          {loading && <Spinner />}
-        </PrimaryButton>
-        <Label>
-          Forgot password? You can reset it{" "}
-          <Link onClick={onClickResetPassword}>here</Link>
-        </Label>
+          <PrimaryButton
+            text={loading ? "Signing in" : "Sign in"}
+            onClick={onClickSignIn}
+            disabled={loading}
+          >
+            {loading && <Spinner />}
+          </PrimaryButton>
+          <Label>
+            Forgot password? You can reset it{" "}
+            <Link onClick={onClickResetPassword}>here</Link>
+          </Label>
+        </Stack>
+        <Label>No account? Register here:</Label>
+        <DefaultButton
+          text="Register"
+          onClick={onClickRegister}
+          disabled={loading}
+        />
       </Stack>
-      <Label>No account? Register here:</Label>
-      <DefaultButton
-        text="Register"
-        onClick={onClickRegister}
-        disabled={loading}
-      />
     </Stack>
   );
 };

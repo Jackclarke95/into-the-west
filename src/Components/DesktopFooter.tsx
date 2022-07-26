@@ -9,7 +9,7 @@ import {
 } from "@fluentui/react";
 import preval from "preval.macro";
 
-const Footer = () => {
+const DesktopFooter = () => {
   const isDevMode = useSelector((state) => state.isDevMode);
 
   return (
@@ -49,4 +49,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default DesktopFooter;

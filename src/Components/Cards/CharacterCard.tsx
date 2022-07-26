@@ -1,5 +1,14 @@
-import { DefaultSpacing, Persona, PersonaSize, Stack } from "@fluentui/react";
-import DataHelper from "../../Helpers/DataHelper";
+import {
+  DefaultSpacing,
+  FontWeights,
+  IPersonaSharedProps,
+  NeutralColors,
+  Persona,
+  PersonaCoin,
+  PersonaSize,
+  Stack,
+  Text,
+} from "@fluentui/react";
 import { Character } from "../../Types/LocalStructures";
 import { ClassIcon } from "../ClassIcon";
 
@@ -36,13 +45,48 @@ const CharacterCard: React.FC<{
     </Stack>
   );
 
-  const text = `${character.fullName} (${DataHelper.formatOrdinalNumber(
-    character.currentLevel ?? 0
-  )} Level)`;
+  const text = character.fullName;
 
   const tertiaryText = `${character.race.subrace ?? ""} ${
     character.race.race
   }`.trim();
+
+  const onRenderPersonaCoin = (a: IPersonaSharedProps | undefined) => {
+    return (
+      <Stack styles={{ root: { position: "relative" } }}>
+        <PersonaCoin imageUrl={a?.imageUrl} coinSize={72} />
+        <Stack
+          verticalAlign="center"
+          horizontalAlign="center"
+          styles={{
+            root: {
+              position: "absolute",
+              bottom: 0,
+              right: 0,
+              paddingBottom: "0.1em",
+              width: 24,
+              height: 24,
+              backgroundColor: "white",
+              borderRadius: "50%",
+              borderStyle: "solid",
+              borderColor: NeutralColors.gray140,
+              borderWidth: 2,
+            },
+          }}
+        >
+          <Text
+            styles={{
+              root: {
+                fontWeight: FontWeights.semibold,
+              },
+            }}
+          >
+            {character.currentLevel}
+          </Text>
+        </Stack>
+      </Stack>
+    );
+  };
 
   return (
     <Persona
@@ -52,6 +96,7 @@ const CharacterCard: React.FC<{
       imageUrl={character.avatarUrl}
       size={PersonaSize.size72}
       styles={{ root: { width: 350 } }}
+      onRenderPersonaCoin={onRenderPersonaCoin}
     />
   );
 };

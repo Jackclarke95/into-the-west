@@ -1,6 +1,6 @@
 import { FontSizes, Image, NeutralColors, Stack, Text } from "@fluentui/react";
 
-const Header = () => {
+const DesktopHeader = () => {
   return (
     <Stack
       horizontal
@@ -33,4 +33,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default DesktopHeader;

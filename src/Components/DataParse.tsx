@@ -1,14 +1,9 @@
-import { Pivot, PivotItem, Stack } from "@fluentui/react";
-import Profile from "./Profile/Profile";
-import Utilities from "./Utilities/Utilities";
-import CharacterTable from "./Tables/CharacterTable";
-import SessionTable from "./Tables/SessionTable";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import SessionRole from "../Enums/SessionRole";
-import { Character, Map, Player, Session } from "../Types/LocalStructures";
+import { Player, Character, Map, Session } from "../Types/LocalStructures";
 
-const Dashboard = () => {
+const DataParse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const dispatch = useDispatch();
 
   const databaseMaps = useSelector((state) => state.databaseMaps);
@@ -382,35 +377,7 @@ const Dashboard = () => {
     databaseMaps,
   ]);
 
-  return (
-    <Stack
-      verticalFill
-      horizontal
-      horizontalAlign="center"
-      tokens={{ childrenGap: 20 }}
-      styles={{
-        root: {
-          overflowY: "auto",
-          height: "100%",
-          padding: "1em",
-          backgroundColor: "white",
-        },
-      }}
-    >
-      <Pivot>
-        <PivotItem headerText="Sessions">
-          <SessionTable />
-        </PivotItem>
-        <PivotItem headerText="Characters">
-          <CharacterTable />
-        </PivotItem>
-      </Pivot>
-      <Stack>
-        <Profile />
-        <Utilities />
-      </Stack>
-    </Stack>
-  );
+  return <div className="intothewest-app">{children}</div>;
 };
 
-export default Dashboard;
+export default DataParse;

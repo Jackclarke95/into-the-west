@@ -1,4 +1,4 @@
-import { Stack } from "@fluentui/react";
+import { ScrollablePane, Stack, Sticky } from "@fluentui/react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getDatabase, onValue, ref } from "firebase/database";
@@ -11,10 +11,10 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import "./Style/App.scss";
-import Header from "./Components/Header";
-import Footer from "./Components/Footer";
+import DesktopHeader from "./Components/DesktopHeader";
+import DesktopFooter from "./Components/DesktopFooter";
 import Login from "./Components/Login";
-import Dashboard from "./Components/Dashboard";
+import DesktopDashboard from "./Components/DesktopDashboard";
 
 import Everwilds from "./Images/Maps/The Everwilds - Preview.jpg";
 import ForgottenLands from "./Images/Maps/The Forgotten Lands - Preview.jpg";
@@ -33,6 +33,12 @@ import NewSubraceDialog from "./Components/Dialogs/NewSubraceDialog";
 import SessionRegistrationDialog from "./Components/Dialogs/SessionRegistrationDialog";
 import { PlayerData } from "./Types/DatabaseStructures";
 import ConfirmationDialog from "./Components/Dialogs/ConfirmationDialog";
+import { BrowserView, MobileView } from "react-device-detect";
+import DataParse from "./Components/DataParse";
+import React from "react";
+import MobileHeader from "./Components/MobileHeader";
+import MobileDashboard from "./Components/MobileDashboard";
+import MobileFooter from "./Components/MobileFooter";
 
 const isDevMode = window.location.hostname === "localhost";
 
@@ -315,60 +321,76 @@ const App = () => {
   });
 
   return (
-    <Stack
-      className="app-container"
-      verticalFill
-      horizontalAlign="center"
-      verticalAlign="center"
-      styles={{
-        root: {
-          textAlign: "center",
-          height: "100vh",
-          backgroundImage: authUser
-            ? `url("${DataHelper.getRandomFromArray([
-                Everwilds,
-                ForgottenLands,
-                LunarIsles,
-                ShatteredRealms,
-              ])}")`
-            : "",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          backgroundComposite: "saturation",
-          backdropFilter: "grayscale(30%) blur(50%)",
-        },
-      }}
-    >
-      {authUser ? (
-        <>
-          <Header />
-          <Dashboard />
-          <Footer />
-          <CharacterCreationDialog />
-          <SessionCreationDialog />
-          <SessionManagementDialog />
-          <AccountNameManagementDialog />
-          <PasswordManagementDialog />
-          <CharacterManagementDialog />
-          <NewRaceDialog />
-          <NewSubraceDialog />
-          <SessionRegistrationDialog />
-          <ConfirmationDialog />
-        </>
-      ) : (
-        <>
-          <Login />
-          <RegistrationDialog />
-        </>
-      )}
+    <React.Fragment>
+      <DataParse>
+        {authUser ? (
+          <React.Fragment>
+            <BrowserView>
+              <Stack
+                className="app-container"
+                verticalFill
+                horizontalAlign="center"
+                verticalAlign="center"
+                styles={{
+                  root: {
+                    textAlign: "center",
+                    height: "100vh",
+                    backgroundImage: authUser
+                      ? `url("${DataHelper.getRandomFromArray([
+                          Everwilds,
+                          ForgottenLands,
+                          LunarIsles,
+                          ShatteredRealms,
+                        ])}")`
+                      : "",
+                    backgroundSize: "cover",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center",
+                    backgroundComposite: "saturation",
+                  },
+                }}
+              >
+                <DesktopHeader />
+                <DesktopDashboard />
+                <DesktopFooter />
+              </Stack>
+            </BrowserView>
+            <MobileView>
+              <ScrollablePane>
+                <Sticky>
+                  <MobileHeader />
+                </Sticky>
+                <MobileDashboard />
+                <Sticky>
+                  <MobileFooter />
+                </Sticky>
+              </ScrollablePane>
+            </MobileView>
+          </React.Fragment>
+        ) : (
+          <>
+            <Login />
+          </>
+        )}
+      </DataParse>
       <ToastContainer
         hideProgressBar
         position="top-center"
         closeButton
         autoClose={1500}
       />
-    </Stack>
+      <RegistrationDialog />
+      <CharacterCreationDialog />
+      <SessionCreationDialog />
+      <SessionManagementDialog />
+      <AccountNameManagementDialog />
+      <PasswordManagementDialog />
+      <CharacterManagementDialog />
+      <NewRaceDialog />
+      <NewSubraceDialog />
+      <SessionRegistrationDialog />
+      <ConfirmationDialog />
+    </React.Fragment>
   );
 };
 

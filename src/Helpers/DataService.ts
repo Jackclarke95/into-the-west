@@ -240,7 +240,7 @@ export default class DataService {
   /**
    * Signs the user out
    */
-  public static signOut = () => {
+  public static signOut = async () => {
     signOut(auth)
       .then(() => {
         toast.success("Successfully signed out");

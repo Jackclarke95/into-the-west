@@ -178,11 +178,11 @@ export default class DataHelper {
    * @returns The sorted dates
    */
   public static sortNullableDatesDescending(
-    dateA: Date | undefined,
-    dateB: Date | undefined
+    dateA: Date | number | undefined,
+    dateB: Date | number | undefined
   ) {
     if (dateA && dateB) {
-      return dateB.getTime() - dateA.getTime();
+      return new Date(dateB).getTime() - new Date(dateA).getTime();
     } else if (dateA) {
       return 1;
     } else if (dateB) {
