@@ -13,7 +13,10 @@ const SessionCard: React.FC<{
   characters: Character[];
 }> = ({ session, characters }) => {
   const onRenderAttendees = () => {
-    const personas = session.attendees.interested
+    const personas = [
+      ...session.attendees.interested,
+      ...session.attendees.attending,
+    ]
       .map((attendee) => {
         const matchedCharacter = characters.find(
           (character) => character.id === attendee.id

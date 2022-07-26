@@ -4,16 +4,7 @@ import MobileSessionList from "./MobileSessionList";
 
 const MobileDashboard = () => {
   return (
-    <Stack
-      horizontalAlign="center"
-      styles={{
-        root: {
-          overflowY: "auto",
-          height: "100vh",
-          width: "100vw",
-        },
-      }}
-    >
+    <Stack horizontalAlign="center">
       <Pivot>
         <PivotItem headerText="Sessions">
           <MobileSessionList />

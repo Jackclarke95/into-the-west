@@ -1,4 +1,4 @@
-import { Stack } from "@fluentui/react";
+import { ScrollablePane, Stack, Sticky } from "@fluentui/react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getDatabase, onValue, ref } from "firebase/database";
@@ -365,8 +365,12 @@ const App = () => {
               </Stack>
             </BrowserView>
             <MobileView>
-              <MobileHeader />
-              <MobileDashboard />
+              <ScrollablePane>
+                <Sticky>
+                  <MobileHeader />
+                </Sticky>
+                <MobileDashboard />
+              </ScrollablePane>
             </MobileView>
           </React.Fragment>
         ) : (
