@@ -8,7 +8,7 @@ const MobileCharacterList = () => {
   return (
     <Stack
       tokens={{ childrenGap: 20 }}
-      styles={{ root: { width: "100vw", padding: "1em" } }}
+      styles={{ root: { width: "100%", padding: "1em" } }}
     >
       {!characters.isLoading &&
         characters.data.map((character) => (
