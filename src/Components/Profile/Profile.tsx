@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import DataHelper from "../../Helpers/DataHelper";
 import DataService from "../../Helpers/DataService";
 import ActiveCharacter from "./ActiveCharacter";
-import NextSession from "./NextSession";
+import UpcomingSessions from "./UpcomingSessions";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -131,7 +131,7 @@ const Profile = () => {
       <Separator />
       <ActiveCharacter />
       <Separator />
-      <NextSession />
+      <UpcomingSessions />
     </Stack>
   );
 };

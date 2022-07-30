@@ -14,7 +14,7 @@ import DataHelper from "../../Helpers/DataHelper";
 import { Session } from "../../Types/LocalStructures";
 import SessionCard from "../Cards/SessionCard";
 
-const NextSession = () => {
+const UpcomingSessions = () => {
   const dispatch = useDispatch();
 
   const sessions = useSelector((state) => state.sessions);
@@ -124,4 +124,4 @@ const NextSession = () => {
   );
 };
 
-export default NextSession;
+export default UpcomingSessions;
