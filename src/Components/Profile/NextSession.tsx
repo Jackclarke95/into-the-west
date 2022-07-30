@@ -3,6 +3,7 @@ import {
   FontSizes,
   MessageBar,
   MessageBarType,
+  Separator,
   Spinner,
   SpinnerSize,
   Stack,
@@ -77,9 +78,14 @@ const NextSession = () => {
         </MessageBar>
       );
     } else {
-      return upcomingSessions.map((session) => (
-        <SessionCard session={session} characters={characters.data} />
-      ));
+      return upcomingSessions.map((session, index) => {
+        return (
+          <Stack>
+            <SessionCard session={session} characters={characters.data} />
+            {index < upcomingSessions.length - 1 && <Separator />}
+          </Stack>
+        );
+      });
     }
   };
 
@@ -91,7 +97,7 @@ const NextSession = () => {
   };
 
   return (
-    <Stack tokens={{ childrenGap: 0 }}>
+    <Stack tokens={{ childrenGap: 10 }}>
       <Stack horizontal styles={{ root: { justifyContent: "space-between" } }}>
         <Text
           styles={{
