@@ -104,7 +104,7 @@ const UpcomingSessions = () => {
             root: { fontSize: FontSizes.xLarge, textAlign: "start" },
           }}
         >
-          My Sessions
+          Upcoming sessions
         </Text>
         <Stack horizontal tokens={{ childrenGap: 10 }}>
           <DefaultButton
