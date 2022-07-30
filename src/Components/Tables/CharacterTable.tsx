@@ -5,25 +5,18 @@ import {
   Image,
   ImageFit,
   Link,
-  ProgressIndicator,
   SelectionMode,
-  SharedColors,
   ShimmeredDetailsList,
   Stack,
-  TooltipHost,
-  useTheme,
 } from "@fluentui/react";
 import { useSelector } from "react-redux";
 import { ClassIcon } from "../ClassIcon";
 import DefaultAvatar from "../../Images/DefaultAvatar.jpeg";
-import LevelUpData from "../../Data/LevelUp";
 import { Character } from "../../Types/LocalStructures";
 import { useEffect, useState } from "react";
 import XpBar from "../XpBar";
 
 const CharacterTable = () => {
-  const theme = useTheme();
-
   const characters = useSelector((state) => state.characters);
 
   const [sortedCharacters, setSortedCharacters] = useState<Character[]>([]);

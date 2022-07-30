@@ -11,6 +11,7 @@ import {
 } from "@fluentui/react";
 import { Character } from "../../Types/LocalStructures";
 import { ClassIcon } from "../ClassIcon";
+import XpBar from "../XpBar";
 
 const CharacterCard: React.FC<{
   character: Character;
@@ -88,15 +89,18 @@ const CharacterCard: React.FC<{
     );
   };
 
+  const onRenderXpBar = () => <XpBar character={character} />;
+
   return (
     <Persona
       text={text}
       onRenderSecondaryText={onRenderClasses}
       tertiaryText={tertiaryText}
       imageUrl={character.avatarUrl}
-      size={PersonaSize.size72}
+      size={PersonaSize.size100}
       styles={{ root: { width: 350 } }}
       onRenderPersonaCoin={onRenderPersonaCoin}
+      onRenderOptionalText={onRenderXpBar}
     />
   );
 };
