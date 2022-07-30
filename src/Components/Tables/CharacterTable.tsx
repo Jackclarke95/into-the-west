@@ -19,6 +19,7 @@ import DefaultAvatar from "../../Images/DefaultAvatar.jpeg";
 import LevelUpData from "../../Data/LevelUp";
 import { Character } from "../../Types/LocalStructures";
 import { useEffect, useState } from "react";
+import XpBar from "../XpBar";
 
 const CharacterTable = () => {
   const theme = useTheme();
@@ -150,50 +151,9 @@ const CharacterTable = () => {
     }
   };
 
-  const onRenderXpBar = (character: Character) => {
-    if (!character.player) {
-      return (
-        <TooltipHost content="Could not find player for this character">
-          <ProgressIndicator />
-        </TooltipHost>
-      );
-    }
-
-    const xpForCurrentLevel =
-      LevelUpData[Math.floor(character.player.xp / 120) - 1].xpRequired;
-
-    const xpToNextLevel =
-      LevelUpData[Math.floor(character.player.xp / 120)].xpRequired;
-
-    const current = character.player.xp - xpForCurrentLevel;
-    const high = xpToNextLevel - xpForCurrentLevel;
-
-    return (
-      <TooltipHost
-        content={`${character.player.xp - xpForCurrentLevel} / ${
-          xpToNextLevel - xpForCurrentLevel
-        }`}
-      >
-        <Stack verticalFill verticalAlign="center">
-          <ProgressIndicator
-            barHeight={3}
-            percentComplete={current / high}
-            styles={{
-              itemProgress: {
-                padding: 0,
-              },
-              progressBar: {
-                backgroundColor:
-                  current >= high
-                    ? SharedColors.greenCyan10
-                    : theme.palette.accent,
-              },
-            }}
-          />
-        </Stack>
-      </TooltipHost>
-    );
-  };
+  const onRenderXpBar = (character: Character) => (
+    <XpBar character={character} />
+  );
 
   const onColumnClick = (
     _: React.MouseEvent<HTMLElement, MouseEvent>,
