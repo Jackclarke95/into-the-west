@@ -1,6 +1,8 @@
+import { Stack } from "@fluentui/react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SessionRole from "../Enums/SessionRole";
+import DataHelper from "../Helpers/DataHelper";
 import { Player, Character, Map, Session } from "../Types/LocalStructures";
 
 const DataParse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -22,11 +24,13 @@ const DataParse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const databaseSessions = useSelector((state) => state.databaseSessions);
   const sessionInterests = useSelector((state) => state.sessionInterests);
 
+  const maps = useSelector((state) => state.maps);
   const players = useSelector((state) => state.players);
   const characters = useSelector((state) => state.characters);
   const authUser = useSelector((state) => state.authUser);
   const currentPlayer = useSelector((state) => state.currentPlayer);
 
+  // Set current player
   useEffect(() => {
     if (players.isLoading || !authUser) {
       return;
@@ -42,6 +46,7 @@ const DataParse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     });
   }, [players, authUser, dispatch]);
 
+  // Set current character
   useEffect(() => {
     if (characters.isLoading || currentPlayer.isLoading) {
       return;
@@ -59,18 +64,11 @@ const DataParse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     });
   }, [characters, currentPlayer, dispatch]);
 
+  // Parse Maps
   useEffect(() => {
     if (
       databaseMaps.isLoading ||
       databaseCharacters.isLoading ||
-      characterClasses.isLoading ||
-      characterRaces.isLoading ||
-      raceConfigs.isLoading ||
-      classConfigs.isLoading ||
-      races.isLoading ||
-      subraces.isLoading ||
-      classes.isLoading ||
-      subclasses.isLoading ||
       databaseSessions.isLoading ||
       sessionInterests.isLoading ||
       databasePlayers.isLoading
@@ -87,6 +85,25 @@ const DataParse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       type: "SetMaps",
       maps: { isLoading: false, data: parsedMaps },
     });
+  }, [
+    databaseCharacters,
+    databaseMaps,
+    databasePlayers,
+    databaseSessions,
+    dispatch,
+    sessionInterests,
+  ]);
+
+  // Parse Players
+  useEffect(() => {
+    if (
+      databaseCharacters.isLoading ||
+      databaseSessions.isLoading ||
+      sessionInterests.isLoading ||
+      databasePlayers.isLoading
+    ) {
+      return;
+    }
 
     const parsedPlayers: Player[] = databasePlayers.data.map((player) => {
       const attendedPlayerSessions = sessionInterests.data
@@ -146,6 +163,30 @@ const DataParse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       type: "SetPlayers",
       players: { isLoading: false, data: parsedPlayers },
     });
+  }, [
+    dispatch,
+    databaseSessions,
+    databaseCharacters,
+    sessionInterests,
+    databasePlayers,
+  ]);
+
+  // Parse characters
+  useEffect(() => {
+    if (
+      databaseCharacters.isLoading ||
+      characterRaces.isLoading ||
+      raceConfigs.isLoading ||
+      races.isLoading ||
+      subraces.isLoading ||
+      characterClasses.isLoading ||
+      classConfigs.isLoading ||
+      classes.isLoading ||
+      subclasses.isLoading ||
+      players.isLoading
+    ) {
+      return;
+    }
 
     const parsedCharacters: Character[] = databaseCharacters.data.map(
       (character) => {
@@ -227,7 +268,7 @@ const DataParse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           });
 
         // Parse character's owner/player
-        const matchingPlayer = parsedPlayers.find(
+        const matchingPlayer = players.data.find(
           (player) => player.id === character.playerId
         );
 
@@ -258,13 +299,38 @@ const DataParse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       type: "SetCharacters",
       characters: { isLoading: false, data: parsedCharacters },
     });
+  }, [
+    characterClasses,
+    characterRaces,
+    classConfigs,
+    classes,
+    databaseCharacters,
+    dispatch,
+    players,
+    raceConfigs,
+    races,
+    subclasses,
+    subraces,
+  ]);
+
+  // Parse Sessions
+  useEffect(() => {
+    if (
+      databaseSessions.isLoading ||
+      sessionInterests.isLoading ||
+      characters.isLoading ||
+      players.isLoading ||
+      maps.isLoading
+    ) {
+      return;
+    }
 
     const parsedSessions: Session[] = databaseSessions.data.map((session) => {
       const matchingSessionAttendedInterests = sessionInterests.data.filter(
         (interest) => interest.sessionId === session.key
       );
 
-      const attendedCharacters = parsedCharacters.filter(
+      const attendedCharacters = characters.data.filter(
         (character) =>
           (!character.retirement?.isRetired ||
             character.retirement.date >
@@ -294,7 +360,7 @@ const DataParse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         }
       });
 
-      const interestedCharacters = parsedCharacters.filter(
+      const interestedCharacters = characters.data.filter(
         (character) =>
           (!character.retirement?.isRetired ||
             character.retirement.date >
@@ -324,7 +390,7 @@ const DataParse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         }
       });
 
-      const dungeonMaster = parsedPlayers.find(
+      const dungeonMaster = players.data.find(
         (player) =>
           player.id ===
           matchingSessionAttendedInterests.find(
@@ -334,7 +400,7 @@ const DataParse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           )?.playerId
       );
 
-      const matchingMap = parsedMaps.find((map) => map.id === session.mapId);
+      const matchingMap = maps.data.find((map) => map.id === session.mapId);
 
       if (!matchingMap) {
         throw new Error(
@@ -360,24 +426,9 @@ const DataParse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       type: "SetSessions",
       sessions: { isLoading: false, data: parsedSessions },
     });
-  }, [
-    dispatch,
-    databaseCharacters,
-    characterClasses,
-    characterRaces,
-    raceConfigs,
-    classConfigs,
-    races,
-    subraces,
-    classes,
-    subclasses,
-    databaseSessions,
-    sessionInterests,
-    databasePlayers,
-    databaseMaps,
-  ]);
+  }, [characters, databaseSessions, dispatch, maps, players, sessionInterests]);
 
-  return <div className="intothewest-app">{children}</div>;
+  return <Stack>{children}</Stack>;
 };
 
 export default DataParse;
