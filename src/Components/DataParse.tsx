@@ -2,7 +2,6 @@ import { Stack } from "@fluentui/react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SessionRole from "../Enums/SessionRole";
-import DataHelper from "../Helpers/DataHelper";
 import { Player, Character, Map, Session } from "../Types/LocalStructures";
 
 const DataParse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
