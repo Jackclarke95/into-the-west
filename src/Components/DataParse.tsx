@@ -2,7 +2,9 @@ import { Stack } from "@fluentui/react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SessionRole from "../Enums/SessionRole";
+import DataHelper from "../Helpers/DataHelper";
 import { Player, Character, Map, Session } from "../Types/LocalStructures";
+import LevelUp from "../Data/LevelUp";
 
 const DataParse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const dispatch = useDispatch();
@@ -105,10 +107,19 @@ const DataParse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     }
 
     const parsedPlayers: Player[] = databasePlayers.data.map((player) => {
-      const attendedPlayerSessions = sessionInterests.data
-        .filter((sessionInterest) => sessionInterest.playerId === player.key)
+      const pastSessions = databaseSessions.data.filter(
+        (session) =>
+          session.selectedDate && DataHelper.isDateInPast(session.selectedDate)
+      );
+
+      const pastSessionInterests = sessionInterests.data.filter((interest) =>
+        pastSessions.map((session) => session.key).includes(interest.sessionId)
+      );
+
+      const attendedPlayerSessions = pastSessionInterests
+        .filter((interest) => interest.playerId === player.key)
         .map((interest) => {
-          const session = databaseSessions.data.find(
+          const session = pastSessions.find(
             (session) => session.key === interest.sessionId
           );
 
@@ -124,8 +135,7 @@ const DataParse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             date: session.selectedDate,
             role: interest.role,
           };
-        })
-        .filter((session) => session !== null);
+        });
 
       const sessionsPlayed = attendedPlayerSessions.filter(
         (session) => session.role === SessionRole.Player
@@ -135,7 +145,7 @@ const DataParse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         (session) => session.role === SessionRole["Dungeon Master"]
       ).length;
 
-      const unattendedSessions = databaseSessions.data.filter(
+      const unattendedSessions = pastSessions.filter(
         (session) =>
           !attendedPlayerSessions.some(
             (attendedSession) => attendedSession.id === session.key
@@ -143,7 +153,11 @@ const DataParse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       ).length;
 
       const xp =
-        sessionsPlayed * 60 + sessionsRun * 30 + unattendedSessions * 12;
+        sessionsPlayed * 60 + sessionsRun * 30 + unattendedSessions * 10;
+
+      const attainedLevels = LevelUp.filter(
+        (level) => xp >= level.xpRequired
+      ).length;
 
       return {
         availableDates: player.availableDates,
@@ -151,7 +165,7 @@ const DataParse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         isGamesMaster: player.isGamesMaster,
         isDungeonMaster: player.isDungeonMaster,
         name: player.name,
-        characterLevel: Math.floor(xp / 120),
+        characterLevel: attainedLevels ?? 0,
         xp: xp,
         sessionsPlayed: sessionsPlayed,
         sessionsRun: sessionsRun,

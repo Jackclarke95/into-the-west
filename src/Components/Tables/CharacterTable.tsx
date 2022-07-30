@@ -312,7 +312,7 @@ const CharacterTable = () => {
     },
     {
       key: "xp",
-      name: "Experience Points",
+      name: "XP (Rendering incorrectly)",
       minWidth: 200,
       onRender: onRenderXpBar,
     },
