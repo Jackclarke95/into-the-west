@@ -40,18 +40,14 @@ import MobileHeader from "./Components/MobileHeader";
 import MobileDashboard from "./Components/MobileDashboard";
 import MobileFooter from "./Components/MobileFooter";
 
-const isDevMode = window.location.hostname === "localhost";
-
 const firebaseConfig = {
-  apiKey: "AIzaSyDJLonhBywTBq-R2AyP5Hvcg2Lp-gUMogk",
-  authDomain: "into-the-west-5869d.firebaseapp.com",
-  databaseURL: isDevMode
-    ? "https://into-the-test.europe-west1.firebasedatabase.app"
-    : "https://into-the-west.europe-west1.firebasedatabase.app",
-  projectId: "into-the-west-5869d",
-  storageBucket: "into-the-west-5869d.appspot.com",
-  messagingSenderId: "1019951241923",
-  appId: "1:1019951241923:web:960fbf221acc3fd05fa076",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
 
 initializeApp(firebaseConfig);

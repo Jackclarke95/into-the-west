@@ -13,6 +13,7 @@ import { Session } from "../Types/LocalStructures";
 import { auth, db } from "../App";
 import SessionRole from "../Enums/SessionRole";
 import { SessionInterestData } from "../Types/DatabaseStructures";
+import { Map } from "../Types/LocalStructures";
 import { Player } from "../Types/LocalStructures";
 import { toast } from "react-toastify";
 
@@ -33,18 +34,20 @@ export default class DataService {
    */
   public static createSession = async (
     sessionName: string,
-    mapId: string,
+    map: Map,
     player: Player
   ) => {
     const sessionsRef = ref(db, "sessions/");
 
     const sessionToAdd = {
       title: sessionName,
-      mapId: mapId,
+      mapId: map.id,
       suggestedByPlayerId: player.id,
     };
 
     await push(sessionsRef, sessionToAdd);
+
+    await DataService.sendNewSessionToDiscord(sessionName, map, player.name);
   };
 
   public static registerForSession = async (
@@ -251,4 +254,45 @@ export default class DataService {
 
     window.location.reload();
   };
+
+  /**
+   * Sends a New Session announcement to the Discord server
+   * @param sessionName The name of the Session
+   * @param map The Map on which the Session will take place
+   * @param playerName The name of the Player who suggested the session
+   */
+  public static async sendNewSessionToDiscord(
+    sessionName: string,
+    map: Map,
+    playerName: string
+  ) {
+    const webhookUrl = process.env.REACT_APP_DISCORD_WEBHOOK_URL;
+
+    if (webhookUrl) {
+      const request = new XMLHttpRequest();
+
+      request.open("POST", webhookUrl);
+      request.setRequestHeader("Content-Type", "application/json");
+
+      const params = {
+        embeds: [
+          {
+            title: `${sessionName} was Suggested`,
+            color: 14944018,
+            description:
+              `The session "${sessionName}" has been suggested for ${map.name}!` +
+              "\r\n\r\n" +
+              "Visit the the [website](https://into-the-west.co.uk) to sign up!",
+            footer: {
+              text: `Suggested by ${playerName}`,
+            },
+          },
+        ],
+      };
+
+      request.send(JSON.stringify(params));
+    } else {
+      toast.error("Could not find Webhook URL to post message in Discord");
+    }
+  }
 }

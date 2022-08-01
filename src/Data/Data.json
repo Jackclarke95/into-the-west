@@ -307,6 +307,7 @@
       "startingLevel": 1
     },
     "-N6dziMi5DV7Tcndwd8l": {
+      "avatarUrl": "https://www.dndbeyond.com/avatars/17/241/636377856728563803.jpeg",
       "fullName": "Holg Ovak",
       "nickname": "Holg",
       "playerId": "LQXJ3bqnXpbHPTfdGRzO2AkRIbm1",
@@ -374,7 +375,7 @@
       "avatarUrl": "https://www.dndbeyond.com/avatars/21853/454/1581111423-62556497.jpeg",
       "fullName": "Prof. Tabbart",
       "nickname": "Tabbart",
-      "playerId": "-MaGLAdfrrLeLWxdwuUU",
+      "playerId": "3uvBcID2bSXM29N2qWYrc3jVT882",
       "sheetUrl": "https://www.dndbeyond.com/characters/62556497",
       "startingLevel": 1
     },
@@ -1087,17 +1088,13 @@
       "name": "The Lunar Isles"
     },
     "-N2Ho3wDN80qp2cAWF13": {
-      "name": "The Shattered Realm"
+      "name": "The Shattered Realms"
     },
     "-N2Ho4bDUkhIqi4tAUjC": {
       "name": "The Everwilds"
     }
   },
   "players": {
-    "-MaGLAdfrrLeLWxdwuUU": {
-      "isDungeonMaster": true,
-      "name": "Felix"
-    },
     "-MaGM4rbdJBgZ8rKnfbc": {
       "name": "Swedish Fox"
     },
@@ -1160,41 +1157,31 @@
         1656716400000, 1656284400000, 1656802800000, 1656198000000,
         1659740400000
       ],
-
       "isDungeonMaster": true,
       "isGamesMaster": true,
       "name": "David"
+    },
+    "3uvBcID2bSXM29N2qWYrc3jVT882": {
+      "availableDates": [1659135600000],
+      "isDungeonMaster": true,
+      "name": "Felix"
     },
     "7zD6gWfMUza6BPRXkJpara46fy83": {
       "availableDates": [
         1656370800000, 1656802800000, 1656198000000, 1656630000000
       ],
-
       "isDungeonMaster": false,
       "isGamesMaster": false,
       "name": "Ali"
     },
-    "g48dYVQDXcOImdJ6AKI3UCaKu8T2": {
-      "name": "The Kingsman",
-      "isDungeonMaster": false,
-      "isGamesMaster": false
-    },
     "9QqPgpLp23cEYeK3Jvq9MmIMpY13": {
-      "availableDates": [
-        1659222000000, 1659049200000, 1659308400000, 1659394800000,
-        1659481200000, 1659654000000
-      ],
-
+      "availableDates": [1659222000000],
       "isDungeonMaster": true,
       "isGamesMaster": true,
       "name": "Jack"
     },
     "LQXJ3bqnXpbHPTfdGRzO2AkRIbm1": {
-      "availableDates": [
-        1656716400000, 1656370800000, 1656284400000, 1659740400000,
-        1656630000000
-      ],
-
+      "availableDates": [1659740400000],
       "isDungeonMaster": false,
       "isGamesMaster": false,
       "name": "Ben Baker"
@@ -1204,17 +1191,20 @@
         1656716400000, 1656284400000, 1656802800000, 1656198000000,
         1659740400000
       ],
-
       "isDungeonMaster": true,
       "isGamesMaster": true,
       "name": "Louis"
+    },
+    "g48dYVQDXcOImdJ6AKI3UCaKu8T2": {
+      "isDungeonMaster": false,
+      "isGamesMaster": false,
+      "name": "The Kingsman"
     },
     "hVn1TdlBSgc2y92GOeKBAjOfl853": {
       "availableDates": [
         1656716400000, 1656370800000, 1656284400000, 1656802800000,
         1656198000000, 1659740400000, 1656630000000
       ],
-
       "isDungeonMaster": true,
       "isGamesMaster": false,
       "name": "Will Carter"
@@ -1949,7 +1939,7 @@
     },
     "-N6w_R8owY8W27Hojba4": {
       "didAttend": true,
-      "playerId": "-MaGLAdfrrLeLWxdwuUU",
+      "playerId": "3uvBcID2bSXM29N2qWYrc3jVT882",
       "role": 0,
       "sessionId": "-N3LNFSEtKmJDoqihyUA",
       "title": "Operation Landgrab"
@@ -2257,7 +2247,7 @@
     },
     "-N6wvd5S8B2XE4WG1k_n": {
       "didAttend": true,
-      "playerId": "-MaGLAdfrrLeLWxdwuUU",
+      "playerId": "3uvBcID2bSXM29N2qWYrc3jVT882",
       "role": 0,
       "sessionId": "-N3LNKkH9J-m44ch9bTL",
       "title": "The Jailer Comes"
@@ -2299,7 +2289,7 @@
     },
     "-N6xISgkhwyr2lsquXfV": {
       "didAttend": true,
-      "playerId": "-MaGLAdfrrLeLWxdwuUU",
+      "playerId": "3uvBcID2bSXM29N2qWYrc3jVT882",
       "role": 0,
       "sessionId": "-N3LNLq0jhFHtxtg-aEb",
       "title": "Dead Drop"
@@ -2488,7 +2478,7 @@
     },
     "-N6xNnIXrAxvgx0OR3UP": {
       "didAttend": true,
-      "playerId": "-MaGLAdfrrLeLWxdwuUU",
+      "playerId": "3uvBcID2bSXM29N2qWYrc3jVT882",
       "role": 0,
       "sessionId": "-N3LNOpE6itnNoUF9DM6",
       "title": "Clearing Dreadshade Fortress"
@@ -2516,7 +2506,7 @@
     },
     "-N6xNpFMSzrCkXyQLNaC": {
       "didAttend": true,
-      "playerId": "-MaGLAdfrrLeLWxdwuUU",
+      "playerId": "3uvBcID2bSXM29N2qWYrc3jVT882",
       "role": 0,
       "sessionId": "-N3LNPJIIaTu4Oa0LB9_",
       "title": "Fallen Light"
@@ -2551,7 +2541,7 @@
     },
     "-N6xNtXwKDjwmzrscyUm": {
       "didAttend": true,
-      "playerId": "-MaGLAdfrrLeLWxdwuUU",
+      "playerId": "3uvBcID2bSXM29N2qWYrc3jVT882",
       "role": 0,
       "sessionId": "-N3LNQ_uI7ekplXbjeoy",
       "title": "Quest for the Ring"
@@ -2684,7 +2674,7 @@
     },
     "-N6xO988p8BUASP-jQWa": {
       "didAttend": true,
-      "playerId": "-MaGLAdfrrLeLWxdwuUU",
+      "playerId": "3uvBcID2bSXM29N2qWYrc3jVT882",
       "role": 0,
       "sessionId": "-N6eNcIWrx2-E4c5KNSY",
       "title": "The Legion Round 3"
@@ -2767,6 +2757,21 @@
       "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
       "role": 0,
       "sessionId": "-N6yWBPaPzXm2HW4cGfO"
+    },
+    "-N8FqBQmluvhvJ4h6zXc": {
+      "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
+      "role": 0,
+      "sessionId": "-N6yWBr6Utf2zP5ioFMt"
+    },
+    "-N8GH0-F3N9C7xndCpUI": {
+      "playerId": "LQXJ3bqnXpbHPTfdGRzO2AkRIbm1",
+      "role": 0,
+      "sessionId": "-N6yWBr6Utf2zP5ioFMt"
+    },
+    "-N8GIEg2vUQ5LuzTECHx": {
+      "playerId": "3uvBcID2bSXM29N2qWYrc3jVT882",
+      "role": 0,
+      "sessionId": "-N6yWBr6Utf2zP5ioFMt"
     }
   },
   "sessions": {
