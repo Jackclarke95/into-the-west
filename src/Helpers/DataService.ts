@@ -255,6 +255,11 @@ export default class DataService {
     window.location.reload();
   };
 
+  /**
+   * Sends a New Session announcement to the Discord server
+   * @param sessionName The name of the Session
+   * @param map The Map on which the Session will take place
+   */
   public static sendNewSessionToDiscord(sessionName: string, map: Map) {
     const webhookUrl = process.env.REACT_APP_DISCORD_WEBHOOK_URL;
 
@@ -265,7 +270,6 @@ export default class DataService {
       request.setRequestHeader("Content-Type", "application/json");
 
       const params = {
-        username: "Westhaven Guildmaster",
         content: `The session "${sessionName}" has been suggested for ${map.name}! Visit the https://into-the-west.co.uk to sign up!`,
       };
 
