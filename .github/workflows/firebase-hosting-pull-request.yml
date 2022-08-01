@@ -12,7 +12,6 @@ jobs:
         run: | 
           touch .env
           # echo FIREBASE_DATABASE_URL="${{ secrets.FIREBASE_DATABASE_URL }}" >> .env
-
       - name: checkout and deploy
         - uses: actions/checkout@v2
         - run: npm ci && npm run build
