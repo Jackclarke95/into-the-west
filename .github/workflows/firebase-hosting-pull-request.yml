@@ -9,14 +9,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: create env file
-        run: | 
+        run: |
           touch .env
-          echo FIREBASE_DATABASE_URL=${{ secrets.FIREBASE_DATABASE_URL }} >> .env
+          echo ENGINE_API_KEY=${{ secrets.ENGINE_API_KEY }} >> .env
+
       - name: checkout and deploy
-        - uses: actions/checkout@v2
-        - run: npm ci && npm run build
-        - uses: FirebaseExtended/action-hosting-deploy@v0
-          with:
-            repoToken: "${{ secrets.GITHUB_TOKEN }}"
-            firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_INTO_THE_WEST_5869D }}"
-            projectId: "${{ secrets.FIREBASE_PROJECT_ID }}"
+      - uses: actions/checkout@v2
+        run: npm ci && npm run build
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_INTO_THE_WEST_5869D }}"
+          projectId: "${{ secrets.FIREBASE_PROJECT_ID }}"
