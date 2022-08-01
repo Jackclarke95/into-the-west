@@ -8,7 +8,7 @@ jobs:
     if: "${{ github.event.pull_request.head.repo.full_name == github.repository }}"
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{ secrets.REACT_APP_FIREBASE_DATABASE_URL }}
+      - run: echo ${{ secrets.REACT_APP_TEST }}
       - uses: actions/checkout@v2
         env: 
           REACT_APP_FIREBASE_API_KEY: ${{ secrets.REACT_APP_FIREBASE_API_KEY }}

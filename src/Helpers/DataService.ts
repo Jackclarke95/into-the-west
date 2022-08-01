@@ -256,7 +256,7 @@ export default class DataService {
   };
 
   public static sendNewSessionToDiscord(sessionName: string, map: Map) {
-    const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
+    const webhookUrl = process.env.REACT_APP_DISCORD_WEBHOOK_URL;
 
     if (webhookUrl) {
       const request = new XMLHttpRequest();
