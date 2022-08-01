@@ -62,7 +62,7 @@ const SessionCreationDialog = () => {
 
     await DataService.createSession(
       sessionName,
-      sessionMap.id,
+      sessionMap,
       currentPlayer.data
     );
 

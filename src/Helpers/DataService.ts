@@ -13,6 +13,7 @@ import { Session } from "../Types/LocalStructures";
 import { auth, db } from "../App";
 import SessionRole from "../Enums/SessionRole";
 import { SessionInterestData } from "../Types/DatabaseStructures";
+import { Map } from "../Types/LocalStructures";
 import { Player } from "../Types/LocalStructures";
 import { toast } from "react-toastify";
 
@@ -33,18 +34,20 @@ export default class DataService {
    */
   public static createSession = async (
     sessionName: string,
-    mapId: string,
+    map: Map,
     player: Player
   ) => {
     const sessionsRef = ref(db, "sessions/");
 
     const sessionToAdd = {
       title: sessionName,
-      mapId: mapId,
+      mapId: map.id,
       suggestedByPlayerId: player.id,
     };
 
     await push(sessionsRef, sessionToAdd);
+
+    await DataService.sendNewSessionToDiscord(sessionName, map);
   };
 
   public static registerForSession = async (
@@ -251,4 +254,24 @@ export default class DataService {
 
     window.location.reload();
   };
+
+  public static sendNewSessionToDiscord(sessionName: string, map: Map) {
+    const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
+
+    if (webhookUrl) {
+      const request = new XMLHttpRequest();
+
+      request.open("POST", webhookUrl);
+      request.setRequestHeader("Content-Type", "application/json");
+
+      const params = {
+        username: "Westhaven Guildmaster",
+        content: `The session "${sessionName}" has been suggested for ${map.name}! Visit the https://into-the-west.co.uk to sign up!`,
+      };
+
+      request.send(JSON.stringify(params));
+    } else {
+      toast.error("Could not find Webhook URL to post message in Discord");
+    }
+  }
 }
