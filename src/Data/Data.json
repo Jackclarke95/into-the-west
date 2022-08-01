@@ -1088,17 +1088,13 @@
       "name": "The Lunar Isles"
     },
     "-N2Ho3wDN80qp2cAWF13": {
-      "name": "The Shattered Realm"
+      "name": "The Shattered Realms"
     },
     "-N2Ho4bDUkhIqi4tAUjC": {
       "name": "The Everwilds"
     }
   },
   "players": {
-    "3uvBcID2bSXM29N2qWYrc3jVT882": {
-      "isDungeonMaster": true,
-      "name": "Felix"
-    },
     "-MaGM4rbdJBgZ8rKnfbc": {
       "name": "Swedish Fox"
     },
@@ -1164,6 +1160,11 @@
       "isDungeonMaster": true,
       "isGamesMaster": true,
       "name": "David"
+    },
+    "3uvBcID2bSXM29N2qWYrc3jVT882": {
+      "availableDates": [1659135600000],
+      "isDungeonMaster": true,
+      "name": "Felix"
     },
     "7zD6gWfMUza6BPRXkJpara46fy83": {
       "availableDates": [
@@ -2764,6 +2765,11 @@
     },
     "-N8GH0-F3N9C7xndCpUI": {
       "playerId": "LQXJ3bqnXpbHPTfdGRzO2AkRIbm1",
+      "role": 0,
+      "sessionId": "-N6yWBr6Utf2zP5ioFMt"
+    },
+    "-N8GIEg2vUQ5LuzTECHx": {
+      "playerId": "3uvBcID2bSXM29N2qWYrc3jVT882",
       "role": 0,
       "sessionId": "-N6yWBr6Utf2zP5ioFMt"
     }

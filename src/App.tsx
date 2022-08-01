@@ -40,8 +40,6 @@ import MobileHeader from "./Components/MobileHeader";
 import MobileDashboard from "./Components/MobileDashboard";
 import MobileFooter from "./Components/MobileFooter";
 
-console.log(process.env);
-
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,

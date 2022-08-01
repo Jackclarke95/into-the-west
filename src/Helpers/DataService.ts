@@ -47,7 +47,7 @@ export default class DataService {
 
     await push(sessionsRef, sessionToAdd);
 
-    await DataService.sendNewSessionToDiscord(sessionName, map);
+    await DataService.sendNewSessionToDiscord(sessionName, map, player.name);
   };
 
   public static registerForSession = async (
@@ -259,8 +259,13 @@ export default class DataService {
    * Sends a New Session announcement to the Discord server
    * @param sessionName The name of the Session
    * @param map The Map on which the Session will take place
+   * @param playerName The name of the Player who suggested the session
    */
-  public static sendNewSessionToDiscord(sessionName: string, map: Map) {
+  public static async sendNewSessionToDiscord(
+    sessionName: string,
+    map: Map,
+    playerName: string
+  ) {
     const webhookUrl = process.env.REACT_APP_DISCORD_WEBHOOK_URL;
 
     if (webhookUrl) {
@@ -270,7 +275,19 @@ export default class DataService {
       request.setRequestHeader("Content-Type", "application/json");
 
       const params = {
-        content: `The session "${sessionName}" has been suggested for ${map.name}! Visit the https://into-the-west.co.uk to sign up!`,
+        embeds: [
+          {
+            title: `${sessionName} was Suggested`,
+            color: 14944018,
+            description:
+              `The session "${sessionName}" has been suggested for ${map.name}!` +
+              "\r\n\r\n" +
+              "Visit the the [website](https://into-the-west.co.uk) to sign up!",
+            footer: {
+              text: `Suggested by ${playerName}`,
+            },
+          },
+        ],
       };
 
       request.send(JSON.stringify(params));
