@@ -2722,7 +2722,8 @@
     "-N6yXBf_fSThuzoBeLg7": {
       "playerId": "cWIubiixD6hbnefPdn3108qn5kI3",
       "role": 1,
-      "sessionId": "-N6yWBr6Utf2zP5ioFMt"
+      "sessionId": "-N6yWBr6Utf2zP5ioFMt",
+      "didAttend": true
     },
     "-N7hQHSQOBzjOx01s6nM": {
       "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
@@ -2758,20 +2759,69 @@
       "role": 0,
       "sessionId": "-N6yWBPaPzXm2HW4cGfO"
     },
+    "-N8jetTzi29iBWCcmVxN": {
+      "playerId": "kQHelre21sgGsU8FDu1CKY33im12",
+      "role": 0,
+      "sessionId": "-N6yWBPaPzXm2HW4cGfO"
+    },
+    "-N8jevHacHvkhxYDjdHM": {
+      "playerId": "7zD6gWfMUza6BPRXkJpara46fy83",
+      "role": 0,
+      "sessionId": "-N6yWBPaPzXm2HW4cGfO"
+    },
+    "-N8jewsuH-K4e8stSecc": {
+      "playerId": "LQXJ3bqnXpbHPTfdGRzO2AkRIbm1",
+      "role": 0,
+      "sessionId": "-N6yWBPaPzXm2HW4cGfO"
+    },
     "-N8FqBQmluvhvJ4h6zXc": {
       "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
       "role": 0,
-      "sessionId": "-N6yWBr6Utf2zP5ioFMt"
+      "sessionId": "-N6yWBr6Utf2zP5ioFMt",
+      "didAttend": true
     },
     "-N8GH0-F3N9C7xndCpUI": {
       "playerId": "LQXJ3bqnXpbHPTfdGRzO2AkRIbm1",
       "role": 0,
-      "sessionId": "-N6yWBr6Utf2zP5ioFMt"
+      "sessionId": "-N6yWBr6Utf2zP5ioFMt",
+      "didAttend": true
     },
     "-N8GIEg2vUQ5LuzTECHx": {
       "playerId": "3uvBcID2bSXM29N2qWYrc3jVT882",
       "role": 0,
-      "sessionId": "-N6yWBr6Utf2zP5ioFMt"
+      "sessionId": "-N6yWBr6Utf2zP5ioFMt",
+      "didAttend": true
+    },
+    "-N8jdWnYTRWkzv2mkozg": {
+      "playerId": "7zD6gWfMUza6BPRXkJpara46fy83",
+      "role": 0,
+      "sessionId": "-N6yWBr6Utf2zP5ioFMt",
+      "didAttend": true
+    },
+    "-N8je8Mlnq_w7Z35PzRU": {
+      "playerId": "-N6xJxUeqevomce8WaX9",
+      "role": 0,
+      "sessionId": "-N8jduR5m_h1ASBR_H9H"
+    },
+    "-N8jeDkGDG9GbEevVKpt": {
+      "playerId": "cWIubiixD6hbnefPdn3108qn5kI3",
+      "role": 1,
+      "sessionId": "-N8jduR5m_h1ASBR_H9H"
+    },
+    "-N8jeEDzDKcBWj1DFFt1": {
+      "playerId": "kQHelre21sgGsU8FDu1CKY33im12",
+      "role": 0,
+      "sessionId": "-N8jduR5m_h1ASBR_H9H"
+    },
+    "-N8jeEbqCgyHt9muvDs5": {
+      "playerId": "LQXJ3bqnXpbHPTfdGRzO2AkRIbm1",
+      "role": 0,
+      "sessionId": "-N8jduR5m_h1ASBR_H9H"
+    },
+    "-N8je_wP_2bLJIW43AuH": {
+      "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
+      "role": 0,
+      "sessionId": "-N8jduR5m_h1ASBR_H9H"
     }
   },
   "sessions": {
@@ -2923,6 +2973,11 @@
       "mapId": "-N2Ho35e7smUBHZx7sEZ",
       "selectedDate": 1659135600000,
       "title": "Frozen Crystals Continued"
+    },
+    "-N8jduR5m_h1ASBR_H9H": {
+      "mapId": "-N2Ho35e7smUBHZx7sEZ",
+      "selectedDate": 1659999600000,
+      "title": "Frozen Crystals Expanded"
     }
   },
   "subclasses": {
