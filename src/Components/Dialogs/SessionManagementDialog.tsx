@@ -64,7 +64,7 @@ const SessionManagementDialog = () => {
     onDismiss();
   };
 
-  const getInterestedUsers = () => {
+  const getInterestedPlayers = () => {
     if (
       sessions.isLoading ||
       players.isLoading ||
@@ -103,23 +103,25 @@ const SessionManagementDialog = () => {
           )
         );
 
-  const onRenderPlayers = (datesAndUsers: {
+  const onRenderPlayers = (datesAndPlayers: {
     date: string;
-    interestedUsers: Player[];
+    interestedPlayers: Player[];
   }) => {
-    const interestedUsersToRender = datesAndUsers.interestedUsers
-      .map((user) => ({
+    const interestedPlayersToRender = datesAndPlayers.interestedPlayers
+      .map((player) => ({
         date: dates,
-        user: user,
+        player: player,
       }))
-      .sort((userA, userB) => userA.user.name.localeCompare(userB.user.name));
+      .sort((playerA, playerB) =>
+        playerA.player.name.localeCompare(playerB.player.name)
+      );
 
     return (
       <Stack horizontal tokens={{ childrenGap: 10 }}>
-        <span>{datesAndUsers.interestedUsers.length}</span>
+        <span>{datesAndPlayers.interestedPlayers.length}</span>
         <TooltipHost
-          content={interestedUsersToRender
-            .map(({ user }) => user.name)
+          content={interestedPlayersToRender
+            .map(({ player: player }) => player.name)
             .join(", ")}
           directionalHint={DirectionalHint.leftCenter}
         >
@@ -127,8 +129,8 @@ const SessionManagementDialog = () => {
             overflowButtonType={OverflowButtonType.descriptive}
             showTooltip={false}
             personaSize={PersonaSize.size24}
-            personas={interestedUsersToRender.map(({ user }) => ({
-              personaName: user.name,
+            personas={interestedPlayersToRender.map(({ player: player }) => ({
+              personaName: player.name,
             }))}
           />
         </TooltipHost>
@@ -136,17 +138,17 @@ const SessionManagementDialog = () => {
     );
   };
 
-  const onRenderSelect = (datesAndUsers: {
+  const onRenderSelect = (datesAndPlayers: {
     date: number;
     displayDate: string;
-    interestedUsers: Player[];
+    interestedPlayers: Player[];
   }) => {
     const onChange = (
       ev?: React.FormEvent<HTMLElement | HTMLInputElement> | undefined,
       checked?: boolean | undefined
     ) => {
       if (checked) {
-        setSelectedDate(datesAndUsers.date);
+        setSelectedDate(datesAndPlayers.date);
       } else {
         setSelectedDate(undefined);
       }
@@ -155,7 +157,7 @@ const SessionManagementDialog = () => {
     return (
       <Checkbox
         onChange={onChange}
-        checked={selectedDate === datesAndUsers.date}
+        checked={selectedDate === datesAndPlayers.date}
       />
     );
   };
@@ -178,9 +180,9 @@ const SessionManagementDialog = () => {
       isResizable: true,
     },
     {
-      key: "users",
+      key: "players",
       name: "Players",
-      fieldName: "users",
+      fieldName: "players",
       minWidth: 50,
       isResizable: true,
       onRender: onRenderPlayers,
@@ -189,17 +191,17 @@ const SessionManagementDialog = () => {
 
   const dates = Array.from(
     new Set(
-      getInterestedUsers()
-        .flatMap((user) => user.availableDates)
+      getInterestedPlayers()
+        .flatMap((player) => player.availableDates)
         .sort()
     )
   )
     .map((date) => ({
       date: date,
       displayDate: DataHelper.getDateInDayDateMonthFormat(new Date(date)),
-      interestedUsers: getInterestedUsers().filter((user) =>
-        user.availableDates.includes(date)
-      ),
+      interestedPlayers: getInterestedPlayers().filter((player) => {
+        player.availableDates.includes(date);
+      }),
     }))
     .filter((date) => !DataHelper.isDateInPast(date.date));
 
@@ -228,7 +230,7 @@ const SessionManagementDialog = () => {
         >
           {sessionManagement.isShown ? sessionManagement.session.name : ""}
         </Text>
-        {getInterestedUsers().length > 0 ? (
+        {getInterestedPlayers().length > 0 ? (
           <>
             {!dungeonMaster && (
               <MessageBar messageBarType={MessageBarType.error}>
