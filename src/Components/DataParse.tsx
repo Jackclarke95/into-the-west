@@ -5,6 +5,7 @@ import SessionRole from "../Enums/SessionRole";
 import DataHelper from "../Helpers/DataHelper";
 import { Player, Character, Map, Session } from "../Types/LocalStructures";
 import LevelUp from "../Data/LevelUp";
+import { GlobalVariables } from "../Data/GlobalVariables";
 
 const DataParse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const dispatch = useDispatch();
@@ -153,7 +154,9 @@ const DataParse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       ).length;
 
       const xp =
-        sessionsPlayed * 60 + sessionsRun * 30 + unattendedSessions * 10;
+        sessionsPlayed * GlobalVariables.XP.XP_PER_SESSION_ATTENDED +
+        sessionsRun * GlobalVariables.XP.XP_PER_SESSION_RUN +
+        unattendedSessions * GlobalVariables.XP.XP_PER_SESSION_UNATTENDED;
 
       const attainedLevels = LevelUp.filter(
         (level) => xp >= level.xpRequired
