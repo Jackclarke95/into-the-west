@@ -265,7 +265,7 @@ const CharacterTable = () => {
     },
     {
       key: "xp",
-      name: "XP (Rendering incorrectly)",
+      name: "XP",
       minWidth: 200,
       onRender: onRenderXpBar,
     },
