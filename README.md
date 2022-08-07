@@ -4,23 +4,19 @@ This project is a web app for tracking a Dungeons and Dragons campaign called In
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Development
 
-In the project directory, you can run:
+### Available Scripts
 
-### `npm start`
+In the project directory, you can run `npm start` to open the app in the development mode.
 
-Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-## Development
+The page will reload if when edits are made, and lint errors are displayed in the console..
 
 ### Environment Variables
 
-In order to run the code locally, enviornment variables need to be configured or the app will fail to execute. These are stored in a file called `.env` stored at the project's root directory (the same place as `package.json`, `.gitignore`, `README.md` etc). The following snippet is required:
+In order to run the code locally, enviornment variables need to be configured or the app will fail to execute. These are stored in a file called `.env` stored at the project's root directory (the same as `package.json`, `.gitignore`, `README.md` etc). The following snippet is required:
 
 ```
 REACT_APP_FIREBASE_API_KEY={apiKey}
@@ -33,7 +29,7 @@ REACT_APP_FIREBASE_APP_ID={appId}
 REACT_APP_DISCORD_WEBHOOK_URL={found in Discord Server}
 ```
 
-The values for the above snippet can be found in Project Settings in the [Firebase Console](https://console.firebase.google.com/)
+The Firebase values for the above snippet can be found in Project Settings in the [Firebase Console](https://console.firebase.google.com/project/into-the-west-5869d/settings/general/web:ZmZjN2FiYzYtZWU2Ni00NDk1LTg3OWMtNTQ1OTczOWEwNmUz/), and the Discord Webhook can be found in the Discord Server.
 
 ## Continuous Development and Integration
 

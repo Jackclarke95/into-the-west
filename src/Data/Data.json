@@ -1179,7 +1179,7 @@
         1659913200000, 1660258800000, 1660431600000, 1660518000000,
         1660863600000, 1660950000000, 1661036400000, 1661122800000,
         1661209200000, 1661295600000, 1661468400000, 1661554800000,
-        1661641200000, 1660604400000, 1660690800000
+        1661641200000, 1660604400000, 1660690800000, 1659999600000
       ],
       "isDungeonMaster": true,
       "isGamesMaster": true,
@@ -1190,6 +1190,9 @@
       "isDungeonMaster": false,
       "isGamesMaster": false,
       "name": "Ben Baker"
+    },
+    "MYuNEU8zoqgIzBIbcVkije09NxA3": {
+      "name": "Test jack"
     },
     "cWIubiixD6hbnefPdn3108qn5kI3": {
       "availableDates": [
@@ -2808,11 +2811,6 @@
       "role": 0,
       "sessionId": "-N8jduR5m_h1ASBR_H9H"
     },
-    "-N8je_wP_2bLJIW43AuH": {
-      "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
-      "role": 0,
-      "sessionId": "-N8jduR5m_h1ASBR_H9H"
-    },
     "-N8jetTzi29iBWCcmVxN": {
       "playerId": "kQHelre21sgGsU8FDu1CKY33im12",
       "role": 0,
@@ -2833,200 +2831,195 @@
       "role": 0,
       "sessionId": "-N8jduR5m_h1ASBR_H9H"
     },
-    "-N8sxxfuP5GhCSeJLERp": {
+    "-N8tnd0eSiR0ozkjrAK1": {
       "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
       "role": 0,
-      "sessionId": "-N8sx3t64CvIGljVU72h"
+      "sessionId": "-N8jduR5m_h1ASBR_H9H"
     }
   },
   "sessions": {
     "-N3LNFSEtKmJDoqihyUA": {
+      "isCompleted": true,
       "mapId": "-N2Ho3wDN80qp2cAWF13",
       "selectedDate": 1637712000000,
-      "title": "Operation Landgrab",
-      "isCompleted": true
+      "title": "Operation Landgrab"
     },
     "-N3LNGR4rzXmngzrk49C": {
+      "isCompleted": true,
       "mapId": "-N2Ho4bDUkhIqi4tAUjC",
       "selectedDate": 1637884800000,
-      "title": "The Poacher Problem",
-      "isCompleted": true
+      "title": "The Poacher Problem"
     },
     "-N3LNGxLbEugSM-igDxf": {
+      "isCompleted": true,
       "mapId": "-N2Ho35e7smUBHZx7sEZ",
       "selectedDate": 1638316800000,
-      "title": "Viking Incursion",
-      "isCompleted": true
+      "title": "Viking Incursion"
     },
     "-N3LNHMoZVGYQlswgwJY": {
+      "isCompleted": true,
       "mapId": "-N2Ho2Bv9PyId_uPU466",
       "selectedDate": 1638576000000,
-      "title": "Finding the Blue Oder",
-      "isCompleted": true
+      "title": "Finding the Blue Oder"
     },
     "-N3LNHmGLBnk7y8S2bZK": {
+      "isCompleted": true,
       "mapId": "-N2Ho3wDN80qp2cAWF13",
       "selectedDate": 1638748800000,
-      "title": "Cirque d'Snicket",
-      "isCompleted": true
+      "title": "Cirque d'Snicket"
     },
     "-N3LNI6zRFS-u13RbWdS": {
+      "isCompleted": true,
       "mapId": "-N2Ho4bDUkhIqi4tAUjC",
       "selectedDate": 1638921600000,
-      "title": "Mysterious Benefactor",
-      "isCompleted": true
+      "title": "Mysterious Benefactor"
     },
     "-N3LNIfVXI73h1p4ttFL": {
+      "isCompleted": true,
       "mapId": "-N2Ho35e7smUBHZx7sEZ",
       "selectedDate": 1639008000000,
-      "title": "Elven Exploration",
-      "isCompleted": true
+      "title": "Elven Exploration"
     },
     "-N3LNJ5JjCz9DKtD9tl-": {
+      "isCompleted": true,
       "mapId": "-N2Ho2Bv9PyId_uPU466",
       "selectedDate": 1639267200000,
-      "title": "Forgotten Foothold",
-      "isCompleted": true
+      "title": "Forgotten Foothold"
     },
     "-N3LNJScFs9LyKGO2-kH": {
+      "isCompleted": true,
       "mapId": "-N2Ho2Bv9PyId_uPU466",
       "selectedDate": 1639612800000,
-      "title": "The Old Man's Message",
-      "isCompleted": true
+      "title": "The Old Man's Message"
     },
     "-N3LNK-uvO0YGG6NtgAn": {
+      "isCompleted": true,
       "mapId": "-N2Ho2Bv9PyId_uPU466",
       "selectedDate": 1641340800000,
-      "title": "Midvalley Mines",
-      "isCompleted": true
+      "title": "Midvalley Mines"
     },
     "-N3LNKO6GPFbjxwM8c9e": {
+      "isCompleted": true,
       "mapId": "-N2Ho4bDUkhIqi4tAUjC",
       "selectedDate": 1642550400000,
-      "title": "Welp, We Released a Dragon",
-      "isCompleted": true
+      "title": "Welp, We Released a Dragon"
     },
     "-N3LNKkH9J-m44ch9bTL": {
+      "isCompleted": true,
       "mapId": "-N2Ho2Bv9PyId_uPU466",
       "selectedDate": 1643155200000,
-      "title": "The Jailer Comes",
-      "isCompleted": true
+      "title": "The Jailer Comes"
     },
     "-N3LNLq0jhFHtxtg-aEb": {
+      "isCompleted": true,
       "mapId": "-N2Ho4bDUkhIqi4tAUjC",
       "selectedDate": 1643587200000,
-      "title": "Dead Drop",
-      "isCompleted": true
+      "title": "Dead Drop"
     },
     "-N3LNMGpPxYkzFp5NZ8M": {
+      "isCompleted": true,
       "mapId": "-N2Ho4bDUkhIqi4tAUjC",
       "selectedDate": 1644105600000,
-      "title": "Making Amends",
-      "isCompleted": true
+      "title": "Making Amends"
     },
     "-N3LNMiva_S6FO0qWApU": {
+      "isCompleted": true,
       "mapId": "-N2Ho2Bv9PyId_uPU466",
       "selectedDate": 1644710400000,
-      "title": "Rumblings of the Legion",
-      "isCompleted": true
+      "title": "Rumblings of the Legion"
     },
     "-N3LNNC6prlaWs1UK9MN": {
+      "isCompleted": true,
       "mapId": "-N2Ho4bDUkhIqi4tAUjC",
       "selectedDate": 1645142400000,
-      "title": "Bad Neighbours",
-      "isCompleted": true
+      "title": "Bad Neighbours"
     },
     "-N3LNNafr1wHnpo_OgWr": {
+      "isCompleted": true,
       "mapId": "-N2Ho2Bv9PyId_uPU466",
       "selectedDate": 1645228800000,
-      "title": "North of Midvalley",
-      "isCompleted": true
+      "title": "North of Midvalley"
     },
     "-N3LNOAQz4P8OzPtcjFg": {
+      "isCompleted": true,
       "mapId": "-N2Ho3wDN80qp2cAWF13",
       "selectedDate": 1646092800000,
-      "title": "Exploring the Realms",
-      "isCompleted": true
+      "title": "Exploring the Realms"
     },
     "-N3LNOpE6itnNoUF9DM6": {
+      "isCompleted": true,
       "mapId": "-N2Ho2Bv9PyId_uPU466",
       "selectedDate": 1646697600000,
-      "title": "Clearing Dreadshade Fortress",
-      "isCompleted": true
+      "title": "Clearing Dreadshade Fortress"
     },
     "-N3LNPJIIaTu4Oa0LB9_": {
+      "isCompleted": true,
       "mapId": "-N2Ho4bDUkhIqi4tAUjC",
       "selectedDate": 1647216000000,
-      "title": "Fallen Light",
-      "isCompleted": true
+      "title": "Fallen Light"
     },
     "-N3LNQ5pGw-kM1FTMq0I": {
+      "isCompleted": true,
       "mapId": "-N2Ho2Bv9PyId_uPU466",
       "selectedDate": 1647561600000,
-      "title": "Shadows Over the Mountains",
-      "isCompleted": true
+      "title": "Shadows Over the Mountains"
     },
     "-N3LNQ_uI7ekplXbjeoy": {
+      "isCompleted": true,
       "mapId": "-N2Ho4bDUkhIqi4tAUjC",
       "selectedDate": 1648508400000,
-      "title": "Quest for the Ring",
-      "isCompleted": true
+      "title": "Quest for the Ring"
     },
     "-N3LNR7z6nH3e6a3vzAD": {
+      "isCompleted": true,
       "mapId": "-N2Ho3wDN80qp2cAWF13",
       "selectedDate": 1649631600000,
-      "title": "Return of the Bounty",
-      "isCompleted": true
+      "title": "Return of the Bounty"
     },
     "-N3LNRW-NpnVMSG5iXwB": {
+      "isCompleted": true,
       "mapId": "-N2Ho2Bv9PyId_uPU466",
       "selectedDate": 1652223600000,
-      "title": "The Legion Round 2",
-      "isCompleted": true
+      "title": "The Legion Round 2"
     },
     "-N3LNSCvKJYMuf3blwBm": {
+      "isCompleted": true,
       "mapId": "-N2Ho35e7smUBHZx7sEZ",
       "selectedDate": 1653346800000,
-      "title": "Froster's Fables - The Mindflayer War",
-      "isCompleted": true
+      "title": "Froster's Fables - The Mindflayer War"
     },
     "-N6eNcIWrx2-E4c5KNSY": {
+      "isCompleted": true,
       "mapId": "-N2Ho2Bv9PyId_uPU466",
       "selectedDate": 1656543600000,
-      "title": "The Legion Round 3",
-      "isCompleted": true
+      "title": "The Legion Round 3"
     },
     "-N6eNcqRKJJmGJUkbr3N": {
+      "isCompleted": true,
       "mapId": "-N2Ho35e7smUBHZx7sEZ",
       "selectedDate": 1657321200000,
-      "title": "Frozen Crystals",
-      "isCompleted": true
+      "title": "Frozen Crystals"
     },
     "-N6eNdZgrlLJlh0wdbL6": {
+      "isCompleted": true,
       "mapId": "-N2Ho4bDUkhIqi4tAUjC",
       "selectedDate": 1658444400000,
-      "title": "Eastwatch Harbour",
-      "isCompleted": true
+      "title": "Eastwatch Harbour"
     },
     "-N6yWBPaPzXm2HW4cGfO": {
       "mapId": "-N2Ho2Bv9PyId_uPU466",
       "title": "The Legion Round 4"
     },
     "-N6yWBr6Utf2zP5ioFMt": {
+      "isCompleted": true,
       "mapId": "-N2Ho35e7smUBHZx7sEZ",
       "selectedDate": 1659135600000,
-      "title": "Frozen Crystals Continued",
-      "isCompleted": true
+      "title": "Frozen Crystals Continued"
     },
     "-N8jduR5m_h1ASBR_H9H": {
       "mapId": "-N2Ho35e7smUBHZx7sEZ",
       "selectedDate": 1659999600000,
       "title": "Frozen Crystals Expanded"
-    },
-    "-N8sx3t64CvIGljVU72h": {
-      "mapId": "-N2Ho2Bv9PyId_uPU466",
-      "suggestedByPlayerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
-      "title": "Test"
     }
   },
   "subclasses": {
