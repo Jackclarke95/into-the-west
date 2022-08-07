@@ -40,7 +40,7 @@ export type SubraceData = {
 export type RaceConfigData = {
   key: string;
   raceId: string;
-  subraceId: string;
+  subraceId: string | undefined;
 };
 
 export type CharacterRaceData = {

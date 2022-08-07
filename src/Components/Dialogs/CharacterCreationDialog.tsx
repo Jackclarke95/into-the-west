@@ -13,7 +13,12 @@ import {
 } from "@fluentui/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import DataHelper from "../../Helpers/DataHelper";
+import {
+  ClassData,
+  RaceData,
+  SubclassData,
+  SubraceData,
+} from "../../Types/DatabaseStructures";
 
 const CharacterCreationDialog = () => {
   const dispatch = useDispatch();
@@ -26,37 +31,41 @@ const CharacterCreationDialog = () => {
   const subraces = useSelector((state) => state.subraces);
   const raceConfigs = useSelector((state) => state.raceConfigs);
 
+  const [messageBarMessage, setMessageBarMessage] = useState<
+    string | undefined
+  >(undefined);
+
   const [characterName, setCharacterName] = useState<string | undefined>(
     undefined
   );
   const [characterShortName, setCharacterNickname] = useState<
     string | undefined
   >(undefined);
-  const [characterRace, setCharacterRace] = useState<string | undefined>(
+
+  const [selectedRace, setSelectedRace] = useState<RaceData | undefined>(
     undefined
   );
-  const [characterSubrace, setCharacterSubrace] = useState<string | undefined>(
-    undefined
-  );
-  const [characterLevel, setCharacterLevel] = useState<number>(1);
-  const [characterClass, setCharacterClass] = useState<string | undefined>(
-    undefined
-  );
-  const [characterSubclass, setCharacterSubclass] = useState<
-    string | undefined
+  const [selectedSubrace, setSelectedSubrace] = useState<
+    SubraceData | undefined
   >(undefined);
-  const [messageBarMessage, setMessageBarMessage] = useState<
-    string | undefined
+
+  const [selectedClass, setSelectedClass] = useState<ClassData | undefined>(
+    undefined
+  );
+  const [selectedSubclass, setSelectedSubclass] = useState<
+    SubclassData | undefined
   >(undefined);
+
+  const [selectableSubraces, setSelectableSubraces] = useState<SubraceData[]>(
+    []
+  );
+  const [selectableSubclasses, setSelectableSubclasses] = useState<
+    SubclassData[]
+  >([]);
 
   const onDismiss = () => {
     setCharacterName(undefined);
     setCharacterNickname(undefined);
-    setCharacterRace(undefined);
-    setCharacterSubrace(undefined);
-    setCharacterLevel(1);
-    setCharacterClass(undefined);
-    setCharacterSubclass(undefined);
 
     dispatch({
       type: "SetShowCharacterCreationDialog",
@@ -74,12 +83,31 @@ const CharacterCreationDialog = () => {
     isBlocking: true,
   } as IModalProps;
 
-  const raceOptions = races.isLoading
+  const raceOptions: IDropdownOption[] = races.isLoading
     ? []
-    : races.data.map((race) => ({
-        key: race.name,
-        text: race.name,
-      }));
+    : races.data
+        .map((race) => ({
+          key: race.key,
+          text: race.name,
+        }))
+        .sort((raceA, raceB) => raceA.text.localeCompare(raceB.text));
+
+  const subraceOptions: IDropdownOption[] = selectableSubraces.map(
+    (subrace) => ({ key: subrace.key, text: subrace.name })
+  );
+
+  const classOptions: IDropdownOption[] = classes.isLoading
+    ? []
+    : classes.data
+        .map((cls) => ({
+          key: cls.key,
+          text: cls.name,
+        }))
+        .sort((classA, classB) => classA.text.localeCompare(classB.text));
+
+  const subclassOptions: IDropdownOption[] = selectableSubclasses.map(
+    (subclass) => ({ key: subclass.key, text: subclass.subclassName })
+  );
 
   const onChangeName = (_, value: string | undefined) => {
     setCharacterName(value);
@@ -90,83 +118,115 @@ const CharacterCreationDialog = () => {
   };
 
   const onChangeRace = (_, option: IDropdownOption | undefined) => {
-    if (!option) {
-      setCharacterRace(undefined);
-    } else {
-      setCharacterRace(option.text);
+    console.log("changing race", option);
+    if (
+      races.isLoading ||
+      subraces.isLoading ||
+      raceConfigs.isLoading ||
+      !option
+    ) {
+      return;
     }
 
-    setCharacterSubrace(undefined);
+    const race = races.data.find((race) => race.key === option.key);
+
+    const subracesToSetSelectable = raceConfigs.data
+      .filter((config) => config.raceId === race?.key && config.subraceId)
+      .map((config) => {
+        const subrace = subraces.data.find(
+          (subrace) => subrace.key === config.subraceId
+        );
+
+        if (!subrace) {
+          throw new Error(
+            `Could not find subrace with ID "${config.subraceId}" from RaceConfig with ID "${config.key}"`
+          );
+        }
+
+        return subrace;
+      })
+      .sort((a, b) => b.name.localeCompare(a.name));
+
+    console.log(race);
+    console.log(subraces);
+
+    setSelectedRace(race);
+
+    if (!race?.subraceRequired && subracesToSetSelectable.length > 0) {
+      subracesToSetSelectable.push({
+        key: "NO_RACE_REQUIRED",
+        name: "~No Subrace~",
+      });
+    }
+
+    setSelectableSubraces(subracesToSetSelectable.reverse());
   };
 
-  const onClickCreateCharacter = () => {
-    console.log(validateCharacter());
+  const onChangeSubrace = (_, option: IDropdownOption | undefined) => {
+    if (subraces.isLoading) {
+      return;
+    }
+
+    const subrace = subraces.data.find(
+      (subrace) => subrace.key === option?.key
+    );
+
+    setSelectedSubrace(subrace);
   };
 
-  const validateCharacter = () => {
+  const onChangeClass = (_, option: IDropdownOption | undefined) => {
+    console.log("changing class", option);
+
     if (
       classes.isLoading ||
       subclasses.isLoading ||
       classConfigs.isLoading ||
-      races.isLoading ||
-      subraces.isLoading ||
-      raceConfigs.isLoading
+      !option
     ) {
-      setMessageBarMessage("Data still loading");
-
       return;
     }
 
-    if (!characterName) {
-      setMessageBarMessage("Please enter a name");
+    const cls = classes.data.find((cls) => cls.key === option.key);
 
-      return false;
+    const subclassesToSetSelectable = classConfigs.data
+      .filter((config) => config.classId === cls?.key)
+      .map((config) => {
+        const subclass = subclasses.data.find(
+          (subclass) => subclass.key === config.subclassId && config.subclassId
+        );
+
+        if (!subclass) {
+          throw new Error(
+            `Could not find subclass with ID "${config.subclassId}" from RaceConfig with ID "${config.key}"`
+          );
+        }
+
+        return subclass;
+      })
+      .sort((a, b) => b.subclassName.localeCompare(a.subclassName));
+
+    console.log(cls);
+    console.log(subraces);
+
+    setSelectedClass(cls);
+
+    setSelectableSubclasses(subclassesToSetSelectable);
+  };
+
+  const onChangeSubclass = (_, option: IDropdownOption | undefined) => {
+    if (subclasses.isLoading) {
+      return;
     }
 
-    if (characterName.trim().split(" ").length > 1 && !characterShortName) {
-      setMessageBarMessage("Please enter a nickname");
+    const subclass = subclasses.data.find(
+      (subclass) => subclass.key === option?.key
+    );
 
-      return false;
-    }
+    setSelectedSubclass(subclass);
+  };
 
-    if (!characterRace) {
-      setMessageBarMessage("Please select a race");
-
-      return false;
-    }
-
-    if (
-      races.data.find((race) => race.name === characterRace)?.subraceRequired &&
-      !characterSubrace
-    ) {
-      setMessageBarMessage("The selected race requires a subrace");
-
-      return false;
-    }
-
-    if (!characterClass) {
-      setMessageBarMessage("Please select a class");
-
-      return false;
-    }
-
-    const cls = classes.data.find((cls) => cls.name === characterClass);
-
-    if (cls && !characterSubclass && cls.levelFrom <= characterLevel) {
-      setMessageBarMessage(
-        `The selected archetype must have ${
-          DataHelper.startsWithVowel(cls.archetypeName) ? "an" : "a"
-        } ${cls.archetypeName} at ${DataHelper.formatOrdinalNumber(
-          characterLevel
-        )} level`
-      );
-
-      return false;
-    }
-
-    setMessageBarMessage(undefined);
-
-    return true;
+  const onClickCreateCharacter = () => {
+    console.log("creating character");
   };
 
   return (
@@ -204,50 +264,21 @@ const CharacterCreationDialog = () => {
         }
         required={!!characterName && characterName.trim().split(" ").length > 1}
       />
+      <Dropdown label="Race" options={raceOptions} onChange={onChangeRace} />
       <Dropdown
-        label="Race"
-        options={raceOptions}
-        onChange={onChangeRace}
-        required
-        calloutProps={{ calloutMaxHeight: 500 }}
-      />
-      {/* <Dropdown
         label="Subrace"
         options={subraceOptions}
-        defaultValue={undefined}
         onChange={onChangeSubrace}
         disabled={subraceOptions.length === 0}
-        required={subraceOptions.length !== 0}
-        selectedKey={characterSubrace}
+        required={selectedRace?.subraceRequired}
       />
-      <SpinButton
-        label="Level"
-        onChange={onChangeCharacterLevel}
-        labelPosition={Position.top}
-        min={1}
-        max={20}
-      />
+      <Dropdown label="Class" options={classOptions} onChange={onChangeClass} />
       <Dropdown
-        label="Class"
-        options={classOptions}
-        onChange={onChangeClass}
-        required
-      /> */}
-      {/* <Dropdown
-        label={
-          subclassOptions().length === 0
-            ? "Subclass"
-            : Classes.find((cls) => cls.name === characterClass)
-                ?.archetypeDefinition.name
-        }
-        options={subclassOptions()}
-        defaultValue={undefined}
+        label="Subclass"
+        options={subclassOptions}
         onChange={onChangeSubclass}
-        disabled={subclassOptions().length === 0}
-        required={subclassOptions().length !== 0}
-        calloutProps={{ calloutMaxHeight: 250 }}
-        selectedKey={characterSubclass}
-      /> */}
+        disabled={subclassOptions.length === 0}
+      />
       <DialogFooter>
         <DefaultButton text="Cancel" onClick={onDismiss} />
         <PrimaryButton text="Create" onClick={onClickCreateCharacter} />
