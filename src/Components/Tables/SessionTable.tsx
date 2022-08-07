@@ -226,7 +226,7 @@ const SessionTable = () => {
               </TooltipHost>
             </Stack>
           )}
-        {!session.isCompleted && (
+        {!session.isCompleted && DataHelper.isDateInPast(session.date!) && (
           <TooltipHost content="Complete session">
             <IconButton
               iconProps={completeIcon}
