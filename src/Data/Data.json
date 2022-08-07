@@ -1096,56 +1096,73 @@
   },
   "players": {
     "-MaGM4rbdJBgZ8rKnfbc": {
+      "availableDates": [],
       "name": "Swedish Fox"
     },
     "-MaGM4yP9MiI5Cy5CmCL": {
+      "availableDates": [],
       "name": "Cassie"
     },
     "-MaGM5CRWHK7L7PRyhub": {
+      "availableDates": [],
       "name": "Perky"
     },
     "-MaGM5QVGtAGMiUj9Eb_": {
+      "availableDates": [],
       "name": "BlackRose89"
     },
     "-MaGM5cq30wDPzwxYLK4": {
+      "availableDates": [],
       "name": "Ellie"
     },
     "-MaGM5koceXzQAlwRUFN": {
+      "availableDates": [],
       "name": "Arnaud"
     },
     "-MaGM5tBXrrMWldlbI-X": {
+      "availableDates": [],
       "name": "Jonno"
     },
     "-MaGM6IOnqXNGuNfxZa6": {
+      "availableDates": [],
       "name": "Patola"
     },
     "-MaGM6Q3kpDNynEBURGO": {
+      "availableDates": [],
       "isDungeonMaster": true,
       "isGamesMaster": true,
       "name": "Benjywa"
     },
     "-MaGM6YXdS0MHyYRc99v": {
+      "availableDates": [],
       "name": "No, this is Patrick"
     },
     "-MaGM6mfWwwgH4r0KsVA": {
+      "availableDates": [],
       "name": "Chloe"
     },
     "-MaGM764hCfwnab2wTy8": {
+      "availableDates": [],
       "name": "HirotoShinori"
     },
     "-MaGM7VISDGDZF-eMIT4": {
+      "availableDates": [],
       "name": "Kosky"
     },
     "-MaGM8l3BWAoEc3mnmIf": {
+      "availableDates": [],
       "name": "Poppy"
     },
     "-MaGM8ycWHXnWbaq-WqQ": {
+      "availableDates": [],
       "name": "Shabbyj"
     },
     "-MaGM9ApuRxANiYS2eNu": {
+      "availableDates": [],
       "name": "Thom Prime"
     },
     "-MaGM9IVAiHx1Zdv8hAu": {
+      "availableDates": [],
       "isDungeonMaster": true,
       "name": "John"
     },
@@ -2820,6 +2837,11 @@
     },
     "-N8je_wP_2bLJIW43AuH": {
       "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
+      "role": 0,
+      "sessionId": "-N8jduR5m_h1ASBR_H9H"
+    },
+    "-N8swstmATRhWCLZsqvE": {
+      "playerId": "7zD6gWfMUza6BPRXkJpara46fy83",
       "role": 0,
       "sessionId": "-N8jduR5m_h1ASBR_H9H"
     }
