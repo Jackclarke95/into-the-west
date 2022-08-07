@@ -34,3 +34,17 @@ REACT_APP_DISCORD_WEBHOOK_URL={found in Discord Server}
 ```
 
 The values for the above snippet can be found in Project Settings in the [Firebase Console](https://console.firebase.google.com/)
+
+## Continuous Development and Integration
+
+Pull requests and merges to the main branch trigger various workflows using GitHub Actions. In future, the intention is to have unit tests run on every pull request, as well as UI tests to run against the test website (see below)
+
+### Pull Request
+
+The creation of a pull request triggers a GitHub action that attempts to build and deploy a preview of that branch to its own website for preview.
+
+In future, UI tests will be run against this website, and unit tests will be run against the code, as well as build validation, which must all succeed before a merge can be completed.
+
+## Merge to Main
+
+A merge to the main branch automatically triggers a production release. Currently, there is no automated testing, but this is intended to be improved in the future, in order to reduce any regressions.
