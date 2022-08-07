@@ -39,6 +39,7 @@ import React from "react";
 import MobileHeader from "./Components/MobileHeader";
 import MobileDashboard from "./Components/MobileDashboard";
 import MobileFooter from "./Components/MobileFooter";
+import SessionCompletionDialog from "./Components/Dialogs/SessionCompletionDialog";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -385,6 +386,7 @@ const App = () => {
       <NewRaceDialog />
       <NewSubraceDialog />
       <SessionRegistrationDialog />
+      <SessionCompletionDialog />
       <ConfirmationDialog />
     </React.Fragment>
   );

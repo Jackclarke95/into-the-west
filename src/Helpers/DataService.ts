@@ -256,6 +256,52 @@ export default class DataService {
   };
 
   /**
+   * Updates a Session Interest's "didAttend" field to whether the player attended the session
+   * @param sessionInterestId The ID of the sessionInterest to update
+   * @param attended Whether the player attended the session
+   */
+  public static setInterestAttendance = async (
+    sessionInterestId: string,
+    attended: boolean
+  ) => {
+    const sessionInterestRef = ref(db, "sessionInterests/" + sessionInterestId);
+
+    update(sessionInterestRef, {
+      didAttend: attended,
+    })
+      .then((response) => response)
+      .catch((error) => {
+        throw new Error(error.message);
+      });
+  };
+
+  /**
+   * Completes a session, setting its "Completed" field to true, and its "selectedDate" value to
+   * the given date
+   * @param sessionId The ID of the Session to update
+   * @param sessionDate The date to update the Session to
+   */
+  public static completeSession = async (
+    sessionId: string,
+    sessionDate: number
+  ) => {
+    const sessionRef = ref(db, "sessions/" + sessionId);
+
+    update(sessionRef, {
+      isCompleted: true,
+      selectedDate: sessionDate,
+    })
+      .then((result) => {
+        return result;
+      })
+      .catch((error) => {
+        throw new Error(
+          `could not complete session with ID "${sessionId}\r\n${error.message}"`
+        );
+      });
+  };
+
+  /**
    * Sends a New Session announcement to the Discord server
    * @param sessionName The name of the Session
    * @param map The Map on which the Session will take place

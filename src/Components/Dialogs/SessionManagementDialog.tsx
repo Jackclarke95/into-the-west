@@ -121,7 +121,7 @@ const SessionManagementDialog = () => {
         <span>{datesAndPlayers.interestedPlayers.length}</span>
         <TooltipHost
           content={interestedPlayersToRender
-            .map(({ player: player }) => player.name)
+            .map(({ player }) => player.name)
             .join(", ")}
           directionalHint={DirectionalHint.leftCenter}
         >
@@ -129,7 +129,7 @@ const SessionManagementDialog = () => {
             overflowButtonType={OverflowButtonType.descriptive}
             showTooltip={false}
             personaSize={PersonaSize.size24}
-            personas={interestedPlayersToRender.map(({ player: player }) => ({
+            personas={interestedPlayersToRender.map(({ player }) => ({
               personaName: player.name,
             }))}
           />
@@ -199,9 +199,9 @@ const SessionManagementDialog = () => {
     .map((date) => ({
       date: date,
       displayDate: DataHelper.getDateInDayDateMonthFormat(new Date(date)),
-      interestedPlayers: getInterestedPlayers().filter((player) => {
-        player.availableDates.includes(date);
-      }),
+      interestedPlayers: getInterestedPlayers().filter((player) =>
+        player.availableDates.includes(date)
+      ),
     }))
     .filter((date) => !DataHelper.isDateInPast(date.date));
 
@@ -230,7 +230,7 @@ const SessionManagementDialog = () => {
         >
           {sessionManagement.isShown ? sessionManagement.session.name : ""}
         </Text>
-        {getInterestedPlayers().length > 0 ? (
+        {getInterestedPlayers().length > 0 && dates.length > 0 ? (
           <>
             {!dungeonMaster && (
               <MessageBar messageBarType={MessageBarType.error}>

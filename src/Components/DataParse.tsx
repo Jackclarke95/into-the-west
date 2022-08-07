@@ -160,7 +160,7 @@ const DataParse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       ).length;
 
       return {
-        availableDates: player.availableDates,
+        availableDates: player.availableDates ?? [],
         id: player.key,
         isGamesMaster: player.isGamesMaster,
         isDungeonMaster: player.isDungeonMaster,
@@ -432,6 +432,7 @@ const DataParse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         },
         map: matchingMap,
         suggestedByPlayerId: session.suggestedByPlayerId,
+        isCompleted: session.isCompleted ?? false,
       };
     });
 

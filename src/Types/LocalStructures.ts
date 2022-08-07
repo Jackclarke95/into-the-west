@@ -33,6 +33,7 @@ export type Session = {
   date: number | undefined;
   map: Map;
   suggestedByPlayerId: string | undefined;
+  isCompleted: boolean;
 };
 
 export type Player = {

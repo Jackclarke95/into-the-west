@@ -141,6 +141,9 @@ declare module "react-redux" {
     /** Whether the Session Management dialog should be shown, along with which Session it will be shown for */
     sessionManagement: { isShown: false } | { isShown: true; session: Session };
 
+    /** Whether the Session Completion dialog should be shown, along with which Session it will be shown for */
+    sessionCompletion: { isShown: false } | { isShown: true; session: Session };
+
     /** Whether the Confirmation dialog should be shown, along with the configuration with which to populate the dialog */
     confirmation:
       | { isShown: false }

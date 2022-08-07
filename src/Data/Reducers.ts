@@ -116,6 +116,10 @@ export type Action =
       sessionManagement: DefaultRootState["sessionManagement"];
     }
   | {
+      type: "SetSessionCompletion";
+      sessionCompletion: DefaultRootState["sessionCompletion"];
+    }
+  | {
       type: "SetConfirmation";
       confirmation: DefaultRootState["confirmation"];
     }
@@ -199,6 +203,8 @@ export const initialState: DefaultRootState = {
   sessionRegistration: { isShown: false },
 
   sessionManagement: { isShown: false },
+
+  sessionCompletion: { isShown: false },
 
   confirmation: { isShown: false },
 };
@@ -417,6 +423,12 @@ export const rootReducer: Reducer<DefaultRootState, Action> = (
         // Action for toggling the Session Management Dialog and the relevant session
         case "SetSessionManagement": {
           draftState.sessionManagement = action.sessionManagement;
+          break;
+        }
+
+        // Action for toggling the Session Management Dialog and the relevant session
+        case "SetSessionCompletion": {
+          draftState.sessionCompletion = action.sessionCompletion;
           break;
         }
 

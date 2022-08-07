@@ -159,6 +159,13 @@ const SessionTable = () => {
       });
     };
 
+    const onClickCompleteSession = (session: Session) => {
+      dispatch({
+        type: "SetSessionCompletion",
+        sessionCompletion: { isShown: true, session: session },
+      });
+    };
+
     const registerIcon: IIconProps = {
       iconName: "AddFriend",
     };
@@ -169,6 +176,10 @@ const SessionTable = () => {
 
     const manageIcon: IIconProps = {
       iconName: "Settings",
+    };
+
+    const completeIcon: IIconProps = {
+      iconName: "Checkmark",
     };
 
     return (
@@ -200,14 +211,30 @@ const SessionTable = () => {
           !currentPlayer.isLoading &&
           (currentPlayer.data?.isDungeonMaster ||
             session.suggestedByPlayerId === currentPlayer.data?.id) && (
-            <TooltipHost content="Manage session">
-              <IconButton
-                iconProps={manageIcon}
-                disabled={false}
-                onClick={() => onClickManageSession(session)}
-              />
-            </TooltipHost>
+            <Stack
+              className="icon-button-container"
+              horizontal
+              verticalAlign="center"
+              styles={{ root: { margin: -6 } }}
+            >
+              <TooltipHost content="Manage session">
+                <IconButton
+                  iconProps={manageIcon}
+                  disabled={false}
+                  onClick={() => onClickManageSession(session)}
+                />
+              </TooltipHost>
+            </Stack>
           )}
+        {!session.isCompleted && (
+          <TooltipHost content="Complete session">
+            <IconButton
+              iconProps={completeIcon}
+              disabled={false}
+              onClick={() => onClickCompleteSession(session)}
+            />
+          </TooltipHost>
+        )}
       </Stack>
     );
   };
@@ -250,7 +277,7 @@ const SessionTable = () => {
     {
       key: "actions",
       name: "Actions",
-      minWidth: 50,
+      minWidth: 100,
       onRender: onRenderActions,
     },
   ];
