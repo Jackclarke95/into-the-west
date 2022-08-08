@@ -445,7 +445,7 @@
     "-N6xK912nY4MImulJ45D": {
       "fullName": "Destrian Darkeyes",
       "nickname": "Destrian",
-      "playerId": "-N6xJxUeqevomce8WaX9",
+      "playerId": "jsDONHy3afcy0io6HQ763SUrPfz1",
       "sheetUrl": "https://www.dndbeyond.com/characters/67876495",
       "startingLevel": 3
     },
@@ -1149,9 +1149,6 @@
       "isDungeonMaster": true,
       "name": "John"
     },
-    "-N6xJxUeqevomce8WaX9": {
-      "name": "Michael"
-    },
     "2Fv3wHgqwjV64m6IEPOp9brzKvb2": {
       "availableDates": [
         1656716400000, 1656284400000, 1656802800000, 1656198000000,
@@ -1168,7 +1165,8 @@
     },
     "7zD6gWfMUza6BPRXkJpara46fy83": {
       "availableDates": [
-        1656370800000, 1656802800000, 1656198000000, 1656630000000
+        1660172400000, 1661122800000, 1661382000000, 1661900400000,
+        1662332400000, 1662418800000
       ],
       "isDungeonMaster": false,
       "isGamesMaster": false,
@@ -1186,7 +1184,14 @@
       "name": "Jack"
     },
     "LQXJ3bqnXpbHPTfdGRzO2AkRIbm1": {
-      "availableDates": [1659740400000],
+      "availableDates": [
+        1659999600000, 1660086000000, 1660258800000, 1660345200000,
+        1660431600000, 1659913200000, 1660518000000, 1660604400000,
+        1660690800000, 1660863600000, 1660950000000, 1661036400000,
+        1661641200000, 1661554800000, 1661468400000, 1661295600000,
+        1661209200000, 1661122800000, 1661727600000, 1661814000000,
+        1661900400000
+      ],
       "isDungeonMaster": false,
       "isGamesMaster": false,
       "name": "Ben Baker"
@@ -1216,6 +1221,14 @@
       "isDungeonMaster": true,
       "isGamesMaster": false,
       "name": "Will Carter"
+    },
+    "jsDONHy3afcy0io6HQ763SUrPfz1": {
+      "availableDates": [
+        1661209200000, 1661295600000, 1661382000000, 1661468400000,
+        1661554800000, 1661641200000, 1661727600000, 1661814000000,
+        1661900400000, 1661986800000, 1662073200000
+      ],
+      "name": "Michael"
     },
     "kQHelre21sgGsU8FDu1CKY33im12": {
       "name": "Thomas"
@@ -2792,7 +2805,7 @@
       "sessionId": "-N6yWBr6Utf2zP5ioFMt"
     },
     "-N8je8Mlnq_w7Z35PzRU": {
-      "playerId": "-N6xJxUeqevomce8WaX9",
+      "playerId": "jsDONHy3afcy0io6HQ763SUrPfz1",
       "role": 0,
       "sessionId": "-N8jduR5m_h1ASBR_H9H"
     },
@@ -2835,6 +2848,26 @@
       "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
       "role": 0,
       "sessionId": "-N8jduR5m_h1ASBR_H9H"
+    },
+    "-N8w6_a4DzKlYxPdXTmu": {
+      "playerId": "LQXJ3bqnXpbHPTfdGRzO2AkRIbm1",
+      "role": 0,
+      "sessionId": "-N8w6BojGCGv6TIg96Sw"
+    },
+    "-N8w9-A4av_GqBDpKBCD": {
+      "playerId": "7zD6gWfMUza6BPRXkJpara46fy83",
+      "role": 0,
+      "sessionId": "-N8w6BojGCGv6TIg96Sw"
+    },
+    "-N8z4Yh6iYN9N_1OiI57": {
+      "playerId": "9QqPgpLp23cEYeK3Jvq9MmIMpY13",
+      "role": 1,
+      "sessionId": "-N8w6BojGCGv6TIg96Sw"
+    },
+    "-N8z4xFvCvS2GXxoj091": {
+      "playerId": "jsDONHy3afcy0io6HQ763SUrPfz1",
+      "role": 0,
+      "sessionId": "-N8w6BojGCGv6TIg96Sw"
     }
   },
   "sessions": {
@@ -3020,6 +3053,11 @@
       "mapId": "-N2Ho35e7smUBHZx7sEZ",
       "selectedDate": 1659999600000,
       "title": "Frozen Crystals Expanded"
+    },
+    "-N8w6BojGCGv6TIg96Sw": {
+      "mapId": "-N2Ho4bDUkhIqi4tAUjC",
+      "suggestedByPlayerId": "kQHelre21sgGsU8FDu1CKY33im12",
+      "title": "Search for Sandport Bay"
     }
   },
   "subclasses": {
