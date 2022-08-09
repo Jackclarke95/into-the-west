@@ -7,10 +7,6 @@ import { Action, initialState, rootReducer } from "./Data/Reducers";
 
 import "./index.css";
 import App from "./App";
-import { initializeIcons, ThemeProvider } from "@fluentui/react";
-import { LightTheme } from "./Style/Themes";
-
-initializeIcons();
 
 // Create the Redux store
 const store = createStore((prevState, action) => {
@@ -24,9 +20,7 @@ const store = createStore((prevState, action) => {
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ThemeProvider theme={LightTheme}>
-        <App />
-      </ThemeProvider>
+      <App />
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

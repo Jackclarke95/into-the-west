@@ -1,0 +1,16 @@
+.session-card {
+  display: flex;
+  flex-direction: column;
+  .title {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  .dungeon-master {
+    display: flex;
+    flex-direction: row;
+    .label {
+      font-weight: bold;
+      margin-right: 5px;
+    }
+  }
+}

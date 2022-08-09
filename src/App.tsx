@@ -1,45 +1,15 @@
-import { ScrollablePane, Stack, Sticky } from "@fluentui/react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getDatabase, onValue, ref } from "firebase/database";
 import { initializeApp } from "firebase/app";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-import DataHelper from "./Helpers/DataHelper";
-
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import "./Style/App.scss";
-import DesktopHeader from "./Components/Legacy/DesktopHeader";
-import DesktopFooter from "./Components/Legacy/DesktopFooter";
-import Login from "./Components/Legacy/Login";
-import DesktopDashboard from "./Components/Legacy/DesktopDashboard";
-
-import Everwilds from "./Images/Maps/The Everwilds - Preview.jpg";
-import ForgottenLands from "./Images/Maps/The Forgotten Lands - Preview.jpg";
-import LunarIsles from "./Images/Maps/The Lunar Isles - Preview.jpg";
-import ShatteredRealms from "./Images/Maps/The Shattered Realms - Preview.jpg";
-
-import RegistrationDialog from "./Components/Legacy/Dialogs/RegistrationDialog";
-import CharacterCreationDialog from "./Components/Legacy/Dialogs/CharacterCreationDialog";
-import SessionCreationDialog from "./Components/Legacy/Dialogs/SessionCreationDialog";
-import SessionManagementDialog from "./Components/Legacy/Dialogs/SessionManagementDialog";
-import AccountNameManagementDialog from "./Components/Legacy/Dialogs/AccountNameManagementDialog";
-import PasswordManagementDialog from "./Components/Legacy/Dialogs/PasswordManagementDialog";
-import CharacterManagementDialog from "./Components/Legacy/Dialogs/CharacterManagementDialog";
-import NewRaceDialog from "./Components/Legacy/Dialogs/NewRaceDialog";
-import NewSubraceDialog from "./Components/Legacy/Dialogs/NewSubraceDialog";
-import SessionRegistrationDialog from "./Components/Legacy/Dialogs/SessionRegistrationDialog";
 import { PlayerData } from "./Types/DatabaseStructures";
-import ConfirmationDialog from "./Components/Legacy/Dialogs/ConfirmationDialog";
-import { BrowserView, MobileView } from "react-device-detect";
-import DataParse from "./Components/Legacy/DataParse";
-import React from "react";
-import MobileHeader from "./Components/Legacy/MobileHeader";
-import MobileDashboard from "./Components/Legacy/MobileDashboard";
-import MobileFooter from "./Components/Legacy/MobileFooter";
-import SessionCompletionDialog from "./Components/Legacy/Dialogs/SessionCompletionDialog";
+import IntoTheWest from "./Components/IntoTheWest";
+import Login from "./Components/Legacy/Login";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -318,77 +288,10 @@ const App = () => {
   });
 
   return (
-    <React.Fragment>
-      <DataParse>
-        {authUser ? (
-          <React.Fragment>
-            <BrowserView>
-              <Stack
-                className="app-container"
-                verticalFill
-                horizontalAlign="center"
-                verticalAlign="center"
-                styles={{
-                  root: {
-                    textAlign: "center",
-                    height: "100vh",
-                    backgroundImage: authUser
-                      ? `url("${DataHelper.getRandomFromArray([
-                          Everwilds,
-                          ForgottenLands,
-                          LunarIsles,
-                          ShatteredRealms,
-                        ])}")`
-                      : "",
-                    backgroundSize: "cover",
-                    backgroundRepeat: "no-repeat",
-                    backgroundPosition: "center",
-                    backgroundComposite: "saturation",
-                  },
-                }}
-              >
-                <DesktopHeader />
-                <DesktopDashboard />
-                <DesktopFooter />
-              </Stack>
-            </BrowserView>
-            <MobileView>
-              <ScrollablePane>
-                <Sticky>
-                  <MobileHeader />
-                </Sticky>
-                <MobileDashboard />
-                <Sticky>
-                  <MobileFooter />
-                </Sticky>
-              </ScrollablePane>
-            </MobileView>
-          </React.Fragment>
-        ) : (
-          <>
-            <Login />
-          </>
-        )}
-      </DataParse>
-      <ToastContainer
-        hideProgressBar
-        position="top-center"
-        closeButton
-        autoClose={1500}
-      />
-      <RegistrationDialog />
-      <CharacterCreationDialog />
-      <SessionCreationDialog />
-      <SessionManagementDialog />
-      <AccountNameManagementDialog />
-      <PasswordManagementDialog />
-      <CharacterManagementDialog />
-      <NewRaceDialog />
-      <NewSubraceDialog />
-      <SessionRegistrationDialog />
-      <SessionCompletionDialog />
-      <ConfirmationDialog />
-    </React.Fragment>
+    <>
+      {authUser ? <IntoTheWest /> : <Login />}
+      <ToastContainer />
+    </>
   );
 };
 
