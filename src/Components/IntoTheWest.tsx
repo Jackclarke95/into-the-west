@@ -468,7 +468,7 @@ const IntoTheWest = () => {
                 )}
                 {!sessions.isLoading && sessions.data && (
                   <SessionCard session={sessions.data[0]} />
-                )}{" "}
+                )}
               </>
             }
           />
