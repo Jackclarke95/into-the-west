@@ -9,7 +9,7 @@ import {
   Stack,
   Text,
 } from "@fluentui/react";
-import { Character } from "../../Types/LocalStructures";
+import { Character } from "../../../Types/LocalStructures";
 import { ClassIcon } from "../ClassIcon";
 import XpBar from "../XpBar";
 

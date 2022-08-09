@@ -11,7 +11,7 @@ import {
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import DataService from "../../Helpers/DataService";
+import DataService from "../../../Helpers/DataService";
 
 const PasswordManagementDialog = () => {
   const dispatch = useDispatch();

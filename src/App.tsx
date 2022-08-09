@@ -11,35 +11,35 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import "./Style/App.scss";
-import DesktopHeader from "./Components/DesktopHeader";
-import DesktopFooter from "./Components/DesktopFooter";
-import Login from "./Components/Login";
-import DesktopDashboard from "./Components/DesktopDashboard";
+import DesktopHeader from "./Components/Legacy/DesktopHeader";
+import DesktopFooter from "./Components/Legacy/DesktopFooter";
+import Login from "./Components/Legacy/Login";
+import DesktopDashboard from "./Components/Legacy/DesktopDashboard";
 
 import Everwilds from "./Images/Maps/The Everwilds - Preview.jpg";
 import ForgottenLands from "./Images/Maps/The Forgotten Lands - Preview.jpg";
 import LunarIsles from "./Images/Maps/The Lunar Isles - Preview.jpg";
 import ShatteredRealms from "./Images/Maps/The Shattered Realms - Preview.jpg";
 
-import RegistrationDialog from "./Components/Dialogs/RegistrationDialog";
-import CharacterCreationDialog from "./Components/Dialogs/CharacterCreationDialog";
-import SessionCreationDialog from "./Components/Dialogs/SessionCreationDialog";
-import SessionManagementDialog from "./Components/Dialogs/SessionManagementDialog";
-import AccountNameManagementDialog from "./Components/Dialogs/AccountNameManagementDialog";
-import PasswordManagementDialog from "./Components/Dialogs/PasswordManagementDialog";
-import CharacterManagementDialog from "./Components/Dialogs/CharacterManagementDialog";
-import NewRaceDialog from "./Components/Dialogs/NewRaceDialog";
-import NewSubraceDialog from "./Components/Dialogs/NewSubraceDialog";
-import SessionRegistrationDialog from "./Components/Dialogs/SessionRegistrationDialog";
+import RegistrationDialog from "./Components/Legacy/Dialogs/RegistrationDialog";
+import CharacterCreationDialog from "./Components/Legacy/Dialogs/CharacterCreationDialog";
+import SessionCreationDialog from "./Components/Legacy/Dialogs/SessionCreationDialog";
+import SessionManagementDialog from "./Components/Legacy/Dialogs/SessionManagementDialog";
+import AccountNameManagementDialog from "./Components/Legacy/Dialogs/AccountNameManagementDialog";
+import PasswordManagementDialog from "./Components/Legacy/Dialogs/PasswordManagementDialog";
+import CharacterManagementDialog from "./Components/Legacy/Dialogs/CharacterManagementDialog";
+import NewRaceDialog from "./Components/Legacy/Dialogs/NewRaceDialog";
+import NewSubraceDialog from "./Components/Legacy/Dialogs/NewSubraceDialog";
+import SessionRegistrationDialog from "./Components/Legacy/Dialogs/SessionRegistrationDialog";
 import { PlayerData } from "./Types/DatabaseStructures";
-import ConfirmationDialog from "./Components/Dialogs/ConfirmationDialog";
+import ConfirmationDialog from "./Components/Legacy/Dialogs/ConfirmationDialog";
 import { BrowserView, MobileView } from "react-device-detect";
-import DataParse from "./Components/DataParse";
+import DataParse from "./Components/Legacy/DataParse";
 import React from "react";
-import MobileHeader from "./Components/MobileHeader";
-import MobileDashboard from "./Components/MobileDashboard";
-import MobileFooter from "./Components/MobileFooter";
-import SessionCompletionDialog from "./Components/Dialogs/SessionCompletionDialog";
+import MobileHeader from "./Components/Legacy/MobileHeader";
+import MobileDashboard from "./Components/Legacy/MobileDashboard";
+import MobileFooter from "./Components/Legacy/MobileFooter";
+import SessionCompletionDialog from "./Components/Legacy/Dialogs/SessionCompletionDialog";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,

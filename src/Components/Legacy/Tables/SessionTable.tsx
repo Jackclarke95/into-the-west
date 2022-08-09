@@ -14,9 +14,9 @@ import {
 } from "@fluentui/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import DataHelper from "../../Helpers/DataHelper";
-import DataService from "../../Helpers/DataService";
-import { Character, Session } from "../../Types/LocalStructures";
+import DataHelper from "../../../Helpers/DataHelper";
+import DataService from "../../../Helpers/DataService";
+import { Character, Session } from "../../../Types/LocalStructures";
 
 const SessionTable = () => {
   const dispatch = useDispatch();

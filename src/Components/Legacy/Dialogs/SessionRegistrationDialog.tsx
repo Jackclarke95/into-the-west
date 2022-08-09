@@ -12,8 +12,8 @@ import {
 } from "@fluentui/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import SessionRole from "../../Enums/SessionRole";
-import DataService from "../../Helpers/DataService";
+import SessionRole from "../../../Enums/SessionRole";
+import DataService from "../../../Helpers/DataService";
 import Availability from "../Availability";
 
 const SessionRegistrationDialog = () => {

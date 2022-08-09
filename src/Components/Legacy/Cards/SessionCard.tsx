@@ -11,9 +11,9 @@ import {
 } from "@fluentui/react";
 import { isMobile } from "react-device-detect";
 import { useDispatch, useSelector } from "react-redux";
-import DataHelper from "../../Helpers/DataHelper";
-import DataService from "../../Helpers/DataService";
-import { Session, Character } from "../../Types/LocalStructures";
+import DataHelper from "../../../Helpers/DataHelper";
+import DataService from "../../../Helpers/DataService";
+import { Session, Character } from "../../../Types/LocalStructures";
 
 const SessionCard: React.FC<{
   session: Session;

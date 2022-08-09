@@ -13,9 +13,9 @@ import {
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import SessionRole from "../../Enums/SessionRole";
-import DataService from "../../Helpers/DataService";
-import { Character } from "../../Types/LocalStructures";
+import SessionRole from "../../../Enums/SessionRole";
+import DataService from "../../../Helpers/DataService";
+import { Character } from "../../../Types/LocalStructures";
 
 const SessionCompletionDialog = () => {
   const dispatch = useDispatch();

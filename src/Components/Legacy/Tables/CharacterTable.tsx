@@ -11,8 +11,8 @@ import {
 } from "@fluentui/react";
 import { useSelector } from "react-redux";
 import { ClassIcon } from "../ClassIcon";
-import DefaultAvatar from "../../Images/DefaultAvatar.jpeg";
-import { Character } from "../../Types/LocalStructures";
+import DefaultAvatar from "../../../Images/DefaultAvatar.jpeg";
+import { Character } from "../../../Types/LocalStructures";
 import { useEffect, useState } from "react";
 import XpBar from "../XpBar";
 

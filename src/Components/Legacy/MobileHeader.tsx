@@ -8,7 +8,7 @@ import {
   Text,
 } from "@fluentui/react";
 import { useDispatch } from "react-redux";
-import DataService from "../Helpers/DataService";
+import DataService from "../../Helpers/DataService";
 
 const MobileHeader = () => {
   const dispatch = useDispatch();

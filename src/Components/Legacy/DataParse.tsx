@@ -1,11 +1,11 @@
 import { Stack } from "@fluentui/react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import SessionRole from "../Enums/SessionRole";
-import DataHelper from "../Helpers/DataHelper";
-import { Player, Character, Map, Session } from "../Types/LocalStructures";
-import LevelUp from "../Data/LevelUp";
-import { GlobalVariables } from "../Data/GlobalVariables";
+import SessionRole from "../../Enums/SessionRole";
+import DataHelper from "../../Helpers/DataHelper";
+import { Player, Character, Map, Session } from "../../Types/LocalStructures";
+import LevelUp from "../../Data/LevelUp";
+import { GlobalVariables } from "../../Data/GlobalVariables";
 
 const DataParse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const dispatch = useDispatch();

@@ -11,8 +11,8 @@ import {
 } from "@fluentui/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import DataService from "../../Helpers/DataService";
-import { Map } from "../../Types/LocalStructures";
+import DataService from "../../../Helpers/DataService";
+import { Map } from "../../../Types/LocalStructures";
 
 const SessionCreationDialog = () => {
   const showDialog = useSelector((state) => state.showSessionCreationDialog);

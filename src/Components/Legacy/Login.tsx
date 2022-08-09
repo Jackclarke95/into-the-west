@@ -17,7 +17,7 @@ import {
 import { getAuth } from "firebase/auth";
 import React from "react";
 import { useDispatch } from "react-redux";
-import DataService from "../Helpers/DataService";
+import DataService from "../../Helpers/DataService";
 
 const Login = () => {
   const dispatch = useDispatch();

@@ -1,6 +1,6 @@
 import { TooltipHost, ProgressIndicator, Stack } from "@fluentui/react";
-import { Character } from "../Types/LocalStructures";
-import LevelUpData from "../Data/LevelUp";
+import { Character } from "../../Types/LocalStructures";
+import LevelUpData from "../../Data/LevelUp";
 
 const XpBar: React.FC<{ character: Character }> = ({ character }) => {
   if (!character.player) {

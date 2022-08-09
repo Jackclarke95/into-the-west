@@ -13,7 +13,7 @@ import {
 } from "@fluentui/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import DataHelper from "../../Helpers/DataHelper";
+import DataHelper from "../../../Helpers/DataHelper";
 
 const CharacterCreationDialog = () => {
   const dispatch = useDispatch();

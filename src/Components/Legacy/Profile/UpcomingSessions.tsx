@@ -10,8 +10,8 @@ import {
   Text,
 } from "@fluentui/react";
 import { useDispatch, useSelector } from "react-redux";
-import DataHelper from "../../Helpers/DataHelper";
-import { Session } from "../../Types/LocalStructures";
+import DataHelper from "../../../Helpers/DataHelper";
+import { Session } from "../../../Types/LocalStructures";
 import SessionCard from "../Cards/SessionCard";
 
 const UpcomingSessions = () => {

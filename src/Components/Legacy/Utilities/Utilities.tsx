@@ -1,6 +1,6 @@
 import { DefaultButton, FontSizes, Separator, Stack } from "@fluentui/react";
 import { useDispatch, useSelector } from "react-redux";
-import DataService from "../../Helpers/DataService";
+import DataService from "../../../Helpers/DataService";
 
 const Utilities = () => {
   const dispatch = useDispatch();

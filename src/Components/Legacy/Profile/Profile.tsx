@@ -8,8 +8,8 @@ import {
 } from "@fluentui/react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import DataHelper from "../../Helpers/DataHelper";
-import DataService from "../../Helpers/DataService";
+import DataHelper from "../../../Helpers/DataHelper";
+import DataService from "../../../Helpers/DataService";
 import ActiveCharacter from "./ActiveCharacter";
 import UpcomingSessions from "./UpcomingSessions";
 

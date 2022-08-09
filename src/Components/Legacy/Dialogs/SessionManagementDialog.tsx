@@ -22,10 +22,10 @@ import {
 } from "@fluentui/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import SessionRole from "../../Enums/SessionRole";
-import DataHelper from "../../Helpers/DataHelper";
-import DataService from "../../Helpers/DataService";
-import { Player } from "../../Types/LocalStructures";
+import SessionRole from "../../../Enums/SessionRole";
+import DataHelper from "../../../Helpers/DataHelper";
+import DataService from "../../../Helpers/DataService";
+import { Player } from "../../../Types/LocalStructures";
 
 const SessionManagementDialog = () => {
   const dispatch = useDispatch();
