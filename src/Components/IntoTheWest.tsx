@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { GlobalVariables } from "../Data/GlobalVariables";
 import LevelUp from "../Data/LevelUp";
 import SessionRole from "../Enums/SessionRole";
@@ -13,6 +13,8 @@ import CharactersPage from "./Pages/CharactersPage";
 import SessionsPage from "./Pages/SessionsPage";
 import SingleCharacterPage from "./Pages/SingleCharacterPage";
 import SingleSessionPage from "./Pages/SingleSessionPage";
+
+import "./IntoTheWest.scss";
 
 const IntoTheWest = () => {
   const dispatch = useDispatch();
@@ -456,6 +458,11 @@ const IntoTheWest = () => {
     <div className="into-the-west">
       <Header />
       <BrowserRouter>
+        <div className="navigation-pane">
+          <Link to="/">Home</Link>
+          <Link to="/characters">Characters</Link>
+          <Link to="/sessions">Sessions</Link>
+        </div>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="characters" element={<CharactersPage />} />
