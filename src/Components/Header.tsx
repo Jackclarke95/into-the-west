@@ -1,7 +1,9 @@
+import "./Header.scss";
+
 const Header = () => {
   return (
-    <div>
-      <div>Into the West</div>
+    <div className="header">
+      <div className="title">Into the West</div>
     </div>
   );
 };

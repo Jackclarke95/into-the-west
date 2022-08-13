@@ -6,10 +6,13 @@ import LevelUp from "../Data/LevelUp";
 import SessionRole from "../Enums/SessionRole";
 import DataHelper from "../Helpers/DataHelper";
 import { Player, Character, Session, Map } from "../Types/LocalStructures";
-import CharacterCard from "./CharacterCard";
 import Header from "./Header";
-import SessionCard from "./SessionCard";
-import Card from "./Surfaces/Card";
+import "./IntoTheWest.scss";
+import HomePage from "./Pages/HomePage";
+import CharactersPage from "./Pages/CharactersPage";
+import SessionsPage from "./Pages/SessionsPage";
+import SingleCharacterPage from "./Pages/SingleCharacterPage";
+import SingleSessionPage from "./Pages/SingleSessionPage";
 
 const IntoTheWest = () => {
   const dispatch = useDispatch();
@@ -35,8 +38,6 @@ const IntoTheWest = () => {
   const characters = useSelector((state) => state.characters);
   const authUser = useSelector((state) => state.authUser);
   const currentPlayer = useSelector((state) => state.currentPlayer);
-  const activeCharacter = useSelector((state) => state.activeCharacter);
-  const sessions = useSelector((state) => state.sessions);
 
   // Set current player
   useEffect(() => {
@@ -452,46 +453,18 @@ const IntoTheWest = () => {
   }, [characters, databaseSessions, dispatch, maps, players, sessionInterests]);
 
   return (
-    <div>
+    <div className="into-the-west">
       <Header />
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="characters" element={<CharactersPage />} />
           <Route
-            path="/"
-            element={
-              <>
-                <Card>
-                  <div>Generic content here please</div>
-                </Card>
-                {!activeCharacter.isLoading && activeCharacter.data && (
-                  <CharacterCard character={activeCharacter.data} />
-                )}
-                {!sessions.isLoading && sessions.data && (
-                  <SessionCard session={sessions.data[0]} />
-                )}
-              </>
-            }
+            path="characters/:characterId"
+            element={<SingleCharacterPage />}
           />
-          <Route
-            path="/character"
-            element={
-              characters.isLoading ? (
-                <div>Loading Character</div>
-              ) : (
-                <CharacterCard character={characters.data[0]} />
-              )
-            }
-          />
-          <Route
-            path="/session"
-            element={
-              sessions.isLoading ? (
-                <div>Loading Session</div>
-              ) : (
-                <SessionCard session={sessions.data[0]} />
-              )
-            }
-          />
+          <Route path="sessions" element={<SessionsPage />} />
+          <Route path="sessions/:sessionId" element={<SingleSessionPage />} />
         </Routes>
       </BrowserRouter>
     </div>
