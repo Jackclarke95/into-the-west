@@ -2,56 +2,10 @@ import React from "react";
 import { Character } from "../Types/LocalStructures";
 import Card from "./Surfaces/Card";
 import DefaultAvatar from "../Images/DefaultAvatar.jpeg";
-import LevelUpData from "../Data/LevelUp";
 import ClassIcon from "./ClassIcon";
+import XpBar from "./XpBar";
 
 const CharacterCard: React.FC<{ character: Character }> = ({ character }) => {
-  // Find the class with the highest level
-  const mainClass = character.classes.reduce((currentClass, prevClass) => {
-    if (currentClass.level > prevClass.level) {
-      return currentClass;
-    } else {
-      return prevClass;
-    }
-  }, character.classes[0]);
-
-  /** XP bar component, displaying a character's progress to the next level */
-  const XpBar = () => {
-    const characterXp = character.player?.xp ?? 0;
-
-    const achievedLevels = LevelUpData.filter(
-      (level) => characterXp >= level.xpRequired
-    );
-
-    const currentLevel = LevelUpData[achievedLevels.length - 1];
-    const nextLevel = LevelUpData[achievedLevels.length];
-
-    const xpForCurrent = currentLevel.xpRequired;
-    const xpForNext = nextLevel.xpRequired;
-
-    const xpBetweenLevels = xpForNext - xpForCurrent;
-    const xpIntoCurrentLevel = characterXp - xpForCurrent;
-    const xpPercentage = (xpIntoCurrentLevel / xpBetweenLevels) * 100;
-
-    return (
-      <div className="xp-bar-container">
-        <div
-          className="xp-bar"
-          title={`${xpIntoCurrentLevel} / ${xpBetweenLevels} XP`}
-        >
-          <div
-            className="progress"
-            class-name={mainClass.class}
-            style={{
-              width: `${xpPercentage}%`,
-            }}
-          ></div>
-        </div>
-        <div className="xp-description">{`${xpIntoCurrentLevel}/${xpBetweenLevels}`}</div>
-      </div>
-    );
-  };
-
   const onRenderCharacterClasses = () => {
     return [...character.classes]
       .sort((a, b) => b.level - a.level)
@@ -74,7 +28,7 @@ const CharacterCard: React.FC<{ character: Character }> = ({ character }) => {
           <img
             className="avatar"
             src={character.avatarUrl ?? DefaultAvatar}
-            alt="Character Avatar URL"
+            alt={`${character.fullName} Avatar`}
             title={`${character.fullName} Avatar`}
           />
           <div className="character-details">
@@ -85,7 +39,7 @@ const CharacterCard: React.FC<{ character: Character }> = ({ character }) => {
             }`}</div>
           </div>
         </div>
-        <XpBar />
+        <XpBar character={character} />
       </div>
     </Card>
   );

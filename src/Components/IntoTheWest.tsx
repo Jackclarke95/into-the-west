@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { GlobalVariables } from "../Data/GlobalVariables";
 import LevelUp from "../Data/LevelUp";
 import SessionRole from "../Enums/SessionRole";
@@ -14,6 +14,7 @@ import SingleCharacterPage from "./Pages/SingleCharacterPage";
 import SingleSessionPage from "./Pages/SingleSessionPage";
 
 import ProfilePage from "./Pages/ProfilePage";
+import NavBar from "./NavBar";
 
 const IntoTheWest = () => {
   const dispatch = useDispatch();
@@ -456,25 +457,22 @@ const IntoTheWest = () => {
   return (
     <div className="into-the-west">
       <Header />
-      <BrowserRouter>
-        <nav className="navigation-pane">
-          <Link to="/">Home</Link>
-          <Link to="/characters">Characters</Link>
-          <Link to="/sessions">Sessions</Link>
-          <Link to="/profile">Profile</Link>
-        </nav>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="characters" element={<CharactersPage />} />
-          <Route
-            path="characters/:characterId"
-            element={<SingleCharacterPage />}
-          />
-          <Route path="sessions" element={<SessionsPage />} />
-          <Route path="sessions/:sessionId" element={<SingleSessionPage />} />
-          <Route path="profile" element={<ProfilePage />} />
-        </Routes>
-      </BrowserRouter>
+      <div className="body">
+        <BrowserRouter>
+          <NavBar />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="characters" element={<CharactersPage />} />
+            <Route
+              path="characters/:characterId"
+              element={<SingleCharacterPage />}
+            />
+            <Route path="sessions" element={<SessionsPage />} />
+            <Route path="sessions/:sessionId" element={<SingleSessionPage />} />
+            <Route path="profile" element={<ProfilePage />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
     </div>
   );
 };
