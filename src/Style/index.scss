@@ -116,13 +116,6 @@ body {
                     }
                     &.xp {
                       width: 30%;
-                      .xp-bar-container {
-                        .xp-bar {
-                          .progress {
-                            height: 10px;
-                          }
-                        }
-                      }
                     }
                   }
                 }
@@ -131,6 +124,31 @@ body {
                 tr {
                   td {
                     text-align: left;
+                    &.name {
+                      width: 40%;
+                    }
+                    &.class {
+                      width: 20%;
+                    }
+                    &.level {
+                      width: 10%;
+                    }
+                    &.xp {
+                      width: 30%;
+                      .xp-bar-container {
+                        // display: flex;
+                        .xp-bar {
+                          .progress {
+                            height: 10px;
+                          }
+                        }
+                        .xp-description {
+                          font-size: 12px;
+                          width: 60px;
+                          text-align: end;
+                        }
+                      }
+                    }
                   }
                 }
               }
@@ -194,44 +212,43 @@ body {
           border-radius: 8px;
           display: flex;
           background-color: $dnd-beyond-red;
-
-          &[class-name="Artificer"] {
+          &[data-class-name="Artificer"] {
             background-color: $artificer-copper;
           }
-          &[class-name="Barbarian"] {
+          &[data-class-name="Barbarian"] {
             background-color: $barbarian-fire;
           }
-          &[class-name="Bard"] {
+          &[data-class-name="Bard"] {
             background-color: $bard-rouge;
           }
-          &[class-name="Cleric"] {
+          &[data-class-name="Cleric"] {
             background-color: $cleric-silver;
           }
-          &[class-name="Druid"] {
+          &[data-class-name="Druid"] {
             background-color: $druid-moss;
           }
-          &[class-name="Fighter"] {
+          &[data-class-name="Fighter"] {
             background-color: $fighter-rust;
           }
-          &[class-name="Monk"] {
+          &[data-class-name="Monk"] {
             background-color: $monk-sky;
           }
-          &[class-name="Paladin"] {
+          &[data-class-name="Paladin"] {
             background-color: $paladin-gold;
           }
-          &[class-name="Ranger"] {
+          &[data-class-name="Ranger"] {
             background-color: $ranger-emerald;
           }
-          &[class-name="Rogue"] {
+          &[data-class-name="Rogue"] {
             background-color: $rogue-ash;
           }
-          &[class-name="Sorcerer"] {
+          &[data-class-name="Sorcerer"] {
             background-color: $sorcerer-blood;
           }
-          &[class-name="Warlock"] {
+          &[data-class-name="Warlock"] {
             background-color: $warlock-iris;
           }
-          &[class-name="Wizard"] {
+          &[data-class-name="Wizard"] {
             background-color: $wizard-cobalt;
           }
         }

@@ -38,11 +38,11 @@ const XpBar: React.FC<{
       >
         <div
           className="progress"
-          class-name={mainClass.class}
+          data-class-name={mainClass.class}
           style={{
             width: `${xpPercentage}%`,
           }}
-        ></div>
+        />
       </div>
       <div className="xp-description">{`${xpIntoCurrentLevel}/${xpBetweenLevels}`}</div>
     </div>

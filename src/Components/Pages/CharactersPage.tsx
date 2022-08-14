@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Character } from "../../Types/LocalStructures";
 import ClassIcon from "../ClassIcon";
 import DefaultAvatar from "../../Images/DefaultAvatar.jpeg";
@@ -72,7 +72,11 @@ const CharactersPage = () => {
         <tbody>
           {characters.data.map((character) => (
             <tr>
-              <td className="name">{character.fullName}</td>
+              <td className="name">
+                <Link to={`/characters/${character.id}`}>
+                  {character.fullName}
+                </Link>
+              </td>
               <td className="class">
                 {character.classes.map((cls) => cls.class).join(", ")}
               </td>

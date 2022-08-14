@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom";
-import Card from "./Surfaces/Card";
 
 const NavBar = () => {
   return (
@@ -7,10 +6,10 @@ const NavBar = () => {
       <NavLink to="/" className="nav-item">
         Home
       </NavLink>
-      <NavLink to="/characters" className="nav-item">
+      <NavLink to="/characters" className="nav-item" end>
         Characters
       </NavLink>
-      <NavLink to="/sessions" className="nav-item">
+      <NavLink to="/sessions" className="nav-item" end>
         Session
       </NavLink>
       <NavLink to="/profile" className="nav-item">
