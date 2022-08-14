@@ -6,8 +6,9 @@ $theme-red: #e53935;
 $theme-orange: #ff5e57;
 $theme-pink: #ff4081;
 $theme-brown: #8d6e63;
-$theme-gray: #757575;
-$theme-black: #212121;
+$theme-grey: #757575;
+$theme-light-grey: #f3f3f3;
+$theme-black: #000000;
 $theme-white: #ffffff;
 
 $dnd-beyond-red: #c73032;
@@ -47,6 +48,9 @@ body {
   a {
     text-decoration: none;
   }
+  img {
+    object-fit: cover;
+  }
   .into-the-west {
     display: flex;
     flex-direction: column;
@@ -56,7 +60,7 @@ body {
     .clickable {
       cursor: pointer;
       &:hover {
-        background-color: #f8f8f8;
+        background-color: $theme-light-grey;
         border-radius: 10px;
       }
     }
@@ -86,49 +90,92 @@ body {
         display: flex;
         flex-direction: column;
         align-items: center;
-        .list {
+        .table {
           display: flex;
           flex-direction: column;
-          align-items: flex-start;
-          width: 100%;
-          table {
+          align-items: center;
+          &.character-table {
             width: 100%;
-            &.characters {
-              thead tr th {
-                text-align: left;
-                &.name {
-                  width: 40%;
+            .avatar {
+              width: 50px;
+            }
+            .sheet {
+              width: 50px;
+            }
+            .name {
+              width: 250px;
+            }
+            .class {
+              width: 250px;
+            }
+            .level {
+              width: 50px;
+            }
+            .xp {
+              width: 350px;
+            }
+            .header {
+              display: flex;
+              justify-content: space-between;
+              font-weight: bold;
+              font-size: 1.2em;
+            }
+            .body {
+              .row {
+                display: flex;
+                padding-left: 5px;
+                padding-right: 5px;
+                &:hover {
+                  font-weight: bold;
                 }
-                &.class {
-                  width: 20%;
-                }
-                &.level {
-                  width: 10%;
-                }
-                &.xp {
-                  width: 30%;
-                }
-              }
-              tbody tr td {
-                text-align: left;
-                &.name {
-                  width: 40%;
-                }
-                &.class {
-                  width: 20%;
-                }
-                &.level {
-                  width: 10%;
-                }
-                &.xp {
-                  width: 30%;
-                  .xp-bar-container .xp-bar .progress {
-                    height: 10px;
+                .cell {
+                  display: flex;
+                  align-items: center;
+                  padding: 5px;
+
+                  &.avatar {
+                    img {
+                      height: 23px;
+                      width: 23px;
+                      border-radius: 5px;
+                    }
                   }
-                  .xp-description {
-                    font-size: 12px;
-                    width: 60px;
-                    text-align: end;
+                  &.sheet {
+                    svg {
+                      // height: 48px;
+                    }
+                  }
+                  &.class {
+                    .class-container {
+                      display: flex;
+                      margin-right: 10px;
+                      align-items: center;
+                      margin-right: 10px;
+                      .class-icon {
+                        height: 16px;
+                        width: 16px;
+                        border-radius: 50%;
+                        margin-right: 5px;
+                      }
+                    }
+                  }
+                  &.level {
+                    display: flex;
+                    justify-content: center;
+                  }
+                  &.xp {
+                    .xp-bar-container {
+                      flex-grow: 1;
+                      width: 100%;
+                      .xp-bar .progress {
+                        height: 10px;
+                      }
+                      .xp-description {
+                        font-size: 12px;
+                        width: 60px;
+                        text-align: end;
+                      }
+                    }
                   }
                 }
               }
@@ -148,7 +195,6 @@ body {
                   height: 48px;
                   width: 48px;
                   border-radius: 25%;
-                  object-fit: cover;
                 }
                 .character-details {
                   margin-left: 10px;
@@ -250,7 +296,6 @@ body {
               height: 72px;
               width: 72px;
               border-radius: 25%;
-              object-fit: cover;
             }
             .character-details {
               margin-left: 10px;

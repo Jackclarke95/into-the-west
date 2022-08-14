@@ -1,18 +1,20 @@
-import React from "react";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Character } from "../../Types/LocalStructures";
 import ClassIcon from "../ClassIcon";
 import DefaultAvatar from "../../Images/DefaultAvatar.jpeg";
 import XpBar from "../XpBar";
 
 const CharactersPage = () => {
+  const characters = useSelector((state) => state.characters);
   const navigate = useNavigate();
 
-  const characters = useSelector((state) => state.characters);
+  const CharactersTable = () => {
+    if (characters.isLoading) {
+      return <div>Loading...</div>;
+    }
 
-  const ListCharacter: React.FC<{ character: Character }> = ({ character }) => {
-    const renderCharacterClasses = (): JSX.Element[] => {
+    const renderCharacterClasses = (character: Character): JSX.Element[] => {
       return [...character.classes]
         .sort((a, b) => b.level - a.level)
         .map((cls) => (
@@ -27,78 +29,54 @@ const CharactersPage = () => {
         ));
     };
 
-    const onClickNavigateToCharacter = () => {
+    const onClickCharacter = (character: Character) => {
       navigate(`/characters/${character.id}`);
     };
 
     return (
-      <div
-        onClick={onClickNavigateToCharacter}
-        key={character.id}
-        className="list-item character clickable"
-      >
-        <div className="character-body">
-          <img
-            className="avatar"
-            src={character.avatarUrl ?? DefaultAvatar}
-            alt={`${character.fullName} Avatar`}
-            title={`${character.fullName} Avatar`}
-          />
-          <div className="character-details">
-            <div>{character.fullName}</div>
-            <div className="classes">{renderCharacterClasses()}</div>
-          </div>
+      <div className="table character-table">
+        <div className="header">
+          <div className="avatar" />
+          <div className="sheet" />
+          <div className="name">Name</div>
+          <div className="class">Class</div>
+          <div className="level">Level</div>
+          <div className="xp">XP</div>
         </div>
-        <XpBar character={character} />
-      </div>
-    );
-  };
-
-  const CharactersTable = () => {
-    if (characters.isLoading) {
-      return <div>Loading...</div>;
-    }
-
-    return (
-      <table className="characters">
-        <thead>
-          <tr>
-            <th className="name">Name</th>
-            <th className="class">Class</th>
-            <th className="level">Level</th>
-            <th className="xp">XP</th>
-          </tr>
-        </thead>
-        <tbody>
+        <div className="body">
           {characters.data.map((character) => (
-            <tr>
-              <td className="name">
-                <Link to={`/characters/${character.id}`}>
-                  {character.fullName}
-                </Link>
-              </td>
-              <td className="class">
-                {character.classes.map((cls) => cls.class).join(", ")}
-              </td>
-              <td className="level">
-                {character.classes.map((cls) => cls.level).join(", ")}
-              </td>
-              <td className="xp">
+            <div
+              className="row clickable"
+              key={character.id}
+              onClick={() => onClickCharacter(character)}
+            >
+              <div className="cell avatar">
+                <img
+                  className="avatar"
+                  src={character.avatarUrl ?? DefaultAvatar}
+                  alt={`${character.fullName} Avatar`}
+                  title={`${character.fullName} Avatar`}
+                />
+              </div>
+              <div className="cell name">{character.fullName}</div>
+              <div className="cell class">
+                {renderCharacterClasses(character)}
+              </div>
+              <div className="cell level">{character.currentLevel}</div>
+              <div className="cell xp">
                 <XpBar character={character} />
-              </td>
-            </tr>
+              </div>
+            </div>
           ))}
-        </tbody>
-      </table>
+        </div>
+      </div>
     );
   };
 
   return (
     <div className="page characters-page">
       <h2>Characters</h2>
-      <div className="list">
-        {characters.isLoading ? <div>Loading...</div> : <CharactersTable />}
-      </div>
+      {characters.isLoading ? <div>Loading...</div> : <CharactersTable />}
     </div>
   );
 };
