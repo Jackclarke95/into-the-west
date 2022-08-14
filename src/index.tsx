@@ -5,7 +5,7 @@ import { createStore } from "redux";
 import { DefaultRootState, Provider } from "react-redux";
 import { Action, initialState, rootReducer } from "./Data/Reducers";
 
-import "./index.scss";
+import "./Style/index.scss";
 import App from "./App";
 
 // Create the Redux store
