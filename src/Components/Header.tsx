@@ -1,9 +1,7 @@
-import "./Header.scss";
-
 const Header = () => {
   return (
     <div className="header">
-      <div className="title">Into the West</div>
+      <h1 className="title">Into the West</h1>
     </div>
   );
 };

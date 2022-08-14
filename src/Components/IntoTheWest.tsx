@@ -7,14 +7,13 @@ import SessionRole from "../Enums/SessionRole";
 import DataHelper from "../Helpers/DataHelper";
 import { Player, Character, Session, Map } from "../Types/LocalStructures";
 import Header from "./Header";
-import "./IntoTheWest.scss";
 import HomePage from "./Pages/HomePage";
 import CharactersPage from "./Pages/CharactersPage";
 import SessionsPage from "./Pages/SessionsPage";
 import SingleCharacterPage from "./Pages/SingleCharacterPage";
 import SingleSessionPage from "./Pages/SingleSessionPage";
 
-import "./IntoTheWest.scss";
+import ProfilePage from "./Pages/ProfilePage";
 
 const IntoTheWest = () => {
   const dispatch = useDispatch();
@@ -458,11 +457,12 @@ const IntoTheWest = () => {
     <div className="into-the-west">
       <Header />
       <BrowserRouter>
-        <div className="navigation-pane">
+        <nav className="navigation-pane">
           <Link to="/">Home</Link>
           <Link to="/characters">Characters</Link>
           <Link to="/sessions">Sessions</Link>
-        </div>
+          <Link to="/profile">Profile</Link>
+        </nav>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="characters" element={<CharactersPage />} />
@@ -472,6 +472,7 @@ const IntoTheWest = () => {
           />
           <Route path="sessions" element={<SessionsPage />} />
           <Route path="sessions/:sessionId" element={<SingleSessionPage />} />
+          <Route path="profile" element={<ProfilePage />} />
         </Routes>
       </BrowserRouter>
     </div>

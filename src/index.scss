@@ -13,7 +13,107 @@ code {
     monospace;
 }
 
+.header {
+  display: flex;
+  flex-grow: 1;
+  width: 100%;
+  justify-content: center;
+}
+
 .page {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  .list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+h1 {
+  font-size: 2.2em;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  // font-weight: bold;
+  margin: 0;
+}
+
+.surface-card {
+  background-color: #fff;
+  width: max-content;
+  padding: 20px;
+  border-radius: 20px;
+  margin: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  min-height: 20px;
+  min-width: 20px;
+}
+
+.surface-card {
+  .character-card {
+    width: 500px;
+    .character-body {
+      display: flex;
+      margin-bottom: 10px;
+      .avatar {
+        height: 72px;
+        width: 72px;
+        border-radius: 25%;
+        object-fit: cover;
+      }
+      .character-details {
+        margin-left: 10px;
+        .classes {
+          display: flex;
+          .class-container {
+            display: flex;
+            margin-right: 10px;
+            .class-icon {
+              height: 24px;
+              width: 24px;
+              border-radius: 50%;
+              margin-right: 5px;
+            }
+          }
+        }
+      }
+    }
+    .xp-bar-container {
+      display: flex;
+      align-items: center;
+      .xp-bar {
+        background-color: aliceblue;
+        border-radius: 6px;
+        width: 100%;
+        margin-right: 10px;
+        .progress {
+          background-color: cadetblue;
+          height: 12px;
+          border-radius: 6px;
+          display: flex;
+        }
+      }
+    }
+  }
+  .session-card {
+    .dungeon-master {
+      display: flex;
+      flex-direction: row;
+      .label {
+        font-weight: bold;
+        margin-right: 5px;
+      }
+    }
+  }
 }

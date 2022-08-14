@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
-import "./HomePage.scss";
 
 const HomePage = () => {
   return (
     <div className="page home-page">
-      <div className="title">Home</div>
+      <h2 className="title">Home</h2>
       <Link to="/characters">Characters</Link>
       <Link to="/sessions">Sessions</Link>
     </div>

@@ -11,6 +11,12 @@ export default class DataHelper {
     );
   }
 
+  /**
+   * Determines if a given date is in a given month
+   * @param dateToCheck The date to check
+   * @param dateToCheckAgainst The date to check against
+   * @returns Whether the given date is in the given month
+   */
   public static isDateInMonth(
     dateToCheck: Date,
     dateToCheckAgainst: Date

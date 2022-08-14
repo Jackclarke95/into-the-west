@@ -1,27 +1,18 @@
 import { useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
-import "./SingleSessionPage.scss";
+import { useParams } from "react-router-dom";
 
 const SingleSessionPage = () => {
-  const { characterId: sessionId } = useParams();
-
-  const params = useParams();
+  const { sessionId } = useParams();
 
   const sessions = useSelector((state) => state.sessions);
 
   const session = sessions.isLoading
     ? undefined
-    : sessions.data.find((character) => character.id === params.characterId);
-
-  console.log({ params });
-  console.log(params.productId);
-  console.log({ characterId: sessionId });
+    : sessions.data.find((session) => session.id === sessionId);
 
   return (
     <div className="page single-session-page">
-      <Link to="/sessions">Sessions (Back)</Link>
-      <div className="title">Character Page</div>
-      <div>{session ? session.name : "Loading"}</div>
+      <h2>{session ? session.name : "Loading"}</h2>
     </div>
   );
 };

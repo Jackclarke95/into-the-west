@@ -1,18 +1,16 @@
 import { useSelector } from "react-redux";
 import CharacterCard from "../CharacterCard";
-import SessionCard from "../SessionCard";
 
 const ProfilePage = () => {
   const activeCharacter = useSelector((state) => state.activeCharacter);
-  const sessions = useSelector((state) => state.sessions);
+  const currentPlayer = useSelector((state) => state.currentPlayer);
 
   return (
     <div className="page profile-page">
+      <h2>Profile</h2>
+      <h3>{currentPlayer.isLoading ? "Loading" : currentPlayer.data?.name}</h3>
       {!activeCharacter.isLoading && activeCharacter.data && (
         <CharacterCard character={activeCharacter.data} />
-      )}
-      {!sessions.isLoading && sessions.data && (
-        <SessionCard session={sessions.data[0]} />
       )}
     </div>
   );
