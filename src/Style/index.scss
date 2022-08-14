@@ -99,11 +99,8 @@ body {
             .avatar {
               width: 50px;
             }
-            .sheet {
-              width: 50px;
-            }
             .name {
-              width: 250px;
+              width: 300px;
             }
             .class {
               width: 250px;
@@ -119,6 +116,10 @@ body {
               justify-content: space-between;
               font-weight: bold;
               font-size: 1.2em;
+              padding: 10px;
+              .xp {
+                text-align: center;
+              }
             }
             .body {
               .row {
@@ -132,17 +133,11 @@ body {
                   display: flex;
                   align-items: center;
                   padding: 5px;
-
                   &.avatar {
                     img {
                       height: 23px;
                       width: 23px;
                       border-radius: 5px;
-                    }
-                  }
-                  &.sheet {
-                    svg {
-                      // height: 48px;
                     }
                   }
                   &.class {
@@ -178,43 +173,6 @@ body {
                     }
                   }
                 }
-              }
-            }
-          }
-          .list-item {
-            width: 350px;
-            padding: 10px;
-            margin: 2px;
-            &.character {
-              display: flex;
-              flex-direction: column;
-              .character-body {
-                display: flex;
-                margin-bottom: 10px;
-                .avatar {
-                  height: 48px;
-                  width: 48px;
-                  border-radius: 25%;
-                }
-                .character-details {
-                  margin-left: 10px;
-                  .classes {
-                    display: flex;
-                    .class-container {
-                      display: flex;
-                      margin-right: 10px;
-                      .class-icon {
-                        height: 24px;
-                        width: 24px;
-                        border-radius: 50%;
-                        margin-right: 5px;
-                      }
-                    }
-                  }
-                }
-              }
-              .xp-bar-container .xp-bar .progress {
-                height: 12px;
               }
             }
           }

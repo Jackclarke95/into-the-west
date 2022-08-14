@@ -10,10 +10,10 @@ const NavBar = () => {
         Characters
       </NavLink>
       <NavLink to="/sessions" className="nav-item" end>
-        Session
+        Sessions
       </NavLink>
       <NavLink to="/profile" className="nav-item">
-        Profile
+        My Profile
       </NavLink>
     </nav>
   );

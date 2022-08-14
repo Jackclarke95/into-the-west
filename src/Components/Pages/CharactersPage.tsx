@@ -36,12 +36,11 @@ const CharactersPage = () => {
     return (
       <div className="table character-table">
         <div className="header">
-          <div className="avatar" />
-          <div className="sheet" />
-          <div className="name">Name</div>
-          <div className="class">Class</div>
-          <div className="level">Level</div>
-          <div className="xp">XP</div>
+          <div className="header-cell avatar" />
+          <div className="header-cell name">Name</div>
+          <div className="header-cell class">Class</div>
+          <div className="header-cell level">Level</div>
+          <div className="header-cell xp">XP</div>
         </div>
         <div className="body">
           {characters.data.map((character) => (
