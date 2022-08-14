@@ -6,6 +6,16 @@ import LevelUpData from "../Data/LevelUp";
 import ClassIcon from "./ClassIcon";
 
 const CharacterCard: React.FC<{ character: Character }> = ({ character }) => {
+  // Find the class with the highest level
+  const mainClass = character.classes.reduce((currentClass, prevClass) => {
+    if (currentClass.level > prevClass.level) {
+      return currentClass;
+    } else {
+      return prevClass;
+    }
+  }, character.classes[0]);
+
+  /** XP bar component, displaying a character's progress to the next level */
   const XpBar = () => {
     const characterXp = character.player?.xp ?? 0;
 
@@ -31,6 +41,7 @@ const CharacterCard: React.FC<{ character: Character }> = ({ character }) => {
         >
           <div
             className="progress"
+            class-name={mainClass.class}
             style={{
               width: `${xpPercentage}%`,
             }}
@@ -42,16 +53,18 @@ const CharacterCard: React.FC<{ character: Character }> = ({ character }) => {
   };
 
   const onRenderCharacterClasses = () => {
-    return character.classes.map((cls) => (
-      <div className="class-container">
-        <ClassIcon key={cls.class} className={cls.class} />
-        <div className="class-name">
-          {character.classes.length > 1
-            ? `${cls.class} (${cls.level})`
-            : cls.class}
+    return [...character.classes]
+      .sort((a, b) => b.level - a.level)
+      .map((cls) => (
+        <div className="class-container">
+          <ClassIcon key={cls.class} className={cls.class} />
+          <div className="class-name">
+            {character.classes.length > 1
+              ? `${cls.class} (${cls.level})`
+              : cls.class}
+          </div>
         </div>
-      </div>
-    ));
+      ));
   };
 
   return (

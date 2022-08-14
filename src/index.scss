@@ -1,3 +1,18 @@
+$dnd-beyond-red: #c73032;
+$artificer-copper: #d59139;
+$barbarian-fire: #e7623e;
+$bard-rouge: #ab6cac;
+$cleric-silver: #91a1b1;
+$druid-moss: #79853c;
+$fighter-rust: #7f513d;
+$monk-sky: #4ea5c5;
+$paladin-gold: #b7a156;
+$ranger-emerald: #4f7f63;
+$rogue-ash: #555752;
+$sorcerer-blood: #992d2f;
+$warlock-iris: #7c469b;
+$wizard-cobalt: #274fa2;
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -93,16 +108,59 @@ h6 {
       display: flex;
       align-items: center;
       .xp-bar {
-        background-color: aliceblue;
-        border-radius: 6px;
+        border-radius: 8px;
         width: 100%;
         margin-right: 10px;
-        .progress {
-          background-color: cadetblue;
-          height: 12px;
-          border-radius: 6px;
-          display: flex;
+        background-color: rgb(250, 250, 250);
+      }
+      .progress {
+        height: 16px;
+        border-radius: 8px;
+        display: flex;
+        background-color: $dnd-beyond-red;
+
+        &[class-name="Artificer"] {
+          background-color: $artificer-copper;
         }
+        &[class-name="Barbarian"] {
+          background-color: $barbarian-fire;
+        }
+        &[class-name="Bard"] {
+          background-color: $bard-rouge;
+        }
+        &[class-name="Cleric"] {
+          background-color: $cleric-silver;
+        }
+        &[class-name="Druid"] {
+          background-color: $druid-moss;
+        }
+        &[class-name="Fighter"] {
+          background-color: $fighter-rust;
+        }
+        &[class-name="Monk"] {
+          background-color: $monk-sky;
+        }
+        &[class-name="Paladin"] {
+          background-color: $paladin-gold;
+        }
+        &[class-name="Ranger"] {
+          background-color: $ranger-emerald;
+        }
+        &[class-name="Rogue"] {
+          background-color: $rogue-ash;
+        }
+        &[class-name="Sorcerer"] {
+          background-color: $sorcerer-blood;
+        }
+        &[class-name="Warlock"] {
+          background-color: $warlock-iris;
+        }
+        &[class-name="Wizard"] {
+          background-color: $wizard-cobalt;
+        }
+      }
+      .xp-description {
+        font-size: 16px;
       }
     }
   }
