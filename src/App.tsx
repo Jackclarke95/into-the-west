@@ -1,4 +1,4 @@
-import { ScrollablePane, Stack, Sticky } from "@fluentui/react";
+import { Stack } from "@fluentui/react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getDatabase, onValue, ref } from "firebase/database";
@@ -14,7 +14,6 @@ import "./Style/App.scss";
 import DesktopHeader from "./Components/DesktopHeader";
 import DesktopFooter from "./Components/DesktopFooter";
 import Login from "./Components/Login";
-import DesktopDashboard from "./Components/DesktopDashboard";
 
 import Everwilds from "./Images/Maps/The Everwilds - Preview.jpg";
 import ForgottenLands from "./Images/Maps/The Forgotten Lands - Preview.jpg";
@@ -33,16 +32,10 @@ import NewSubraceDialog from "./Components/Dialogs/NewSubraceDialog";
 import SessionRegistrationDialog from "./Components/Dialogs/SessionRegistrationDialog";
 import { PlayerData } from "./Types/DatabaseStructures";
 import ConfirmationDialog from "./Components/Dialogs/ConfirmationDialog";
-import { BrowserView, MobileView } from "react-device-detect";
 import DataParse from "./Components/DataParse";
 import React from "react";
-import MobileHeader from "./Components/MobileHeader";
-import MobileDashboard from "./Components/MobileDashboard";
-import MobileFooter from "./Components/MobileFooter";
 import SessionCompletionDialog from "./Components/Dialogs/SessionCompletionDialog";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import CharacterTable from "./Components/Tables/CharacterTable";
-import SessionTable from "./Components/Tables/SessionTable";
 import HomePage from "./Components/Pages/HomePage";
 import CharacterPage from "./Components/Pages/CharacterPage";
 import SessionPage from "./Components/Pages/SessionPage";
