@@ -1,6 +1,6 @@
 import { NeutralColors, Stack } from "@fluentui/react";
 
-const SessionPage = () => {
+const SessionsPage = () => {
   return (
     <Stack
       verticalFill
@@ -12,4 +12,4 @@ const SessionPage = () => {
   );
 };
 
-export default SessionPage;
+export default SessionsPage;

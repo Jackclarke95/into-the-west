@@ -37,8 +37,8 @@ import React from "react";
 import SessionCompletionDialog from "./Components/Dialogs/SessionCompletionDialog";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "./Components/Pages/HomePage";
-import CharacterPage from "./Components/Pages/CharacterPage";
-import SessionPage from "./Components/Pages/SessionPage";
+import CharactersPage from "./Components/Pages/CharactersPage";
+import SessionsPage from "./Components/Pages/SessionsPage";
 import ProfilePage from "./Components/Pages/ProfilePage";
 
 const firebaseConfig = {
@@ -350,8 +350,8 @@ const App = () => {
             >
               <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="characters" element={<CharacterPage />} />
-                <Route path="sessions" element={<SessionPage />} />
+                <Route path="characters" element={<CharactersPage />} />
+                <Route path="sessions" element={<SessionsPage />} />
                 <Route path="profile" element={<ProfilePage />} />
               </Routes>
             </Stack>

@@ -1,6 +1,6 @@
 import { NeutralColors, Stack } from "@fluentui/react";
 
-const CharacterPage = () => {
+const CharactersPage = () => {
   return (
     <Stack
       verticalFill
@@ -12,4 +12,4 @@ const CharacterPage = () => {
   );
 };
 
-export default CharacterPage;
+export default CharactersPage;
