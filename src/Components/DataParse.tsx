@@ -1,5 +1,5 @@
 import { Stack } from "@fluentui/react";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SessionRole from "../Enums/SessionRole";
 import DataHelper from "../Helpers/DataHelper";
@@ -445,7 +445,14 @@ const DataParse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     });
   }, [characters, databaseSessions, dispatch, maps, players, sessionInterests]);
 
-  return <Stack>{children}</Stack>;
+  return (
+    <Stack
+      className="data-parse"
+      styles={{ root: { height: "100vh", overflow: "auto" } }}
+    >
+      {children}
+    </Stack>
+  );
 };
 
 export default DataParse;

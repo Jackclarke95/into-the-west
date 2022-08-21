@@ -14,6 +14,7 @@ const DesktopFooter = () => {
 
   return (
     <Stack
+      className="footer"
       styles={{
         root: {
           width: "100%",

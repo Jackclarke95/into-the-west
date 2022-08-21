@@ -40,6 +40,13 @@ import MobileHeader from "./Components/MobileHeader";
 import MobileDashboard from "./Components/MobileDashboard";
 import MobileFooter from "./Components/MobileFooter";
 import SessionCompletionDialog from "./Components/Dialogs/SessionCompletionDialog";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import CharacterTable from "./Components/Tables/CharacterTable";
+import SessionTable from "./Components/Tables/SessionTable";
+import HomePage from "./Components/Pages/HomePage";
+import CharacterPage from "./Components/Pages/CharacterPage";
+import SessionPage from "./Components/Pages/SessionPage";
+import ProfilePage from "./Components/Pages/ProfilePage";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -317,59 +324,52 @@ const App = () => {
     }
   });
 
+  const pageContentStyles = {
+    root: {
+      textAlign: "center",
+      backgroundImage: authUser
+        ? `url("${DataHelper.getRandomFromArray([
+            Everwilds,
+            ForgottenLands,
+            LunarIsles,
+            ShatteredRealms,
+          ])}")`
+        : "",
+      backgroundSize: "cover",
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "center",
+      backgroundComposite: "saturation",
+      height: "100vh",
+      overflowY: "scroll",
+    },
+  };
+
   return (
     <React.Fragment>
-      <DataParse>
-        {authUser ? (
-          <React.Fragment>
-            <BrowserView>
-              <Stack
-                className="app-container"
-                verticalFill
-                horizontalAlign="center"
-                verticalAlign="center"
-                styles={{
-                  root: {
-                    textAlign: "center",
-                    height: "100vh",
-                    backgroundImage: authUser
-                      ? `url("${DataHelper.getRandomFromArray([
-                          Everwilds,
-                          ForgottenLands,
-                          LunarIsles,
-                          ShatteredRealms,
-                        ])}")`
-                      : "",
-                    backgroundSize: "cover",
-                    backgroundRepeat: "no-repeat",
-                    backgroundPosition: "center",
-                    backgroundComposite: "saturation",
-                  },
-                }}
-              >
-                <DesktopHeader />
-                <DesktopDashboard />
-                <DesktopFooter />
-              </Stack>
-            </BrowserView>
-            <MobileView>
-              <ScrollablePane>
-                <Sticky>
-                  <MobileHeader />
-                </Sticky>
-                <MobileDashboard />
-                <Sticky>
-                  <MobileFooter />
-                </Sticky>
-              </ScrollablePane>
-            </MobileView>
-          </React.Fragment>
-        ) : (
-          <>
-            <Login />
-          </>
-        )}
-      </DataParse>
+      {authUser ? (
+        <DataParse>
+          <BrowserRouter>
+            <DesktopHeader />
+            <Stack
+              className="page-content"
+              styles={pageContentStyles}
+              horizontalAlign="center"
+            >
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="characters" element={<CharacterPage />} />
+                <Route path="sessions" element={<SessionPage />} />
+                <Route path="profile" element={<ProfilePage />} />
+              </Routes>
+            </Stack>
+            <DesktopFooter />
+          </BrowserRouter>
+        </DataParse>
+      ) : (
+        <>
+          <Login />
+        </>
+      )}
       <ToastContainer
         hideProgressBar
         position="top-center"
