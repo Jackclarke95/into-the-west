@@ -5,7 +5,7 @@ import { createStore } from "redux";
 import { DefaultRootState, Provider } from "react-redux";
 import { Action, initialState, rootReducer } from "./Data/Reducers";
 
-import "./index.css";
+import "./index.scss";
 import App from "./App";
 import { initializeIcons, ThemeProvider } from "@fluentui/react";
 import { LightTheme } from "./Style/Themes";

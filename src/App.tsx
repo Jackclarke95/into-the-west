@@ -5,20 +5,12 @@ import { getDatabase, onValue, ref } from "firebase/database";
 import { initializeApp } from "firebase/app";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-import DataHelper from "./Helpers/DataHelper";
-
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import "./Style/App.scss";
 import DesktopHeader from "./Components/DesktopHeader";
 import DesktopFooter from "./Components/DesktopFooter";
 import Login from "./Components/Login";
-
-import Everwilds from "./Images/Maps/The Everwilds - Preview.jpg";
-import ForgottenLands from "./Images/Maps/The Forgotten Lands - Preview.jpg";
-import LunarIsles from "./Images/Maps/The Lunar Isles - Preview.jpg";
-import ShatteredRealms from "./Images/Maps/The Shattered Realms - Preview.jpg";
 
 import RegistrationDialog from "./Components/Dialogs/RegistrationDialog";
 import CharacterCreationDialog from "./Components/Dialogs/CharacterCreationDialog";
@@ -40,6 +32,7 @@ import HomePage from "./Components/Pages/HomePage";
 import CharactersPage from "./Components/Pages/CharactersPage";
 import SessionsPage from "./Components/Pages/SessionsPage";
 import ProfilePage from "./Components/Pages/ProfilePage";
+import NavigationBar from "./Components/NavigationBar";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -320,20 +313,9 @@ const App = () => {
   const pageContentStyles = {
     root: {
       textAlign: "center",
-      backgroundImage: authUser
-        ? `url("${DataHelper.getRandomFromArray([
-            Everwilds,
-            ForgottenLands,
-            LunarIsles,
-            ShatteredRealms,
-          ])}")`
-        : "",
-      backgroundSize: "cover",
-      backgroundRepeat: "no-repeat",
-      backgroundPosition: "center",
-      backgroundComposite: "saturation",
       height: "100vh",
-      overflowY: "scroll",
+      width: 1200,
+      backgroundColor: "white",
     },
   };
 
@@ -348,11 +330,12 @@ const App = () => {
               styles={pageContentStyles}
               horizontalAlign="center"
             >
+              <NavigationBar />
               <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="characters" element={<CharactersPage />} />
-                <Route path="sessions" element={<SessionsPage />} />
-                <Route path="profile" element={<ProfilePage />} />
+                <Route path="/characters" element={<CharactersPage />} />
+                <Route path="/sessions" element={<SessionsPage />} />
+                <Route path="/profile" element={<ProfilePage />} />
               </Routes>
             </Stack>
             <DesktopFooter />

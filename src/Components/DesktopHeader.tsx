@@ -1,66 +1,32 @@
 import { FontSizes, Image, NeutralColors, Stack, Text } from "@fluentui/react";
-import { NavLink } from "react-router-dom";
 
 const DesktopHeader = () => {
   return (
     <Stack
       className="header"
       horizontalAlign="center"
+      horizontal
       tokens={{ childrenGap: 20 }}
       styles={{
         root: {
           backgroundColor: NeutralColors.gray150,
+          width: "100%",
+          padding: 10,
         },
       }}
     >
-      <Stack
-        horizontal
-        verticalAlign="center"
-        tokens={{ childrenGap: 20 }}
-        styles={{
-          root: {
-            padding: "0.2em",
-            fontSize: FontSizes.superLarge,
-            display: "flex",
-          },
-        }}
-      >
-        <Image src={process.env.PUBLIC_URL + "logo512.png"} height={64} />
-        <Text
-          styles={{
-            root: {
-              color: NeutralColors.gray30,
-              fontSize: FontSizes.superLarge,
-            },
-          }}
-        >
-          Into the West
-        </Text>
-        <Image src={process.env.PUBLIC_URL + "logo512.png"} height={64} />
-      </Stack>
-      <Stack
-        horizontal
-        horizontalAlign="center"
-        tokens={{ childrenGap: 20 }}
+      <Image src={process.env.PUBLIC_URL + "logo512.png"} height={64} />
+      <Text
         styles={{
           root: {
             color: NeutralColors.gray30,
+            fontSize: FontSizes.superLarge,
           },
         }}
       >
-        <NavLink to="/" replace>
-          Home
-        </NavLink>
-        <NavLink to="characters" replace>
-          Characters
-        </NavLink>
-        <NavLink to="sessions" replace>
-          Sessions
-        </NavLink>
-        <NavLink to="profile" replace>
-          Profile
-        </NavLink>
-      </Stack>
+        Into the West
+      </Text>
+      <Image src={process.env.PUBLIC_URL + "logo512.png"} height={64} />
     </Stack>
   );
 };

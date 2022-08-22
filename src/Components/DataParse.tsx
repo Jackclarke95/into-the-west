@@ -7,6 +7,11 @@ import { Player, Character, Map, Session } from "../Types/LocalStructures";
 import LevelUp from "../Data/LevelUp";
 import { GlobalVariables } from "../Data/GlobalVariables";
 
+import Everwilds from "../Images/Maps/The Everwilds - Preview.jpg";
+import ForgottenLands from "../Images/Maps/The Forgotten Lands - Preview.jpg";
+import LunarIsles from "../Images/Maps/The Lunar Isles - Preview.jpg";
+import ShatteredRealms from "../Images/Maps/The Shattered Realms - Preview.jpg";
+
 const DataParse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const dispatch = useDispatch();
 
@@ -448,7 +453,26 @@ const DataParse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <Stack
       className="data-parse"
-      styles={{ root: { height: "100vh", overflow: "auto" } }}
+      horizontalAlign="center"
+      styles={{
+        root: {
+          height: "100vh",
+          overflow: "auto",
+          width: "100%",
+          backgroundImage: authUser
+            ? `url("${DataHelper.getRandomFromArray([
+                Everwilds,
+                ForgottenLands,
+                LunarIsles,
+                ShatteredRealms,
+              ])}")`
+            : "",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          backgroundComposite: "saturation",
+        },
+      }}
     >
       {children}
     </Stack>
