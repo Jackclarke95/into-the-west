@@ -41,14 +41,14 @@ const NavigationBar = () => {
           root: {
             fontSize: FontSizes.xLarge,
             color: onThisPage
-              ? theme.palette.themeDark
-              : theme.palette.neutralPrimary,
+              ? theme.palette.accent
+              : theme.palette.neutralDark,
           },
           icon: {
             fontSize: FontSizes.xLarge,
             color: onThisPage
-              ? theme.palette.themeDark
-              : theme.palette.neutralPrimary,
+              ? theme.palette.accent
+              : theme.palette.neutralDark,
           },
         }}
       >
