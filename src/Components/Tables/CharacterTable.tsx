@@ -1,6 +1,5 @@
 import {
   DefaultSpacing,
-  DetailsListLayoutMode,
   IColumn,
   IGroup,
   Image,
@@ -218,22 +217,21 @@ const CharacterTable = () => {
 
   const widerColumnWidth = 200;
   const defaultColumnWidth = 150;
-  const narrowColumnWidth = 100;
-  const ultraNarrowColumnWidth = 50;
+  const narrowColumnWidth = 50;
 
   const columns: IColumn[] = [
     {
       key: "avatar",
       name: "",
-      minWidth: ultraNarrowColumnWidth,
-      maxWidth: ultraNarrowColumnWidth,
+      minWidth: narrowColumnWidth,
+      maxWidth: narrowColumnWidth,
       onRender: onRenderAvatar,
     },
     {
       key: "level",
       name: "Level",
-      minWidth: ultraNarrowColumnWidth,
-      maxWidth: ultraNarrowColumnWidth,
+      minWidth: narrowColumnWidth,
+      maxWidth: narrowColumnWidth,
       isSorted: sortedColumn.column === "level",
       isSortedDescending:
         sortedColumn.column === "level" && sortedColumn.descending,

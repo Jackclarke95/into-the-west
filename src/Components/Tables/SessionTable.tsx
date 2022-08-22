@@ -16,12 +16,10 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DataHelper from "../../Helpers/DataHelper";
 import DataService from "../../Helpers/DataService";
-import useWindowDimensions from "../../Helpers/WindowDimensionHook";
 import { Character, Session } from "../../Types/LocalStructures";
 
 const SessionTable = () => {
   const dispatch = useDispatch();
-  const { width } = useWindowDimensions();
 
   const sessions = useSelector((state) => state.sessions);
   const activeCharacter = useSelector((state) => state.activeCharacter);
