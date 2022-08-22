@@ -1,5 +1,6 @@
 import {
   DefaultSpacing,
+  DetailsListLayoutMode,
   IColumn,
   IGroup,
   Image,
@@ -215,18 +216,24 @@ const CharacterTable = () => {
     });
   };
 
+  const widerColumnWidth = 200;
+  const defaultColumnWidth = 150;
+  const narrowColumnWidth = 100;
+  const ultraNarrowColumnWidth = 50;
+
   const columns: IColumn[] = [
     {
       key: "avatar",
       name: "",
-      minWidth: 20,
-      maxWidth: 20,
+      minWidth: ultraNarrowColumnWidth,
+      maxWidth: ultraNarrowColumnWidth,
       onRender: onRenderAvatar,
     },
     {
       key: "level",
       name: "Level",
-      minWidth: 50,
+      minWidth: ultraNarrowColumnWidth,
+      maxWidth: ultraNarrowColumnWidth,
       isSorted: sortedColumn.column === "level",
       isSortedDescending:
         sortedColumn.column === "level" && sortedColumn.descending,
@@ -236,7 +243,8 @@ const CharacterTable = () => {
     {
       key: "name",
       name: "Name",
-      minWidth: 150,
+      minWidth: defaultColumnWidth,
+      flexGrow: 1,
       isSorted: sortedColumn.column === "name",
       isSortedDescending:
         sortedColumn.column === "name" && sortedColumn.descending,
@@ -246,7 +254,8 @@ const CharacterTable = () => {
     {
       key: "race",
       name: "Race",
-      minWidth: 100,
+      minWidth: defaultColumnWidth,
+      flexGrow: 1,
       isSorted: sortedColumn.column === "race",
       isSortedDescending:
         sortedColumn.column === "race" && sortedColumn.descending,
@@ -256,7 +265,7 @@ const CharacterTable = () => {
     {
       key: "class",
       name: "Class",
-      minWidth: 200,
+      minWidth: defaultColumnWidth,
       isSorted: sortedColumn.column === "class",
       isSortedDescending:
         sortedColumn.column === "class" && sortedColumn.descending,
@@ -266,7 +275,8 @@ const CharacterTable = () => {
     {
       key: "xp",
       name: "XP",
-      minWidth: 200,
+      minWidth: widerColumnWidth,
+      isResizable: true,
       onRender: onRenderXpBar,
     },
   ];
@@ -289,7 +299,6 @@ const CharacterTable = () => {
 
   return (
     <ShimmeredDetailsList
-      styles={{ root: { overFlowY: "auto" } }}
       columns={columns}
       enableShimmer={activeCharacters.length === 0}
       items={[...activeCharacters, ...inactiveCharacters]}

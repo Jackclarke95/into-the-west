@@ -316,6 +316,7 @@ const App = () => {
       height: "100vh",
       width: 1200,
       backgroundColor: "white",
+      overflowX: "auto",
     },
   };
 
@@ -325,11 +326,7 @@ const App = () => {
         <DataParse>
           <BrowserRouter>
             <DesktopHeader />
-            <Stack
-              className="page-content"
-              styles={pageContentStyles}
-              horizontalAlign="center"
-            >
+            <Stack className="page-content" styles={pageContentStyles}>
               <NavigationBar />
               <Routes>
                 <Route path="/" element={<HomePage />} />

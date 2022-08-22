@@ -16,10 +16,12 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DataHelper from "../../Helpers/DataHelper";
 import DataService from "../../Helpers/DataService";
+import useWindowDimensions from "../../Helpers/WindowDimensionHook";
 import { Character, Session } from "../../Types/LocalStructures";
 
 const SessionTable = () => {
   const dispatch = useDispatch();
+  const { width } = useWindowDimensions();
 
   const sessions = useSelector((state) => state.sessions);
   const activeCharacter = useSelector((state) => state.activeCharacter);
@@ -239,45 +241,55 @@ const SessionTable = () => {
     );
   };
 
+  const widerColumnWidth = 250;
+  const defaultColumnWidth = 150;
+  const narrowColumnWidth = 100;
+
   const columns: IColumn[] = [
     {
       key: "name",
       name: "Name",
       fieldName: "name",
-      minWidth: 250,
+      minWidth: widerColumnWidth,
+      isResizable: true,
     },
     {
       key: "dungeonMaster",
       name: "Dungeon Master",
       fieldName: "dungeonMaster",
-      minWidth: 100,
+      minWidth: defaultColumnWidth,
+      isResizable: true,
       onRender: onRenderDungeonMaster,
     },
     {
       key: "map",
       name: "Map",
       fieldName: "map",
-      minWidth: 150,
+      minWidth: defaultColumnWidth,
+      isResizable: true,
       onRender: onRenderMap,
     },
     {
       key: "attendees",
       name: "Attendees",
       fieldName: "attendees",
-      minWidth: 150,
+      minWidth: defaultColumnWidth,
+      isResizable: true,
       onRender: onRenderAttendees,
     },
     {
       key: "date",
       name: "Date",
       fieldName: "scheduledDate",
-      minWidth: 150,
+      minWidth: defaultColumnWidth,
+      isResizable: true,
       onRender: onRenderDate,
     },
     {
       key: "actions",
       name: "Actions",
-      minWidth: 100,
+      minWidth: narrowColumnWidth,
+      isResizable: true,
       onRender: onRenderActions,
     },
   ];
@@ -298,27 +310,13 @@ const SessionTable = () => {
   ];
 
   return (
-    <Stack
-      styles={{
-        root: {
-          display: "flex",
-          flexFlow: "column nowrap",
-          width: "auto",
-          height: "auto",
-          boxSizing: "border-box",
-          maxHeight: "50%",
-          overflow: "auto",
-        },
-      }}
-    >
-      <ShimmeredDetailsList
-        columns={columns}
-        enableShimmer={sessions.isLoading}
-        items={sortedSessions}
-        selectionMode={SelectionMode.none}
-        groups={groups}
-      />
-    </Stack>
+    <ShimmeredDetailsList
+      columns={columns}
+      enableShimmer={sessions.isLoading}
+      items={sortedSessions}
+      selectionMode={SelectionMode.none}
+      groups={groups}
+    />
   );
 };
 

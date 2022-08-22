@@ -1,9 +1,18 @@
-import { Stack } from "@fluentui/react";
+import { Stack, Text } from "@fluentui/react";
+import CharacterTable from "../Tables/CharacterTable";
 
 const CharactersPage = () => {
   return (
-    <Stack verticalFill horizontalAlign="center">
-      Characters Page
+    <Stack
+      verticalFill
+      styles={{
+        root: {
+          overflowY: "scroll",
+        },
+      }}
+    >
+      <Text variant="xxLarge">Characters</Text>
+      <CharacterTable />
     </Stack>
   );
 };
