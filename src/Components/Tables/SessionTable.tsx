@@ -11,15 +11,19 @@ import {
   ShimmeredDetailsList,
   Stack,
   TooltipHost,
+  useTheme,
 } from "@fluentui/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import DataHelper from "../../Helpers/DataHelper";
 import DataService from "../../Helpers/DataService";
 import { Character, Session } from "../../Types/LocalStructures";
 
 const SessionTable = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const theme = useTheme();
 
   const sessions = useSelector((state) => state.sessions);
   const activeCharacter = useSelector((state) => state.activeCharacter);
@@ -68,6 +72,30 @@ const SessionTable = () => {
     setPastSessions(previousSessions);
     setUpcomingSessions(upcomingSessions);
   }, [sortedSessions]);
+
+  const onRenderName = (session: Session) => {
+    const onClickName = () => {
+      navigate(`${session.id}`);
+    };
+
+    const nameStyles = {
+      root: {
+        color: theme.palette.accent,
+        width: "fit-content",
+        "&:hover": {
+          cursor: "pointer",
+          textDecoration: "underline",
+          color: theme.palette.themeDarkAlt,
+        },
+      },
+    };
+
+    return (
+      <Stack onClick={onClickName} styles={nameStyles}>
+        {session.name}
+      </Stack>
+    );
+  };
 
   const onRenderAttendees = (session: Session) => {
     let attendees: Character[] = [];
@@ -250,6 +278,7 @@ const SessionTable = () => {
       fieldName: "name",
       minWidth: widerColumnWidth,
       isResizable: true,
+      onRender: onRenderName,
     },
     {
       key: "dungeonMaster",

@@ -1150,10 +1150,7 @@
       "name": "John"
     },
     "2Fv3wHgqwjV64m6IEPOp9brzKvb2": {
-      "availableDates": [
-        1656716400000, 1656284400000, 1656802800000, 1656198000000,
-        1659740400000
-      ],
+      "availableDates": [1661209200000],
       "isDungeonMaster": true,
       "isGamesMaster": true,
       "name": "David"
@@ -1165,8 +1162,7 @@
     },
     "7zD6gWfMUza6BPRXkJpara46fy83": {
       "availableDates": [
-        1660172400000, 1661122800000, 1661382000000, 1661900400000,
-        1662332400000, 1662418800000
+        1661382000000, 1661900400000, 1662332400000, 1662418800000
       ],
       "isDungeonMaster": false,
       "isGamesMaster": false,
@@ -1185,12 +1181,11 @@
     },
     "LQXJ3bqnXpbHPTfdGRzO2AkRIbm1": {
       "availableDates": [
-        1659999600000, 1660086000000, 1660258800000, 1660345200000,
-        1660431600000, 1659913200000, 1660518000000, 1660604400000,
+        1660345200000, 1660431600000, 1660518000000, 1660604400000,
         1660690800000, 1660863600000, 1660950000000, 1661036400000,
         1661641200000, 1661554800000, 1661468400000, 1661295600000,
         1661209200000, 1661122800000, 1661727600000, 1661814000000,
-        1661900400000
+        1661900400000, 1660258800000
       ],
       "isDungeonMaster": false,
       "isGamesMaster": false,
@@ -1209,6 +1204,10 @@
       "name": "Louis"
     },
     "g48dYVQDXcOImdJ6AKI3UCaKu8T2": {
+      "availableDates": [
+        1660258800000, 1660345200000, 1660604400000, 1660863600000,
+        1660950000000, 1661209200000
+      ],
       "isDungeonMaster": false,
       "isGamesMaster": false,
       "name": "The Kingsman"
@@ -1224,13 +1223,18 @@
     },
     "jsDONHy3afcy0io6HQ763SUrPfz1": {
       "availableDates": [
-        1661209200000, 1661295600000, 1661382000000, 1661468400000,
-        1661554800000, 1661641200000, 1661727600000, 1661814000000,
-        1661900400000, 1661986800000, 1662073200000
+        1661209200000, 1661295600000, 1661382000000, 1661468400000
       ],
       "name": "Michael"
     },
     "kQHelre21sgGsU8FDu1CKY33im12": {
+      "availableDates": [
+        1660514400000, 1660600800000, 1660687200000, 1660773600000,
+        1660860000000, 1660946400000, 1661032800000, 1661119200000,
+        1661205600000, 1661292000000, 1661378400000, 1661464800000,
+        1661551200000, 1661637600000, 1661724000000, 1661810400000,
+        1661896800000, 1660168800000
+      ],
       "name": "Thomas"
     }
   },
@@ -2805,6 +2809,7 @@
       "sessionId": "-N6yWBr6Utf2zP5ioFMt"
     },
     "-N8je8Mlnq_w7Z35PzRU": {
+      "didAttend": true,
       "playerId": "jsDONHy3afcy0io6HQ763SUrPfz1",
       "role": 0,
       "sessionId": "-N8jduR5m_h1ASBR_H9H"
@@ -2815,11 +2820,13 @@
       "sessionId": "-N8jduR5m_h1ASBR_H9H"
     },
     "-N8jeEDzDKcBWj1DFFt1": {
+      "didAttend": true,
       "playerId": "kQHelre21sgGsU8FDu1CKY33im12",
       "role": 0,
       "sessionId": "-N8jduR5m_h1ASBR_H9H"
     },
     "-N8jeEbqCgyHt9muvDs5": {
+      "didAttend": true,
       "playerId": "LQXJ3bqnXpbHPTfdGRzO2AkRIbm1",
       "role": 0,
       "sessionId": "-N8jduR5m_h1ASBR_H9H"
@@ -2840,6 +2847,7 @@
       "sessionId": "-N6yWBPaPzXm2HW4cGfO"
     },
     "-N8swstmATRhWCLZsqvE": {
+      "didAttend": true,
       "playerId": "7zD6gWfMUza6BPRXkJpara46fy83",
       "role": 0,
       "sessionId": "-N8jduR5m_h1ASBR_H9H"
@@ -2866,6 +2874,41 @@
     },
     "-N8z4xFvCvS2GXxoj091": {
       "playerId": "jsDONHy3afcy0io6HQ763SUrPfz1",
+      "role": 0,
+      "sessionId": "-N8w6BojGCGv6TIg96Sw"
+    },
+    "-N90uIG-oSWusqoFkWXH": {
+      "playerId": "kQHelre21sgGsU8FDu1CKY33im12",
+      "role": 0,
+      "sessionId": "-N8w6BojGCGv6TIg96Sw"
+    },
+    "-N97Uj7sRiyTxVYdq62l": {
+      "playerId": "LQXJ3bqnXpbHPTfdGRzO2AkRIbm1",
+      "role": 0,
+      "sessionId": "-N97UdR6cfJji36N2e1V"
+    },
+    "-N97WrotFLQBB5v3HOqp": {
+      "playerId": "g48dYVQDXcOImdJ6AKI3UCaKu8T2",
+      "role": 0,
+      "sessionId": "-N8w6BojGCGv6TIg96Sw"
+    },
+    "-N98Bq6wFnGKQmfUY6K3": {
+      "playerId": "7zD6gWfMUza6BPRXkJpara46fy83",
+      "role": 0,
+      "sessionId": "-N97UdR6cfJji36N2e1V"
+    },
+    "-N98Yz-X2eJQFHXJKytk": {
+      "playerId": "kQHelre21sgGsU8FDu1CKY33im12",
+      "role": 0,
+      "sessionId": "-N97UdR6cfJji36N2e1V"
+    },
+    "-N98vyOPY5alXyj1GPm8": {
+      "playerId": "jsDONHy3afcy0io6HQ763SUrPfz1",
+      "role": 0,
+      "sessionId": "-N97UdR6cfJji36N2e1V"
+    },
+    "-NA5LhaZyVqbER5inQ-S": {
+      "playerId": "2Fv3wHgqwjV64m6IEPOp9brzKvb2",
       "role": 0,
       "sessionId": "-N8w6BojGCGv6TIg96Sw"
     }
@@ -3050,14 +3093,21 @@
       "title": "Frozen Crystals Continued"
     },
     "-N8jduR5m_h1ASBR_H9H": {
+      "isCompleted": true,
       "mapId": "-N2Ho35e7smUBHZx7sEZ",
       "selectedDate": 1659999600000,
       "title": "Frozen Crystals Expanded"
     },
     "-N8w6BojGCGv6TIg96Sw": {
       "mapId": "-N2Ho4bDUkhIqi4tAUjC",
+      "selectedDate": 1661209200000,
       "suggestedByPlayerId": "kQHelre21sgGsU8FDu1CKY33im12",
       "title": "Search for Sandport Bay"
+    },
+    "-N97UdR6cfJji36N2e1V": {
+      "mapId": "-N2Ho35e7smUBHZx7sEZ",
+      "suggestedByPlayerId": "LQXJ3bqnXpbHPTfdGRzO2AkRIbm1",
+      "title": "Frozen Crystals Prolonged"
     }
   },
   "subclasses": {

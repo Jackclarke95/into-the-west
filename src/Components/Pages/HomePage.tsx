@@ -17,17 +17,16 @@ const HomePage = () => {
   return (
     <Stack
       verticalFill
-      horizontalAlign="center"
       styles={{
         root: {
           overflowY: "scroll",
         },
       }}
     >
-      <Text variant="xxLargePlus" styles={{ root: { marginLeft: 20 } }}>
-        Home Page
-      </Text>
-      {upcomingSessions}
+      <Stack styles={{ root: { marginLeft: 20 } }}>
+        <Text variant="xxLargePlus">Home Page</Text>
+        {upcomingSessions}
+      </Stack>
     </Stack>
   );
 };

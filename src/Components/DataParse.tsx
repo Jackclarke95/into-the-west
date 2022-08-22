@@ -282,9 +282,7 @@ const DataParse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             return {
               level: matchedCharacterClass.level,
               class: matchingClass.name,
-              subclass: matchingSubclass
-                ? matchingSubclass.subclassName
-                : undefined,
+              subclass: matchingSubclass ? matchingSubclass.name : undefined,
             };
           });
 

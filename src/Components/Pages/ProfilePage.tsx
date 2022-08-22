@@ -4,16 +4,15 @@ const ProfilePage = () => {
   return (
     <Stack
       verticalFill
-      horizontalAlign="center"
       styles={{
         root: {
           overflowY: "scroll",
         },
       }}
     >
-      <Text variant="xxLargePlus" styles={{ root: { marginLeft: 20 } }}>
-        My Profile
-      </Text>
+      <Stack styles={{ root: { marginLeft: 20 } }}>
+        <Text variant="xxLargePlus">My Profile</Text>
+      </Stack>
     </Stack>
   );
 };

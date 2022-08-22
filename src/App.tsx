@@ -33,6 +33,8 @@ import CharactersPage from "./Components/Pages/CharactersPage";
 import SessionsPage from "./Components/Pages/SessionsPage";
 import ProfilePage from "./Components/Pages/ProfilePage";
 import NavigationBar from "./Components/NavigationBar";
+import SingleCharacterPage from "./Components/Pages/SingleCharacterPage";
+import SingleSessionPage from "./Components/Pages/SingleSessionPage";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -330,7 +332,15 @@ const App = () => {
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/characters" element={<CharactersPage />} />
+                <Route
+                  path="/characters/:characterId"
+                  element={<SingleCharacterPage />}
+                />
                 <Route path="/sessions" element={<SessionsPage />} />
+                <Route
+                  path="/sessions/:sessionId"
+                  element={<SingleSessionPage />}
+                />
                 <Route path="/profile" element={<ProfilePage />} />
               </Routes>
             </Stack>

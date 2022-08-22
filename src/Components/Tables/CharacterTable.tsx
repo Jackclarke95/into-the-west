@@ -1,6 +1,7 @@
 import {
   DefaultSpacing,
   IColumn,
+  Icon,
   IGroup,
   Image,
   ImageFit,
@@ -8,6 +9,8 @@ import {
   SelectionMode,
   ShimmeredDetailsList,
   Stack,
+  TooltipHost,
+  useTheme,
 } from "@fluentui/react";
 import { useSelector } from "react-redux";
 import { ClassIcon } from "../ClassIcon";
@@ -15,8 +18,12 @@ import DefaultAvatar from "../../Images/DefaultAvatar.jpeg";
 import { Character } from "../../Types/LocalStructures";
 import { useEffect, useState } from "react";
 import XpBar from "../XpBar";
+import { useNavigate } from "react-router-dom";
 
 const CharacterTable = () => {
+  const navigate = useNavigate();
+  const theme = useTheme();
+
   const characters = useSelector((state) => state.characters);
 
   const [sortedCharacters, setSortedCharacters] = useState<Character[]>([]);
@@ -81,18 +88,35 @@ const CharacterTable = () => {
       ? character.retirement.level
       : character.currentLevel;
 
-  const onRenderName = (character: Character) =>
-    !character.retirement.isRetired ? (
+  const onRenderName = (character: Character) => {
+    const onClickName = () => {
+      navigate(`${character.id}`);
+    };
+
+    const nameStyles = {
+      root: {
+        color: theme.palette.accent,
+        width: "fit-content",
+        "&:hover": {
+          cursor: "pointer",
+          textDecoration: "underline",
+          color: theme.palette.themeDarkAlt,
+        },
+      },
+    };
+
+    return !character.retirement.isRetired ? (
       character.sheetUrl ? (
-        <Link href={character.sheetUrl} target="_blank">
+        <Stack onClick={onClickName} styles={nameStyles}>
           {character.fullName}
-        </Link>
+        </Stack>
       ) : (
         character.fullName
       )
     ) : (
       `${character.fullName} (Retired)`
     );
+  };
 
   const onRenderRace = (character: Character) => {
     if (characters.isLoading) {
@@ -147,6 +171,18 @@ const CharacterTable = () => {
   const onRenderXpBar = (character: Character) => (
     <XpBar character={character} />
   );
+
+  const onRenderSheetUrl = (character: Character) => {
+    return (
+      <TooltipHost content="Open character sheet in D&D Beyond">
+        <Stack verticalAlign="center" verticalFill>
+          <Link href={character.sheetUrl} target="_blank">
+            <Icon iconName="OpenInNewTab" />
+          </Link>
+        </Stack>
+      </TooltipHost>
+    );
+  };
 
   const onColumnClick = (
     _: React.MouseEvent<HTMLElement, MouseEvent>,
@@ -276,6 +312,13 @@ const CharacterTable = () => {
       minWidth: widerColumnWidth,
       isResizable: true,
       onRender: onRenderXpBar,
+    },
+    {
+      key: "sheetUrl",
+      name: "",
+      minWidth: 20,
+      maxWidth: 20,
+      onRender: onRenderSheetUrl,
     },
   ];
 

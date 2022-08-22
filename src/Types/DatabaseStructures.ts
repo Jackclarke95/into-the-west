@@ -10,7 +10,7 @@ export type ClassData = {
 
 export type SubclassData = {
   key: string;
-  subclassName: string;
+  name: any;
 };
 
 export type ClassConfigData = {
