@@ -1,19 +1,9 @@
-import {
-  ActionButton,
-  FontSizes,
-  FontWeights,
-  Icon,
-  Stack,
-  Text,
-  useTheme,
-} from "@fluentui/react";
-import { useState } from "react";
+import { ActionButton, FontSizes, Stack, useTheme } from "@fluentui/react";
 import { useLocation, useNavigate } from "react-router-dom";
+import DataService from "../Helpers/DataService";
 
 const NavigationBar = () => {
   const theme = useTheme();
-
-  const [isLoading, setIsLoading] = useState(false);
 
   const NavItem: React.FC<{
     displayText: string;
@@ -84,7 +74,12 @@ const NavigationBar = () => {
         />
         <NavItem displayText="Profile" url="/profile" iconName="ContactInfo" />
       </Stack>
-      <NavItem displayText="Sign Out" iconName="SignOut" iconOnRight />
+      <NavItem
+        displayText="Sign Out"
+        iconName="SignOut"
+        iconOnRight
+        onClickAction={DataService.signOut}
+      />
     </Stack>
   );
 };
