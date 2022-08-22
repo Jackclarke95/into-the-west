@@ -11,7 +11,9 @@ const ProfilePage = () => {
         },
       }}
     >
-      <Text variant="xxLarge">Profile Page</Text>
+      <Text variant="xxLargePlus" styles={{ root: { marginLeft: 20 } }}>
+        My Profile
+      </Text>
     </Stack>
   );
 };

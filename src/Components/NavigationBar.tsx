@@ -72,7 +72,11 @@ const NavigationBar = () => {
           url="/sessions"
           iconName="CalendarAgenda"
         />
-        <NavItem displayText="Profile" url="/profile" iconName="ContactInfo" />
+        <NavItem
+          displayText="My Profile"
+          url="/profile"
+          iconName="ContactInfo"
+        />
       </Stack>
       <NavItem
         displayText="Sign Out"

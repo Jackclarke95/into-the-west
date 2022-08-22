@@ -11,7 +11,9 @@ const SessionsPage = () => {
         },
       }}
     >
-      <Text variant="xxLarge">Sessions</Text>
+      <Text variant="xxLargePlus" styles={{ root: { marginLeft: 20 } }}>
+        Sessions
+      </Text>
       <SessionTable />
     </Stack>
   );

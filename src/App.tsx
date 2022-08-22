@@ -312,7 +312,6 @@ const App = () => {
 
   const pageContentStyles = {
     root: {
-      textAlign: "center",
       height: "100vh",
       width: 1200,
       backgroundColor: "white",

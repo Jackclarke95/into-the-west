@@ -11,7 +11,9 @@ const CharactersPage = () => {
         },
       }}
     >
-      <Text variant="xxLarge">Characters</Text>
+      <Text variant="xxLargePlus" styles={{ root: { marginLeft: 20 } }}>
+        Characters
+      </Text>
       <CharacterTable />
     </Stack>
   );
