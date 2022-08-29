@@ -85,6 +85,7 @@ const Availability = () => {
 
     return (
       <Stack
+        key={date.getTime()}
         horizontalAlign="center"
         verticalAlign="center"
         styles={{
@@ -144,7 +145,7 @@ const Availability = () => {
         horizontalAlign="space-around"
       >
         {dates.map((date) => (
-          <Day date={date} />
+          <Day key={date.getTime()} date={date} />
         ))}
       </Stack>
     );
@@ -158,7 +159,7 @@ const Availability = () => {
     return (
       <Stack tokens={{ childrenGap: 7 }}>
         {weeksToRender.map((week) => (
-          <Week weekOfDates={week} />
+          <Week key={week[0].getTime()} weekOfDates={week} />
         ))}
       </Stack>
     );
@@ -203,8 +204,9 @@ const Availability = () => {
         </Stack>
       </Stack>
       <Stack horizontal horizontalAlign="space-between">
-        {["M", "T", "W", "T", "F", "S", "S"].map((day) => (
+        {["M", "T", "W", "T", "F", "S", "S"].map((day, index) => (
           <Text
+            key={index}
             styles={{
               root: {
                 height: 28,

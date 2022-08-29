@@ -7,7 +7,6 @@ const BasePage: React.FC<{ children: React.ReactNode; pageTitle: string }> = ({
   return (
     <Stack
       verticalFill
-      tokens={{ childrenGap: 20 }}
       styles={{
         root: {
           paddingTop: 10,

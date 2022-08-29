@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SessionRole from "../../Enums/SessionRole";
 import DataService from "../../Helpers/DataService";
+import { Player } from "../../Types/LocalStructures";
 import Availability from "../Availability";
 
 const SessionRegistrationDialog = () => {
@@ -23,6 +24,9 @@ const SessionRegistrationDialog = () => {
   const authUser = useSelector((state) => state.authUser);
   const availabilitiesSelections = useSelector((state) => state.selectedDates);
   const currentPlayer = useSelector((state) => state.currentPlayer);
+  const activeCharacter = useSelector((state) => state.activeCharacter);
+  const sessionInterests = useSelector((state) => state.sessionInterests);
+  const players = useSelector((state) => state.players);
 
   const [interestedRole, setInterestedRole] = useState<SessionRole | undefined>(
     undefined
@@ -66,15 +70,44 @@ const SessionRegistrationDialog = () => {
       !authUser ||
       !sessionRegistration.isShown ||
       !currentPlayer.data ||
-      !interestedRole
+      !interestedRole ||
+      activeCharacter.isLoading ||
+      !activeCharacter.data ||
+      sessionInterests.isLoading ||
+      players.isLoading
     ) {
       return;
     }
 
+    const applicableSessionInterests = sessionInterests.data.filter(
+      (sessionInterest) =>
+        sessionInterest.sessionId === sessionRegistration.session.id
+    );
+
+    let dungeonMaster: Player | undefined;
+
+    if (interestedRole.toString() === "Dungeon Master") {
+      dungeonMaster = currentPlayer.data;
+    } else {
+      const dungeonMasterInterest = applicableSessionInterests.find(
+        (sessionInterest) =>
+          sessionInterest.role === SessionRole["Dungeon Master"]
+      );
+
+      dungeonMaster = players.data.find(
+        (player) => player.id === dungeonMasterInterest?.playerId
+      );
+    }
+
+    debugger;
+
     await DataService.registerForSession(
       sessionRegistration.session,
       currentPlayer.data,
-      interestedRole
+      interestedRole,
+      activeCharacter.data.fullName,
+      applicableSessionInterests,
+      dungeonMaster
     );
 
     await DataService.updateAvailableDates(authUser, availabilitiesSelections);

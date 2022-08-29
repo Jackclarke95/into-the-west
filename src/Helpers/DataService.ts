@@ -53,7 +53,10 @@ export default class DataService {
   public static registerForSession = async (
     session: Session,
     player: Player,
-    role: SessionRole
+    role: SessionRole,
+    characterName: string,
+    sessionInterests: SessionInterestData[],
+    dungeonMaster: Player | undefined
   ) => {
     const sessionInterestsRef = ref(db, "sessionInterests/");
 
@@ -63,7 +66,17 @@ export default class DataService {
       role: SessionRole[role],
     };
 
+    debugger;
+
     await push(sessionInterestsRef, newSessionInterest);
+
+    DataService.sendSessionRegistrationToDiscord(
+      session.name,
+      player.name,
+      characterName,
+      sessionInterests.length.toString() + 1,
+      dungeonMaster
+    );
   };
 
   public static unregisterFromSession = async (
@@ -332,6 +345,56 @@ export default class DataService {
             footer: {
               text: `Suggested by ${playerName}`,
             },
+          },
+        ],
+      };
+
+      request.send(JSON.stringify(params));
+    } else {
+      toast.error("Could not find Webhook URL to post message in Discord");
+    }
+  }
+
+  /**
+   * Sends a Session Registration announcement to the Discord server
+   * @param sessionName The name of the Session
+   * @param playerName The name of the Player who registered for the session
+   * @param characterName The name of the Character attending the session
+   * @param playerCount The number of Players (including DMs) registering interest in the session
+   * @param dungeonMaster The Dungeon Master running the session
+   */
+  public static async sendSessionRegistrationToDiscord(
+    sessionName: string,
+    playerName: string,
+    characterName: string,
+    playerCount: string,
+    dungeonMaster?: Player
+  ) {
+    const webhookUrl = process.env.REACT_APP_DISCORD_WEBHOOK_URL;
+
+    if (webhookUrl) {
+      const request = new XMLHttpRequest();
+
+      request.open("POST", webhookUrl);
+      request.setRequestHeader("Content-Type", "application/json");
+
+      const params = {
+        embeds: [
+          {
+            title: `${characterName} registered for ${sessionName}`,
+            color: 14944018,
+            description:
+              `${playerName} has registered ${characterName} for ${sessionName} as ` +
+              "\r\n\r\n" +
+              (dungeonMaster
+                ? `${dungeonMaster.name} is the Dungeon Master for this session.`
+                : "This session still needs a Dungeon Master.") +
+              "\r\n\r\n" +
+              `There are ${playerCount} players interested in this session${
+                dungeonMaster ? ", including dungeon masters." : "."
+              }` +
+              "\r\n\r\n" +
+              "Visit the the [website](https://into-the-west.co.uk) to sign up!",
           },
         ],
       };
