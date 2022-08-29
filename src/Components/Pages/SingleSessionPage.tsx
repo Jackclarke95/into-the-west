@@ -1,6 +1,7 @@
-import { Stack, Text } from "@fluentui/react";
+import { Stack } from "@fluentui/react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import BasePage from "./BasePage";
 
 const SingleSessionPage = () => {
   const { sessionId } = useParams();
@@ -12,20 +13,9 @@ const SingleSessionPage = () => {
     : sessions.data.find((session) => session.id === sessionId);
 
   return (
-    <Stack
-      verticalFill
-      styles={{
-        root: {
-          overflowY: "scroll",
-        },
-      }}
-    >
-      <Stack styles={{ root: { marginLeft: 20 } }}>
-        <Text variant="xxLargePlus">
-          {session ? session.name : "Loading..."}
-        </Text>
-      </Stack>
-    </Stack>
+    <BasePage pageTitle={session ? session.name : "Loading..."}>
+      <Stack styles={{ root: { marginLeft: 20 } }}></Stack>
+    </BasePage>
   );
 };
 

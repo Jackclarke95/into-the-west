@@ -1,21 +1,11 @@
-import { Stack, Text } from "@fluentui/react";
 import SessionTable from "../Tables/SessionTable";
+import BasePage from "./BasePage";
 
 const SessionsPage = () => {
   return (
-    <Stack
-      verticalFill
-      styles={{
-        root: {
-          overflowY: "auto",
-        },
-      }}
-    >
-      <Text variant="xxLargePlus" styles={{ root: { marginLeft: 20 } }}>
-        Sessions
-      </Text>
+    <BasePage pageTitle="Sessions">
       <SessionTable />
-    </Stack>
+    </BasePage>
   );
 };
 

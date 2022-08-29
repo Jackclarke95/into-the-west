@@ -1,21 +1,11 @@
-import { Stack, Text } from "@fluentui/react";
 import CharacterTable from "../Tables/CharacterTable";
+import BasePage from "./BasePage";
 
 const CharactersPage = () => {
   return (
-    <Stack
-      verticalFill
-      styles={{
-        root: {
-          overflowY: "scroll",
-        },
-      }}
-    >
-      <Text variant="xxLargePlus" styles={{ root: { marginLeft: 20 } }}>
-        Characters
-      </Text>
+    <BasePage pageTitle="Characters">
       <CharacterTable />
-    </Stack>
+    </BasePage>
   );
 };
 

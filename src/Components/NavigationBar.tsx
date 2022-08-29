@@ -1,4 +1,10 @@
-import { ActionButton, FontSizes, Stack, useTheme } from "@fluentui/react";
+import {
+  ActionButton,
+  FontSizes,
+  Separator,
+  Stack,
+  useTheme,
+} from "@fluentui/react";
 import { useLocation, useNavigate } from "react-router-dom";
 import DataService from "../Helpers/DataService";
 
@@ -66,24 +72,31 @@ const NavigationBar = () => {
     >
       <Stack className="main=nav" horizontal horizontalAlign="center">
         <NavItem displayText="Home" url="/" iconName="Home" />
+        <Separator vertical />
         <NavItem displayText="Characters" url="/characters" iconName="Group" />
+        <Separator vertical />
         <NavItem
           displayText="Sessions"
           url="/sessions"
           iconName="CalendarAgenda"
         />
+        <Separator vertical />
         <NavItem
           displayText="My Profile"
           url="/profile"
           iconName="ContactInfo"
         />
+        <Separator vertical />
       </Stack>
-      <NavItem
-        displayText="Sign Out"
-        iconName="SignOut"
-        iconOnRight
-        onClickAction={DataService.signOut}
-      />
+      <Stack className="main=nav" horizontal horizontalAlign="center">
+        <Separator vertical />
+        <NavItem
+          displayText="Sign Out"
+          iconName="SignOut"
+          iconOnRight
+          onClickAction={DataService.signOut}
+        />
+      </Stack>
     </Stack>
   );
 };

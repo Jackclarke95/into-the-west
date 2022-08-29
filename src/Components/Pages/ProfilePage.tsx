@@ -1,20 +1,7 @@
-import { Stack, Text } from "@fluentui/react";
+import BasePage from "./BasePage";
 
 const ProfilePage = () => {
-  return (
-    <Stack
-      verticalFill
-      styles={{
-        root: {
-          overflowY: "scroll",
-        },
-      }}
-    >
-      <Stack styles={{ root: { marginLeft: 20 } }}>
-        <Text variant="xxLargePlus">My Profile</Text>
-      </Stack>
-    </Stack>
-  );
+  return <BasePage pageTitle="My Profile">Profile Page</BasePage>;
 };
 
 export default ProfilePage;

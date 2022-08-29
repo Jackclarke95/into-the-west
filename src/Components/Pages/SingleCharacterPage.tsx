@@ -1,15 +1,10 @@
-import {
-  DefaultSpacing,
-  Persona,
-  PersonaSize,
-  Stack,
-  Text,
-} from "@fluentui/react";
+import { DefaultSpacing, Persona, PersonaSize, Stack } from "@fluentui/react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import DataHelper from "../../Helpers/DataHelper";
 import DefaultAvatar from "../../Images/DefaultAvatar.jpeg";
 import { ClassIcon } from "../ClassIcon";
+import BasePage from "./BasePage";
 
 const SingleCharacterPage = () => {
   const { characterId } = useParams();
@@ -28,19 +23,37 @@ const SingleCharacterPage = () => {
     }
   }, character.classes[0]);
 
+  const onRenderSecondaryText = () => {
+    return (
+      <Stack horizontal tokens={{ childrenGap: 10 }}>
+        {[...character!.classes]
+          .sort((a, b) => b.level - a.level)
+          .map((cls) => {
+            return (
+              <Stack horizontal horizontalAlign="center" verticalAlign="center">
+                <ClassIcon
+                  className={cls.class}
+                  styles={{
+                    root: {
+                      borderRadius: "50%",
+                      marginRight: DefaultSpacing.s2,
+                      maxWidth: 24,
+                    },
+                  }}
+                />
+                {character!.classes.length > 1
+                  ? `${cls.class} (${cls.level})`
+                  : cls.class}
+              </Stack>
+            );
+          })}
+      </Stack>
+    );
+  };
+
   return (
-    <Stack
-      verticalFill
-      styles={{
-        root: {
-          overflowY: "scroll",
-        },
-      }}
-    >
+    <BasePage pageTitle={character?.fullName ?? ""}>
       <Stack styles={{ root: { marginLeft: 20 } }} tokens={{ childrenGap: 20 }}>
-        <Text variant="xxLargePlus">
-          {character ? character.fullName : "Loading..."}
-        </Text>
         <Persona
           size={PersonaSize.size120}
           imageUrl={character?.avatarUrl ?? DefaultAvatar}
@@ -51,38 +64,10 @@ const SingleCharacterPage = () => {
               primaryClass?.subclass ? `(${primaryClass?.subclass})` : ""
             }` ?? "Unknown"
           }`}
-          onRenderSecondaryText={() => (
-            <Stack horizontal tokens={{ childrenGap: 10 }}>
-              {[...character!.classes]
-                .sort((a, b) => b.level - a.level)
-                .map((cls) => {
-                  return (
-                    <Stack
-                      horizontal
-                      horizontalAlign="center"
-                      verticalAlign="center"
-                    >
-                      <ClassIcon
-                        className={cls.class}
-                        styles={{
-                          root: {
-                            borderRadius: "50%",
-                            marginRight: DefaultSpacing.s2,
-                            maxWidth: 24,
-                          },
-                        }}
-                      />
-                      {character!.classes.length > 1
-                        ? `${cls.class} (${cls.level})`
-                        : cls.class}
-                    </Stack>
-                  );
-                })}
-            </Stack>
-          )}
+          onRenderSecondaryText={onRenderSecondaryText}
         />
       </Stack>
-    </Stack>
+    </BasePage>
   );
 };
 
