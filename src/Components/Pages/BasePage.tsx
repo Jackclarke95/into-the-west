@@ -1,4 +1,4 @@
-import { Separator, Stack, Text } from "@fluentui/react";
+import { Stack, Text } from "@fluentui/react";
 
 const BasePage: React.FC<{ children: React.ReactNode; pageTitle: string }> = ({
   children,
@@ -7,15 +7,17 @@ const BasePage: React.FC<{ children: React.ReactNode; pageTitle: string }> = ({
   return (
     <Stack
       verticalFill
+      tokens={{ childrenGap: 20 }}
       styles={{
         root: {
+          paddingTop: 10,
           overflowY: "auto",
         },
       }}
     >
-      <Separator>
-        <Text variant="xxLargePlus">{pageTitle}</Text>
-      </Separator>
+      <Text variant="xxLargePlus" styles={{ root: { textAlign: "center" } }}>
+        {pageTitle}
+      </Text>
       <Stack
         styles={{
           root: {

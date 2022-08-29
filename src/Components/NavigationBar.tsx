@@ -68,7 +68,13 @@ const NavigationBar = () => {
       className="nav"
       horizontal
       horizontalAlign="space-between"
-      styles={{ root: { width: "100%", padding: "5px 10px" } }}
+      styles={{
+        root: {
+          width: "100%",
+          padding: "5px 10px",
+          boxShadow: theme.effects.elevation8,
+        },
+      }}
     >
       <Stack className="main=nav" horizontal horizontalAlign="center">
         <NavItem displayText="Home" url="/" iconName="Home" />
