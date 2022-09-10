@@ -16,7 +16,7 @@ const SessionsPage = () => {
   };
 
   return (
-    <BasePage pageTitle="Sessions">
+    <BasePage pageTitle="Sessions" noPadding>
       <Stack
         horizontalAlign="start"
         styles={{ root: { padding: 10 } }}

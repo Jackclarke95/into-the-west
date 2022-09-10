@@ -1,4 +1,4 @@
-import { DefaultButton, PrimaryButton, Stack } from "@fluentui/react";
+import { DefaultButton, PrimaryButton, Stack, Text } from "@fluentui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import DataService from "../../Helpers/DataService";
@@ -60,23 +60,24 @@ const SingleSessionPage = () => {
 
   return (
     <BasePage pageTitle={session ? session.name : "Loading..."}>
-      <Stack
-        horizontalAlign="start"
-        horizontal
-        styles={{ root: { padding: 10 } }}
-        tokens={{ childrenGap: 10 }}
-      >
-        {!playerIsInterested && (
-          <PrimaryButton text="Sign Up" onClick={onClickSignUp} />
-        )}
-        {playerIsInterested && (
-          <PrimaryButton text="Unregister" onClick={onClickRemoveFromSession} />
-        )}
-        <DefaultButton text="Set date" onClick={onClickSetDate} />
-        <DefaultButton
-          text="Complete session"
-          onClick={onClickCompleteSession}
-        />
+      <Stack styles={{ root: { padding: 10 } }} tokens={{ childrenGap: 10 }}>
+        <Stack horizontal tokens={{ childrenGap: 10 }}>
+          {!playerIsInterested && (
+            <PrimaryButton text="Sign Up" onClick={onClickSignUp} />
+          )}
+          {playerIsInterested && (
+            <PrimaryButton
+              text="Unregister"
+              onClick={onClickRemoveFromSession}
+            />
+          )}
+          <DefaultButton text="Set date" onClick={onClickSetDate} />
+          <DefaultButton
+            text="Complete session"
+            onClick={onClickCompleteSession}
+          />
+        </Stack>
+        <Text>{session?.description}</Text>
       </Stack>
     </BasePage>
   );

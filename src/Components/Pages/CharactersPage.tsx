@@ -3,7 +3,7 @@ import BasePage from "./BasePage";
 
 const CharactersPage = () => {
   return (
-    <BasePage pageTitle="Characters">
+    <BasePage pageTitle="Characters" noPadding>
       <CharacterTable />
     </BasePage>
   );

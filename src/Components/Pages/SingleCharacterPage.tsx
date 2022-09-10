@@ -53,7 +53,7 @@ const SingleCharacterPage = () => {
 
   return (
     <BasePage pageTitle={character?.fullName ?? ""}>
-      <Stack styles={{ root: { marginLeft: 20 } }} tokens={{ childrenGap: 20 }}>
+      <Stack tokens={{ childrenGap: 20 }}>
         <Persona
           size={PersonaSize.size120}
           imageUrl={character?.avatarUrl ?? DefaultAvatar}

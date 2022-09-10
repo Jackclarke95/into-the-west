@@ -334,7 +334,6 @@ const CharacterTable = () => {
       name: "Inactive Characters",
       startIndex: activeCharacters.length,
       count: inactiveCharacters.length,
-      isCollapsed: true,
     },
   ];
 

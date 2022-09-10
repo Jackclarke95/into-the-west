@@ -99,8 +99,6 @@ const SessionRegistrationDialog = () => {
       );
     }
 
-    debugger;
-
     await DataService.registerForSession(
       sessionRegistration.session,
       currentPlayer.data,

@@ -1,7 +1,7 @@
 import {
+  DefaultEffects,
   MessageBar,
   MessageBarType,
-  Separator,
   Stack,
   Text,
 } from "@fluentui/react";
@@ -30,7 +30,17 @@ const HomePage = () => {
     sessions,
   }) => {
     return (
-      <Stack tokens={{ childrenGap: 10 }} styles={{ root: { width: "50%" } }}>
+      <Stack
+        tokens={{ childrenGap: 10 }}
+        styles={{
+          root: {
+            height: "fit-content",
+            width: "50%",
+            boxShadow: DefaultEffects.elevation16,
+            padding: 20,
+          },
+        }}
+      >
         <Text variant="xxLarge">Upcoming Sessions</Text>
 
         {sessions
@@ -50,12 +60,9 @@ const HomePage = () => {
         return <div>Loading...</div>;
       } else if (!activeCharacter.isLoading && activeCharacter.data) {
         return (
-          <Stack
-            tokens={{ childrenGap: 10 }}
-            styles={{ root: { width: "50%" } }}
-          >
+          <Stack tokens={{ childrenGap: 10 }} styles={{}}>
             <Text variant="large">Your Character</Text>
-            {activeCharacter.data.currentLevel! <
+            {activeCharacter.data.currentLevel! >
               currentPlayer.data?.characterLevel! && (
               <MessageBar
                 messageBarType={MessageBarType.success}
@@ -76,7 +83,17 @@ const HomePage = () => {
     };
 
     return (
-      <Stack tokens={{ childrenGap: 10 }} styles={{ root: { width: "50%" } }}>
+      <Stack
+        tokens={{ childrenGap: 10 }}
+        styles={{
+          root: {
+            height: "fit-content",
+            width: "50%",
+            boxShadow: DefaultEffects.elevation16,
+            padding: 20,
+          },
+        }}
+      >
         <Text variant="xxLarge">Actions</Text>
         <ActiveCharacter />
       </Stack>
@@ -84,25 +101,15 @@ const HomePage = () => {
   };
 
   return (
-    <BasePage pageTitle="Home">
+    <BasePage pageTitle="Home" noPadding>
       <Stack
         tokens={{ childrenGap: 20 }}
+        horizontal
         verticalFill
-        styles={{
-          root: {
-            marginLeft: 20,
-            marginRight: 20,
-            marginBottom: 20,
-          },
-        }}
+        styles={{ root: { padding: 20 } }}
       >
-        <Stack tokens={{ childrenGap: 20 }} horizontal verticalFill>
-          <UpcomingSessions
-            sessions={sessions.isLoading ? [] : sessions.data}
-          />
-          <Separator vertical />
-          <Actions />
-        </Stack>
+        <UpcomingSessions sessions={sessions.isLoading ? [] : sessions.data} />
+        <Actions />
       </Stack>
     </BasePage>
   );

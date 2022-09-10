@@ -34,6 +34,7 @@ export type Session = {
   map: Map;
   suggestedByPlayerId: string | undefined;
   isCompleted: boolean;
+  description: string | undefined;
 };
 
 export type Player = {

@@ -30,12 +30,14 @@ export default class DataService {
    * Creates a session in the Firebase Realtime Database
    * @param sessionName The name of the session
    * @param mapId The ID of the map of the session
-
+   * @param player The Player who suggested the session
+   * @param description The description of the session
    */
   public static createSession = async (
     sessionName: string,
     map: Map,
-    player: Player
+    player: Player,
+    sessionDescription: string
   ) => {
     const sessionsRef = ref(db, "sessions/");
 
@@ -43,11 +45,17 @@ export default class DataService {
       title: sessionName,
       mapId: map.id,
       suggestedByPlayerId: player.id,
+      description: sessionDescription,
     };
 
     await push(sessionsRef, sessionToAdd);
 
-    await DataService.sendNewSessionToDiscord(sessionName, map, player.name);
+    await DataService.sendNewSessionToDiscord(
+      sessionName,
+      map,
+      player.name,
+      sessionDescription
+    );
   };
 
   public static registerForSession = async (
@@ -65,8 +73,6 @@ export default class DataService {
       playerId: player.id,
       role: SessionRole[role],
     };
-
-    debugger;
 
     await push(sessionInterestsRef, newSessionInterest);
 
@@ -319,11 +325,13 @@ export default class DataService {
    * @param sessionName The name of the Session
    * @param map The Map on which the Session will take place
    * @param playerName The name of the Player who suggested the session
+   * @param sessionDescription The description of the Session
    */
   public static async sendNewSessionToDiscord(
     sessionName: string,
     map: Map,
-    playerName: string
+    playerName: string,
+    sessionDescription: string
   ) {
     const webhookUrl = process.env.REACT_APP_DISCORD_WEBHOOK_URL;
 
@@ -340,6 +348,8 @@ export default class DataService {
             color: 14944018,
             description:
               `The session "${sessionName}" has been suggested for ${map.name}!` +
+              "\r\n\r\n" +
+              `${sessionDescription}` +
               "\r\n\r\n" +
               "Visit the the [website](https://into-the-west.co.uk) to sign up!",
             footer: {
@@ -381,10 +391,10 @@ export default class DataService {
       const params = {
         embeds: [
           {
-            title: `${characterName} registered for ${sessionName}`,
+            title: `${playerName} registered for ${sessionName}`,
             color: 14944018,
             description:
-              `${playerName} has registered ${characterName} for ${sessionName} as ` +
+              `${playerName} has registered ${characterName} for ${sessionName}.` +
               "\r\n\r\n" +
               (dungeonMaster
                 ? `${dungeonMaster.name} is the Dungeon Master for this session.`

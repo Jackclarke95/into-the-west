@@ -439,6 +439,7 @@ const DataParse: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         map: matchingMap,
         suggestedByPlayerId: session.suggestedByPlayerId,
         isCompleted: session.isCompleted ?? false,
+        description: session.description,
       };
     });
 

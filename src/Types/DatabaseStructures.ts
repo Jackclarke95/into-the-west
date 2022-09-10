@@ -64,6 +64,7 @@ export type SessionData = {
   selectedDate: number | undefined;
   suggestedByPlayerId: any;
   isCompleted: boolean | undefined;
+  description: string | undefined;
 };
 
 export type MapData = {

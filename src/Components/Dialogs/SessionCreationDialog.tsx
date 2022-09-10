@@ -20,13 +20,19 @@ const SessionCreationDialog = () => {
   const currentPlayer = useSelector((state) => state.currentPlayer);
 
   const [sessionName, setSessionName] = useState<string | undefined>(undefined);
-
+  const [sessionDescription, setSessionDescription] = useState<
+    string | undefined
+  >(undefined);
   const [sessionMap, setSessionMap] = useState<Map | undefined>(undefined);
 
   const dispatch = useDispatch();
 
   const onChangeSessionName = (_, value: string | undefined) => {
     setSessionName(value);
+  };
+
+  const onChangeSessionDescription = (_, value: string | undefined) => {
+    setSessionDescription(value);
   };
 
   const onChangeMap = (_, option: IDropdownOption | undefined) => {
@@ -55,7 +61,9 @@ const SessionCreationDialog = () => {
       sessionName.length === 0 ||
       !sessionMap ||
       currentPlayer.isLoading ||
-      !currentPlayer.data
+      !currentPlayer.data ||
+      !sessionDescription ||
+      sessionDescription.length === 0
     ) {
       return;
     }
@@ -63,7 +71,8 @@ const SessionCreationDialog = () => {
     await DataService.createSession(
       sessionName,
       sessionMap,
-      currentPlayer.data
+      currentPlayer.data,
+      sessionDescription
     );
 
     onDismiss();
@@ -114,13 +123,23 @@ const SessionCreationDialog = () => {
         onChange={onChangeMap}
         required
       />
+      <TextField
+        label="Description"
+        value={sessionDescription}
+        onChange={onChangeSessionDescription}
+        required
+      />
       <DialogFooter>
         <DefaultButton text="Cancel" onClick={onDismiss} />
         <TooltipHost content={getRegisterDisabledTooltipContent()}>
           <PrimaryButton
             text="Create"
             onClick={onClickAddSession}
-            disabled={sessionName?.length === 0 || !sessionMap}
+            disabled={
+              sessionName?.length === 0 ||
+              sessionDescription?.length === 0 ||
+              !sessionMap
+            }
           />
         </TooltipHost>
       </DialogFooter>

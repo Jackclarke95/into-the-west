@@ -1,16 +1,18 @@
 import { Stack, Text } from "@fluentui/react";
 
-const BasePage: React.FC<{ children: React.ReactNode; pageTitle: string }> = ({
-  children,
-  pageTitle,
-}) => {
+const BasePage: React.FC<{
+  children: React.ReactNode;
+  pageTitle: string;
+  noPadding?: boolean;
+}> = ({ children, pageTitle, noPadding = false }) => {
   return (
     <Stack
       verticalFill
       styles={{
         root: {
-          paddingTop: 10,
           overflowY: "auto",
+          padding: noPadding ? 0 : 20,
+          paddingTop: 20,
         },
       }}
     >
